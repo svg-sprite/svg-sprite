@@ -13,3 +13,9 @@ results
 
 npm-debug.log
 node_modules
+/.settings
+/.buildpath
+/.project
+/.gitignore
+/index.js
+/tmp

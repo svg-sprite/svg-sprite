@@ -1,0 +1,45 @@
+{
+  "name": "svg-sprite",
+  "version": "0.0.1",
+  "description": "Node module for SVG sprite generation",
+  "main": "lib/svg-sprite.js",
+  "bin": {
+    "svg-sprite": "svg-sprite.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkphl/svg-sprite.git"
+  },
+  "keywords": [
+    "svg",
+    "sprite",
+    "generator",
+    "css",
+    "sass"
+  ],
+  "author": "Joschi Kuphal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkphl/svg-sprite/issues"
+  },
+  "homepage": "https://github.com/jkphl/svg-sprite",
+  "dependencies": {
+    "mkdirp": "~0.3.5",
+    "async": "~0.2.9",
+    "underscore": "",
+    "svgo": "~0.4.4",
+    "svg-cleaner": "~0.0.1",
+    "libxmljs": "~0.8.1",
+    "phantom-sync": "~1.1.1"
+  },
+  "devDependencies": {
+	   "mocha": "",
+	   "should": ""
+	}
+}
