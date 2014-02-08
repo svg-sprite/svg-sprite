@@ -41,6 +41,7 @@ Options:
   --spritedir <sprite-directory>       Sprite subdirectory name [svg]
   --sprite <sprite-filename>           Sprite file name [sprite]
   -p, --prefix <selector-prefix>       CSS selector prefix [svg]
+  --common <common-selector>           Common CSS selector for all images
   --maxwidth <max-width>               Maximum single image width [1000]
   --maxheight <max-height>             Maximum single image height [1000]
   --padding <padding>                  Transparent padding around the single images (in pixel)
@@ -126,6 +127,7 @@ Property      | Type             | Description
 `spritedir`   | Directory path   | Directory relative to the general CSS output directory where the SVG sprite will be created. Defaults to *svg*.
 `sprite`      | String           | Filename of the SVG sprite (preceding the `.svg` extension). Defaults to *sprite*. 
 `prefix`      | String           | Prefix for all CSS rules (CSS and Sass file). Defaults to *svg* (results in `.svg-*` CSS selectors)
+`common`      | String           | If given and not empty, it will be used for creating a CSS selector that commonly defines the `background-image` and `background-repeat` properties for all the sprite images (thus saving some bytes by not unnecessarily repeating these properties for each image) 
 `maxwidth`    | Integer          | Maximum width of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `maxheight`   | Integer          | Maximum height of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `padding`     | Integer          | Padding around the single SVG images in the sprite. Defaults to `0`.
@@ -140,7 +142,20 @@ Property      | Type             | Description
 Known problems / To-do
 ----------------------
 
-When several SVG images are combined into one file, the contained IDs should be namespaced to avoid conflicts between the images (e.g. when containing inline CSS). The namespacing of IDs is still to be implemented.
+*	When several SVG images are combined into one file, the contained IDs should be namespaced to avoid conflicts between the images (e.g. when containing inline CSS). The namespacing of IDs is still to be implemented.
+*	There should be added some more tests, especially for comparing the created SVG sprite with the expected result. At the moment, however, there are some problems with the libraries that would have to be used ...
+
+
+Release history
+---------------
+
+#### v0.0.2
+*	Fixed a bug that let the sprite creation fail when keeping the intermediate SVG files
+*	Added the `common` option
+*	Added some tests
+
+#### v0.0.1
+*	Initial release
 
 
 Legal
