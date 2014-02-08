@@ -31,6 +31,9 @@ function createSprite(cmd) {
 	if (typeof this.prefix != 'undefined') {
 		options.prefix		= this.prefix;
 	}
+	if (typeof this.common != 'undefined') {
+		options.common		= this.common;
+	}
 	if (typeof this.maxwidth != 'undefined') {
 		options.maxwidth	= parseInt(this.maxwidth, 10);
 	}
@@ -81,6 +84,7 @@ program
 	.option('--spritedir <sprite-directory>', 'Sprite subdirectory name [svg]')
 	.option('--sprite <sprite-filename>', 'Sprite file name [sprite]')
 	.option('-p, --prefix <selector-prefix>', 'CSS selector prefix [svg]')
+	.option('--common <common-selector>', 'Common CSS selector for all images')
 	.option('--maxwidth <max-width>', 'Maximum single image width [1000]')
 	.option('--maxheight <max-height>', 'Maximum single image height [1000]')
 	.option('--padding <padding>', 'Transparent padding around the single images (in pixel)')
