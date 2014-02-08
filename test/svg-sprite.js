@@ -1,6 +1,9 @@
 var should			= require('should'),
 path				= require('path'),
-svgsprite			= require('../lib/svg-sprite');
+rimraf				= require('rimraf'),
+svgsprite			= require('../lib/svg-sprite'),
+svg2png				= require('svg2png'),
+imageDiff			= require('image-diff');
 
 describe('svg-sprite', function() {
 	
@@ -48,14 +51,33 @@ describe('svg-sprite', function() {
         });
     });
     
-    /* Further tests still to be done */
     describe('with valid arguments', function() {
         it('returns a valid sprite', function(done) {
         	this.timeout(10000);
         	svgsprite.createSprite(path.join(__dirname, 'files'), path.normalize(path.join(__dirname, '..', 'tmp', 'css')), {sassout: path.normalize(path.join(__dirname, '..', 'tmp', 'sass'))}, function(err, result){
-				done();
+        		should(err).not.ok;
+        		done();
+//        		var spriteSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', 'sprite.svg'),
+//        		spritePNG				= path.join(__dirname, '..', 'tmp', 'css', 'svg', 'sprite.png');
+//        		svg2png(spriteSVG, spritePNG, function(err) {
+//        			should(err).not.ok;
+//					imageDiff({
+//						actualImage: spritePNG,
+//						expectedImage: path.join(__dirname, 'expected', 'sprite.png'),
+//						diffImage: path.join(__dirname, '..', 'tmp', 'css', 'svg', 'sprite.diff.png')
+//					}, function (err, imagesAreSame) {
+//				    	should(err).not.ok;
+//				    	should.ok(imagesAreSame, 'The generated sprite doesn\'t match the expected one!');
+//				    	done();
+//				    });
+//				});
             });
         });
     });
-    /**/
+});
+
+after(function(done) {
+	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
+		done();
+	});
 });
