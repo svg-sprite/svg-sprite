@@ -19,3 +19,4 @@ node_modules
 /.gitignore
 /index.js
 /tmp
+/*.md.html
