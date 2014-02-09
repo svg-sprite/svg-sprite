@@ -149,6 +149,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.0.3
+*	Fixed a bug with the Sass output
+
 #### v0.0.2
 *	Fixed a bug that let the sprite creation fail when keeping the intermediate SVG files
 *	Added the `common` option
