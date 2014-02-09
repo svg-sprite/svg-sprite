@@ -20,3 +20,4 @@ node_modules
 /index.js
 /tmp
 /*.md.html
+/.sass-cache
