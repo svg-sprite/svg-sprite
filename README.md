@@ -149,6 +149,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.0.4
+*	Changed devDependencies & added more tests
+
 #### v0.0.3
 *	Fixed a bug with the Sass output
 
