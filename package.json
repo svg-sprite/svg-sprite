@@ -43,7 +43,7 @@
     "mocha": "",
     "should": "",
     "rimraf": "",
-    "svg2png": "~1.0.0",
-    "image-diff": "~0.2.0"
+    "svg2png": ">= 1.0.1",
+    "image-diff": ">= 0.3.0"
 	}
 }
