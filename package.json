@@ -5,7 +5,7 @@
   "description": "Creates an SVG sprite plus suitable CSS / Sass resources of a folder of SVG files",
   "main": "lib/svg-sprite.js",
   "bin": {
-    "svg-sprite": "svg-sprite.js"
+    "svg-sprite": "./bin/svg-sprite.js"
   },
   "directories": {
     "test": "test"
