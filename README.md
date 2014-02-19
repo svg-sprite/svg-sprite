@@ -149,6 +149,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.0.7
+*	Fixed incomplete Sass output ([#3](https://github.com/jkphl/grunt-svg-sprite/issues/3))
+
 #### v0.0.6
 *	Fixed broken SVGO support ([#2](https://github.com/jkphl/grunt-svg-sprite/issues/2))
 *	Removed deprecated `width` and `height` config options from `lib/svg-obj.js`
