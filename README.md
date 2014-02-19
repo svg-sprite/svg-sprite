@@ -149,8 +149,12 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.0.6
+*	Fixed broken SVGO support ([#2](https://github.com/jkphl/grunt-svg-sprite/issues/2))
+*	Removed deprecated `width` and `height` config options from `lib/svg-obj.js`
+
 #### v0.0.5
-*	Fixed binary path in package.json (#1)
+*	Fixed binary path in package.json ([#1](https://github.com/jkphl/grunt-svg-sprite/issues/1))
 
 #### v0.0.4
 *	Changed devDependencies & added more tests
