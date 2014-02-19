@@ -55,8 +55,8 @@ function createSprite(cmd) {
 	if (typeof this.verbose != 'undefined') {
 		options.verbose		= Math.min(2, Math.max(0, parseInt(this.verbose, 10)));
 	}
-	if (typeof this.cleanwidth != 'undefined') {
-		options.cleanwidth	= this.cleanwidth.length ? this.cleanwidth : false;
+	if (typeof this.cleanwith != 'undefined') {
+		options.cleanwith	= this.cleanwith.length ? this.cleanwith : false;
 	}
 	if (typeof this.cleanconfig != 'undefined') {
 		options.cleanconfig	= this.cleanconfig.length ? JSON.parse(this.cleanconfig) : {};
