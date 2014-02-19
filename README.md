@@ -149,6 +149,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.0.5
+*	Fixed binary path in package.json (#1)
+
 #### v0.0.4
 *	Changed devDependencies & added more tests
 
