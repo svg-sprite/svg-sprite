@@ -36,8 +36,10 @@ Options:
   -V, --version                        output the version number
   -o, --out <css-directory>            Output directory for the CSS file and the sprite subdirectory
   --sassout <sass-directory>           Optional: separate output directory for Sass files [defaults to --out]
+  --lessout <less-directory>           Optional: separate output directory for LESS files [defaults to --out]
   -c, --css [css-filename]             Render CSS file (optionally provide a CSS file name, defaults to "sprite")
   -s, --sass [sass-filename]           Render Sass file (optionally provide a Sass file name, defaults to "sprite")
+  -l, --less [less-filename]           Render LESS file (optionally provide a LESS file name, defaults to "sprite")
   --spritedir <sprite-directory>       Sprite subdirectory name [svg]
   --sprite <sprite-filename>           Sprite file name [sprite]
   -p, --prefix <selector-prefix>       CSS selector prefix [svg]
@@ -122,17 +124,19 @@ These are the options you may pass as the `createSprite()` method's third argume
 Property      | Type             | Description     
 ------------- | ---------------- | ----------------
 `css`         | Boolean / String | If given and non-empty, a CSS file will be rendered, with the value being the file name (preceding the `.css` extension). If set to `TRUE`, the file name will be *sprite*.
-`sass`        | Boolean / String | If given and non-empty, a Sass file (SCSS) will be rendered, with the value being the file name (preceding the `.scss` extension). If set to `TRUE`, the file name will be *sprite*.
+`sass`        | Boolean / String | If given and non-empty, a [Sass](http://sass-lang.com) file (SCSS) will be rendered, with the value being the file name (preceding the `.scss` extension). If set to `TRUE`, the file name will be *sprite*.
 `sassout`     | Directory path   | Output directory for the Sass file (also see the `sass` option above, which needs to be set to create a Sass file). Defaults to the general output directory (second argument to `createSprite()`).
+`less`        | Boolean / String | If given and non-empty, a [LESS](http://lesscss.org) file will be rendered, with the value being the file name (preceding the `.less` extension). If set to `TRUE`, the file name will be *sprite*.
+`lessout`     | Directory path   | Output directory for the LESS file (also see the `less` option above, which needs to be set to create a LESS file). Defaults to the general output directory (second argument to `createSprite()`).
 `spritedir`   | Directory path   | Directory relative to the general CSS output directory where the SVG sprite will be created. Defaults to *svg*.
 `sprite`      | String           | Filename of the SVG sprite (preceding the `.svg` extension). Defaults to *sprite*. 
-`prefix`      | String           | Prefix for all CSS rules (CSS and Sass file). Defaults to *svg* (results in `.svg-*` CSS selectors)
+`prefix`      | String           | Prefix for all CSS rules (CSS, Sass & LESS file). Defaults to *svg* (results in `.svg-*` CSS selectors)
 `common`      | String           | If given and not empty, it will be used for creating a CSS selector that commonly defines the `background-image` and `background-repeat` properties for all the sprite images (thus saving some bytes by not unnecessarily repeating these properties for each image) 
 `maxwidth`    | Integer          | Maximum width of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `maxheight`   | Integer          | Maximum height of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `padding`     | Integer          | Padding around the single SVG images in the sprite. Defaults to `0`.
 `pseudo`      | String           | Char to determine the usage of CSS pseudo classes. See the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for details. Defaults to *~*.
-`dims`        | -                | If present, additional CSS rules will be rendered (both CSS and Sass) that set the dimensions of the single images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
+`dims`        | -                | If present, additional CSS rules will be rendered (CSS, Sass & LESS) that set the dimensions of the single images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
 `keep`        | -                | If present, the single optimized intermediate SVG images used for creating the sprite will not be discarded, but kept in the `spritedir` as well.
 `verbose`     | Integer    | Set to a value > `0` to get some output. Defaults to `0`.
 `cleanwith`   | String           | Select the module used for optimizing the single SVG images. Currently, the Node.js modules [svg-cleaner](https://npmjs.org/package/svg-cleaner) (loosely based on [Scour](http://www.codedread.com/scour)) and [SVGO](https://github.com/svg/svgo) are supported, so use either *scour* or *svgo* for this option. Set it to `FALSE` or `NULL` to skip the SVG optimization altogether. Defaults to *scour* (but this may change in the future).
@@ -148,6 +152,9 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v0.0.8
+*	Added support for LESS output ([#4](https://github.com/jkphl/svg-sprite/issues/4))
 
 #### v0.0.7
 *	Fixed incomplete Sass output ([#3](https://github.com/jkphl/grunt-svg-sprite/issues/3))

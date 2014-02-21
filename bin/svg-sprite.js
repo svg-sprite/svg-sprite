@@ -13,14 +13,20 @@ function createSprite(cmd) {
 		console.log('Converting the SVG files in directory "%s" to an SVG sprite ...', cmd);
 	}
 	var options = {};
-	if (typeof this.sassout != 'undefined') {
-		options.sassout		= this.sassout;
-	}
 	if (typeof this.css != 'undefined') {
 		options.css			= this.css.length ? this.css : true;
 	}
 	if (typeof this.sass != 'undefined') {
 		options.sass		= this.sass.length ? this.sass : true;
+	}
+	if (typeof this.sassout != 'undefined') {
+		options.sassout		= this.sassout;
+	}
+	if (typeof this.less != 'undefined') {
+		options.less		= this.less.length ? this.less : true;
+	}
+	if (typeof this.lessout != 'undefined') {
+		options.lessout		= this.lessout;
 	}
 	if (typeof this.spritedir != 'undefined') {
 		options.spritedir	= this.spritedir;
@@ -79,8 +85,10 @@ program
 	.version('0.0.1')
 	.option('-o, --out <css-directory>', 'Output directory for the CSS file and the sprite subdirectory')
 	.option('--sassout <sass-directory>', 'Optional: separate output directory for Sass files [defaults to --out]')
+	.option('--lessout <less-directory>', 'Optional: separate output directory for LESS files [defaults to --out]')
 	.option('-c, --css [css-filename]', 'Render CSS file (optionally provide a CSS file name, defaults to "sprite")')
 	.option('-s, --sass [sass-filename]', 'Render Sass file (optionally provide a Sass file name, defaults to "sprite")')
+	.option('-l, --less [less-filename]', 'Render LESS file (optionally provide a LESS file name, defaults to "sprite")')
 	.option('--spritedir <sprite-directory>', 'Sprite subdirectory name [svg]')
 	.option('--sprite <sprite-filename>', 'Sprite file name [sprite]')
 	.option('-p, --prefix <selector-prefix>', 'CSS selector prefix [svg]')
