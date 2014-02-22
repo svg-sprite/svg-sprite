@@ -3,13 +3,13 @@
 	background-image: url({{sprite}});
 }
 
-{{#svg}}{{#selector}}{{expression}}{{^last}},
+{{#svg}}{{#selector}}.{{expression}}{{^last}},
 {{/last}}{{/selector}} {
 	background-position: {{position}};{{^common}}
 	@extend %{{prefix}};{{/common}}
 }{{#dims}}
 
-{{#selector}}{{expression}}{{^last}},
+{{#selector}}.{{expression}}{{^last}},
 {{/last}}{{/selector}} {
 	width: {{width}}px;
 	height: {{height}}px;

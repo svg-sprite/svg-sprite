@@ -307,14 +307,21 @@ The **JavaScript hash** piped into the template rendering process typically look
     	// Single sprite image configuration
         {
         
+        	// Sprite image name
+        	"name": "weather-clear-night",
+        
         	// List of CSS selector expressions for this sprite image
             "selector": [
                 {
-                    "expression": ".svg-weather-clear-night",
+                    "expression": "svg-weather-clear-night",
+                    "raw": "svg-weather-clear-night",
+                    "first": true, // Indicating the first expression
                     "last": false
                 },
                 {
-                    "expression": ".svg-weather-clear-night\\:regular",
+                    "expression": "svg-weather-clear-night\\:regular",
+                    "raw": "svg-weather-clear-night:regular", // Unescaped expression version
+                    "first": false,
                     "last": true // Indicating the last expression
                 }
             ],
@@ -328,7 +335,9 @@ The **JavaScript hash** piped into the template rendering process typically look
             	// List of CSS selector expressions for this sprite image dimensions
                 "selector": [
                     {
-                        "expression": ".svg-weather-clear-night-dims",
+                        "expression": "svg-weather-clear-night-dims",
+                        "raw": "svg-weather-clear-night-dims",
+                        "first": true, // Indicating the first expression
                         "last": true // Indicating the last expression
                     }
                 ],

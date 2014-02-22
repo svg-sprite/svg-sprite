@@ -2,7 +2,7 @@
   "name": "svg-sprite",
   "version": "0.1.0",
   "author": "Joschi Kuphal <joschi@kuphal.net>",
-  "description": "Creates an SVG sprite plus suitable CSS / Sass resources of a folder of SVG files",
+  "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable CSS / Sass / LESS etc. resources out of them",
   "main": "lib/svg-sprite.js",
   "bin": {
     "svg-sprite": "./bin/svg-sprite.js"
@@ -45,6 +45,9 @@
     "should": "",
     "rimraf": "",
     "svg2png": ">= 1.0.1",
-    "image-diff": ">= 0.3.0"
-	}
+    "image-diff": ">= 0.3.0",
+    "clean-css": ">= 2.1.1",
+    "node-sass": ">= 0.8.1",
+    "less": ">= 1.6.3"
+  }
 }
