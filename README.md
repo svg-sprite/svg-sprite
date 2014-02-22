@@ -372,6 +372,7 @@ Release history
 *	Added support for omitting the sprite subdirectory ([#5](https://github.com/jkphl/svg-sprite/issues/5))
 *	Added support for Mustache template based rendering ([#6](https://github.com/jkphl/svg-sprite/issues/6))
 *	**Breaking change**: Dropped `css`, `sass`, `sassout`, `less` and `lessout` configuration options, added `render` instead
+*	SVG DOCTYPE declaration gets automatically stripped now   
 
 #### v0.0.8
 *	Added support for LESS output ([#4](https://github.com/jkphl/svg-sprite/issues/4))
