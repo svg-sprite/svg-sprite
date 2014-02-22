@@ -204,7 +204,7 @@ If a `template` path is given, it must point to an existing template file — ot
 // expands to an absolute
 
 {
-    css             : '/path/to/svg-sprite/path/to/template.css'
+    css             : '/path/to/svg-sprite/<output-directory>/path/to/template.css'
 }
 ```
 
