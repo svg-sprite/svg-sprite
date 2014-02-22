@@ -1,0 +1,18 @@
+.{{prefix}}{{^common}}(){{/common}} {
+	background-repeat: no-repeat;
+	background-image: url({{sprite}});
+}
+
+{{#svg}}{{#selector}}{{expression}}{{^last}},
+{{/last}}{{/selector}} {
+	background-position: {{position}};{{^common}}
+	.{{prefix}}();{{/common}}
+}{{#dims}}
+
+{{#selector}}{{expression}}{{^last}},
+{{/last}}{{/selector}} {
+	width: {{width}}px;
+	height: {{height}}px;
+}{{/dims}}
+
+{{/svg}}

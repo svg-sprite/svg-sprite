@@ -9,24 +9,22 @@ path				= require('path'),
 svgsprite			= require('../lib/svg-sprite');
 
 function createSprite(cmd) {
+	if ((typeof this.out == 'undefined') || !this.out) {
+		console.error();
+		console.error('You must provide an output directory (--out)');
+		console.error();
+		process.exit(1);
+	}
+	
 	if (!this.quiet) {
+		console.log();
 		console.log('Converting the SVG files in directory "%s" to an SVG sprite ...', cmd);
+		console.log();
 	}
+	
 	var options = {};
-	if (typeof this.css != 'undefined') {
-		options.css			= this.css.length ? this.css : true;
-	}
-	if (typeof this.sass != 'undefined') {
-		options.sass		= this.sass.length ? this.sass : true;
-	}
-	if (typeof this.sassout != 'undefined') {
-		options.sassout		= this.sassout;
-	}
-	if (typeof this.less != 'undefined') {
-		options.less		= this.less.length ? this.less : true;
-	}
-	if (typeof this.lessout != 'undefined') {
-		options.lessout		= this.lessout;
+	if (typeof this.render != 'undefined') {
+		options.render		= this.render.length ? JSON.parse(this.render) : {};
 	}
 	if (typeof this.spritedir != 'undefined') {
 		options.spritedir	= this.spritedir;
@@ -83,12 +81,8 @@ function createSprite(cmd) {
 
 program
 	.version('0.0.1')
-	.option('-o, --out <css-directory>', 'Output directory for the CSS file and the sprite subdirectory')
-	.option('--sassout <sass-directory>', 'Optional: separate output directory for Sass files [defaults to --out]')
-	.option('--lessout <less-directory>', 'Optional: separate output directory for LESS files [defaults to --out]')
-	.option('-c, --css [css-filename]', 'Render CSS file (optionally provide a CSS file name, defaults to "sprite")')
-	.option('-s, --sass [sass-filename]', 'Render Sass file (optionally provide a Sass file name, defaults to "sprite")')
-	.option('-l, --less [less-filename]', 'Render LESS file (optionally provide a LESS file name, defaults to "sprite")')
+	.option('-o, --out <output-directory>', 'Default output directory for stylesheets and the sprite subdirectory')
+	.option('-r, --render <render-config>', 'Rendering configuration [{"css":true}]')
 	.option('--spritedir <sprite-directory>', 'Sprite subdirectory name [svg]')
 	.option('--sprite <sprite-filename>', 'Sprite file name [sprite]')
 	.option('-p, --prefix <selector-prefix>', 'CSS selector prefix [svg]')
@@ -102,7 +96,7 @@ program
 	.option('-v, --verbose', 'Output verbose progress information')
 	.option('--cleanwith <clean-module>', 'Module to be used for SVG cleaning. Currently "scour" or "svgo" [scour]')
 	.option('--cleanconfig <clean-configuration>', 'JSON-serialized configuration options for the cleaning module')
-	.option('-q, --quiet', 'Don\'t produce any output');
+	.option('-q, --quiet', 'Don\'t print any status messages');
 	
 program
 	.command('*')
@@ -112,15 +106,15 @@ program
 program.on('--help', function(){
   console.log('  Examples:');
   console.log('');
-  console.log('    $ svg-sprite --css --out sprite');
+  console.log('    $ svg-sprite --out sprite');
   console.log('    $ svg-sprite -co sprite');
   console.log('       Reads SVG files from the current directory and uses the subdirectory "sprite" to create an SVG sprite and CSS file');
   console.log('');
-  console.log('    $ svg-sprite --css --out sprite --sass _sprite --sassout sprite/sass');
+  console.log('    $ svg-sprite --out sprite --render \'{"scss":{"dest":"sprite/sass/_sprite"}}\'');
   console.log('       Creates an SVG sprite and a CSS file along with a Sass file at "sprite/sass/_sprite.scss"');
   console.log('');
-  console.log('    $ svg-sprite --keep --dims --css --out sprite --cleanwith svgo ./svg');
-  console.log('    $ svg-sprite -kdco sprite --cleanwith svgo ./svg');
+  console.log('    $ svg-sprite --keep --dims --out sprite --cleanwith svgo ./svg');
+  console.log('    $ svg-sprite -kdo sprite --cleanwith svgo ./svg');
   console.log('       Uses the subdirectory "./svg", creates image size CSS rules, optimizes the single SVG files using SVGO and doesn\'t discard them');
   console.log('');
 });
