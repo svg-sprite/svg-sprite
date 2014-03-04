@@ -367,6 +367,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.1.2
+*	Fixed a regression bug with the `:regular` pseudo-pseudo class
+
 #### v0.1.1
 *	Implemented element ID namespacing (during sprite composition)
 *	Switched to SVGO as default SVG optimizer
