@@ -6,9 +6,14 @@
 
 var program			= require('commander'),
 path				= require('path'),
-svgsprite			= require('../lib/svg-sprite'),
-fs					= require('fs');
+fs					= require('fs'),
+svgsprite			= require('../lib/svg-sprite');
 
+/**
+ * Create the SVG sprite
+ * 
+ * @param {String} cmd			Input directory
+ */
 function createSprite(cmd) {
 	if ((typeof this.out == 'undefined') || !this.out) {
 		console.error();
@@ -80,18 +85,17 @@ function createSprite(cmd) {
 	});
 }
 
+/**
+ * Return the version number
+ * 
+ * @return {String}			Version number
+ */
 function getVersion() {
-	var version;
-
 	try {
-		version = JSON.parse(
-			fs.readFileSync(__dirname + '/../package.json', {encoding: 'utf8'})
-		).version;
+		return JSON.parse(fs.readFileSync(path.dirname(__dirname) + '/package.json', {encoding: 'utf8'})).version;
 	} catch(e) {
-		version = 'N/A';
+		return 'N/A';
 	}
-
-	return version;
 }
 
 program
