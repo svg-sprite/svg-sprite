@@ -6,7 +6,8 @@
 
 var program			= require('commander'),
 path				= require('path'),
-svgsprite			= require('../lib/svg-sprite');
+svgsprite			= require('../lib/svg-sprite'),
+fs					= require('fs');
 
 function createSprite(cmd) {
 	if ((typeof this.out == 'undefined') || !this.out) {
@@ -79,8 +80,22 @@ function createSprite(cmd) {
 	});
 }
 
+function getVersion() {
+	var version;
+
+	try {
+		version = JSON.parse(
+			fs.readFileSync(__dirname + '/../package.json', {encoding: 'utf8'})
+		).version;
+	} catch(e) {
+		version = 'N/A';
+	}
+
+	return version;
+}
+
 program
-	.version('0.0.1')
+	.version(getVersion())
 	.option('-o, --out <output-directory>', 'Default output directory for stylesheets and the sprite subdirectory')
 	.option('-r, --render <render-config>', 'Rendering configuration [{"css":true}]')
 	.option('--spritedir <sprite-directory>', 'Sprite subdirectory name [svg]')
