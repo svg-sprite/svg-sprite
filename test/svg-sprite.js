@@ -82,6 +82,7 @@ describe('svg-sprite', function() {
     
     describe('with an invalid Sass output directory', function() {
         it('returns an error', function(done) {
+        	this.timeout(10000);
         	svgsprite.createSprite(path.join(__dirname, 'files'), path.normalize(path.join(__dirname, '..', 'tmp', 'css')), {render: {scss: path.normalize(path.join(__dirname, '..', 'tmp', 'sass\0null/'))}}, function(err, result){
             	err.should.be.an.Error;
 				err.should.have.property('errno', 1391854708);
@@ -148,7 +149,7 @@ describe('svg-sprite', function() {
 							diffImage: path.join(__dirname, '..', 'tmp', 'preview.css.diff.png')
 						}, function (__err, imagesAreSame) {
 					    	should(__err).not.ok;
-					    	should.ok(imagesAreSame, 'The generated preview doesn\'t match the expected one!');
+					    	should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
 					    	done();
 					    });
 					})
@@ -191,7 +192,7 @@ describe('svg-sprite', function() {
 										diffImage: path.join(__dirname, '..', 'tmp', 'preview.scss.diff.png')
 									}, function (___err, imagesAreSame) {
 								    	should(___err).not.ok;
-								    	should.ok(imagesAreSame, 'The generated preview doesn\'t match the expected one!');
+								    	should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
 								    	done();
 								    });
 								})
@@ -245,7 +246,7 @@ describe('svg-sprite', function() {
 										diffImage: path.join(__dirname, '..', 'tmp', 'preview.less.diff.png')
 									}, function (_____err, imagesAreSame) {
 								    	should(_____err).not.ok;
-								    	should.ok(imagesAreSame, 'The generated preview doesn\'t match the expected one!');
+								    	should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
 								    	done();
 								    });
 								})
