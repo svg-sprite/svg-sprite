@@ -13,11 +13,11 @@ results
 
 npm-debug.log
 node_modules
-/.settings
-/.buildpath
-/.project
-/.gitignore
-/index.js
-/tmp
-/*.md.html
-/.sass-cache
+.settings
+.buildpath
+.project
+.gitignore
+index.js
+tmp
+*.md.html
+.sass-cachetest/svg
