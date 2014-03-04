@@ -372,6 +372,7 @@ Release history
 *	Switched to SVGO as default SVG optimizer
 *	Compatibility features for the upcoming [Node.js based iconizr](https://github.com/jkphl/node-iconizr) (e.g. exposed two additional methods)
 *	Improved log messages  
+*	Improved the usage of the `:regular` pseudo-pseudo class ([#7](https://github.com/jkphl/svg-sprite/issues/7))
 
 #### v0.1.0
 *	Added support for omitting the sprite subdirectory ([#5](https://github.com/jkphl/svg-sprite/issues/5))
