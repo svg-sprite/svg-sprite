@@ -301,6 +301,9 @@ The **JavaScript hash** piped into the template rendering process typically look
     // Path to the generated SVG sprite, relative to the main output directory
     "sprite": "svg/sprite.svg",
     
+    // Whether to render image dimension CSS rules
+    "dims": false,
+    
     // List of all sprite images
     "svg": [
     
@@ -330,7 +333,7 @@ The **JavaScript hash** piped into the template rendering process typically look
             "position": "0 0",
             
             // Sprite image dimension configuration (if activated, otherwise FALSE)
-            "dims": {
+            "dimensions": {
             
             	// List of CSS selector expressions for this sprite image dimensions
                 "selector": [
@@ -366,6 +369,11 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v0.1.3
+*	Fixed wrong version statement in the CLI app ([#8](https://github.com/jkphl/svg-sprite/pull/8), thanks to @stefanjudis)
+*	Prefer `viewBox` attribute for image dimension calculation ([#9](https://github.com/jkphl/svg-sprite/issues/9))
+*	Compatibility features for the upcoming [Node.js based iconizr](https://github.com/jkphl/node-iconizr) (modified the JavaScript hash for [custom output formats](#custom-output-formats))
 
 #### v0.1.2
 *	Fixed a regression bug with the `:regular` pseudo-pseudo class

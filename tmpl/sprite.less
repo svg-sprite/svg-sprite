@@ -7,12 +7,12 @@
 {{/last}}{{/selector}} {
 	background-position: {{position}};{{^common}}
 	.{{prefix}}();{{/common}}
-}{{#dims}}
+}{{#dims}}{{#dimensions}}
 
 {{#selector}}.{{expression}}{{^last}},
 {{/last}}{{/selector}} {
 	width: {{width}}px;
 	height: {{height}}px;
-}{{/dims}}
+}{{/dimensions}}{{/dims}}
 
 {{/svg}}
