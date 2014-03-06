@@ -304,6 +304,15 @@ The **JavaScript hash** piped into the template rendering process typically look
     // Whether to render image dimension CSS rules
     "dims": false,
     
+    // Padding around each sprite image (pixel)
+    "padding": 0,
+    
+    // Overall sprite width (pixel)
+    "swidth": 32,
+    
+    // Overall sprite height (pixel)
+    "sheight": 32,
+    
     // List of all sprite images
     "svg": [
     
@@ -329,7 +338,19 @@ The **JavaScript hash** piped into the template rendering process typically look
                 }
             ],
             
-            // CSS background position values
+            // Sprite image width (pixel)
+		    "width": 32,
+		    
+		    // Sprite image height (pixel)
+		    "height": 32,
+		    
+		    // Horizontal offset of the image within the sprite (pixel; currently always 0)  
+            "positionX": 0,
+            
+            // Vertical offset of the image within the sprite  
+            "positionY": 0,
+            
+            // CSS background position values (including "px" unit if necessary)
             "position": "0 0",
             
             // Sprite image dimension configuration (if activated, otherwise FALSE)
@@ -369,6 +390,10 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v0.1.4
+*	Fixed padding bug with missing `viewBox` attribute ([#10](https://github.com/jkphl/svg-sprite/pull/10), thanks to @arminrosu)
+*	Added additional Mustache variables ([#10](https://github.com/jkphl/svg-sprite/pull/10), thanks to @arminrosu)
 
 #### v0.1.3
 *	Fixed wrong version statement in the CLI app ([#8](https://github.com/jkphl/svg-sprite/pull/8), thanks to @stefanjudis)
