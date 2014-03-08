@@ -1,8 +1,26 @@
 {
   "name": "svg-sprite",
   "version": "0.2.0",
-  "author": "Joschi Kuphal <joschi@kuphal.net>",
+  "author": {
+    "name": "Joschi Kuphal",
+    "email": "joschi@kuphal.net",
+    "url": "http://jkphl.is"
+  },
   "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable stylesheet resources (e.g. CSS, Sass or LESS) out of them",
+  "homepage": "https://github.com/jkphl/svg-sprite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkphl/svg-sprite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jkphl/svg-sprite/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt"
+    }
+  ],
   "main": "lib/svg-sprite.js",
   "bin": {
     "svg-sprite": "./bin/svg-sprite.js"
@@ -13,35 +31,6 @@
   "scripts": {
     "test": "mocha test/*.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jkphl/svg-sprite.git"
-  },
-  "keywords": [
-    "icon",
-    "icons",
-    "svg",
-    "png",
-    "sprite",
-    "generator",
-    "css",
-    "sass",
-    "less",
-    "vector",
-    "rwd",
-    "retina",
-    "mustache"
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/jkphl/svg-sprite/issues"
-  },
-  "homepage": "https://github.com/jkphl/svg-sprite",
   "dependencies": {
     "mkdirp": "~0.3.5",
     "async": "~0.2.9",
@@ -65,5 +54,20 @@
     "clean-css": ">= 2.1.1",
     "node-sass": ">= 0.8.1",
     "less": ">= 1.6.3"
-  }
+  },
+  "keywords": [
+    "icon",
+    "icons",
+    "svg",
+    "png",
+    "sprite",
+    "generator",
+    "css",
+    "sass",
+    "less",
+    "vector",
+    "rwd",
+    "retina",
+    "mustache"
+  ]
 }
