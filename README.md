@@ -135,7 +135,7 @@ Property      | Type             | Description
 `dims`        | -                | If present, additional CSS rules will be rendered (all output formats) that set the dimensions of the single sprite images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
 `keep`        | -                | If present, the single optimized intermediate SVG images used for creating the sprite will not be discarded, but kept in the `spritedir` as well.
 `verbose`     | Integer    | Set this to a value > `0` to get some output. Defaults to `0`.
-`cleanwith`   | String           | Select the module used for optimizing the single SVG images. Currently, the Node.js modules [svg-cleaner](https://npmjs.org/package/svg-cleaner) (loosely based on [Scour](http://www.codedread.com/scour)) and [SVGO](https://github.com/svg/svgo) are supported, so use either *scour* or *svgo* for this option. Set it to `FALSE` or `NULL` to skip the SVG optimization altogether. Defaults to *svgo* (starting with version v0.1.1).
+`cleanwith`   | String           | Select the module used for optimizing the single SVG images. Currently, the Node.js modules [svg-cleaner](https://npmjs.org/package/svg-cleaner) (loosely based on [Scour](http://www.codedread.com/scour)) and [SVGO](https://github.com/svg/svgo) are supported, so use either *scour* or *svgo* for this option. Set it to `FALSE` or `NULL` to skip the SVG optimization altogether. Defaults to *svgo* (starting with version v0.1.1). **ATTENTION: Currently Scour is not supported** (until an updated release gets available)
 `cleanconfig` | String (JSON)    | You may provide a configuration object that is passed to the SVG optimizer (currently, only [SVGO](https://github.com/svg/svgo) supports this). It defaults to `{plugins: [{moveGroupAttrsToElems: false}]}`. When used on the [command line](#command-line-usage), provide a valid JSON encoded string here.
 
 
@@ -391,6 +391,7 @@ Release history
 
 #### v0.2.0
 *	Improved log messages
+*	Disabled Scour until next release
 *	Compatibility release for the [Node.js based iconizr](https://github.com/jkphl/node-iconizr)
 
 #### v0.1.5
