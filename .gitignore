@@ -17,7 +17,9 @@ node_modules
 .buildpath
 .project
 .gitignore
+
 index.js
 tmp
 *.md.html
 .sass-cachetest/svg
+test/svg
