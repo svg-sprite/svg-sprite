@@ -390,6 +390,7 @@ Release history
 ---------------
 
 #### v0.2.0
+*	Improved log messages
 *	Compatibility release for the [Node.js based iconizr](https://github.com/jkphl/node-iconizr)
 
 #### v0.1.5

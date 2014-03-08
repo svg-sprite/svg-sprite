@@ -18,11 +18,19 @@
     "url": "https://github.com/jkphl/svg-sprite.git"
   },
   "keywords": [
+    "icon",
+    "icons",
     "svg",
+    "png",
     "sprite",
     "generator",
     "css",
-    "sass"
+    "sass",
+    "less",
+    "vector",
+    "rwd",
+    "retina",
+    "mustache"
   ],
   "licenses": [
     {
@@ -45,7 +53,8 @@
     "css-selector-parser": "~1.0.3",
     "phantom-sync": "~1.1.1",
     "commander": "1.0.x",
-    "mu2": "~0.5.20"
+    "mu2": "~0.5.20",
+    "chalk": "0.3.x"
   },
   "devDependencies": {
     "mocha": "",
