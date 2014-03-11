@@ -1,6 +1,6 @@
 {
   "name": "svg-sprite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Joschi Kuphal",
     "email": "joschi@kuphal.net",
@@ -34,16 +34,16 @@
   "dependencies": {
     "mkdirp": "~0.3.5",
     "async": "~0.2.9",
-    "underscore": "",
+    "underscore": "~1.6.0",
     "svgo": "~0.4.4",
     "svg-cleaner": "~0.0.1",
     "libxmljs": "~0.8.1",
     "cssom": "~0.3.0",
     "css-selector-parser": "~1.0.3",
     "phantom-sync": "~1.1.1",
-    "commander": "1.0.x",
+    "commander": "~1.0.5",
     "mu2": "~0.5.20",
-    "chalk": "0.3.x"
+    "chalk": "~0.3.0"
   },
   "devDependencies": {
     "mocha": "",

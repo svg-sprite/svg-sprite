@@ -34,7 +34,7 @@ Options:
   -h, --help                           Output usage information
   -V, --version                        Output the version number
   -o, --out <output-directory>         Default output directory for stylesheets and the sprite subdirectory
-  -r, --render <render-config>         Rendering configuration [{"css":true}]
+  -r, --render <render-config>         Rendering configuration [{css: true}]
   --spritedir <sprite-directory>       Sprite subdirectory name [svg]
   --sprite <sprite-filename>           Sprite file name [sprite]
   -p, --prefix <selector-prefix>       CSS selector prefix [svg]
@@ -42,7 +42,7 @@ Options:
   --maxwidth <max-width>               Maximum single image width [1000]
   --maxheight <max-height>             Maximum single image height [1000]
   --padding <padding>                  Transparent padding around the single images (in pixel) [0]
-  --layout <layout>                    Method of arranging single images. Can be "vertical", "horizontal" or "diagonal" [vertical]
+  --layout <layout>                    Sprite images arrangement ("vertical", "horizontal" or "diagonal") [vertical]
   --pseudo <pseudo-separator>          Character sequence for denoting CSS pseudo classes [~]
   -d, --dims                           Render image dimensions as separate CSS rules [false] 
   -k, --keep                           Keep intermediate SVG files (inside the sprite subdirectory) [false]
@@ -132,7 +132,7 @@ Property      | Type             | Description
 `maxwidth`    | Integer          | Maximum width of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `maxheight`   | Integer          | Maximum height of single SVG images. Will be downscaled if necessary. Defaults to `1000`.
 `padding`     | Integer          | Padding around the single SVG images in the sprite. Defaults to `0`.
-`layout`      | String           | Method of arranging single SVG images in the sprite. Can be "vertical", "horizontal" or "diagonal", defaults to `vertical`.
+`layout`      | String           | Method of arranging the single SVG images in the sprite. Can be "vertical", "horizontal" or "diagonal", defaults to `vertical`.
 `pseudo`      | String           | Char to separate CSS pseudo classes in file names. See the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for details. Defaults to `~`.
 `dims`        | -                | If present, additional CSS rules will be rendered (all output formats) that set the dimensions of the single sprite images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
 `keep`        | -                | If present, the single optimized intermediate SVG images used for creating the sprite will not be discarded, but kept in the `spritedir` as well.
@@ -390,6 +390,9 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v0.2.1
+*	Added support for horizontal & diagonal sprites ([#11](https://github.com/jkphl/svg-sprite/pull/11), thanks to @arminrosu)
 
 #### v0.2.0
 *	Improved log messages
