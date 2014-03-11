@@ -53,7 +53,7 @@ function createSprite(cmd) {
 	if (typeof this.padding != 'undefined') {
 		options.padding		= this.padding;
 	}
-	if (typeof this.layout != 'undefined' && ['vertical', 'horizontal'].indexOf(this.layout) != -1) {
+	if (typeof this.layout != 'undefined' && ['vertical', 'horizontal', 'diagonal'].indexOf(this.layout) != -1) {
 		options.layout		= this.layout;
 	}
 	if (typeof this.pseudo != 'undefined') {
@@ -112,7 +112,7 @@ program
 	.option('--maxwidth <max-width>', 'Maximum single image width [1000]')
 	.option('--maxheight <max-height>', 'Maximum single image height [1000]')
 	.option('--padding <padding>', 'Transparent padding around the single images (in pixel)')
-	.option('--layout <layout>', 'Method of arranging single images. Can be "vertical" or "horizontal" [vertical]')
+	.option('--layout <layout>', 'Method of arranging single images. Can be "vertical", "horizontal" or "diagonal" [vertical]')
 	.option('--pseudo <pseudo-separator>', 'Character sequence for denoting CSS pseudo classes [~]')
 	.option('-d, --dims', 'Render image dimensions as separate CSS and / or Sass rules')
 	.option('-k, --keep', 'Keep intermediate SVG files (inside the sprite subdirectory)')
