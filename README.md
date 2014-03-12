@@ -49,6 +49,7 @@ Options:
   --cleanwith <clean-module>           Module to be used for SVG cleaning. Currently "scour" or "svgo" [svgo]
   --cleanconfig <clean-configuration>  JSON-serialized configuration options for the cleaning module [{}]
   -q, --quiet                          Don't print any status messages
+  --recursive						   Look for svg files recursively
 ```
 
 Please [see below](#available-options) to learn more about the options and their values.
@@ -99,9 +100,9 @@ callback				= function(err, results) { /*
 	   success			: true,		// Overall success
 	   length			: 3,		// Total number of files written
 	   files			: {			// Files along with their file size in bytes
-	      '/path/to/your/cwd/css/output/directory/svg/sprite.svg'	: 436823,
-	      '/path/to/your/cwd/css/output/directory/sprite.css'		: 1821,
-	      '/path/to/your/cwd/sass/output/directory/_sprite.scss'	: 2197
+		  '/path/to/your/cwd/css/output/directory/svg/sprite.svg'	: 436823,
+		  '/path/to/your/cwd/css/output/directory/sprite.css'		: 1821,
+		  '/path/to/your/cwd/sass/output/directory/_sprite.scss'	: 2197
 	   }
 	}
 	
@@ -137,6 +138,7 @@ Property      | Type             | Description
 `verbose`     | Integer    | Set this to a value > `0` to get some output. Defaults to `0`.
 `cleanwith`   | String           | Select the module used for optimizing the single SVG images. Currently, the Node.js modules [svg-cleaner](https://npmjs.org/package/svg-cleaner) (loosely based on [Scour](http://www.codedread.com/scour)) and [SVGO](https://github.com/svg/svgo) are supported, so use either *scour* or *svgo* for this option. Set it to `FALSE` or `NULL` to skip the SVG optimization altogether. Defaults to *svgo* (starting with version v0.1.1). **ATTENTION: Currently Scour is not supported** (until an updated release gets available)
 `cleanconfig` | String (JSON)    | You may provide a configuration object that is passed to the SVG optimizer (currently, only [SVGO](https://github.com/svg/svgo) supports this). It defaults to `{plugins: [{moveGroupAttrsToElems: false}]}`. When used on the [command line](#command-line-usage), provide a valid JSON encoded string here.
+`recursive`		| Boolean	| Defaults to false. When set to true, the svg input folder will be searched recursively for .svg files
 
 
 #### Rendering configuration
@@ -196,13 +198,13 @@ If a `template` path is given, it must point to an existing template file — ot
 // A relative path
 
 {
-    css             : 'path/to/template.css'
+	css             : 'path/to/template.css'
 }
 
 // expands to an absolute
 
 {
-    css             : '/path/to/svg-sprite/<output-directory>/path/to/template.css'
+	css             : '/path/to/svg-sprite/<output-directory>/path/to/template.css'
 }
 ```
 
@@ -210,14 +212,14 @@ If a `template` path is given, it must point to an existing template file — ot
 // A missing file extension 
 
 {
-    scss            : '/path/to/svg-sprite/path/to/template'
+	scss            : '/path/to/svg-sprite/path/to/template'
 }
 
 // expands to the template's file extension, whereas the template is determined
 // by the overall format key (if not explicitly specified via `template`)
 
 {
-    scss            : '/path/to/svg-sprite/path/to/template.scss' // default template: sprite.scss
+	scss            : '/path/to/svg-sprite/path/to/template.scss' // default template: sprite.scss
 }
 ```
 
@@ -225,19 +227,19 @@ If a `template` path is given, it must point to an existing template file — ot
 // A missing file name 
 
 {
-    less            : {
-    	template	: '/path/to/custom.less',
-    	dest		: '/path/to/svg-sprite/path/to/directory/'
-    }
+	less            : {
+		template	: '/path/to/custom.less',
+		dest		: '/path/to/svg-sprite/path/to/directory/'
+	}
 }
 
 // is also derived from the template
 
 {
-    less            : {
-    	template	: '/path/to/custom.less',
-    	dest		: '/path/to/svg-sprite/path/to/directory/custom.less' // default template: sprite.less
-    }
+	less            : {
+		template	: '/path/to/custom.less',
+		dest		: '/path/to/svg-sprite/path/to/directory/custom.less' // default template: sprite.less
+	}
 }
 ```
 
@@ -245,13 +247,13 @@ If a `template` path is given, it must point to an existing template file — ot
 // An empty destination
 
 {
-    css             : ''
+	css             : ''
 }
 
 // expands to an absolute one with all default values
 
 {
-    css             : '/path/to/svg-sprite/<output-directory>/sprite.css'
+	css             : '/path/to/svg-sprite/<output-directory>/sprite.css'
 }
 ```
 
@@ -260,9 +262,9 @@ To disable a certain output format, set it's value to `false` or `null`:
 ```javascript
 {
 	// Disable CSS rendering
-    css				: false,
-    
-    // Activate Sass rendering
+	css				: false,
+	
+	// Activate Sass rendering
 	scss			: 'sass/output/directory/',
 	
 	// Activate LESS rendering with custom template
@@ -279,7 +281,7 @@ Introducing a custom output format — or overwriting one of the predefined ones
 
 ```javascript
 {
-    myformat		: {
+	myformat		: {
 		template	: 'path/to/custom/mustache/template.abc',
 		dest		: 'path/to/output/file.xyz'
 	}
@@ -290,90 +292,90 @@ The **JavaScript hash** piped into the template rendering process typically look
 
 ```javascript
 {
-    // CSS class name for `common` sprite image properties (or FALSE if disabled)
-    "common": "icon",
-    
-    // `Prefix` for all CSS rules
-    "prefix": "svg",
-    
-    // Path to the generated SVG sprite, relative to the main output directory
-    "sprite": "svg/sprite.svg",
-    
-    // Whether to render image dimension CSS rules
-    "dims": false,
-    
-    // Padding around each sprite image (pixel)
-    "padding": 0,
-    
-    // Overall sprite width (pixel)
-    "swidth": 32,
-    
-    // Overall sprite height (pixel)
-    "sheight": 32,
-    
-    // List of all sprite images
-    "svg": [
-    
-    	// Single sprite image configuration
-        {
-        
-        	// Sprite image name
-        	"name": "weather-clear-night",
-        
-        	// List of CSS selector expressions for this sprite image
-            "selector": [
-                {
-                    "expression": "svg-weather-clear-night",
-                    "raw": "svg-weather-clear-night",
-                    "first": true, // Indicating the first expression
-                    "last": false
-                },
-                {
-                    "expression": "svg-weather-clear-night\\:regular",
-                    "raw": "svg-weather-clear-night:regular", // Unescaped expression version
-                    "first": false,
-                    "last": true // Indicating the last expression
-                }
-            ],
-            
-            // Sprite image width (pixel)
-		    "width": 32,
-		    
-		    // Sprite image height (pixel)
-		    "height": 32,
-		    
-		    // Horizontal offset of the image within the sprite (pixel; currently always 0)  
-            "positionX": 0,
-            
-            // Vertical offset of the image within the sprite  
-            "positionY": 0,
-            
-            // CSS background position values (including "px" unit if necessary)
-            "position": "0 0",
-            
-            // Sprite image dimension configuration (if activated, otherwise FALSE)
-            "dimensions": {
-            
-            	// List of CSS selector expressions for this sprite image dimensions
-                "selector": [
-                    {
-                        "expression": "svg-weather-clear-night-dims",
-                        "raw": "svg-weather-clear-night-dims",
-                        "first": true, // Indicating the first expression
-                        "last": true // Indicating the last expression
-                    }
-                ],
-                
-                // Sprite image width (pixels)
-                "width": 50,
-                
-                // Sprite image width (height)
-                "height": 50
-            }
-        }
-        
-        /* Further sprite images */
-    ]
+	// CSS class name for `common` sprite image properties (or FALSE if disabled)
+	"common": "icon",
+	
+	// `Prefix` for all CSS rules
+	"prefix": "svg",
+	
+	// Path to the generated SVG sprite, relative to the main output directory
+	"sprite": "svg/sprite.svg",
+	
+	// Whether to render image dimension CSS rules
+	"dims": false,
+	
+	// Padding around each sprite image (pixel)
+	"padding": 0,
+	
+	// Overall sprite width (pixel)
+	"swidth": 32,
+	
+	// Overall sprite height (pixel)
+	"sheight": 32,
+	
+	// List of all sprite images
+	"svg": [
+	
+		// Single sprite image configuration
+		{
+		
+			// Sprite image name
+			"name": "weather-clear-night",
+		
+			// List of CSS selector expressions for this sprite image
+			"selector": [
+				{
+					"expression": "svg-weather-clear-night",
+					"raw": "svg-weather-clear-night",
+					"first": true, // Indicating the first expression
+					"last": false
+				},
+				{
+					"expression": "svg-weather-clear-night\\:regular",
+					"raw": "svg-weather-clear-night:regular", // Unescaped expression version
+					"first": false,
+					"last": true // Indicating the last expression
+				}
+			],
+			
+			// Sprite image width (pixel)
+			"width": 32,
+			
+			// Sprite image height (pixel)
+			"height": 32,
+			
+			// Horizontal offset of the image within the sprite (pixel; currently always 0)  
+			"positionX": 0,
+			
+			// Vertical offset of the image within the sprite  
+			"positionY": 0,
+			
+			// CSS background position values (including "px" unit if necessary)
+			"position": "0 0",
+			
+			// Sprite image dimension configuration (if activated, otherwise FALSE)
+			"dimensions": {
+			
+				// List of CSS selector expressions for this sprite image dimensions
+				"selector": [
+					{
+						"expression": "svg-weather-clear-night-dims",
+						"raw": "svg-weather-clear-night-dims",
+						"first": true, // Indicating the first expression
+						"last": true // Indicating the last expression
+					}
+				],
+				
+				// Sprite image width (pixels)
+				"width": 50,
+				
+				// Sprite image width (height)
+				"height": 50
+			}
+		}
+		
+		/* Further sprite images */
+	]
 }
 ```
 

@@ -71,6 +71,9 @@ function createSprite(cmd) {
 	if (typeof this.cleanconfig != 'undefined') {
 		options.cleanconfig	= this.cleanconfig.length ? JSON.parse(this.cleanconfig) : {};
 	}
+	if (typeof this.recursive != 'undefined') {
+		options.recursive 	= this.recursive;
+	}
 	svgsprite.createSprite(cmd, this.out, options, function(error, results){
 		if (!program.quiet) {
 			if (error) {
@@ -116,6 +119,7 @@ program
 	.option('--cleanwith <clean-module>', 'Module to be used for SVG cleaning. Currently "scour" or "svgo" [scour]')
 	.option('--cleanconfig <clean-configuration>', 'JSON-serialized configuration options for the cleaning module')
 	.option('-q, --quiet', 'Don\'t print any status messages');
+	.option('--recursive', 'Look for svg files recursively');
 	
 program
 	.command('*')
