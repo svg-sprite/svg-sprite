@@ -1,74 +1,74 @@
 {
   "name": "svg-sprite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
-	"name": "Joschi Kuphal",
-	"email": "joschi@kuphal.net",
-	"url": "http://jkphl.is"
+    "name": "Joschi Kuphal",
+    "email": "joschi@kuphal.net",
+    "url": "http://jkphl.is"
   },
   "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable stylesheet resources (e.g. CSS, Sass or LESS) out of them",
   "homepage": "https://github.com/jkphl/svg-sprite",
   "repository": {
-	"type": "git",
-	"url": "https://github.com/jkphl/svg-sprite.git"
+    "type": "git",
+    "url": "https://github.com/jkphl/svg-sprite.git"
   },
   "bugs": {
-	"url": "https://github.com/jkphl/svg-sprite/issues"
+    "url": "https://github.com/jkphl/svg-sprite/issues"
   },
   "licenses": [
-	{
-	  "type": "MIT",
-	  "url": "https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt"
-	}
+    {
+      "type": "MIT",
+      "url": "https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt"
+    }
   ],
   "main": "lib/svg-sprite.js",
   "bin": {
-	"svg-sprite": "./bin/svg-sprite.js"
+    "svg-sprite": "./bin/svg-sprite.js"
   },
   "directories": {
-	"test": "test"
+    "test": "test"
   },
   "scripts": {
-	"test": "mocha test/*.js"
+    "test": "mocha test/*.js"
   },
   "dependencies": {
-	"mkdirp": "~0.3.5",
-	"async": "~0.2.9",
-	"underscore": "",
-	"svgo": "~0.4.4",
-	"svg-cleaner": "~0.0.1",
-	"libxmljs": "~0.8.1",
-	"cssom": "~0.3.0",
-	"css-selector-parser": "~1.0.3",
-	"phantom-sync": "~1.1.1",
-	"commander": "1.0.x",
-	"mu2": "~0.5.20",
-	"chalk": "0.3.x",
-	"wrench": "1.5.8" 
+    "mkdirp": "~0.3.5",
+    "async": "~0.2.9",
+    "underscore": "~1.6.0",
+    "svgo": "~0.4.4",
+    "svg-cleaner": "~0.0.1",
+    "libxmljs": "~0.8.1",
+    "cssom": "~0.3.0",
+    "css-selector-parser": "~1.0.3",
+    "phantom-sync": "~1.1.1",
+    "commander": "~1.0.5",
+    "mu2": "~0.5.20",
+	"chalk": "0.3.0",
+    "wrench": "1.5.8"
   },
   "devDependencies": {
-	"mocha": "",
-	"should": "",
-	"rimraf": "",
-	"svg2png": ">= 1.0.1",
-	"image-diff": ">= 0.3.0",
-	"clean-css": ">= 2.1.1",
-	"node-sass": ">= 0.8.1",
-	"less": ">= 1.6.3"
+    "mocha": "",
+    "should": "",
+    "rimraf": "",
+    "svg2png": ">= 1.0.1",
+    "image-diff": ">= 0.3.0",
+    "clean-css": ">= 2.1.1",
+    "node-sass": ">= 0.8.1",
+    "less": ">= 1.6.3"
   },
   "keywords": [
-	"icon",
-	"icons",
-	"svg",
-	"png",
-	"sprite",
-	"generator",
-	"css",
-	"sass",
-	"less",
-	"vector",
-	"rwd",
-	"retina",
-	"mustache"
+    "icon",
+    "icons",
+    "svg",
+    "png",
+    "sprite",
+    "generator",
+    "css",
+    "sass",
+    "less",
+    "vector",
+    "rwd",
+    "retina",
+    "mustache"
   ]
 }
