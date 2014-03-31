@@ -53,7 +53,7 @@ function createSprite(cmd) {
 	if (typeof this.padding != 'undefined') {
 		options.padding		= this.padding;
 	}
-	if ((typeof this.layout != 'undefined') && ()['vertical', 'horizontal', 'diagonal'].indexOf(this.layout) != -1)) {
+	if ((typeof this.layout != 'undefined') && (['vertical', 'horizontal', 'diagonal'].indexOf(this.layout) >= 0)) {
 		options.layout		= this.layout;
 	}
 	if (typeof this.pseudo != 'undefined') {

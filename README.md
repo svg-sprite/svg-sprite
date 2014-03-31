@@ -391,6 +391,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.2.2
+*	Fixed typo in binary script ([#13](https://github.com/jkphl/svg-sprite/issues/13), thanks to @jeff-mccoy)
+
 #### v0.2.1
 *	Added support for horizontal & diagonal sprites ([#11](https://github.com/jkphl/svg-sprite/pull/11), thanks to @arminrosu)
 
