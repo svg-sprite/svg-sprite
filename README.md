@@ -391,6 +391,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.2.3
+*	Fixed bug with SVGO plugin configuration
+
 #### v0.2.2
 *	Fixed typo in binary script ([#13](https://github.com/jkphl/svg-sprite/issues/13), thanks to @jeff-mccoy)
 
