@@ -65,6 +65,9 @@ function createSprite(cmd) {
 	if (typeof this.keep != 'undefined') {
 		options.keep		= !!this.keep;
 	}
+	if (typeof this.recursive != 'undefined') {
+		options.recursive	= !!this.recursive;
+	}
 	if (typeof this.verbose != 'undefined') {
 		options.verbose		= Math.min(2, Math.max(0, parseInt(this.verbose, 10)));
 	}
@@ -116,6 +119,7 @@ program
 	.option('--pseudo <pseudo-separator>', 'Character sequence for denoting CSS pseudo classes [~]')
 	.option('-d, --dims', 'Render image dimensions as separate CSS and / or Sass rules')
 	.option('-k, --keep', 'Keep intermediate SVG files (inside the sprite subdirectory)')
+	.option('--recursive', 'Recursively scan for SVG files in subdirectories)')
 	.option('-v, --verbose', 'Output verbose progress information')
 	.option('--cleanwith <clean-module>', 'Module to be used for SVG cleaning. Currently "scour" or "svgo" [scour]')
 	.option('--cleanconfig <clean-configuration>', 'JSON-serialized configuration options for the cleaning module')

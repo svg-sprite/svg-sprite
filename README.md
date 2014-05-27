@@ -46,6 +46,7 @@ Options:
   --pseudo <pseudo-separator>          Character sequence for denoting CSS pseudo classes [~]
   -d, --dims                           Render image dimensions as separate CSS rules [false] 
   -k, --keep                           Keep intermediate SVG files (inside the sprite subdirectory) [false]
+  --recursive                          Recursively scan for SVG files in subdirectories
   -v, --verbose                        Output verbose progress information (0-3) [0]
   --cleanwith <clean-module>           Module to be used for SVG cleaning. Currently "scour" or "svgo" [svgo]
   --cleanconfig <clean-configuration>  JSON-serialized configuration options for the cleaning module [{}]
@@ -134,8 +135,9 @@ Property      | Type             | Description
 `padding`     | Integer          | Padding around the single SVG images in the sprite. Defaults to `0`.
 `layout`      | String           | Method of arranging the single SVG images in the sprite. Can be "vertical", "horizontal" or "diagonal", defaults to `vertical`.
 `pseudo`      | String           | Char to separate CSS pseudo classes in file names. See the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for details. Defaults to `~`.
-`dims`        | -                | If present, additional CSS rules will be rendered (all output formats) that set the dimensions of the single sprite images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
-`keep`        | -                | If present, the single optimized intermediate SVG images used for creating the sprite will not be discarded, but kept in the `spritedir` as well.
+`dims`        | Boolean          | If present and equal to `true`, additional CSS rules will be rendered (all output formats) that set the dimensions of the single sprite images. You can use these CSS rules for sizing your elements appropriately. In general, the suffix `-dims` will be used in conjunction with the regular CSS selector for the image, but please have a look at the generated CSS file as well as the [iconizr documentation](https://github.com/jkphl/iconizr#css-pseudo-classes) for some special rules regarding CSS pseudo classes.
+`keep`        | Boolean          | If present and equal to `true`, the single optimized intermediate SVG images used for creating the sprite will not be discarded, but kept in the `spritedir` as well.
+`recursive`   | Boolean          | If present and equal to `true`, the input directory will be recursively scanned for SVG files in subdirectories. The directory names will be used for constructing the sprite image CSS class names, concatenated by hyphens.
 `verbose`     | Integer    | Set this to a value > `0` to get some output. Defaults to `0`.
 `cleanwith`   | String           | Select the module used for optimizing the single SVG images. Currently, the Node.js modules [svg-cleaner](https://npmjs.org/package/svg-cleaner) (loosely based on [Scour](http://www.codedread.com/scour)) and [SVGO](https://github.com/svg/svgo) are supported, so use either *scour* or *svgo* for this option. Set it to `FALSE` or `NULL` to skip the SVG optimization altogether. Defaults to *svgo* (starting with version v0.1.1). **ATTENTION: Currently Scour is not supported** (until an updated release gets available)
 `cleanconfig` | String (JSON)    | You may provide a configuration object that is passed to the SVG optimizer (currently, only [SVGO](https://github.com/svg/svgo) supports this). It defaults to `{plugins: [{moveGroupAttrsToElems: false}]}`. When used on the [command line](#command-line-usage), provide a valid JSON encoded string here.
@@ -393,6 +395,8 @@ Release history
 
 #### v0.2.3
 *	Fixed bug with SVGO plugin configuration
+*	Added support for recursive input directory scanning (#12)
+*	Documentation corrections
 
 #### v0.2.2
 *	Fixed typo in binary script ([#13](https://github.com/jkphl/svg-sprite/issues/13), thanks to @jeff-mccoy)
