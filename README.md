@@ -307,13 +307,13 @@ The **JavaScript hash** piped into the template rendering process typically look
     "dims": false,
     
     // Padding around each sprite image (pixel)
-    "padding": 0,
+    "padding": 9,
     
     // Overall sprite width (pixel)
-    "swidth": 32,
+    "swidth": 50,
     
     // Overall sprite height (pixel)
-    "sheight": 32,
+    "sheight": 160,
     
     // List of all sprite images
     "svg": [
@@ -340,16 +340,16 @@ The **JavaScript hash** piped into the template rendering process typically look
                 }
             ],
             
-            // Sprite image width (pixel)
+            // Sprite image width (pixel; excluding padding)
 		    "width": 32,
 		    
-		    // Sprite image height (pixel)
+		    // Sprite image height (pixel; excluding padding)
 		    "height": 32,
 		    
-		    // Horizontal offset of the image within the sprite (pixel; currently always 0)  
+		    // Horizontal offset of the image within the sprite (pixel; including padding; always 0 for vertical sprites)
             "positionX": 0,
             
-            // Vertical offset of the image within the sprite  
+            // Vertical offset of the image within the sprite (pixel; including padding; always 0 for horizontal sprites) 
             "positionY": 0,
             
             // CSS background position values (including "px" unit if necessary)
@@ -368,10 +368,10 @@ The **JavaScript hash** piped into the template rendering process typically look
                     }
                 ],
                 
-                // Sprite image width (pixels)
+                // Sprite image width (pixel; including padding)
                 "width": 50,
                 
-                // Sprite image width (height)
+                // Sprite image width (pixel; including padding)
                 "height": 50
             }
         }
@@ -395,7 +395,7 @@ Release history
 
 #### v0.2.3
 *	Fixed bug with SVGO plugin configuration
-*	Added support for recursive input directory scanning (#12)
+*	Added support for recursive input directory scanning ([#12](https://github.com/jkphl/svg-sprite/pull/12))
 *	Documentation corrections
 
 #### v0.2.2
