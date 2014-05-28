@@ -396,6 +396,7 @@ Release history
 #### v0.2.3
 *	Fixed bug with SVGO plugin configuration
 *	Added support for recursive input directory scanning ([#12](https://github.com/jkphl/svg-sprite/pull/12))
+*	Fixed a bug with ID substitution ([#15](https://github.com/jkphl/svg-sprite/issues/15))
 *	Documentation corrections
 
 #### v0.2.2
