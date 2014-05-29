@@ -156,7 +156,7 @@ describe('svg-sprite', function() {
 				});
         });
         
-        it('creates visually correct Sass code', function(done) {
+		it('creates visually correct Sass code', function(done) {
         	this.timeout(10000);
         	sass.render({
 			    file					: path.join(__dirname, '..', 'tmp', 'sass', '_sprite.scss'),
