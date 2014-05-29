@@ -383,6 +383,48 @@ The **JavaScript hash** piped into the template rendering process typically look
 
 Please read the [Mustache manual](http://mustache.github.io/mustache.5.html) to get familiar with the rendering mechanism.
 
+#### Inline embedding
+
+In case you want to embed the SVG sprite into your HTML source and reference it via SVG fragment identifiers (`<use xlink:href="...">`), you will need to use a slightly different version of the SVG sprite (with the sprite images wrapped into a `<defs>` element). Starting with version 0.3.0, *svg-sprite* comes with an [Inline sprite output template](https://github.com/jkphl/svg-sprite/blob/master/tmpl/sprite.inline.svg) (`tmpl/sprite.inline.svg`) suitable for generating this embeddable sprite variant. You may trigger it's creation by using the `inline.svg` [rendering configuration](#rendering-configuration) key:
+
+```javascript
+// Create "<default-output-directory>/sprite.inline.svg"
+
+{
+    'inline.svg'    : true
+}
+
+// ... or create "<default-output-directory>/inline/sprite.svg" 
+
+{
+    'inline.svg'    : {
+    	template	: 'tmpl/sprite.inline.svg', 
+		dest		: 'inline/sprite'
+    }
+}
+```
+
+Also, to give you an idea of how to use the inline sprite, there's a new output template for rendering an **HTML preview document** that demonstrates some possible use cases. The `html` [rendering configuration](#rendering-configuration) key triggers it's creation:
+
+```javascript
+// Create "<default-output-directory>/sprite.html"
+
+{
+    html            : true
+}
+
+// ... or create "<default-output-directory>/custom/preview.html" 
+
+{
+    html            : {
+    	template	: 'tmpl/sprite.html', 
+		dest		: 'custom/preview'
+    }
+}
+```
+
+The preview document features both the use of **document-internal SVG references** (`<use xlink:href="#internal-id"/>`) as well as **external SVG spritemaps** (`<use xlink:href="http://example.com/sprite.svg#fragment-id"/>`) as [described by Chris Coyier](http://css-tricks.com/svg-use-external-source/) and others (including the polyfill [SVG for Everybody](https://github.com/jonathantneal/svg4everybody) for Internet Explorer 9-11).
+
 
 Known problems / To-do
 ----------------------
@@ -393,10 +435,14 @@ Known problems / To-do
 Release history
 ---------------
 
-#### v0.2.3
+#### v0.3.0
 *	Fixed bug with SVGO plugin configuration
 *	Added support for recursive input directory scanning ([#12](https://github.com/jkphl/svg-sprite/pull/12))
 *	Fixed a bug with ID substitution ([#15](https://github.com/jkphl/svg-sprite/issues/15))
+*	Switched to mustache.js for extended function support
+*	Added new HTML output format for rendering an inline SVG HTML implementation ([#16](https://github.com/jkphl/svg-sprite/issues/16))
+*	Added new SVG output format for rendering an inline SVG sprite ([#16](https://github.com/jkphl/svg-sprite/issues/16))
+*	Basic XML namespace consolidation in SVG sprite ([#17](https://github.com/jkphl/svg-sprite/issues/17))
 *	Documentation corrections
 
 #### v0.2.2
