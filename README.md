@@ -437,6 +437,7 @@ Release history
 
 #### v0.3.1
 *	Skip creation of empty SVG sprite ([#18](https://github.com/jkphl/svg-sprite/issues/18))
+*	Fixed bug with missing XML namespaces ([#19](https://github.com/jkphl/svg-sprite/issues/19))
 
 #### v0.3.0
 *	Fixed bug with SVGO plugin configuration
