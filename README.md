@@ -323,6 +323,15 @@ The **JavaScript hash** piped into the template rendering process typically look
         
         	// Sprite image name
         	"name": "weather-clear-night",
+        	
+		    // Sprite image height (pixel; excluding padding)
+		    "height": 32,
+		    
+		    // Sprite image width (pixel; excluding padding)
+		    "width": 32,
+		    
+		    // Last image of sprite
+		    "last": false,
         
         	// List of CSS selector expressions for this sprite image
             "selector": [
@@ -339,12 +348,6 @@ The **JavaScript hash** piped into the template rendering process typically look
                     "last": true // Indicating the last expression
                 }
             ],
-            
-            // Sprite image width (pixel; excluding padding)
-		    "width": 32,
-		    
-		    // Sprite image height (pixel; excluding padding)
-		    "height": 32,
 		    
 		    // Horizontal offset of the image within the sprite (pixel; including padding; always 0 for vertical sprites)
             "positionX": 0,
@@ -373,11 +376,17 @@ The **JavaScript hash** piped into the template rendering process typically look
                 
                 // Sprite image width (pixel; including padding)
                 "height": 50
-            }
+            },
+            
+            // Inline SVG image for being referenced by <use> elements
+            "data": "<svg width=\"48\" height=\"48\" id=\"weather-clear-night\" y=\"0\">...</svg>"
         }
         
         /* Further sprite images */
-    ]
+    ],
+    
+    // Current date (RFC-1123)
+    "date": "Fri, 30 May 2014 20:04:18 GMT"
 }
 ```
 
