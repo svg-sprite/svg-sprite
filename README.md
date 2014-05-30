@@ -435,6 +435,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v0.3.1
+*	Skip creation of empty SVG sprite ([#18](https://github.com/jkphl/svg-sprite/issues/18))
+
 #### v0.3.0
 *	Fixed bug with SVGO plugin configuration
 *	Added support for recursive input directory scanning ([#12](https://github.com/jkphl/svg-sprite/pull/12))
