@@ -1,6 +1,6 @@
 svg-sprite
 ==========
-is a Node.js module that reads a folder of **SVG images**, optimizes them and creates an **SVG sprite** along with suitable **stylesheet resources** (e.g. CSS, Sass or LESS). Additional formats may easily be added by providing appropriate [Mustache](http://mustache.github.io) templates.
+is a Node.js module that reads a folder of **SVG images**, optimizes them and creates an **SVG sprite** along with suitable **stylesheet resources** (e.g. CSS, Sass, LESS or Stylus). Additional formats may easily be added by providing appropriate [Mustache](http://mustache.github.io) templates.
 
 On a personal note: This is my first ever Node.js module, so please be forgiving in case of errors (and drop me a line instead of dropping the module altogether  — I'd really appreciate that). *svg-sprite* is closely related to another project of mine — **iconizr** — which exists in several versions ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](http://iconizr.com)). That said, you will find most of the configuration options being relevant for *iconizr* as well.
 
@@ -114,7 +114,7 @@ SVGSprite.createSprite('path/with/svg/images', 'css/output/directory', options, 
 The `createSprite()` method will refuse to run if you don't pass exactly four arguments:
 
 1.	A path to be used as the **input directory** containing the SVG images sprite creation. A relative path refers to the current working directory.
-2.	A main / default **output directory**, used for creating the stylesheet resources (CSS / Sass / LESS etc. if activated and not specified otherwise; see the [rendering options](#rendering-configuration) below) and serving as a base for the sprite subdirectory given by `spritedir` ([see below](#available-options)). A relative path refers to the current working directory.
+2.	A main / default **output directory**, used for creating the stylesheet resources (CSS / Sass / LESS / Stylus etc. if activated and not specified otherwise; see the [rendering options](#rendering-configuration) below) and serving as a base for the sprite subdirectory given by `spritedir` ([see below](#available-options)). A relative path refers to the current working directory.
 3.	An object with [configuration options](#available-options). None of these options are mandatory, so you may pass an empty object `{}` here.
 4.	A callback to be run when the sprite creation has finished (with or without error).
 
@@ -147,7 +147,7 @@ Property      | Type             | Description
 
 Starting with version v0.1.0, the output rendering of *svg-sprite* is based on [Mustache](http://mustache.github.io) templates. Compared to the earlier approach, template based rendering gives you way more flexiblity: Not only you can produce almost any (text based) output format, but also wrap the results with custom code or completely rearrange it's structure.
 
-At the moment, *svg-sprite* comes with predefined templates for **CSS**, **Sass** (SCSS) and **LESS**, but you can easily overwrite them or add custom templates for different formats. The `render` option controls,
+At the moment, *svg-sprite* comes with predefined templates for **CSS**, **Sass** (SCSS), **LESS** and **Stylus**, but you can easily overwrite them or add custom templates for different formats. The `render` option controls,
 
 * which **output formats** are generated,
 * where the **output files** are put and
@@ -192,7 +192,7 @@ Besides serving as a unique key, the property name `css` also indicates the defa
 }
 ```
 
-You can find the three provided standard templates `sprite.css`, `sprite.scss` and `sprite.less` in the subdirectory `tmpl` of your *svg-sprite* installation. By default, output files will be named just like their corresponding template files.
+You can find the provided standard templates `sprite.css`, `sprite.scss`, `sprite.less` and `sprite.styl` in the subdirectory `tmpl` of your *svg-sprite* installation. By default, output files will be named just like their corresponding template files.
 
 If a `template` path is given, it must point to an existing template file — otherwise the conversion process will exit. The `dest` property can be provided as an absolute or relative path, as directory or file name, with or without file extension. The missing parts will be automatically expanded using default values. See the following equivalents to understand the mechanism:
 
@@ -443,6 +443,9 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v0.3.2
+*	Added a Stylus output template
 
 #### v0.3.1
 *	Skip creation of empty SVG sprite ([#18](https://github.com/jkphl/svg-sprite/issues/18))

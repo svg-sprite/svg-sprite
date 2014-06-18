@@ -1,0 +1,15 @@
+{{#common}}.{{/common}}{{^common}}${{/common}}{{prefix}} 
+	background-repeat no-repeat
+	background-image url({{{sprite}}})
+
+{{#svg}}{{#selector}}.{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
+{{/selector}}	background-position {{position}}{{^common}}
+	@extend ${{prefix}}{{/common}}
+{{#dims}}{{#dimensions}}
+
+{{#selector}}.{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
+{{/selector}}	width {{width}}px
+	height {{height}}px
+{{/dimensions}}{{/dims}}
+
+{{/svg}}

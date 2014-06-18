@@ -9,6 +9,7 @@ fs					= require('fs'),
 clean				= require('clean-css'),
 sass				= require('node-sass'),
 less				= require('less'),
+stylus				= require('stylus'),
 phantom_sync		= require('phantom-sync'),
 phantom      		= phantom_sync.phantom,
 sync         		= phantom_sync.sync,
@@ -98,7 +99,8 @@ describe('svg-sprite', function() {
         		dims					: true,
 				render					: {
 					scss				: path.normalize(path.join(__dirname, '..', 'tmp', 'sass', '_sprite')),
-					less				: path.normalize(path.join(__dirname, '..', 'tmp', 'less', '_sprite'))
+					less				: path.normalize(path.join(__dirname, '..', 'tmp', 'less', '_sprite')),
+					styl				: path.normalize(path.join(__dirname, '..', 'tmp', 'styl', '_sprite'))
 				}
 			};
         	svgsprite.createSprite(path.join(__dirname, 'files'), path.normalize(path.join(__dirname, '..', 'tmp', 'css')), config, function(err, result){
@@ -247,6 +249,55 @@ describe('svg-sprite', function() {
 									}, function (_____err, imagesAreSame) {
 								    	should(_____err).not.ok;
 								    	should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
+								    	done();
+								    });
+								})
+							});
+			    	});
+	    		});
+        	});
+        });
+        
+        it('creates visually correct Stylus code', function(done) {
+        	this.timeout(10000);
+        	var stylusStyl				= path.join(__dirname, '..', 'tmp', 'styl', '_sprite.styl');
+        	fs.readFile(stylusStyl, function(err, stylText) {
+        		should(err).not.ok;
+	    		stylus.render(stylText.toString(), function (_err, stylText) {
+	    			should(_err).not.ok;
+	    			
+	    			var stylCss						= path.join(__dirname, '..', 'tmp', 'css', 'sprite.styl.css');
+					try { fs.truncateSync(stylCss); } catch(e) {}
+			    	fs.writeFile(stylCss, stylText, function(__err) {
+			    		should(__err).not.ok;
+			    		
+			    		var preview					= path.join(__dirname, '..', 'tmp', 'preview.styl.html');
+			        	try { fs.truncateSync(preview); } catch(e) {}
+			        	data.css					= 'css/sprite.styl.css';
+			        	mu.root						= path.join(__dirname, 'tmpl');
+						mu.compileAndRender('preview.html', data)
+							.on('data', function (data) {
+								try { fs.appendFileSync(preview, data.toString()); } catch(e) {}
+							})
+							.on('error', function(___err) {
+								should(___err).not.ok;
+							})
+							.on('end', function(___err) {
+								should(___err).not.ok;
+								var previewPNG		= path.join(__dirname, '..', 'tmp', 'preview.styl.png');
+								
+								// Create a screenshot of the preview page
+								capture(path.join(__dirname, '..', 'tmp', 'preview.styl.html'), previewPNG, function(____err) {
+									should(____err).not.ok;
+									
+									// Compare it to the expected screenshot
+									imageDiff({
+										actualImage: previewPNG,
+										expectedImage: path.join(__dirname, 'expected', 'preview.png'),
+										diffImage: path.join(__dirname, '..', 'tmp', 'preview.styl.diff.png')
+									}, function (_____err, imagesAreSame) {
+								    	should(_____err).not.ok;
+								    	should.ok(imagesAreSame, 'The generated Stylus preview doesn\'t match the expected one!');
 								    	done();
 								    });
 								})
