@@ -95,12 +95,18 @@ describe('svg-sprite', function() {
     describe('with valid arguments', function() {
         it('returns a visually correct sprite', function(done) {
         	this.timeout(10000);
-        	var config					= {
-        		dims					: true,
-				render					: {
-					scss				: path.normalize(path.join(__dirname, '..', 'tmp', 'sass', '_sprite')),
-					less				: path.normalize(path.join(__dirname, '..', 'tmp', 'less', '_sprite')),
-					styl				: path.normalize(path.join(__dirname, '..', 'tmp', 'styl', '_sprite'))
+        	var config						= {
+        		dims						: true,
+				render						: {
+					scss					: path.normalize(path.join(__dirname, '..', 'tmp', 'sass', '_sprite')),
+					less					: path.normalize(path.join(__dirname, '..', 'tmp', 'less', '_sprite')),
+					styl					: path.normalize(path.join(__dirname, '..', 'tmp', 'styl', '_sprite'))
+				},
+				cleanconfig	: {
+//					plugins	: [
+//						{removeDoctype		: false},	// Don't remove the DOCTYPE declaration
+//						{removeXMLProcInst	: false}	// Don't remove the XML declaration
+//					]
 				}
 			};
         	svgsprite.createSprite(path.join(__dirname, 'files'), path.normalize(path.join(__dirname, '..', 'tmp', 'css')), config, function(err, result){

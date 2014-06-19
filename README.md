@@ -446,6 +446,7 @@ Release history
 
 #### v0.3.2
 *	Added a Stylus output template
+*	Improved XML and DOCTYPE declaration handling ([#22](https://github.com/jkphl/svg-sprite/issues/22))
 
 #### v0.3.1
 *	Skip creation of empty SVG sprite ([#18](https://github.com/jkphl/svg-sprite/issues/18))
@@ -527,6 +528,13 @@ Release history
 
 #### v0.0.1
 *	Initial release
+
+
+Contributors
+------------
+*	[Stefan Judis](https://github.com/stefanjudis)
+*	[Armin Roșu](https://github.com/arminrosu)
+*	[Thomas Khyn](https://github.com/tkhyn)
 
 
 Legal

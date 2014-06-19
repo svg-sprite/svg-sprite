@@ -6,7 +6,7 @@
     "email": "joschi@kuphal.net",
     "url": "http://jkphl.is"
   },
-  "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable stylesheet resources (e.g. CSS, Sass or LESS) out of them",
+  "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable stylesheet resources (e.g. CSS, Sass, LESS or Stylus) out of them",
   "homepage": "https://github.com/jkphl/svg-sprite",
   "repository": {
     "type": "git",
@@ -67,6 +67,10 @@
     "css",
     "sass",
     "less",
+    "stylus",
+    "stylesheet",
+    "inline",
+    "html",
     "vector",
     "rwd",
     "retina",
