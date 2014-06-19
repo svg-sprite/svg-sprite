@@ -53,7 +53,7 @@ Options:
   -q, --quiet                          Don't print any status messages
 ```
 
-Please [see below](#available-options) to learn more about the options and their values.
+Please [see below](#available-options) to learn more about the options and their values. Due to complexity issues, the `variables` option is not available for the CLI version.
 
 
 #### Examples
@@ -126,6 +126,7 @@ These are the options you may pass as the `createSprite()` method's third argume
 Property      | Type             | Description     
 ------------- | ---------------- | ----------------
 `render`      | String (JSON)    | You may provide a configuration object that controls which output files and formats are generated and which [Mustache](http://mustache.github.io) rendering templates are used for the generation. It defaults to `{css: true}`, which means that a **CSS file with the default name will be generated to the default location**. This option is available since v0.1.0; prior to that, the now deprecated options `css`, `sass`, `sassout`, `less` and `lessout` were used for controlling the rendering behaviour. See below for an explanation of all [rendering options](#rendering-configuration).
+`variables`   | Object           | You may use this option to pass additional custom variables to the Mustache rendering process. Be aware that there are a couple of reserved keys that are not available for custom variables (`common`, `prefix`, `sprite`, `dims`, `padding`, `swidth`, `sheight`, `svg`, `date`, `invert`, `escape`). You may also pass callback functions as variables (see [here](https://github.com/janl/mustache.js/#functions) for further details).  
 `spritedir`   | Directory path   | Directory relative to the main output directory where the SVG sprite will be created. Defaults to `'svg'`. Starting with version v0.1.0 you may also provide an empty string or `.` to avoid the creation of a subdirectory altogether.
 `sprite`      | String           | Filename of the SVG sprite (preceding the `.svg` extension). Defaults to `'sprite'`. 
 `prefix`      | String           | Prefix for all CSS rules (all output formats). Defaults to `'svg'` (results in `.svg-*` CSS selectors)
@@ -447,6 +448,7 @@ Release history
 #### v0.3.2
 *	Added a Stylus output template
 *	Improved XML and DOCTYPE declaration handling ([#22](https://github.com/jkphl/svg-sprite/issues/22))
+*	Added the `variables` config option ([*grunt-iconizr* #13](https://github.com/jkphl/grunt-iconizr/issues/13))
 
 #### v0.3.1
 *	Skip creation of empty SVG sprite ([#18](https://github.com/jkphl/svg-sprite/issues/18))
