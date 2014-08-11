@@ -53,6 +53,9 @@ function createSprite(cmd) {
 	if (typeof this.padding != 'undefined') {
 		options.padding		= this.padding;
 	}
+	if (typeof this.margin != 'undefined') {
+		options.margin		= this.margin;
+	}
 	if ((typeof this.layout != 'undefined') && (['vertical', 'horizontal', 'diagonal'].indexOf(this.layout) >= 0)) {
 		options.layout		= this.layout;
 	}
@@ -115,6 +118,7 @@ program
 	.option('--maxwidth <max-width>', 'Maximum single image width [1000]')
 	.option('--maxheight <max-height>', 'Maximum single image height [1000]')
 	.option('--padding <padding>', 'Transparent padding around the single images (in pixel)')
+	.option('--margin <margin>', 'Additional spacing between images retaining original width & height (in pixel)')
 	.option('--layout <layout>', 'Sprite images arrangement ("vertical", "horizontal" or "diagonal") [vertical]')
 	.option('--pseudo <pseudo-separator>', 'Character sequence for denoting CSS pseudo classes [~]')
 	.option('-d, --dims', 'Render image dimensions as separate CSS and / or Sass rules')
