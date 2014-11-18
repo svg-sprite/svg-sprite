@@ -32,18 +32,19 @@
     "test": "mocha test/*.js"
   },
   "dependencies": {
-    "mkdirp": "~0.3.5",
     "async": "~0.2.9",
-    "underscore": "~1.6.0",
-    "svgo": "~0.4.4",
-    "svg-cleaner": "~0.0.1",
-    "libxmljs": "~0.8.1",
-    "cssom": "~0.3.0",
-    "css-selector-parser": "~1.0.3",
-    "phantom-sync": "~1.1.1",
+    "chalk": "~0.3.0",
     "commander": "~1.0.5",
+    "crypto": "0.0.3",
+    "css-selector-parser": "~1.0.3",
+    "cssom": "~0.3.0",
+    "libxmljs": "~0.8.1",
+    "mkdirp": "~0.3.5",
     "mustache": "~0.8.1",
-    "chalk": "~0.3.0"
+    "phantom-sync": "~1.1.1",
+    "svg-cleaner": "~0.0.1",
+    "svgo": "~0.4.4",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "mocha": "",
