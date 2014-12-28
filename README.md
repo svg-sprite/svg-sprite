@@ -3,11 +3,11 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 
 is a [Node.js](http://nodejs.org/) module that **reads in a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and creates **SVG sprites** in various flavours:
 
-1. Traditional **CSS sprites** for use with background images ([configuration](#d-1-css-mode))
-2. CSS sprites with **pre-defined SVG views**, suitable for foreground images as well ([configuration](#d-2-view-mode))
-3. Inline sprites using the **`<defs>` element** ([configuration](#d-3-defs-mode))
-4. Inline sprites using the **`<symbol>` element** ([configuration](#d-4-symbol-mode))
-5. **SVG stacks** ([configuration](#d-5-stack-mode))
+1. Traditional **CSS sprites** for use with background images ([configuration](#d1-css-mode))
+2. CSS sprites with **pre-defined SVG views**, suitable for foreground images as well ([configuration](#d2-view-mode))
+3. Inline sprites using the **`<defs>` element** ([configuration](#d3-defs-mode))
+4. Inline sprites using the **`<symbol>` element** ([configuration](#d4-symbol-mode))
+5. **SVG stacks** ([configuration](#d5-stack-mode))
 
 For the generation of [CSS sprite](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) stylesheet resources (flavours 1 & 2), *svg-sprite* comes with pre-defined [Mustache](http://mustache.github.io/) templates in four different formats:
 
@@ -174,9 +174,9 @@ $ svg-sprite -cD out --cscss -p 10 assets/*.svg
 
 Creating a sprite with *svg-sprite* typically follows these steps:
 
-1. You [create an instance of the SVGSpriter](#svgspriter-config) class, passing it a main configuration object.
-2. You [register a couple of SVG files](#svgspriter-add-file-name-svg) for processing.
-3. You [trigger the compilation process](#svgspriter-compile-config-callback) and receive the generated files (sprite, CSS, example documents etc.) .
+1. You [create an instance of the SVGSpriter](#svgspriter-config-) class, passing it a main configuration object.
+2. You [register a couple of SVG files](#svgspriteraddfile--name-svg-) for processing.
+3. You [trigger the compilation process](#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.) .
 
 This may look something like this:
 
@@ -247,7 +247,7 @@ spriter.compile(function(error, result, data){
 
 **Registration of an SVG file** — Prior to compiliation, you'll need to register one or more SVG files for processing, obviously. As *svg-sprite* doesn't read the files from disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another. Please [see below](#example-using-glob-and-vinyl) for an example.
 
-It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspriter-compile-config-callback). This way, it is possibly to call the `.compile()` method more than once (e.g. giving different render configurations) without unnecessarily repeating the optimization step.
+It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way, it is possibly to call the `.compile()` method more than once (e.g. giving different render configurations) without unnecessarily repeating the optimization step.
 
 ##### Arguments
 
@@ -301,15 +301,15 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 
 #### SVGSpriter.compile([ config ,] callback )
 
-**Sprite compilation** — Trigger an asynchronous sprite compilation process with this method. You may pass in an optional [output mode configuration](#output-mode-configuration) object as the first argument in order to set the output parameters for that very run. If you omit the config object, the spriter will use the `mode` component of the [main configuration](#configuration) which you previously passed to the [constructor](#svgspriter-config). You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, a callback will be triggered, giving you access to the resources that were generated.
+**Sprite compilation** — Trigger an asynchronous sprite compilation process with this method. You may pass in an optional [output mode configuration](#d-output-mode-configuration) object as the first argument in order to set the output parameters for that very run. If you omit the config object, the spriter will use the `mode` component of the [main configuration](#configuration) which you previously passed to the [constructor](#svgspriter-config-). You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, a callback will be triggered, giving you access to the resources that were generated.
 
 ##### Arguments
 
-1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](#output-mode-configuration) for the single compilation run. If omitted, the `mode` component of the [main configuration](#configuration) will be used.
+1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](#d-output-mode-configuration) for the single compilation run. If omitted, the `mode` component of the [main configuration](#configuration) will be used.
 2. **callback** `{Function}` — Callback triggered when the compilation has finished, getting passed in three arguments:
 	* **error** `{Error}` — Error message in case the compilation has failed.
 	* **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
-	* **data** `{Object}` — Data passed to Mustache for rendering the resources (see [sprite & shape variables](#f-1-sprite-amp-shape-variables) for details)
+	* **data** `{Object}` — Data passed to Mustache for rendering the resources (see [sprite & shape variables](#f1-sprite--shape-variables) for details)
 
 ##### Compilation example
 
@@ -342,7 +342,7 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 }
 ```
 
-For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css](#d-1-css-mode) and [view](#d-2-view-mode) output modes, there are additional items named after the configured [rendering configurations](#e-rendering-configurations) (`scss` in the example).
+For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css](#d1-css-mode) and [view](#d2-view-mode) output modes, there are additional items named after the configured [rendering configurations](#e-rendering-configurations) (`scss` in the example).
 
 Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).  
 
@@ -375,7 +375,7 @@ spriter.getShapes(path.resolve('tmp/svg'), function(error, result) {
 Configuration
 -------------
 
-The *svg-sprite* **main configuration** is provided to the [constructor](#svgspriter-config) as an `Object` with the following structure:
+The *svg-sprite* **main configuration** is provided to the [constructor](#svgspriter-config-) as an `Object` with the following structure:
 
 ```javascript
 {
@@ -418,8 +418,8 @@ Property                 | Type            | Default       | Description        
 `dimension.precision`    | Integer         | `2`           | Precision (number of decimal places) for dimension calculations |
 `spacing.padding`        | Integer/Array   | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
 `spacing.box`            | String          | `content`     | Box sizing strategy, similar to CSS. When *content* is given, the `spacing.padding` will get applied outside the shape, thus effectively increasing the shapes bounding box. When *padding*, the content plus the given `spacing.padding` will stay within the given dimension contraints. |
-`meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with meta data to be injected into the SVG files. [See below](#a-1-shape-meta-data) for an example. |
-`dest`                   | String          |               | Implicit way of calling [`.getShapes()`](#svgspriter-getshapes-dest-callback) during sprite compilation. If given, the `result` of subsequent [`.compile()`](#svgspriter-compile-config-callback) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
+`meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with meta data to be injected into the SVG files. [See below](#a1-meta-data-injection) for an example. |
+`dest`                   | String          |               | Implicit way of calling [`.getShapes()`](#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
 
 #### A.1 Meta data injection
 
@@ -435,7 +435,7 @@ path--to--circle		:
 	description			: A red circle with a black border
 ``` 
 
-The keys need to match either the **"local" file path part** of the SVG files you [register to the spriter](#svgspriter-add-file-name-svg) or the final **shape IDs / CSS class names** as returned by the `id.generator` function. For each of your shapes, *svg-sprite* will look for `title` and `description` meta data and inject it like this:
+The keys need to match either the **"local" file path part** of the SVG files you [register to the spriter](#svgspriteraddfile--name-svg-) or the final **shape IDs / CSS class names** as returned by the `id.generator` function. For each of your shapes, *svg-sprite* will look for `title` and `description` meta data and inject it like this:
 
 ```xml
 <svg aria-labelledby="title desc">
@@ -614,7 +614,7 @@ Property         | Type            | Default       | Description                
 
 #### D.4 `symbol` mode
 
-The `symbol` mode behaves pretty much like the [defs mode](#d-3-defs-mode) except it's using `<symbol>` elements to combine the original shapes into a sprite. Again, you can `<use>` the shapes then with either **document-internal references** (`<svg><use xlink:href="#internal-id"/></svg>` while having the SVG sprite embedded inline into the very same document) or as an **external SVG spritemap** (`<svg><use xlink:href="http://example.com/sprite.svg#fragment-id"/></svg>`). For the latter to work in Internet Explorer 9-11 you will as well have to use [SVG for Everybody](https://github.com/jonathantneal/svg4everybody). Please see [this article by Chris Coyier](http://css-tricks.com/svg-symbol-good-choice-icons/) for further explanation of the `<symbol>` technique. Compared to the `defs` mode, one of the main benefits is that you don't have to provide the `viewBox` attribute on every `<use>` element which makes it a lot easier.  
+The `symbol` mode behaves pretty much like the [defs mode](#d3-defs-mode) except it's using `<symbol>` elements to combine the original shapes into a sprite. Again, you can `<use>` the shapes then with either **document-internal references** (`<svg><use xlink:href="#internal-id"/></svg>` while having the SVG sprite embedded inline into the very same document) or as an **external SVG spritemap** (`<svg><use xlink:href="http://example.com/sprite.svg#fragment-id"/></svg>`). For the latter to work in Internet Explorer 9-11 you will as well have to use [SVG for Everybody](https://github.com/jonathantneal/svg4everybody). Please see [this article by Chris Coyier](http://css-tricks.com/svg-symbol-good-choice-icons/) for further explanation of the `<symbol>` technique. Compared to the `defs` mode, one of the main benefits is that you don't have to provide the `viewBox` attribute on every `<use>` element which makes it a lot easier.  
 
 Property         | Type            | Default       | Description                                |
 ---------------- | --------------- | ------------- | ------------------------------------------ |
@@ -643,7 +643,7 @@ Property         | Type            | Default       | Description                
 
 ### E. Rendering configurations
 
-*svg-sprite* uses [Mustache](http://mustache.github.io/) templates for creating certain output formats. Typically, the generation of these files is optional and you have to switch on the rendering process. Take a look at the `example` option of the [defs mode](#d-3-defs-mode). To enable the demo HTML document **with default template and destination**, simply set the `example` value to `true`:
+*svg-sprite* uses [Mustache](http://mustache.github.io/) templates for creating certain output formats. Typically, the generation of these files is optional and you have to switch on the rendering process. Take a look at the `example` option of the [defs mode](#d3-defs-mode). To enable the demo HTML document **with default template and destination**, simply set the `example` value to `true`:
 
 ```javascript
 {
@@ -682,7 +682,7 @@ To **disable the file rendering** altogether, set the value to something falsy:
 
 #### F.1 Sprite & shape variables
 
-For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can retrieve the values used via the `data` argument passed to the [compile() callback](#svgspriter-compile-config-callback). Example:  
+For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can retrieve the values used via the `data` argument passed to the [compile() callback](#svgspritercompile-config--callback-). Example:  
 
 ```javascript
 {  
@@ -919,7 +919,7 @@ Release history
 * Enabled custom SVG transformations
 * Enabled independent `padding` values for all sides of a shape
 * Added cache busting for `css` and `view` mode (enabled by default; [#29](https://github.com/jkphl/svg-sprite/pull/29))
-* Added support for [meta data injection](#a-1-meta-data-injection)
+* Added support for [meta data injection](#a1-meta-data-injection)
 
 Legal
 -----
