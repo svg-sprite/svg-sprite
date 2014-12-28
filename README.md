@@ -936,8 +936,8 @@ The contained example SVG icons are part of the [Tango Icon Library](http://tang
 [travis-url]: http://travis-ci.org/jkphl/svg-sprite
 [travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png?branch=dev
 
-[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
-[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png
+[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite?branch=dev
+[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png?branch=dev
 
 [depstat-url]: https://david-dm.org/jkphl/svg-sprite
-[depstat-image]: https://david-dm.org/jkphl/svg-sprite.png
+[depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
