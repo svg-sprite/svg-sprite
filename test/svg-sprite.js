@@ -110,6 +110,12 @@ function capturePhantom(src, target, cb) {
     });
 }
 
+before(function(done) {
+	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
+		done();
+	});
+});
+
 describe('svg-sprite', function() {
 	var files				= glob.glob.sync('**/weather*.svg', {cwd: cwd});
 	
@@ -498,9 +504,3 @@ describe('svg-sprite', function() {
 	    });
 	});
 });
-    
-//after(function(done) {
-//	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
-//		done();
-//	});
-//});
