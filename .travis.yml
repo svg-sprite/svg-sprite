@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-  - '0.8'
   - '0.10'
-before_script:
+before_install:
   - npm update -g npm
 after_script:
   - npm run coveralls
+after_failure:
+  - tar -cvf "travis_${TRAVIS_BUILD_NUMBER}.tar" tmp && curl --ftp-create-dirs -T "travis_${TRAVIS_BUILD_NUMBER}.tar" -u $FTP_USER:$FTP_PASSWORD "ftp://jkphl.is/travis/${TRAVIS_REPO_SLUG}/travis_${TRAVIS_BUILD_NUMBER}.tar"

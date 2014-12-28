@@ -499,8 +499,8 @@ describe('svg-sprite', function() {
 	});
 });
     
-after(function(done) {
-	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
-		done();
-	});
-});
+//after(function(done) {
+//	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
+//		done();
+//	});
+//});
