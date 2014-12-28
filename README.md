@@ -59,7 +59,7 @@ Options:
   --version                    Show version number
   --help                       Display this help information
   -D, --dest                   Main output directory (base path)                                     [default: "."]
-  -V, --verbose                Logging verbosity (0 = quiet, 3 = debug)                              [default: 1]
+  -l, --log                    Logging verbosity ("info", "verbose" or "debug")
   --shape-id-separator         Separator for traversing a directory structure into a shape ID        [default: "--"]
   --shape-id-generator         ID generation callback [not available via command line]               [default: null]
   --shape-id-pseudo            Separator for CSS pseudo classes                                      [default: "~"]
@@ -379,13 +379,13 @@ The *svg-sprite* **main configuration** is provided to the [constructor](#svgspr
 
 ```javascript
 {
-	dest			: <String>,		// Main output directory
-	verbose			: <Number>,		// Logging verbosity
-	shape			: <Object>,		// SVG shape configuration
-	transform		: <Array>,		// SVG transformations
-	svg				: <Object>,		// Common SVG options
-	mode			: <Object>,		// Output mode configuration
-	variables		: <Object>		// Common templating variables
+	dest			: <String>,				// Main output directory
+	log  			: <String∣Logger>,		// Logging verbosity or custom logger
+	shape			: <Object>,				// SVG shape configuration
+	transform		: <Array>,				// SVG transformations
+	svg				: <Object>,				// Common SVG options
+	mode			: <Object>,				// Output mode configuration
+	variables		: <Object>				// Common templating variables
 }
 ```
 
@@ -394,7 +394,7 @@ All of the items are optional, so in fact an empty object `{}` is a valid config
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
 `dest`                   | String          | `.`           | Main output directory which is used for resolving relative paths. Although *svg-sprite* doesn't write any files itself, it does need this setting in order to correctly layout the resulting file and directory structures. |
-`verbose`                | Integer         | `1`           | Log level: 0 = No logging, 3 = Very verbose |
+`log`                    | String∣Logger   |               | *svg-sprite* uses [winston](https://github.com/flatiron/winston) for logging, but output is turned off by default. To activate and use the pre-configured console logger, you need to pass the desired log level (`'info'`, `'verbose'` or `'debug'`). Alternatively, you can pass your own custom `winston.Logger` instance (which needs to handle at least these three log levels). |
 
 ### A. SVG shape configuration
 

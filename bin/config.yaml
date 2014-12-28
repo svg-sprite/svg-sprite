@@ -4,11 +4,10 @@ dest:
   default                 : .
   map                     : dest
   
-verbose:
-  description             : Logging verbosity (0 = quiet, 3 = debug)
-  default                 : 1
-  alias                   : V
-  map                     : verbose
+log:
+  description             : Logging verbosity ("info", "verbose" or "debug")
+  alias                   : l
+  map                     : log
   
 shape:
   id:
