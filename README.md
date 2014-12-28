@@ -1,4 +1,4 @@
-svg-sprite
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 ==========
 
 is a [Node.js](http://nodejs.org/) module that **reads in a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and creates **SVG sprites** in various flavours:
@@ -24,7 +24,7 @@ About
 The [original svg-sprite](https://github.com/jkphl/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10) was my first-ever Node.js module and featured CSS sprites only. The `1.0` release is rewritten from scratch and introduces a bunch of new features like **less dependencies** (for improved Mac OS and Windows compatibility), support for **inline sprite formats** and the **removal of file-system access** so that other libraries can build on top of it more easily. Derived libraries include:
 
 * [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite)
-* [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)
+* [svg-sprite](https://github.com/jkphl/svg-sprite)
 * [svg-sprite-data](https://github.com/shakyShane/svg-sprite-data) by [Shane Osbourne](https://github.com/shakyShane) (based on the original svg-sprite)
 
 Furthermore, I built **_iconizr_** around *svg-sprite*, which exists in a couple of flavours ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](http://iconizr.com)). At the time of this writing, I'm working on an all-over remake of *iconizr* as well, so stay tuned.
@@ -928,3 +928,16 @@ Copyright © 2014 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 *svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
 
 The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
+
+
+[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-image]: https://badge.fury.io/js/svg-sprite.png
+
+[travis-url]: http://travis-ci.org/jkphl/svg-sprite
+[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png?branch=dev
+
+[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
+[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png
+
+[depstat-url]: https://david-dm.org/jkphl/svg-sprite
+[depstat-image]: https://david-dm.org/jkphl/svg-sprite.png

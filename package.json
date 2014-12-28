@@ -29,7 +29,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
   	"async": "~0.2.9",
@@ -49,6 +50,9 @@
   },
   "devDependencies": {
   	"mocha": "",
+  	"coveralls": "*",
+    "mocha-lcov-reporter": "*",
+    "istanbul": "*",
     "should": "",
     "rimraf": "",
   	"vinyl-fs": "~0.3.13",

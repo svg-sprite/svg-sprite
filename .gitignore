@@ -1,10 +1,11 @@
-.project
 *.md.html
 **/*.md.html
-/.settings
 /.buildpath
+/.project
+/.settings
 /node_modules
 /npm-debug.log
+/coverage
 /tmp
 /index.js
 /test.js
