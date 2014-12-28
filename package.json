@@ -1,12 +1,12 @@
 {
   "name": "svg-sprite",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "author": {
     "name": "Joschi Kuphal",
     "email": "joschi@kuphal.net",
     "url": "http://jkphl.is"
   },
-  "description": "Takes a folder of SVG images and creates an SVG sprite along with suitable stylesheet resources (e.g. CSS, Sass, LESS or Stylus) out of them",
+  "description": "SVG sprites & stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)",
   "homepage": "https://github.com/jkphl/svg-sprite",
   "repository": {
     "type": "git",
@@ -32,30 +32,36 @@
     "test": "mocha test/*.js"
   },
   "dependencies": {
-    "mkdirp": "~0.3.5",
-    "async": "~0.2.9",
-    "underscore": "~1.6.0",
-    "svgo": "~0.4.4",
-    "svg-cleaner": "~0.0.1",
-    "libxmljs": "~0.8.1",
-    "cssom": "~0.3.0",
-    "css-selector-parser": "~1.0.3",
-    "phantom-sync": "~1.1.1",
-    "commander": "~1.0.5",
-    "mustache": "~0.8.1",
-    "chalk": "~0.3.0"
+  	"async": "~0.2.9",
+  	"lodash": "lodash/lodash",
+  	"xmldom": "^0.1.19",
+  	"xpath": "^0.0.8",
+  	"vinyl": "^0.4.6",
+  	"svgo": "^0.5.0",
+  	"cssom": "^0.3.0",
+    "css-selector-parser": "^1.0.3",
+    "phantomjs": "^1.9.12",
+    "cssmin": "^0.4.2",
+    "mustache": "^1.0.0",
+    "commander": "^2.5.1",
+    "js-yaml": "^3.2.4",
+    "yargs": "^1.3.3"
   },
   "devDependencies": {
-    "mocha": "",
+  	"mocha": "",
     "should": "",
     "rimraf": "",
-    "svg2png": ">= 1.0.1",
-    "image-diff": ">= 0.3.0",
-    "clean-css": ">= 2.1.1",
-    "node-sass": ">= 0.8.1",
-    "mu2": ">= 0.5.20",
-    "less": ">= 1.6.3",
-    "stylus": ">= 0.46.3"
+  	"vinyl-fs": "~0.3.13",
+  	"glob": "~4.3.1",
+  	"node-sass": "^1.2.3",
+  	"less": "^2.1.2",
+  	"stylus": "^0.49.3",
+  	"mkdirp": "^0.5.0",
+  	"svg2png": "^1.1.0",
+  	"image-diff": "^1.0.1",
+  	"node-sass": "^1.2.3",
+  	"less": "^2.1.2",
+  	"stylus": "^0.49.3"
   },
   "keywords": [
     "icon",
@@ -63,6 +69,8 @@
     "svg",
     "png",
     "sprite",
+    "spritesheet",
+    "stack",
     "generator",
     "css",
     "sass",
@@ -74,6 +82,7 @@
     "vector",
     "rwd",
     "retina",
-    "mustache"
+    "mustache",
+    "gulpfriendly"
   ]
 }

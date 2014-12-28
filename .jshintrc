@@ -1,17 +1,21 @@
 {
-	// Enforcing Options
-	"bitwise" : true,
-	"camelcase" : true,
-	"curly" : true,
-	"latedef" : true,
-	"newcap" : true,
-	"noarg" : true,
-	"noempty" : true,
-	"nonew" : true,
-	"regexp" : true,
-	"strict" : true,
-	"undef" : true,
-	"unused" : true,
-	// Environments
-	"node" : true
+    "node": true,
+    "esnext": true,
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "quotmark": "single",
+    "regexp": true,
+    "undef": true,
+    "unused": true,
+    "strict": true,
+    "sub": true,
+    "trailing": true,
+    "smarttabs": true
 }

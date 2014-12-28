@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>svg-sprite example: SVG sprite (defs mode)</title>
+		<link rel="stylesheet" href="../../css/main.css"/>
+		<style>
+.icon-original {
+	width: 48px;
+	height: 48px;
+}
+.icon-double {
+	width: 96px;
+	height: 96px;
+}
+.icon-weather-clear-svg {
+	background-image: url(../../svg/sprite/weather-svg.svg);
+}
+.icon-weather-clear-png {
+	background-image: url(../../png/sprite/weather-svg.png);
+}
+.icon-absolute {
+	background-position: 0 -384px;
+}
+.icon-relative {
+	background-position: 0 88.888888%;
+	/* y-part 80% / (100% - 10%) = */
+	/* x-part 173px / (1000px - 80px) = 0.1880434783 ->> 18.80434783% */
+}
+.icon-background {
+	background-size: 100% auto;
+}
+pre {
+	padding: 1em;
+	font-size: 120%;
+	border: 1px solid #ccc;
+}
+code {
+	font-size: 120%;
+	background-color: #eee;
+	padding: .1em .3em;
+}
+		</style>
+	</head>
+	<body>
+		<h1>SVG sprite (defs mode)</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>SVG</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<svg viewBox="0 0 48 48" class="icon">
+							<use xlink:href="../../svg/sprite/weather-defs#weather-clear"></use>
+						</svg>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

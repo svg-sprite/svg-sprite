@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>svg-sprite example: SVG sprite (background mode)</title>
+		<link rel="stylesheet" href="../../css/main.css"/>
+		<style>
+.icon-original {
+	width: 48px;
+	height: 48px;
+}
+.icon-double {
+	width: 96px;
+	height: 96px;
+}
+.icon-weather-clear-svg {
+	background-image: url(../../svg/sprite/weather-svg.svg);
+}
+.icon-weather-clear-png {
+	background-image: url(../../png/sprite/weather-svg.png);
+}
+.icon-absolute {
+	background-position: 0 -384px;
+}
+.icon-relative {
+	background-position: 0 88.888888%;
+	/* y-part 80% / (100% - 10%) = */
+	/* x-part 173px / (1000px - 80px) = 0.1880434783 ->> 18.80434783% */
+}
+.icon-background {
+	background-size: 100% auto;
+}
+pre {
+	padding: 1em;
+	font-size: 120%;
+	border: 1px solid #ccc;
+}
+code {
+	font-size: 120%;
+	background-color: #eee;
+	padding: .1em .3em;
+}
+		</style>
+	</head>
+	<body>
+		<h1>SVG sprite (background mode)</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Positioning</th>
+					<th>Size</th>
+					<th>SVG</th>
+					<th>PNG</th>
+					<th>Comment</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Absolute (px)</td>
+					<td>Original</td>
+					<td><i class="icon-background icon-original icon-absolute icon-weather-clear-svg">Clear weather icon</i></td>
+					<td><i class="icon-background icon-original icon-absolute icon-weather-clear-png">Clear weather icon</i></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Absolute (px)</td>
+					<td>Double</td>
+					<td><i class="icon-background icon-double icon-absolute icon-weather-clear-svg">Clear weather icon</i></td>
+					<td><i class="icon-background icon-double icon-absolute icon-weather-clear-png">Clear weather icon</i></td>
+					<td>Can't work without setting an absolute size for <code>background-size</code>. Scaling the absolutely positioned sprite screws up the image offset (which would have to be scaled as well)</td>
+				</tr>
+				<tr>
+					<td>Relative (%)</td>
+					<td>Original</td>
+					<td><i class="icon-background icon-original icon-relative icon-weather-clear-svg">Clear weather icon</i></td>
+					<td><i class="icon-background icon-original icon-relative icon-weather-clear-png">Clear weather icon</i></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Relative (%)</td>
+					<td>Double</td>
+					<td><i class="icon-background icon-double icon-relative icon-weather-clear-svg">Clear weather icon</i></td>
+					<td><i class="icon-background icon-double icon-relative icon-weather-clear-png">Clear weather icon</i></td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>The formular for calculating the relative position of a particular sprite image is as follows:</p>
+		<pre>$percentage = $imageOffset / ($spriteDimension - $imageDimension) * 100%</pre>
+		<p>This holds true for both absolute as well als relative values. The following example will display the 7th image of the above sprites, with each original image being 48 x 48 pixels and the sprites holding 10 images each:</p>
+		<pre>$percentage = 288px / (480px - 48px) = 60% / (100% - 10%) = 0.666666 = 66.666666%</pre>
+	</body>
+</html>

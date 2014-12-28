@@ -3,149 +3,167 @@
 /**
  * Module dependencies.
  */
-
 var program			= require('commander'),
+_					= require('lodash'),
 path				= require('path'),
 fs					= require('fs'),
-svgsprite			= require('../lib/svg-sprite');
+mkdirp				= require('mkdirp'),
+File				= require('vinyl'),
+yaml				= require('js-yaml')
+SVGSpriter			= require('../lib/svg-sprite'),
+config				= {},
+map					= {},
+yargs				= require('yargs')
+					.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
+					.version(JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json'), {encoding: 'utf8'})).version, 'version')
+					.help('help', 'Display this help information')
+					.example('$0 --css --css-render-css --css-example --dest=out assets/*.svg', 'Create a CSS sprite of the given SVG files including example document to the sub directory "out"')
+					.example('$0 -cD out --ccss --cx assets/*.svg', 'Same as above')
+					.example('$0 -cD out --cscss -p 10 assets/*.svg', 'Same as above, but render Sass instead of CSS and add 10px padding around all shapes')
+					.showHelpOnFail(true)
+					.demand(1);
 
 /**
- * Create the SVG sprite
+ * Add a command line option
  * 
- * @param {String} cmd			Input directory
+ * @param {String} name				Option name
+ * @param {Object} option			Option configuration
+ * @return {void}
  */
-function createSprite(cmd) {
-	if ((typeof this.out == 'undefined') || !this.out) {
-		console.error();
-		console.error('You must provide an output directory (--out)');
-		console.error();
-		process.exit(1);
+function addOption(name, option) {
+	var alias					= name;
+	
+	// If the this is an option itself
+	if ('description' in option) {
+		if ('alias' in option) {
+			alias				= option.alias;
+			yargs				= yargs.alias(alias, name);
+		}
+		
+		yargs					= yargs.describe(alias, option.description);
+		
+		if ('default' in option) {
+			var template		= (name.substr(-9) == '-template'),
+			def					= template ? path.resolve(path.dirname(__dirname), option.default) : option.default;
+			yargs				= yargs.default(alias, def);
+		} else if (option.required) {
+			yargs				= yargs.require(alias);
+		}
+		
+		if ('map' in option) {
+			map[option.map]		= name;
+		}
 	}
 	
-	if (!this.quiet) {
-		console.log();
-		console.log('Converting the SVG files in directory "%s" to an SVG sprite ...', cmd);
-		console.log();
+	var children				= _.omit(option, ['description', 'alias', 'default', 'map']);
+	for (var sub in children) {
+		addOption(name + '-' + sub, children[sub]);
 	}
-	
-	var options = {};
-	if (typeof this.render != 'undefined') {
-		options.render		= this.render.length ? JSON.parse(this.render) : {};
+}
+
+/**
+ * Add a value to the global configuration
+ * 
+ * @param {Object} store			Configuration
+ * @param {Array} path				Path
+ * @param {Mixed} value				Value				
+ */
+function addConfigMap(store, path, value) {
+	var key					= path.shift();
+	if (path.length) {
+		if (!(key in store)) {
+			store[key]		= {};
+		}
+		addConfigMap(store[key], path, value);
+	} else {
+		store[key]		= value;
 	}
-	if (typeof this.spritedir != 'undefined') {
-		options.spritedir	= this.spritedir;
-	}
-	if (typeof this.sprite != 'undefined') {
-		options.sprite		= this.sprite;
-	}
-	if (typeof this.prefix != 'undefined') {
-		options.prefix		= this.prefix;
-	}
-	if (typeof this.common != 'undefined') {
-		options.common		= this.common;
-	}
-	if (typeof this.maxwidth != 'undefined') {
-		options.maxwidth	= parseInt(this.maxwidth, 10);
-	}
-	if (typeof this.maxheight != 'undefined') {
-		options.maxheight	= parseInt(this.maxheight, 10);
-	}
-	if (typeof this.padding != 'undefined') {
-		options.padding		= this.padding;
-	}
-	if ((typeof this.layout != 'undefined') && (['vertical', 'horizontal', 'diagonal'].indexOf(this.layout) >= 0)) {
-		options.layout		= this.layout;
-	}
-	if (typeof this.pseudo != 'undefined') {
-		options.pseudo		= this.pseudo;
-	}
-	if (typeof this.dims != 'undefined') {
-		options.dims		= !!this.dims;
-	}
-	if (typeof this.keep != 'undefined') {
-		options.keep		= !!this.keep;
-	}
-	if (typeof this.recursive != 'undefined') {
-		options.recursive	= !!this.recursive;
-	}
-	if (typeof this.verbose != 'undefined') {
-		options.verbose		= Math.min(2, Math.max(0, parseInt(this.verbose, 10)));
-	}
-	if (typeof this.cleanwith != 'undefined') {
-		options.cleanwith	= this.cleanwith.length ? this.cleanwith : false;
-	}
-	if (typeof this.cleanconfig != 'undefined') {
-		options.cleanconfig	= this.cleanconfig.length ? JSON.parse(this.cleanconfig) : {};
-	}
-	svgsprite.createSprite(cmd, this.out, options, function(error, results){
-		if (!program.quiet) {
-			if (error) {
-				console.error(error);
+}
+
+/**
+ * Recursively write files to disc
+ * 
+ * @param {Object} files			Files
+ * @return {Number}					Number of written files
+ */
+function writeFiles(files) {
+	var written				= 0;
+	for (var key in files) {
+		if (_.isObject(files[key])) {
+			if (files[key].__proto__.constructor == File) {
+				mkdirp.sync(path.dirname(files[key].path));
+				fs.writeFileSync(files[key].path, files[key].contents);
+				++written;
 			} else {
-				console.log('SUCCESS - %s files have been writen to disk:', results.length);
-				for (var file in results.files) {
-					console.log('+++ %s (%s bytes)', file, results.files[file]);
-				}
+				written		+= writeFiles(files[key]);
 			}
 		}
-	});
+	}
+	return written;
 }
 
-/**
- * Return the version number
- * 
- * @return {String}			Version number
- */
-function getVersion() {
-	try {
-		return JSON.parse(fs.readFileSync(path.dirname(__dirname) + '/package.json', {encoding: 'utf8'})).version;
-	} catch(e) {
-		return 'N/A';
+// Get document, or throw exception on error
+try {
+	var options		= yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'config.yaml'), 'utf8'));
+	for (var name in options) {
+		addOption(name, options[name]);
+	}
+	
+} catch (e) {
+	console.log(e);
+}
+
+var argv			= yargs.argv;
+
+// Map all arguments to a global configuration object
+for (var m in map) {
+	if (!(map[m] in argv)) {
+		continue;
+	}
+	addConfigMap(config, m.split('.'), argv[map[m]]);
+}
+
+// Refine particular config options
+config.shape.spacing.padding		= ('' + config.shape.spacing.padding).trim();
+config.shape.spacing.padding		= config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function(dim) { return parseFloat(dim || 0, 10); }) : [];
+
+config.transform					= ('' + config.transform).trim();
+config.transform					= config.transform.length ? config.transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : [];
+
+['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){
+	if (!argv[mode]) {
+		delete this[mode];
+	} else if (['css', 'view'].indexOf(mode) >= 0) {
+		['css', 'scss', 'less', 'styl'].forEach(function(render){
+			var arg							= 'css-render-' + render;
+			if (!argv[arg] && (render in this)) {
+				delete this[render];
+			}
+		}, this[mode].render);
+	}
+}, config.mode);
+
+for (var mode in config.mode) {
+	var example						= mode + '-example';
+	if (!argv[example] && ('example' in config.mode[mode])) {
+		delete config.mode[mode].example;
 	}
 }
 
-program
-	.version(getVersion())
-	.option('-o, --out <output-directory>', 'Default output directory for stylesheets and the sprite subdirectory')
-	.option('-r, --render <render-config>', 'Rendering configuration [{"css":true}]')
-	.option('--spritedir <sprite-directory>', 'Sprite subdirectory name [svg]')
-	.option('--sprite <sprite-filename>', 'Sprite file name [sprite]')
-	.option('-p, --prefix <selector-prefix>', 'CSS selector prefix [svg]')
-	.option('--common <common-selector>', 'Common CSS selector for all images')
-	.option('--maxwidth <max-width>', 'Maximum single image width [1000]')
-	.option('--maxheight <max-height>', 'Maximum single image height [1000]')
-	.option('--padding <padding>', 'Transparent padding around the single images (in pixel)')
-	.option('--layout <layout>', 'Sprite images arrangement ("vertical", "horizontal" or "diagonal") [vertical]')
-	.option('--pseudo <pseudo-separator>', 'Character sequence for denoting CSS pseudo classes [~]')
-	.option('-d, --dims', 'Render image dimensions as separate CSS and / or Sass rules')
-	.option('-k, --keep', 'Keep intermediate SVG files (inside the sprite subdirectory)')
-	.option('--recursive', 'Recursively scan for SVG files in subdirectories)')
-	.option('-v, --verbose', 'Output verbose progress information')
-	.option('--cleanwith <clean-module>', 'Module to be used for SVG cleaning. Currently "scour" or "svgo" [scour]')
-	.option('--cleanconfig <clean-configuration>', 'JSON-serialized configuration options for the cleaning module')
-	.option('-q, --quiet', 'Don\'t print any status messages');
-	
-program
-	.command('*')
-	.description('Convert the SVG files in the given directory. If omitted, the current working directory is used.')
-	.action(createSprite);
-	
-program.on('--help', function(){
-  console.log('  Examples:');
-  console.log('');
-  console.log('    $ svg-sprite --out sprite');
-  console.log('    $ svg-sprite -co sprite');
-  console.log('       Reads SVG files from the current directory and uses the subdirectory "sprite" to create an SVG sprite and CSS file');
-  console.log('');
-  console.log('    $ svg-sprite --out sprite --render \'{"scss":{"dest":"sprite/sass/_sprite"}}\'');
-  console.log('       Creates an SVG sprite and a CSS file along with a Sass file at "sprite/sass/_sprite.scss"');
-  console.log('');
-  console.log('    $ svg-sprite --keep --dims --out sprite --cleanwith svgo ./svg');
-  console.log('    $ svg-sprite -kdo sprite --cleanwith svgo ./svg');
-  console.log('       Uses the subdirectory "./svg", creates image size CSS rules, optimizes the single SVG files using SVGO and doesn\'t discard them');
-  console.log('');
+var spriter							= new SVGSpriter(config);
+argv._.forEach(function(file){
+	file							= path.resolve(file);
+	var stat						= fs.lstatSync(file);
+	if (stat.isSymbolicLink()) {
+		file						= fs.readlinkSync(file);
+	}
+	spriter.add(file, path.basename(file), fs.readFileSync(file));
 });
 
-if (!program.parse(process.argv).args.length) {
-	createSprite.apply(program, [path.resolve('./')]);
-}
+spriter.compile(function(error, result, data) {
+	if (error) {
+		console.error(error);
+	} else {
+		writeFiles(result);
+	}
+});

@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	padding: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.icon-background {
+	display: inline-block;
+	background-repeat: no-repeat;
+	text-indent: 200%;
+	white-space: nowrap;
+	overflow: hidden;
+	border: 1px solid #ccc;
+}
+table {
+	border-collapse: collapse;
+}
+td, th {
+	padding: 1em;
+}
+th {
+	text-align: left;
+}
+td {
+	border-top: 1px solid #ccc;
+	height: 100px;
+}
