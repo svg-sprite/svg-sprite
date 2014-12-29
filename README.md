@@ -939,7 +939,7 @@ The contained example SVG icons are part of the [Tango Icon Library](http://tang
 [travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png
 
 [coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
-[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png
+[coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
 
 [depstat-url]: https://david-dm.org/jkphl/svg-sprite
 [depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
