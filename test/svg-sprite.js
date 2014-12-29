@@ -149,18 +149,17 @@ describe('svg-sprite', function() {
     });
     
     describe('with minimum configuration and ' + files.length + ' SVG files', function() {
-		var spriter				= null,
-		data					= null,
-		svg						= {},
-		previewTemplate			= fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
+		var spriter						= null,
+		data							= null,
+		svg								= {},
+		previewTemplate					= fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
 
 		describe('in «css» mode and all render types enabled', function() {
 			
 	        it('creates 5 files for vertical layout', function(done) {
 	        	this.timeout(20000);
-	        	spriter			= new SVGSpriter({
-					dest		: dest,
-					verbose		: 0
+	        	spriter					= new SVGSpriter({
+					dest				: dest
 	    		});
 				addFixtureFiles(spriter, files);
 	        	spriter.compile({
