@@ -910,16 +910,18 @@ Release history
 #### v1.0.0 Next generation release
 * Rewritten from scratch ([#23](https://github.com/jkphl/svg-sprite/issues/23), [#30](https://github.com/jkphl/svg-sprite/issues/30))
 * Dropped [libxmljs](https://github.com/polotek/libxmljs) dependency for improving Windows support (e.g. [grunt-svg-sprite #14](https://github.com/jkphl/grunt-svg-sprite/issues/14))
-* Added support for `view`, `symbol` and `stack` modes ([grunt-svg-sprite #24](https://github.com/jkphl/grunt-svg-sprite/issues/24))
-* Split out all file access methods so that they need not necessarily be used, making the module a good basis for 3rd party tools (like Grunt & Gulp plugins) ([#21](https://github.com/jkphl/svg-sprite/issues/21), [#25](https://github.com/jkphl/svg-sprite/issues/25))
+* Added support for `view`, `symbol` and `stack` modes ([#27](https://github.com/jkphl/svg-sprite/issues/27), [#35](https://github.com/jkphl/svg-sprite/issues/35), [grunt-svg-sprite #24](https://github.com/jkphl/grunt-svg-sprite/issues/24))
+* Strip off all file access methods, making the module a good basis for 3rd party tools (like Grunt & Gulp plugins) ([#21](https://github.com/jkphl/svg-sprite/issues/21), [#25](https://github.com/jkphl/svg-sprite/issues/25))
 * Improved command line version ([#34](https://github.com/jkphl/svg-sprite/issues/34))
 * Switched to relative positioning in CSS sprites ([grunt-svg-sprite #23](https://github.com/jkphl/grunt-svg-sprite/issues/23))
 * Made the configuration of Mustache templates and destinations more intuitive
 * Enabled customization of shape IDs
 * Enabled custom SVG transformations
-* Enabled independent `padding` values for all sides of a shape
+* Enhanced `padding` options ([#24](https://github.com/jkphl/svg-sprite/issues/24))
 * Added cache busting for `css` and `view` mode (enabled by default; [#29](https://github.com/jkphl/svg-sprite/pull/29))
 * Added support for [meta data injection](#a1-meta-data-injection)
+
+For older release notes please [see here](https://github.com/jkphl/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10#release-history).
 
 Legal
 -----
@@ -934,10 +936,10 @@ The contained example SVG icons are part of the [Tango Icon Library](http://tang
 [npm-image]: https://badge.fury.io/js/svg-sprite.png
 
 [travis-url]: http://travis-ci.org/jkphl/svg-sprite
-[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png?branch=dev
+[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png
 
-[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite?branch=dev
-[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png?branch=dev
+[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
+[coveralls-image]: https://coveralls.io/repos/jkphl/svg-sprite/badge.png
 
 [depstat-url]: https://david-dm.org/jkphl/svg-sprite
 [depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
