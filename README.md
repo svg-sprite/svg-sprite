@@ -907,6 +907,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v1.0.1 Maintenance release
+* Updated module depencencies
+
 #### v1.0.0 Next generation release
 * Rewritten from scratch ([#23](https://github.com/jkphl/svg-sprite/issues/23), [#30](https://github.com/jkphl/svg-sprite/issues/30))
 * Dropped [libxmljs](https://github.com/polotek/libxmljs) dependency for improving Windows support (e.g. [grunt-svg-sprite #14](https://github.com/jkphl/grunt-svg-sprite/issues/14))

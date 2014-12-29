@@ -33,7 +33,7 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-  	"async": "~0.2.9",
+  	"async": "^0.9.0",
   	"lodash": "lodash/lodash",
   	"xmldom": "^0.1.19",
   	"xpath": "^0.0.8",
