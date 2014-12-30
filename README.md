@@ -907,6 +907,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v1.0.2 Maintenance release
+* Improved error handling
+
 #### v1.0.1 Maintenance release
 * Updated module depencencies
 
