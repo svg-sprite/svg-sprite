@@ -907,6 +907,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v1.0.3 Bufix release
+* Fixed dependency error ([#36](https://github.com/jkphl/svg-sprite/issues/36))
+
 #### v1.0.2 Maintenance release
 * Improved error handling
 
