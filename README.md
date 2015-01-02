@@ -934,7 +934,7 @@ For older release notes please [see here](https://github.com/jkphl/svg-sprite/tr
 
 Legal
 -----
-Copyright © 2014 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
+Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
 
 *svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
 
