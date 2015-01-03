@@ -31,7 +31,8 @@ var config					= {
 		}
 	}
 },
-cwd							= path.join(__dirname, 'fixture', 'svg', 'single'),
+cwdWeather					= path.join(__dirname, 'fixture', 'svg', 'single'),
+cwdAlign					= path.join(__dirname, 'fixture', 'svg', 'css'),
 dest						= path.normalize(path.join(__dirname, '..', 'tmp'));
 
 /**
@@ -39,8 +40,9 @@ dest						= path.normalize(path.join(__dirname, '..', 'tmp'));
  * 
  * @param {SVGSpriter} spriter		Spriter instance
  * @param {Array} files				SVG files
+ * @param {String} cwd				Working directory
  */
-function addFixtureFiles(spriter, files) {
+function addFixtureFiles(spriter, files, cwd) {
 	files.forEach(function(file){
 		spriter.add(
 			path.resolve(path.join(cwd, file)),
@@ -117,7 +119,9 @@ before(function(done) {
 });
 
 describe('svg-sprite', function() {
-	var files				= glob.glob.sync('**/weather*.svg', {cwd: cwd});
+	var weather				= glob.glob.sync('**/weather*.svg', {cwd: cwdWeather}),
+	align					= glob.glob.sync('**/*.svg', {cwd: cwdAlign}),
+	previewTemplate			= fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
 	
     describe('with no arguments', function() {
     	var spriter			= new SVGSpriter();
@@ -134,11 +138,11 @@ describe('svg-sprite', function() {
 	        });
 	    });
 	   
-    	describe('with ' + files.length + ' SVG files', function() {
+    	describe('with ' + weather.length + ' SVG files', function() {
     		
 	        it('returns an empty object', function(done) {
 	        	this.timeout(20000);
-	        	addFixtureFiles(spriter, files);
+	        	addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile(function(error, result) {
 	        		result.should.be.an.Object;
 	        		result.should.be.empty;
@@ -148,11 +152,10 @@ describe('svg-sprite', function() {
 	    });
     });
     
-    describe('with minimum configuration and ' + files.length + ' SVG files', function() {
+    describe('with minimum configuration and ' + weather.length + ' SVG files', function() {
 		var spriter						= null,
 		data							= null,
-		svg								= {},
-		previewTemplate					= fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
+		svg								= {};
 
 		describe('in «css» mode and all render types enabled', function() {
 			
@@ -161,7 +164,7 @@ describe('svg-sprite', function() {
 	        	spriter					= new SVGSpriter({
 					dest				: dest
 	    		});
-				addFixtureFiles(spriter, files);
+				addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile({
 					css					: {
 						sprite			: 'svg/css.vertical.svg',
@@ -446,6 +449,7 @@ describe('svg-sprite', function() {
 					result.view.should.be.an.Object;
 					writeFiles(result).should.be.exactly(2);
 					data					= cssData.view;
+					svg.packed				= path.basename(result.view.sprite.path);
 					done();
 				});
 			});
@@ -453,7 +457,7 @@ describe('svg-sprite', function() {
 			describe('creates visually correct sprite with', function() {
 		    	
 		        it('packed layout', function(done) {
-		        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', 'view.packed.svg'),
+		        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.packed),
 	        		verticalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.packed.png');
 	        		svg2png(verticalSVG, verticalPNG, function(err) {
 	        			should(err).not.ok;
@@ -501,5 +505,515 @@ describe('svg-sprite', function() {
 		    });
 		    */
 	    });
+	});
+    
+    describe('with centered alignment and ' + align.length + ' SVG files', function() {
+		var spriter						= null,
+		data							= null,
+		svg								= {};
+
+		describe('with «css» mode, vertical layout and CSS render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					css					: {
+						sprite			: 'svg/css.vertical.centered.svg',
+						layout			: 'vertical',
+						dimensions		: true,
+						render			: {
+							css			: {
+								dest	: 'sprite.centered.css'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.css.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.css;
+					svg.vertical		= path.basename(result.css.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.vertical),
+        		verticalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.png');
+        		svg2png(verticalSVG, verticalPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: verticalPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.vertical.centered.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The vertical sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	        
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+
+	        	data.css				= '../sprite.centered.css';
+	        	var out					= mustache.render(previewTemplate, data),
+	        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'css', 'html', 'css.vertical.centered.html'), out),
+	        	previewImage			= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.html.png');
+	        	preview.should.be.ok;
+	        	
+	        	capturePhantom(preview, previewImage, function(error) {
+	        		should(error).not.ok;
+	        		imageDiff({
+						actualImage		: previewImage,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.vertical.centered.html.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.centered.html.diff.png')
+					}, function (error, imagesAreSame) {
+				    	should(error).not.ok;
+				    	should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
+				    	done();
+				    });
+	        	});
+	    	});
+		});
+
+		describe('with «css» mode, horizontal layout and Sass render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					css					: {
+						sprite			: 'svg/css.horizontal.centered.svg',
+						layout			: 'horizontal',
+						dimensions		: true,
+						render			: {
+							scss		: {
+								dest	: 'sprite.centered.scss'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.css.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.css;
+					svg.horizontal		= path.basename(result.css.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var horizontalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.horizontal),
+        		horizontalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.horizontal.centered.png');
+        		svg2png(horizontalSVG, horizontalPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: horizontalPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.horizontal.centered.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.horizontal.centered.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The horizontal sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	    	
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+		    	
+		    	sass.render({
+				    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss'),
+				    success						: function(scssText) {
+				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss.css'), scssText)).be.ok;
+				    	
+				    	data.css				= '../sprite.centered.scss.css';				        
+				    	var out					= mustache.render(previewTemplate, data),
+			        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'css', 'html', 'scss.horizontal.centered.html'), out),
+			        	previewImage			= path.join(__dirname, '..', 'tmp', 'css', 'png', 'scss.horizontal.centered.html.png');
+			        	preview.should.be.ok;
+			        	
+			        	capturePhantom(preview, previewImage, function(error) {
+			        		should(error).not.ok;
+			        		imageDiff({
+								actualImage		: previewImage,
+								expectedImage	: path.join(__dirname, 'expected', 'png', 'css.horizontal.centered.html.png'),
+								diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'scss.horizontal.centered.html.diff.png')
+							}, function (error, imagesAreSame) {
+						    	should(error).not.ok;
+						    	should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
+						    	done();
+						    });
+			        	});
+				    },
+				    error				: function(err) {
+				    	should(err).not.ok;
+				    	done();
+				    }
+			    });
+	    	});
+		});
+
+		describe('with «css» mode, packed layout and LESS render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					css					: {
+						sprite			: 'svg/css.packed.centered.svg',
+						layout			: 'packed',
+						dimensions		: true,
+						render			: {
+							less		: {
+								dest	: 'sprite.centered.less'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.css.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.css;
+					svg.packed		= path.basename(result.css.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var packedSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.packed),
+        		packedPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.centered.png');
+        		svg2png(packedSVG, packedPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: packedPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.packed.aligned.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.centered.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The packed sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	    	
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+		    	
+		    	var lessFile					= path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.less');
+		    	fs.readFile(lessFile, function(err, lessText) {
+	        		should(err).not.ok;
+
+	        		less.render(lessText.toString(), {}, function(error, output) {
+		    			should(error).not.ok;
+		    			should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.less.css'), output.css)).be.ok;
+		    			
+		    			data.css				= '../sprite.centered.less.css';				        
+				    	var out					= mustache.render(previewTemplate, data),
+			        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'css', 'html', 'less.packed.centered.html'), out),
+			        	previewImage			= path.join(__dirname, '..', 'tmp', 'css', 'png', 'less.packed.centered.html.png');
+			        	preview.should.be.ok;
+			        	
+			        	capturePhantom(preview, previewImage, function(error) {
+			        		should(error).not.ok;
+			        		imageDiff({
+								actualImage		: previewImage,
+								expectedImage	: path.join(__dirname, 'expected', 'png', 'css.packed.aligned.html.png'),
+								diffImage		: path.join(__dirname, '..', 'tmp', 'css', 'png', 'less.packed.centered.html.diff.png')
+							}, function (error, imagesAreSame) {
+						    	should(error).not.ok;
+						    	should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
+						    	done();
+						    });
+			        	});
+	        		});
+	        	});
+	    	});
+		});
+	});
+    
+    describe('with mixed alignment and ' + align.length + ' SVG files', function() {
+		var spriter						= null,
+		data							= null,
+		svg								= {};
+
+		describe('with «view» mode, vertical layout and CSS render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					view				: {
+						sprite			: 'svg/view.vertical.mixed.svg',
+						layout			: 'vertical',
+						dimensions		: true,
+						render			: {
+							css			: {
+								dest	: 'sprite.mixed.css'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.view.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.view;
+					svg.vertical		= path.basename(result.view.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.vertical),
+        		verticalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.png');
+        		svg2png(verticalSVG, verticalPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: verticalPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.vertical.mixed.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The vertical sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	        
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+
+	        	data.css				= '../sprite.mixed.css';
+	        	var out					= mustache.render(previewTemplate, data),
+	        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'view', 'html', 'css.vertical.mixed.html'), out),
+	        	previewImage			= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.html.png');
+	        	preview.should.be.ok;
+	        	
+	        	capturePhantom(preview, previewImage, function(error) {
+	        		should(error).not.ok;
+	        		imageDiff({
+						actualImage		: previewImage,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.vertical.mixed.html.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.mixed.html.diff.png')
+					}, function (error, imagesAreSame) {
+				    	should(error).not.ok;
+				    	should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
+				    	done();
+				    });
+	        	});
+	    	});
+		});
+
+		describe('with «view» mode, horizontal layout and Sass render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					view				: {
+						sprite			: 'svg/view.horizontal.mixed.svg',
+						layout			: 'horizontal',
+						dimensions		: true,
+						render			: {
+							scss		: {
+								dest	: 'sprite.mixed.scss'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.view.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.view;
+					svg.horizontal		= path.basename(result.view.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var horizontalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.horizontal),
+        		horizontalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.horizontal.mixed.png');
+        		svg2png(horizontalSVG, horizontalPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: horizontalPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.horizontal.mixed.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.horizontal.mixed.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The horizontal sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	    	
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+		    	
+		    	sass.render({
+				    file						: path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss'),
+				    success						: function(scssText) {
+				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss.css'), scssText)).be.ok;
+				    	
+				    	data.css				= '../sprite.mixed.scss.css';				        
+				    	var out					= mustache.render(previewTemplate, data),
+			        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'view', 'html', 'scss.horizontal.mixed.html'), out),
+			        	previewImage			= path.join(__dirname, '..', 'tmp', 'view', 'png', 'scss.horizontal.mixed.html.png');
+			        	preview.should.be.ok;
+			        	
+			        	capturePhantom(preview, previewImage, function(error) {
+			        		should(error).not.ok;
+			        		imageDiff({
+								actualImage		: previewImage,
+								expectedImage	: path.join(__dirname, 'expected', 'png', 'css.horizontal.mixed.html.png'),
+								diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'scss.horizontal.mixed.html.diff.png')
+							}, function (error, imagesAreSame) {
+						    	should(error).not.ok;
+						    	should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
+						    	done();
+						    });
+			        	});
+				    },
+				    error				: function(err) {
+				    	should(err).not.ok;
+				    	done();
+				    }
+			    });
+	    	});
+		});
+
+		describe('with «view» mode, packed layout and LESS render type', function() {
+			
+	        it('creates 2 files', function(done) {
+	        	this.timeout(20000);
+	        	spriter					= new SVGSpriter({
+					dest				: dest,
+					shape				: {
+						align			: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
+						dimension		: {
+							maxWidth	: 200,
+							maxHeight	: 200
+						}
+					}
+	    		});
+				addFixtureFiles(spriter, align, cwdAlign);
+	        	spriter.compile({
+					view				: {
+						sprite			: 'svg/view.packed.mixed.svg',
+						layout			: 'packed',
+						dimensions		: true,
+						render			: {
+							less		: {
+								dest	: 'sprite.mixed.less'
+							}
+						}
+					}
+				}, function(error, result, cssData) {
+	        		result.view.should.be.an.Object;
+					writeFiles(result).should.be.exactly(2);
+					data				= cssData.view;
+					svg.packed			= path.basename(result.view.sprite.path);
+	        		done();
+	        	});
+	        });
+	        
+	        it('creates visually correct sprite', function(done) {
+	        	var packedSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.packed),
+        		packedPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.packed.mixed.png');
+        		svg2png(packedSVG, packedPNG, function(err) {
+        			should(err).not.ok;
+					imageDiff({
+						actualImage		: packedPNG,
+						expectedImage	: path.join(__dirname, 'expected', 'png', 'css.packed.aligned.png'),
+						diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.packed.mixed.diff.png')
+					}, function (err, imagesAreSame) {
+				    	should(err).not.ok;
+				    	should.ok(imagesAreSame, 'The packed sprite doesn\'t match the expected one!');
+				    	done();
+				    });
+				});
+	        });
+	    	
+	    	it('creates a visually correct stylesheet resource', function(done) {
+		    	this.timeout(10000);
+		    	
+		    	var lessFile					= path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.less');
+		    	fs.readFile(lessFile, function(err, lessText) {
+	        		should(err).not.ok;
+
+	        		less.render(lessText.toString(), {}, function(error, output) {
+		    			should(error).not.ok;
+		    			should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.less.css'), output.css)).be.ok;
+		    			
+		    			data.css				= '../sprite.mixed.less.css';				        
+				    	var out					= mustache.render(previewTemplate, data),
+			        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'view', 'html', 'less.packed.mixed.html'), out),
+			        	previewImage			= path.join(__dirname, '..', 'tmp', 'view', 'png', 'less.packed.mixed.html.png');
+			        	preview.should.be.ok;
+			        	
+			        	capturePhantom(preview, previewImage, function(error) {
+			        		should(error).not.ok;
+			        		imageDiff({
+								actualImage		: previewImage,
+								expectedImage	: path.join(__dirname, 'expected', 'png', 'css.packed.aligned.html.png'),
+								diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'less.packed.mixed.html.diff.png')
+							}, function (error, imagesAreSame) {
+						    	should(error).not.ok;
+						    	should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
+						    	done();
+						    });
+			        	});
+	        		});
+	        	});
+	    	});
+		});
 	});
 });

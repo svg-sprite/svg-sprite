@@ -61,6 +61,11 @@ shape:
     description           : Path to YAML file with meta information
     alias                 : m
     map                   : shape.meta
+      
+  align:
+    description           : Path to YAML file with alignment information
+    alias                 : a
+    map                   : shape.align
     
   dest:
     description           : Path to output directory for intermediate SVG files
