@@ -541,6 +541,7 @@ Property                 | Type            | Default       | Description        
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
 `xmlDeclaration`         | Boolean         | `true`        | Output an XML declaration at the very beginning of SVG. The declaration defaults to `<?xml version="1.0" encoding="utf-8"?>` but might differ depending on the original shape SVG files. |
 `doctypeDeclaration`     | Boolean         | `true`        | Include a `<DOCTYPE>` declaration in the sprite. The doctype will be drawn from the first SVG shape in the sprite. If there is no doctype declaration available, none will be written to the sprite as well. |
+`namespaceIDs`           | Boolean         | `true`        | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `FALSE` then and be aware that you might also want to disable SVGO's ID minification (`transform.svgo.plugins: [{cleanupIDs: false}]`). |
 
 ### D. Output mode configuration
 
@@ -906,6 +907,9 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### v1.0.6 Feature release
+* Made shape ID namespacing configurable ([grunt-svg-sprite #27](https://github.com/jkphl/grunt-svg-sprite/issues/27))
 
 #### v1.0.5 Bufix release
 * Fixed regression bug with SVG stacks
