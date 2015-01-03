@@ -61,7 +61,7 @@ Options:
   -D, --dest                   Main output directory (base path)                                     [default: "."]
   -l, --log                    Logging verbosity ("info", "verbose" or "debug")
   --shape-id-separator         Separator for traversing a directory structure into a shape ID        [default: "--"]
-  --shape-id-generator         ID generation callback [not available via command line]               [default: null]
+  --shape-id-generator         ID generation callback [via CLI only template strings]                [default: "%s"]
   --shape-id-pseudo            Separator for CSS pseudo classes                                      [default: "~"]
   -w, --shape-dim-width        Maximum shape width in pixels                                         [default: 2000]
   -h, --shape-dim-height       Maximum shape height in pixels                                        [default: 2000]
@@ -909,6 +909,7 @@ Release history
 
 #### v1.0.5 Bufix release
 * Fixed regression bug with SVG stacks
+* Added support for ID generator templates in CLI version ([#37](https://github.com/jkphl/svg-sprite/issues/37))
 
 #### v1.0.4 Bufix release
 * Fixed XML & doctype declaration bug with inline sprites ([gulp-svg-sprite #2](https://github.com/jkphl/gulp-svg-sprite/issues/2))

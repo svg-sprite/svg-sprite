@@ -17,8 +17,9 @@ shape:
       map                 : shape.id.separator
       
     generator:
-      description         : ID generation callback [not available via command line]
-      default             : 
+      description         : ID generation callback [via CLI only template strings]
+      default             : "%s"
+      map                 : shape.id.generator
       
     pseudo:
       description         : Separator for CSS pseudo classes
