@@ -907,6 +907,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v1.0.5 Bufix release
+* Fixed regression bug with SVG stacks
+
 #### v1.0.4 Bufix release
 * Fixed XML & doctype declaration bug with inline sprites ([gulp-svg-sprite #2](https://github.com/jkphl/gulp-svg-sprite/issues/2))
 * Added support for ID generator templates ([#37](https://github.com/jkphl/svg-sprite/issues/37))
