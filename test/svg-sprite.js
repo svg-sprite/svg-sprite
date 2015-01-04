@@ -128,11 +128,13 @@ describe('svg-sprite', function() {
     	
     	describe('with no SVG files', function() {
     		
-	        it('returns an empty object', function(done) {
+	        it('returns an error', function(done) {
 	        	
 	        	spriter.compile(function(error, result) {
-	        		result.should.be.an.Object;
-	        		result.should.be.empty;
+	        		should(error).be.an.Error;
+					should(error).have.property('name', 'ArgumentError');
+					should(error).have.property('errno', 1420362541);
+	        		should(result).be.exactly(null);
 	        		done();
 	        	});
 	        });
@@ -140,12 +142,14 @@ describe('svg-sprite', function() {
 	   
     	describe('with ' + weather.length + ' SVG files', function() {
     		
-	        it('returns an empty object', function(done) {
+	        it('returns an error', function(done) {
 	        	this.timeout(20000);
 	        	addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile(function(error, result) {
-	        		result.should.be.an.Object;
-	        		result.should.be.empty;
+	        		should(error).be.an.Error;
+					should(error).have.property('name', 'ArgumentError');
+					should(error).have.property('errno', 1420362541);
+	        		should(result).be.exactly(null);
 	        		done();
 	        	});
 	        });
