@@ -469,8 +469,8 @@ To use these icons as centered background images, you would need them to be cent
 *svg-sprite*'s default behaviour can be expressed as follows:
 
 ```yaml
-"*"			:
-  "%s"	: 0
+"*"				:
+  "%s"			: 0
 ```
 
 ##### A.2.1 Centering shapes
@@ -478,8 +478,8 @@ To use these icons as centered background images, you would need them to be cent
 With only these two lines
 
 ```yaml
-"*"			:
-  "%s"	: .5
+"*"				:
+  "%s"			: .5
 ```
 
 all the icons in the example sprite above get centered:
