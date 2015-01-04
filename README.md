@@ -969,9 +969,12 @@ Known problems / To-do
 Release history
 ---------------
 
+#### master (will become v1.0.8)
+* Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
+
 #### v1.0.7 Feature release
 * Improved error handling
-* Improved XML & DOCTYPE declaration handling and fixed ([grunt-svg-sprit #28](https://github.com/jkphl/grunt-svg-sprite/issues/28))
+* Improved XML & DOCTYPE declaration handling and fixed ([grunt-svg-sprite #28](https://github.com/jkphl/grunt-svg-sprite/issues/28))
 
 #### v1.0.6 Feature release
 * Made shape ID namespacing configurable ([grunt-svg-sprite #27](https://github.com/jkphl/grunt-svg-sprite/issues/27))
