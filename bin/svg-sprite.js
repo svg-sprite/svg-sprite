@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-var program			= require('commander'),
-_					= require('lodash'),
+var _				= require('lodash'),
 path				= require('path'),
 fs					= require('fs'),
 mkdirp				= require('mkdirp'),
