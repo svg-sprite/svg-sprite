@@ -1,4 +1,4 @@
-The following shall shed some light on the rather elaborate (and thus maybe overwhelming) [README of svg-sprite](https://github.com/jkphl/svg-sprite) and demonstrate that it is neither complicated to use, nor that the config necessarily has to be huge. I admit, however, that it would be nice to have some practical tutorials or recipies of how to work with *svg-sprite*. I'll try my best to do something about this as soon as possible (or at least split up the README into more digestible sections). Hopefully the below does help a little bit in the meantime.
+The following shall shed some light on the rather elaborate (and thus maybe overwhelming) [README of svg-sprite](https://github.com/jkphl/svg-sprite) and demonstrate that it is neither complicated to use, nor that the config necessarily has to be huge. I admit, however, that it would be nice to have some practical tutorials or recipes of how to work with *svg-sprite*. I'll try my best to do something about this as soon as possible (or at least split up the README into more digestible sections). Hopefully the below does help a little bit in the meantime.
 
 Let's start with some fundamentals:
 
@@ -43,7 +43,7 @@ spriter.compile(function(error, result) {
 
 This is the very same for **all types of sprites**. As you see, quite a lot has to do with file system access (reading and writing files from and to disk). In most cases you'll want to abstract that away and rather use *svg-sprite* via Grunt or Gulp for that very reason.
 
-An equivalent **Grunt task** would look like this ([installataion see here](https://github.com/jkphl/grunt-svg-sprite#getting-started)):
+An equivalent **Grunt task** would look like this ([installation](https://github.com/jkphl/grunt-svg-sprite#getting-started)):
 
 ```javascript
 // svg-sprite Grunt task
@@ -59,7 +59,7 @@ grunt.initConfig({
 });
 ```
 
-An equivalent **Gulp task** would look like this ([installation see here](https://github.com/jkphl/gulp-svg-sprite#usage)):
+An equivalent **Gulp task** would look like this ([installation](https://github.com/jkphl/gulp-svg-sprite#usage)):
 
 ```javascript
 // svg-sprite Gulp task
@@ -87,7 +87,7 @@ var config					= {
 }
 ```
 
-A foreground image sprite using `<symbol>` elements and being `<use>`d in your HTML would be even simpler:
+A foreground image sprite using `<symbol>` elements (for being `<use>`d in your HTML) would be even simpler:
 
 ```javascript
 // «symbol» sprite with CSS stylesheet resource
@@ -113,7 +113,7 @@ var config					= {
 }
 ```
 
-As you see, the `mode` config option is the only one that is truly necessary to create a sprite. Omitting it wouldn't you get any (sprite) output. But still, you could use a `mode`-less run to just optimize and get back the source SVG files:
+As you see, the `mode` config option is the only one that is truly necessary to create a sprite. Omitting it wouldn't get you any (sprite) output. But still, you could use a `mode`-less run to just optimize and get back the source SVG files:
 
 ```javascript
 // Just optimize source SVG files, create no sprite
