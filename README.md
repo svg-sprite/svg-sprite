@@ -971,6 +971,7 @@ Release history
 
 #### master (will become v1.0.9)
 * Updated dependencies
+* Introduced `svg` getter in templating shape variables
 
 #### v1.0.8 Bugfix release
 * Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
