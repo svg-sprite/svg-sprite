@@ -623,7 +623,7 @@ Property                 | Type            | Default       | Description        
 * `symbol`
 * `stack`
 
-Each of these modes produces it's own specific files and has it's individual configuration. You can configure several modes in parallel so that *svg-sprite* runs them simultaneously. Activate a mode by adding a like-named key to the `mode` object, either with default configuration or a custom settings object:
+Each of these modes produces it's own specific files and has it's individual configuration. You may enable and configure several modes in parallel so that *svg-sprite* renders them in one run, saving the redundant SVG optimization overhead. Enable a specific mode by adding a like-named key to the `mode` object, either with default configuration or a custom settings object:
 
 ```javascript
 // Activate the 'sprite' mode with default configuration
@@ -637,6 +637,22 @@ Each of these modes produces it's own specific files and has it's individual con
 {
 	mode			: {
 		css			: {}
+	}
+}
+```
+
+It is also possible to configure the same output mode multiple times, each time with a different configuration. In that case, use a custom key for the configuration object and give it a `mode` property telling *svg-sprite* which output mode to use:
+
+```javascript
+// Multiple sprites of the same output mode
+{
+	mode			: {
+		sprite1		: {
+			mode	: 'css'		// Sprite with «css» mode
+		},
+		sprite2		: {
+			mode	: 'css'		// Another sprite with «css» mode
+		}
 	}
 }
 ```
@@ -753,15 +769,18 @@ To **disable the file rendering** altogether, set the value to something falsy:
 
 #### F.1 Sprite & shape variables
 
-For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can retrieve the values used via the `data` argument passed to the [compile() callback](#svgspritercompile-config--callback-). Example:  
+For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](#svgspritercompile-config--callback-). Example:  
 
 ```javascript
 {  
-	// Data object for the `css` output mode
-	css							: {
+	// Data object for the `mymode` output key
+	mymode						: {
 	
 		// Name of the current output mode
 		mode					: 'css',
+		
+		// Key used for result files & data
+		key						: 'mymode',
 		
 		// CSS class name for `common` sprite shape properties (or NULL if disabled)
 		common					: null,
@@ -977,6 +996,9 @@ Known problems / To-do
 
 Release history
 ---------------
+
+#### master (will become v1.0.10)
+* Added support for custom mode keys
 
 #### v1.0.9 Maintenance release
 * Updated dependencies
