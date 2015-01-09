@@ -982,6 +982,9 @@ Release history
 * Updated dependencies
 * Introduced `svg` getter in templating shape variables
 * Fixed broken dimension argument in CLI version ([#38](https://github.com/jkphl/svg-sprite/issues/38))
+* Fixed logging error in SVGO optimization
+* Fixed missing XML namespaces in SVG stack 
+* Fixed cache busting errors with example HTML document 
 
 #### v1.0.8 Bugfix release
 * Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
