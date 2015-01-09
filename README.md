@@ -999,6 +999,7 @@ Release history
 
 #### master (will become v1.0.10)
 * Added support for custom mode keys
+* Fixed external CLI transform configuration support
 
 #### v1.0.9 Maintenance release
 * Updated dependencies
