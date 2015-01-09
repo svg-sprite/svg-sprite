@@ -126,8 +126,22 @@ for (var m in map) {
 config.shape.spacing.padding		= ('' + config.shape.spacing.padding).trim();
 config.shape.spacing.padding		= config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function(dim) { return parseFloat(dim || 0, 10); }) : [];
 
-config.transform					= ('' + config.transform).trim();
-config.transform					= config.transform.length ? config.transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : [];
+var transform						= ('' + config.transform).trim();
+config.transform					= [];
+(transform.length ? transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : []).forEach(function(transform){
+	if (transform.length) {
+		if (('transform-' + transform) in argv) {
+			try {
+				var transformConfigFile		= argv['transform-' + transform],
+				transformConfigJSON			= fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'});
+				transformConfig				= transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
+				this.push(_.object([transform], [transformConfig]));
+			} catch(e) {};
+		} else {
+			this.push(transform);
+		}
+	}
+}, config.transform);
 
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){
 	if (!argv[mode]) {
