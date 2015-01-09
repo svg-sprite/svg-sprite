@@ -80,7 +80,7 @@ Options:
   --cl, --css-layout           Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
   --css-common                 Common CSS rule selector for all shapes                               [default: null]
   --css-prefix                 CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --css-dimensions             CSS selector suffix for shape dimension rules (TRUE for inline)       [default: "-dims"]
+  --css-dimensions             CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --cs, --css-sprite           Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --css-bust                   Enable cache busting                                                  [default: true]
   --ccss, --css-render-css     Whether to render a CSS stylesheet                                    [default: false]
@@ -106,7 +106,7 @@ Options:
   --vl, --view-layout          Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
   --view-common                Common CSS rule selector for all shapes                               [default: null]
   --view-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --view-dimensions            CSS selector suffix for shape dimension rules (TRUE for inline)       [default: "-dims"]
+  --view-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --vs, --view-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --view-bust                  Enable cache busting                                                  [default: true]
   --vcss, --view-render-css    Whether to render a CSS stylesheet                                    [default: false]
@@ -130,7 +130,7 @@ Options:
   -d, --defs                   Activates the «defs» mode                                             [default: false]
   --defs-dest                  Mode specific output directory                                        [default: "defs"]
   --defs-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --defs-dimensions            CSS selector suffix for shape dimension rules (TRUE for inline)       [default: "-dims"]
+  --defs-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ds, --defs-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --di, --defs-inline          Create sprite variant suitable for inline embedding                   [default: false]
   --dx, --defs-example         Whether to render an example HTML document                            [default: false]
@@ -139,7 +139,7 @@ Options:
   -s, --symbol                 Activates the «symbol» mode                                           [default: false]
   --symbol-dest                Mode specific output directory                                        [default: "symbol"]
   --symbol-prefix              CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --symbol-dimensions          CSS selector suffix for shape dimension rules (TRUE for inline)       [default: "-dims"]
+  --symbol-dimensions          CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ss, --symbol-sprite        Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --si, --symbol-inline        Create sprite variant suitable for inline embedding                   [default: false]
   --sx, --symbol-example       Whether to render an example HTML document                            [default: false]
@@ -148,7 +148,7 @@ Options:
   -S, --stack                  Activates the «stack» mode                                            [default: false]
   --stack-dest                 Mode specific output directory                                        [default: "stack"]
   --stack-prefix               CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --stack-dimensions           CSS selector suffix for shape dimension rules (TRUE for inline)       [default: "-dims"]
+  --stack-dimensions           CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --Ss, --stack-sprite         Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --Sx, --stack-example        Whether to render an example HTML document                            [default: false]
   --stack-example-template     HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/stack/sprite.html"]
@@ -169,6 +169,15 @@ The next one renders as Sass stylesheet instead of CSS and adds a 10px padding a
 
 ```bash
 $ svg-sprite -cD out --cscss -p 10 assets/*.svg
+```
+
+#### Inlined shape dimensions
+
+To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension class prefix. Use one of these methods:
+
+```bash
+$ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
+$ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
 ```
 
 ### API
@@ -969,9 +978,10 @@ Known problems / To-do
 Release history
 ---------------
 
-#### master (will become v1.0.9)
+#### v1.0.9 Maintenance release
 * Updated dependencies
 * Introduced `svg` getter in templating shape variables
+* Fixed broken dimension argument in CLI version ([#38](https://github.com/jkphl/svg-sprite/issues/38))
 
 #### v1.0.8 Bugfix release
 * Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))

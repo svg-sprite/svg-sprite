@@ -118,7 +118,7 @@ css:
     map                   : mode.css.prefix
     
   dimensions:
-    description           : CSS selector suffix for shape dimension rules (TRUE for inline)
+    description           : CSS selector suffix for shape dimension rules ("" for inline)
     default               : -dims
     map                   : mode.css.dimensions
     
@@ -244,7 +244,7 @@ view:
     map                   : mode.view.prefix
     
   dimensions:
-    description           : CSS selector suffix for shape dimension rules (TRUE for inline)
+    description           : CSS selector suffix for shape dimension rules ("" for inline)
     default               : -dims
     map                   : mode.view.dimensions
     
@@ -359,7 +359,7 @@ defs:
     map                   : mode.defs.prefix
     
   dimensions:
-    description           : CSS selector suffix for shape dimension rules (TRUE for inline)
+    description           : CSS selector suffix for shape dimension rules ("" for inline)
     default               : -dims
     map                   : mode.defs.dimensions
     
@@ -406,7 +406,7 @@ symbol:
     map                   : mode.symbol.prefix
     
   dimensions:
-    description           : CSS selector suffix for shape dimension rules (TRUE for inline)
+    description           : CSS selector suffix for shape dimension rules ("" for inline)
     default               : -dims
     map                   : mode.symbol.dimensions
     
@@ -453,7 +453,7 @@ stack:
     map                   : mode.stack.prefix
     
   dimensions:
-    description           : CSS selector suffix for shape dimension rules (TRUE for inline)
+    description           : CSS selector suffix for shape dimension rules ("" for inline)
     default               : -dims
     map                   : mode.stack.dimensions
     

@@ -132,6 +132,7 @@ config.transform					= config.transform.length ? config.transform.split(',').map
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){
 	if (!argv[mode]) {
 		delete this[mode];
+		return;
 	} else if (['css', 'view'].indexOf(mode) >= 0) {
 		['css', 'scss', 'less', 'styl'].forEach(function(render){
 			var arg							= 'css-render-' + render;
@@ -139,6 +140,10 @@ config.transform					= config.transform.length ? config.transform.split(',').map
 				delete this[render];
 			}
 		}, this[mode].render);
+	}
+	
+	if (!this[mode].dimensions.length) {
+		this[mode].dimensions		= true;
 	}
 }, config.mode);
 
