@@ -286,10 +286,10 @@ spriter						= new SVGSpriter({
 		}
 	}
 }),
-cwd							: path.resolve('assets');
+cwd							= path.resolve('assets');
 
 // Find SVG files recursively via `glob`
-glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
+glob.glob('**/*.svg', {cwd: 'assets'}, function(err, files) {
 	files.forEach(function(file){
 	
 		// Create and add a vinyl file instance for each SVG
@@ -297,7 +297,7 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 			path: path.join(cwd, file),							// Absolute path to the SVG file
 			base: cwd,											// Base path (see `name` argument)
 			contents: fs.readFileSync(path.join(cwd, file))		// SVG file contents
-		}););
+		}));
 	})
 	
 	spriter.compile(function(error, result, data){
