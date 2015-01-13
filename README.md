@@ -278,7 +278,7 @@ File						= require('vinyl'),
 glob						= require('glob'),
 spriter						= new SVGSpriter({
 	dest					: 'out',
-	mode					:
+	mode					: {
 		css					: {
 			render			: {
 				css			: true
@@ -289,7 +289,7 @@ spriter						= new SVGSpriter({
 cwd							= path.resolve('assets');
 
 // Find SVG files recursively via `glob`
-glob.glob('**/*.svg', {cwd: 'assets'}, function(err, files) {
+glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 	files.forEach(function(file){
 	
 		// Create and add a vinyl file instance for each SVG
