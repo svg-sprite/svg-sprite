@@ -278,7 +278,7 @@ File						= require('vinyl'),
 glob						= require('glob'),
 spriter						= new SVGSpriter({
 	dest					: 'out',
-	mode					:
+	mode					: {
 		css					: {
 			render			: {
 				css			: true
@@ -286,7 +286,7 @@ spriter						= new SVGSpriter({
 		}
 	}
 }),
-cwd							: path.resolve('assets');
+cwd							= path.resolve('assets');
 
 // Find SVG files recursively via `glob`
 glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
@@ -297,7 +297,7 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 			path: path.join(cwd, file),							// Absolute path to the SVG file
 			base: cwd,											// Base path (see `name` argument)
 			contents: fs.readFileSync(path.join(cwd, file))		// SVG file contents
-		}););
+		}));
 	})
 	
 	spriter.compile(function(error, result, data){
