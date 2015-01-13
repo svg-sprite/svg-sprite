@@ -8,7 +8,8 @@ path				= require('path'),
 fs					= require('fs'),
 mkdirp				= require('mkdirp'),
 File				= require('vinyl'),
-yaml				= require('js-yaml')
+yaml				= require('js-yaml'),
+glob				= require('glob'),
 SVGSpriter			= require('../lib/svg-sprite'),
 config				= {},
 map					= {},
@@ -169,7 +170,7 @@ for (var mode in config.mode) {
 }
 
 var spriter							= new SVGSpriter(config);
-argv._.forEach(function(file){
+_.reduce(argv._, function(f, g){ return f.concat(glob.sync(g)); }, []).forEach(function(file){
 	file							= path.resolve(file);
 	var stat						= fs.lstatSync(file);
 	if (stat.isSymbolicLink()) {

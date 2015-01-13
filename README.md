@@ -1001,6 +1001,7 @@ Release history
 * Added support for custom mode keys
 * Fixed external CLI transform configuration support
 * Fixed typos in README example ([PR #39](https://github.com/jkphl/svg-sprite/pull/39))
+* Added support for Windows file name globbing ([#40](https://github.com/jkphl/svg-sprite/issues/40))
 
 #### v1.0.9 Maintenance release
 * Updated dependencies
