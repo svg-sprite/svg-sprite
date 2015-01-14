@@ -143,7 +143,7 @@ describe('svg-sprite', function() {
     	describe('with ' + weather.length + ' SVG files', function() {
     		
 	        it('returns an error', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile(function(error, result) {
 	        		should(error).be.an.Error;
@@ -164,7 +164,7 @@ describe('svg-sprite', function() {
 		describe('in «css» mode and all render types enabled', function() {
 			
 	        it('creates 5 files for vertical layout', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest
 	    		});
@@ -193,7 +193,7 @@ describe('svg-sprite', function() {
 	        describe('then rerun with all render types disabled', function() {
 	        	
 		        it('creates 1 additional file for horizontal layout', function(done) {
-		        	this.timeout(30000);
+		        	this.timeout(20000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.horizontal.svg',
@@ -208,7 +208,7 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('creates 1 additional file for diagonal layout', function(done) {
-		        	this.timeout(30000);
+		        	this.timeout(20000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.diagonal.svg',
@@ -223,7 +223,7 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('creates 1 additional file for packed layout', function(done) {
-		        	this.timeout(30000);
+		        	this.timeout(20000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.packed.svg',
@@ -312,7 +312,7 @@ describe('svg-sprite', function() {
 		    describe('creates a visually correct stylesheet resource in', function() {
 		    	
 		    	it('CSS format', function(done) {
-			    	this.timeout(10000);
+			    	this.timeout(20000);
 
 		        	data.css				= '../sprite.css';
 		        	var out					= mustache.render(previewTemplate, data),
@@ -335,7 +335,7 @@ describe('svg-sprite', function() {
 		    	});
 		    	
 		    	it('Sass format', function(done) {
-			    	this.timeout(10000);
+			    	this.timeout(20000);
 			    	
 			    	sass.render({
 					    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss'),
@@ -369,7 +369,7 @@ describe('svg-sprite', function() {
 		    	});
 		    	
 		    	it('LESS format', function(done) {
-			    	this.timeout(10000);
+			    	this.timeout(20000);
 			    	
 			    	var lessFile					= path.join(__dirname, '..', 'tmp', 'css', 'sprite.less');
 			    	fs.readFile(lessFile, function(err, lessText) {
@@ -402,7 +402,7 @@ describe('svg-sprite', function() {
 		    	});
 		    	
 		    	it('Stylus format', function(done) {
-			    	this.timeout(10000);
+			    	this.timeout(20000);
 			    	
 			    	var stylusFile					= path.join(__dirname, '..', 'tmp', 'css', 'sprite.styl');
 			    	fs.readFile(stylusFile, function(err, stylusText) {
@@ -439,7 +439,7 @@ describe('svg-sprite', function() {
 		describe('in «view» mode', function() {
 			
 			it('creates 2 files for packed layout', function(done) {
-				this.timeout(30000);
+				this.timeout(20000);
 				spriter.compile({
 					view					: {
 					sprite					: 'svg/view.packed.svg',
@@ -484,7 +484,7 @@ describe('svg-sprite', function() {
 		    describe('creates a visually correct stylesheet resource in', function() {
 		    	
 		    	it('CSS format', function(done) {
-			    	this.timeout(10000);
+			    	this.timeout(20000);
 
 		        	data.css				= '../sprite.css';
 		        	var previewTemplate		= fs.readFileSync(path.join(__dirname, 'tmpl', 'view.html'), 'utf-8'),
@@ -519,7 +519,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, vertical layout and CSS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -569,7 +569,7 @@ describe('svg-sprite', function() {
 	        });
 	        
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 
 	        	data.css				= '../sprite.centered.css';
 	        	var out					= mustache.render(previewTemplate, data),
@@ -595,7 +595,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, horizontal layout and Sass render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -645,7 +645,7 @@ describe('svg-sprite', function() {
 	        });
 	    	
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 		    	
 		    	sass.render({
 				    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss'),
@@ -682,7 +682,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, packed layout and LESS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -732,7 +732,7 @@ describe('svg-sprite', function() {
 	        });
 	    	
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 		    	
 		    	var lessFile					= path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.less');
 		    	fs.readFile(lessFile, function(err, lessText) {
@@ -774,7 +774,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, vertical layout and CSS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -824,7 +824,7 @@ describe('svg-sprite', function() {
 	        });
 	        
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 
 	        	data.css				= '../sprite.mixed.css';
 	        	var out					= mustache.render(previewTemplate, data),
@@ -850,7 +850,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, horizontal layout and Sass render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -900,7 +900,7 @@ describe('svg-sprite', function() {
 	        });
 	    	
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 		    	
 		    	sass.render({
 				    file						: path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss'),
@@ -937,7 +937,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, packed layout and LESS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(30000);
+	        	this.timeout(20000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -987,7 +987,7 @@ describe('svg-sprite', function() {
 	        });
 	    	
 	    	it('creates a visually correct stylesheet resource', function(done) {
-		    	this.timeout(10000);
+		    	this.timeout(20000);
 		    	
 		    	var lessFile					= path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.less');
 		    	fs.readFile(lessFile, function(err, lessText) {
