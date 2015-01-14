@@ -143,7 +143,7 @@ describe('svg-sprite', function() {
     	describe('with ' + weather.length + ' SVG files', function() {
     		
 	        it('returns an error', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile(function(error, result) {
 	        		should(error).be.an.Error;
@@ -164,7 +164,7 @@ describe('svg-sprite', function() {
 		describe('in «css» mode and all render types enabled', function() {
 			
 	        it('creates 5 files for vertical layout', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest
 	    		});
@@ -193,7 +193,7 @@ describe('svg-sprite', function() {
 	        describe('then rerun with all render types disabled', function() {
 	        	
 		        it('creates 1 additional file for horizontal layout', function(done) {
-		        	this.timeout(20000);
+		        	this.timeout(30000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.horizontal.svg',
@@ -208,7 +208,7 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('creates 1 additional file for diagonal layout', function(done) {
-		        	this.timeout(20000);
+		        	this.timeout(30000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.diagonal.svg',
@@ -223,7 +223,7 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('creates 1 additional file for packed layout', function(done) {
-		        	this.timeout(20000);
+		        	this.timeout(30000);
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.packed.svg',
@@ -439,7 +439,7 @@ describe('svg-sprite', function() {
 		describe('in «view» mode', function() {
 			
 			it('creates 2 files for packed layout', function(done) {
-				this.timeout(20000);
+				this.timeout(30000);
 				spriter.compile({
 					view					: {
 					sprite					: 'svg/view.packed.svg',
@@ -519,7 +519,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, vertical layout and CSS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -595,7 +595,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, horizontal layout and Sass render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -682,7 +682,7 @@ describe('svg-sprite', function() {
 		describe('with «css» mode, packed layout and LESS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -774,7 +774,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, vertical layout and CSS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -850,7 +850,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, horizontal layout and Sass render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -937,7 +937,7 @@ describe('svg-sprite', function() {
 		describe('with «view» mode, packed layout and LESS render type', function() {
 			
 	        it('creates 2 files', function(done) {
-	        	this.timeout(20000);
+	        	this.timeout(30000);
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
