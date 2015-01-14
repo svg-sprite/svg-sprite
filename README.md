@@ -997,6 +997,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### v1.0.11 Bugfix release
+* Fixed coordinate distortion in CSS sprites ([#41](https://github.com/jkphl/svg-sprite/issues/41))
+
 #### v1.0.10 Maintenance release
 * Added support for custom mode keys
 * Fixed external CLI transform configuration support
