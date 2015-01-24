@@ -101,7 +101,7 @@ SVG sprite. They may be styled via CSS. (IE 9-11 with polyfill only)
 -->
 
 			<h3>B) Inline SVG with external sprite (IE 9-11 with polyfill only)</h3>
-			<ul>
+			{{#inline}}<p>Please set the <code>inline</code> option to <code>FALSE</code> in order to preview this method.</p>{{/inline}}{{^inline}}<ul>
 				
 {{#shapes}}				<li title="{{name}}">
 					<div class="icon-box">
@@ -114,7 +114,7 @@ SVG sprite. They may be styled via CSS. (IE 9-11 with polyfill only)
 					</div>
 					<h2>{{name}}</h2>
 				</li>
-{{/shapes}}			</ul>
+{{/shapes}}			</ul>{{/inline}}
 
 <!--
 ====================================================================================================

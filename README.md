@@ -997,6 +997,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### master (will become v1.0.12)
+* Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
+
 #### v1.0.11 Bugfix release
 * Fixed coordinate distortion in CSS sprites ([#41](https://github.com/jkphl/svg-sprite/issues/41))
 
