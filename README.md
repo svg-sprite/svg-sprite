@@ -1,39 +1,31 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 ==========
 
-is a [Node.js](http://nodejs.org/) module that **reads in a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and creates **SVG sprites** in various flavours:
+is a low-level [Node.js](http://nodejs.org/) module that **reads in a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and creates **SVG sprites** in several variants:
 
-1. Traditional **CSS sprites** for use with background images ([configuration](#d1-css-mode))
-2. CSS sprites with **pre-defined SVG views**, suitable for foreground images as well ([configuration](#d2-view-mode))
-3. Inline sprites using the **`<defs>` element** ([configuration](#d3-defs-mode))
-4. Inline sprites using the **`<symbol>` element** ([configuration](#d4-symbol-mode))
-5. **SVG stacks** ([configuration](#d5-stack-mode))
+1. Traditional **[CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) ** for use as background images,
+2. CSS sprites with **pre-defined SVG `<view>` elements**, useful for foreground images as well,
+3. inline sprites using the **`<defs>` element**,
+4. inline sprites using the **`<symbol>` element**
+5. and finally **SVG stacks**.
 
-For the generation of [CSS sprite](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) stylesheet resources (flavours 1 & 2), *svg-sprite* comes with pre-defined [Mustache](http://mustache.github.io/) templates in four different formats:
+*svg-sprite* comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the supported pre-processor formats ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking them or even adding your **custom format** is as simple as switching on the creation of an **HTML example document** along with your sprite.
 
-* [CSS](http://www.w3.org/Style/CSS/)
-* [Sass](http://sass-lang.com/)
-* [Less](http://lesscss.org/)
-* [Stylus](http://learnboost.github.io/stylus/)
+There are **[Grunt](https:// github.com/jkphl/grunt-svg-sprite)** and **[Gulp](https://github.com/jkphl/gulp-svg-sprite)** wrappers available for *svg-sprite*, so if you aren't exactly out for a low-level library, you should rather have a look at them. *svg-sprite* is also the foundation of my **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality, SVG based **CSS icon kits with PNG fallbacks**.
 
-Mustache templates are also used for rendering optional **HTML example documents** for each of the sprite variants. Tailoring them to your needs — and even adding **custom output formats** — is a breeze.
+Table of contents
+-----------------
+* [Installation](#installation)
+* [Getting started](#getting-started)
+* Command line usage
+* Known problems / To-do
+* [Changelog](changelog.md)
+* [Legal](#legal)
 
-About
------
+Installation
+------------
 
-The [original svg-sprite](https://github.com/jkphl/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10) was my first-ever Node.js module and featured CSS sprites only. The `1.0` release is **rewritten from scratch** and introduces a bunch of new features like **less dependencies** (for improved Mac OS and Windows compatibility), support for **inline sprite formats** and the **removal of file-system access** so that other libraries can build on top of it more easily. Derived libraries include:
-
-* [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite) (a [Grunt](http://gruntjs.com) wrapper around *svg-sprite*)
-* [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) (a [Gulp](http://gulpjs.com) wrapper around *svg-sprite*)
-* [svg-sprite-data](https://github.com/shakyShane/svg-sprite-data) by [Shane Osbourne](https://github.com/shakyShane) (based on the original svg-sprite)
-
-**_iconizr_**, another project of mine, is based on *svg-sprite* and adds PNG fallbacks for the sprites so you can use them as universal icon systems for websites ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](http://iconizr.com)). At the time of this writing, I'm working on an all-over remake of *iconizr* as well, so stay tuned.
-
-
-Installation & usage
---------------------
-
-To install *svg-sprite*, run
+To install *svg-sprite* globally, run
 
 ```bash
 npm install svg-sprite -g
@@ -41,346 +33,37 @@ npm install svg-sprite -g
 
 on the command line.
 
-
-### Command line usage
-
-You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get all the available options:
-
-```bash
-Usage: svg-sprite [options] files
-
-Examples:
-  svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg    Create a CSS sprite of the given SVG files including example document to the sub directory "out"
-  svg-sprite -cD out --ccss --cx assets/*.svg                                Same as above
-  svg-sprite -cD out --cscss -p 10 assets/*.svg                              Same as above, but render Sass instead of CSS and add 10px padding around all shapes
-
-
-Options:
-  --version                    Show version number
-  --help                       Display this help information
-  -D, --dest                   Main output directory (base path)                                     [default: "."]
-  -l, --log                    Logging verbosity ("info", "verbose" or "debug")
-  --shape-id-separator         Separator for traversing a directory structure into a shape ID        [default: "--"]
-  --shape-id-generator         ID generation callback [via CLI only template strings]                [default: "%s"]
-  --shape-id-pseudo            Separator for CSS pseudo classes                                      [default: "~"]
-  -w, --shape-dim-width        Maximum shape width in pixels                                         [default: 2000]
-  -h, --shape-dim-height       Maximum shape height in pixels                                        [default: 2000]
-  --shape-dim-precision        Precision (decimal places) for dimension calculations                 [default: 2]
-  -p, --shape-spacing-padding  Padding around shape (up to 4 x comma-separated)                      [default: "0,0,0,0"]
-  -b, --shape-spacing-box      Box sizing strategy ("content" or "padding")                          [default: "content"]
-  -m, --shape-meta             Path to YAML file with meta and positioning information
-  -a, --shape-align            Path to YAML file with alignment information
-  -i, --shape-dest             Path to output directory for intermediate SVG files
-  --transform                  Comma-separated list of predefined transformers (see docs)            [default: "svgo"]
-  --transform-*                External JSON config files for named transformers
-  --svg-xmldecl                Whether to include an XML declaration in SVG files                    [default: true]
-  --svg-doctype                Whether to include a doctype declaration in SVG files                 [default: true]
-  -c, --css                    Activates the «css» mode                                              [default: false]
-  --css-dest                   Mode specific output directory                                        [default: "css"]
-  --cl, --css-layout           Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
-  --css-common                 Common CSS rule selector for all shapes                               [default: null]
-  --css-prefix                 CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --css-dimensions             CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
-  --cs, --css-sprite           Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
-  --css-bust                   Enable cache busting                                                  [default: true]
-  --ccss, --css-render-css     Whether to render a CSS stylesheet                                    [default: false]
-  --css-render-css-template    CSS stylesheet Mustache template (relative to svg-sprite basedir)     [default: "tmpl/css/sprite.css"]
-  --css-render-css-dest        CSS stylesheet destination (relative to the --mode-css-dest)          [default: "sprite.css"]
-  --cscss, --css-render-scss   Whether to render a Sass stylesheet (SCSS)                            [default: false]
-  --css-render-scss-template   Sass stylesheet Mustache template (relative to svg-sprite basedir)    [default: "tmpl/css/sprite.scss"]
-  --css-render-scss-dest       Sass stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.scss"]
-  --cless, --css-render-less   Whether to render a LESS stylesheet                                   [default: false]
-  --css-render-less-template   LESS stylesheet Mustache template (relative to svg-sprite basedir)    [default: "tmpl/css/sprite.less"]
-  --css-render-less-dest       LESS stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.less"]
-  --cstyl, --css-render-styl   Whether to render a Stylus stylesheet                                 [default: false]
-  --css-render-styl-template   Stylus stylesheet Mustache template (relative to svg-sprite basedir)  [default: "tmpl/css/sprite.styl"]
-  --css-render-styl-dest       styl stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.styl"]
-  --css-render-*               Custom output renderings
-  --css-render-*-template      Custom output Mustache template (relative to svg-sprite basedir)
-  --css-render-*-dest          Custom output destination (relative to the --mode-css-dest)
-  --cx, --css-example          Whether to render an example HTML document                            [default: false]
-  --css-example-template       HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/css/sprite.html"]
-  --css-example-dest           HTML document destination (relative to the --mode-css-dest)           [default: "sprite.css.html"]
-  -v, --view                   Activates the «view» mode                                             [default: false]
-  --view-dest                  Mode specific output directory                                        [default: "view"]
-  --vl, --view-layout          Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
-  --view-common                Common CSS rule selector for all shapes                               [default: null]
-  --view-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --view-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
-  --vs, --view-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
-  --view-bust                  Enable cache busting                                                  [default: true]
-  --vcss, --view-render-css    Whether to render a CSS stylesheet                                    [default: false]
-  --view-render-css-template   CSS stylesheet Mustache template (relative to svg-sprite basedir)     [default: "tmpl/css/sprite.css"]
-  --view-render-css-dest       CSS stylesheet destination (relative to the --mode-css-dest)          [default: "sprite.css"]
-  --vscss, --view-render-scss  Whether to render a Sass stylesheet (SCSS)                            [default: false]
-  --view-render-scss-template  Sass stylesheet Mustache template (relative to svg-sprite basedir)    [default: "tmpl/css/sprite.scss"]
-  --view-render-scss-dest      Sass stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.scss"]
-  --vless, --view-render-less  Whether to render a LESS stylesheet                                   [default: false]
-  --view-render-less-template  LESS stylesheet Mustache template (relative to svg-sprite basedir)    [default: "tmpl/css/sprite.less"]
-  --view-render-less-dest      LESS stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.less"]
-  --vstyl, --view-render-styl  Whether to render a Stylus stylesheet                                 [default: false]
-  --view-render-styl-template  Stylus stylesheet Mustache template (relative to svg-sprite basedir)  [default: "tmpl/css/sprite.styl"]
-  --view-render-styl-dest      styl stylesheet destination (relative to the --mode-css-dest)         [default: "sprite.styl"]
-  --view-render-*              Custom output renderings
-  --view-render-*-template     Custom output Mustache template (relative to svg-sprite basedir)
-  --view-render-*-dest         Custom output destination (relative to the --mode-css-dest)
-  --vx, --view-example         Whether to render an example HTML document                            [default: false]
-  --view-example-template      HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/view/sprite.html"]
-  --view-example-dest          HTML document destination (relative to the --mode-css-dest)           [default: "sprite.view.html"]
-  -d, --defs                   Activates the «defs» mode                                             [default: false]
-  --defs-dest                  Mode specific output directory                                        [default: "defs"]
-  --defs-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --defs-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
-  --ds, --defs-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
-  --di, --defs-inline          Create sprite variant suitable for inline embedding                   [default: false]
-  --dx, --defs-example         Whether to render an example HTML document                            [default: false]
-  --defs-example-template      HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/defs/sprite.html"]
-  --defs-example-dest          HTML document destination (relative to the --mode-css-dest)           [default: "sprite.defs.html"]
-  -s, --symbol                 Activates the «symbol» mode                                           [default: false]
-  --symbol-dest                Mode specific output directory                                        [default: "symbol"]
-  --symbol-prefix              CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --symbol-dimensions          CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
-  --ss, --symbol-sprite        Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
-  --si, --symbol-inline        Create sprite variant suitable for inline embedding                   [default: false]
-  --sx, --symbol-example       Whether to render an example HTML document                            [default: false]
-  --symbol-example-template    HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/symbol/sprite.html"]
-  --symbol-example-dest        HTML document destination (relative to the --mode-css-dest)           [default: "sprite.symbol.html"]
-  -S, --stack                  Activates the «stack» mode                                            [default: false]
-  --stack-dest                 Mode specific output directory                                        [default: "stack"]
-  --stack-prefix               CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
-  --stack-dimensions           CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
-  --Ss, --stack-sprite         Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
-  --Sx, --stack-example        Whether to render an example HTML document                            [default: false]
-  --stack-example-template     HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/stack/sprite.html"]
-  --stack-example-dest         HTML document destination (relative to the --mode-css-dest)           [default: "sprite.stack.html"]
-  --variables                  Path to external JSON file with Mustache variable definitions
-```
-
-#### Examples
-
-Both the following commands are doing the same (with the second one using the shorter argument syntax) in creating a CSS sprite of the given SVG files. The sprite along with an accompanying CSS stylesheet are written to the subdirectory `out`. 
-
-```bash
-$ svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
-$ svg-sprite -cD out --ccss --cx assets/*.svg
-```
-
-The next one renders as Sass stylesheet instead of CSS and adds a 10px padding around all shapes in the sprite:
-
-```bash
-$ svg-sprite -cD out --cscss -p 10 assets/*.svg
-```
-
-#### Inlined shape dimensions
-
-To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension class prefix. Use one of these methods:
-
-```bash
-$ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
-$ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
-```
-
-### API
+Getting started
+---------------
 
 Creating a sprite with *svg-sprite* typically follows these steps:
 
-1. You [create an instance of the SVGSpriter](#svgspriter-config-) class, passing it a main configuration object.
-2. You [register a couple of SVG files](#svgspriteraddfile--name-svg-) for processing.
-3. You [trigger the compilation process](#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.) .
+1. You [create an instance of the SVGSpriter](docs/api.md#svgspriter-config-) class, passing it a main configuration object.
+2. You [register a couple of SVG source files](docs/api.md#svgspriteraddfile--name-svg-) for processing.
+3. You [trigger the compilation process](docs/api.md#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.) .
 
-This may look something like this:
+In practice, this will look something like this:
 
 ```javascript
-'use strict';
+// Create spriter instance (see below for `config` examples)
+var spriter       = new SVGSpriter(config);
 
-var SVGSpriter				= require('svg-sprite'),
-mkdirp						= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs'),
-
-// 1. Create and configure a spriter instance
-// ====================================================================
-spriter						= new SVGSpriter({
-	dest					: 'out',		// Destination directory
-	mode					:
-		css					: {				// Create a CSS sprite
-			render			: {
-				css			: true			// Render a CSS stylesheet
-			}
-		}
-	}
-});
-
-// 2. Add some SVG files to process
-// ====================================================================
-spriter.add(
-	path.resolve('assets/example-1.svg'),
-	'example-1.svg',
-	fs.readFileSync('assets/example-1.svg', {encoding: 'utf-8'})
-);
-
+// Add SVG source files — the manual way ...
+spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', {encoding: 'utf-8'}));
+spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', {encoding: 'utf-8'}));
 	/* ... */
 
-spriter.add(
-	path.resolve('assets/example-x.svg'),
-	'example-x.svg',
-	fs.readFileSync('assets/example-x.svg', {encoding: 'utf-8'})
-);
-
-// 3. Trigger the (asynchronous) compilation process
-// ====================================================================
-spriter.compile(function(error, result, data){
-
-	// Run through all files that have been created for the `css` mode
-	for (var type in result.css) {
-	
-		// Recursively create directories as needed
-		mkdirp.sync(path.dirname(result.css[type].path));
-		
-		// Write the generated resource to disk
-		fs.writeFileSync(result.css[type].path, result.css[type].contents);
-	}
+// Compile sprite
+spriter.compile(function(error, result) {
+	/* ... Write `result` files to disk or do whatever with them ... */
 });
 ```
+
+This is the very same for **all types of sprites**. As you see, quite a lot has to do with file system access (reading and writing files from and to disk). In most cases you'll want to abstract that away and rather use *svg-sprite* via Grunt or Gulp for that very reason.
 
 **NOTICE**: *svg-sprite* doesn't write any files to disk. It's up to you to do so (or pass the files on to some other process).
 
-#### SVGSpriter([ config ])
 
-**Constructor** — This is the only method exported by the *svg-sprite*, so it's always your entry point. Use it to create an instance of the spriter.
-
-##### Arguments
-
-1. **config** `{Object}` *(default: `{}`)* — [Main configuration](#configuration) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the added SVG files will be optimized). The `mode` configuration properties may also be specified when calling the `.compile()` method (see below). 
-
-#### SVGSpriter.add(file [, name, svg ])
-
-**Registration of an SVG file** — Prior to compiliation, you'll need to register one or more SVG files for processing, obviously. As *svg-sprite* doesn't read the files from disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another. Please [see below](#example-using-glob-and-vinyl) for an example.
-
-It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way, it is possibly to call the `.compile()` method more than once (e.g. giving different render configurations) without unnecessarily repeating the optimization step.
-
-##### Arguments
-
-1. **file** `{String|File}` — Absolute path to the SVG file or a [vinyl](https://github.com/wearefractal/vinyl) file object carrying all the necessary values (the following arguments are ignored then).
-2. **name** `{String}` *(ignored with vinyl file)* — The "local" file path part, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` configuration option ([see below](#a-svg-shape-configuration)). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting this to `deeply/nested/asset.svg` while giving `/path/to/my/deeply/nested/asset.svg` for `file` will translate to the CSS selector `deeply--nested--asset`.
-3. **svg** `{String}` *(ignored with vinyl file)*: SVG file content.
-
-##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/wearefractal/vinyl)
-
-```javascript
-'use strict';
-
-var SVGSpriter				= require('svg-sprite'),
-mkdirp						= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs'),
-File						= require('vinyl'),
-glob						= require('glob'),
-spriter						= new SVGSpriter({
-	dest					: 'out',
-	mode					: {
-		css					: {
-			render			: {
-				css			: true
-			}
-		}
-	}
-}),
-cwd							= path.resolve('assets');
-
-// Find SVG files recursively via `glob`
-glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
-	files.forEach(function(file){
-	
-		// Create and add a vinyl file instance for each SVG
-		spriter.add(new File({
-			path: path.join(cwd, file),							// Absolute path to the SVG file
-			base: cwd,											// Base path (see `name` argument)
-			contents: fs.readFileSync(path.join(cwd, file))		// SVG file contents
-		}));
-	})
-	
-	spriter.compile(function(error, result, data){
-		for (var type in result.css) {
-			mkdirp.sync(path.dirname(result.css[type].path));
-			fs.writeFileSync(result.css[type].path, result.css[type].contents);
-		}
-	});
-});
-```
-
-#### SVGSpriter.compile([ config ,] callback )
-
-**Sprite compilation** — Trigger an asynchronous sprite compilation process with this method. You may pass in an optional [output mode configuration](#d-output-mode-configuration) object as the first argument in order to set the output parameters for that very run. If you omit the config object, the spriter will use the `mode` component of the [main configuration](#configuration) which you previously passed to the [constructor](#svgspriter-config-). You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, a callback will be triggered, giving you access to the resources that were generated.
-
-##### Arguments
-
-1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](#d-output-mode-configuration) for the single compilation run. If omitted, the `mode` component of the [main configuration](#configuration) will be used.
-2. **callback** `{Function}` — Callback triggered when the compilation has finished, getting passed in three arguments:
-	* **error** `{Error}` — Error message in case the compilation has failed.
-	* **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
-	* **data** `{Object}` — Data passed to Mustache for rendering the resources (see [sprite & shape variables](#f1-sprite--shape-variables) for details)
-
-##### Compilation example
-
-Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example: 
-
-```javascript
-spriter.compile({
-		css					: {
-			render			: {
-				scss		: true
-			},
-			example			: true
-		}
-	},
-	function(error, result, data){
-	    console.log(result);
-	}
-);
-```
-
-The spriter is instructed to create a CSS sprite along with the accompanying stylesheet resource in Sass format and an example HTML document demonstrating the use of the sprite. The output will look something like this (shortened for brevity):
-
-```javascript
-{
-	css						: {
-		sprite				: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
-     	scss				: <File "css/sprite.scss" <Buffer 2e 73 76 ...>>,
-     	example				: <File "css/sprite.css.html" <Buffer 3c 21 44 ...>>
-	}
-}
-```
-
-For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css](#d1-css-mode) and [view](#d2-view-mode) output modes, there are additional items named after the configured [rendering configurations](#e-rendering-configurations) (`scss` in the example).
-
-Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).  
-
-#### SVGSpriter.getShapes( dest , callback )
-
-**Accessing the intermediate SVG resources** — Sometimes you may want to access the single transformed / optimized SVG files that *svg-sprite* produces as an intermediate step. Depending on the [configured transformations](#b-transform-configuration) (e.g. SVG optimization with [SVGO](https://github.com/svg/svgo)), *svg-sprite* will need some time to transform the files you register to the spriter. Therefore, access to the shapes is given in an asynchronous way to ensure that all transformations have been finished.
-
-##### Arguments
-
-1. **dest** `{String}` — Base directory for the SVG files in case the will be written to disk.
-2. **callback** `{Function}`: Callback triggered when the shapes are available, getting passed in two arguments:
-	* **error** `{Error}` — Error message in case the shape access has failed.
-	* **result** `{Array}` — List of [vinyl](https://github.com/wearefractal/vinyl) files for the intermediate SVGs.  
-
-##### Shape access example
-
-```javascript
-var mkdirp					= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs');
-
-spriter.getShapes(path.resolve('tmp/svg'), function(error, result) {
-	result.forEach(function(file){
-		mkdirp.sync(path.dirname(file.path));
-		fs.writeFileSync(file.path, file.contents);
-	});
-});
-```
 
 Configuration
 -------------
@@ -992,74 +675,6 @@ Known problems / To-do
 ----------------------
 
 * SVGO does not minify element IDs when there are `<style>` or `<script>` elements contained in the file
-
-
-Release history
----------------
-
-#### master (will become v1.0.12)
-* Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
-
-#### v1.0.11 Bugfix release
-* Fixed coordinate distortion in CSS sprites ([#41](https://github.com/jkphl/svg-sprite/issues/41))
-
-#### v1.0.10 Maintenance release
-* Added support for custom mode keys
-* Fixed external CLI transform configuration support
-* Fixed typos in README example ([PR #39](https://github.com/jkphl/svg-sprite/pull/39))
-* Added support for Windows file name globbing ([#40](https://github.com/jkphl/svg-sprite/issues/40))
-
-#### v1.0.9 Maintenance release
-* Updated dependencies
-* Introduced `svg` getter in templating shape variables
-* Fixed broken dimension argument in CLI version ([#38](https://github.com/jkphl/svg-sprite/issues/38))
-* Fixed logging error in SVGO optimization
-* Fixed missing XML namespaces in SVG stack 
-* Fixed cache busting errors with example HTML document 
-
-#### v1.0.8 Bugfix release
-* Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
-
-#### v1.0.7 Feature release
-* Improved error handling
-* Improved XML & DOCTYPE declaration handling and fixed ([grunt-svg-sprite #28](https://github.com/jkphl/grunt-svg-sprite/issues/28))
-
-#### v1.0.6 Feature release
-* Made shape ID namespacing configurable ([grunt-svg-sprite #27](https://github.com/jkphl/grunt-svg-sprite/issues/27))
-* Added extended alignment options ([#33](https://github.com/jkphl/svg-sprite/issues/33))
-
-#### v1.0.5 Bufix release
-* Fixed regression bug with SVG stacks
-* Added support for ID generator templates in CLI version ([#37](https://github.com/jkphl/svg-sprite/issues/37))
-
-#### v1.0.4 Bufix release
-* Fixed XML & doctype declaration bug with inline sprites ([gulp-svg-sprite #2](https://github.com/jkphl/gulp-svg-sprite/issues/2))
-* Added support for ID generator templates ([#37](https://github.com/jkphl/svg-sprite/issues/37))
-
-#### v1.0.3 Bufix release
-* Fixed dependency error ([#36](https://github.com/jkphl/svg-sprite/issues/36))
-
-#### v1.0.2 Maintenance release
-* Improved error handling
-
-#### v1.0.1 Maintenance release
-* Updated module depencencies
-
-#### v1.0.0 Next generation release
-* Rewritten from scratch ([#23](https://github.com/jkphl/svg-sprite/issues/23), [#30](https://github.com/jkphl/svg-sprite/issues/30))
-* Dropped [libxmljs](https://github.com/polotek/libxmljs) dependency for improving Windows support (e.g. [grunt-svg-sprite #14](https://github.com/jkphl/grunt-svg-sprite/issues/14))
-* Added support for `view`, `symbol` and `stack` modes ([#27](https://github.com/jkphl/svg-sprite/issues/27), [#35](https://github.com/jkphl/svg-sprite/issues/35), [grunt-svg-sprite #24](https://github.com/jkphl/grunt-svg-sprite/issues/24))
-* Strip off all file access methods, making the module a good basis for 3rd party tools (like Grunt & Gulp plugins) ([#21](https://github.com/jkphl/svg-sprite/issues/21), [#25](https://github.com/jkphl/svg-sprite/issues/25))
-* Improved command line version ([#34](https://github.com/jkphl/svg-sprite/issues/34))
-* Switched to relative positioning in CSS sprites ([grunt-svg-sprite #23](https://github.com/jkphl/grunt-svg-sprite/issues/23))
-* Made the configuration of Mustache templates and destinations more intuitive
-* Enabled customization of shape IDs
-* Enabled custom SVG transformations
-* Enhanced `padding` options ([#24](https://github.com/jkphl/svg-sprite/issues/24))
-* Added cache busting for `css` and `view` mode (enabled by default; [#29](https://github.com/jkphl/svg-sprite/pull/29))
-* Added support for [meta data injection](#a1-meta-data-injection)
-
-For older release notes please [see here](https://github.com/jkphl/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10#release-history).
 
 Legal
 -----
