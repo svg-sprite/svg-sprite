@@ -997,8 +997,9 @@ Known problems / To-do
 Release history
 ---------------
 
-#### master (will become v1.0.12)
+#### v1.0.12 Feature release (2015-01-27)
 * Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
+* Bumped lodash dependency version ([#44](https://github.com/jkphl/svg-sprite/issues/44))
 
 #### v1.0.11 Bugfix release
 * Fixed coordinate distortion in CSS sprites ([#41](https://github.com/jkphl/svg-sprite/issues/41))
