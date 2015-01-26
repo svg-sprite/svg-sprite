@@ -11,7 +11,7 @@ The *svg-sprite* **main configuration** is provided to the [constructor](#svgspr
 	transform		: <Array>,				// SVG transformations
 	svg				: <Object>,				// Common SVG options
 	mode			: <Object>,				// Output mode configuration
-	variables		: <Object>				// Common templating variables
+	variables		: <Object>				// Custom templating variables
 }
 ```
 
