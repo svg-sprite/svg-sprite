@@ -4,7 +4,7 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
 *	Traditional **[CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS)** for use as background images,
-*	CSS sprites with **pre-defined SVG `<view>` elements**, useful for foreground images as well,
+*	CSS sprites with **pre-defined `<view>` elements**, useful as foreground images as well,
 *	inline sprites using the **`<defs>` element**,
 *	inline sprites using the **`<symbol>` element**
 *	and finally **SVG stacks**.
@@ -25,9 +25,10 @@ Table of contents
 	* [Common configuration options](#common-configuration-options)
 	* [Output modes](#output-modes)
 * [Advanced techniques](#advanced-techniques)
+	* [Templating](#templating)
 * [Command line usage](#command-line-usage)
 * [Known problems / To-do](#known-problems--to-do)
-* [Changelog](changelog.md)
+* [Changelog](CHANGELOG.md)
 * [Legal](#legal)
 
 Installation
@@ -71,7 +72,8 @@ spriter.compile(function(error, result) {
 
 While this is still straightforward, quite a lot of the file system ground combat can be saved by [using the Grunt or Gulp module](docs/grunt-gulp.md#basic-usage-pattern) instead of the *svg-sprite* [default API](docs/api.md).
 
-## Configuration basics
+Configuration basics
+--------------------
 
 In the example above, the variable `config` is passed to the spriter's constructor. This is the **main configuration** — an `Object` with the following properties:
 
@@ -243,7 +245,11 @@ var config					= {
 Again, `mode.css.example` and the stylesheet format options (`mode.css.render.css` & co) are [rendering templates](https://github.com/jkphl/svg-sprite#e-rendering-configurations) and may have up to two suboptions each. Setting them to `TRUE` just uses the defaults.
 
 
-## Advanced techniques
+Advanced techniques
+-------------------
+
+### Templating
+
 
 
 Known problems / To-do
