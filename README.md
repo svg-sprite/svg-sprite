@@ -997,6 +997,9 @@ Known problems / To-do
 Release history
 ---------------
 
+#### master (will become v1.0.13)
+# Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
+
 #### v1.0.12 Feature release (2015-01-27)
 * Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
 * Bumped lodash dependency version ([#44](https://github.com/jkphl/svg-sprite/issues/44))
