@@ -135,6 +135,7 @@ Options:
   --defs-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
   --defs-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ds, --defs-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --defs-bust                  Enable cache busting                                                  [default: false]
   --di, --defs-inline          Create sprite variant suitable for inline embedding                   [default: false]
   --dx, --defs-example         Whether to render an example HTML document                            [default: false]
   --defs-example-template      HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/defs/sprite.html"]
@@ -144,6 +145,7 @@ Options:
   --symbol-prefix              CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
   --symbol-dimensions          CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ss, --symbol-sprite        Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --symbol-bust                Enable cache busting                                                  [default: false]
   --si, --symbol-inline        Create sprite variant suitable for inline embedding                   [default: false]
   --sx, --symbol-example       Whether to render an example HTML document                            [default: false]
   --symbol-example-template    HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/symbol/sprite.html"]
@@ -153,6 +155,7 @@ Options:
   --stack-prefix               CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
   --stack-dimensions           CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --Ss, --stack-sprite         Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --stack-bust                 Enable cache busting                                                  [default: false]
   --Sx, --stack-example        Whether to render an example HTML document                            [default: false]
   --stack-example-template     HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/stack/sprite.html"]
   --stack-example-dest         HTML document destination (relative to the --mode-css-dest)           [default: "sprite.stack.html"]
@@ -674,7 +677,7 @@ Property         | Type            | Default       | Description                
 `prefix`         | String          | `"svg-%s"`    | If the value is not empty and does not contain any whitespace, it will be used as prefix for CSS class name generation. Class names will be constructed of the prefix (prepended with a dot if necessary) and the respective shape ID. If the value is empty, no prefix will be used. If the value contains whitespace (e.g. `.svg .icon-`), no dot will be prepended, so please take care of this yourself. If the value contains a placeholder (e.g. `.svg %s-svg`), it will get replaced by the shape ID (again without prepending a dot). |
 `dimensions`     | String/Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as a selector suffix and behave much like `prefix`. A boolean `TRUE` will cause the dimensions to be included directly into each shape's CSS rule. |
 `sprite`         | String          | `"svg/sprite.css.svg"` | SVG sprite path and file name, relative to the base directory (see above). The file extension is optional as it will get replaced with `.svg` anyway. The basename part will always get used as name for the sprite file. |
-`bust`           | Boolean         | `true`        | Add a content based hash to the name of the sprite file so that clients reliably reload the sprite when it's content changes («cache busting») |
+`bust`           | Boolean         | `true`        | Add a content based hash to the name of the sprite file so that clients need to reload the sprite when it's content changes («cache busting») |
 `render`         | Object          | `{}`     | Collection of [rendering configurations](#e-rendering-configurations) for the stylesheet resources created along with the sprite. The keys are used as file extensions as well as file return keys. Please see below for further reading on [rendering configurations](#e-rendering-configurations). At present, there are default templates for the file extensions `css` ([CSS](http://www.w3.org/Style/CSS/)), `scss` ([Sass](http://sass-lang.com/)), `less` ([Less](http://lesscss.org/)) and `styl` ([Stylus](http://learnboost.github.io/stylus/)), which all reside in the directory `tmpl/css`. Example: `{css: true, scss: {dest: '_sprite.scss'}}` |
 `example`        | [Rendering config](#e-rendering-configurations) | `false`       | Enabling this will trigger the creation of an HTML document demoing the usage of the CSS sprite. Please see below for further reading on [rendering configurations](#e-rendering-configurations). |
 `example.template` | String        | `"tmpl/css/sprite.html"`     | HTML document Mustache template |
@@ -699,6 +702,7 @@ Property         | Type            | Default       | Description                
 `prefix`         | String          | `"svg-%s"`    | If the value is not empty and does not contain any whitespace, it will be used as prefix for CSS class name generation. Class names will be constructed of the prefix (prepended with a dot if necessary) and the respective shape ID. If the value is empty, no prefix will be used. If the value contains whitespace (e.g. `.svg .icon-`), no dot will be prepended, so please take care of this yourself. If the value contains a placeholder (e.g. `.svg %s-svg`), it will get replaced by the shape ID (again without prepending a dot). |
 `dimensions`     | String/Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as a selector suffix and behave much like `prefix`. A boolean `TRUE` will cause the dimensions to be included directly into each shape's CSS rule. |
 `sprite`         | String          | `"svg/sprite.defs.svg"`   | SVG sprite path and file name, relative to the base directory (see above). The file extension is optional as it will get replaced with `.svg` anyway. The basename part will always get used as name for the sprite file.  |
+`bust`           | Boolean         | `false`       | Add a content based hash to the name of the sprite file so that clients need to reload the sprite when it's content changes («cache busting») |
 `inline`         | Boolean         | `false`       | If you want to embed the `<defs>` sprite into your HTML source, you will want to set this to `true` in order to prevent the creation of SVG namespace declarations and to set some other attributes for effectively hiding the library sprite. |
 `example`        | [Rendering config](#e-rendering-configurations) | `false`       | Enabling this will trigger the creation of an HTML document demoing the usage of the `<defs>` sprite with both document-internal and external shape references. Please see below for further reading on [rendering configurations](#e-rendering-configurations). |
 `example.template` | String        | `"tmpl/defs/sprite.html"` | HTML document Mustache template |
@@ -714,6 +718,7 @@ Property         | Type            | Default       | Description                
 `prefix`         | String          | `"svg-%s"`    | If the value is not empty and does not contain any whitespace, it will be used as prefix for CSS class name generation. Class names will be constructed of the prefix (prepended with a dot if necessary) and the respective shape ID. If the value is empty, no prefix will be used. If the value contains whitespace (e.g. `.svg .icon-`), no dot will be prepended, so please take care of this yourself. If the value contains a placeholder (e.g. `.svg %s-svg`), it will get replaced by the shape ID (again without prepending a dot). |
 `dimensions`     | String/Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as a selector suffix and behave much like `prefix`. A boolean `TRUE` will cause the dimensions to be included directly into each shape's CSS rule. |
 `sprite`         | String          | `"svg/sprite.symbol.svg"` | SVG sprite path and file name, relative to the base directory (see above). The file extension is optional as it will get replaced with `.svg` anyway. The basename part will always get used as name for the sprite file.  |
+`bust`           | Boolean         | `false`       | Add a content based hash to the name of the sprite file so that clients need to reload the sprite when it's content changes («cache busting») |
 `inline`         | Boolean         | `false`       | If you want to embed the `<symbol>` sprite into your HTML source, you will want to set this to `true` in order to prevent the creation of SVG namespace declarations and to set some other attributes for effectively hiding the library sprite. |
 `example`        | [Rendering config](#e-rendering-configurations) | `false`       | Enabling this will trigger the creation of an HTML document demoing the usage of the `<symbol>` sprite with both document-internal and external shape references. Please see below for further reading on [rendering configurations](#e-rendering-configurations). |
 `example.template` | String        | `"tmpl/symbol/sprite.html"` | HTML document Mustache template |
@@ -729,6 +734,7 @@ Property         | Type            | Default       | Description                
 `prefix`         | String          | `"svg-%s"`    | If the value is not empty and does not contain any whitespace, it will be used as prefix for CSS class name generation. Class names will be constructed of the prefix (prepended with a dot if necessary) and the respective shape ID. If the value is empty, no prefix will be used. If the value contains whitespace (e.g. `.svg .icon-`), no dot will be prepended, so please take care of this yourself. If the value contains a placeholder (e.g. `.svg %s-svg`), it will get replaced by the shape ID (again without prepending a dot). |
 `dimensions`     | String/Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as a selector suffix and behave much like `prefix`. A boolean `TRUE` will cause the dimensions to be included directly into each shape's CSS rule. |
 `sprite`         | String          | `"svg/sprite.stack.svg"` | SVG sprite path and file name, relative to the base directory (see above). The file extension is optional as it will get replaced with `.svg` anyway. The basename part will always get used as name for the sprite file.  |
+`bust`           | Boolean         | `false`       | Add a content based hash to the name of the sprite file so that clients need to reload the sprite when it's content changes («cache busting») |
 `example`        | [Rendering config](#e-rendering-configurations) | `false`       | Enabling this will trigger the creation of an HTML document demoing the usage of the SVG stack. Please see below for further reading on [rendering configurations](#e-rendering-configurations). |
 `example.template` | String        | `"tmpl/stack/sprite.html"` | HTML document Mustache template |
 `example.dest`   | String          | `"sprite.stack.html"`      | HTML document destination |
@@ -1002,9 +1008,10 @@ Known problems / To-do
 Release history
 ---------------
 
-#### master (will become v1.0.13)
+#### v1.0.13 Maintenance release (2015-01-28)
 * Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
 * Made dimension attributes (width & height) optional ([#45](https://github.com/jkphl/svg-sprite/issues/45))
+* Added cache busting option for non-CSS sprites ([#48](https://github.com/jkphl/svg-sprite/issues/48))
 
 #### v1.0.12 Feature release (2015-01-27)
 * Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))

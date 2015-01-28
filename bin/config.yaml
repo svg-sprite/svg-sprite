@@ -385,6 +385,11 @@ defs:
     alias                 : ds
     map                   : mode.defs.sprite
     
+  bust:
+    description           : Enable cache busting
+    default               : false
+    map                   : mode.defs.bust
+    
   inline:
     description           : Create sprite variant suitable for inline embedding
     default               : false
@@ -432,6 +437,11 @@ symbol:
     alias                 : ss
     map                   : mode.symbol.sprite
     
+  bust:
+    description           : Enable cache busting
+    default               : false
+    map                   : mode.symbol.bust
+    
   inline:
     description           : Create sprite variant suitable for inline embedding
     default               : false
@@ -478,6 +488,11 @@ stack:
     default               : svg/sprite.css.svg
     alias                 : Ss
     map                   : mode.stack.sprite
+    
+  bust:
+    description           : Enable cache busting
+    default               : false
+    map                   : mode.stack.bust
     
   example:
     description           : Whether to render an example HTML document
