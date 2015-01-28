@@ -66,6 +66,7 @@ Options:
   -w, --shape-dim-width        Maximum shape width in pixels                                         [default: 2000]
   -h, --shape-dim-height       Maximum shape height in pixels                                        [default: 2000]
   --shape-dim-precision        Precision (decimal places) for dimension calculations                 [default: 2]
+  --shape-dim-attributes       Whether to add width and height attributes to the shapes              [default: false]
   -p, --shape-spacing-padding  Padding around shape (up to 4 x comma-separated)                      [default: "0,0,0,0"]
   -b, --shape-spacing-box      Box sizing strategy ("content" or "padding")                          [default: "content"]
   -m, --shape-meta             Path to YAML file with meta and positioning information
@@ -75,6 +76,8 @@ Options:
   --transform-*                External JSON config files for named transformers
   --svg-xmldecl                Whether to include an XML declaration in SVG files                    [default: true]
   --svg-doctype                Whether to include a doctype declaration in SVG files                 [default: true]
+  --svg-namespace-ids          Whether to apply ID namespacing to the sprite                         [default: true]
+  --svg-dimattrs               Whether to add width and height attributes to the sprite              [default: true]
   -c, --css                    Activates the «css» mode                                              [default: false]
   --css-dest                   Mode specific output directory                                        [default: "css"]
   --cl, --css-layout           Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]

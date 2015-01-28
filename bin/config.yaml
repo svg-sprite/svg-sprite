@@ -44,6 +44,11 @@ shape:
       default             : 2
       map                 : shape.dimension.precision
       
+    attributes:
+      description         : Whether to add width and height attributes to the shapes
+      default             : false
+      map                 : shape.dimension.attributes
+      
   spacing:
     padding:
       description         : Padding around shape (up to 4 x comma-separated)
@@ -90,6 +95,17 @@ svg:
     description           : Whether to include a doctype declaration in SVG files
     default               : true
     map                   : svg.doctypeDeclaration
+    
+  namespace:
+    ids                   :
+      description         : Whether to apply ID namespacing to the sprite
+      default             : true
+      map                 : svg. namespaceIDs
+    
+  dimattrs:
+    description           : Whether to add width and height attributes to the sprite
+    default               : true
+    map                   : svg. dimensionAttributes
     
 css:
   description             : Activates the «css» mode
