@@ -426,6 +426,7 @@ Property                 | Type            | Default       | Description        
 `dimension.maxWidth`     | Integer         | `2000`        | Maximum shape width in pixels |
 `dimension.maxHeight`    | Integer         | `2000`        | Maximum shape height in pixels |
 `dimension.precision`    | Integer         | `2`           | Precision (number of decimal places) for dimension calculations |
+`dimension.attributes`   | Boolean         | `false`       | If truthy, `width` and `height` attributes will be set on the shapes inside the sprite (where applicable). |
 `spacing.padding`        | Integer/Array   | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
 `spacing.box`            | String          | `"content"`   | Box sizing strategy, similar to CSS. When *content* is given, the `spacing.padding` will get applied outside the shape, thus effectively increasing the shapes bounding box. When *padding*, the content plus the given `spacing.padding` will stay within the given dimension contraints. |
 `meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](#a1-meta-data-injection) into the SVG shapes. |
@@ -999,7 +1000,8 @@ Release history
 ---------------
 
 #### master (will become v1.0.13)
-# Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
+* Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
+* Made dimension attributes (width & height) optional ([#45](https://github.com/jkphl/svg-sprite/issues/45))
 
 #### v1.0.12 Feature release (2015-01-27)
 * Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
