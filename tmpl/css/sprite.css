@@ -1,10 +1,12 @@
 {{#common}}.{{mixin}} {
+	display: inline-block;
 	background-repeat: no-repeat;
 	background-image: url({{{sprite}}});
 }
 
 {{/common}}{{#shapes}}{{#selector.shape}}{{expression}}{{^last}},
 {{/last}}{{/selector.shape}} {
+	display: inline-block;
 	background-position: {{position.relative.xy}};{{^common}}
 	background-repeat: no-repeat;
 	background-image: url({{{sprite}}});{{/common}}{{#dimensions.inline}}
