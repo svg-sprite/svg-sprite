@@ -496,7 +496,7 @@ new SVGSpriteConfigurator({
       },
       "collapseGroups": {
         "type": "boolean",
-        "label": "Collapse useles groups",
+        "label": "Collapse useless groups",
         "default": true,
         "skip": 3
       },
