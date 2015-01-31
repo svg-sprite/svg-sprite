@@ -96,31 +96,31 @@ shape             :
     type          : string
     label         : Meta data YAML file
     skip          : 3
-    default       : null
+    default       : 
   
   align           :
     type          : string
     label         : Alignment data YAML file
     skip          : 3
-    default       : null
+    default       : 
   
   dest            :
     type          : string
     label         : SVG shape output directory
     skip          : 3
-    default       : null
+    default       : 
   
 transform         :
   type            : section
   label           : SVG shape transformations
   skip            : 3
+  process         : transform
   
   svgo            :
     type          : enableconfig
     label         : SVGO
     skip          : 3
     default       : 1
-    process       : true
     
     cleanupAttrs  :
       type        : boolean
@@ -334,6 +334,7 @@ mode              :
   css             :
     type          : enableconfig
     label         : «css» sprite
+    default       : 0
     skip          : 3
     
     dest          :
@@ -392,6 +393,7 @@ mode              :
       css         :
         type      : enableconfig
         label     : Render CSS stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -409,6 +411,7 @@ mode              :
       scss        :
         type      : enableconfig
         label     : Render Sass stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -426,6 +429,7 @@ mode              :
       less        :
         type      : enableconfig
         label     : Render LESS stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -443,6 +447,7 @@ mode              :
       styl        :
         type      : enableconfig
         label     : Render Stylus stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -460,6 +465,7 @@ mode              :
     example       :
       type        : enableconfig
       label       : Render HTML example
+      default     : 0
       skip        : 3
       
       template    :
@@ -477,6 +483,7 @@ mode              :
   view             :
     type          : enableconfig
     label         : «view» sprite
+    default       : 0
     skip          : 3
     
     dest          :
@@ -535,6 +542,7 @@ mode              :
       css         :
         type      : enableconfig
         label     : Render CSS stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -552,6 +560,7 @@ mode              :
       scss        :
         type      : enableconfig
         label     : Render Sass stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -569,6 +578,7 @@ mode              :
       less        :
         type      : enableconfig
         label     : Render LESS stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -586,6 +596,7 @@ mode              :
       styl        :
         type      : enableconfig
         label     : Render Stylus stylesheet
+        default   : 0
         skip      : 3
         
         template  :
@@ -603,6 +614,7 @@ mode              :
     example       :
       type        : enableconfig
       label       : Render HTML example
+      default     : 0
       skip        : 3
       
       template    :
@@ -620,6 +632,7 @@ mode              :
   defs            :
     type          : enableconfig
     label         : «defs» sprite
+    default       : 0
     skip          : 3
     
     dest          :
@@ -661,6 +674,7 @@ mode              :
     example       :
       type        : enableconfig
       label       : Render HTML example
+      default     : 0
       skip        : 3
       
       template    :
@@ -678,6 +692,7 @@ mode              :
   symbol            :
     type          : enableconfig
     label         : «symbol» sprite
+    default       : 0
     skip          : 3
     
     dest          :
@@ -719,6 +734,7 @@ mode              :
     example       :
       type        : enableconfig
       label       : Render HTML example
+      default     : 0
       skip        : 3
       
       template    :
@@ -736,6 +752,7 @@ mode              :
   stack            :
     type          : enableconfig
     label         : «stack» sprite
+    default       : 0
     skip          : 3
     
     dest          :
@@ -771,6 +788,7 @@ mode              :
     example       :
       type        : enableconfig
       label       : Render HTML example
+      default     : 0
       skip        : 3
       
       template    :

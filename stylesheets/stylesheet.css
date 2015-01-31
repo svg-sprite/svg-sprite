@@ -52,7 +52,7 @@ body {
   box-sizing: border-box;
   color:#373737;
   background: #212121;
-  font-size: 16px;
+  font-size: 1em;
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -67,34 +67,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 36px;
+  font-size: 2.25em;
   font-weight: 700;
 }
 
 h2 {
   padding-bottom: 10px;
-  font-size: 32px;
+  font-size: 2em;
   background: url('../images/bg_hr.png') repeat-x bottom;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 1.75em;
 }
 
 h4 {
-  font-size: 21px;
+  font-size: 1.5em;
 }
 
 h5 {
-  font-size: 18px;
+  font-size: 1.25em;
 }
 
 h6 {
-  font-size: 16px;
+  font-size: 1em;
 }
 
 p {
-  margin: 10px 0 15px 0;
+  margin: .625em 0 .9375em 0;
 }
 
 footer p {
@@ -354,14 +354,15 @@ Full-Width Styles
   background: url(../images/sprite_download.png) no-repeat top right;
 }
 
-#main_content_wrap {
+main {
+	display: block;
   background: #f2f2f2;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
 }
 
-#main_content {
-  padding-top: 40px;
+main section {
+  padding-top: 5em;
 }
 
 #footer_wrap {

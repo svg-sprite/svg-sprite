@@ -117,12 +117,12 @@
     "type": "section",
     "label": "SVG shape transformations",
     "skip": 3,
+    "process": "transform",
     "svgo": {
       "type": "enableconfig",
       "label": "SVGO",
       "skip": 3,
       "default": 1,
-      "process": true,
       "cleanupAttrs": {
         "type": "boolean",
         "label": "Cleanup attributes from whitespace",
@@ -336,6 +336,7 @@
     "css": {
       "type": "enableconfig",
       "label": "«css» sprite",
+      "default": 0,
       "skip": 3,
       "dest": {
         "type": "string",
@@ -393,6 +394,7 @@
         "css": {
           "type": "enableconfig",
           "label": "Render CSS stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -410,6 +412,7 @@
         "scss": {
           "type": "enableconfig",
           "label": "Render Sass stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -427,6 +430,7 @@
         "less": {
           "type": "enableconfig",
           "label": "Render LESS stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -444,6 +448,7 @@
         "styl": {
           "type": "enableconfig",
           "label": "Render Stylus stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -462,6 +467,7 @@
       "example": {
         "type": "enableconfig",
         "label": "Render HTML example",
+        "default": 0,
         "skip": 3,
         "template": {
           "type": "string",
@@ -480,6 +486,7 @@
     "view": {
       "type": "enableconfig",
       "label": "«view» sprite",
+      "default": 0,
       "skip": 3,
       "dest": {
         "type": "string",
@@ -537,6 +544,7 @@
         "css": {
           "type": "enableconfig",
           "label": "Render CSS stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -554,6 +562,7 @@
         "scss": {
           "type": "enableconfig",
           "label": "Render Sass stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -571,6 +580,7 @@
         "less": {
           "type": "enableconfig",
           "label": "Render LESS stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -588,6 +598,7 @@
         "styl": {
           "type": "enableconfig",
           "label": "Render Stylus stylesheet",
+          "default": 0,
           "skip": 3,
           "template": {
             "type": "string",
@@ -606,6 +617,7 @@
       "example": {
         "type": "enableconfig",
         "label": "Render HTML example",
+        "default": 0,
         "skip": 3,
         "template": {
           "type": "string",
@@ -624,6 +636,7 @@
     "defs": {
       "type": "enableconfig",
       "label": "«defs» sprite",
+      "default": 0,
       "skip": 3,
       "dest": {
         "type": "string",
@@ -664,6 +677,7 @@
       "example": {
         "type": "enableconfig",
         "label": "Render HTML example",
+        "default": 0,
         "skip": 3,
         "template": {
           "type": "string",
@@ -682,6 +696,7 @@
     "symbol": {
       "type": "enableconfig",
       "label": "«symbol» sprite",
+      "default": 0,
       "skip": 3,
       "dest": {
         "type": "string",
@@ -722,6 +737,7 @@
       "example": {
         "type": "enableconfig",
         "label": "Render HTML example",
+        "default": 0,
         "skip": 3,
         "template": {
           "type": "string",
@@ -740,6 +756,7 @@
     "stack": {
       "type": "enableconfig",
       "label": "«stack» sprite",
+      "default": 0,
       "skip": 3,
       "dest": {
         "type": "string",
@@ -774,6 +791,7 @@
       "example": {
         "type": "enableconfig",
         "label": "Render HTML example",
+        "default": 0,
         "skip": 3,
         "template": {
           "type": "string",

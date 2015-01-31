@@ -7,6 +7,22 @@
 	}
 }
 
+#compiled {
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	width: 100%;
+	min-height: 5em;
+	padding: 2em;
+	box-sizing: border-box;
+	resize: vertical;
+	font-size: .85em;
+	line-height: 1.6;
+	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+}
+
 #configurator .section:checked ~ div,
 #configurator .configure:checked ~ div {
 	display: block;
@@ -78,7 +94,6 @@ label {
 
 .id {
 	color: #ccc;
-	font-family: monospace;
 	margin: 0 .5em;
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 	font-size: 10px;
@@ -94,7 +109,7 @@ label {
 	}
 }
 
-input, select, textarea {
+input, select {
 	font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 }
