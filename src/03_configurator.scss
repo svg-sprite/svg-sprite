@@ -21,6 +21,8 @@ textarea {
 	font-size: .85em;
 	line-height: 1.6;
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+	border: none;
+	outline-color: transparent;
 }
 
 #configurator .section:checked ~ div,
@@ -170,4 +172,27 @@ input[type=radio] {
 
 .section {
 	display: none;
+}
+
+.tabs {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	margin: 0;
+	
+	a {
+		display: table-cell;
+		padding: .5em;
+		text-align: center;
+		border: none;
+		outline-color: transparent;
+	
+		&:target {
+			background-color: #fff;
+			color: #000;
+			text-decoration: none;
+			cursor: default;
+		}
+	}
 }

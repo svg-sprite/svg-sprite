@@ -16,7 +16,9 @@ textarea {
   resize: vertical;
   font-size: 0.85em;
   line-height: 1.6;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace; }
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  border: none;
+  outline-color: transparent; }
 
 #configurator .section:checked ~ div, #configurator .configure:checked ~ div {
   display: block; }
@@ -113,4 +115,22 @@ input[type=radio] {
 
 .section {
   display: none; }
+
+.tabs {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0; }
+  .tabs a {
+    display: table-cell;
+    padding: 0.5em;
+    text-align: center;
+    border: none;
+    outline-color: transparent; }
+    .tabs a:target {
+      background-color: #fff;
+      color: #000;
+      text-decoration: none;
+      cursor: default; }
 /*# sourceMappingURL=03_configurator.css.map */
