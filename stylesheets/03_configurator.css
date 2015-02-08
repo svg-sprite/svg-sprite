@@ -6,19 +6,18 @@
 
 #compiled {
   margin: 0;
-  padding: 0; }
-
-textarea {
   width: 100%;
   min-height: 5em;
   padding: 1em;
   border: 1em solid #D5EDFF;
   box-sizing: border-box;
-  resize: vertical;
   font-size: 0.85em;
   line-height: 1.6;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  outline-color: transparent; }
+  display: block;
+  box-shadow: none;
+  white-space: pre;
+  overflow-x: auto; }
 
 #configurator .section:checked ~ div, #configurator .configure:checked ~ div {
   display: block; }

@@ -295,12 +295,8 @@ SVGSpriteConfigurator.prototype.update = function() {
 	console.log(this.tab.template);
 	var json						= JSON.stringify(this.compiled, null, 4),
 	result							= this.tab.template.split('$$config$$').join(json),
-	lines							= result.split("\n").length,
-	style							= window.getComputedStyle(this.$compiled[0], null),
-	lineHeight						= parseFloat(style.getPropertyValue('line-height'), 10),
-	paddingBottom					= parseFloat(style.getPropertyValue('padding-bottom'), 10),
-	paddingTop						= parseFloat(style.getPropertyValue('padding-top'), 10);
-	this.$compiled.text(result).height((lines + .5) * lineHeight);
+	highlighted						= Prism.highlight(result, Prism.languages.javascript);
+	this.$compiled.html(highlighted);
 }
 
 /**
@@ -501,5 +497,5 @@ SVGSpriteConfigurator.prototype.refine = function(property, compiled, config) {
 }
 
 window.location.hash = 'json';
-new SVGSpriteConfigurator(@@include('02_config.json', {}), $('#configurator'), $('#compiled textarea'), $('.tabs a'), true);
+new SVGSpriteConfigurator(@@include('02_config.json', {}), $('#configurator'), $('#compiled'), $('.tabs a'), true);
 window.setTimeout(function() { window.scrollTo(0, 0); }, 0);
