@@ -1,4 +1,4 @@
-## master (will become 1.1.0)
+## 1.0.14 Maintenance release (2015-02-08)
 * Restructured documentation
 * Updated dependencies
 * Fixed error with falsy rendering configurations ([#52](https://github.com/jkphl/svg-sprite/issues/52))
