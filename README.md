@@ -4,17 +4,17 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
 *	Traditional **[CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS)** for use as background images,
-*	CSS sprites with **pre-defined `<view>` elements**, useful as foreground images as well,
+*	CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
 *	inline sprites using the **`<defs>` element**,
 *	inline sprites using the **`<symbol>` element**
-*	and finally **SVG stacks**.
+*	and **[SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks/)**.
 
-It comes with a set of **[Mustache](http://mustache.github.io/) templates** for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the common **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** couldn't be easier, just as switching on the generation of an **HTML example document** along with your sprite.
+It comes with a set of **[Mustache](http://mustache.github.io/) templates** for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
 Grunt, Gulp & Co.
 -----------------
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source files from and writing the results to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https:// github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of my **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https:// github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
 
 Table of contents
 -----------------
@@ -24,6 +24,7 @@ Table of contents
 * [Configuration basics](#configuration-basics)
 	* [Common configuration options](#common-configuration-options)
 	* [Output modes](#output-modes)
+	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
 	* [Templating](#templating)
 * [Command line usage](#command-line-usage)
@@ -47,7 +48,7 @@ Getting started
 
 Crafting a sprite with *svg-sprite* typically follows these steps:
 
-1. You [create an instance of the SVGSpriter](docs/api.md#svgspriter-config-) class, passing it a main configuration object.
+1. You [create an instance of the SVGSpriter](docs/api.md#svgspriter-config-), passing a main configuration object to the constructor.
 2. You [register a couple of SVG source files](docs/api.md#svgspriteraddfile--name-svg-) for processing.
 3. You [trigger the compilation process](docs/api.md#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.) .
 
@@ -64,18 +65,18 @@ spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', {encod
 spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', {encoding: 'utf-8'}));
 	/* ... */
 
-// Compile sprite
+// Compile the sprite
 spriter.compile(function(error, result) {
 	/* ... Write `result` files to disk or do whatever with them ... */
 });
 ```
 
-While this is still straightforward, quite a lot of the file system ground combat can be saved by [using the Grunt or Gulp module](docs/grunt-gulp.md#basic-usage-pattern) instead of the *svg-sprite* [default API](docs/api.md).
+As you see, big parts of the above deal with disk I/O related stuff. You can make your life easier by [using the Grunt or Gulp modules](docs/grunt-gulp.md#basic-usage-pattern) instead of the *svg-sprite* [default API](docs/api.md).
 
 Configuration basics
 --------------------
 
-In the example above, the variable `config` is passed to the spriter's constructor. This is the **main configuration** — an `Object` with the following properties:
+Did you notice the `config` variable that is passed to the constructor in the example above? This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
 
 ```javascript
 {
@@ -89,14 +90,14 @@ In the example above, the variable `config` is passed to the spriter's construct
 }
 ```
 
-If not provided, *svg-sprite* uses built-in defaults for these properties, so in fact they are all optional. However, you will need to enable at least one **output mode** (`mode` property) to get some reasonable results (i.e. a sprite of some type).
+If you don't provide a configuration altogether, *svg-sprite* uses built-in defaults for these properties, so in fact they are all optional. However, you will need to enable at least one **output mode** (`mode` property) to get some reasonable results (i.e. a sprite of some type).
 
 ### Common configuration options
 
-All configuration properties except `mode` are common between all sprites created by a single spriter instance. Their default values are:
+The common configuration properties (all except `mode`) apply to all sprites created by a single spriter instance. Their default values are:
 
 ```javascript
-// Full blown common options example
+// Common svg-sprite config options and their defaul values
 
 var config					= {
 	dest					: '.',						// Main output directory
@@ -110,7 +111,8 @@ var config					= {
 		dimension			: {							// Dimension related options
 			maxWidth		: 2000,						// Max. shape width
 			maxHeight		: 2000,						// Max. shape height
-			precision		: 2							// Floating point precision
+			precision		: 2,						// Floating point precision
+			attributes		: false,					// Width and height attributes on embedded shapes
 		},
 		spacing				: {							// Spacing related options
 			padding			: 0,						// Padding around all shapes
@@ -125,6 +127,7 @@ var config					= {
 		xmlDeclaration		: true,						// Add XML declaration to SVG sprite
 		doctypeDeclaration	: true,						// Add DOCTYPE declaration to SVG sprite
 		namespaceIDs		: true,						// Add namespace token to all IDs in SVG shapes
+		dimensionAttributes	: true						// Width and height attributes on the sprite
 	},
 	variables				: {}						// Custom Mustache templating variables and functions
 }
@@ -133,6 +136,10 @@ var config					= {
 Please refer to the [configuration documentation](docs/configuration.md) for details.
 
 ### Output modes
+
+At the moment *svg-sprite* supports **five different output modes** (i.e. sprite types), each of them having it's own characteristics and use cases. It's up to you to decide which sprite type is the best choice for your project. The `mode` configuration option controls which ones are created. You may enable more than one output mode at a time — *svg-sprite* will happily create several sprites in parallel.
+
+
 
 To create a single **foreground image sprite with `<symbol>` elements** (for being `<use>`d in your HTML), this little piece of configuration would suffice:
 
@@ -243,6 +250,10 @@ var config					= {
 ```
 
 Again, `mode.css.example` and the stylesheet format options (`mode.css.render.css` & co) are [rendering templates](https://github.com/jkphl/svg-sprite#e-rendering-configurations) and may have up to two suboptions each. Setting them to `TRUE` just uses the defaults.
+
+### Online configurator & project kickstarter
+
+To get you off the ground quickly, I made a simple [online configurator](http://jkphl.github.io/svg-sprite) that lets you create a custom *svg-sprite* configuration in seconds. You may download it as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at http://jkphl.github.io/svg-sprite.
 
 
 Advanced techniques
