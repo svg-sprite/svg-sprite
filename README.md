@@ -22,8 +22,10 @@ Table of contents
 * [Getting started](#getting-started)
 	* [Usage pattern](#usage-pattern)
 * [Configuration basics](#configuration-basics)
-	* [Common configuration options](#common-configuration-options)
+	* [General configuration options](#general-configuration-options)
 	* [Output modes](#output-modes)
+		* [Common mode properties](#common-mode-properties)
+		* [Basic examples](#basic-examples)
 	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
 	* [Templating](#templating)
@@ -92,7 +94,7 @@ Did you notice the `config` variable that is passed to the constructor in the ex
 
 If you don't provide a configuration altogether, *svg-sprite* uses built-in defaults for these properties, so in fact they are all optional. However, you will need to enable at least one **output mode** (`mode` property) to get some reasonable results (i.e. a sprite of some type).
 
-### Common configuration options
+### General configuration options
 
 The common configuration properties (all except `mode`) apply to all sprites created by a single spriter instance. Their default values are:
 
@@ -137,11 +139,65 @@ Please refer to the [configuration documentation](docs/configuration.md) for det
 
 ### Output modes
 
-At the moment *svg-sprite* supports **five different output modes** (i.e. sprite types), each of them having it's own characteristics and use cases. It's up to you to decide which sprite type is the best choice for your project. The `mode` configuration option controls which ones are created. You may enable more than one output mode at a time — *svg-sprite* will happily create several sprites in parallel.
+At the moment, *svg-sprite* supports **five different output modes** (i.e. sprite types), each of them having it's own characteristics and use cases. It's up to you to decide which sprite type is the best choice for your project. The `mode` option controls which sprite types are created. You may enable more than one output mode at a time — *svg-sprite* will happily create several sprites in parallel.
 
+To enable the creation of a specific sprite type with default values, simply set the appropriate `mode` property to `true`:
 
+```javascript
+var config					= {
+	mode					:
+		css					: true,		// Create a «css» sprite
+		view				: true,		// Create a «view» sprite
+		defs				: true,		// Create a «defs» sprite
+		symbol				: true,		// Create a «symbol» sprite
+		stack				: true		// Create a «stack» sprite
+	}
+}
+```
 
-To create a single **foreground image sprite with `<symbol>` elements** (for being `<use>`d in your HTML), this little piece of configuration would suffice:
+To further configure a sprite, pass in an object with configuration options:
+
+```javascript
+// «symbol» sprite with CSS stylesheet resource
+
+var config					= {
+	mode					:
+		css					: {
+			// Configuration for the «css» sprite
+			// ...
+		}
+	}
+}
+```
+
+#### Common mode properties
+
+Most of the `mode` properties are shared between the sprite types:
+
+```javascript
+// Common mode properties
+
+var config					= {
+	mode					:
+		<mode> 				: {
+			dest			: "<mode>",						// Mode specific output directory
+			prefix			: "svg-%s",						// Prefix for CSS selectors
+			dimensions		: "-dims",						// Suffix for dimension CSS selectors
+			sprite			: "svg/sprite.<mode>.svg"		// Sprite path and name
+			bust			: true|false,					// Cache busting (default value is mode dependent)
+			example			: false							// Create HTML example document
+		}
+	}
+}
+```
+
+Depending on the sprite type there may be additional settings. Please refer to the [configuration documentation](docs/configuration.md) for a full reference.
+
+#### Basic examples
+
+##### A.) Standalone sprite
+
+Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your HTML source):
 
 ```javascript
 // «symbol» sprite with CSS stylesheet resource
@@ -153,7 +209,9 @@ var config					= {
 }
 ```
 
-To create a traditional **CSS sprite** along with a **plain CSS stylesheet**:
+##### B.) Sprite with CSS resource
+
+Traditional **CSS sprite** along with a **plain CSS stylesheet**:
 
 ```javascript
 // «css» sprite with CSS stylesheet resource
@@ -169,7 +227,9 @@ var config					= {
 }
 ```
 
-Even creating a **`<defs>` sprite, `<symbol>` sprite and an SVG stack all at once** wouldn't be much more complicated:
+##### C.) Multiple sprites
+
+**`<defs>` sprite**, **`<symbol>` sprite** and an **SVG stack** all at once:
 
 ```javascript
 // «defs», «symbol» and «stack» sprites in parallel
@@ -183,7 +243,9 @@ var config					= {
 }
 ```
 
-As you see, the `mode` config option is the only one that is truly necessary to create a sprite. Omitting it wouldn't get you any (sprite) output. But still, you could use a `mode`-less run to just optimize and get back the source SVG files:
+##### D.) No sprite at all
+
+`mode`-less run, returning the **optimized SVG shapes only**:
 
 ```javascript
 // Just optimize source SVG files, create no sprite
@@ -198,58 +260,6 @@ var config					= {
 > 
 > "Didn't you say that *svg-sprite* doesn't access the file system? So why do you need an output directory?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file contexts (e.g. the path to the SVG sprite from the perspective of a referencing CSS stylesheet).
 
-
-#### Non-CSS sprite configuration («defs», «symbol» and «stack» mode)
-
-The configuration for the three non-CSS sprite types is (almost) identical. Here's a full blown example with all options specified, showing the default values (for a «defs» sprite). **They're all optional!**.
-
-```javascript
-// Full blown non-CSS sprite example
-
-var config					= {
-	mode					: {
-		defs				: {							// Create «defs» sprite; Set to TRUE to use all default values
-			dest			: 'defs',					// Output directory (relative to main `defs`) 
-			sprite			: 'svg/sprite.defs.svg',	// Sprite path and file name (relative to `dest`)
-			inline			: false,					// Prepare sprite for HTML embedding (only «defs» and «symbol»)
-			example			: false						// Render HTML example document
-		}
-	}
-}
-```
-
-In fact, there are two more options which are not directly sprite generation related (`mode.defs.prefix` and `mode.defs.dimensions`; please see [README](https://github.com/jkphl/svg-sprite#d3-defs-mode)) and `mode.defs.example` may have two suboptions (it's a [rendering template](https://github.com/jkphl/svg-sprite#e-rendering-configurations)), but I'll skip them here for brevity.
-
-#### CSS sprite configuration («css» and «view» mode)
-
-The configuration for CSS sprites is a little more verbose as you may specify some stylesheet related options here. Switching between «css» and «view» mode is as easy as changing the property name.
-
-```javascript
-// Full blown CSS sprite example
-
-var config					= {
-	mode					: {
-		css					: {							// Create «css» sprite; Set to 'view' to switch
-			dest			: 'defs',					// Output directory (relative to main `defs`) 
-			layout			: 'packed',					// Sprite layout (horizontal, vertical, diagonal, packed)
-			common			: null,						// Common CSS class name for all shapes, e.g. 'icon'
-			prefix			: 'svg-%s',					// Prefix/template for CSS shape class names
-			dimensions		: '-dims',					// Suffix/template for CSS shape dimension class names
-			sprite			: 'svg/sprite.css.svg',		// Sprite path and file name (relative to `dest`)
-			bust			: true,						// Add cache busting hash to sprite file name
-			render			: {
-				css			: false,					// Render CSS stylesheet
-				scss		: false,					// Render Sass (scss) stylesheet
-				less		: false,					// Render LESS stylesheet
-				styl		: false						// Render Stylus
-			}
-			example			: false						// Render HTML example document
-		}
-	}
-}
-```
-
-Again, `mode.css.example` and the stylesheet format options (`mode.css.render.css` & co) are [rendering templates](https://github.com/jkphl/svg-sprite#e-rendering-configurations) and may have up to two suboptions each. Setting them to `TRUE` just uses the defaults.
 
 ### Online configurator & project kickstarter
 

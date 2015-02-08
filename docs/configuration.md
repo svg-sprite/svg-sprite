@@ -1,3 +1,56 @@
+#### Non-CSS sprite configuration («defs», «symbol» and «stack» mode)
+
+The configuration for the three non-CSS sprite types is (almost) identical. Here's a full blown example with all options specified, showing the default values (for a «defs» sprite). **They're all optional!**.
+
+```javascript
+// Full blown non-CSS sprite example
+
+var config					= {
+	mode					: {
+		defs				: {							// Create «defs» sprite; Set to TRUE to use all default values
+			dest			: 'defs',					// Output directory (relative to main `defs`) 
+			sprite			: 'svg/sprite.defs.svg',	// Sprite path and file name (relative to `dest`)
+			inline			: false,					// Prepare sprite for HTML embedding (only «defs» and «symbol»)
+			example			: false						// Render HTML example document
+		}
+	}
+}
+```
+
+In fact, there are two more options which are not directly sprite generation related (`mode.defs.prefix` and `mode.defs.dimensions`; please see [README](https://github.com/jkphl/svg-sprite#d3-defs-mode)) and `mode.defs.example` may have two suboptions (it's a [rendering template](https://github.com/jkphl/svg-sprite#e-rendering-configurations)), but I'll skip them here for brevity.
+
+#### CSS sprite configuration («css» and «view» mode)
+
+The configuration for CSS sprites is a little more verbose as you may specify some stylesheet related options here. Switching between «css» and «view» mode is as easy as changing the property name.
+
+```javascript
+// Full blown CSS sprite example
+
+var config					= {
+	mode					: {
+		css					: {							// Create «css» sprite; Set to 'view' to switch
+			dest			: 'defs',					// Output directory (relative to main `defs`) 
+			layout			: 'packed',					// Sprite layout (horizontal, vertical, diagonal, packed)
+			common			: null,						// Common CSS class name for all shapes, e.g. 'icon'
+			prefix			: 'svg-%s',					// Prefix/template for CSS shape class names
+			dimensions		: '-dims',					// Suffix/template for CSS shape dimension class names
+			sprite			: 'svg/sprite.css.svg',		// Sprite path and file name (relative to `dest`)
+			bust			: true,						// Add cache busting hash to sprite file name
+			render			: {
+				css			: false,					// Render CSS stylesheet
+				scss		: false,					// Render Sass (scss) stylesheet
+				less		: false,					// Render LESS stylesheet
+				styl		: false						// Render Stylus
+			}
+			example			: false						// Render HTML example document
+		}
+	}
+}
+```
+
+Again, `mode.css.example` and the stylesheet format options (`mode.css.render.css` & co) are [rendering templates](https://github.com/jkphl/svg-sprite#e-rendering-configurations) and may have up to two suboptions each. Setting them to `TRUE` just uses the defaults.
+
+
 Configuration
 -------------
 
