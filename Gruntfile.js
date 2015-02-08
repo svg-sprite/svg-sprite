@@ -8,6 +8,18 @@
 
 'use strict';
 
+/**
+ * Encode all HTML entities in a string
+ * 
+ * @param {String} str			String
+ * @return {String}				Encoded string
+ */
+function htmlentities(str) {
+	return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+	   return '&#'+i.charCodeAt(0)+';';
+	});
+}
+
 module.exports = function(grunt) {
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -59,7 +71,14 @@ module.exports = function(grunt) {
 		},
 		
 		includereplace : {
-			dist : {
+			html : {
+				options : {
+					processIncludeContents: htmlentities
+				},
+				src : 'src/00_index.html',
+				dest : 'index.html'
+			},
+			javascript : {
 				options : {
 //					prefix: '$$'
 				},
@@ -80,6 +99,14 @@ module.exports = function(grunt) {
 			yaml : {
 				files : ['src/*.yaml'],
 				tasks : ['compile'],
+				options : {
+					spawn : true
+				}
+			},
+
+			html : {
+				files : ['src/*.html'],
+				tasks : ['includereplace'],
 				options : {
 					spawn : true
 				}

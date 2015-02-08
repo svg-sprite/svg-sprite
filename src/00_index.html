@@ -32,82 +32,9 @@
 			<section class="inner">
 				<h3 class="tabs">
 					<a href="#json" id="json">JSON</a>
-					<a href="#node" id="node">Node.js<pre>'use strict';
-
-var SVGSpriter    = require('svg-sprite'),
-path              = require('path'),
-mkdirp            = require('mkdirp'),
-fs                = require('fs'),
-config            = $$config$$,
-spriter           = new SVGSpriter(config);
-
-// Register some SVG files with the spriter
-var file          = 'path/to/example.svg'; // &#60;-- Replace with your local file path
-spriter.add(path.resolve(file), file, fs.readFileSync(path.resolve(file), {encoding: 'utf-8'}));
-// ...
-
-// Compile the sprite
-spriter.compile(function(error, result, cssData) {
-    
-    // Run through all configured output modes
-    for (var mode in result) {
-        
-        // Run through all created resources and write them to disk
-        for (var type in result[mode]) {
-            mkdirp.sync(path.dirname(result[mode][type].path));
-            fs.writeFileSync(result[mode][type].path, result[mode][type].contents);
-        }
-    }
-});</pre></a>
-					<a href="#grunt" id="grunt">Gruntfile<pre>'use strict';
-
-var gulp     = require('gulp'),
-svgSprite    = require('gulp-svg-sprite'),
-plumber      = require('gulp-plumber'),
-baseDir      = 'svg/base/dir',   // &#60;-- Set to your SVG base directory
-svgGlob      = '**/*.svg',       // &#60;-- Glob to match your SVG files
-outDir       = 'output/dir',     // &#60;-- Main output directory
-config       = $$config$$;
-
-module.exports = function(grunt) {
-
-    // Project configuration
-    grunt.initConfig({
-
-        // svg-sprite configuration
-        svg_sprite        : {
-            dist          : {
-                expand    : true,
-                cwd       : baseDir,
-                src       : [baseDir],
-                dest      : outDir,
-                options   : config
-            }
-        }
-    });
-
-    // These plugins provide necessary tasks
-    grunt.loadNpmTasks('grunt-svg-sprite');
-
-    // By default, compile the sprite(s)
-    grunt.registerTask('default', ['svg_sprite']);
-};</pre></a>
-					<a href="#gulp" id="gulp">Gulpfile<pre>'use strict';
-
-var gulp     = require('gulp'),
-svgSprite    = require('gulp-svg-sprite'),
-plumber      = require('gulp-plumber'),
-baseDir      = 'svg/base/dir',   // &#60;-- Set to your SVG base directory
-svgGlob      = '**/*.svg',       // &#60;-- Glob to match your SVG files
-outDir       = 'output/dir',     // &#60;-- Main output directory
-config       = $$config$$;
-
-gulp.task('svgsprite', function() {
-    return gulp.src(svgGlob, {cwd: baseDir})
-        .pipe(plumber())
-        .pipe(svgSprite(config)).on('error', function(error){ console.log(error); })
-        .pipe(gulp.dest(outDir))
-});</pre></a>
+					<a href="#node" id="node">Node.js<pre>@@include('04_Node.js', {})</pre></a>
+					<a href="#grunt" id="grunt">Gruntfile<pre>@@include('05_Gruntfile.js', {})</pre></a>
+					<a href="#gulp" id="gulp">Gulpfile<pre>@@include('06_Gulpfile.js', {})</pre></a>
 				</h3>
 				<form id="compiled"><textarea></textarea></form>
 			</section>

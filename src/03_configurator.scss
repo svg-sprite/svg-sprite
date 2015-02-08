@@ -15,13 +15,13 @@
 textarea {
 	width: 100%;
 	min-height: 5em;
-	padding: 2em;
+	padding: 1em;
+	border: 1em solid #D5EDFF;
 	box-sizing: border-box;
 	resize: vertical;
 	font-size: .85em;
 	line-height: 1.6;
 	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-	border: none;
 	outline-color: transparent;
 }
 
@@ -189,10 +189,14 @@ input[type=radio] {
 		outline-color: transparent;
 	
 		&:target {
-			background-color: #fff;
+			background-color: #D5EDFF;
 			color: #000;
 			text-decoration: none;
 			cursor: default;
+		}
+		
+		pre {
+			display: none;
 		}
 	}
 }

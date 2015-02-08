@@ -11,13 +11,13 @@
 textarea {
   width: 100%;
   min-height: 5em;
-  padding: 2em;
+  padding: 1em;
+  border: 1em solid #D5EDFF;
   box-sizing: border-box;
   resize: vertical;
   font-size: 0.85em;
   line-height: 1.6;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  border: none;
   outline-color: transparent; }
 
 #configurator .section:checked ~ div, #configurator .configure:checked ~ div {
@@ -129,8 +129,10 @@ input[type=radio] {
     border: none;
     outline-color: transparent; }
     .tabs a:target {
-      background-color: #fff;
+      background-color: #D5EDFF;
       color: #000;
       text-decoration: none;
       cursor: default; }
+    .tabs a pre {
+      display: none; }
 /*# sourceMappingURL=03_configurator.css.map */

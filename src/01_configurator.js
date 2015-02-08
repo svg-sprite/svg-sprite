@@ -1,6 +1,6 @@
 'use strict';
 
-var SVGSpriteConfigurator = function(config, $form, $compiled, debug) {
+var SVGSpriteConfigurator = function(config, $form, $compiled, $tabs, debug) {
 	this.config		= config;
 	this.$form		= $form;
 	this.$compiled	= $compiled;
@@ -8,9 +8,31 @@ var SVGSpriteConfigurator = function(config, $form, $compiled, debug) {
 	this.reserved	= ['label', 'default', 'skip', 'type', 'options', 'emphasize'];
 	this.register	= {};
 	this.debug		= !!debug;
+	this.tab		= null;
+	this.compiled	= {};
 	
+	this.prepareTabs($tabs);
 	this.build(this.$form, this.config, []);
-	this.compile();
+	this.update();
+}
+
+/**
+ * Prepare the tabs and JavaScript templates
+ * 
+ * @param {jQuery) $tabs			Tabs
+ */
+SVGSpriteConfigurator.prototype.prepareTabs = function($tabs) {
+	var that				= this;
+	$tabs.each(function(index, tab){
+		var template		= $('pre', tab);
+		tab.template		= template.length ? template.text() : '$$config$$';
+		tab.onclick			= function() {
+			that.tab		= this;
+			that.update();
+		}
+	});
+	
+	this.tab				= $tabs[0];
 }
 
 /**
@@ -262,13 +284,23 @@ SVGSpriteConfigurator.prototype.compile = function() {
 		this.refine(property, compiled, this.config);
 	}
 
-	var json						= JSON.stringify(compiled, null, 4),
-	lines							= json.split("\n").length,
+	this.compiled					= compiled;
+	this.update();
+}
+
+/**
+ * Update the display
+ */
+SVGSpriteConfigurator.prototype.update = function() {
+	console.log(this.tab.template);
+	var json						= JSON.stringify(this.compiled, null, 4),
+	result							= this.tab.template.split('$$config$$').join(json),
+	lines							= result.split("\n").length,
 	style							= window.getComputedStyle(this.$compiled[0], null),
 	lineHeight						= parseFloat(style.getPropertyValue('line-height'), 10),
 	paddingBottom					= parseFloat(style.getPropertyValue('padding-bottom'), 10),
 	paddingTop						= parseFloat(style.getPropertyValue('padding-top'), 10);
-	this.$compiled.text(json).height((lines + .5) * lineHeight);
+	this.$compiled.text(result).height((lines + .5) * lineHeight);
 }
 
 /**
@@ -468,4 +500,6 @@ SVGSpriteConfigurator.prototype.refine = function(property, compiled, config) {
 	return properties;
 }
 
-new SVGSpriteConfigurator(@@include('02_config.json', {}), $('#configurator'), $('#compiled textarea'), true);
+window.location.hash = 'json';
+new SVGSpriteConfigurator(@@include('02_config.json', {}), $('#configurator'), $('#compiled textarea'), $('.tabs a'), true);
+window.setTimeout(function() { window.scrollTo(0, 0); }, 0);
