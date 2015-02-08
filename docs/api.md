@@ -77,7 +77,7 @@ spriter.compile(function(error, result, data){
 
 ##### Arguments
 
-1. **config** `{Object}` *(default: `{}`)* — [Main configuration](../README.md#configuration-basics) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). Alternatively, the `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)). 
+1. **config** `{Object}` *(default: `{}`)* — [Main configuration](configuration.md) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). Alternatively, the `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)). 
 
 #### SVGSpriter.add(file [, name, svg ])
 
@@ -88,7 +88,7 @@ It is important to know that the spriter **optimizes the SVG files as soon as yo
 ##### Arguments
 
 1. **file** `{String|File}` — Absolute path to the SVG file or a [vinyl](https://github.com/wearefractal/vinyl) file object carrying all the necessary values (the following arguments are ignored then).
-2. **name** `{String}` *(ignored with vinyl file)* — The "local" file path part, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` [configuration option](configuration.md#svg-shape-configuration). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting `name` to `"deeply/nested/asset.svg"` while giving `"/path/to/my/deeply/nested/asset.svg"` for `file` will translate to the CSS selector `"deeply--nested--asset"`.
+2. **name** `{String}` *(ignored with vinyl file)* — The "local" file path part, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` [configuration option](configuration.md#shape-ids). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting `name` to `"deeply/nested/asset.svg"` while giving `"/path/to/my/deeply/nested/asset.svg"` for `file` will translate to the CSS selector `"deeply--nested--asset"`.
 3. **svg** `{String}` *(ignored with vinyl file)*: SVG file content.
 
 ##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/wearefractal/vinyl)
@@ -137,11 +137,11 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 
 #### SVGSpriter.compile([ config ,] callback )
 
-**Sprite compilation** — Triggers an asynchronous sprite compilation process. You may pass in an optional [output mode configuration](configuration.md#output-mode-configuration) object as the first argument in order to set the output parameters for that very run. You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, the callback will be triggered independently, giving you access to the resources that were generated.
+**Sprite compilation** — Triggers an asynchronous sprite compilation process. You may pass in an optional [output mode configuration](configuration.md#output-modes) object as the first argument in order to set the output parameters for that very run. You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, the callback will be triggered independently, giving you access to the resources that were generated.
 
 ##### Arguments
 
-1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](configuration.md#output-mode-configuration) for a single compilation run. If omitted, the `mode` property of the [main configuration](#configuration) used for the [constructor](#svgspriter-config-) will be used.
+1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](configuration.md#output-modes) for a single compilation run. If omitted, the `mode` property of the [main configuration](configuration.md) used for the [constructor](#svgspriter-config-) will be used.
 2. **callback** `{Function}` — Callback triggered when the compilation has finished, getting three arguments:
 	* **error** `{Error}` — Error message in case the compilation has failed
 	* **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
@@ -178,13 +178,13 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 }
 ```
 
-For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css](configuration.md#css-mode) and [view](configuration.md#view-mode) output modes, there are additional items named after the configured [rendering configurations](configuration.md#rendering-configurations) (`scss` in the example).
+For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css and view](configuration.md#css--view-mode) output modes, there are additional items named after the configured [rendering configurations](configuration.md#rendering-configurations) (`scss` in the example).
 
 Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).  
 
 #### SVGSpriter.getShapes( dest , callback )
 
-**Accessing the intermediate SVG resources** — Sometimes you may want to access the single transformed / optimized SVG files that *svg-sprite* produces in an intermediate step. Depending on the [configured transformations](configuration.md#transform-configuration) (e.g. SVG optimization with [SVGO](https://github.com/svg/svgo)), *svg-sprite* will need some time for transforming the files, which is why accessing them must be an assynchronous task.
+**Accessing the intermediate SVG resources** — Sometimes you may want to access the single transformed / optimized SVG files that *svg-sprite* produces in an intermediate step. Depending on the [configured transformations](configuration.md#svg-transformations) (e.g. SVG optimization with [SVGO](https://github.com/svg/svgo)), *svg-sprite* will need some time for transforming the files, which is why accessing them must be an assynchronous task.
 
 ##### Arguments
 

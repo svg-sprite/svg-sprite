@@ -9,7 +9,7 @@ Tweaking and adding output formats
 
 ### Sprite & shape variables
 
-For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](#svgspritercompile-config--callback-). Example:  
+For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](api.md#svgspritercompile-config--callback-). Example:  
 
 ```javascript
 {  
@@ -170,7 +170,7 @@ For each sprite generation process, a data object is constructed that is passed 
 
 There are a couple of functions directly built into *svg-sprite*. You may use them in any template.
 
-#### `date`
+#### date
 
 Takes no arguments and returns the current date and time as GMT string (e.g. *Mon, 22 Dec 2014 16:18:53 GMT*).
 
@@ -178,7 +178,7 @@ Takes no arguments and returns the current date and time as GMT string (e.g. *Mo
 <p>Generated at {{date}} by svg-sprite</p>
 ```
 
-#### `invert`
+#### invert
 
 Returns the negative value of a floating point number.
 
@@ -188,7 +188,7 @@ Returns the negative value of a floating point number.
 }
 ```
 
-#### `classname`
+#### classname
 
 Returns the innermost part of a CSS selector as a class name (with the leading dot stripped off). For instance, if `fullselector` had the value *.svg .icon-cart*,
 
@@ -202,7 +202,7 @@ would become
 <i class="icon-cart">Cart</i>
 ```
 
-#### `escape`
+#### escape
 
 Finds all backslashes in a string and escapes each of them with another backslash. 
 

@@ -123,8 +123,8 @@ Property                 | Type            | Default       | Description        
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](#a1-meta-data-injection) into the SVG shapes. |
-`shape.align`                  | String          |               | Path to a [YAML](http://yaml.org/) file with [extended alignment settings](#a2-extended-shape-alignment) for sprites with `"vertical"` or `"horizontal"` layout. |
+`shape.meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](meta-data.md) into the SVG shapes. |
+`shape.align`                  | String          |               | Path to a [YAML](http://yaml.org/) file with [extended alignment settings](shape-alignment.md) for sprites with `"vertical"` or `"horizontal"` layout. |
 `shape.dest`                   | String          |               | Implicit way of calling [`.getShapes()`](api.md#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](api.md#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
 
 
