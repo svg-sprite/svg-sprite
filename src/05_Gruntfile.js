@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             dist          : {
                 expand    : true,
                 cwd       : baseDir,
-                src       : [baseDir],
+                src       : [svgGlob],
                 dest      : outDir,
                 options   : config
             }
