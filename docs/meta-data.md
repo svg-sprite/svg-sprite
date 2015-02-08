@@ -3,6 +3,7 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
 
+
 Meta data injection
 -------------------
 
@@ -40,6 +41,7 @@ For each of your shapes, *svg-sprite* will look for `title` and `description` ke
 ```
 
 Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, *svg-sprite* will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.
+
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://badge.fury.io/js/svg-sprite.png

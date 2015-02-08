@@ -1,7 +1,11 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 ==========
 
-### Command line usage
+This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
+
+
+Command line usage
+------------------
 
 You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get all the available options:
 
@@ -137,15 +141,6 @@ To get the shape dimensions inlined into the main shape CSS rules, you need to p
 ```bash
 $ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
 $ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
-```
-
-Legal
------
-Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
-
-*svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
-
-The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite

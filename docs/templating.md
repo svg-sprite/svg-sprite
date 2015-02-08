@@ -1,6 +1,9 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 ==========
 
+This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
+
+
 ### F. Templating variables
 
 #### F.1 Sprite & shape variables
@@ -223,14 +226,6 @@ Finds all backslashes in a string and escapes each of them with another backslas
 	color: red;
 }
 ```
-
-Legal
------
-Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
-
-*svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
-
-The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite

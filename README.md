@@ -3,24 +3,28 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
-*	Traditional **[CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS)** for use as background images,
+*	Traditional [CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) for use as background images,
 *	CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
 *	inline sprites using the **`<defs>` element**,
 *	inline sprites using the **`<symbol>` element**
-*	and **[SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks/)**.
+*	and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks/).
 
-It comes with a set of **[Mustache](http://mustache.github.io/) templates** for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
+It comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
+
 
 Grunt, Gulp & Co.
 -----------------
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https:// github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+
 
 Table of contents
 -----------------
 * [Installation](#installation)
 * [Getting started](#getting-started)
 	* [Usage pattern](#usage-pattern)
+	* [Standard API](docs/api.md)
+	* [Grunt & Gulp wrapper](docs/grunt-gulp.md)
 * [Configuration basics](#configuration-basics)
 	* [General configuration options](#general-configuration-options)
 	* [Output modes](#output-modes)
@@ -30,11 +34,12 @@ Table of contents
 * [Advanced techniques](#advanced-techniques)
 	* [Meta data injection](docs/meta-data.md)
 	* [Aligning and duplicating shapes](docs/shape-alignment.md)
-	* [Tweaking and adding output formats](#tweaking-and-adding-output-formats)
-* [Command line usage](#command-line-usage)
+	* [Tweaking and adding output formats](docs/templating.md)
+* [Command line usage](docs/command-line.md)
 * [Known problems / To-do](#known-problems--to-do)
 * [Changelog](CHANGELOG.md)
 * [Legal](#legal)
+
 
 Installation
 ------------
@@ -46,6 +51,7 @@ npm install svg-sprite -g
 ```
 
 on the command line.
+
 
 Getting started
 ---------------
@@ -76,6 +82,7 @@ spriter.compile(function(error, result) {
 ```
 
 As you see, big parts of the above deal with disk I/O related stuff. You can make your life easier by [using the Grunt or Gulp modules](docs/grunt-gulp.md#basic-usage-pattern) instead of the *svg-sprite* [default API](docs/api.md).
+
 
 Configuration basics
 --------------------
@@ -291,15 +298,24 @@ For CSS sprites using `"horizontal"` or `"vertical"` layouts it is sometimes des
 
 *svg-sprite* uses [Mustache](http://mustache.github.io/) templates for rendering the various CSS resources. This makes it very easy to tailor the generated CSS / Sass / LESS / Stylus resources to your needs or add completely new output formats. Please refer to the [templating guide](docs/templating.md) to learn about the details.
 
+
+Command line usage
+------------------
+
+*svg-sprite* comes with a pretty feature complete command line version. Please refer to the [command line guide](docs/command-line.md) for details.
+
+
 Known problems / To-do
 ----------------------
 
 * SVGO does not minify element IDs when there are `<style>` or `<script>` elements contained in the file
 
+
 Changelog
 ---------
 
 Please refer to the [changelog](CHANGELOG.md) for a complete release history.
+
 
 Legal
 -----

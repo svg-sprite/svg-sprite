@@ -4,8 +4,8 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
 
 
-Shape alignment
----------------
+Aligning and duplicating shapes
+-------------------------------
 
 CSS sprites with `"vertical"` or `"horizontal"` layout use only one axis for positioning the shapes inside the sprite. For the opposite axis, *svg-sprite* uses `0` as default positioning value. That's why the weather icons are left-aligned in the following example:
 
