@@ -1,5 +1,11 @@
-## 1.0.12 (unreleased)
+## 1.0.13 Maintenance release (2015-01-28)
+* Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
+* Made dimension attributes (width & height) optional ([#45](https://github.com/jkphl/svg-sprite/issues/45))
+* Added cache busting option for non-CSS sprites ([#48](https://github.com/jkphl/svg-sprite/issues/48))
+
+## 1.0.12 Feature release (2015-01-27)
 * Added dimension CSS output for non-CSS sprites ([#45](https://github.com/jkphl/svg-sprite/issues/45))
+* Bumped lodash dependency version (#44)
 
 ## 1.0.11 Bugfix release
 * Fixed coordinate distortion in CSS sprites ([#41](https://github.com/jkphl/svg-sprite/issues/41))

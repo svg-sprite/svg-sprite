@@ -119,28 +119,29 @@ Options:
   --variables                  Path to external JSON file with Mustache variable definitions
 ```
 
-#### Examples
+### Examples
 
-Both the following commands are doing the same (with the second one using the shorter argument syntax) in creating a CSS sprite of the given SVG files. The sprite along with an accompanying CSS stylesheet are written to the subdirectory `out`. 
+Both the following commands are doing the same (with the second one using the shorter argument syntax): They use the SVG files found in the directory `"assets"`, create a CSS sprite of them and write them to the sudirectory `"out"` along with an accompanying CSS stylesheet. 
 
 ```bash
 $ svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
 $ svg-sprite -cD out --ccss --cx assets/*.svg
 ```
 
-The next one renders as Sass stylesheet instead of CSS and adds a 10px padding around all shapes in the sprite:
+The next one renders as Sass stylesheet (instead of plain CSS) and adds a 10px padding around all shapes in the sprite:
 
 ```bash
 $ svg-sprite -cD out --cscss -p 10 assets/*.svg
 ```
 
-#### Inlined shape dimensions
+### Inlined shape dimensions
 
-To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension class prefix. Use one of these methods:
+To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension class prefix. There are two ways of doing so:
 
 ```bash
 $ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
 $ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
+```
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite

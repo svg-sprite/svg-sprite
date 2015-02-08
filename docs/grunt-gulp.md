@@ -4,9 +4,9 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
 
 
-# Basic usage pattern
+# Grunt & Gulp wrappers
 
-The examples below are simplified for the sake of clarity. Prerequisites like `require`s or the [configuration](configuration.md) (`config`) have been omitted.
+This document aims to compare the use of *svg-sprite* via it's [standard API](api.md) with the use of wrappers like the ones for Grunt and Gulp. The following examples are equivalent and have been simplified for the sake of clarity. Prerequisites like the necessary `require` calls or the construction of a [main configuration](configuration.md) object (`config`) have been omitted.
 
 ## Standard API 
 

@@ -4,9 +4,10 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
 
 
-### F. Templating variables
+Tweaking and adding output formats
+----------------------------------
 
-#### F.1 Sprite & shape variables
+### Sprite & shape variables
 
 For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](#svgspritercompile-config--callback-). Example:  
 
@@ -164,28 +165,12 @@ For each sprite generation process, a data object is constructed that is passed 
 }
 ```
 
-#### F.2 Custom variables & functions
 
-The top-level `variables` object lets you define global variables that are passed to all [Mustache](http://mustache.github.io/) templating processes (across all output modes). You may either use scalar values or callbacks (see [here](https://github.com/janl/mustache.js/#functions) for details). Example:
-
-```javascript
-{
-	variables	: {
-		now		: +new Date(),
-		png		: function() {
-			return function(sprite, render) {
-				return render(sprite).split('.svg').join('.png');
-			}
-		}
-	}
-}
-```
-
-#### F.3 Builtin templating functions
+### Builtin templating functions
 
 There are a couple of functions directly built into *svg-sprite*. You may use them in any template.
 
-##### F.3.1 `date`
+#### `date`
 
 Takes no arguments and returns the current date and time as GMT string (e.g. *Mon, 22 Dec 2014 16:18:53 GMT*).
 
@@ -193,7 +178,7 @@ Takes no arguments and returns the current date and time as GMT string (e.g. *Mo
 <p>Generated at {{date}} by svg-sprite</p>
 ```
 
-##### F.3.2 `invert`
+#### `invert`
 
 Returns the negative value of a floating point number.
 
@@ -203,7 +188,7 @@ Returns the negative value of a floating point number.
 }
 ```
 
-##### F.3.3 `classname`
+#### `classname`
 
 Returns the innermost part of a CSS selector as a class name (with the leading dot stripped off). For instance, if `fullselector` had the value *.svg .icon-cart*,
 
@@ -217,7 +202,7 @@ would become
 <i class="icon-cart">Cart</i>
 ```
 
-##### F.3.4 `escape`
+#### `escape`
 
 Finds all backslashes in a string and escapes each of them with another backslash. 
 

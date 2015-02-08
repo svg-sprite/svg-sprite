@@ -24,7 +24,7 @@ Table of contents
 * [Getting started](#getting-started)
 	* [Usage pattern](#usage-pattern)
 	* [Standard API](docs/api.md)
-	* [Grunt & Gulp wrapper](docs/grunt-gulp.md)
+	* [Grunt & Gulp wrappers](docs/grunt-gulp.md)
 * [Configuration basics](#configuration-basics)
 	* [General configuration options](#general-configuration-options)
 	* [Output modes](#output-modes)
@@ -81,34 +81,34 @@ spriter.compile(function(error, result) {
 });
 ```
 
-As you see, big parts of the above deal with disk I/O related stuff. You can make your life easier by [using the Grunt or Gulp modules](docs/grunt-gulp.md#basic-usage-pattern) instead of the *svg-sprite* [default API](docs/api.md).
+As you can see, big parts of the above are dealing with disk I/O. In this regard you can make your life easier by [using the Grunt or Gulp wrappers](docs/grunt-gulp.md) instead of the [standard API](docs/api.md).
 
 
 Configuration basics
 --------------------
 
-Did you notice the `config` variable that is passed to the constructor in the example above? This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
+Of course you noticed the `config` variable that is passed to the constructor in the example above. This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
 
 ```javascript
 {
 	dest			: <String>,				// Main output directory
-	log  			: <String∣Logger>,		// Logging verbosity or custom logger
+	log  			: <String|Logger>,		// Logging verbosity or custom logger
 	shape			: <Object>,				// SVG shape configuration
 	transform		: <Array>,				// SVG transformations
 	svg				: <Object>,				// Common SVG options
 	variables		: <Object>,				// Custom templating variables
-	mode			: <Object>				// Output mode configuration
+	mode			: <Object>				// Output mode configurations
 }
 ```
 
-If you don't provide a configuration altogether, *svg-sprite* uses built-in defaults for these properties, so in fact they are all optional. However, you will need to enable at least one **output mode** (`mode` property) to get some reasonable results (i.e. a sprite of some type).
+If you don't provide a configuration object altogether, *svg-sprite* uses built-in defaults for these properties, so in fact they are all optional. However, you will need to enable at least one **output mode** (`mode` property) to get reasonable results (i.e. a sprite of some type).
 
 ### General configuration options
 
-The common configuration properties (all except `mode`) apply to all sprites created by a single spriter instance. Their default values are:
+Many configuration properties (all except `mode`) apply to all sprites created by the same spriter instance. The default values are:
 
 ```javascript
-// Common svg-sprite config options and their defaul values
+// Common svg-sprite config options and their default values
 
 var config					= {
 	dest					: '.',						// Main output directory
@@ -134,7 +134,7 @@ var config					= {
 		dest				: null						// Output directory for optimized intermediate SVG shapes
 	},
 	transform				: ['svgo'],					// List of transformations / optimizations
-	svg						: {							// General options for all SVG output
+	svg						: {							// General options for created SVG files
 		xmlDeclaration		: true,						// Add XML declaration to SVG sprite
 		doctypeDeclaration	: true,						// Add DOCTYPE declaration to SVG sprite
 		namespaceIDs		: true,						// Add namespace token to all IDs in SVG shapes
@@ -181,7 +181,7 @@ var config					= {
 
 #### Common mode properties
 
-Many `mode` properties are shared between the different sprite types, but there are also specific options. Please refer to the [configuration documentation](docs/configuration.md) for a full reference.
+Many `mode` properties are shared between the different sprite types, but there are also type specific options. Please refer to the [configuration documentation](docs/configuration.md) for a complete list of settings.
 
 ```javascript
 // Common mode properties
@@ -193,7 +193,7 @@ var config					= {
 			prefix			: "svg-%s",						// Prefix for CSS selectors
 			dimensions		: "-dims",						// Suffix for dimension CSS selectors
 			sprite			: "svg/sprite.<mode>.svg"		// Sprite path and name
-			bust			: true|false,					// Cache busting (default value is mode dependent)
+			bust			: true|false,					// Cache busting (mode dependent default value)
 			render			: {								// Stylesheet rendering definitions
 				/* -------------------------------------------
 				css			: false,						// CSS stylesheet options
@@ -203,7 +203,7 @@ var config					= {
 				<custom>	: ...							// Custom stylesheet options
 				-------------------------------------------	*/
 			},
-			example			: false							// Create HTML example document
+			example			: false							// Create an HTML example document
 		}
 	}
 }
@@ -220,23 +220,24 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 
 var config					= {
 	mode					:
+		inline				: true,		// Prepare for inline embedding
 		symbol				: true		// Create a «symbol» sprite
 	}
 }
 ```
 
-##### B.) Sprite with CSS resource
+##### B.) CSS sprite with Sass resource
 
-Traditional **CSS sprite** along with a **plain CSS stylesheet**:
+Traditional **CSS sprite** with a **Sass stylesheet**:
 
 ```javascript
-// «css» sprite with CSS stylesheet resource
+// «css» sprite with Sass stylesheet resource
 
 var config					= {
 	mode					:
 		css					: {			// Create a «css» sprite
 			render			: {
-				css			: true		// Render a CSS stylesheet
+				scss		: true		// Render a Sass stylesheet
 			}
 		}
 	}
@@ -274,12 +275,12 @@ var config					= {
 ```
 > **NOTE ABOUT THE `dest` OPTION(S)**
 > 
-> "Didn't you say that *svg-sprite* doesn't access the file system? So why do you need an output directory?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file contexts (e.g. the path to the SVG sprite from the perspective of a referencing CSS stylesheet).
+> "Didn't you say that *svg-sprite* doesn't access the file system? So why do you need an output directory?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file paths (e.g. the path of an SVG sprite as used by a CSS stylesheet).
 
 
 ### Online configurator & project kickstarter
 
-To get you off the ground quickly, I made a simple [online configurator](http://jkphl.github.io/svg-sprite) that lets you create a custom *svg-sprite* configuration in seconds. You may download it as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at http://jkphl.github.io/svg-sprite.
+To get you quickly off the ground, I made a simple [online configurator](http://jkphl.github.io/svg-sprite) that lets you create a custom *svg-sprite* configuration in seconds. You may download the results as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at http://jkphl.github.io/svg-sprite.
 
 
 Advanced techniques
@@ -291,7 +292,7 @@ In order to improve accessibility, *svg-sprite* can read meta data from a YAML f
 
 ### Aligning and duplicating shapes
 
-For CSS sprites using `"horizontal"` or `"vertical"` layouts it is sometimes desirable to align the shapes within the sprite. With the help of an external YAML file, *svg-sprite* can not only [control the alignment](docs/shape-alignment.md#shape-alignment) for each individual shape but also [create displaced copies](docs/shape-alignment.md#creating-displaced-shape-copies) of them without significantly increasing the sprite's file size.
+For CSS sprites using a `"horizontal"` or `"vertical"` layout it is sometimes desirable to align the shapes within the sprite. With the help of an external YAML file, *svg-sprite* can not only [control the alignment](docs/shape-alignment.md#aligning-and-duplicating-shapes) for each individual shape but also [create displaced copies](docs/shape-alignment.md#creating-displaced-shape-copies) of them without significantly increasing the sprite's file size.
   
 
 ### Tweaking and adding output formats
@@ -302,7 +303,13 @@ For CSS sprites using `"horizontal"` or `"vertical"` layouts it is sometimes des
 Command line usage
 ------------------
 
-*svg-sprite* comes with a pretty feature complete command line version. Please refer to the [command line guide](docs/command-line.md) for details.
+*svg-sprite* comes with a pretty feature complete command line version. A typical example could look like this:
+
+```bash
+$ svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
+```
+
+Please refer to the [CLI guide](docs/command-line.md) for further details.
 
 
 Known problems / To-do
