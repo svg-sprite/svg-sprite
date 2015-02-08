@@ -1,3 +1,6 @@
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+==========
+
 #### Non-CSS sprite configuration («defs», «symbol» and «stack» mode)
 
 The configuration for the three non-CSS sprite types is (almost) identical. Here's a full blown example with all options specified, showing the default values (for a «defs» sprite). **They're all optional!**.
@@ -100,91 +103,6 @@ Property                 | Type            | Default       | Description        
 `meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](#a1-meta-data-injection) into the SVG shapes. |
 `align`                  | String          |               | Path to a [YAML](http://yaml.org/) file with [extended alignment settings](#a2-extended-shape-alignment) for sprites with `"vertical"` or `"horizontal"` layout. |
 `dest`                   | String          |               | Implicit way of calling [`.getShapes()`](#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
-
-#### A.1 Meta data injection
-
-By providing a simple [YAML](http://yaml.org/) file via the `shape.meta` property, you can use *svg-sprite* to inject meta data into your SVG files before they get compiled as a sprite, trying to improve accessibility. The meta data file needs to look like this:
-
-```yaml
-"path/to/rectangle.svg"	:
-	title				: Green rectangle
-	description			: A light green rectangle with rounded corners and a dark green border
-	
-path--to--circle		:
-	title				: Red circle
-	description			: A red circle with a black border
-``` 
-
-The keys need to match either the **"local" file path part** of the SVG files you [register to the spriter](#svgspriteraddfile--name-svg-) or the final **shape IDs / CSS class names** as returned by the `id.generator` function. For each of your shapes, *svg-sprite* will look for `title` and `description` meta data and inject it like this:
-
-```xml
-<svg aria-labelledby="title desc">
-	<title id="title">Green rectangle</title>
-	<desc id="desc">A light green rectangle with rounded corners and a dark green border</desc>
-	<rect width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1" />
-</svg>
-```
-
-Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, *svg-sprite* will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.
-
-#### A.2 Extended shape alignment
-
-CSS sprites with `"vertical"` or `"horizontal"` layout use only one axis for positioning the shapes inside the sprite. For the opposite axis, *svg-sprite* uses `0` as default positioning value. That's why the weather icons are left-aligned in the following example:
-
-![Sprite with vertical layout and default x-axis positioning](test/expected/png/css.vertical.default.png)
-
-To use these icons as centered background images, you would need them to be centered within the sprite as well. This is where the **extended alignment options** jump in. To control the placement of the shapes, use the `shape.align` option to specify the path of a [YAML](http://yaml.org/) file with the following format:
-
-```yaml
-<shape-ID-or-path>:
-  <template-string-with-placeholder>: <positioning>	
-```
-
-* `<shape-ID-or-path>` has to be the **"local" file path part** or the final **shape ID / CSS class name** of a particular shape in your sprite. Use the `"*"` for a catch-all rule (needs to be quoted in the YAML file).
-* `<template-string-with-placeholder>` is a powerful feature that lets you **derive displaced copies** of your shapes. [See below](#a22-creating-displaced-shape-copies) for an example. The string should contain the placeholder `"%s"` which gets replaced by the ID of the matched shape. If the placeholder cannot be found in the string, it will be used as suffix for the shape ID. 
-* `<positioning>` is a floating point value between `0` and `1`, expressing the relative placement of the shape on the secondary axis (0 - 100%).
-
-*svg-sprite*'s default behaviour can be expressed as follows:
-
-```yaml
-"*"				:
-  "%s"			: 0
-```
-
-##### A.2.1 Centering shapes
-
-With only these two lines
-
-```yaml
-"*"				:
-  "%s"			: .5
-```
-
-all the icons in the example sprite above get centered:
-
-![Sprite with vertical layout and centered x-axis positioning](test/expected/png/css.vertical.centered.png)
-
-##### A.2.2 Creating displaced shape copies
-
-You can leverage the `<template-string-with-placeholder>` for creating displaced on-the-fly copies of your shapes:
-
-```yaml
-"*"             :
-  "%s"          : .5
-  
-weather-clear   :
-  -left         : 0 
-  -right        : 1
-  
-weather-storm   :
-  "%s"          : 0
-```
-
-Remember that the omitting the placeholder `"%s"`will make the template strings to be used as a suffices, effectively leading to the virtual shape IDs / CSS class names `"weather-clear-left"` and `"weather-clear-right"` (`"-left"` is equivalent to `"%s-left"`).
-
-![Sprite with vertical layout, mixed x-axis positioning and displaced copies](test/expected/png/css.vertical.mixed.png)
-
-As the displaced copies are created with the `<use>` element, your sprite doesn't get significantly bigger in file size by duplicating shapes this way. For each of the duplicates, an **individual CSS rule** is created in the stylesheet resources, using the virtual shape ID as selector class name.
 
 ### B. Transform configuration
 
@@ -433,3 +351,24 @@ To **disable the file rendering** altogether, set the value to something falsy:
 	example			: false
 }
 ```
+
+Legal
+-----
+Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
+
+*svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
+
+The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
+
+
+[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-image]: https://badge.fury.io/js/svg-sprite.png
+
+[travis-url]: http://travis-ci.org/jkphl/svg-sprite
+[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png
+
+[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
+[coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
+
+[depstat-url]: https://david-dm.org/jkphl/svg-sprite
+[depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg

@@ -28,7 +28,9 @@ Table of contents
 		* [Basic examples](#basic-examples)
 	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
-	* [Templating](#templating)
+	* [Meta data injection](docs/meta-data.md)
+	* [Aligning and duplicating shapes](docs/shape-alignment.md)
+	* [Tweaking and adding output formats](#tweaking-and-adding-output-formats)
 * [Command line usage](#command-line-usage)
 * [Known problems / To-do](#known-problems--to-do)
 * [Changelog](CHANGELOG.md)
@@ -172,7 +174,7 @@ var config					= {
 
 #### Common mode properties
 
-Most of the `mode` properties are shared between the sprite types:
+Many `mode` properties are shared between the different sprite types, but there are also specific options. Please refer to the [configuration documentation](docs/configuration.md) for a full reference.
 
 ```javascript
 // Common mode properties
@@ -185,13 +187,20 @@ var config					= {
 			dimensions		: "-dims",						// Suffix for dimension CSS selectors
 			sprite			: "svg/sprite.<mode>.svg"		// Sprite path and name
 			bust			: true|false,					// Cache busting (default value is mode dependent)
+			render			: {								// Stylesheet rendering definitions
+				/* -------------------------------------------
+				css			: false,						// CSS stylesheet options
+				scss		: false,						// Sass stylesheet options
+				less		: false,						// LESS stylesheet options
+				styl		: false							// Stylus stylesheet options
+				<custom>	: ...							// Custom stylesheet options
+				-------------------------------------------	*/
+			},
 			example			: false							// Create HTML example document
 		}
 	}
 }
 ```
-
-Depending on the sprite type there may be additional settings. Please refer to the [configuration documentation](docs/configuration.md) for a full reference.
 
 #### Basic examples
 
@@ -269,22 +278,32 @@ To get you off the ground quickly, I made a simple [online configurator](http://
 Advanced techniques
 -------------------
 
-### Templating
+### Meta data injection
 
+In order to improve accessibility, *svg-sprite* can read meta data from a YAML file and inject `<title>` and `<description>` elements into your SVGs. Please refer to the [meta data injection guide](docs/meta-data.md) for details.  
 
+### Aligning and duplicating shapes
+
+For CSS sprites using `"horizontal"` or `"vertical"` layouts it is sometimes desirable to align the shapes within the sprite. With the help of an external YAML file, *svg-sprite* can not only [control the alignment](docs/shape-alignment.md#shape-alignment) for each individual shape but also [create displaced copies](docs/shape-alignment.md#creating-displaced-shape-copies) of them without significantly increasing the sprite's file size.
+  
+
+### Tweaking and adding output formats
+
+*svg-sprite* uses [Mustache](http://mustache.github.io/) templates for rendering the various CSS resources. This makes it very easy to tailor the generated CSS / Sass / LESS / Stylus resources to your needs or add completely new output formats. Please refer to the [templating guide](docs/templating.md) to learn about the details.
 
 Known problems / To-do
 ----------------------
 
 * SVGO does not minify element IDs when there are `<style>` or `<script>` elements contained in the file
 
+Changelog
+---------
+
+Please refer to the [changelog](CHANGELOG.md) for a complete release history.
+
 Legal
 -----
-Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
-
-*svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
-
-The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
+Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl). *svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt). The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite

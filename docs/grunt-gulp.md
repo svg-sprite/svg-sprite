@@ -1,3 +1,6 @@
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+==========
+
 # Basic usage pattern
 
 The examples below are simplified for the sake of clarity. Prerequisites like `require`s or the [configuration](configuration.md) (`config`) have been omitted.
@@ -44,3 +47,24 @@ gulp.src('assets/*.svg')
 	.pipe(svgSprite(config))
 	.pipe(gulp.dest('out'));
 ```
+
+Legal
+-----
+Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl)
+
+*svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt).
+
+The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
+
+
+[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-image]: https://badge.fury.io/js/svg-sprite.png
+
+[travis-url]: http://travis-ci.org/jkphl/svg-sprite
+[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png
+
+[coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
+[coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
+
+[depstat-url]: https://david-dm.org/jkphl/svg-sprite
+[depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
