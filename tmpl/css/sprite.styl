@@ -1,9 +1,9 @@
-{{#common}}.{{/common}}{{^common}}${{/common}}{{mixin}} 
+{{#hasCommon}}.{{/hasCommon}}{{^hasCommon}}${{/hasCommon}}{{mixin}} 
 	background url({{{sprite}}}) no-repeat
 
 {{#shapes}}{{#selector.shape}}{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
-{{/selector.shape}}	{{^common}}@extend ${{mixin}}
-	{{/common}}background-position {{position.relative.xy}}{{#dimensions.inline}}
+{{/selector.shape}}	{{^hasCommon}}@extend ${{mixin}}
+	{{/hasCommon}}background-position {{position.relative.xy}}{{#dimensions.inline}}
 	width {{width.outer}}px
 	height {{height.outer}}px{{/dimensions.inline}}
 {{#dimensions.extra}}

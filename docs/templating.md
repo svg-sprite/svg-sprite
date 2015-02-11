@@ -22,6 +22,9 @@ For each sprite generation process, a data object is constructed that is passed 
 		// Key used for result files & data
 		key						: 'mymode',
 		
+		// Indicator whether a `common` CSS class name has been defined
+		hasCommon				: false,
+		
 		// CSS class name for `common` sprite shape properties (or NULL if disabled)
 		common					: null,
 		

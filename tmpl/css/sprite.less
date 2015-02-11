@@ -1,11 +1,11 @@
-.{{mixin}}{{^common}}(){{/common}} {
+.{{mixin}}{{^hasCommon}}(){{/hasCommon}} {
 	background: url({{{sprite}}}) no-repeat;
 }
 
 {{#shapes}}{{#selector.shape}}{{expression}}{{^last}},
 {{/last}}{{/selector.shape}} {
-	{{^common}}.{{mixin}}();
-	{{/common}}background-position: {{position.relative.xy}};{{#dimensions.inline}}
+	{{^hasCommon}}.{{mixin}}();
+	{{/hasCommon}}background-position: {{position.relative.xy}};{{#dimensions.inline}}
 	width: {{width.outer}}px;
 	height: {{height.outer}}px;{{/dimensions.inline}}
 }{{#dimensions.extra}}
