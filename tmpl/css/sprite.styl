@@ -2,8 +2,8 @@
 	background url({{{sprite}}}) no-repeat
 
 {{#shapes}}{{#selector.shape}}{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
-{{/selector.shape}}	background-position {{position.relative.xy}}{{^common}}
-	@extend ${{mixin}}{{/common}}{{#dimensions.inline}}
+{{/selector.shape}}	{{^common}}@extend ${{mixin}}
+	{{/common}}background-position {{position.relative.xy}}{{#dimensions.inline}}
 	width {{width.outer}}px
 	height {{height.outer}}px{{/dimensions.inline}}
 {{#dimensions.extra}}
