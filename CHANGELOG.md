@@ -1,3 +1,6 @@
+## master (will become 1.0.16)
+* Optimized stylesheet templates
+
 ## 1.0.16 Bugfix release (2015-02-11)
 * Fixed broken previous release
 

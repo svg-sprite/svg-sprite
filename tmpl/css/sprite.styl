@@ -1,6 +1,5 @@
 {{#common}}.{{/common}}{{^common}}${{/common}}{{mixin}} 
-	background-repeat no-repeat
-	background-image url({{{sprite}}})
+	background url({{{sprite}}}) no-repeat
 
 {{#shapes}}{{#selector.shape}}{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
 {{/selector.shape}}	background-position {{position.relative.xy}}{{^common}}

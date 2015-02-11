@@ -1,6 +1,5 @@
 .{{mixin}}{{^common}}(){{/common}} {
-	background-repeat: no-repeat;
-	background-image: url({{{sprite}}});
+	background: url({{{sprite}}}) no-repeat;
 }
 
 {{#shapes}}{{#selector.shape}}{{expression}}{{^last}},

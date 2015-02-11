@@ -1,13 +1,10 @@
 {{#common}}.{{mixin}} {
-	background-repeat: no-repeat;
-	background-image: url({{{sprite}}});
+	background: url({{{sprite}}}) no-repeat;
 }
 
 {{/common}}{{#shapes}}{{#selector.shape}}{{expression}}{{^last}},
 {{/last}}{{/selector.shape}} {
-	background-position: {{position.relative.xy}};{{^common}}
-	background-repeat: no-repeat;
-	background-image: url({{{sprite}}});{{/common}}{{#dimensions.inline}}
+	{{#common}}background-position: {{position.relative.xy}};{{/common}}{{^common}}background: url({{{sprite}}}) {{position.relative.xy}} no-repeat;{{/common}}{{#dimensions.inline}}
 	width: {{width.outer}}px;
 	height: {{height.outer}}px;{{/dimensions.inline}}
 }{{#dimensions.extra}}
