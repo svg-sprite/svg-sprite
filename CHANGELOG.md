@@ -1,7 +1,8 @@
-## master (will become 1.0.15)
+## 1.0.15 Maintenance release (2015-02-11)
 * Fixed missing file extensions with CSS resources ([#54](https://github.com/jkphl/svg-sprite/issues/54))
 * Fixed broken sprite URL in css/view example HTML documents ([#53](https://github.com/jkphl/svg-sprite/issues/53))
 * Fixed wrong base path for intermediate SVG shapes
+* Removed the automatic dot prefix for CSS selectors ([#55](https://github.com/jkphl/svg-sprite/issues/55))
 
 ## 1.0.14 Maintenance release (2015-02-08)
 * Restructured documentation
