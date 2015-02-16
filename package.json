@@ -6,7 +6,7 @@
 		"email": "joschi@kuphal.net",
 		"url": "http://jkphl.is"
 	},
-	"description": "SVG sprites & stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)",
+	"description": "SVG sprites & stacks galore — a low-level Node.js module that takes a bunch of SVG files, optimizes them and bakes them into SVG sprites of several types along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)",
 	"homepage": "https://github.com/jkphl/svg-sprite",
 	"repository": {
 		"type": "git",

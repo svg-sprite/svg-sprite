@@ -60,7 +60,7 @@ Crafting a sprite with *svg-sprite* typically follows these steps:
 
 1. You [create an instance of the SVGSpriter](docs/api.md#svgspriter-config-), passing a main configuration object to the constructor.
 2. You [register a couple of SVG source files](docs/api.md#svgspriteraddfile--name-svg-) for processing.
-3. You [trigger the compilation process](docs/api.md#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.) .
+3. You [trigger the compilation process](docs/api.md#svgspritercompile-config--callback-) and receive the generated files (sprite, CSS, example documents etc.).
 
 The procedure is the very same for all supported sprite types («modes»).
 
@@ -88,7 +88,7 @@ As you can see, big parts of the above are dealing with disk I/O. In this regard
 Configuration basics
 --------------------
 
-Of course you noticed the `config` variable that is passed to the constructor in the example above. This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
+Of course you noticed the `config` variable passed to the constructor in the above example. This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
 
 ```javascript
 {
