@@ -1,3 +1,6 @@
+## 1.0.18 Bugfix release (2015-02-20)
+* Removed excessive console output
+
 ## 1.0.17 Maintenance release (2015-02-20)
 * Optimized stylesheet templates
 * Introduced boolean hasCommon template variable
