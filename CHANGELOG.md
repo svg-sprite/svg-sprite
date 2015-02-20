@@ -1,7 +1,8 @@
-## master (will become 1.0.16)
+## 1.0.17 Maintenance release (2015-02-20)
 * Optimized stylesheet templates
 * Introduced boolean hasCommon template variable
 * Updated dependencies
+* Fixed incomplete dimension CSS selector suffix ([grunt-svg-sprite #31](https://github.com/jkphl/grunt-svg-sprite/issues/31))
 
 ## 1.0.16 Bugfix release (2015-02-11)
 * Fixed broken previous release
