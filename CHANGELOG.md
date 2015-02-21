@@ -1,3 +1,7 @@
+## master (will become 1.0.19)
+* Changed alias for shape.dest CLI option
+* Updated dependencies
+
 ## 1.0.18 Bugfix release (2015-02-20)
 * Removed excessive console output
 
