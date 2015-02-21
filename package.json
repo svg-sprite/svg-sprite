@@ -47,7 +47,7 @@
 		"cssmin": "^0.4.2",
 		"mustache": "^1.0.0",
 		"js-yaml": "^3.2.6",
-		"yargs": "^3.0.2",
+		"yargs": "^3.1.0",
 		"winston": "^0.9.0",
 		"prettysize": "^0.0.3"
 	},

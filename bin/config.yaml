@@ -74,7 +74,7 @@ shape:
     
   dest:
     description           : Path to output directory for intermediate SVG files
-    alias                 : i
+    alias                 : im
     map                   : shape.dest
       
 transform:
