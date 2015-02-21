@@ -130,7 +130,7 @@ css:
     
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
-    default               : svg-%s
+    default               : .svg-%s
     map                   : mode.css.prefix
     
   dimensions:
@@ -256,7 +256,7 @@ view:
     
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
-    default               : svg-%s
+    default               : .svg-%s
     map                   : mode.view.prefix
     
   dimensions:
@@ -371,7 +371,7 @@ defs:
 
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
-    default               : svg-%s
+    default               : .svg-%s
     map                   : mode.defs.prefix
     
   dimensions:
@@ -423,7 +423,7 @@ symbol:
 
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
-    default               : svg-%s
+    default               : .svg-%s
     map                   : mode.symbol.prefix
     
   dimensions:
@@ -475,7 +475,7 @@ stack:
 
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
-    default               : svg-%s
+    default               : .svg-%s
     map                   : mode.stack.prefix
     
   dimensions:
