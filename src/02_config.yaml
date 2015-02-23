@@ -363,7 +363,7 @@ mode              :
     prefix        :
       type        : string
       label       : CSS selector prefix
-      default     : svg-%s
+      default     : .svg-%s
       skip        : 3
         
     dimensions    :
@@ -512,7 +512,7 @@ mode              :
     prefix        :
       type        : string
       label       : CSS selector prefix
-      default     : svg-%s
+      default     : .svg-%s
       skip        : 3
         
     dimensions    :
@@ -644,7 +644,7 @@ mode              :
     prefix        :
       type        : string
       label       : CSS selector prefix
-      default     : svg-%s
+      default     : .svg-%s
       skip        : 3
         
     dimensions    :
@@ -704,7 +704,7 @@ mode              :
     prefix        :
       type        : string
       label       : CSS selector prefix
-      default     : svg-%s
+      default     : .svg-%s
       skip        : 3
         
     dimensions    :
@@ -764,7 +764,7 @@ mode              :
     prefix        :
       type        : string
       label       : CSS selector prefix
-      default     : svg-%s
+      default     : .svg-%s
       skip        : 3
         
     dimensions    :
