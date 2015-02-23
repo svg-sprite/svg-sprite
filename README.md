@@ -30,6 +30,8 @@ Table of contents
 	* [Output modes](#output-modes)
 		* [Common mode properties](#common-mode-properties)
 		* [Basic examples](#basic-examples)
+	* [Output destinations](#output-destinations)
+		* [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
 	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
 	* [Meta data injection](docs/meta-data.md)
@@ -282,9 +284,41 @@ var config					= {
 	}
 }
 ```
-> **NOTE ABOUT THE `dest` OPTION(S)**
-> 
-> "Didn't you say that *svg-sprite* doesn't access the file system? So why do you need an output directory?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file paths (e.g. the path of an SVG sprite as used by a CSS stylesheet).
+
+
+### Output destinations
+
+Depending on your particular configuration, *svg-sprite* creates a lot of files that partly refer to each other. There are several configuration options controlling the exact location of each file, and you are well advised to spend a moment on understanding how they interrelate with each other.
+
+Relative destination paths refer to their ancestors as shown in the following scheme, with the current working directory being the ultimate base.
+
+```
+        Destination option                     Default               Comment
+---------------------------------------------------------------------------------------------
+cwd $   <dest>/                                .                     Main output directory  
+            <mode.css.dest>/                   css                   «css» base directory
+                <mode.css.sprite>              svg/sprite.css.svg    Sprite location
+                <mode.css.render.css.dest>     sprite.css            CSS stylesheet location
+                <mode.css.render.scss.dest>    sprite.scss           Sass stylesheet location
+                ...
+            <mode.view>/                       view                  «view» base directory
+                ...	
+```
+
+By default, stylesheet resources are generated directly into the respective **mode's base directory**.
+
+> "Oh wait! Didn't you say that *svg-sprite* doesn't access the file system? So why do you need output directories at all?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file paths (e.g. the path of an SVG sprite as used by a CSS stylesheet).
+
+
+#### Pre-processor formats and the sprite location
+
+Special care needs to be taken when you create a **CSS sprite** («css» or «view» mode) along with a stylesheet in one of the **pre-processor formats** (Sass, LESS, Stylus etc.). In this case, calculating the correct relative SVG sprite path as used by the stylesheets can become tricky, as your (future) plain CSS compilation doesn't necessarily lie side by side with the pre-processor file. *svg-sprite* doesn't know anything about your pre-processor workflow, so it might have to estimate the location of the CSS file:
+
+1.	If you **truly configured CSS output** in addition to the pre-processor format, *svg-sprite* uses your custom `mode.<mode>.render.css.dest` as the CSS stylesheet location.
+2.	If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `TRUE`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
+3.	The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`. 
+
+So even if you don't enable plain CSS output explictly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
 
 
 ### Online configurator & project kickstarter

@@ -2,6 +2,7 @@
 * Changed alias for shape.dest CLI option
 * Updated dependencies
 * Fixed ID bug with view sprites
+* Fixed sprite CSS path calculation
 
 ## 1.0.18 Bugfix release (2015-02-20)
 * Removed excessive console output
