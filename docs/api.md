@@ -7,14 +7,14 @@ This file is part of the documentation of *svg-sprite* — a free low-level Node
 Standard API
 ------------
 
-*svg-sprite* knows only four public methods responsible for the sprite creation process:
+*svg-sprite* comes with four public methods:
 
-* [SVGSpriter([ config ])](#svgspriter-config-) — The spriter's constructor
+* [SVGSpriter([ config ])](#svgspriter-config-) — The spriter's constructor (always the entry point)
 * [SVGSpriter.add(file [, name, svg ])](#svgspriteraddfile--name-svg-) — Registering source SVG files
-* [SVGSpriter.compile([ config ,] callback )](#svgspritercompile-config--callback-) — Registering source SVG files
+* [SVGSpriter.compile([ config ,] callback )](#svgspritercompile-config--callback-) — Triggering the sprite compilation
 * [SVGSpriter.getShapes( dest , callback )](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
 
-To understand their roles and interaction, please have a look at the following example first.
+To understand these methods' roles and interaction, please have a look at the following basic example first.
 
 ### Usage example 
 
@@ -29,7 +29,7 @@ fs							= require('fs'),
 // 1. Create and configure a spriter instance
 // ====================================================================
 spriter						= new SVGSpriter({
-	dest					: 'out',		// Destination directory
+	dest					: 'out',		// Main output directory
 	mode					:
 		css					: {				// Create a CSS sprite
 			render			: {
@@ -73,22 +73,22 @@ spriter.compile(function(error, result, data){
 
 #### SVGSpriter([ config ])
 
-**Constructor** — This is the only method exposed by the *svg-sprite* module, so it's always your entry point. Use it to create an instance of the spriter.
+**Constructor** — This is the only method publicly exposed by *svg-sprite*, so it's always your entry point. Use it to create an instance of the spriter and access the remaining three methods.
 
 ##### Arguments
 
-1. **config** `{Object}` *(default: `{}`)* — [Main configuration](configuration.md) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). Alternatively, the `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)). 
+1. **config** `{Object}` *(default: `{}`)* — [Main configuration](configuration.md) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). The `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)). 
 
 #### SVGSpriter.add(file [, name, svg ])
 
 **Registration of an SVG file** — Prior to compiliation, you'll need to register one or more SVG files for processing, obviously. As *svg-sprite* doesn't read the files from disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another (as you would do with the [Gulp wrapper](https://github.com/jkphl/gulp-svg-sprite) anyway). Please [see below](#example-using-glob-and-vinyl) for an example.
 
-It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way it is possibly to call the `.compile()` method several time, possibly passing in different render configurations without the need to repeat the optimization step.
+It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way it is possibly to call the `.compile()` method several time, possibly passing in different render configurations without the need of repeating the optimization steps.
 
 ##### Arguments
 
 1. **file** `{String|File}` — Absolute path to the SVG file or a [vinyl](https://github.com/wearefractal/vinyl) file object carrying all the necessary values (the following arguments are ignored then).
-2. **name** `{String}` *(ignored with vinyl file)* — The "local" file path part, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` [configuration option](configuration.md#shape-ids). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting `name` to `"deeply/nested/asset.svg"` while giving `"/path/to/my/deeply/nested/asset.svg"` for `file` will translate to the CSS selector `"deeply--nested--asset"`.
+2. **name** `{String}` *(ignored with vinyl file)* — The "local" part of the file path, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` [configuration option](configuration.md#shape-ids). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting `name` to `"deeply/nested/asset.svg"` while giving `"/path/to/my/deeply/nested/asset.svg"` for `file` will translate to the CSS selector `"deeply--nested--asset"`.
 3. **svg** `{String}` *(ignored with vinyl file)*: SVG file content.
 
 ##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/wearefractal/vinyl)
@@ -137,7 +137,7 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 
 #### SVGSpriter.compile([ config ,] callback )
 
-**Sprite compilation** — Triggers an asynchronous sprite compilation process. You may pass in an optional [output mode configuration](configuration.md#output-modes) object as the first argument in order to set the output parameters for that very run. You may call `.compile()` multiple times, allowing for several different sprites being generated in one go. For each run, the callback will be triggered independently, giving you access to the resources that were generated.
+**Sprite compilation** — Triggers an asynchronous sprite compilation process. You may pass in an optional [output mode configuration](configuration.md#output-modes) object as the first argument in order to set the output parameters for that very run. You may call `.compile()` multiple times, allowing for several different sprites being generated by the same spriter instance. For each run, the callback will be triggered independently, giving you access to the resources that were generated.
 
 ##### Arguments
 
@@ -153,17 +153,16 @@ Depending on the particular mode and render configuration, quite a lot of resour
 
 ```javascript
 spriter.compile({
-		css					: {
-			render			: {
-				scss		: true
-			},
-			example			: true
-		}
-	},
-	function(error, result, data){
-	    console.log(result);
+	css					: {
+		render			: {
+			scss		: true
+		},
+		example			: true
 	}
-);
+},
+function(error, result, data){
+    console.log(result);
+});
 ```
 
 The spriter is instructed to create a CSS sprite along with the accompanying stylesheet resource in Sass format and an example HTML document demonstrating the use of the sprite. The output will look something like this (shortened for brevity):

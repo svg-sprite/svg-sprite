@@ -12,11 +12,6 @@ You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get
 ```bash
 Usage: svg-sprite [options] files
 
-Examples:
-  svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg    Create a CSS sprite of the given SVG files including example document to the sub directory "out"
-  svg-sprite -cD out --ccss --cx assets/*.svg                                Same as above
-  svg-sprite -cD out --cscss -p 10 assets/*.svg                              Same as above, but render Sass instead of CSS and add 10px padding around all shapes
-
 
 Options:
   --version                    Show version number
@@ -121,14 +116,14 @@ Options:
 
 ### Examples
 
-Both the following commands are doing the same (with the second one using the shorter argument syntax): They use the SVG files found in the directory `"assets"`, create a CSS sprite of them and write them to the sudirectory `"out"` along with an accompanying CSS stylesheet. 
+Both the following commands are doing the same (with the second one using the shorter argument syntax): They use the SVG files found in the directory `"assets"`, create a CSS sprite of them and write them to the subdirectory `"out"` along with accompanying CSS stylesheets. 
 
 ```bash
 $ svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
 $ svg-sprite -cD out --ccss --cx assets/*.svg
 ```
 
-The next one renders as Sass stylesheet (instead of plain CSS) and adds a 10px padding around all shapes in the sprite:
+The next one renders a Sass stylesheet (instead of plain CSS) and adds a 10px padding around all shapes in the sprite:
 
 ```bash
 $ svg-sprite -cD out --cscss -p 10 assets/*.svg
@@ -136,7 +131,7 @@ $ svg-sprite -cD out --cscss -p 10 assets/*.svg
 
 ### Inlined shape dimensions
 
-To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension class prefix. There are two ways of doing so:
+To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension selector suffix. There are two ways of doing so:
 
 ```bash
 $ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg

@@ -17,9 +17,10 @@ yargs				= require('yargs')
 					.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
 					.version(JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json'), {encoding: 'utf8'})).version, 'version')
 					.help('help', 'Display this help information')
-					.example('$0 --css --css-render-css --css-example --dest=out assets/*.svg', 'Create a CSS sprite of the given SVG files including example document to the sub directory "out"')
+					.wrap(null)
+					.example('$0 --css --css-render-css --css-example --dest=out assets/*.svg', 'Create a CSS sprite of the given SVG files including example document to the subdirectory "out"')
 					.example('$0 -cD out --ccss --cx assets/*.svg', 'Same as above')
-					.example('$0 -cD out --cscss -p 10 assets/*.svg', 'Same as above, but render Sass instead of CSS and add 10px padding around all shapes')
+					.example('$0 -cD out --cscss -p 10 assets/*.svg', 'Render Sass instead of CSS and add 10px padding around all shapes (no example document this time)')
 					.showHelpOnFail(true)
 					.demand(1);
 
@@ -127,6 +128,7 @@ for (var m in map) {
 config.shape.spacing.padding		= ('' + config.shape.spacing.padding).trim();
 config.shape.spacing.padding		= config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function(dim) { return parseFloat(dim || 0, 10); }) : [];
 
+// Expand transformation options
 var transform						= ('' + config.transform).trim();
 config.transform					= [];
 (transform.length ? transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : []).forEach(function(transform){
@@ -144,13 +146,16 @@ config.transform					= [];
 	}
 }, config.transform);
 
+// Run through all sprite modes
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){
 	if (!argv[mode]) {
 		delete this[mode];
 		return;
 	} else if (['css', 'view'].indexOf(mode) >= 0) {
+		
+		// Remove excessive render types
 		['css', 'scss', 'less', 'styl'].forEach(function(render){
-			var arg							= 'css-render-' + render;
+			var arg							= mode + '-render-' + render;
 			if (!argv[arg] && (render in this)) {
 				delete this[render];
 			}
@@ -162,6 +167,7 @@ config.transform					= [];
 	}
 }, config.mode);
 
+// Remove excessive example options
 for (var mode in config.mode) {
 	var example						= mode + '-example';
 	if (!argv[example] && ('example' in config.mode[mode])) {
