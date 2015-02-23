@@ -14,7 +14,7 @@ log               :
     info          : Informal
     verbose       : Verbose
     debug         : Debug information
-    
+
 shape             :
   type            : section
   label           : SVG shape properties

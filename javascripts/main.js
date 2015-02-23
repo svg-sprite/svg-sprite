@@ -864,7 +864,7 @@ new SVGSpriteConfigurator({
       "prefix": {
         "type": "string",
         "label": "CSS selector prefix",
-        "default": "svg-%s",
+        "default": ".svg-%s",
         "skip": 3
       },
       "dimensions": {
@@ -1014,7 +1014,7 @@ new SVGSpriteConfigurator({
       "prefix": {
         "type": "string",
         "label": "CSS selector prefix",
-        "default": "svg-%s",
+        "default": ".svg-%s",
         "skip": 3
       },
       "dimensions": {
@@ -1146,7 +1146,7 @@ new SVGSpriteConfigurator({
       "prefix": {
         "type": "string",
         "label": "CSS selector prefix",
-        "default": "svg-%s",
+        "default": ".svg-%s",
         "skip": 3
       },
       "dimensions": {
@@ -1206,7 +1206,7 @@ new SVGSpriteConfigurator({
       "prefix": {
         "type": "string",
         "label": "CSS selector prefix",
-        "default": "svg-%s",
+        "default": ".svg-%s",
         "skip": 3
       },
       "dimensions": {
@@ -1266,7 +1266,7 @@ new SVGSpriteConfigurator({
       "prefix": {
         "type": "string",
         "label": "CSS selector prefix",
-        "default": "svg-%s",
+        "default": ".svg-%s",
         "skip": 3
       },
       "dimensions": {
