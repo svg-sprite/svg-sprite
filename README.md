@@ -32,6 +32,7 @@ Table of contents
 		* [Basic examples](#basic-examples)
 	* [Output destinations](#output-destinations)
 		* [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
+	* [Full configuraton documentation](docs/configuration.md)
 	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
 	* [Meta data injection](docs/meta-data.md)
@@ -319,6 +320,11 @@ Special care needs to be taken when you create a **CSS sprite** («css» or «vi
 3.	The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`. 
 
 So even if you don't enable plain CSS output explictly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
+
+
+### Full configuraton documentation
+
+The complete configuration documentation including all options [can be found here](docs/configuration.md).
 
 
 ### Online configurator & project kickstarter

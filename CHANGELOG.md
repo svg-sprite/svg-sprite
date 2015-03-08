@@ -1,4 +1,4 @@
-## master (will become 1.0.19)
+## 1.0.19 Maintenance release (2015-03-08)
 * Changed alias for shape.dest CLI option
 * Updated dependencies
 * Fixed ID bug with view sprites
