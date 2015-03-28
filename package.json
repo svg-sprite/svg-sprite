@@ -1,6 +1,6 @@
 {
 	"name": "svg-sprite",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"author": {
 		"name": "Joschi Kuphal",
 		"email": "joschi@kuphal.net",
@@ -45,7 +45,7 @@
 		"css-selector-parser": "^1.0.4",
 		"phantomjs": "^1.9.16",
 		"cssmin": "^0.4.3",
-		"mustache": "^1.0.0",
+		"mustache": "^2.0.0",
 		"js-yaml": "^3.2.7",
 		"yargs": "^3.4.5",
 		"winston": "^0.9.0",

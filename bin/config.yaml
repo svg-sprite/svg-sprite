@@ -100,12 +100,12 @@ svg:
     ids                   :
       description         : Whether to apply ID namespacing to the sprite
       default             : true
-      map                 : svg. namespaceIDs
+      map                 : svg.namespaceIDs
     
   dimattrs:
     description           : Whether to add width and height attributes to the sprite
     default               : true
-    map                   : svg. dimensionAttributes
+    map                   : svg.dimensionAttributes
     
 css:
   description             : Activates the «css» mode

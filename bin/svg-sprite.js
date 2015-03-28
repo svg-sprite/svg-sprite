@@ -175,6 +175,20 @@ for (var mode in config.mode) {
 	}
 }
 
+// Read & parse Mustache variable JSON file
+if ('variables' in config) {
+	var variables					= ('' + config.variables).trim();
+	delete config.variables;
+	variables						= variables.length ? path.resolve(variables) : null;
+	if (variables && fs.existsSync(variables)) {
+		try {
+			config.variables		= JSON.parse(fs.readFileSync(variables));
+		} catch(e) {
+			console.error('[ERROR] Skipping --variables file due to errors ("%s")', e.message.trim());
+		}
+	}
+}
+
 var spriter							= new SVGSpriter(config);
 _.reduce(argv._, function(f, g){ return f.concat(glob.sync(g)); }, []).forEach(function(file){
 	file							= path.resolve(file);

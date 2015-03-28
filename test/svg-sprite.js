@@ -129,7 +129,6 @@ describe('svg-sprite', function() {
     	describe('with no SVG files', function() {
     		
 	        it('returns an error', function(done) {
-	        	
 	        	spriter.compile(function(error, result) {
 	        		should(error).be.an.Error;
 					should(error).have.property('name', 'ArgumentError');
@@ -144,6 +143,7 @@ describe('svg-sprite', function() {
     		
 	        it('returns an error', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	addFixtureFiles(spriter, weather, cwdWeather);
 	        	spriter.compile(function(error, result) {
 	        		should(error).be.an.Error;
@@ -165,6 +165,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 5 files for vertical layout', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest
 	    		});
@@ -194,6 +195,7 @@ describe('svg-sprite', function() {
 	        	
 		        it('creates 1 additional file for horizontal layout', function(done) {
 		        	this.timeout(20000);
+		        	
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.horizontal.svg',
@@ -209,6 +211,7 @@ describe('svg-sprite', function() {
 		        
 		        it('creates 1 additional file for diagonal layout', function(done) {
 		        	this.timeout(20000);
+		        	
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.diagonal.svg',
@@ -224,6 +227,7 @@ describe('svg-sprite', function() {
 		        
 		        it('creates 1 additional file for packed layout', function(done) {
 		        	this.timeout(20000);
+		        	
 		        	spriter.compile({
 						css			: {
 							sprite	: 'svg/css.packed.svg',
@@ -241,6 +245,8 @@ describe('svg-sprite', function() {
 		    describe('creates visually correct sprite with', function() {
 		    	
 		        it('vertical layout', function(done) {
+		        	this.timeout(20000);
+		        	
 		        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.vertical),
 	        		verticalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.png');
 	        		svg2png(verticalSVG, verticalPNG, function(err) {
@@ -258,6 +264,8 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('horizontal layout', function(done) {
+		        	this.timeout(20000);
+		        	
 		        	var horizontalSVG		= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.horizontal),
 	        		horizontalPNG			= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.horizontal.png');
 	        		svg2png(horizontalSVG, horizontalPNG, function(err) {
@@ -275,6 +283,8 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('diagonal layout', function(done) {
+		        	this.timeout(20000);
+		        	
 		        	var diagonalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.diagonal),
 	        		diagonalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.diagonal.png');
 	        		svg2png(diagonalSVG, diagonalPNG, function(err) {
@@ -292,6 +302,8 @@ describe('svg-sprite', function() {
 		        });
 		        
 		        it('packed layout', function(done) {
+		        	this.timeout(20000);
+		        	
 		        	var packedSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.packed),
 	        		packedPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.png');
 	        		svg2png(packedSVG, packedPNG, function(err) {
@@ -440,6 +452,7 @@ describe('svg-sprite', function() {
 			
 			it('creates 2 files for packed layout', function(done) {
 				this.timeout(20000);
+				
 				spriter.compile({
 					view					: {
 					sprite					: 'svg/view.packed.svg',
@@ -461,6 +474,8 @@ describe('svg-sprite', function() {
 			describe('creates visually correct sprite with', function() {
 		    	
 		        it('packed layout', function(done) {
+		        	this.timeout(20000);
+		        	
 		        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.packed),
 	        		verticalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.packed.png');
 	        		svg2png(verticalSVG, verticalPNG, function(err) {
@@ -520,6 +535,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -552,6 +568,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.vertical),
         		verticalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.png');
         		svg2png(verticalSVG, verticalPNG, function(err) {
@@ -596,6 +614,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -628,6 +647,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var horizontalSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.horizontal),
         		horizontalPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.horizontal.centered.png');
         		svg2png(horizontalSVG, horizontalPNG, function(err) {
@@ -683,6 +704,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -715,6 +737,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var packedSVG			= path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.packed),
         		packedPNG				= path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.centered.png');
         		svg2png(packedSVG, packedPNG, function(err) {
@@ -775,6 +799,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -807,6 +832,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var verticalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.vertical),
         		verticalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.png');
         		svg2png(verticalSVG, verticalPNG, function(err) {
@@ -851,6 +878,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -883,6 +911,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var horizontalSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.horizontal),
         		horizontalPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.horizontal.mixed.png');
         		svg2png(horizontalSVG, horizontalPNG, function(err) {
@@ -938,6 +968,7 @@ describe('svg-sprite', function() {
 			
 	        it('creates 2 files', function(done) {
 	        	this.timeout(20000);
+	        	
 	        	spriter					= new SVGSpriter({
 					dest				: dest,
 					shape				: {
@@ -970,6 +1001,8 @@ describe('svg-sprite', function() {
 	        });
 	        
 	        it('creates visually correct sprite', function(done) {
+	        	this.timeout(20000);
+	        	
 	        	var packedSVG			= path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.packed),
         		packedPNG				= path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.packed.mixed.png');
         		svg2png(packedSVG, packedPNG, function(err) {
