@@ -22,14 +22,20 @@ For each sprite generation process, a data object is constructed that is passed 
 		// Key used for result files & data
 		key						: 'mymode',
 		
-		// Indicator whether a `common` CSS class name has been defined
+		// Indicator whether a `common` CSS class name has been specified
 		hasCommon				: false,
 		
-		// CSS class name for `common` sprite shape properties (or NULL if disabled)
+		// Given CSS class name for `common` sprite shape properties (NULL if disabled)
 		common					: null,
 		
-		// Mixin name for `common` properties (identical to `common`, defaulting to 'svg-common' if disabled)
-		mixin					: 'svg-common',
+		// Effective `common` CSS class / mixin name (identical to `common`, defaulting to 'svg-common' if disabled)
+		commonName				: 'svg-common',
+		
+		// Indicator whether a `mixin` name has been specified
+		hasMixin				: false,
+		
+		// Mixin name for common sprite shape properties (NULL if disabled)
+		mixinName				: null,
 		
 		// Whether to create shape dimensioning CSS rules 
 		includeDimensions		: true,

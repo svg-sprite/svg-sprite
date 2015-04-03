@@ -1,4 +1,4 @@
-{{#hasCommon}}.{{mixin}} {
+{{#hasCommon}}.{{commonName}} {
 	background: url({{{sprite}}}) no-repeat;
 }
 
