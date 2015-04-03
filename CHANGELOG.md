@@ -1,3 +1,6 @@
+## 1.0.21 Maintenance release (2015-04-03)
+* Updated dependencies
+
 ## 1.0.20 Bugfix release (2015-03-28)
 * Updated dependencies
 * Fixed several CLI bugs ([#65](https://github.com/jkphl/svg-sprite/issues/65))
