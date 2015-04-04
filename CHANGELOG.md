@@ -1,5 +1,5 @@
-## 1.1.0 Maintenance release (2015-04-03)
-* Updated dependencies
+## 1.1.0 Maintenance release (2015-04-04)
+* Updated dependencies & development dependencies
 * Added mixin option ([#66](https://github.com/jkphl/svg-sprite/issues/66); ATTENTION: May break custom templates!)
 
 ## 1.0.20 Bugfix release (2015-03-28)
