@@ -352,7 +352,7 @@ describe('svg-sprite', function() {
 			    	sass.render({
 					    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss'),
 					    success						: function(scssText) {
-					    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss.css'), scssText)).be.ok;
+					    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss.css'), scssText.css)).be.ok;
 					    	
 					    	data.css				= '../sprite.scss.css';				        
 					    	var out					= mustache.render(previewTemplate, data),
@@ -525,7 +525,7 @@ describe('svg-sprite', function() {
 		    */
 	    });
 	});
-    
+	
     describe('with centered alignment and ' + align.length + ' SVG files', function() {
 		var spriter						= null,
 		data							= null,
@@ -671,7 +671,7 @@ describe('svg-sprite', function() {
 		    	sass.render({
 				    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss'),
 				    success						: function(scssText) {
-				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss.css'), scssText)).be.ok;
+				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss.css'), scssText.css)).be.ok;
 				    	
 				    	data.css				= '../sprite.centered.scss.css';				        
 				    	var out					= mustache.render(previewTemplate, data),
@@ -935,7 +935,7 @@ describe('svg-sprite', function() {
 		    	sass.render({
 				    file						: path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss'),
 				    success						: function(scssText) {
-				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss.css'), scssText)).be.ok;
+				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss.css'), scssText.css)).be.ok;
 				    	
 				    	data.css				= '../sprite.mixed.scss.css';				        
 				    	var out					= mustache.render(previewTemplate, data),

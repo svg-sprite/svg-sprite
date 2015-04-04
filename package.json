@@ -59,13 +59,10 @@
 		"should": "",
 		"rimraf": "",
 		"vinyl-fs": "^1.0.0",
-		"node-sass": "^2.1.1",
-		"less": "^2.5.0",
-		"stylus": "^0.49.3",
 		"svg2png": "^1.1.0",
 		"image-diff": "^1.0.1",
-		"node-sass": "^1.2.3",
-		"less": "^2.1.2",
+		"node-sass": "^2.1.1",
+		"less": "^2.5.0",
 		"stylus": "^0.50.0"
 	},
 	"keywords": [
