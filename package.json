@@ -40,7 +40,7 @@
 		"xmldom": "^0.1.19",
 		"xpath": "^0.0.9",
 		"vinyl": "^0.4.6",
-		"svgo": "0.5.0",
+		"svgo": "^0.5.1",
 		"cssom": "^0.3.0",
 		"css-selector-parser": "^1.0.4",
 		"phantomjs": "^1.9.16",
