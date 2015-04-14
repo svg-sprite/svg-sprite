@@ -18,7 +18,7 @@ They might well be outsourced to an external stylesheet of course.
 -->
 
 <style type="text/css">
-{{#shapes}}	{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}} { width: {{width.outer}}px; height: {{height.outer}}px; }
+{{#shapes}}	.{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}} { width: {{width.outer}}px; height: {{height.outer}}px; }
 {{/shapes}}</style>
 <!--
 ====================================================================================================
@@ -73,9 +73,9 @@ embedded above. They may be styled via CSS.
 					<div class="icon-box">
 						
 						<!-- {{name}} -->
-						<svg class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}">
+						<svg class="{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}}">
 							<use xlink:href="#{{name}}"></use>
-						</shapes>
+						</svg>
 						
 					</div>
 					<h2>{{name}}</h2>
@@ -105,9 +105,9 @@ SVG sprite. They may be styled via CSS. (IE 9-11 with polyfill only)
 					<div class="icon-box">
 						
 						<!-- {{name}} -->
-						<svg class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}">
+						<svg class="{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}}">
 							<use xlink:href="{{{example}}}#{{name}}"></use>
-						</shapes>
+						</svg>
 						
 					</div>
 					<h2>{{name}}</h2>
