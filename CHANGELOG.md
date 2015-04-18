@@ -4,6 +4,7 @@
 * Fixed example document path resolution bug ([#70](https://github.com/jkphl/svg-sprite/issues/70))
 * Allow negative viewBox values ([#72](https://github.com/jkphl/svg-sprite/pull/72))
 * Fixed symbol example document ([#71](https://github.com/jkphl/svg-sprite/pull/71))
+* Improved error log for invalid SVG files ([#69](https://github.com/jkphl/svg-sprite/issues/69))
 
 ## 1.1.0 Maintenance release (2015-04-04)
 * Updated dependencies & development dependencies
