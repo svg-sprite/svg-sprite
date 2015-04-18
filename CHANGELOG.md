@@ -1,4 +1,4 @@
-## 1.1.1 Bugfix release (unreleased)
+## 1.1.1 Bugfix release (2015-04-19)
 * Updated dependencies & development dependencies
 * Added viewBox attribute to SVG stacks ([#73](https://github.com/jkphl/svg-sprite/issues/73))
 * Fixed example document path resolution bug ([#70](https://github.com/jkphl/svg-sprite/issues/70))
