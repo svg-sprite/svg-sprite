@@ -26,6 +26,11 @@ shape:
       default             : "~"
       map                 : shape.id.pseudo
       
+    whitespace:
+      description         : Whitespace replacement string for shape IDs
+      default             : "_"
+      map                 : shape.id.whitespace
+      
   dim:
     width:
       description         : Maximum shape width in pixels

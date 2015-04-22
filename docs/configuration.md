@@ -74,7 +74,8 @@ shape				: {
 	id				: {                         // SVG shape ID related options
         separator	: '--',                     // Separator for directory name traversal
         generator	: function() { /*...*/ },   // SVG shape ID generator callback
-        pseudo		: '~'                       // File name separator for shape states (e.g. ':hover')
+        pseudo		: '~',                      // File name separator for shape states (e.g. ':hover')
+        whitespace	: '_'                       // Whitespace replacement for shape IDs
     },
     dimension		: {                         // Dimension related options
         maxWidth	: 2000,                     // Max. shape width
@@ -97,9 +98,10 @@ shape				: {
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.id.separator`           | String          | `"--"`        | Separator for traversing a directory structure into a shape ID |
-`shape.id.generator`           | Function∣String  | See desc.     | Callback for translating the local part of a shape's file name into a shape ID. The callback's signature is `function(name) { /* ... */ return id; }`. By default, the file extension `".svg"` is stripped off and directory structures get traversed using the `id.separator` as replacement for the directory separator. You may also provide a template string (e.g. `"icon-%s"`), in which case the placeholder `"%s"` gets substituted with the traversed local file name. If the string doesn't contain any placeholder, it is used as a prefix to the local file name. |
-`shape.id.pseudo`              | String          | `"~"`         | String separator for pseudo CSS classes in file names. Example: `my-icon.svg` and `my-icon~hover.svg` for an icon with a regular and a `:hover` state. |
+`shape.id.separator`     | String          | `"--"`        | Separator for traversing a directory structure into a shape ID |
+`shape.id.generator`     | Function∣String | See desc.     | Callback for translating the local part of a shape's file name into a shape ID. The callback's signature is `function(name) { /* ... */ return id; }`. By default, the file extension `".svg"` is stripped off and directory structures get traversed using the `id.separator` as replacement for the directory separator. You may also provide a template string (e.g. `"icon-%s"`), in which case the placeholder `"%s"` gets substituted with the traversed local file name. If the string doesn't contain any placeholder, it is used as a prefix to the local file name. |
+`shape.id.pseudo`        | String          | `"~"`         | String separator for pseudo CSS classes in file names. Example: `my-icon.svg` and `my-icon~hover.svg` for an icon with a regular and a `:hover` state. |
+`shape.id.whitespace`    | String          | `"_"`         | Replacement string for whitespace characters in file names during shape ID generation. Example: By default, `My Custom Icon.svg` will result in the shape ID `my_custom_icon`. |
 
 
 #### Shape dimensions

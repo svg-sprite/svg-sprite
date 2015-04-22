@@ -20,6 +20,7 @@ Options:
   --shape-id-separator         Separator for traversing a directory structure into a shape ID        [default: "--"]
   --shape-id-generator         ID generation callback [via CLI only template strings]                [default: "%s"]
   --shape-id-pseudo            Separator for CSS pseudo classes                                      [default: "~"]
+  --shape-id-whitespace        Whitespace replacement string for shape IDs                           [default: "_"]
   -w, --shape-dim-width        Maximum shape width in pixels                                         [default: 2000]
   -h, --shape-dim-height       Maximum shape height in pixels                                        [default: 2000]
   --shape-dim-precision        Precision (decimal places) for dimension calculations                 [default: 2]
