@@ -1,3 +1,6 @@
+## 1.1.2 Bugfix release (unreleased)
+* Fixed symbol example template regression bug ([#70](https://github.com/jkphl/svg-sprite/issues/70#issuecomment-95307588)) 
+
 ## 1.1.1 Bugfix release (2015-04-19)
 * Updated dependencies & development dependencies
 * Added viewBox attribute to SVG stacks ([#73](https://github.com/jkphl/svg-sprite/issues/73))
