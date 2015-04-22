@@ -47,6 +47,11 @@ function addOption(name, option) {
 			var template		= (name.substr(-9) == '-template'),
 			def					= template ? path.resolve(path.dirname(__dirname), option.default) : option.default;
 			yargs				= yargs.default(alias, def);
+			
+			if ((option.default === true) || (option.default === false)) {
+				yargs			= yargs.boolean(name);
+			}
+ 			
 		} else if (option.required) {
 			yargs				= yargs.require(alias);
 		}
