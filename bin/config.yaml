@@ -128,6 +128,11 @@ css:
     default               : 
     map                   : mode.css.common
     
+  mixin:
+    description           : Preprocessor mixin name with properties for all shapes
+    default               : 
+    map                   : mode.css.mixin
+    
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
     default               : .svg-%s
@@ -254,6 +259,11 @@ view:
     default               : 
     map                   : mode.view.common
     
+  mixin:
+    description           : Preprocessor mixin name with properties for all shapes
+    default               : 
+    map                   : mode.view.mixin
+
   prefix:
     description           : CSS selector prefix for all shapes (including placeholders)
     default               : .svg-%s

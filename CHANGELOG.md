@@ -1,5 +1,6 @@
 ## 1.1.2 Bugfix release (unreleased)
-* Fixed symbol example template regression bug ([#70](https://github.com/jkphl/svg-sprite/issues/70#issuecomment-95307588)) 
+* Fixed symbol example template regression bug ([#70](https://github.com/jkphl/svg-sprite/issues/70#issuecomment-95307588))
+* Added mixin option to CLI arguments
 
 ## 1.1.1 Bugfix release (2015-04-19)
 * Updated dependencies & development dependencies

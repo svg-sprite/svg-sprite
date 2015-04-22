@@ -12,7 +12,6 @@ You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get
 ```bash
 Usage: svg-sprite [options] files
 
-
 Options:
   --version                    Show version number
   --help                       Display this help information
@@ -24,20 +23,23 @@ Options:
   -w, --shape-dim-width        Maximum shape width in pixels                                         [default: 2000]
   -h, --shape-dim-height       Maximum shape height in pixels                                        [default: 2000]
   --shape-dim-precision        Precision (decimal places) for dimension calculations                 [default: 2]
+  --shape-dim-attributes       Whether to add width and height attributes to the shapes              [default: false]
   -p, --shape-spacing-padding  Padding around shape (up to 4 x comma-separated)                      [default: "0,0,0,0"]
   -b, --shape-spacing-box      Box sizing strategy ("content" or "padding")                          [default: "content"]
-  -m, --shape-meta             Path to YAML file with meta and positioning information
+  -m, --shape-meta             Path to YAML file with meta information
   -a, --shape-align            Path to YAML file with alignment information
-  -i, --shape-dest             Path to output directory for intermediate SVG files
+  --ims, --shape-dest          Path to output directory for intermediate SVG files
   --transform                  Comma-separated list of predefined transformers (see docs)            [default: "svgo"]
-  --transform-*                External JSON config files for named transformers
   --svg-xmldecl                Whether to include an XML declaration in SVG files                    [default: true]
   --svg-doctype                Whether to include a doctype declaration in SVG files                 [default: true]
+  --svg-namespace-ids          Whether to apply ID namespacing to the sprite                         [default: true]
+  --svg-dimattrs               Whether to add width and height attributes to the sprite              [default: true]
   -c, --css                    Activates the «css» mode                                              [default: false]
   --css-dest                   Mode specific output directory                                        [default: "css"]
   --cl, --css-layout           Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
   --css-common                 Common CSS rule selector for all shapes                               [default: null]
-  --css-prefix                 CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
+  --css-mixin                  Preprocessor mixin name with properties for all shapes                [default: null]
+  --css-prefix                 CSS selector prefix for all shapes (including placeholders)           [default: ".svg-%s"]
   --css-dimensions             CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --cs, --css-sprite           Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --css-bust                   Enable cache busting                                                  [default: true]
@@ -63,7 +65,8 @@ Options:
   --view-dest                  Mode specific output directory                                        [default: "view"]
   --vl, --view-layout          Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")           [default: "packed"]
   --view-common                Common CSS rule selector for all shapes                               [default: null]
-  --view-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
+  --view-mixin                 Preprocessor mixin name with properties for all shapes                [default: null]
+  --view-prefix                CSS selector prefix for all shapes (including placeholders)           [default: ".svg-%s"]
   --view-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --vs, --view-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
   --view-bust                  Enable cache busting                                                  [default: true]
@@ -87,27 +90,30 @@ Options:
   --view-example-dest          HTML document destination (relative to the --mode-css-dest)           [default: "sprite.view.html"]
   -d, --defs                   Activates the «defs» mode                                             [default: false]
   --defs-dest                  Mode specific output directory                                        [default: "defs"]
-  --defs-prefix                CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
+  --defs-prefix                CSS selector prefix for all shapes (including placeholders)           [default: ".svg-%s"]
   --defs-dimensions            CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ds, --defs-sprite          Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --defs-bust                  Enable cache busting                                                  [default: false]
   --di, --defs-inline          Create sprite variant suitable for inline embedding                   [default: false]
   --dx, --defs-example         Whether to render an example HTML document                            [default: false]
   --defs-example-template      HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/defs/sprite.html"]
   --defs-example-dest          HTML document destination (relative to the --mode-css-dest)           [default: "sprite.defs.html"]
   -s, --symbol                 Activates the «symbol» mode                                           [default: false]
   --symbol-dest                Mode specific output directory                                        [default: "symbol"]
-  --symbol-prefix              CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
+  --symbol-prefix              CSS selector prefix for all shapes (including placeholders)           [default: ".svg-%s"]
   --symbol-dimensions          CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --ss, --symbol-sprite        Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --symbol-bust                Enable cache busting                                                  [default: false]
   --si, --symbol-inline        Create sprite variant suitable for inline embedding                   [default: false]
   --sx, --symbol-example       Whether to render an example HTML document                            [default: false]
   --symbol-example-template    HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/symbol/sprite.html"]
   --symbol-example-dest        HTML document destination (relative to the --mode-css-dest)           [default: "sprite.symbol.html"]
   -S, --stack                  Activates the «stack» mode                                            [default: false]
   --stack-dest                 Mode specific output directory                                        [default: "stack"]
-  --stack-prefix               CSS selector prefix for all shapes (including placeholders)           [default: "svg-%s"]
+  --stack-prefix               CSS selector prefix for all shapes (including placeholders)           [default: ".svg-%s"]
   --stack-dimensions           CSS selector suffix for shape dimension rules ("" for inline)         [default: "-dims"]
   --Ss, --stack-sprite         Sprite path and filename (relative to --mode-css-dest)                [default: "svg/sprite.css.svg"]
+  --stack-bust                 Enable cache busting                                                  [default: false]
   --Sx, --stack-example        Whether to render an example HTML document                            [default: false]
   --stack-example-template     HTML document Mustache template (relative to svg-sprite basedir)      [default: "tmpl/stack/sprite.html"]
   --stack-example-dest         HTML document destination (relative to the --mode-css-dest)           [default: "sprite.stack.html"]
