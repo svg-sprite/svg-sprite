@@ -1,4 +1,4 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
@@ -32,7 +32,7 @@ Table of contents
 		* [Basic examples](#basic-examples)
 	* [Output destinations](#output-destinations)
 		* [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
-	* [Full configuraton documentation](docs/configuration.md)
+	* [Full configuration documentation](docs/configuration.md)
 	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
 	* [Meta data injection](docs/meta-data.md)
@@ -70,7 +70,7 @@ The procedure is the very same for all supported sprite types («modes»).
 
 ### Usage pattern
 
-```javascript
+```js
 // Create spriter instance (see below for `config` examples)
 var spriter       = new SVGSpriter(config);
 
@@ -93,7 +93,7 @@ Configuration basics
 
 Of course you noticed the `config` variable passed to the constructor in the above example. This is *svg-sprite*'s **main configuration** — an `Object` with the following properties:
 
-```javascript
+```js
 {
 	dest			: <String>,				// Main output directory
 	log  			: <String|Logger>,		// Logging verbosity or custom logger
@@ -112,7 +112,7 @@ If you don't provide a configuration object altogether, *svg-sprite* uses built-
 
 Many configuration properties (all except `mode`) apply to all sprites created by the same spriter instance. The default values are:
 
-```javascript
+```js
 // Common svg-sprite config options and their default values
 
 var config					= {
@@ -158,7 +158,7 @@ At the moment, *svg-sprite* supports **five different output modes** (i.e. sprit
 
 To enable the creation of a specific sprite type with default values, simply set the appropriate `mode` property to `true`:
 
-```javascript
+```js
 var config					= {
 	mode					:
 		css					: true,		// Create a «css» sprite
@@ -172,7 +172,7 @@ var config					= {
 
 To further configure a sprite, pass in an object with configuration options:
 
-```javascript
+```js
 // «symbol» sprite with CSS stylesheet resource
 
 var config					= {
@@ -190,7 +190,7 @@ var config					= {
 
 Many `mode` properties are shared between the different sprite types, but there are also type specific options. Please refer to the [configuration documentation](docs/configuration.md) for a complete list of settings.
 
-```javascript
+```js
 // Common mode properties
 
 var config					= {
@@ -224,7 +224,7 @@ var config					= {
 
 Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your HTML source):
 
-```javascript
+```js
 // «symbol» sprite with CSS stylesheet resource
 
 var config					= {
@@ -240,7 +240,7 @@ var config					= {
 
 Traditional **CSS sprite** with a **Sass stylesheet**:
 
-```javascript
+```js
 // «css» sprite with Sass stylesheet resource
 
 var config					= {
@@ -259,7 +259,7 @@ var config					= {
 
 **`<defs>` sprite**, **`<symbol>` sprite** and an **SVG stack** all at once:
 
-```javascript
+```js
 // «defs», «symbol» and «stack» sprites in parallel
 
 var config					= {
@@ -276,7 +276,7 @@ var config					= {
 
 `mode`-less run, returning the **optimized SVG shapes only**:
 
-```javascript
+```js
 // Just optimize source SVG files, create no sprite
 
 var config					= {
@@ -296,14 +296,14 @@ Relative destination paths refer to their ancestors as shown in the following sc
 ```
         Destination option                     Default               Comment
 ---------------------------------------------------------------------------------------------
-cwd $   <dest>/                                .                     Main output directory  
+cwd $   <dest>/                                .                     Main output directory
             <mode.css.dest>/                   css                   «css» base directory
                 <mode.css.sprite>              svg/sprite.css.svg    Sprite location
                 <mode.css.render.css.dest>     sprite.css            CSS stylesheet location
                 <mode.css.render.scss.dest>    sprite.scss           Sass stylesheet location
                 ...
             <mode.view>/                       view                  «view» base directory
-                ...	
+                ...
 ```
 
 By default, stylesheet resources are generated directly into the respective **mode's base directory**.
@@ -317,12 +317,12 @@ Special care needs to be taken when you create a **CSS sprite** («css» or «vi
 
 1.	If you **truly configured CSS output** in addition to the pre-processor format, *svg-sprite* uses your custom `mode.<mode>.render.css.dest` as the CSS stylesheet location.
 2.	If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `TRUE`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
-3.	The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`. 
+3.	The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`.
 
-So even if you don't enable plain CSS output explictly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
+So even if you don't enable plain CSS output explicitly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
 
 
-### Full configuraton documentation
+### Full configuration documentation
 
 The complete configuration documentation including all options [can be found here](docs/configuration.md).
 
@@ -338,13 +338,13 @@ Advanced techniques
 
 ### Meta data injection
 
-In order to improve accessibility, *svg-sprite* can read meta data from a YAML file and inject `<title>` and `<description>` elements into your SVGs. Please refer to the [meta data injection guide](docs/meta-data.md) for details.  
+In order to improve accessibility, *svg-sprite* can read meta data from a YAML file and inject `<title>` and `<description>` elements into your SVGs. Please refer to the [meta data injection guide](docs/meta-data.md) for details.
 
 
 ### Aligning and duplicating shapes
 
 For CSS sprites using a `"horizontal"` or `"vertical"` layout it is sometimes desirable to align the shapes within the sprite. With the help of an external YAML file, *svg-sprite* can not only [control the alignment](docs/shape-alignment.md#aligning-and-duplicating-shapes) for each individual shape but also [create displaced copies](docs/shape-alignment.md#creating-displaced-shape-copies) of them without significantly increasing the sprite's file size.
-  
+
 
 ### Tweaking and adding output formats
 
@@ -381,10 +381,10 @@ Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite
-[npm-image]: https://badge.fury.io/js/svg-sprite.png
+[npm-image]: https://badge.fury.io/js/svg-sprite.svg
 
 [travis-url]: http://travis-ci.org/jkphl/svg-sprite
-[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.png
+[travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.svg
 
 [coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
 [coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
