@@ -98,7 +98,6 @@ Of course you noticed the `config` variable passed to the constructor in the abo
 	dest			: <String>,				// Main output directory
 	log  			: <String|Logger>,		// Logging verbosity or custom logger
 	shape			: <Object>,				// SVG shape configuration
-	transform		: <Array>,				// SVG transformations
 	svg				: <Object>,				// Common SVG options
 	variables		: <Object>,				// Custom templating variables
 	mode			: <Object>				// Output mode configurations
@@ -134,11 +133,11 @@ var config					= {
 			padding			: 0,						// Padding around all shapes
 			box				: 'content'					// Padding strategy (similar to CSS `box-sizing`)
 		},
+		transform			: ['svgo'],					// List of transformations / optimizations
 		meta				: null,						// Path to YAML file with meta / accessibility data
 		align				: null,						// Path to YAML file with extended alignment data
 		dest				: null						// Output directory for optimized intermediate SVG shapes
 	},
-	transform				: ['svgo'],					// List of transformations / optimizations
 	svg						: {							// General options for created SVG files
 		xmlDeclaration		: true,						// Add XML declaration to SVG sprite
 		doctypeDeclaration	: true,						// Add DOCTYPE declaration to SVG sprite
