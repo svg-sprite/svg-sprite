@@ -1,3 +1,8 @@
+'use strict';
+
+/* jshint -W117 */
+/* jshint -W030 */
+
 var should					= require('should'),
 path						= require('path'),
 fs							= require('fs'),
@@ -17,21 +22,7 @@ less						= require('less'),
 stylus						= require('stylus'),
 SVGSpriter					= require('../lib/svg-sprite');
 
-var config					= {
-	dest					: path.normalize(path.join(__dirname, '..', 'tmp')),
-	verbose					: 0,
-	mode					: {
-		css					: {
-			render			: {
-				css			: true,
-				scss		: true,
-				less		: true,
-				styl		: true
-			}
-		}
-	}
-},
-cwdWeather					= path.join(__dirname, 'fixture', 'svg', 'single'),
+var cwdWeather				= path.join(__dirname, 'fixture', 'svg', 'single'),
 cwdAlign					= path.join(__dirname, 'fixture', 'svg', 'css'),
 dest						= path.normalize(path.join(__dirname, '..', 'tmp'));
 
@@ -49,7 +40,7 @@ function addFixtureFiles(spriter, files, cwd) {
 			file,
 			fs.readFileSync(path.join(cwd, file), {encoding: 'utf-8'})
 		);
-	})
+	});
 }
 
 /**
@@ -62,7 +53,7 @@ function writeFiles(files) {
 	var written				= 0;
 	for (var key in files) {
 		if (_.isObject(files[key])) {
-			if (files[key].__proto__.constructor == File) {
+			if (files[key].constructor === File) {
 				mkdirp.sync(path.dirname(files[key].path));
 				fs.writeFileSync(files[key].path, files[key].contents);
 				++written;
@@ -103,7 +94,7 @@ function capturePhantom(src, target, cb) {
         if (err) {
             cb(err);
         } else if (stdout.length > 0) {
-        	cb((stdout.toString().trim() == 'success') ? null : new Error('PhantomJS couldn\'t capture "' + src + '"'));
+        	cb((stdout.toString().trim() === 'success') ? null : new Error('PhantomJS couldn\'t capture "' + src + '"'));
         } else if (stderr.length > 0) {
             cb(new Error(stderr.toString().trim()));
         } else {
@@ -113,7 +104,7 @@ function capturePhantom(src, target, cb) {
 }
 
 before(function(done) {
-	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(error){
+	rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function(/* error */){
 		done();
 	});
 });
@@ -186,7 +177,7 @@ describe('svg-sprite', function() {
 	        		result.css.should.be.an.Object;
 					writeFiles(result).should.be.exactly(5);
 					data				= cssData.css;
-					svg.vertical		= path.basename(result.css.sprite.path)
+					svg.vertical		= path.basename(result.css.sprite.path);
 	        		done();
 	        	});
 	        });
@@ -204,7 +195,7 @@ describe('svg-sprite', function() {
 					}, function(error, result) {
 		        		result.css.should.be.an.Object;
 						writeFiles(result).should.be.exactly(1);
-						svg.horizontal	= path.basename(result.css.sprite.path)
+						svg.horizontal	= path.basename(result.css.sprite.path);
 		        		done();
 		        	});
 		        });
@@ -220,7 +211,7 @@ describe('svg-sprite', function() {
 					}, function(error, result) {
 		        		result.css.should.be.an.Object;
 						writeFiles(result).should.be.exactly(1);
-						svg.diagonal	= path.basename(result.css.sprite.path)
+						svg.diagonal	= path.basename(result.css.sprite.path);
 		        		done();
 		        	});
 		        });
@@ -236,7 +227,7 @@ describe('svg-sprite', function() {
 					}, function(error, result) {
 		        		result.css.should.be.an.Object;
 						writeFiles(result).should.be.exactly(1);
-						svg.packed		= path.basename(result.css.sprite.path)
+						svg.packed		= path.basename(result.css.sprite.path);
 		        		done();
 		        	});
 		        });

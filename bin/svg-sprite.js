@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -44,7 +46,7 @@ function addOption(name, option) {
 		yargs					= yargs.describe(alias, option.description);
 		
 		if ('default' in option) {
-			var template		= (name.substr(-9) == '-template'),
+			var template		= (name.substr(-9) === '-template'),
 			def					= template ? path.resolve(path.dirname(__dirname), option.default) : option.default;
 			yargs				= yargs.default(alias, def);
 			
@@ -96,7 +98,7 @@ function writeFiles(files) {
 	var written				= 0;
 	for (var key in files) {
 		if (_.isObject(files[key])) {
-			if (files[key].__proto__.constructor == File) {
+			if (files[key].constructor === File) {
 				mkdirp.sync(path.dirname(files[key].path));
 				fs.writeFileSync(files[key].path, files[key].contents);
 				++written;
@@ -141,10 +143,10 @@ config.transform					= [];
 		if (('transform-' + transform) in argv) {
 			try {
 				var transformConfigFile		= argv['transform-' + transform],
-				transformConfigJSON			= fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'});
+				transformConfigJSON			= fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
 				transformConfig				= transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
 				this.push(_.object([transform], [transformConfig]));
-			} catch(e) {};
+			} catch(e) {}
 		} else {
 			this.push(transform);
 		}
@@ -204,7 +206,7 @@ _.reduce(argv._, function(f, g){ return f.concat(glob.sync(g)); }, []).forEach(f
 	spriter.add(file, path.basename(file), fs.readFileSync(file));
 });
 
-spriter.compile(function(error, result, data) {
+spriter.compile(function(error, result /*, data*/) {
 	if (error) {
 		console.error(error);
 	} else {
