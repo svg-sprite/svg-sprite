@@ -1,4 +1,4 @@
-## 1.2.1 Bugfix release (2015-04-22)
+## 1.2.1 Bugfix release (2016-06-04)
 * Fixed broken NPM publish settings
 
 ## 1.2.0 Feature release (2016-06-04)
