@@ -1,4 +1,4 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
@@ -52,5 +52,7 @@ Please be aware that existing `<title>` and `<description>` elements in the SVG 
 [coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
 [coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
 
-[depstat-url]: https://david-dm.org/jkphl/svg-sprite
+[depstat-url]: https://david-dm.org/jkphl/svg-sprite#info=dependencies
 [depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
+[devdepstat-url]: https://david-dm.org/jkphl/svg-sprite#info=devDependencies
+[devdepstat-image]: https://david-dm.org/jkphl/svg-sprite/dev-status.svg

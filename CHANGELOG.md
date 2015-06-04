@@ -1,4 +1,4 @@
-## 1.2.0 Feature release (unreleased)
+## 1.2.0 Feature release (2016-06-04)
 * Updated dependencies & development dependencies ([#67](https://github.com/jkphl/svg-sprite/pull/67), [#82](https://github.com/jkphl/svg-sprite/issues/82))
 * Relocated the shape transformations list config option
 * Added custom root attributes support ([#87](https://github.com/jkphl/svg-sprite/issues/87))

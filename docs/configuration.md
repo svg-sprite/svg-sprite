@@ -1,4 +1,4 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
@@ -14,7 +14,7 @@ The *svg-sprite* **main configuration** is provided to the [constructor](api.md#
 	dest			: <String>,				// Main output directory
 	log  			: <String|Logger>,		// Logging verbosity or custom logger
 	shape			: <Object>,				// SVG shape configuration
-	svg				: <Object>,				// Common SVG options
+	svg				: <Object>,				// Sprite SVG options
 	variables		: <Object>,				// Custom templating variables
 	mode			: <Object>				// Output mode configurations
 }
@@ -39,6 +39,7 @@ Table of contents
 			* [Custom callback transformation](#custom-callback-transformation-function-values)
 	* [Miscellaneous shape options](#miscellaneous-shape-options)
 * [Sprite SVG options](#sprite-svg-options)
+	* [SVG sprite customization](#svg-sprite-customization)
 * [Custom templating variables](#custom-templating-variables)
 * [Output modes](#output-modes)
 	* [Enabling & configuring](#enabling--configuring)
@@ -242,7 +243,7 @@ Property                 | Type            | Default       | Description        
 
 #### SVG sprite customization
 
-The `svg.transform` option can be used to post-process and customize the SVG sprites created by *svg-sprite*. It takes and applies a callback (or a list of callbacks) with the following signature:
+The `svg.transform` option can be used to post-process and customize the SVG sprites. You may specify a callback (or a list of callbacks) with the following signature:
 
 ```javascript
 // Custom global post-processing transformation
@@ -266,7 +267,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 }
 ```
 
-The callback gets passed in the sprite SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to you how you modify the SVG source, as long as you return a non-empty string. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/jindw/xmldom), so you may require a parser instance `var DOMParser = require('xmldom').DOMParser; /* ... */` within your callback ...).
+The callbacks are processed synchronously and in the given order. Each one gets passed the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/jindw/xmldom), so you may require a parser instance `var DOMParser = require('xmldom').DOMParser; /* ... */` within your callback ...).
 
 
 ### Custom templating variables
@@ -461,5 +462,7 @@ To **disable the rendering** without removing the whole structure, simply set th
 [coveralls-url]: https://coveralls.io/r/jkphl/svg-sprite
 [coveralls-image]: https://img.shields.io/coveralls/jkphl/svg-sprite.svg
 
-[depstat-url]: https://david-dm.org/jkphl/svg-sprite
+[depstat-url]: https://david-dm.org/jkphl/svg-sprite#info=dependencies
 [depstat-image]: https://david-dm.org/jkphl/svg-sprite.svg
+[devdepstat-url]: https://david-dm.org/jkphl/svg-sprite#info=devDependencies
+[devdepstat-image]: https://david-dm.org/jkphl/svg-sprite/dev-status.svg

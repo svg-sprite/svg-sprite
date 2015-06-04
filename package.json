@@ -12,6 +12,9 @@
 		"url": "https://github.com/jkphl/svg-sprite/issues"
 	},
 	"license": "MIT",
+	"engines": {
+		"node": ">= 0.10.0"
+	},
 	"main": "lib/svg-sprite.js",
 	"bin": {
 		"svg-sprite": "./bin/svg-sprite.js"
