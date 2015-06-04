@@ -38,7 +38,7 @@ Table of contents
 			* [Pre-defined shape transformation with custom configuration](#pre-defined-shape-transformation-with-custom-configuration-object-values)
 			* [Custom callback transformation](#custom-callback-transformation-function-values)
 	* [Miscellaneous shape options](#miscellaneous-shape-options)
-* [Common SVG options](#common-svg-options)
+* [Sprite SVG options](#sprite-svg-options)
 * [Custom templating variables](#custom-templating-variables)
 * [Output modes](#output-modes)
 	* [Enabling & configuring](#enabling--configuring)
@@ -86,6 +86,7 @@ shape				: {
         padding		: 0,                        // Padding around all shapes
         box         : 'content'                 // Padding strategy (similar to CSS `box-sizing`)
     },
+    transform		: ['svgo'],					// List of transformations / optimizations
     meta			: null,                     // Path to YAML file with meta / accessibility data
     align			: null,                     // Path to YAML file with extended alignment data
     dest			: null                      // Output directory for optimized intermediate SVG shapes
@@ -225,9 +226,9 @@ Property                 | Type            | Default       | Description        
 `shape.dest`                   | String          |               | Implicit way of calling [`.getShapes()`](api.md#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](api.md#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
 
 
-### Common SVG options
+### Sprite SVG options
 
-The `svg` object holds common options that apply to each SVG file created. The common options might be overriden by mode configurations ([see below](#output-modes)).
+The `svg` object holds common options that apply to each SVG sprite created. The common options might be overriden by mode configurations ([see below](#output-modes)).
 
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
@@ -235,6 +236,37 @@ Property                 | Type            | Default       | Description        
 `doctypeDeclaration`     | Boolean∣String  | `true`        | Include a `<DOCTYPE>` declaration in each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">`). If you set this to `TRUE`, *svg-sprite* will look at the registered shapes for a DOCTYPE declaration and use the first one it can find. |
 `namespaceIDs`           | Boolean         | `true`        | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `FALSE` then and be aware that you might also want to disable SVGO's ID minification (`shape.transform.svgo.plugins: [{cleanupIDs: false}]`). |
 `dimensionAttributes`    | Boolean         | `true`        | If truthy, `width` and `height` attributes will be set on the sprite's `<svg>` element (where applicable). |
+`rootAttributes`         | Object          |               | Shorthand for applying custom attributes to the outermost `<svg>` element. Please be aware that certain attributes (e.g. `viewBox`) will be calculated dynamically and override custom `rootAttributes` in any case. |
+`transform`              | Function∣Array  |               | Callback (or list of callbacks) that will be applied to the resulting SVG sprites as global [post-processing transformation](#svg-sprite-customization). |
+
+
+#### SVG sprite customization
+
+The `svg.transform` option can be used to post-process and customize the SVG sprites created by *svg-sprite*. It takes and applies a callback (or a list of callbacks) with the following signature:
+
+```javascript
+// Custom global post-processing transformation
+{
+	svg                 : {
+		transform       : [
+			/**
+			 * Custom callback transformation
+			 * 
+			 * @param {String} shape				SVG shape object
+			 * @param {SVGSpriter} spriter			SVG spriter
+			 * @param {Function} callback			Callback
+			 * @return {void}
+			 */ 
+			function(shape, sprite, callback) {
+				/* ... */
+				callback(null);
+			},
+			
+			/* ... */
+		]
+	}
+}
+```
 
 
 ### Custom templating variables
