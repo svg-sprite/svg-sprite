@@ -250,16 +250,14 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 	svg                 : {
 		transform       : [
 			/**
-			 * Custom callback transformation
+			 * Custom sprite SVG transformation
 			 * 
-			 * @param {String} shape				SVG shape object
-			 * @param {SVGSpriter} spriter			SVG spriter
-			 * @param {Function} callback			Callback
-			 * @return {void}
+			 * @param {String} svg					Sprite SVG
+			 * @return {String}						Processed SVG
 			 */ 
-			function(shape, sprite, callback) {
+			function(svg) {
 				/* ... */
-				callback(null);
+				return svg;
 			},
 			
 			/* ... */
@@ -267,6 +265,8 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 	}
 }
 ```
+
+The callback gets passed in the sprite SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to you how you modify the SVG source, as long as you return a non-empty string. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/jindw/xmldom), so you may require a parser instance `var DOMParser = require('xmldom').DOMParser; /* ... */` within your callback ...).
 
 
 ### Custom templating variables
