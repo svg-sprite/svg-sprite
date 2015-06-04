@@ -1,5 +1,6 @@
-## 1.1.3 Maintenance release (unreleased)
+## 1.2.0 Feature release (unreleased)
 * Updated dependencies & development dependencies ([#67](https://github.com/jkphl/svg-sprite/pull/67), [#82](https://github.com/jkphl/svg-sprite/issues/82))
+* Relocated the shape transformations list config option 
 
 ## 1.1.2 Bugfix release (2015-04-22)
 * Fixed symbol example template regression bug ([#70](https://github.com/jkphl/svg-sprite/issues/70#issuecomment-95307588))

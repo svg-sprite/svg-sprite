@@ -82,13 +82,13 @@ shape:
     alias                 : ims
     map                   : shape.dest
       
-transform:
-  description             : Comma-separated list of predefined transformers (see docs)
-  default                 : svgo
-  map                     : transform
-  
-  "*":
-    description           : External JSON config files for named transformers
+  transform:
+    description           : Comma-separated list of predefined transformers (see docs)
+    default               : svgo
+    map                   : shape.transform
+    
+    "*":
+      description           : External JSON config files for named transformers
     
 svg:
   xmldecl:

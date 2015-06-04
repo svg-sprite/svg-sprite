@@ -30,7 +30,8 @@ Options:
   -m, --shape-meta             Path to YAML file with meta information
   -a, --shape-align            Path to YAML file with alignment information
   --ims, --shape-dest          Path to output directory for intermediate SVG files
-  --transform                  Comma-separated list of predefined transformers (see docs)            [default: "svgo"]
+  --shape-transform            Comma-separated list of predefined transformers (see docs)            [default: "svgo"]
+  --shape-transform-*          External JSON config files for named transformers
   --svg-xmldecl                Whether to include an XML declaration in SVG files                    [default: true]
   --svg-doctype                Whether to include a doctype declaration in SVG files                 [default: true]
   --svg-namespace-ids          Whether to apply ID namespacing to the sprite                         [default: true]

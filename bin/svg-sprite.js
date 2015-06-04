@@ -136,8 +136,8 @@ config.shape.spacing.padding		= ('' + config.shape.spacing.padding).trim();
 config.shape.spacing.padding		= config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function(dim) { return parseFloat(dim || 0, 10); }) : [];
 
 // Expand transformation options
-var transform						= ('' + config.transform).trim();
-config.transform					= [];
+var transform						= ('' + config.shape.transform).trim();
+config.shape.transform					= [];
 (transform.length ? transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : []).forEach(function(transform){
 	if (transform.length) {
 		if (('transform-' + transform) in argv) {
@@ -151,7 +151,7 @@ config.transform					= [];
 			this.push(transform);
 		}
 	}
-}, config.transform);
+}, config.shape.transform);
 
 // Run through all sprite modes
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){

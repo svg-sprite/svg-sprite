@@ -14,7 +14,6 @@ The *svg-sprite* **main configuration** is provided to the [constructor](api.md#
 	dest			: <String>,				// Main output directory
 	log  			: <String|Logger>,		// Logging verbosity or custom logger
 	shape			: <Object>,				// SVG shape configuration
-	transform		: <Array>,				// SVG transformations
 	svg				: <Object>,				// Common SVG options
 	variables		: <Object>,				// Custom templating variables
 	mode			: <Object>				// Output mode configurations
@@ -33,12 +32,12 @@ Table of contents
 	* [Shape IDs](#shape-ids)
 	* [Shape dimensions](#shape-dimensions)
 	* [Shape spacing](#shape-spacing)
+	* [Shape transformations](#shape-transformations)
+		* [Pre-defined shape transformations](#pre-defined-shape-transformations-string-values)
+		* [Custom shape transformations](#custom-shape-transformations-object-values)
+			* [Pre-defined shape transformation with custom configuration](#pre-defined-shape-transformation-with-custom-configuration-object-values)
+			* [Custom callback transformation](#custom-callback-transformation-function-values)
 	* [Miscellaneous shape options](#miscellaneous-shape-options)
-* [SVG transformations](#svg-transformations)
-	* [Pre-defined transformations](#pre-defined-transformations-string-values)
-	* [Custom transformations](#custom-transformations-object-values)
-		* [Pre-defined transformation with custom configuration](#pre-defined-transformation-with-custom-configuration-object-values)
-		* [Custom callback transformation](#custom-callback-transformation-function-values)
 * [Common SVG options](#common-svg-options)
 * [Custom templating variables](#custom-templating-variables)
 * [Output modes](#output-modes)
@@ -120,6 +119,102 @@ Property                 | Type            | Default       | Description        
 `shape.spacing.padding`        | Integer/Array   | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
 `shape.spacing.box`            | String          | `"content"`   | Box sizing strategy, similar to CSS. When *content* is given, the `spacing.padding` will get applied outside the shape, thus effectively increasing the shapes bounding box. When *padding*, the content plus the given `spacing.padding` will stay within the given dimension contraints. |
 
+#### Shape transformations
+
+The `shape.transform` array holds a list of transformations that are applied — in order — to the each of the SVG shapes before they get combined into the sprite. The list defaults to `['svgo']`. The items of the `shape.transform` list might be of type `String` or `Object`.
+
+
+##### Pre-defined shape transformations (`String` values)
+
+If a `shape.transform` item is of type `String`, it's a shorthand and refers to a **pre-defined transformation** with the transformation's **default configuration**. At the time of this writing, the only supported pre-defined transformation is `svgo`:
+
+```javascript
+// SVGO transformation with default configuration
+{
+	shape				: {
+		transform		: ['svgo']
+		/* ... */
+	}
+}
+```
+
+##### Custom shape transformations (`Object` values)
+
+If you don't want to use a pre-defined transformation or it's default configuration, you need to use the `Object` notation. Each of the shorthands can be expanded like this:  
+
+```javascript
+// Equivalent transformation to ['svgo']
+{
+	shape				: {
+		transform		: [
+			{svgo		: {}}
+		]
+		/* ... */
+	}
+}
+```
+
+In this case, the list item's first object key is used as the **transformation name**. Depending on it's value type,
+
+* a **pre-defined shape transformation with custom configuration** or
+* a **custom callback**
+
+will be called.
+
+
+###### Pre-defined shape transformation with custom configuration (`Object` values)
+
+To call a pre-defined transformation with custom configuration options, use it's name as the transformation name and provide an object which will get merged over the default configuration:
+
+```javascript
+// SVGO transformation with custom plugin configuration
+{
+	shape				: {
+		transform		: [
+			{svgo		: {
+				plugins	: [
+					{transformsWithOnePath: true},
+					{moveGroupAttrsToElems: false}
+				]
+			}}
+		]
+		/* ... */
+	}
+}
+```
+
+###### Custom callback transformation (`Function` values)
+
+To use a custom callback for transforming a shape's SVG, pass a function with the following signature:
+
+```javascript
+// SVGO transformation with custom plugin configuration
+{
+	shape				: {
+		transform		: [
+			{custom		:
+			
+				/**
+				 * Custom callback transformation
+				 * 
+				 * @param {SVGShape} shape				SVG shape object
+				 * @param {SVGSpriter} spriter			SVG spriter
+				 * @param {Function} callback			Callback
+				 * @return {void}
+				 */ 
+				function(shape, sprite, callback) {
+					/* ... */
+					callback(null);
+				}
+			}
+		]
+		/* ... */
+	}
+}
+```
+
+The transformation name (`"custom"` in this case) is of no significance. Please see `lib/svg-sprite/shape.js` to learn about what you can do with the shape object. 
+
 
 #### Miscellaneous shape options
 
@@ -130,94 +225,6 @@ Property                 | Type            | Default       | Description        
 `shape.dest`                   | String          |               | Implicit way of calling [`.getShapes()`](api.md#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](api.md#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
 
 
-### SVG transformations
-
-The `transform` array holds a list of transformations that are applied — in order — to the each of the SVG shapes before they get combined into the sprite. The list defaults to `['svgo']`. The items of the `transform` list might be of type `String` or `Object`.
-
-
-#### Pre-defined transformations (`String` values)
-
-If a `transform` item is of type `String`, it's a shorthand and refers to a **pre-defined transformation** with the transformation's **default configuration**. At the time of this writing, the only supported pre-defined transformation is `svgo`:
-
-```javascript
-// SVGO transformation with default configuration
-{
-	transform		: ['svgo']
-	/* ... */
-}
-```
-
-#### Custom transformations (`Object` values)
-
-If you don't want to use a pre-defined transformation or it's default configuration, you need to use the `Object` notation. First, each shorthand can be expanded like this:  
-
-```javascript
-// Equivalent transformation to ['svgo']
-{
-	transform		: [
-		{svgo		: {}}
-	]
-	/* ... */
-}
-```
-
-In this case, the list item's first object key is used as the **transformation name**. Depending on it's value type,
-
-* a **pre-defined transformation with custom configuration** or
-* a **custom callback**
-
-will be called.
-
-##### Pre-defined transformation with custom configuration (`Object` values)
-
-To call a pre-defined transformation with custom configuration options, use it's name as the transformation name and provide an object which will get merged over the default configuration:
-
-```javascript
-// SVGO transformation with custom plugin configuration
-{
-	transform		: [
-		{svgo		: {
-			plugins	: [
-				{transformsWithOnePath: true},
-				{moveGroupAttrsToElems: false}
-			]
-		}}
-	]
-	/* ... */
-}
-```
-
-##### Custom callback transformation (`Function` values)
-
-To use a custom callback form transforming a shape's SVG, give a callback with the following signature:
-
-```javascript
-// SVGO transformation with custom plugin configuration
-{
-	transform		: [
-		{custom		:
-		
-			/**
-			 * Custom callback transformation
-			 * 
-			 * @param {SVGShape} shape				SVG shape object
-			 * @param {SVGSpriter} spriter			SVG spriter
-			 * @param {Function} callback			Callback
-			 * @return {void}
-			 */ 
-			function(shape, sprite, callback) {
-				/* ... */
-				callback(null);
-			}
-		}
-	]
-	/* ... */
-}
-```
-
-The transformation name (`custom`) is of no significance in this case. Please see `lib/svg-sprite/shape.js` to learn about what you can do with the shape object. 
-
-
 ### Common SVG options
 
 The `svg` object holds common options that apply to each SVG file created. The common options might be overriden by mode configurations ([see below](#output-modes)).
@@ -226,7 +233,7 @@ Property                 | Type            | Default       | Description        
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
 `xmlDeclaration`         | Boolean∣String  | `true`        | Output an XML declaration at the very beginning of each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<?xml version="1.0" encoding="utf-8"?>`). If you set this to `TRUE`, *svg-sprite* will look at the registered shapes for an XML declaration and use the first one it can find. |
 `doctypeDeclaration`     | Boolean∣String  | `true`        | Include a `<DOCTYPE>` declaration in each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">`). If you set this to `TRUE`, *svg-sprite* will look at the registered shapes for a DOCTYPE declaration and use the first one it can find. |
-`namespaceIDs`           | Boolean         | `true`        | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `FALSE` then and be aware that you might also want to disable SVGO's ID minification (`transform.svgo.plugins: [{cleanupIDs: false}]`). |
+`namespaceIDs`           | Boolean         | `true`        | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `FALSE` then and be aware that you might also want to disable SVGO's ID minification (`shape.transform.svgo.plugins: [{cleanupIDs: false}]`). |
 `dimensionAttributes`    | Boolean         | `true`        | If truthy, `width` and `height` attributes will be set on the sprite's `<svg>` element (where applicable). |
 
 
