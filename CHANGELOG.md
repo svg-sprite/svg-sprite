@@ -1,3 +1,6 @@
+## 1.2.1 Bugfix release (2015-04-22)
+* Fixed broken NPM publish settings
+
 ## 1.2.0 Feature release (2016-06-04)
 * Updated dependencies & development dependencies ([#67](https://github.com/jkphl/svg-sprite/pull/67), [#82](https://github.com/jkphl/svg-sprite/issues/82))
 * Relocated the shape transformations list config option
