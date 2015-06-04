@@ -347,11 +347,13 @@ describe('svg-sprite', function() {
 		    	});
 		    	
 		    	it('Sass format', function(done) {
-			    	this.timeout(20000);
+			    	this.timeout(30000);
 			    	
 			    	sass.render({
-					    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss'),
-					    success						: function(scssText) {
+						    file					: path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss')
+				    	},
+						function(err, scssText) {
+					    	should(err).not.ok;
 					    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.scss.css'), scssText.css)).be.ok;
 					    	
 					    	data.css				= '../sprite.scss.css';				        
@@ -372,12 +374,8 @@ describe('svg-sprite', function() {
 							    	done();
 							    });
 				        	});
-					    },
-					    error				: function(err) {
-					    	should(err).not.ok;
-					    	done();
 					    }
-				    });
+				    );
 		    	});
 		    	
 		    	it('LESS format', function(done) {
@@ -669,8 +667,10 @@ describe('svg-sprite', function() {
 		    	this.timeout(20000);
 		    	
 		    	sass.render({
-				    file						: path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss'),
-				    success						: function(scssText) {
+				    	file					: path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss')
+		    		},
+		    		function(err, scssText) {
+		    			should(err).not.ok;
 				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.scss.css'), scssText.css)).be.ok;
 				    	
 				    	data.css				= '../sprite.centered.scss.css';				        
@@ -691,12 +691,8 @@ describe('svg-sprite', function() {
 						    	done();
 						    });
 			        	});
-				    },
-				    error				: function(err) {
-				    	should(err).not.ok;
-				    	done();
 				    }
-			    });
+			    );
 	    	});
 		});
 
@@ -933,8 +929,10 @@ describe('svg-sprite', function() {
 		    	this.timeout(20000);
 		    	
 		    	sass.render({
-				    file						: path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss'),
-				    success						: function(scssText) {
+						file					: path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss')
+		    		},
+		    		function(err, scssText) {
+		    			should(err).not.ok;
 				    	should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.scss.css'), scssText.css)).be.ok;
 				    	
 				    	data.css				= '../sprite.mixed.scss.css';				        
@@ -955,12 +953,8 @@ describe('svg-sprite', function() {
 						    	done();
 						    });
 			        	});
-				    },
-				    error				: function(err) {
-				    	should(err).not.ok;
-				    	done();
 				    }
-			    });
+			    );
 	    	});
 		});
 
