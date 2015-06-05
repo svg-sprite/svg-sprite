@@ -62,7 +62,7 @@ shape:
       map                 : shape.spacing.padding
       
     box:
-      description         : Box sizing strategy ("content" or "padding")
+      description         : Box sizing strategy ("content", "padding" or "icon")
       default             : content
       alias               : b
       map                 : shape.spacing.box

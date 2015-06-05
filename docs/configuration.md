@@ -119,7 +119,7 @@ Property                 | Type            | Default       | Description        
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
 `shape.spacing.padding`        | Integer/Array   | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
-`shape.spacing.box`            | String          | `"content"`   | Box sizing strategy, similar to CSS. When *content* is given, the `spacing.padding` will get applied outside the shape, thus effectively increasing the shapes bounding box. When *padding*, the content plus the given `spacing.padding` will stay within the given dimension contraints. |
+`shape.spacing.box`            | String          | `"content"`   | Box sizing strategy, similar to CSS. When set to `"content"`, the `shape.spacing.padding` values will get applied to the outside of each shape, effectively increasing the shape's bounding box. When set to `"padding"`, the content plus the given `spacing.padding` values will stay within the dimension contraints `shape.dimension.max*` (they are the bounding box' maxima). When set to `"icon"`, the `shape.dimension.max*` values are used as fixed dimensions for the bounding box around each shape. The shapes get either up- or downscaled proportionally to fit this bounding box (including `shape.spacing.padding`), resulting in all equally sized and distributed shape tiles (best fit for a set of same size icons). |
 
 #### Shape transformations
 

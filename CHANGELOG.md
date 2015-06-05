@@ -1,3 +1,6 @@
+## 1.2.2 Feature release (2016-06-05)
+* Introduced "icon" box sizing strategy ([#57](https://github.com/jkphl/svg-sprite/pull/57), [grunt-svg-sprite #35](https://github.com/jkphl/grunt-svg-sprite/issues/35#issuecomment-74232726))
+
 ## 1.2.1 Bugfix release (2016-06-04)
 * Fixed broken NPM publish settings
 
