@@ -1,3 +1,7 @@
+## 1.2.3 Bugfix release (2016-06-08)
+* Fixed string conversion regression ([#89](https://github.com/jkphl/svg-sprite/issues/89))
+* Updated dependencies
+
 ## 1.2.2 Feature release (2016-06-05)
 * Introduced "icon" box sizing strategy ([#57](https://github.com/jkphl/svg-sprite/pull/57), [grunt-svg-sprite #35](https://github.com/jkphl/grunt-svg-sprite/issues/35#issuecomment-74232726))
 
