@@ -1,14 +1,14 @@
-## 1.2.3 Bugfix release (2016-06-08)
+## 1.2.3 Bugfix release (2015-06-08)
 * Fixed string conversion regression ([#89](https://github.com/jkphl/svg-sprite/issues/89))
 * Updated dependencies
 
-## 1.2.2 Feature release (2016-06-05)
+## 1.2.2 Feature release (2015-06-05)
 * Introduced "icon" box sizing strategy ([#57](https://github.com/jkphl/svg-sprite/pull/57), [grunt-svg-sprite #35](https://github.com/jkphl/grunt-svg-sprite/issues/35#issuecomment-74232726))
 
-## 1.2.1 Bugfix release (2016-06-04)
+## 1.2.1 Bugfix release (2015-06-04)
 * Fixed broken NPM publish settings
 
-## 1.2.0 Feature release (2016-06-04)
+## 1.2.0 Feature release (2015-06-04)
 * Updated dependencies & development dependencies ([#67](https://github.com/jkphl/svg-sprite/pull/67), [#82](https://github.com/jkphl/svg-sprite/issues/82))
 * Relocated the shape transformations list config option
 * Added custom root attributes support ([#87](https://github.com/jkphl/svg-sprite/issues/87))
