@@ -1,3 +1,7 @@
+## 1.2.4 Bugfix release (unreleased)
+* Updated dependencies
+* Fixed invalid SVG validation regex ([#94](https://github.com/jkphl/svg-sprite/issues/94))
+
 ## 1.2.3 Bugfix release (2015-06-08)
 * Fixed string conversion regression ([#89](https://github.com/jkphl/svg-sprite/issues/89))
 * Updated dependencies
