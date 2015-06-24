@@ -1,3 +1,7 @@
+## 1.2.5 Maintenance release (unreleased)
+* Updated dependencies
+* Changed sprite file name handling ([#97](https://github.com/jkphl/svg-sprite/issues/97))
+
 ## 1.2.4 Bugfix release (2015-06-17)
 * Updated dependencies
 * Fixed invalid SVG validation regex ([#94](https://github.com/jkphl/svg-sprite/issues/94))
