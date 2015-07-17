@@ -1,5 +1,6 @@
-## 1.2.6 Feature release (unreleased)
+## 1.2.6 Feature release (2015-07-17)
 * Updated dependencies
+* Added CSS class namespacing ([#42](https://github.com/jkphl/svg-sprite/issues/42))
 
 ## 1.2.5 Maintenance release (2015-06-24)
 * Updated dependencies
