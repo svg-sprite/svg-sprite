@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jkphl/svg-sprite.png?label=ready&title=Ready)](https://waffle.io/jkphl/svg-sprite)
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
