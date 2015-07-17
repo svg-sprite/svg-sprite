@@ -1,3 +1,6 @@
+## 1.2.6 Feature release (unreleased)
+* Updated dependencies
+
 ## 1.2.5 Maintenance release (2015-06-24)
 * Updated dependencies
 * Changed sprite file name handling ([#97](https://github.com/jkphl/svg-sprite/issues/97))
