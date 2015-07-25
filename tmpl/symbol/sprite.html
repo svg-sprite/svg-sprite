@@ -18,7 +18,7 @@ They might well be outsourced to an external stylesheet of course.
 -->
 
 <style type="text/css">
-{{#shapes}}	.{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}} { width: {{width.outer}}px; height: {{height.outer}}px; }
+{{#shapes}}	{{#selector.dimensions}}{{expression}}{{^last}}, {{/last}}{{/selector.dimensions}} { width: {{width.outer}}px; height: {{height.outer}}px; }
 {{/shapes}}</style>
 <!--
 ====================================================================================================
