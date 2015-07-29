@@ -1,3 +1,7 @@
+## 1.2.7 Maintenance release (2015-07-29)
+* Updated dependencies
+* Fixed error in symbol example template ([#99](https://github.com/jkphl/svg-sprite/pull/99))
+
 ## 1.2.6 Feature release (2015-07-17)
 * Updated dependencies
 * Added CSS class namespacing ([#42](https://github.com/jkphl/svg-sprite/issues/42))
