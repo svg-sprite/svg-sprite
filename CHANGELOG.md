@@ -1,3 +1,7 @@
+## 1.2.8 Feature release (unreleased)
+* Updated dependencies
+* Introduced CSS positioning values floating point precision ([#102](https://github.com/jkphl/svg-sprite/issues/102))
+
 ## 1.2.7 Maintenance release (2015-07-29)
 * Updated dependencies
 * Fixed error in symbol example template ([#99](https://github.com/jkphl/svg-sprite/pull/99))

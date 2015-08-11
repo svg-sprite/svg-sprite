@@ -117,6 +117,15 @@ svg:
     default               : true
     map                   : svg.dimensionAttributes
     
+  rootattrs:
+    description           : Custom root attributes for the outermost <svg> element (external JSON file)
+    map                   : svg.rootAttributes
+       
+  precision:
+    description           : Floating point precision for CSS positioning values
+    default               : -1
+    map                   : svg.precision
+    
 css:
   description             : Activates the «css» mode
   default                 : false

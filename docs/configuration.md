@@ -239,6 +239,7 @@ Property                 | Type            | Default       | Description        
 `namespaceClassnames`    | Boolean         | `true`        | In order to avoid CSS class name ambiguities, the default behavior is to namespace CSS class names in the source SVGs before compiling them into a sprite. Each class name is prepended with a unique string. Disable this option to keep the class names untouched. |
 `dimensionAttributes`    | Boolean         | `true`        | If truthy, `width` and `height` attributes will be set on the sprite's `<svg>` element (where applicable). |
 `rootAttributes`         | Object          |               | Shorthand for applying custom attributes to the outermost `<svg>` element. Please be aware that certain attributes (e.g. `viewBox`) will be calculated dynamically and override custom `rootAttributes` in any case. |
+`precision`              | Integer         |               | Floating point precision for CSS positioning values (defaults to `-1` meaning highest possible precision). |
 `transform`              | Function∣Array  |               | Callback (or list of callbacks) that will be applied to the resulting SVG sprites as global [post-processing transformation](#svg-sprite-customization). |
 
 
