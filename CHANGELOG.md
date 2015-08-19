@@ -1,3 +1,7 @@
+## 1.2.9 Bugfix release (2015-08-19)
+* Updated dependencies
+* Fixed broken `classname` rendering function ([#71](https://github.com/jkphl/svg-sprite/pull/71))
+
 ## 1.2.8 Feature release (2015-08-12)
 * Updated dependencies
 * Introduced CSS positioning values floating point precision ([#102](https://github.com/jkphl/svg-sprite/issues/102))
