@@ -195,15 +195,15 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
 	shape				: {
 		transform		: [
 			{custom		:
-			
+
 				/**
 				 * Custom callback transformation
-				 * 
+				 *
 				 * @param {SVGShape} shape				SVG shape object
 				 * @param {SVGSpriter} spriter			SVG spriter
 				 * @param {Function} callback			Callback
 				 * @return {void}
-				 */ 
+				 */
 				function(shape, sprite, callback) {
 					/* ... */
 					callback(null);
@@ -215,7 +215,7 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
 }
 ```
 
-The transformation name (`"custom"` in this case) is of no significance. Please see `lib/svg-sprite/shape.js` to learn about what you can do with the shape object. 
+The transformation name (`"custom"` in this case) is of no significance. Please see `lib/svg-sprite/shape.js` to learn about what you can do with the shape object.
 
 
 #### Miscellaneous shape options
@@ -254,15 +254,15 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 		transform       : [
 			/**
 			 * Custom sprite SVG transformation
-			 * 
+			 *
 			 * @param {String} svg					Sprite SVG
 			 * @return {String}						Processed SVG
-			 */ 
+			 */
 			function(svg) {
 				/* ... */
 				return svg;
 			},
-			
+
 			/* ... */
 		]
 	}
@@ -344,7 +344,7 @@ It is also possible to configure the same output mode multiple times, each time 
 
 #### Common mode properties
 
-Many `mode` properties are common between all sprite types (sometimes their default values differ from type to type, however). The placeholder `"<mode>"` is used as a substitute for one of `"css"`, `"view"`, `"defs"`, `"symbol"` or `"stack"`. Please replace it consequently. 
+Many `mode` properties are common between all sprite types (sometimes their default values differ from type to type, however). The placeholder `"<mode>"` is used as a substitute for one of `"css"`, `"view"`, `"defs"`, `"symbol"` or `"stack"`. Please replace it consequently.
 
 Property         | Type            | Default       | Description                                |
 ---------------- | --------------- | ------------- | ------------------------------------------ |
@@ -435,8 +435,12 @@ Use the subkey `template` for configuring the **rendering template** and `dest` 
 {
 	mode				: {
 		css				: {
-			template	: 'path/to/template.html',	// relative to current working directory
-			dest		: 'path/to/demo.html'		// relative to current output directory
+			render		: {
+				css		: {
+					template	: 'path/to/template.html',	// relative to current working directory
+					dest		: 'path/to/demo.html'		// relative to current output directory
+				}
+			}
 		}
 	}
 }
