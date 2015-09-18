@@ -7,7 +7,7 @@ This file is part of the documentation of *svg-sprite* — a free low-level Node
 Meta data injection
 -------------------
 
-By providing a simple [YAML](http://yaml.org/) file via the `shape.meta` configuration property, you can **inject titles and descriptions** into your SVG files before they get compiled as a sprite. Doing so may improve accessibility of your SVGs.
+By providing a simple [YAML](http://yaml.org/) file via the `shape.meta` configuration property, you can **inject titles and descriptions** into your SVG files before they get compiled as a sprite. Doing so may improve the accessibility of your SVGs. Please see the articles by [The Paciello Group](http://www.paciellogroup.com/blog/2013/12/using-aria-enhance-svg-accessibility/) and [Jonathan Neal](https://github.com/jonathantneal/svg4everybody#readability-and-accessibility) on how to use your SVG sprites in a most accessible way.
 
 ### File structure
 
@@ -17,11 +17,11 @@ The YAML file needs to look like this:
 "path/to/rectangle.svg"	:
 	title				: Green rectangle
 	description			: A light green rectangle with rounded corners and a dark green border
-	
+
 path--to--circle		:
 	title				: Red circle
 	description			: A red circle with a black border
-``` 
+```
 
 The keys need to match either
 

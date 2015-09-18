@@ -1,6 +1,7 @@
-## 1.2.10 Maintenance release (unreleased)
+## 1.2.10 Maintenance release (2015-08-19)
 * Updated dependencies
 * Added browser compatibility hint ([#106](https://github.com/jkphl/svg-sprite/issues/106))
+* Added accessibility features to symbol sprites ([#107](https://github.com/jkphl/svg-sprite/issues/107))
 
 ## 1.2.9 Bugfix release (2015-08-19)
 * Updated dependencies
