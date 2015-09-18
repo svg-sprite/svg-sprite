@@ -11,6 +11,7 @@ is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG
 
 It comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
+For an up-to-date list of browsers supporting [SVG in general](http://caniuse.com/#feat=svg) respectively [SVG fragment identifiers](http://caniuse.com/#feat=svg-fragment) in particular (required for `<defs>` and `<symbol>` sprites as well as SVG stacks) please refer to [caniuse.com](http://caniuse.com/).
 
 Grunt, Gulp & Co.
 -----------------

@@ -1,3 +1,7 @@
+## 1.2.10 Maintenance release (unreleased)
+* Updated dependencies
+* Added browser compatibility hint ([#106](https://github.com/jkphl/svg-sprite/issues/106))
+
 ## 1.2.9 Bugfix release (2015-08-19)
 * Updated dependencies
 * Fixed broken `classname` rendering function ([#71](https://github.com/jkphl/svg-sprite/pull/71))
@@ -113,8 +117,8 @@
 * Introduced `svg` getter in templating shape variables
 * Fixed broken dimension argument in CLI version ([#38](https://github.com/jkphl/svg-sprite/issues/38))
 * Fixed logging error in SVGO optimization
-* Fixed missing XML namespaces in SVG stack 
-* Fixed cache busting errors with example HTML document 
+* Fixed missing XML namespaces in SVG stack
+* Fixed cache busting errors with example HTML document
 
 ## 1.0.8 Bugfix release
 * Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
