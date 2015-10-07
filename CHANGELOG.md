@@ -1,3 +1,6 @@
+## 1.2.11 Maintenance release (2015-10-07)
+* Updated dependencies
+
 ## 1.2.10 Maintenance release (2015-08-19)
 * Updated dependencies
 * Added browser compatibility hint ([#106](https://github.com/jkphl/svg-sprite/issues/106))
