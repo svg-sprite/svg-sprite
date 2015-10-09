@@ -160,7 +160,7 @@ To enable the creation of a specific sprite type with default values, simply set
 
 ```js
 var config					= {
-	mode					:
+	mode					: {
 		css					: true,		// Create a «css» sprite
 		view				: true,		// Create a «view» sprite
 		defs				: true,		// Create a «defs» sprite
@@ -176,7 +176,7 @@ To further configure a sprite, pass in an object with configuration options:
 // «symbol» sprite with CSS stylesheet resource
 
 var config					= {
-	mode					:
+	mode					: {
 		css					: {
 			// Configuration for the «css» sprite
 			// ...
@@ -194,7 +194,7 @@ Many `mode` properties are shared between the different sprite types, but there 
 // Common mode properties
 
 var config					= {
-	mode					:
+	mode					: {
 		<mode> 				: {
 			dest			: "<mode>",						// Mode specific output directory
 			prefix			: "svg-%s",						// Prefix for CSS selectors
@@ -228,7 +228,7 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 // «symbol» sprite with CSS stylesheet resource
 
 var config					= {
-	mode					:
+	mode					: {
 		inline				: true,		// Prepare for inline embedding
 		symbol				: true		// Create a «symbol» sprite
 	}
@@ -244,7 +244,7 @@ Traditional **CSS sprite** with a **Sass stylesheet**:
 // «css» sprite with Sass stylesheet resource
 
 var config					= {
-	mode					:
+	mode					: {
 		css					: {			// Create a «css» sprite
 			render			: {
 				scss		: true		// Render a Sass stylesheet
@@ -263,7 +263,7 @@ var config					= {
 // «defs», «symbol» and «stack» sprites in parallel
 
 var config					= {
-	mode					:
+	mode					: {
 		defs				: true,
 		symbol				: true,
 		stack				: true
@@ -280,7 +280,7 @@ var config					= {
 // Just optimize source SVG files, create no sprite
 
 var config					= {
-	shape					:
+	shape					: {
 		dest				: 'path/to/out/dir'
 	}
 }
