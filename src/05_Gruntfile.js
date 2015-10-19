@@ -1,9 +1,6 @@
 'use strict';
 
-var gulp     = require('gulp'),
-svgSprite    = require('gulp-svg-sprite'),
-plumber      = require('gulp-plumber'),
-baseDir      = 'svg/base/dir',   // <-- Set to your SVG base directory
+var baseDir  = 'svg/base/dir',   // <-- Set to your SVG base directory
 svgGlob      = '**/*.svg',       // <-- Glob to match your SVG files
 outDir       = 'output/dir',     // <-- Main output directory
 config       = $$config$$;

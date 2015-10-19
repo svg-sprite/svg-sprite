@@ -62,10 +62,7 @@ spriter.compile(function(error, result, cssData) {
 });</pre></a>
 					<a href="#grunt" id="grunt">Gruntfile<pre>'use strict';
 
-var gulp     = require('gulp'),
-svgSprite    = require('gulp-svg-sprite'),
-plumber      = require('gulp-plumber'),
-baseDir      = 'svg/base/dir',   // &#60;-- Set to your SVG base directory
+var baseDir  = 'svg/base/dir',   // &#60;-- Set to your SVG base directory
 svgGlob      = '**/*.svg',       // &#60;-- Glob to match your SVG files
 outDir       = 'output/dir',     // &#60;-- Main output directory
 config       = $$config$$;
