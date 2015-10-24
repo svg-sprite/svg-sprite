@@ -1,3 +1,7 @@
+## 1.2.12 Maintenance release (2015-10-24)
+* Updated dependencies
+* Dropped example file extension restriction ([#119](https://github.com/jkphl/svg-sprite/issues/119))
+
 ## 1.2.11 Maintenance release (2015-10-07)
 * Updated dependencies
 
