@@ -1,3 +1,6 @@
+## 1.2.14 Bugfix release (unreleased)
+* Fixed broken svg4everybody links ([gulp-svg-sprite #39](https://github.com/jkphl/gulp-svg-sprite/issues/39))
+
 ## 1.2.13 Maintenance release (2015-11-06)
 * Updated dependencies
 * Support for source files outside the cwd ([grunt-svg-sprite #62](https://github.com/jkphl/grunt-svg-sprite/issues/62))
