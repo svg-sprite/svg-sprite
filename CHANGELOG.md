@@ -1,5 +1,5 @@
 ## 1.2.14 Bugfix release (unreleased)
-* Fixed broken svg4everybody links ([gulp-svg-sprite #39](https://github.com/jkphl/gulp-svg-sprite/issues/39))
+* Fixed broken svg4everybody links ([#122](https://github.com/jkphl/svg-sprite/issues/122), [gulp-svg-sprite #39](https://github.com/jkphl/gulp-svg-sprite/issues/39))
 
 ## 1.2.13 Maintenance release (2015-11-06)
 * Updated dependencies
