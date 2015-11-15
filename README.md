@@ -198,7 +198,7 @@ var config					= {
 		<mode> 				: {
 			dest			: "<mode>",						// Mode specific output directory
 			prefix			: "svg-%s",						// Prefix for CSS selectors
-			dimensions		: "-dims",						// Suffix for dimension CSS selectors
+			dimensions		: "%-dims",						// Suffix for dimension CSS selectors
 			sprite			: "svg/sprite.<mode>.svg"		// Sprite path and name
 			bust			: true|false,					// Cache busting (mode dependent default value)
 			render			: {								// Stylesheet rendering definitions
