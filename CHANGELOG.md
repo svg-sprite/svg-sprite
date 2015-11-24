@@ -1,3 +1,6 @@
+## 1.2.15 Maintenance release (2015-11-24)
+* Updated dependencies
+
 ## 1.2.14 Bugfix release (2015-11-17)
 * Updated dependencies & test fixture
 * Added Node.js versions 4 & 5 to Travis tests
