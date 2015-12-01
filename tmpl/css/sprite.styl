@@ -1,11 +1,11 @@
 {{#hasMixin}}{{mixinName}}()
-	background url({{{sprite}}}) no-repeat
+	background url("{{{sprite}}}") no-repeat
 
 {{#hasCommon}}.{{commonName}}
 	{{mixinName}}()
 
 {{/hasCommon}}{{/hasMixin}}{{^hasMixin}}{{#hasCommon}}.{{/hasCommon}}{{^hasCommon}}${{/hasCommon}}{{commonName}} 
-	background url({{{sprite}}}) no-repeat
+	background url("{{{sprite}}}") no-repeat
 
 {{/hasMixin}}{{#shapes}}{{#selector.shape}}{{#escape}}{{expression}}{{/escape}}{{^last}},{{/last}}
 {{/selector.shape}}	{{^hasCommon}}{{#hasMixin}}{{mixinName}}(){{/hasMixin}}{{^hasMixin}}@extend ${{commonName}}{{/hasMixin}}

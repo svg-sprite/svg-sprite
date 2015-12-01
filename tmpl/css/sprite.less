@@ -1,5 +1,5 @@
 {{#hasMixin}}.{{mixinName}}() {
-	background: url({{{sprite}}}) no-repeat;
+	background: url("{{{sprite}}}") no-repeat;
 }
 
 {{#hasCommon}}.{{commonName}} {
@@ -7,7 +7,7 @@
 }
 
 {{/hasCommon}}{{/hasMixin}}{{^hasMixin}}.{{commonName}}{{^hasCommon}}(){{/hasCommon}} {
-	background: url({{{sprite}}}) no-repeat;
+	background: url("{{{sprite}}}") no-repeat;
 }
 
 {{/hasMixin}}{{#shapes}}{{#selector.shape}}{{expression}}{{^last}},
