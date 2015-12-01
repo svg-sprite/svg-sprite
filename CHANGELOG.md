@@ -1,4 +1,4 @@
-## 1.2.15 Feature release (unreleased)
+## 1.2.16 Maintenance release (2015-12-01)
 * Updated dependencies
 * Improved log level config handling ([#124](https://github.com/jkphl/svg-sprite/issues/124))
 * Wrapped CSS url()s in quotes ([#125](https://github.com/jkphl/svg-sprite/issues/125))
