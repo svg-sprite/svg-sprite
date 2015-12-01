@@ -62,7 +62,7 @@ Property                 | Type            | Default       | Description        
 
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
-`log`                    | String∣Logger   |               | *svg-sprite* uses [winston](https://github.com/flatiron/winston) for logging, but output is turned off by default. To activate and use the pre-configured console logger, you need to pass the desired log level (`'info'`, `'verbose'` or `'debug'`). Alternatively, you can pass your own custom `winston.Logger` instance (which needs to handle at least these three log levels). |
+`log`                    | String∣Logger   |               | *svg-sprite* uses [winston](https://github.com/flatiron/winston) for logging, but output is turned off by default. To activate and use the pre-configured console logger, you need to pass the desired log level (`'info'`, `'verbose'` or `'debug'`). Alternatively, you can pass your own custom `winston.Logger` instance (which needs to handle at least these three log levels). Falsy values like `""`, `false` or `null` will disable logging. |
 
 
 ### SVG shape configuration

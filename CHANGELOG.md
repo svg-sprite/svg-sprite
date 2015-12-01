@@ -1,3 +1,7 @@
+## 1.2.15 Feature release (unreleased)
+* Updated dependencies
+* Improved log level config handling ([#124](https://github.com/jkphl/svg-sprite/issues/124))
+
 ## 1.2.15 Maintenance release (2015-11-24)
 * Updated dependencies
 
