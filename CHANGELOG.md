@@ -1,4 +1,4 @@
-## 1.2.17 Maintenance release (unreleased)
+## 1.2.17 Maintenance release (2015-12-17)
 * Updated dependencies
 
 ## 1.2.16 Maintenance release (2015-12-01)
