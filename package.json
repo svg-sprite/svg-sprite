@@ -36,9 +36,9 @@
 	},
 	"dependencies": {
 		"mkdirp": "^0.5.1",
-		"async": "^1.5.0",
+		"async": "^1.5.1",
 		"lodash": "^3.10.1",
-		"glob": "^6.0.1",
+		"glob": "^6.0.3",
 		"xmldom": "^0.1.19",
 		"xpath": "^0.0.9",
 		"vinyl": "^1.1.0",
@@ -66,7 +66,7 @@
 		"node-sass": "^3.4.2",
 		"less": "^2.5.3",
 		"stylus": "^0.53.0",
-		"jshint": "^2.9.1-rc1"
+		"jshint": "^2.9.1-rc2"
 	},
 	"keywords": [
 		"icon",
