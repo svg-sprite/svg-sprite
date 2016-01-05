@@ -1,7 +1,8 @@
-## 1.2.18 Maintenance release (unreleased)
+## 1.2.18 Maintenance release (2016-01-05)
 * Updated dependencies
 * Fixed inline embedding link in example templates ([#130](https://github.com/jkphl/svg-sprite/issues/130))
 * Fixed broken Less mixin support ([#133](https://github.com/jkphl/svg-sprite/issues/133))
+* Introduced support for custom shape orders ([#131](https://github.com/jkphl/svg-sprite/issues/131))
 
 ## 1.2.17 Maintenance release (2015-12-17)
 * Updated dependencies

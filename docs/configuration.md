@@ -88,6 +88,7 @@ shape				: {
         box         : 'content'                 // Padding strategy (similar to CSS `box-sizing`)
     },
     transform		: ['svgo'],					// List of transformations / optimizations
+    sort 			: function() { /*...*/ },   // SVG shape sorting callback
     meta			: null,                     // Path to YAML file with meta / accessibility data
     align			: null,                     // Path to YAML file with extended alignment data
     dest			: null                      // Output directory for optimized intermediate SVG shapes
@@ -222,9 +223,10 @@ The transformation name (`"custom"` in this case) is of no significance. Please 
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.meta`                   | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](meta-data.md) into the SVG shapes. |
-`shape.align`                  | String          |               | Path to a [YAML](http://yaml.org/) file with [extended alignment settings](shape-alignment.md) for sprites with `"vertical"` or `"horizontal"` layout. |
-`shape.dest`                   | String          |               | Implicit way of calling [`.getShapes()`](api.md#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](api.md#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
+`shape.sort`             | Function        |               | Callback for sorting the list of shapes. The callback's signature is `function(shape1, shape2) { /* ... */ return order; }`. It gets passed two shape objects and is expected to return an integer with `0` meaning both shapes are equal in their position, `1` meaning the first shape should follow the second one and `-1` the other way round. The default callback simply compares the shapes' `id` values and returns them in alphabetical order, but you may as well implement your own ordering logic. |
+`shape.meta`             | String          |               | Path to a [YAML](http://yaml.org/) file with [meta data to be injected](meta-data.md) into the SVG shapes. |
+`shape.align`            | String          |               | Path to a [YAML](http://yaml.org/) file with [extended alignment settings](shape-alignment.md) for sprites with `"vertical"` or `"horizontal"` layout. |
+`shape.dest`             | String          |               | Implicit way of calling [`.getShapes()`](api.md#svgspritergetshapes-dest--callback-) during sprite compilation. If given, the `result` of subsequent [`.compile()`](api.md#svgspritercompile-config--callback-) calls will carry an additional `shapes` property, listing the intermediate SVG files as an Array of [vinyl](https://github.com/wearefractal/vinyl) files. The value will be used as destination directory for the files (relative to the main output directory if not absolute anyway). |
 
 
 ### Sprite SVG options
