@@ -1,3 +1,7 @@
+## 1.2.19 Maintenance release (2016-01-11)
+* Updated dependencies
+* Temporarily fixed xmldom dependency problem ([#135](https://github.com/jkphl/svg-sprite/issues/135))
+
 ## 1.2.18 Maintenance release (2016-01-05)
 * Updated dependencies
 * Fixed inline embedding link in example templates ([#130](https://github.com/jkphl/svg-sprite/issues/130))

@@ -1,6 +1,6 @@
 {
 	"name": "svg-sprite",
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"author": "Joschi Kuphal <joschi@kuphal.net> (https://jkphl.is)",
 	"description": "SVG sprites & stacks galore — A low-level Node.js module that takes a bunch of SVG files, optimizes them and bakes them into SVG sprites of several types along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)",
 	"homepage": "https://github.com/jkphl/svg-sprite",
@@ -36,10 +36,10 @@
 	},
 	"dependencies": {
 		"mkdirp": "^0.5.1",
-		"async": "^1.5.1",
+		"async": "^1.5.2",
 		"lodash": "^3.10.1",
-		"glob": "^6.0.3",
-		"xmldom": "^0.1.19",
+		"glob": "^6.0.4",
+		"xmldom": "0.1.19",
 		"xpath": "^0.0.9",
 		"vinyl": "^1.1.0",
 		"svgo": "0.6.1",
@@ -48,7 +48,7 @@
 		"phantomjs": "^1.9.19",
 		"cssmin": "^0.4.3",
 		"mustache": "^2.2.1",
-		"js-yaml": "^3.4.6",
+		"js-yaml": "^3.5.2",
 		"yargs": "^3.31.0",
 		"winston": "^2.1.1",
 		"prettysize": "^0.0.3"
