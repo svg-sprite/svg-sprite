@@ -1,3 +1,6 @@
+## 1.2.20 Maintenance release (unreleased)
+* Updated dependencies (still incomplete)
+
 ## 1.2.19 Maintenance release (2016-01-11)
 * Updated dependencies
 * Temporarily fixed xmldom dependency problem ([#135](https://github.com/jkphl/svg-sprite/issues/135))

@@ -145,7 +145,7 @@ config.shape.transform					= [];
 				var transformConfigFile		= argv['transform-' + transform],
 				transformConfigJSON			= fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
 				transformConfig				= transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
-				this.push(_.object([transform], [transformConfig]));
+				this.push(_.zipObject([transform], [transformConfig]));
 			} catch(e) {}
 		} else {
 			this.push(transform);
