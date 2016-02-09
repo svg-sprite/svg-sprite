@@ -1,8 +1,5 @@
 *.md.html
 **/*.md.html
-/.buildpath
-/.project
-/.settings
 /.idea
 /node_modules
 /npm-debug.log
@@ -11,4 +8,5 @@
 /index.js
 /capture.js
 /align.js
+/test/fixture/svg/css
 /FEATURES.md

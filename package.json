@@ -37,7 +37,7 @@
 	"dependencies": {
 		"mkdirp": "^0.5.1",
 		"async": "^1.5.2",
-		"lodash": "^4.1.0",
+		"lodash": "^4.3.0",
 		"lodash.pluck": "^3.1.2",
 		"glob": "^6.0.4",
 		"xmldom": "0.1.22",
