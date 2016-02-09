@@ -113,7 +113,7 @@ describe('svg-sprite', function() {
 	var weather				= glob.glob.sync('**/weather*.svg', {cwd: cwdWeather}),
 	align					= glob.glob.sync('**/*.svg', {cwd: cwdAlign}),
 	previewTemplate			= fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
-	
+
     describe('with no arguments', function() {
     	var spriter			= new SVGSpriter();
     	
@@ -481,37 +481,34 @@ describe('svg-sprite', function() {
 					});
 		        });
 		    });
-		    
-		    /*
-		     * Cannot be tested at the moment as PhantomJS 1.9 doesn't support fragment identifiers with SVG
-		     * 
-		    describe('creates a visually correct stylesheet resource in', function() {
-		    	
-		    	it('CSS format', function(done) {
-			    	this.timeout(20000);
 
-		        	data.css				= '../sprite.css';
-		        	var previewTemplate		= fs.readFileSync(path.join(__dirname, 'tmpl', 'view.html'), 'utf-8'),
-		        	out						= mustache.render(previewTemplate, data),
-		        	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'view', 'html', 'view.html'), out),
-		        	previewImage			= path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.html.png');
-		        	preview.should.be.ok;
-		        	
-		        	captureSlimer(preview, previewImage, function(error) {
-		        		should(error).not.ok;
-		        		imageDiff({
-							actualImage		: previewImage,
-							expectedImage	: path.join(__dirname, 'expected', 'png', 'view.html.png'),
-							diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.html.diff.png')
-						}, function (error, imagesAreSame) {
-					    	should(error).not.ok;
-					    	should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
-					    	done();
-					    });ddr
-		        	});
-		    	});
-		    });
-		    */
+            //// Cannot be tested at the moment as PhantomJS 1.9 doesn't support fragment identifiers with SVG
+		    //describe('creates a visually correct stylesheet resource in', function() {
+		    //
+		    //	it('CSS format', function(done) {
+			 //   	this.timeout(20000);
+            //
+		    //    	data.css				= '../sprite.css';
+		    //    	var previewTemplate		= fs.readFileSync(path.join(__dirname, 'tmpl', 'view.html'), 'utf-8'),
+		    //    	out						= mustache.render(previewTemplate, data),
+		    //    	preview					= writeFile(path.join(__dirname, '..', 'tmp', 'view', 'html', 'view.html'), out),
+		    //    	previewImage			= path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.html.png');
+		    //    	preview.should.be.ok;
+		    //
+		    //    	captureSlimer(preview, previewImage, function(error) {
+		    //    		should(error).not.ok;
+		    //    		imageDiff({
+				//			actualImage		: previewImage,
+				//			expectedImage	: path.join(__dirname, 'expected', 'png', 'view.html.png'),
+				//			diffImage		: path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.html.diff.png')
+				//		}, function (error, imagesAreSame) {
+				//	    	should(error).not.ok;
+				//	    	should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
+				//	    	done();
+				//	    });ddr
+		    //    	});
+		    //	});
+		    //});
 	    });
 	});
 	
@@ -776,7 +773,7 @@ describe('svg-sprite', function() {
 	    	});
 		});
 	});
-    
+
     describe('with mixed alignment and ' + align.length + ' SVG files', function() {
 		var spriter						= null,
 		data							= null,
