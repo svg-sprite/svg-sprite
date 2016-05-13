@@ -2,6 +2,7 @@
 * Updated dependencies (still incomplete)
 * Tweaked .gitignore to ignore symlinked test files (closes #140)
 * Updated documentation ([grunt-svg-sprite #69](https://github.com/jkphl/grunt-svg-sprite/issues/69))
+* Removed redundant require ([#156](https://github.com/jkphl/svg-sprite/issues/156))
 
 ## 1.2.19 Maintenance release (2016-01-11)
 * Updated dependencies
