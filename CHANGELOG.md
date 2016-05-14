@@ -4,6 +4,8 @@
 * Updated documentation ([grunt-svg-sprite #69](https://github.com/jkphl/grunt-svg-sprite/issues/69))
 * Removed redundant require ([#156](https://github.com/jkphl/svg-sprite/issues/156))
 * Breaking change: Dropped support for Node.js < 4.0 and io.js
+* Breaking change: Dropped support for Node.js < 4.0 and io.js
+* Set sprite size in example document ([#138](https://github.com/jkphl/svg-sprite/issues/138))
 
 ## 1.2.19 Maintenance release (2016-01-11)
 * Updated dependencies
