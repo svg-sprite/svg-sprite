@@ -62,7 +62,7 @@
 		"should": "",
 		"rimraf": "",
 		"vinyl-fs": "^2.2.1",
-		"svg2png": "^3.0.0",
+		"svg2png": "jkphl/svg2png",
 		"image-diff": "^1.5.1",
 		"node-sass": "^3.7.0",
 		"less": "^2.7.1",
