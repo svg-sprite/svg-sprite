@@ -197,7 +197,7 @@ describe('svg-sprite', function () {
             it('creates 5 files for vertical layout', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest
                 });
                 addFixtureFiles(spriter, weather, cwdWeather);
@@ -539,7 +539,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
@@ -611,7 +611,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
@@ -692,7 +692,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
@@ -780,7 +780,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
@@ -852,7 +852,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
@@ -933,7 +933,7 @@ describe('svg-sprite', function () {
             it('creates 2 files', function (done) {
                 this.timeout(20000);
 
-                spriter = new SVGSpriter({log: 'debug',
+                spriter = new SVGSpriter({
                     dest: dest,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.mixed.yaml'),
