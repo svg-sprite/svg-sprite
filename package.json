@@ -43,7 +43,7 @@
 		"xmldom": "0.1.22",
 		"xpath": "^0.0.9",
 		"vinyl": "^1.1.0",
-		"svgo": "0.6.1",
+		"svgo": "0.6.6",
 		"cssom": "^0.3.0",
 		"css-selector-parser": "^1.1.0",
 		"phantomjs": "^1.9.20",
