@@ -1,5 +1,5 @@
-## 1.3.0 Maintenance release (unreleased)
-* Updated dependencies (still incomplete)
+## 1.3.0 Major maintenance release (unreleased)
+* Updated dependencies
 * Tweaked .gitignore to ignore symlinked test files (closes #140)
 * Updated documentation ([grunt-svg-sprite #69](https://github.com/jkphl/grunt-svg-sprite/issues/69))
 * Removed redundant require ([#156](https://github.com/jkphl/svg-sprite/issues/156))

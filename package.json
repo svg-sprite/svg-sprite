@@ -46,7 +46,7 @@
 		"svgo": "0.6.6",
 		"cssom": "^0.3.0",
 		"css-selector-parser": "^1.1.0",
-		"phantomjs": "^1.9.20",
+		"phantomjs-prebuilt": "^2.1.7",
 		"cssmin": "^0.4.3",
 		"mustache": "^2.2.1",
 		"js-yaml": "^3.6.1",
