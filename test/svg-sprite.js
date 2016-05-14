@@ -691,9 +691,11 @@ describe('svg-sprite', function () {
 
             it('creates 2 files', function (done) {
                 this.timeout(20000);
+                console.log(align);
 
                 spriter = new SVGSpriter({
                     dest: dest,
+                    log: debug,
                     shape: {
                         align: path.join(__dirname, 'fixture', 'yaml', 'align.centered.yaml'),
                         dimension: {
