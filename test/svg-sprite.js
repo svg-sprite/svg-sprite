@@ -3,9 +3,18 @@
 /* jshint -W117 */
 /* jshint -W030 */
 
-const fs = require('pn/fs'); // https://www.npmjs.com/package/pn
-const svg2png = require('svg2png');
+/**
+ * svg-sprite is a Node.js module for creating SVG sprites
+ *
+ * @see https://github.com/jkphl/svg-sprite
+ *
+ * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
+ * @copyright © 2016 Joschi Kuphal
+ * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE.txt
+ */
 
+var fs = require('pn/fs'); // https://www.npmjs.com/package/pn
+var svg2png = require('svg2png');
 var should = require('should'),
     path = require('path'),
     mkdirp = require('mkdirp'),
@@ -120,7 +129,7 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
         console.log(err);
         should(err).not.ok;
         done();
-    }
+    };
     fs.readFile(svg)
         .then(svg2png)
         .then(function (buffer) {
@@ -136,7 +145,7 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
                         done();
                     });
                 })
-                .catch(ecb)
+                .catch(ecb);
         })
         .catch(ecb);
 }

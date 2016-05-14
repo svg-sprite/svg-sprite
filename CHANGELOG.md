@@ -1,14 +1,13 @@
-## 1.3.0 Major maintenance release (unreleased)
+## 1.3.0 Major maintenance release (2016-04-14)
 * Updated dependencies
-* Tweaked .gitignore to ignore symlinked test files (closes #140)
+* ~~Tweaked .gitignore to ignore symlinked test files (closes #140)~~ Reverted & made the files real copies
 * Updated documentation ([grunt-svg-sprite #69](https://github.com/jkphl/grunt-svg-sprite/issues/69))
 * Removed redundant require ([#156](https://github.com/jkphl/svg-sprite/issues/156))
-* Breaking change: Dropped support for Node.js < 4.0 and io.js
-* Breaking change: Dropped support for Node.js < 4.0 and io.js
-* Set sprite size in example document ([#138](https://github.com/jkphl/svg-sprite/issues/138))
+* Dropped support for Node.js < 4.0 and io.js
+* Added explicit sprite size in example document ([#138](https://github.com/jkphl/svg-sprite/issues/138))
 * Added XML entity resolution ([#118](https://github.com/jkphl/svg-sprite/issues/118))
 * Allow multiple selectors for ID / class namespacing ([#109](https://github.com/jkphl/svg-sprite/issues/109))
-* Dev: Switched to [patched svg2png](https://github.com/domenic/svg2png/pull/45) until media queries are properly supported
+* Switched to [patched svg2png](https://github.com/domenic/svg2png/pull/45) until media queries are properly supported (devDependencies)
 
 ## 1.2.19 Maintenance release (2016-01-11)
 * Updated dependencies

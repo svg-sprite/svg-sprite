@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+/**
+ * svg-sprite is a Node.js module for creating SVG sprites
+ *
+ * @see https://github.com/jkphl/svg-sprite
+ *
+ * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
+ * @copyright © 2016 Joschi Kuphal
+ * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE
+ */
+
 'use strict';
 
 /**
@@ -28,41 +38,41 @@ yargs				= require('yargs')
 
 /**
  * Add a command line option
- * 
+ *
  * @param {String} name				Option name
  * @param {Object} option			Option configuration
  * @return {void}
  */
 function addOption(name, option) {
 	var alias					= name;
-	
+
 	// If the this is an option itself
 	if ('description' in option) {
 		if ('alias' in option) {
 			alias				= option.alias;
 			yargs				= yargs.alias(alias, name);
 		}
-		
+
 		yargs					= yargs.describe(alias, option.description);
-		
+
 		if ('default' in option) {
 			var template		= (name.substr(-9) === '-template'),
 			def					= template ? path.resolve(path.dirname(__dirname), option.default) : option.default;
 			yargs				= yargs.default(alias, def);
-			
+
 			if ((option.default === true) || (option.default === false)) {
 				yargs			= yargs.boolean(name);
 			}
- 			
+
 		} else if (option.required) {
 			yargs				= yargs.require(alias);
 		}
-		
+
 		if ('map' in option) {
 			map[option.map]		= name;
 		}
 	}
-	
+
 	var children				= _.omit(option, ['description', 'alias', 'default', 'map']);
 	for (var sub in children) {
 		addOption(name + '-' + sub, children[sub]);
@@ -71,10 +81,10 @@ function addOption(name, option) {
 
 /**
  * Add a value to the global configuration
- * 
+ *
  * @param {Object} store			Configuration
  * @param {Array} path				Path
- * @param {Mixed} value				Value				
+ * @param {Mixed} value				Value
  */
 function addConfigMap(store, path, value) {
 	var key					= path.shift();
@@ -90,7 +100,7 @@ function addConfigMap(store, path, value) {
 
 /**
  * Recursively write files to disc
- * 
+ *
  * @param {Object} files			Files
  * @return {Number}					Number of written files
  */
@@ -116,7 +126,7 @@ try {
 	for (var name in options) {
 		addOption(name, options[name]);
 	}
-	
+
 } catch (e) {
 	console.log(e);
 }
@@ -159,7 +169,7 @@ config.shape.transform					= [];
 		delete this[mode];
 		return;
 	} else if (['css', 'view'].indexOf(mode) >= 0) {
-		
+
 		// Remove excessive render types
 		['css', 'scss', 'less', 'styl'].forEach(function(render){
 			var arg							= mode + '-render-' + render;
@@ -168,7 +178,7 @@ config.shape.transform					= [];
 			}
 		}, this[mode].render);
 	}
-	
+
 	if (!this[mode].dimensions.length) {
 		this[mode].dimensions		= true;
 	}
