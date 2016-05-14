@@ -1,0 +1,22 @@
+<svg height="43" preserveAspectRatio="xMidYMid" viewBox="0 0 40 43" width="40" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .cls-1 {
+            fill: #33b6fa;
+            fill-rule: evenodd;
+            }
+            .cls-2,
+            .cls-3 {
+            font-size: 22px;
+            }
+            .cls-3 {
+            fill: #fff;
+            font-family: "STHeitiSC-Light"
+            }
+        </style>
+    </defs>
+    <path class="cls-1" d="M0 0h40v43l-20-5.292-20 5.292v-43z"/>
+    <text class="cls-2" x="9" y="27">
+        <tspan class="cls-3">新</tspan>
+    </text>
+</svg>

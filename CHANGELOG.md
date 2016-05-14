@@ -7,6 +7,7 @@
 * Breaking change: Dropped support for Node.js < 4.0 and io.js
 * Set sprite size in example document ([#138](https://github.com/jkphl/svg-sprite/issues/138))
 * Added XML entity resolution ([#118](https://github.com/jkphl/svg-sprite/issues/118))
+* Allow multiple selectors for ID / class namespacing ([#109](https://github.com/jkphl/svg-sprite/issues/109))
 
 ## 1.2.19 Maintenance release (2016-01-11)
 * Updated dependencies
