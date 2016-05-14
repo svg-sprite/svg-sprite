@@ -5,56 +5,59 @@
         <title>svg-sprite preview</title>
         <link href="{{{css}}}" rel="stylesheet" type="text/css"/>
         <style>
-body {
-    padding: 0;
-    margin: 0;
-    color: #666;
-    background: #fafafa;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
-    line-height: 1.4;
-    width: 1280px;
-}
-li {
-    display: inline-block;
-    background-color: #fff;
-    position: relative;
-    margin: 0 2em 2em 0;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    padding: 1em;
-    cursor: default;
-    width: 200px;
-    height: 200px;
-    line-height: 200px;
-}
-figure {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    display: inline-block;
-    line-height: 1;
-    vertical-align: middle;
-}
-figcaption {
-    display: none;
-}
-img {
-    margin-bottom: 1em;
-}
+            body {
+                padding: 0;
+                margin: 0;
+                color: #666;
+                background: #fafafa;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16px;
+                line-height: 1.4;
+                width: 1280px;
+            }
+            ol {
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                display: inline-block;
+                background-color: #fff;
+                position: relative;
+                margin: 14px;
+                vertical-align: middle;
+                border: 1px solid #ccc;
+                padding: 13px;
+                cursor: default;
+                width: 200px;
+                height: 200px;
+                line-height: 200px;
+            }
+            figure {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                display: inline-block;
+                line-height: 1;
+                vertical-align: middle;
+            }
+            figcaption {
+                display: none;
+            }
+            i {
+                display: inline-block;
+                margin-bottom: 16px;
+            }
         </style>
     </head>
-    <body> 
+    <body>
         <ol>
-            {{#shapes}}
-            <li>
+            {{#shapes}}<li>
                 <figure>
                     <img src="../{{{sprite}}}#{{name}}" class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}" alt="{{name}}"/>
                     <figcaption>{{name}}</figcaption>
                 </figure>
-            </li>
-            {{/shapes}}
+            </li>{{/shapes}}
         </ol>
     </body>
 </html>
