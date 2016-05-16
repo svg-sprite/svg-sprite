@@ -1,3 +1,6 @@
+## 1.3.1 Bugfix release (unreleased)
+* Fixed modeless run ([#158](https://github.com/jkphl/svg-sprite/issues/158), [gulp-svg-sprite #42](https://github.com/jkphl/gulp-svg-sprite/issues/42))
+
 ## 1.3.0 Major maintenance release (2016-04-14)
 * Updated dependencies
 * ~~Tweaked .gitignore to ignore symlinked test files (closes #140)~~ Reverted & made the files real copies

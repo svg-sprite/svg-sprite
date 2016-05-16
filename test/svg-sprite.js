@@ -162,16 +162,21 @@ describe('svg-sprite', function () {
         previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
 
     describe('with no arguments', function () {
-        var spriter = new SVGSpriter();
+        var spriter = new SVGSpriter({
+            shape: {
+                dest: 'svg'
+            }
+        });
 
         describe('with no SVG files', function () {
 
-            it('returns an error', function (done) {
-                spriter.compile(function (error, result) {
-                    should(error).be.an.Error;
-                    should(error).have.property('name', 'ArgumentError');
-                    should(error).have.property('errno', 1420362541);
-                    should(result).be.exactly(null);
+            it('has an empty result', function (done) {
+                spriter.compile(function (error, result, data) {
+                    should(error).not.ok;
+                    should(result).be.an.Object;
+                    should(result).be.empty;
+                    should(data).be.an.Object;
+                    should(data).be.empty;
                     done();
                 });
             });
@@ -179,15 +184,18 @@ describe('svg-sprite', function () {
 
         describe('with ' + weather.length + ' SVG files', function () {
 
-            it('returns an error', function (done) {
+            it('returns ' + weather.length + ' optimized shapes', function (done) {
                 this.timeout(20000);
 
                 addFixtureFiles(spriter, weather, cwdWeather);
-                spriter.compile(function (error, result) {
-                    should(error).be.an.Error;
-                    should(error).have.property('name', 'ArgumentError');
-                    should(error).have.property('errno', 1420362541);
-                    should(result).be.exactly(null);
+                spriter.compile(function (error, result, data) {
+                    should(error).not.ok;
+                    should(result).be.an.Object;
+                    should(result).have.property('shapes');
+                    should(result.shapes).be.an.Array;
+                    should(result.shapes).have.lengthOf(weather.length);
+                    should(data).be.an.Object;
+                    should(data).be.empty;
                     done();
                 });
             });
