@@ -113,6 +113,7 @@ Property                 | Type            | Default       | Description        
 `shape.dimension.maxWidth`     | Integer         | `2000`        | Maximum shape width in pixels |
 `shape.dimension.maxHeight`    | Integer         | `2000`        | Maximum shape height in pixels |
 `shape.dimension.precision`    | Integer         | `2`           | Precision (number of decimal places) for dimension calculations |
+`shape.dimension.attributes`   | Boolean         | `false`       | Whether to add `width` and `height` attributes to embedded shapes («defs» and «stack» mode only) |
 
 
 #### Shape spacing
