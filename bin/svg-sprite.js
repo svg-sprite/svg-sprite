@@ -150,9 +150,9 @@ var transform						= ('' + config.shape.transform).trim();
 config.shape.transform					= [];
 (transform.length ? transform.split(',').map(function(trans){ return ('' + trans).trim(); }) : []).forEach(function(transform){
 	if (transform.length) {
-		if (('transform-' + transform) in argv) {
+		if (('shape-transform-' + transform) in argv) {
 			try {
-				var transformConfigFile		= argv['transform-' + transform],
+				var transformConfigFile		= argv['shape-transform-' + transform],
 				transformConfigJSON			= fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
 				transformConfig				= transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
 				this.push(_.zipObject([transform], [transformConfig]));
