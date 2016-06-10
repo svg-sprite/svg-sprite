@@ -3,7 +3,12 @@ dest:
   alias                   : D
   default                 : .
   map                     : dest
-  
+
+config:
+  description             : Path to config file
+  alias                   : C
+  map                     : config
+
 log:
   description             : Logging verbosity ("info", "verbose" or "debug")
   alias                   : l

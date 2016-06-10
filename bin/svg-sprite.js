@@ -24,6 +24,7 @@ yaml				= require('js-yaml'),
 glob				= require('glob'),
 SVGSpriter			= require('../lib/svg-sprite'),
 config				= {},
+JSONConfig			= {},
 map					= {},
 yargs				= require('yargs')
 					.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -94,7 +95,9 @@ function addConfigMap(store, path, value) {
 		}
 		addConfigMap(store[key], path, value);
 	} else {
-		store[key]		= value;
+		if (store[key] === undefined) {
+			store[key]		= value;
+		}
 	}
 }
 
@@ -133,6 +136,22 @@ try {
 
 var argv			= yargs.argv;
 
+if (argv['config']) {
+	try {
+		var file = argv['config'];
+		delete argv['config'];
+		var JSONConfigContent	= fs.readFileSync(path.resolve(file));
+		config					= JSON.parse(JSONConfigContent);
+		// make a clone of initial config for options removal checks
+		JSONConfig				= JSON.parse(JSONConfigContent);
+		if (!('mode' in JSONConfig)) {
+			JSONConfig['mode'] = {};
+		}
+	} catch(e) {
+		console.error('[ERROR] Skipping --config file due to errors ("%s")', e.message.trim());
+	}
+}
+
 // Map all arguments to a global configuration object
 for (var m in map) {
 	if (!(map[m] in argv)) {
@@ -165,7 +184,7 @@ config.shape.transform					= [];
 
 // Run through all sprite modes
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode){
-	if (!argv[mode]) {
+	if (!argv[mode] && !(mode in JSONConfig.mode)) {
 		delete this[mode];
 		return;
 	} else if (['css', 'view'].indexOf(mode) >= 0) {
@@ -173,7 +192,7 @@ config.shape.transform					= [];
 		// Remove excessive render types
 		['css', 'scss', 'less', 'styl'].forEach(function(render){
 			var arg							= mode + '-render-' + render;
-			if (!argv[arg] && (render in this)) {
+			if (!argv[arg] && !(render in JSONConfig.mode[mode]) && (render in this)) {
 				delete this[render];
 			}
 		}, this[mode].render);
@@ -187,7 +206,7 @@ config.shape.transform					= [];
 // Remove excessive example options
 for (var mode in config.mode) {
 	var example						= mode + '-example';
-	if (!argv[example] && ('example' in config.mode[mode])) {
+	if (!argv[example] && !('example' in JSONConfig.mode[mode]) && ('example' in config.mode[mode])) {
 		delete config.mode[mode].example;
 	}
 }
