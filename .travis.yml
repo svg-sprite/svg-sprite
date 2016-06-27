@@ -5,6 +5,7 @@ language: node_js
 node_js:
   - '4.0'
   - '5.0'
+  - '6.0'
 
 before_install:
   - npm update -g npm
@@ -14,6 +15,6 @@ after_script:
 
 after_failure:
   - tar -cjf "svg-sprite_travis_${TRAVIS_BUILD_NUMBER}.tar.bz2" tmp && curl --ftp-create-dirs -T "svg-sprite_travis_${TRAVIS_BUILD_NUMBER}.tar.bz2" -u $FTP_USER:$FTP_PASSWORD "ftp://jkphl.is/${TRAVIS_REPO_SLUG}/svg-sprite_travis_${TRAVIS_BUILD_NUMBER}.tar.bz2"
-  
+
 matrix:
   fast_finish: true
