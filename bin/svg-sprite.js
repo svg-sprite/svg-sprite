@@ -24,6 +24,7 @@ var _ = require('lodash'),
 	glob = require('glob'),
 	SVGSpriter = require('../lib/svg-sprite'),
 	config = {},
+	JSONConfig = {},
 	map = {},
 	yargs = require('yargs')
 		.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -39,8 +40,8 @@ var _ = require('lodash'),
 /**
  * Add a command line option
  *
- * @param {String} name                Option name
- * @param {Object} option            Option configuration
+ * @param {String} name Option name
+ * @param {Object} option Option configuration
  * @return {void}
  */
 function addOption(name, option) {
@@ -82,14 +83,14 @@ function addOption(name, option) {
 /**
  * Add a value to the global configuration
  *
- * @param {Object} store            Configuration
- * @param {Array} path                Path
- * @param {Mixed} value                Value
+ * @param {Object} store Configuration
+ * @param {Array} path Path
+ * @param {Mixed} value Value
  */
 function addConfigMap(store, path, value) {
 	var key = path.shift();
 	if (path.length) {
-		if (!(key in store)) {
+		if (!(key in store) || !_.isObject(store[key])) {
 			store[key] = {};
 		}
 		addConfigMap(store[key], path, value);
@@ -99,10 +100,30 @@ function addConfigMap(store, path, value) {
 }
 
 /**
+ * Recursively merge two config objects
+ *
+ * @param {Object} from Source configuration
+ * @param {Object} to Target configuration
+ */
+function mergeConfig(from, to) {
+	for (var f in from) {
+		if (_.isObject(from[f])) {
+			if (!_.isObject(to[f])) {
+				to[f] = from[f];
+			} else {
+				mergeConfig(from[f], to[f]);
+			}
+		} else {
+			to[f] = from[f];
+		}
+	}
+}
+
+/**
  * Recursively write files to disc
  *
- * @param {Object} files            Files
- * @return {Number}                    Number of written files
+ * @param {Object} files Files
+ * @return {Number} Number of written files
  */
 function writeFiles(files) {
 	var written = 0;
@@ -141,6 +162,25 @@ for (var m in map) {
 	addConfigMap(config, m.split('.'), argv[map[m]]);
 }
 
+// Load external JSON config file
+if (argv['config']) {
+	try {
+		var file = argv['config'];
+		delete argv['config'];
+		delete argv['C'];
+		var JSONConfigContent = fs.readFileSync(path.resolve(file));
+		mergeConfig(JSON.parse(JSONConfigContent), config);
+
+		// Make a clone of initial config for options removal checks
+		JSONConfig = JSON.parse(JSONConfigContent);
+		if (!('mode' in JSONConfig)) {
+			JSONConfig['mode'] = {};
+		}
+	} catch (e) {
+		console.error('[ERROR] Skipping --config file due to errors ("%s")', e.message.trim());
+	}
+}
+
 // Refine particular config options
 config.shape.spacing.padding = ('' + config.shape.spacing.padding).trim();
 config.shape.spacing.padding = config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function (dim) {
@@ -170,7 +210,7 @@ config.shape.transform = [];
 
 // Run through all sprite modes
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function (mode) {
-	if (!argv[mode]) {
+	if (!argv[mode] && !(mode in JSONConfig.mode)) {
 		delete this[mode];
 		return;
 	}
@@ -178,7 +218,7 @@ config.shape.transform = [];
 	// Remove excessive render types
 	['css', 'scss', 'less', 'styl'].forEach(function (render) {
 		var arg = mode + '-render-' + render;
-		if (!argv[arg] && (render in this)) {
+		if ((render in this) && !argv[arg] && (!('render' in JSONConfig.mode[mode]) || !(render in JSONConfig.mode[mode].render))) {
 			delete this[render];
 		}
 	}, this[mode].render);
@@ -191,7 +231,7 @@ config.shape.transform = [];
 // Remove excessive example options
 for (var mode in config.mode) {
 	var example = mode + '-example';
-	if (!argv[example] && ('example' in config.mode[mode])) {
+	if (!argv[example] && !('example' in JSONConfig.mode[mode]) && ('example' in config.mode[mode])) {
 		delete config.mode[mode].example;
 	}
 }

@@ -1,7 +1,8 @@
-## 1.3.2 Maintenance release (unreleased)
+## 1.3.2 Feature release (unreleased)
 * Updated dependencies
 * Restored documentation image ([#168](https://github.com/jkphl/svg-sprite/issues/168))
 * Added CLI rendering options for defs/symbol/stack sprites ([#160](https://github.com/jkphl/svg-sprite/issues/160))
+* Added CLI option for external JSON config file ([#160](https://github.com/jkphl/svg-sprite/issues/160), [#165](https://github.com/jkphl/svg-sprite/issues/165))
 
 ## 1.3.1 Bugfix release (2016-04-17)
 * Fixed modeless run ([#158](https://github.com/jkphl/svg-sprite/issues/158), [gulp-svg-sprite #42](https://github.com/jkphl/gulp-svg-sprite/issues/42))
