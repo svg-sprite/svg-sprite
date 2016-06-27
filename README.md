@@ -1,5 +1,5 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+svg-sprite [![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url] [![Build Status][travis-image]][travis-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
+====================================================================================================================================================================================================================================================================================================================================================================================================
 
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
@@ -382,6 +382,7 @@ Copyright © 2015 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://badge.fury.io/js/svg-sprite.svg
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [travis-url]: http://travis-ci.org/jkphl/svg-sprite
 [travis-image]: https://secure.travis-ci.org/jkphl/svg-sprite.svg

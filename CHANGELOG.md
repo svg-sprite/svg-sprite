@@ -1,4 +1,4 @@
-## 1.3.2 Feature release (unreleased)
+## 1.3.2 Feature release (2016-04-27)
 * Updated dependencies
 * Restored documentation image ([#168](https://github.com/jkphl/svg-sprite/issues/168))
 * Added CLI rendering options for defs/symbol/stack sprites ([#160](https://github.com/jkphl/svg-sprite/issues/160))
