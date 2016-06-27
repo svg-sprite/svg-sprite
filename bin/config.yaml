@@ -4,6 +4,10 @@ dest:
   default                 : .
   map                     : dest
 
+config:
+  description             : Path to external JSON config file
+  alias                   : C
+
 log:
   description             : Logging verbosity ("info", "verbose" or "debug")
   alias                   : l

@@ -16,6 +16,7 @@ Options:
   --version                      Show version number  [boolean]
   --help                         Display this help information  [boolean]
   -D, --dest                     Main output directory (base path)  [default: "."]
+  -C, --config                   Path to external JSON config file
   -l, --log                      Logging verbosity ("info", "verbose" or "debug")
   --shape-id-separator           Separator for traversing a directory structure into a shape ID  [default: "--"]
   --shape-id-generator           ID generation callback [via CLI only template strings]  [default: "%s"]
@@ -189,6 +190,13 @@ The next one renders a Sass stylesheet (instead of plain CSS) and adds a 10px pa
 
 ```bash
 $ svg-sprite -cD out --cscss -p 10 assets/*.svg
+```
+
+Using config file (config.json in project base path) instead of command line options.
+Config file can be generated [with the online configurator](http://jkphl.github.io/svg-sprite/#json).
+
+```bash
+$ svg-sprite --config config.json assets/*.svg
 ```
 
 ### Inlined shape dimensions
