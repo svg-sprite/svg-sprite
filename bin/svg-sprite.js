@@ -24,7 +24,7 @@ var _ = require('lodash'),
 	glob = require('glob'),
 	SVGSpriter = require('../lib/svg-sprite'),
 	config = {},
-	JSONConfig = {},
+	JSONConfig = {mode: {}},
 	map = {},
 	yargs = require('yargs')
 		.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -218,7 +218,11 @@ config.shape.transform = [];
 	// Remove excessive render types
 	['css', 'scss', 'less', 'styl'].forEach(function (render) {
 		var arg = mode + '-render-' + render;
-		if ((render in this) && !argv[arg] && (!('render' in JSONConfig.mode[mode]) || !(render in JSONConfig.mode[mode].render))) {
+		if ((render in this) && !argv[arg]
+			&& (!(mode in JSONConfig.mode)
+			|| !('render' in JSONConfig.mode[mode])
+			|| !(render in JSONConfig.mode[mode].render))
+		) {
 			delete this[render];
 		}
 	}, this[mode].render);
