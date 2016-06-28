@@ -1,5 +1,6 @@
 ## 1.3.3 Bugfix release (2016-04-28)
 * Fixed CLI regression bug ([#173](https://github.com/jkphl/svg-sprite/issues/173))
+* Fixed CLI root attributes file handling ([#144](https://github.com/jkphl/svg-sprite/issues/144))
 
 ## 1.3.2 Feature release (2016-04-27)
 * Updated dependencies

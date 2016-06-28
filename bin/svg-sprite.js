@@ -187,6 +187,16 @@ config.shape.spacing.padding = config.shape.spacing.padding.length ? config.shap
 	return parseFloat(dim || 0, 10);
 }) : [];
 
+if (config.svg.rootAttributes) {
+	try {
+		var JSONAttributesContent = fs.readFileSync(path.resolve(config.svg.rootAttributes));
+		config.svg.rootAttributes = JSON.parse(JSONAttributesContent);
+	} catch (e) {
+		console.error('[ERROR] Skipping --svg-rootattrs file due to errors ("%s")', e.message.trim());
+		config.svg.rootAttributes = {};
+	}
+}
+
 // Expand transformation options
 var transform = ('' + config.shape.transform).trim();
 config.shape.transform = [];
@@ -235,7 +245,10 @@ config.shape.transform = [];
 // Remove excessive example options
 for (var mode in config.mode) {
 	var example = mode + '-example';
-	if (!argv[example] && !('example' in JSONConfig.mode[mode]) && ('example' in config.mode[mode])) {
+	if (!argv[example]
+		&& (!(mode in JSONConfig.mode) || !('example' in JSONConfig.mode[mode]))
+		&& ('example' in config.mode[mode])
+	) {
 		delete config.mode[mode].example;
 	}
 }
