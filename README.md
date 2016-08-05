@@ -143,7 +143,7 @@ var config					= {
 		xmlDeclaration		: true,						// Add XML declaration to SVG sprite
 		doctypeDeclaration	: true,						// Add DOCTYPE declaration to SVG sprite
 		namespaceIDs		: true,						// Add namespace token to all IDs in SVG shapes
-		namespaceClassnames	: true,						// Add namespace token to all class names in SVG shapes
+		namespaceClassnames	: true,						// Add namespace token to all CSS class names in SVG shapes
 		dimensionAttributes	: true						// Width and height attributes on the sprite
 	},
 	variables				: {}						// Custom Mustache templating variables and functions
