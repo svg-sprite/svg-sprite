@@ -1,7 +1,8 @@
-## 1.3.4 Bugfix release (unreleased)
+## 1.3.4 Bugfix release (2016-08-12)
 * Updated dependencies
 * Extended the ID generator callback signature ([#176](https://github.com/jkphl/svg-sprite/issues/176))
 * Improved usage pattern example ([#177](https://github.com/jkphl/svg-sprite/issues/177))
+* Added support for mode shorthand definitions in CLI mode ([#183](https://github.com/jkphl/svg-sprite/issues/183))
 
 ## 1.3.3 Bugfix release (2016-04-28)
 * Fixed CLI regression bug ([#173](https://github.com/jkphl/svg-sprite/issues/173))

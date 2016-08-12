@@ -169,13 +169,28 @@ if (argv['config']) {
 		delete argv['config'];
 		delete argv['C'];
 		var JSONConfigContent = fs.readFileSync(path.resolve(file));
-		mergeConfig(JSON.parse(JSONConfigContent), config);
+		var externalConfig = JSON.parse(JSONConfigContent);
 
 		// Make a clone of initial config for options removal checks
 		JSONConfig = JSON.parse(JSONConfigContent);
 		if (!('mode' in JSONConfig)) {
 			JSONConfig['mode'] = {};
 		}
+
+		// Expand shorthand mode definitions
+		if (('mode' in externalConfig) && _.isObject(externalConfig.mode)) {
+			for (var emode in externalConfig.mode) {
+				if (externalConfig.mode[emode] === true) {
+					externalConfig.mode[emode] = JSONConfig.mode[emode] = {
+						render: {
+							css: true
+						}
+					};
+				}
+			}
+		}
+
+		mergeConfig(externalConfig, config);
 	} catch (e) {
 		console.error('[ERROR] Skipping --config file due to errors ("%s")', e.message.trim());
 	}
