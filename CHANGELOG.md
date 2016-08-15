@@ -1,3 +1,6 @@
+## 1.3.5 Bugfix release (2016-08-15)
+* Fixed file name regression bug ([#186](https://github.com/jkphl/svg-sprite/issues/186))
+
 ## 1.3.4 Bugfix release (2016-08-12)
 * Updated dependencies
 * Extended the ID generator callback signature ([#176](https://github.com/jkphl/svg-sprite/issues/176))
