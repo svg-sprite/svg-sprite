@@ -1,3 +1,6 @@
+## 1.3.6 Maintenance release (unreleased)
+* Updated dependencies
+
 ## 1.3.5 Bugfix release (2016-08-15)
 * Fixed file name regression bug ([#186](https://github.com/jkphl/svg-sprite/issues/186))
 
