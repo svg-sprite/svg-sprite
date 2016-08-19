@@ -1,5 +1,6 @@
 ## 1.3.6 Maintenance release (unreleased)
 * Updated dependencies
+* Fixed LESS template mixin call ([#187](https://github.com/jkphl/svg-sprite/pull/187))
 
 ## 1.3.5 Bugfix release (2016-08-15)
 * Fixed file name regression bug ([#186](https://github.com/jkphl/svg-sprite/issues/186))
