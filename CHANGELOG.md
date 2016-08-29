@@ -1,4 +1,4 @@
-## 1.3.6 Maintenance release (unreleased)
+## 1.3.6 Bugfix release (2016-08-29)
 * Updated dependencies
 * Fixed LESS template mixin call ([#187](https://github.com/jkphl/svg-sprite/pull/187))
 * Fixed broken keyframe animation support ([gulp-svg-sprite #63](https://github.com/jkphl/gulp-svg-sprite/issues/63))
