@@ -18,7 +18,7 @@ This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 <style type="text/css">
 {{#shapes}}{{#selector.shape}}.{{#classname}}{{expression}}{{/classname}}{{^last}},
 {{/last}}{{/selector.shape}} {
-	background: url("{{{example}}}") {{position.relative.xy}} no-repeat;
+	background: url("{{{sprite}}}") {{position.relative.xy}} no-repeat;
 	width: {{width.outer}}px;
 	height: {{height.outer}}px;
 }
