@@ -1,3 +1,6 @@
+## 1.3.7 Bugfix release (unreleased
+* Fixed invalid markup in `<defs>` example html ([#229](https://github.com/jkphl/svg-sprite/issues/229))
+
 ## 1.3.6 Bugfix release (2016-08-29)
 * Updated dependencies
 * Fixed LESS template mixin call ([#187](https://github.com/jkphl/svg-sprite/pull/187))
