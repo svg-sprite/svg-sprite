@@ -1,6 +1,7 @@
 ## 1.3.7 Bugfix release (unreleased
 * Updated dependencies
 * Fixed invalid markup in `<defs>` example html ([#229](https://github.com/jkphl/svg-sprite/issues/229))
+* Fallback for failing CPU detection ([#217](https://github.com/jkphl/svg-sprite/pull/217))
 
 ## 1.3.6 Bugfix release (2016-08-29)
 * Updated dependencies
