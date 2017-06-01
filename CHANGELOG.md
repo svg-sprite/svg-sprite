@@ -1,4 +1,5 @@
 ## 1.3.7 Bugfix release (unreleased
+* Updated dependencies
 * Fixed invalid markup in `<defs>` example html ([#229](https://github.com/jkphl/svg-sprite/issues/229))
 
 ## 1.3.6 Bugfix release (2016-08-29)
