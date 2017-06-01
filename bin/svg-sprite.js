@@ -24,11 +24,11 @@ var _ = require('lodash'),
 	glob = require('glob'),
 	SVGSpriter = require('../lib/svg-sprite'),
 	config = {},
-	JSONConfig = {mode: {}},
+	JSONConfig = { mode: {} },
 	map = {},
 	yargs = require('yargs')
 		.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
-		.version('version', 'Show version number', JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json'), {encoding: 'utf8'})).version)
+		.version('version', 'Show version number', JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json'), { encoding: 'utf8' })).version)
 		.help('help', 'Display this help information')
 		.wrap(null)
 		.example('$0 --css --css-render-css --css-example --dest=out assets/*.svg', 'Create a CSS sprite of the given SVG files including example document to the subdirectory "out"')
@@ -223,7 +223,7 @@ if (typeof config.shape.transform === 'string') {
 			if (('shape-transform-' + transform) in argv) {
 				try {
 					var transformConfigFile = argv['shape-transform-' + transform],
-						transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
+						transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), { encoding: 'utf8' }),
 						transformConfig = transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
 					this.push(_.zipObject([transform], [transformConfig]));
 				} catch (e) {
