@@ -213,25 +213,27 @@ if (config.svg.rootAttributes) {
 }
 
 // Expand transformation options
-var transform = ('' + config.shape.transform).trim();
-config.shape.transform = [];
-(transform.length ? transform.split(',').map(function (trans) {
-	return ('' + trans).trim();
-}) : []).forEach(function (transform) {
-	if (transform.length) {
-		if (('shape-transform-' + transform) in argv) {
-			try {
-				var transformConfigFile = argv['shape-transform-' + transform],
-					transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
-					transformConfig = transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
-				this.push(_.zipObject([transform], [transformConfig]));
-			} catch (e) {
+if (typeof config.shape.transform === 'string') {
+	var transform = ('' + config.shape.transform).trim();
+	config.shape.transform = [];
+	(transform.length ? transform.split(',').map(function (trans) {
+		return ('' + trans).trim();
+	}) : []).forEach(function (transform) {
+		if (transform.length) {
+			if (('shape-transform-' + transform) in argv) {
+				try {
+					var transformConfigFile = argv['shape-transform-' + transform],
+						transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), {encoding: 'utf8'}),
+						transformConfig = transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
+					this.push(_.zipObject([transform], [transformConfig]));
+				} catch (e) {
+				}
+			} else {
+				this.push(transform);
 			}
-		} else {
-			this.push(transform);
 		}
-	}
-}, config.shape.transform);
+	}, config.shape.transform);
+}
 
 // Run through all sprite modes
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function (mode) {
