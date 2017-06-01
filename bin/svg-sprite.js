@@ -202,7 +202,7 @@ config.shape.spacing.padding = config.shape.spacing.padding.length ? config.shap
 	return parseFloat(dim || 0, 10);
 }) : [];
 
-if (config.svg.rootAttributes) {
+if (config.svg.rootAttributes && typeof config.svg.rootAttributes === 'string') {
 	try {
 		var JSONAttributesContent = fs.readFileSync(path.resolve(config.svg.rootAttributes));
 		config.svg.rootAttributes = JSON.parse(JSONAttributesContent);
