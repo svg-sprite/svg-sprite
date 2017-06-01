@@ -3,6 +3,7 @@
 * Fixed invalid markup in `<defs>` example html ([#229](https://github.com/jkphl/svg-sprite/issues/229))
 * Fallback for failing CPU detection ([#217](https://github.com/jkphl/svg-sprite/pull/217))
 * Fixed broken SVGO configuration in CLI ([#216](https://github.com/jkphl/svg-sprite/pull/216), [#199](https://github.com/jkphl/svg-sprite/issues/199))
+* Added glob base directory option to CLI ([#220](https://github.com/jkphl/svg-sprite/issues/220))
 
 ## 1.3.6 Bugfix release (2016-08-29)
 * Updated dependencies

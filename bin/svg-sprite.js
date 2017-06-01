@@ -288,12 +288,17 @@ var spriter = new SVGSpriter(config);
 _.reduce(argv._, function (f, g) {
 	return f.concat(glob.sync(g));
 }, []).forEach(function (file) {
+	var basename = file;
 	file = path.resolve(file);
 	var stat = fs.lstatSync(file);
 	if (stat.isSymbolicLink()) {
 		file = fs.readlinkSync(file);
+		basename = path.basename(file);
+	} else {
+		var basepos = basename.lastIndexOf('./');
+		basename = (basepos >= 0) ? basename.substr(basepos + 2) : path.basename(file);
 	}
-	spriter.add(file, path.basename(file), fs.readFileSync(file));
+	spriter.add(file, basename, fs.readFileSync(file));
 });
 
 spriter.compile(function (error, result /*, data*/) {

@@ -198,6 +198,22 @@ Using config file (config.json in project base path) instead of command line opt
 $ svg-sprite --config config.json assets/*.svg
 ```
 
+### Advanced globbing
+
+Some shells don't support the double-star character `**` for matching files in an arbitrary directory depth, so you should wrap your glob expression in single quotes when using it in your pattern. This will prevent your shell from trying to resolve it and rather delegate globbing to Node instead (which does support the `**` character). 
+ 
+```bash
+$ svg-sprite --config config.json 'assets/**/*.svg'
+```
+
+The CLI typically uses only the basename of files for constructing the shape IDs in your sprite. That is, if an SVG source file is found at the path `assets/path/to/source.svg`, the shape inside the sprite will have the ID `source`. If you want to set a "base directory" from where ID traversal should start, simply add a symbolic link to that very same directory (`"./"`) in your pattern:
+
+```bash
+$ svg-sprite --config config.json 'assets/./**/*.svg'
+```
+
+The spriter will then use `path/to/source` for ID creation, resulting in the shape ID `path--to--source` (assuming you don't override the default shape ID generator function). Please be aware that the described feature won't work if the matched SVG files are symbolic links themselves. 
+
 ### Inlined shape dimensions
 
 To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension selector suffix. There are two ways of doing so:
