@@ -46,7 +46,6 @@
     "lodash.pluck": "^3.1.2",
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
-    "phantomjs-prebuilt": "^2.1.14",
     "prettysize": "^0.1.0",
     "svgo": "^0.7.2",
     "vinyl": "^2.0.2",
@@ -69,6 +68,7 @@
     "less": "^2.7.2",
     "stylus": "^0.54.5",
     "jshint": "^2.9.4",
+    "phantomjs-prebuilt": "^2.1.14",
     "pn": "^1.0.0"
   },
   "keywords": [
