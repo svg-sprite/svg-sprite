@@ -7,7 +7,7 @@ is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG
 * CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
 * inline sprites using the **`<defs>` element**,
 * inline sprites using the **`<symbol>` element**
-* and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks/).
+* and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks).
 
 It comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
