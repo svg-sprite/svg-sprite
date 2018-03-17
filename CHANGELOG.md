@@ -6,6 +6,7 @@
 * Reformatted documentation code examples ([#236](https://github.com/jkphl/svg-sprite/pull/236))
 * Fix JSHint errors ([#261](https://github.com/jkphl/svg-sprite/pull/261))
 * Add support for simple shape ID generator ([#240](https://github.com/jkphl/svg-sprite/pull/240))
+* Add failing CPU detection workaround ([#252](https://github.com/jkphl/svg-sprite/issues/252))
 
 ## 1.3.7 Bugfix release (2017-06-01)
 
