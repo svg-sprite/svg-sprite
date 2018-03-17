@@ -1,6 +1,8 @@
-## 1.3.7 Bugfix release (2017-06-01)
+## 1.4.0 Maintenance release (unreleased)
 
-**This is going to be the final release in the 1.x line (except someone encounters some severe issues).** 
+* Added more Node.js versions to Travis instructions 
+
+## 1.3.7 Bugfix release (2017-06-01)
 
 * Updated dependencies
 * Fixed invalid markup in `<defs>` example html ([#229](https://github.com/jkphl/svg-sprite/issues/229))
