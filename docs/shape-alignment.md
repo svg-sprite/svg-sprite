@@ -15,7 +15,7 @@ To use these icons as centered background images, you would need them to be cent
 
 ```yaml
 <shape-ID-or-path>:
-  <template-string-with-placeholder>: <positioning>	
+  <template-string-with-placeholder>: <positioning>    
 ```
 
 * `<shape-ID-or-path>` has to be the **"local" file path part** or the final **shape ID / CSS class name** of a particular shape in your sprite. Use the `"*"` for a catch-all rule (needs to be quoted in the YAML file).
@@ -25,8 +25,8 @@ To use these icons as centered background images, you would need them to be cent
 *svg-sprite*'s default behaviour can be expressed as follows:
 
 ```yaml
-"*"				:
-  "%s"			: 0
+"*":
+  "%s": 0
 ```
 
 ### Centering shapes
@@ -34,8 +34,8 @@ To use these icons as centered background images, you would need them to be cent
 With only these two lines
 
 ```yaml
-"*"				:
-  "%s"			: .5
+"*":
+  "%s": .5
 ```
 
 all the icons in the example sprite above get centered:
@@ -47,15 +47,15 @@ all the icons in the example sprite above get centered:
 You can leverage the `<template-string-with-placeholder>` for creating displaced on-the-fly copies of your shapes:
 
 ```yaml
-"*"             :
-  "%s"          : .5
+"*":
+  "%s": .5
   
-weather-clear   :
-  -left         : 0 
-  -right        : 1
+weather-clear:
+  -left: 0 
+  -right: 1
   
-weather-storm   :
-  "%s"          : 0
+weather-storm:
+  "%s": 0
 ```
 
 Remember that the omitting the placeholder `"%s"`will make the template strings to be used as a suffices, effectively leading to the virtual shape IDs / CSS class names `"weather-clear-left"` and `"weather-clear-right"` (`"-left"` is equivalent to `"%s-left"`).

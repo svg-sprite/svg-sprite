@@ -21,53 +21,53 @@ To understand these methods' roles and interaction, please have a look at the fo
 ```javascript
 'use strict';
 
-var SVGSpriter				= require('svg-sprite'),
-mkdirp						= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs'),
+var SVGSpriter = require('svg-sprite'),
+    mkdirp = require('mkdirp'),
+    path = require('path'),
+    fs = require('fs'),
 
 // 1. Create and configure a spriter instance
 // ====================================================================
-spriter						= new SVGSpriter({
-	dest					: 'out',		// Main output directory
-	mode					:
-		css					: {				// Create a CSS sprite
-			render			: {
-				css			: true			// Render a CSS stylesheet
-			}
-		}
-	}
-});
+    spriter = new SVGSpriter({
+        dest: 'out',        // Main output directory
+        mode: {
+            css: {                // Create a CSS sprite
+                render: {
+                    css: true            // Render a CSS stylesheet
+                }
+            }
+        }
+    });
 
 // 2. Add some SVG files to process
 // ====================================================================
 spriter.add(
-	path.resolve('assets/example-1.svg'),
-	'example-1.svg',
-	fs.readFileSync('assets/example-1.svg', {encoding: 'utf-8'})
+    path.resolve('assets/example-1.svg'),
+    'example-1.svg',
+    fs.readFileSync('assets/example-1.svg', { encoding: 'utf-8' })
 );
 
-	/* ... */
+/* ... */
 
 spriter.add(
-	path.resolve('assets/example-x.svg'),
-	'example-x.svg',
-	fs.readFileSync('assets/example-x.svg', {encoding: 'utf-8'})
+    path.resolve('assets/example-x.svg'),
+    'example-x.svg',
+    fs.readFileSync('assets/example-x.svg', { encoding: 'utf-8' })
 );
 
 // 3. Trigger the (asynchronous) compilation process
 // ====================================================================
-spriter.compile(function(error, result, data){
+spriter.compile(function (error, result, data) {
 
-	// Run through all files that have been created for the `css` mode
-	for (var type in result.css) {
-	
-		// Recursively create directories as needed
-		mkdirp.sync(path.dirname(result.css[type].path));
-		
-		// Write the generated resource to disk
-		fs.writeFileSync(result.css[type].path, result.css[type].contents);
-	}
+    // Run through all files that have been created for the `css` mode
+    for (var type in result.css) {
+
+        // Recursively create directories as needed
+        mkdirp.sync(path.dirname(result.css[type].path));
+
+        // Write the generated resource to disk
+        fs.writeFileSync(result.css[type].path, result.css[type].contents);
+    }
 });
 ```
 
@@ -96,42 +96,42 @@ It is important to know that the spriter **optimizes the SVG files as soon as yo
 ```javascript
 'use strict';
 
-var SVGSpriter				= require('svg-sprite'),
-mkdirp						= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs'),
-File						= require('vinyl'),
-glob						= require('glob'),
-spriter						= new SVGSpriter({
-	dest					: 'out',
-	mode					: {
-		css					: {
-			render			: {
-				css			: true
-			}
-		}
-	}
-}),
-cwd							= path.resolve('assets');
+var SVGSpriter = require('svg-sprite'),
+    mkdirp = require('mkdirp'),
+    path = require('path'),
+    fs = require('fs'),
+    File = require('vinyl'),
+    glob = require('glob'),
+    spriter = new SVGSpriter({
+        dest: 'out',
+        mode: {
+            css: {
+                render: {
+                    css: true
+                }
+            }
+        }
+    }),
+    cwd = path.resolve('assets');
 
 // Find SVG files recursively via `glob`
-glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
-	files.forEach(function(file){
-	
-		// Create and add a vinyl file instance for each SVG
-		spriter.add(new File({
-			path: path.join(cwd, file),							// Absolute path to the SVG file
-			base: cwd,											// Base path (see `name` argument)
-			contents: fs.readFileSync(path.join(cwd, file))		// SVG file contents
-		}));
-	})
-	
-	spriter.compile(function(error, result, data){
-		for (var type in result.css) {
-			mkdirp.sync(path.dirname(result.css[type].path));
-			fs.writeFileSync(result.css[type].path, result.css[type].contents);
-		}
-	});
+glob.glob('**/*.svg', { cwd: cwd }, function (err, files) {
+    files.forEach(function (file) {
+
+        // Create and add a vinyl file instance for each SVG
+        spriter.add(new File({
+            path: path.join(cwd, file),                      // Absolute path to the SVG file
+            base: cwd,                                       // Base path (see `name` argument)
+            contents: fs.readFileSync(path.join(cwd, file))  // SVG file contents
+        }));
+    })
+
+    spriter.compile(function (error, result, data) {
+        for (var type in result.css) {
+            mkdirp.sync(path.dirname(result.css[type].path));
+            fs.writeFileSync(result.css[type].path, result.css[type].contents);
+        }
+    });
 });
 ```
 
@@ -143,37 +143,39 @@ glob.glob('**/*.svg', {cwd: cwd}, function(err, files) {
 
 1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](configuration.md#output-modes) for a single compilation run. If omitted, the `mode` property of the [main configuration](configuration.md) used for the [constructor](#svgspriter-config-) will be used.
 2. **callback** `{Function}` — Callback triggered when the compilation has finished, getting three arguments:
-	* **error** `{Error}` — Error message in case the compilation has failed
-	* **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
-	* **data** `{Object}` — Templating variables passed to Mustache for rendering the resources (see [sprite & shape variables](templating.md#sprite--shape-variables) for details)
+    * **error** `{Error}` — Error message in case the compilation has failed
+    * **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
+    * **data** `{Object}` — Templating variables passed to Mustache for rendering the resources (see [sprite & shape variables](templating.md#sprite--shape-variables) for details)
 
 ##### Compilation example
 
 Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example: 
 
 ```javascript
-spriter.compile({
-	css					: {
-		render			: {
-			scss		: true
-		},
-		example			: true
-	}
-},
-function(error, result, data){
-    console.log(result);
-});
+spriter.compile(
+    {
+        css: {
+            render: {
+                scss: true
+            },
+            example: true
+        }
+    },
+    function (error, result, data) {
+        console.log(result);
+    }
+);
 ```
 
 The spriter is instructed to create a CSS sprite along with the accompanying stylesheet resource in Sass format and an example HTML document demonstrating the use of the sprite. The output will look something like this (shortened for brevity):
 
 ```javascript
 {
-	css						: {
-		sprite				: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
-     	scss				: <File "css/sprite.scss" <Buffer 2e 73 76 ...>>,
-     	example				: <File "css/sprite.css.html" <Buffer 3c 21 44 ...>>
-	}
+    css: {
+        sprite: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
+        scss: <File "css/sprite.scss" <Buffer 2e 73 76 ...>>,
+        example: <File "css/sprite.css.html" <Buffer 3c 21 44 ...>>
+    }
 }
 ```
 
@@ -189,21 +191,21 @@ Please note that the resources are always returned as [vinyl](https://github.com
 
 1. **dest** `{String}` — Base directory for the SVG files in case the will be written to disk.
 2. **callback** `{Function}`: Callback triggered when the shapes are available, getting called with two arguments:
-	* **error** `{Error}` — Error message in case the shape access has failed.
-	* **result** `{Array}` — Array of [vinyl](https://github.com/wearefractal/vinyl) carrying the intermediate SVGs.  
+    * **error** `{Error}` — Error message in case the shape access has failed.
+    * **result** `{Array}` — Array of [vinyl](https://github.com/wearefractal/vinyl) carrying the intermediate SVGs.  
 
 ##### Shape access example
 
 ```javascript
-var mkdirp					= require('mkdirp'),
-path						= require('path'),
-fs							= require('fs');
+var mkdirp = require('mkdirp'),
+    path = require('path'),
+    fs = require('fs');
 
-spriter.getShapes(path.resolve('tmp/svg'), function(error, result) {
-	result.forEach(function(file){
-		mkdirp.sync(path.dirname(file.path));
-		fs.writeFileSync(file.path, file.contents);
-	});
+spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
+    result.forEach(function (file) {
+        mkdirp.sync(path.dirname(file.path));
+        fs.writeFileSync(file.path, file.contents);
+    });
 });
 ```
 

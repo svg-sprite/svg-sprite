@@ -11,12 +11,12 @@ The *svg-sprite* **main configuration** is provided to the [constructor](api.md#
 
 ```javascript
 {
-	dest			: <String>,				// Main output directory
-	log  			: <String|Logger>,		// Logging verbosity or custom logger
-	shape			: <Object>,				// SVG shape configuration
-	svg				: <Object>,				// Sprite SVG options
-	variables		: <Object>,				// Custom templating variables
-	mode			: <Object>				// Output mode configurations
+    dest: <String>, // Main output directory
+    log: <String|Logger>, // Logging verbosity or custom logger
+    shape: <Object>, // SVG shape configuration
+    svg: <Object>, // Sprite SVG options
+    variables: <Object>, // Custom templating variables
+    mode: <Object> // Output mode configurations
 }
 ```
 
@@ -29,26 +29,26 @@ Table of contents
 * [Main output directory](#main-output-directory)
 * [Logging](#logging)
 * [SVG shape configuration](#svg-shape-configuration)
-	* [Shape IDs](#shape-ids)
-	* [Shape dimensions](#shape-dimensions)
-	* [Shape spacing](#shape-spacing)
-	* [Shape transformations](#shape-transformations)
-		* [Pre-defined shape transformations](#pre-defined-shape-transformations-string-values)
-		* [Custom shape transformations](#custom-shape-transformations-object-values)
-			* [Pre-defined shape transformation with custom configuration](#pre-defined-shape-transformation-with-custom-configuration-object-values)
-			* [Custom callback transformation](#custom-callback-transformation-function-values)
-	* [Miscellaneous shape options](#miscellaneous-shape-options)
+    * [Shape IDs](#shape-ids)
+    * [Shape dimensions](#shape-dimensions)
+    * [Shape spacing](#shape-spacing)
+    * [Shape transformations](#shape-transformations)
+        * [Pre-defined shape transformations](#pre-defined-shape-transformations-string-values)
+        * [Custom shape transformations](#custom-shape-transformations-object-values)
+            * [Pre-defined shape transformation with custom configuration](#pre-defined-shape-transformation-with-custom-configuration-object-values)
+            * [Custom callback transformation](#custom-callback-transformation-function-values)
+    * [Miscellaneous shape options](#miscellaneous-shape-options)
 * [Sprite SVG options](#sprite-svg-options)
-	* [SVG sprite customization](#svg-sprite-customization)
+    * [SVG sprite customization](#svg-sprite-customization)
 * [Custom templating variables](#custom-templating-variables)
 * [Output modes](#output-modes)
-	* [Enabling & configuring](#enabling--configuring)
-	* [Common mode properties](#common-mode-properties)
-	* [Specific mode properties](#specific-mode-properties)
-		* [«css» & «view» mode](#css--view-mode)
-		* [«defs» & «symbol» mode](#defs--symbol-mode)
-		* [«stack» mode](#stack-mode)
-	* [Rendering configurations](#rendering-configurations)
+    * [Enabling & configuring](#enabling--configuring)
+    * [Common mode properties](#common-mode-properties)
+    * [Specific mode properties](#specific-mode-properties)
+        * [«css» & «view» mode](#css--view-mode)
+        * [«defs» & «symbol» mode](#defs--symbol-mode)
+        * [«stack» mode](#stack-mode)
+    * [Rendering configurations](#rendering-configurations)
 
 
 ### Main output directory
@@ -70,28 +70,28 @@ Property                 | Type            | Default       | Description        
 The `shape` property holds all settings affecting the SVG shapes of the sprite:
 
 ```javascript
-shape				: {
-	id				: {                         // SVG shape ID related options
-        separator	: '--',                     // Separator for directory name traversal
-        generator	: function() { /*...*/ },   // SVG shape ID generator callback
-        pseudo		: '~',                      // File name separator for shape states (e.g. ':hover')
-        whitespace	: '_'                       // Whitespace replacement for shape IDs
+shape: {
+    id: { // SVG shape ID related options
+        separator: '--', // Separator for directory name traversal
+        generator: function() { /*...*/ }, // SVG shape ID generator callback
+        pseudo: '~', // File name separator for shape states (e.g. ':hover')
+        whitespace: '_' // Whitespace replacement for shape IDs
     },
-    dimension		: {                         // Dimension related options
-        maxWidth	: 2000,                     // Max. shape width
-        maxHeight	: 2000,                     // Max. shape height
-        precision	: 2,                        // Floating point precision
-        attributes 	: false,                    // Width and height attributes on embedded shapes
+    dimension: { // Dimension related options
+        maxWidth: 2000, // Max. shape width
+        maxHeight: 2000, // Max. shape height
+        precision: 2, // Floating point precision
+        attributes: false, // Width and height attributes on embedded shapes
     },
-    spacing			: {                         // Spacing related options
-        padding		: 0,                        // Padding around all shapes
-        box         : 'content'                 // Padding strategy (similar to CSS `box-sizing`)
+    spacing: { // Spacing related options
+        padding: 0, // Padding around all shapes
+        box: 'content' // Padding strategy (similar to CSS `box-sizing`)
     },
-    transform		: ['svgo'],					// List of transformations / optimizations
-    sort 			: function() { /*...*/ },   // SVG shape sorting callback
-    meta			: null,                     // Path to YAML file with meta / accessibility data
-    align			: null,                     // Path to YAML file with extended alignment data
-    dest			: null                      // Output directory for optimized intermediate SVG shapes
+    transform: ['svgo'], // List of transformations / optimizations
+    sort: function() { /*...*/ }, // SVG shape sorting callback
+    meta: null, // Path to YAML file with meta / accessibility data
+    align: null, // Path to YAML file with extended alignment data
+    dest: null // Output directory for optimized intermediate SVG shapes
 }
 ```
 
@@ -135,10 +135,10 @@ If a `shape.transform` item is of type `String`, it's a shorthand and refers to 
 ```javascript
 // SVGO transformation with default configuration
 {
-	shape				: {
-		transform		: ['svgo']
-		/* ... */
-	}
+    shape: {
+        transform: ['svgo']
+        /* ... */
+    }
 }
 ```
 
@@ -149,12 +149,12 @@ If you don't want to use a pre-defined transformation or it's default configurat
 ```javascript
 // Equivalent transformation to ['svgo']
 {
-	shape				: {
-		transform		: [
-			{svgo		: {}}
-		]
-		/* ... */
-	}
+    shape: {
+        transform: [
+            {svgo: {}}
+        ]
+        /* ... */
+    }
 }
 ```
 
@@ -173,17 +173,17 @@ To call a pre-defined transformation with custom configuration options, use it's
 ```javascript
 // SVGO transformation with custom plugin configuration
 {
-	shape				: {
-		transform		: [
-			{svgo		: {
-				plugins	: [
-					{transformsWithOnePath: true},
-					{moveGroupAttrsToElems: false}
-				]
-			}}
-		]
-		/* ... */
-	}
+    shape: {
+        transform: [
+            {svgo: {
+                plugins: [
+                    {transformsWithOnePath: true},
+                    {moveGroupAttrsToElems: false}
+                ]
+            }}
+        ]
+        /* ... */
+    }
 }
 ```
 
@@ -194,26 +194,26 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
 ```javascript
 // SVGO transformation with custom plugin configuration
 {
-	shape				: {
-		transform		: [
-			{custom		:
+    shape: {
+        transform: [
+            {custom:
 
-				/**
-				 * Custom callback transformation
-				 *
-				 * @param {SVGShape} shape				SVG shape object
-				 * @param {SVGSpriter} spriter			SVG spriter
-				 * @param {Function} callback			Callback
-				 * @return {void}
-				 */
-				function(shape, sprite, callback) {
-					/* ... */
-					callback(null);
-				}
-			}
-		]
-		/* ... */
-	}
+                /**
+                 * Custom callback transformation
+                 *
+                 * @param {SVGShape} shape                SVG shape object
+                 * @param {SVGSpriter} spriter            SVG spriter
+                 * @param {Function} callback            Callback
+                 * @return {void}
+                 */
+                function(shape, sprite, callback) {
+                    /* ... */
+                    callback(null);
+                }
+            }
+        ]
+        /* ... */
+    }
 }
 ```
 
@@ -253,22 +253,22 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 ```javascript
 // Custom global post-processing transformation
 {
-	svg                 : {
-		transform       : [
-			/**
-			 * Custom sprite SVG transformation
-			 *
-			 * @param {String} svg					Sprite SVG
-			 * @return {String}						Processed SVG
-			 */
-			function(svg) {
-				/* ... */
-				return svg;
-			},
+    svg: {
+        transform: [
+            /**
+             * Custom sprite SVG transformation
+             *
+             * @param {String} svg                    Sprite SVG
+             * @return {String}                        Processed SVG
+             */
+            function(svg) {
+                /* ... */
+                return svg;
+            },
 
-			/* ... */
-		]
-	}
+            /* ... */
+        ]
+    }
 }
 ```
 
@@ -281,14 +281,14 @@ The top-level `variables` object lets you define global variables that are passe
 
 ```javascript
 {
-	variables	: {
-		now		: +new Date(),
-		png		: function() {
-			return function(sprite, render) {
-				return render(sprite).split('.svg').join('.png');
-			}
-		}
-	}
+    variables: {
+        now: +new Date(),
+        png: function() {
+            return function(sprite, render) {
+                return render(sprite).split('.svg').join('.png');
+            }
+        }
+    }
 }
 ```
 
@@ -315,16 +315,16 @@ Each of them produces it's own specific files and has it's individual configurat
 ```javascript
 // Activate the «css» mode with default configuration
 {
-	mode			: {
-		css			: true
-	}
+    mode: {
+        css: true
+    }
 }
 
 // Equivalent: Provide an empty configuration object
 {
-	mode			: {
-		css			: {}
-	}
+    mode: {
+        css: {}
+    }
 }
 ```
 
@@ -333,14 +333,14 @@ It is also possible to configure the same output mode multiple times, each time 
 ```javascript
 // Multiple sprites of the same output mode
 {
-	mode			: {
-		sprite1		: {
-			mode	: 'css'		// Sprite with «css» mode
-		},
-		sprite2		: {
-			mode	: 'css'		// Another sprite with «css» mode
-		}
-	}
+    mode: {
+        sprite1: {
+            mode: 'css' // Sprite with «css» mode
+        },
+        sprite2: {
+            mode: 'css' // Another sprite with «css» mode
+        }
+    }
 }
 ```
 
@@ -412,11 +412,11 @@ In both cases you'll have to use a **rendering configuration** to tell *svg-spri
 
 ```javascript
 {
-	mode				: {
-		css				: {
-			example		: true
-		}
-	}
+    mode: {
+        css: {
+            example: true
+        }
+    }
 }
 ```
 
@@ -424,11 +424,11 @@ This is absolutely equivalent to:
 
 ```javascript
 {
-	mode				: {
-		css				: {
-			example		: {}
-		}
-	}
+    mode: {
+        css: {
+            example: {}
+        }
+    }
 }
 ```
 
@@ -436,16 +436,16 @@ Use the subkey `template` for configuring the **rendering template** and `dest` 
 
 ```javascript
 {
-	mode				: {
-		css				: {
-			render		: {
-				css		: {
-					template	: 'path/to/template.html',	// relative to current working directory
-					dest		: 'path/to/demo.html'		// relative to current output directory
-				}
-			}
-		}
-	}
+    mode: {
+        css: {
+            render: {
+                css: {
+                    template: 'path/to/template.html', // relative to current working directory
+                    dest: 'path/to/demo.html' // relative to current output directory
+                }
+            }
+        }
+    }
 }
 ```
 
@@ -453,11 +453,11 @@ To **disable the rendering** without removing the whole structure, simply set th
 
 ```javascript
 {
-	mode				: {
-		css				: {
-			example		: false
-		}
-	}
+    mode: {
+        css: {
+            example: false
+        }
+    }
 }
 ```
 
