@@ -12,16 +12,16 @@ This document aims to compare the use of *svg-sprite* via it's [standard API](ap
 
 ```javascript
 // Create spriter instance
-var spriter       = new SVGSpriter(config);
+var spriter = new SVGSpriter(config);
 
 // Add SVG source files — the manual way ...
-spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', {encoding: 'utf-8'}));
-spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', {encoding: 'utf-8'}));
-	/* ... */
+spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', { encoding: 'utf-8' }));
+spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', { encoding: 'utf-8' }));
+/* ... */
 
 // Compile sprite
-spriter.compile(function(error, result) {
-	/* ... Write `result` files to disk or do whatever with them ... */
+spriter.compile(function (error, result) {
+    /* ... Write `result` files to disk or do whatever with them ... */
 });
 ```
 
@@ -31,13 +31,13 @@ spriter.compile(function(error, result) {
 // svg-sprite Grunt task
 
 grunt.initConfig({
-	svg_sprite				: {
-		minimal				: {
-			src				: ['assets/**/*.svg'],
-			dest			: 'out',
-			options			: config
-		},
-	},
+    svg_sprite: {
+        minimal: {
+            src: ['assets/**/*.svg'],
+            dest: 'out',
+            options: config
+        },
+    },
 });
 ```
 
@@ -47,8 +47,8 @@ grunt.initConfig({
 // svg-sprite Gulp task
 
 gulp.src('assets/*.svg')
-	.pipe(svgSprite(config))
-	.pipe(gulp.dest('out'));
+    .pipe(svgSprite(config))
+    .pipe(gulp.dest('out'));
 ```
 
 
