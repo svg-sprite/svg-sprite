@@ -201,9 +201,9 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
                 /**
                  * Custom callback transformation
                  *
-                 * @param {SVGShape} shape                SVG shape object
-                 * @param {SVGSpriter} spriter            SVG spriter
-                 * @param {Function} callback            Callback
+                 * @param {SVGShape} shape SVG shape object
+                 * @param {SVGSpriter} spriter SVG spriter
+                 * @param {Function} callback Callback
                  * @return {void}
                  */
                 function(shape, sprite, callback) {
@@ -258,8 +258,8 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
             /**
              * Custom sprite SVG transformation
              *
-             * @param {String} svg                    Sprite SVG
-             * @return {String}                        Processed SVG
+             * @param {String} svg Sprite SVG
+             * @return {String} Processed SVG
              */
             function(svg) {
                 /* ... */
