@@ -4,6 +4,7 @@
 * Updated dependencies 
 * Updated SVGO version & test fixture ([#258](https://github.com/jkphl/svg-sprite/pull/258), [#259](https://github.com/jkphl/svg-sprite/issues/259))
 * Reformatted documentation code examples ([#236](https://github.com/jkphl/svg-sprite/pull/236))
+* Fix JSHint errors ([#261](https://github.com/jkphl/svg-sprite/pull/261))
 
 ## 1.3.7 Bugfix release (2017-06-01)
 
