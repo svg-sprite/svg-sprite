@@ -1,4 +1,4 @@
-## 1.4.0 Maintenance release (unreleased)
+## 1.4.0 Maintenance release (2018-03-17)
 
 * Added more Node.js versions to Travis instructions
 * Updated dependencies 
