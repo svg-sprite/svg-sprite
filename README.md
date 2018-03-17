@@ -3,11 +3,11 @@ svg-sprite [![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]
 
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
-*	Traditional [CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) for use as background images,
-*	CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
-*	inline sprites using the **`<defs>` element**,
-*	inline sprites using the **`<symbol>` element**
-*	and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks).
+* Traditional [CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) for use as background images,
+* CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
+* inline sprites using the **`<defs>` element**,
+* inline sprites using the **`<symbol>` element**
+* and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks).
 
 It comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
@@ -23,22 +23,22 @@ Table of contents
 -----------------
 * [Installation](#installation)
 * [Getting started](#getting-started)
-	* [Usage pattern](#usage-pattern)
-	* [Standard API](docs/api.md)
-	* [Grunt & Gulp wrappers](docs/grunt-gulp.md)
+    * [Usage pattern](#usage-pattern)
+    * [Standard API](docs/api.md)
+    * [Grunt & Gulp wrappers](docs/grunt-gulp.md)
 * [Configuration basics](#configuration-basics)
-	* [General configuration options](#general-configuration-options)
-	* [Output modes](#output-modes)
-		* [Common mode properties](#common-mode-properties)
-		* [Basic examples](#basic-examples)
-	* [Output destinations](#output-destinations)
-		* [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
-	* [Full configuration documentation](docs/configuration.md)
-	* [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
+    * [General configuration options](#general-configuration-options)
+    * [Output modes](#output-modes)
+        * [Common mode properties](#common-mode-properties)
+        * [Basic examples](#basic-examples)
+    * [Output destinations](#output-destinations)
+        * [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
+    * [Full configuration documentation](docs/configuration.md)
+    * [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
 * [Advanced techniques](#advanced-techniques)
-	* [Meta data injection](docs/meta-data.md)
-	* [Aligning and duplicating shapes](docs/shape-alignment.md)
-	* [Tweaking and adding output formats](docs/templating.md)
+    * [Meta data injection](docs/meta-data.md)
+    * [Aligning and duplicating shapes](docs/shape-alignment.md)
+    * [Tweaking and adding output formats](docs/templating.md)
 * [Command line usage](docs/command-line.md)
 * [Known problems / To-do](#known-problems--to-do)
 * [Changelog](CHANGELOG.md)
@@ -73,22 +73,26 @@ The procedure is the very same for all supported sprite types («modes»).
 
 ```js
 // Create spriter instance (see below for `config` examples)
-var spriter       = new SVGSpriter(config);
+var spriter = new SVGSpriter(config);
 
 // Add SVG source files — the manual way ...
-spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', {encoding: 'utf-8'}));
-spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', {encoding: 'utf-8'}));
-	/* ... */
+spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', {
+    encoding: 'utf-8'
+}));
+spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', {
+    encoding: 'utf-8'
+}));
+/* ... */
 
 // Compile the sprite
-spriter.compile(function(error, result) {
-	/* Write `result` files to disk (or do whatever with them ...) */
-	for (var mode in result) {
-		for (var resource in result[mode]) {
-			mkdirp.sync(path.dirname(result[mode][resource].path));
-			fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
-		}
-	}
+spriter.compile(function (error, result) {
+    /* Write `result` files to disk (or do whatever with them ...) */
+    for (var mode in result) {
+        for (var resource in result[mode]) {
+            mkdirp.sync(path.dirname(result[mode][resource].path));
+            fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
+        }
+    }
 });
 ```
 
@@ -102,12 +106,12 @@ Of course you noticed the `config` variable passed to the constructor in the abo
 
 ```js
 {
-	dest			: <String>,				// Main output directory
-	log  			: <String|Logger>,		// Logging verbosity or custom logger
-	shape			: <Object>,				// SVG shape configuration
-	svg				: <Object>,				// Common SVG options
-	variables		: <Object>,				// Custom templating variables
-	mode			: <Object>				// Output mode configurations
+    dest     : < String > ,             // Main output directory
+    log      : < String | Logger > ,    // Logging verbosity or custom logger
+    shape    : < Object > ,             // SVG shape configuration
+    svg      : < Object > ,             // Common SVG options
+    variables: < Object > ,             // Custom templating variables
+    mode     : < Object >               // Output mode configurations
 }
 ```
 
@@ -121,38 +125,38 @@ Many configuration properties (all except `mode`) apply to all sprites created b
 ```js
 // Common svg-sprite config options and their default values
 
-var config					= {
-	dest					: '.',						// Main output directory
-	log						: null,						// Logging verbosity (default: no logging)
-	shape					: {							// SVG shape related options
-		id					: {							// SVG shape ID related options
-			separator		: '--',						// Separator for directory name traversal
-			generator		: function() { /*...*/ },	// SVG shape ID generator callback
-			pseudo			: '~'						// File name separator for shape states (e.g. ':hover')
-		},
-		dimension			: {							// Dimension related options
-			maxWidth		: 2000,						// Max. shape width
-			maxHeight		: 2000,						// Max. shape height
-			precision		: 2,						// Floating point precision
-			attributes		: false,					// Width and height attributes on embedded shapes
-		},
-		spacing				: {							// Spacing related options
-			padding			: 0,						// Padding around all shapes
-			box				: 'content'					// Padding strategy (similar to CSS `box-sizing`)
-		},
-		transform			: ['svgo'],					// List of transformations / optimizations
-		meta				: null,						// Path to YAML file with meta / accessibility data
-		align				: null,						// Path to YAML file with extended alignment data
-		dest				: null						// Output directory for optimized intermediate SVG shapes
-	},
-	svg						: {							// General options for created SVG files
-		xmlDeclaration		: true,						// Add XML declaration to SVG sprite
-		doctypeDeclaration	: true,						// Add DOCTYPE declaration to SVG sprite
-		namespaceIDs		: true,						// Add namespace token to all IDs in SVG shapes
-		namespaceClassnames	: true,						// Add namespace token to all CSS class names in SVG shapes
-		dimensionAttributes	: true						// Width and height attributes on the sprite
-	},
-	variables				: {}						// Custom Mustache templating variables and functions
+var config                 = {
+    dest                   : '.',                       // Main output directory
+    log                    : null,                      // Logging verbosity (default: no logging)
+    shape                  : {                          // SVG shape related options
+        id                 : {                          // SVG shape ID related options
+            separator      : '--',                      // Separator for directory name traversal
+            generator      : function () { /*...*/ },   // SVG shape ID generator callback
+            pseudo         : '~'                        // File name separator for shape states (e.g. ':hover')
+        },
+        dimension          : {                          // Dimension related options
+            maxWidth       : 2000,                      // Max. shape width
+            maxHeight      : 2000,                      // Max. shape height
+            precision      : 2,                         // Floating point precision
+            attributes     : false,                     // Width and height attributes on embedded shapes
+        },
+        spacing            : {                          // Spacing related options
+            padding        : 0,                         // Padding around all shapes
+            box            : 'content'                  // Padding strategy (similar to CSS `box-sizing`)
+        },
+        transform          : ['svgo'],                  // List of transformations / optimizations
+        meta               : null,                      // Path to YAML file with meta / accessibility data
+        align              : null,                      // Path to YAML file with extended alignment data
+        dest               : null                       // Output directory for optimized intermediate SVG shapes
+    },
+    svg                    : {                          // General options for created SVG files
+        xmlDeclaration     : true,                      // Add XML declaration to SVG sprite
+        doctypeDeclaration : true,                      // Add DOCTYPE declaration to SVG sprite
+        namespaceIDs       : true,                      // Add namespace token to all IDs in SVG shapes
+        namespaceClassnames: true,                      // Add namespace token to all CSS class names in SVG shapes
+        dimensionAttributes: true                       // Width and height attributes on the sprite
+    },
+    variables              : {}                         // Custom Mustache templating variables and functions
 }
 ```
 
@@ -166,14 +170,14 @@ At the moment, *svg-sprite* supports **five different output modes** (i.e. sprit
 To enable the creation of a specific sprite type with default values, simply set the appropriate `mode` property to `true`:
 
 ```js
-var config					= {
-	mode					: {
-		css					: true,		// Create a «css» sprite
-		view				: true,		// Create a «view» sprite
-		defs				: true,		// Create a «defs» sprite
-		symbol				: true,		// Create a «symbol» sprite
-		stack				: true		// Create a «stack» sprite
-	}
+var config    = {
+    mode      : {
+        css   : true,   // Create a «css» sprite
+        view  : true,   // Create a «view» sprite
+        defs  : true,   // Create a «defs» sprite
+        symbol: true,   // Create a «symbol» sprite
+        stack : true    // Create a «stack» sprite
+    }
 }
 ```
 
@@ -182,13 +186,13 @@ To further configure a sprite, pass in an object with configuration options:
 ```js
 // «symbol» sprite with CSS stylesheet resource
 
-var config					= {
-	mode					: {
-		css					: {
-			// Configuration for the «css» sprite
-			// ...
-		}
-	}
+var config = {
+    mode   : {
+        css: {
+            // Configuration for the «css» sprite
+            // ...
+        }
+    }
 }
 ```
 
@@ -200,26 +204,26 @@ Many `mode` properties are shared between the different sprite types, but there 
 ```js
 // Common mode properties
 
-var config					= {
-	mode					: {
-		<mode> 				: {
-			dest			: "<mode>",						// Mode specific output directory
-			prefix			: "svg-%s",						// Prefix for CSS selectors
-			dimensions		: "-dims",						// Suffix for dimension CSS selectors
-			sprite			: "svg/sprite.<mode>.svg"		// Sprite path and name
-			bust			: true|false,					// Cache busting (mode dependent default value)
-			render			: {								// Stylesheet rendering definitions
-				/* -------------------------------------------
-				css			: false,						// CSS stylesheet options
-				scss		: false,						// Sass stylesheet options
-				less		: false,						// LESS stylesheet options
-				styl		: false							// Stylus stylesheet options
-				<custom>	: ...							// Custom stylesheet options
-				-------------------------------------------	*/
-			},
-			example			: false							// Create an HTML example document
-		}
-	}
+var config              = {
+    mode                : { 
+        < mode >        : {
+            dest        : "<mode>",                 // Mode specific output directory
+            prefix      : "svg-%s",                 // Prefix for CSS selectors
+            dimensions  : "-dims",                  // Suffix for dimension CSS selectors
+            sprite      : "svg/sprite.<mode>.svg"   // Sprite path and name
+            bust        : true | false,             // Cache busting (mode dependent default value)
+            render      : {                         // Stylesheet rendering definitions
+                /* -------------------------------------------
+                css     : false,                    // CSS stylesheet options
+                scss    : false,                    // Sass stylesheet options
+                less    : false,                    // LESS stylesheet options
+                styl    : false                     // Stylus stylesheet options
+                <custom>: ...                       // Custom stylesheet options
+                -------------------------------------------*/
+            },
+            example     : false                     // Create an HTML example document
+        }
+    }
 }
 ```
 
@@ -234,11 +238,11 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 ```js
 // «symbol» sprite with CSS stylesheet resource
 
-var config					= {
-	mode					: {
-		inline				: true,		// Prepare for inline embedding
-		symbol				: true		// Create a «symbol» sprite
-	}
+var config    = {
+    mode      : {
+        inline: true,   // Prepare for inline embedding
+        symbol: true    // Create a «symbol» sprite
+    }
 }
 ```
 
@@ -250,14 +254,14 @@ Traditional **CSS sprite** with a **Sass stylesheet**:
 ```js
 // «css» sprite with Sass stylesheet resource
 
-var config					= {
-	mode					: {
-		css					: {			// Create a «css» sprite
-			render			: {
-				scss		: true		// Render a Sass stylesheet
-			}
-		}
-	}
+var config          = {
+    mode            : {
+        css         : {         // Create a «css» sprite
+            render  : {
+                scss: true      // Render a Sass stylesheet
+            }
+        }
+    }
 }
 ```
 
@@ -269,12 +273,12 @@ var config					= {
 ```js
 // «defs», «symbol» and «stack» sprites in parallel
 
-var config					= {
-	mode					: {
-		defs				: true,
-		symbol				: true,
-		stack				: true
-	}
+var config    = {
+    mode      : {
+        defs  : true,
+        symbol: true,
+        stack : true
+    }
 }
 ```
 
@@ -286,10 +290,10 @@ var config					= {
 ```js
 // Just optimize source SVG files, create no sprite
 
-var config					= {
-	shape					: {
-		dest				: 'path/to/out/dir'
-	}
+var config  = {
+    shape   : {
+        dest: 'path/to/out/dir'
+    }
 }
 ```
 
@@ -322,9 +326,9 @@ By default, stylesheet resources are generated directly into the respective **mo
 
 Special care needs to be taken when you create a **CSS sprite** («css» or «view» mode) along with a stylesheet in one of the **pre-processor formats** (Sass, LESS, Stylus etc.). In this case, calculating the correct relative SVG sprite path as used by the stylesheets can become tricky, as your (future) plain CSS compilation doesn't necessarily lie side by side with the pre-processor file. *svg-sprite* doesn't know anything about your pre-processor workflow, so it might have to estimate the location of the CSS file:
 
-1.	If you **truly configured CSS output** in addition to the pre-processor format, *svg-sprite* uses your custom `mode.<mode>.render.css.dest` as the CSS stylesheet location.
-2.	If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `TRUE`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
-3.	The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`.
+1. If you **truly configured CSS output** in addition to the pre-processor format, *svg-sprite* uses your custom `mode.<mode>.render.css.dest` as the CSS stylesheet location.
+2. If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `TRUE`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
+3. The same holds true when you **dont't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`.
 
 So even if you don't enable plain CSS output explicitly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
 
