@@ -876,8 +876,12 @@ describe('svg-sprite', function () {
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
-                        }
-                    }
+                        },
+						dest: 'shapes'
+                    },
+					svg: {
+						namespaceIDs: true
+					}
                 });
                 addFixtureFiles(spriter, align, cwdAlign);
                 spriter.compile({
@@ -893,7 +897,7 @@ describe('svg-sprite', function () {
                     }
                 }, function (error, result, cssData) {
                     result.view.should.be.an.Object;
-                    writeFiles(result).should.be.exactly(2);
+                    writeFiles(result).should.be.exactly(8);
                     data = cssData.view;
                     svg.horizontal = path.basename(result.view.sprite.path);
                     done();
