@@ -6,7 +6,7 @@
  * @see https://github.com/jkphl/svg-sprite
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
- * @copyright © 2016 Joschi Kuphal
+ * @copyright © 2018 Joschi Kuphal
  * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE
  */
 
@@ -245,7 +245,11 @@ if (typeof config.shape.transform === 'string') {
 	// Remove excessive render types
 	['css', 'scss', 'less', 'styl'].forEach(function (render) {
 		var arg = mode + '-render-' + render;
-		if (render in this && !argv[arg] && (!(mode in JSONConfig.mode) || !('render' in JSONConfig.mode[mode]) || !(render in JSONConfig.mode[mode].render))) {
+		if ((render in this) && !argv[arg]
+			&& (!(mode in JSONConfig.mode)
+			|| !('render' in JSONConfig.mode[mode])
+			|| !(render in JSONConfig.mode[mode].render))
+		) {
 			delete this[render];
 		}
 	}, this[mode].render);
@@ -258,7 +262,10 @@ if (typeof config.shape.transform === 'string') {
 // Remove excessive example options
 for (var mode in config.mode) {
 	var example = mode + '-example';
-	if (!argv[example] && (!(mode in JSONConfig.mode) || !('example' in JSONConfig.mode[mode])) && 'example' in config.mode[mode]) {
+	if (!argv[example]
+		&& (!(mode in JSONConfig.mode) || !('example' in JSONConfig.mode[mode]))
+		&& ('example' in config.mode[mode])
+	) {
 		delete config.mode[mode].example;
 	}
 }
