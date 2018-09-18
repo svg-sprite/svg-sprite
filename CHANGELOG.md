@@ -1,8 +1,13 @@
+## 1.5.0 Maintenance release (2018-09-18)
+
+* Updated dependencies
+* Dropped support for Node.js < 6.4
+
 ## 1.4.1 Maintenance release (2018-09-18)
 
 * Updated dependencies ([#276](https://github.com/jkphl/svg-sprite/pull/276), [#277](https://github.com/jkphl/svg-sprite/pull/277))
 
-## 1.4.0 Maintenance release (2018-03-17)
+[Draft a new release.url](C:/Users/joschi/AppData/Local/Temp/Draft a new release.url)## 1.4.0 Maintenance release (2018-03-17)
 
 * Added more Node.js versions to Travis instructions
 * Updated dependencies
