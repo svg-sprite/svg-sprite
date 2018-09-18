@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 4.0"
+    "node": ">= 6.4.0"
   },
   "main": "lib/svg-sprite.js",
   "bin": {
@@ -30,7 +30,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "pretest1": "npm run lint",
+    "pretest": "npm run lint",
     "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js --reporter spec",
     "lint": "jshint bin && jshint lib && jshint test",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
@@ -53,7 +53,7 @@
     "should": "^13.2.3",
     "svgo": "^1.1.1",
     "vinyl": "^2.2.0",
-    "winston": "^3.1.0",
+    "winston": "^2.4.1",
     "xmldom": "0.1.27",
     "xpath": "^0.0.27",
     "yargs": "^12.0.2"
