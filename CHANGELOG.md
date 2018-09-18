@@ -1,11 +1,7 @@
-## 1.4.1 Maintenance release (unreleased)
-
-* Updated dependencies (#276)
-
 ## 1.4.0 Maintenance release (2018-03-17)
 
 * Added more Node.js versions to Travis instructions
-* Updated dependencies
+* Updated dependencies 
 * Updated SVGO version & test fixture ([#258](https://github.com/jkphl/svg-sprite/pull/258), [#259](https://github.com/jkphl/svg-sprite/issues/259))
 * Reformatted documentation code examples ([#236](https://github.com/jkphl/svg-sprite/pull/236))
 * Fix JSHint errors ([#261](https://github.com/jkphl/svg-sprite/pull/261))
