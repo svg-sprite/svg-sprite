@@ -49,7 +49,7 @@
     "mustache": "^2.3.0",
     "phantomjs-prebuilt": "^2.1.16",
     "prettysize": "^1.1.0",
-    "svgo": "^1.0.5",
+    "svgo": "^1.1.1",
     "vinyl": "^2.1.0",
     "winston": "^2.4.1",
     "xmldom": "0.1.27",
