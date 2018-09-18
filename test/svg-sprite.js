@@ -48,7 +48,7 @@ function addFixtureFiles(spriter, files, cwd) {
         spriter.add(
             path.resolve(path.join(cwd, file)),
             file,
-            fs.readFileSync(path.join(cwd, file), {encoding: 'utf-8'})
+            fs.readFileSync(path.join(cwd, file), { encoding: 'utf-8' })
         );
     });
 }
@@ -157,8 +157,8 @@ before(function (done) {
 });
 
 describe('svg-sprite', function () {
-    var weather = glob.glob.sync('**/weather*.svg', {cwd: cwdWeather}),
-        align = glob.glob.sync('**/*.svg', {cwd: cwdAlign}),
+    var weather = glob.glob.sync('**/weather*.svg', { cwd: cwdWeather }),
+        align = glob.glob.sync('**/*.svg', { cwd: cwdAlign }),
         previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
 
     describe('with no arguments', function () {
@@ -877,11 +877,11 @@ describe('svg-sprite', function () {
                             maxWidth: 200,
                             maxHeight: 200
                         },
-						dest: 'shapes'
+                        dest: 'shapes'
                     },
-					svg: {
-						namespaceIDs: true
-					}
+                    svg: {
+                        namespaceIDs: true
+                    }
                 });
                 addFixtureFiles(spriter, align, cwdAlign);
                 spriter.compile({

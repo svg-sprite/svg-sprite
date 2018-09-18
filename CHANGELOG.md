@@ -1,6 +1,7 @@
-## 1.4.1 Maintenance release (unreleased)
+## 1.4.1 Maintenance release (2018-09-18)
 
-* Updated dependencies (#276)
+* Updated dependencies
+* Fixed SVGO / Winston update problems ([#276](https://github.com/jkphl/svg-sprite/pull/276), [#277](https://github.com/jkphl/svg-sprite/pull/277))
 
 ## 1.4.0 Maintenance release (2018-03-17)
 
