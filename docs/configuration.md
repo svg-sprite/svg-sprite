@@ -177,7 +177,6 @@ To call a pre-defined transformation with custom configuration options, use it's
         transform: [
             {svgo: {
                 plugins: [
-                    {transformsWithOnePath: true},
                     {moveGroupAttrsToElems: false}
                 ]
             }}
