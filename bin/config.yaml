@@ -111,6 +111,11 @@ svg:
       default             : true
       map                 : svg.namespaceIDs
 
+    prefix                :
+      description         : What, if any, prefix to apply to the automatically generated id
+      default             : ''
+      map                 : svg.namespaceIDPrefix
+
     classnames            :
       description         : Whether to apply CSS class namespacing to the sprite
       default             : true
