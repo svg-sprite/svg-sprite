@@ -221,6 +221,16 @@ Finds all backslashes in a string and escapes each of them with another backslas
 }
 ```
 
+#### encodeHashSign
+
+Finds all hash signs in a string and encodes each of them to `%23` symbol. 
+
+```css
+.{{name}}-background {
+  background: url('data:image/svg+xml;utf-8,{{#escapeHashSign}}{{{svg}}}{{/escapeHashSign}}') no-repeat;
+}
+```
+
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://badge.fury.io/js/svg-sprite.png
