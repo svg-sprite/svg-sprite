@@ -8,10 +8,10 @@
 		<style>i{text-indent:200%;white-space:nowrap;overflow:hidden;display:inline-block}</style>
 
 <!--
-	
+
 Sprite CSS
 ====================================================================================================
-This is an all-in-one inline version of the CSS necessary to use the SVG sprite. 
+This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 
 -->
 
@@ -23,9 +23,9 @@ This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 	height: {{height.outer}}px;
 }
 {{/shapes}}</style>
-		
+
 <!--
-	
+
 Sprite shape dimensions
 ====================================================================================================
 If you use the sprite in conjunction with the pre-defined views (respectively fragment identifiers),
@@ -56,7 +56,7 @@ external stylesheet of course.
 		<section>
 
 <!--
-	
+
 A) Conventional CSS sprite
 ====================================================================================================
 This technique uses CSS classes to display portions of the sprite as background image of
@@ -66,13 +66,13 @@ appropriately sized elements.
 
 			<h3>A) Conventional CSS sprite</h3>
 			<ul>
-				
+
 {{#shapes}}				<li title="{{name}}">
 					<div class="icon-box">
-						
+
 						<!-- {{name}} -->
 						<i class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.shape}}">{{name}}</i>
-						
+
 					</div>
 					<h2>{{name}}</h2>
 				</li>
@@ -86,7 +86,7 @@ appropriately sized elements.
 		<section>
 
 <!--
-	
+
 B) External sprite with pre-defined views referenced by fragment identifiers
 ====================================================================================================
 These SVG images make use of fragment identifiers (IDs) and are referencing the <view> elements
@@ -96,13 +96,13 @@ pre-defined in the external sprite.
 
 			<h3>B) External sprite with pre-defined views referenced by fragment identifiers</h3>
 			<ul>
-				
+
 {{#shapes}}				<li title="{{name}}">
 					<div class="icon-box">
-						
+
 						<!-- {{name}} -->
 						<img src="{{{example}}}#{{name}}" class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}-dims{{/last}}{{/selector.shape}}" alt="{{name}}"/>
-						
+
 					</div>
 					<h2>{{name}}</h2>
 				</li>
@@ -114,7 +114,7 @@ pre-defined in the external sprite.
 
 		</section>
 		<footer>
-			<p>Generated at {{date}} by <a href="https://github.com/jkphl/svg-sprite" target="_blank">svg-sprite</a>.</p>
+			<p>Generated at {{date}} by <a href="https://github.com/jkphl/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
 		</footer>
 	</body>
 </html>
