@@ -1,6 +1,7 @@
 ## 1.5.1 Maintenance release (unreleased)
 
 * Update documentation to use updated SVGO plugin name ([#275](https://github.com/jkphl/svg-sprite/pull/275))
+* Move `mocha` and `should` dependencies back to `devDependencies` again ([#297](https://github.com/jkphl/svg-sprite/pull/297), [#285](https://github.com/jkphl/svg-sprite/issues/285))
 
 ## 1.5.0 Maintenance release (2018-09-18)
 
