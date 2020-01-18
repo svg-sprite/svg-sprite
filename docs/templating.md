@@ -223,11 +223,11 @@ Finds all backslashes in a string and escapes each of them with another backslas
 
 #### encodeHashSign
 
-Finds all hash signs in a string and encodes each of them to `%23` symbol. 
+Finds all hash signs in a string and encodes each of them to `%23`. 
 
 ```css
 .{{name}}-background {
-  background: url('data:image/svg+xml;utf-8,{{#escapeHashSign}}{{{svg}}}{{/escapeHashSign}}') no-repeat;
+  background: url('data:image/svg+xml;utf-8,{{#encodeHashSign}}{{{svg}}}{{/encodeHashSign}}') no-repeat;
 }
 ```
 

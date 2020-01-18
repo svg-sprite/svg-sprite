@@ -2,6 +2,7 @@
 
 * Update documentation to use updated SVGO plugin name ([#275](https://github.com/jkphl/svg-sprite/pull/275))
 * Move `mocha` and `should` dependencies back to `devDependencies` again ([#297](https://github.com/jkphl/svg-sprite/pull/297), [#285](https://github.com/jkphl/svg-sprite/issues/285))
+* Add built-in templating function to encode hash signs ([#294](https://github.com/jkphl/svg-sprite/pull/294))
 
 ## 1.5.0 Maintenance release (2018-09-18)
 
