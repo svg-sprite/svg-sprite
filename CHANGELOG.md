@@ -1,5 +1,6 @@
-## 1.5.1 Maintenance release (unreleased)
+## 1.6.0 Maintenance release (unreleased)
 
+* Remove support for Node < 8.0
 * Update dependencies ([#306](https://github.com/jkphl/svg-sprite/pull/306), [#310](https://github.com/jkphl/svg-sprite/pull/310))
 * Update documentation to use updated SVGO plugin name ([#275](https://github.com/jkphl/svg-sprite/pull/275))
 * Move `mocha` and `should` dependencies back to `devDependencies` again ([#297](https://github.com/jkphl/svg-sprite/pull/297), [#285](https://github.com/jkphl/svg-sprite/issues/285))
