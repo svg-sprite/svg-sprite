@@ -1,4 +1,4 @@
-## 1.6.0 Maintenance release (unreleased)
+## 1.6.0-alpha Maintenance pre-release (2020-01-18)
 
 * Remove support for Node < 8.0
 * Update dependencies ([#306](https://github.com/jkphl/svg-sprite/pull/306), [#310](https://github.com/jkphl/svg-sprite/pull/310))
