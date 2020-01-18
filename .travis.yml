@@ -10,6 +10,12 @@ node_js:
   - '12'
   - '13'
 
+jobs:
+  allow_failures:
+    - node_js: 11
+    - node_js: 12
+    - node_js: 13
+
 after_script:
   - npm run coveralls
 
