@@ -39,18 +39,11 @@
     "async": "^3.1.0",
     "css-selector-parser": "^1.3.0",
     "cssmin": "^0.4.3",
-<<<<<<< HEAD
     "cssom": "^0.4.4",
     "dateformat": "^3.0.3",
     "glob": "^7.1.6",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-=======
-    "cssom": "^0.3.4",
-    "glob": "^7.1.3",
-    "js-yaml": "^3.12.0",
-    "lodash": "^4.17.11",
->>>>>>> 067203f6ced0539e4fd8232b564ad18bb4d56ac5
     "lodash.pluck": "^3.1.2",
     "mkdirp": "^0.5.1",
     "mustache": "^4.0.0",
