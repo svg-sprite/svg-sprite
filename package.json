@@ -69,8 +69,7 @@
     "rimraf": "",
     "should": "^13.2.3",
     "stylus": "^0.54.7",
-    "svg2png": "github:jkphl/svg2png",
-    "vinyl-fs": "^3.0.3"
+    "svg2png": "github:jkphl/svg2png"
   },
   "keywords": [
     "icon",
