@@ -47,6 +47,7 @@
     "lodash.pluck": "^3.1.2",
     "mkdirp": "^0.5.1",
     "mustache": "^3.0.0",
+    "npm-check-updates": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.16",
     "prettysize": "^1.1.0",
     "svgo": "^1.1.1",
@@ -68,7 +69,7 @@
     "pn": "^1.1.0",
     "rimraf": "",
     "should": "^13.2.3",
-    "stylus": "^0.54.5",
+    "stylus": "^0.54.7",
     "svg2png": "github:jkphl/svg2png",
     "vinyl-fs": "^3.0.3"
   },
