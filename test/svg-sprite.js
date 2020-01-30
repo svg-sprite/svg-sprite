@@ -146,7 +146,13 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
                     }, function (err, imagesAreSame) {
                         should(err).not.ok;
                         should.ok(imagesAreSame, msg);
-                        done();
+                        if (imagesAreSame) {
+                            rimraf(diff, function() {
+                                done();
+                            });
+                        } else {
+                            done();
+                        }
                     });
                 })
                 .catch(ecb);
@@ -372,7 +378,13 @@ describe('svg-sprite', function () {
                         }, function (error, imagesAreSame) {
                             should(error).not.ok;
                             should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
-                            done();
+                            if (imagesAreSame) {
+                                rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.html.diff.png'), function() {
+                                    done();
+                                });
+                            } else {
+                                done();
+                            }
                         });
                     });
                 });
@@ -403,7 +415,13 @@ describe('svg-sprite', function () {
                                 }, function (error, imagesAreSame) {
                                     should(error).not.ok;
                                     should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
-                                    done();
+                                    if (imagesAreSame) {
+                                        rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'scss.html.diff.png'), function() {
+                                            done();
+                                        });
+                                    } else {
+                                        done();
+                                    }
                                 });
                             });
                         }
@@ -437,7 +455,13 @@ describe('svg-sprite', function () {
                                 }, function (error, imagesAreSame) {
                                     should(error).not.ok;
                                     should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
-                                    done();
+                                    if (imagesAreSame) {
+                                        rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'less.html.diff.png'), function() {
+                                            done();
+                                        });
+                                    } else {
+                                        done();
+                                    }
                                 });
                             });
                         });
@@ -471,7 +495,13 @@ describe('svg-sprite', function () {
                                 }, function (error, imagesAreSame) {
                                     should(error).not.ok;
                                     should.ok(imagesAreSame, 'The generated Stylus preview doesn\'t match the expected one!');
-                                    done();
+                                    if (imagesAreSame) {
+                                        rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'styl.html.diff.png'), function() {
+                                            done();
+                                        });
+                                    } else {
+                                        done();
+                                    }
                                 });
                             });
                         });
@@ -617,11 +647,17 @@ describe('svg-sprite', function () {
                     imageDiff({
                         actualImage: previewImage,
                         expectedImage: path.join(__dirname, 'expected', 'png', 'css.vertical.centered.html.png'),
-                        diffImage: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.centered.html.diff.png')
+                        diffImage: path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.html.diff.png')
                     }, function (error, imagesAreSame) {
                         should(error).not.ok;
                         should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
-                        done();
+                        if (imagesAreSame) {
+                            rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.vertical.centered.html.diff.png'), function() {
+                                done();
+                            });
+                        } else {
+                            done();
+                        }
                     });
                 });
             });
@@ -700,7 +736,13 @@ describe('svg-sprite', function () {
                             }, function (error, imagesAreSame) {
                                 should(error).not.ok;
                                 should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
-                                done();
+                                if (imagesAreSame) {
+                                    rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'scss.horizontal.centered.html.diff.png'), function() {
+                                        done();
+                                    });
+                                } else {
+                                    done();
+                                }
                             });
                         });
                     }
@@ -782,7 +824,13 @@ describe('svg-sprite', function () {
                             }, function (error, imagesAreSame) {
                                 should(error).not.ok;
                                 should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
-                                done();
+                                if (imagesAreSame) {
+                                    rimraf(path.join(__dirname, '..', 'tmp', 'css', 'png', 'less.packed.centered.html.diff.png'), function() {
+                                        done();
+                                    });
+                                } else {
+                                    done();
+                                }
                             });
                         });
                     });
@@ -858,11 +906,17 @@ describe('svg-sprite', function () {
                     imageDiff({
                         actualImage: previewImage,
                         expectedImage: path.join(__dirname, 'expected', 'png', 'css.vertical.mixed.html.png'),
-                        diffImage: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.mixed.html.diff.png')
+                        diffImage: path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.html.diff.png')
                     }, function (error, imagesAreSame) {
                         should(error).not.ok;
                         should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
-                        done();
+                        if (imagesAreSame) {
+                            rimraf(path.join(__dirname, '..', 'tmp', 'view', 'png', 'css.vertical.mixed.html.diff.png'), function() {
+                                done();
+                            });
+                        } else {
+                            done();
+                        }
                     });
                 });
             });
@@ -945,7 +999,13 @@ describe('svg-sprite', function () {
                             }, function (error, imagesAreSame) {
                                 should(error).not.ok;
                                 should.ok(imagesAreSame, 'The generated Sass preview doesn\'t match the expected one!');
-                                done();
+                                if (imagesAreSame) {
+                                    rimraf(path.join(__dirname, '..', 'tmp', 'view', 'png', 'scss.horizontal.mixed.html.diff.png'), function() {
+                                        done();
+                                    });
+                                } else {
+                                    done();
+                                }
                             });
                         });
                     }
@@ -1027,7 +1087,13 @@ describe('svg-sprite', function () {
                             }, function (error, imagesAreSame) {
                                 should(error).not.ok;
                                 should.ok(imagesAreSame, 'The generated LESS preview doesn\'t match the expected one!');
-                                done();
+                                if (imagesAreSame) {
+                                    rimraf(path.join(__dirname, '..', 'tmp', 'view', 'png', 'less.packed.mixed.html.diff.png'), function() {
+                                        done();
+                                    });
+                                } else {
+                                    done();
+                                }
                             });
                         });
                     });
