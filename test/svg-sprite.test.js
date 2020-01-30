@@ -949,4 +949,30 @@ describe('svg-sprite', () => {
             });
         });
     });
+
+    describe('with styled svg files', () => {
+        const spriter = new SVGSpriter({
+            shape: {
+                dest: 'svg'
+            }
+        });
+
+        describe('with zebra file', () => {
+            const cwdStyled = path.join(__dirname, 'fixture/svg/styled');
+            const zebra = 'zebra.svg';
+
+            it('returns optimized shape', done => {
+                addFixtureFiles(spriter, [zebra], cwdStyled);
+                spriter.compile((error, result, data) => {
+                    should(error).not.ok;
+                    should(result).be.an.Object;
+                    should(result).have.property('shapes');
+                    should(result.shapes).be.an.Array;
+                    should(data).be.an.Object;
+                    should(data).be.empty;
+                    done();
+                });
+            });
+        });
+    });
 });
