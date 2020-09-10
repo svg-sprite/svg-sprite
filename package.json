@@ -54,7 +54,7 @@
     "winston": "^3.2.1",
     "xmldom": "^0.2.1",
     "xpath": "^0.0.27",
-    "yargs": "^15.1.0"
+    "yargs": "^16.0.3"
   },
   "devDependencies": {
     "coveralls": "^3.0.9",
