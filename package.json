@@ -29,11 +29,14 @@
     "tmpl",
     "CHANGELOG.md"
   ],
+  "mocha": {
+    "reporter": "spec"
+  },
   "scripts": {
     "pretest": "npm run lint",
-    "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js --reporter spec",
+    "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js",
     "lint": "jshint bin && jshint lib && jshint test",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "async": "^3.2.0",
