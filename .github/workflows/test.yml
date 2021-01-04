@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 env:
   FORCE_COLOR: 2
+  NODE_COV: 10 # The Node.js version to run coveralls on
 
 jobs:
   run:
@@ -37,6 +38,11 @@ jobs:
 
       - name: Run tests
         run: npm test
+        if: matrix.node != env.NODE_COV
+
+      - name: Run tests with coverage
+        run: npm run coverage
+        if: matrix.node == env.NODE_COV
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v2
@@ -44,3 +50,9 @@ jobs:
         with:
           name: svg-sprite-ci-${{ matrix.node }}-${{ github.sha }}
           path: tmp/
+
+      - name: Run Coveralls
+        uses: coverallsapp/github-action@master
+        if: github.repository == 'jkphl/svg-sprite' && matrix.node == env.NODE_COV
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"

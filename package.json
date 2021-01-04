@@ -36,7 +36,7 @@
     "pretest": "npm run lint",
     "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js",
     "lint": "jshint bin && jshint lib && jshint test",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly"
   },
   "dependencies": {
     "async": "^3.2.0",
@@ -58,7 +58,6 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "coveralls": "^3.1.0",
     "image-diff": "^2.0.0",
     "istanbul": "^0.4.5",
     "jshint": "^2.12.0",
