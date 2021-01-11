@@ -61,7 +61,7 @@
     "image-diff": "^2.0.0",
     "istanbul": "*",
     "jshint": "^2.11.0",
-    "less": "^3.10.3",
+    "less": "^4.1.0",
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "*",
     "node-sass": "^4.13.1",
