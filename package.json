@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">=10"
   },
   "main": "lib/svg-sprite.js",
   "bin": {
