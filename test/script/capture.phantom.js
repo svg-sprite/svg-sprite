@@ -1,7 +1,5 @@
 'use strict';
 
-/* jshint -W117 */
-
 var system				= require('system');
 
 if (system.args.length !== 3) {
