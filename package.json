@@ -26,7 +26,8 @@
     "tmpl"
   ],
   "scripts": {
-    "lint": "jshint bin lib test",
+    "lint": "xo",
+    "fix": "npm run lint -- --fix",
     "mocha": "_mocha --reporter spec test/svg-sprite.js",
     "coverage": "c8 npm run mocha",
     "example": "node example.js",
@@ -52,7 +53,6 @@
   },
   "devDependencies": {
     "c8": "^7.7.1",
-    "jshint": "^2.12.0",
     "less": "^4.1.1",
     "looks-same": "^7.3.0",
     "mocha": "^8.3.2",
@@ -60,7 +60,8 @@
     "sass": "^1.32.11",
     "should": "^13.2.3",
     "stylus": "^0.54.8",
-    "svg2png": "^4.1.1"
+    "svg2png": "^4.1.1",
+    "xo": "^0.39.1"
   },
   "keywords": [
     "icon",
@@ -100,5 +101,62 @@
     "trace-deprecation": true,
     "trace-warnings": true,
     "use_strict": true
+  },
+  "xo": {
+    "space": 4,
+    "rules": {
+      "capitalized-comments": "off",
+      "eslint-comments/disable-enable-pair": "off",
+      "guard-for-in": "off",
+      "max-depth": [
+        "warn",
+        5
+      ],
+      "max-params": "off",
+      "no-labels": "off",
+      "no-negated-condition": "off",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "prefer-template": "error",
+      "promise/prefer-await-to-then": "off",
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "spaced-comment": "off",
+      "unicorn/explicit-length-check": "off",
+      "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-reduce": "off",
+      "unicorn/no-for-loop": "off",
+      "unicorn/prefer-query-selector": "off",
+      "unicorn/prefer-reflect-apply": "off",
+      "unicorn/prefer-string-slice": "off",
+      "unicorn/prevent-abbreviations": "off"
+    },
+    "overrides": [
+      {
+        "files": "test/**/*.js",
+        "envs": [
+          "mocha"
+        ]
+      },
+      {
+        "files": "**/*.phantom.js",
+        "envs": [
+          "phantomjs"
+        ],
+        "parserOptions": {
+          "ecmaVersion": 3,
+          "sourceType": "script"
+        },
+        "rules": {
+          "no-var": "off",
+          "prefer-arrow-callback": "off",
+          "prefer-template": "off"
+        }
+      }
+    ]
   }
 }

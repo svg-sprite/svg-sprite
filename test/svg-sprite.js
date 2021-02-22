@@ -10,8 +10,8 @@
  * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE
  */
 
-/* jshint -W117 */
-/* jshint -W030 */
+// TODO fix/work around these
+/* eslint-disable no-unused-expressions, max-nested-callbacks */
 
 var fs = require('fs');
 var util = require('util');
