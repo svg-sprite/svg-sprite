@@ -13,7 +13,8 @@
  * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE.txt
  */
 
-var fs = require('pn/fs'); // https://www.npmjs.com/package/pn
+var fs = require('fs');
+var util = require('util');
 var svg2png = require('svg2png');
 var should = require('should'),
     path = require('path'),
@@ -35,6 +36,9 @@ var should = require('should'),
 var cwdWeather = path.join(__dirname, 'fixture', 'svg', 'single'),
     cwdAlign = path.join(__dirname, 'fixture', 'svg', 'css'),
     dest = path.normalize(path.join(__dirname, '..', 'tmp'));
+
+var readFileP = util.promisify(fs.readFile);
+var writeFileP = util.promisify(fs.writeFile);
 
 /**
  * Add a bunch of SVG files
@@ -130,10 +134,10 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
         should(err).not.ok;
         done();
     };
-    fs.readFile(svg)
+    readFileP(svg)
         .then(svg2png)
         .then(function (buffer) {
-            fs.writeFile(png, buffer)
+            writeFileP(png, buffer)
                 .then(function () {
                     imageDiff({
                         actualImage: png,
