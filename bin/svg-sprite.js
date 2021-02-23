@@ -199,7 +199,7 @@ if (argv['config']) {
 // Refine particular config options
 config.shape.spacing.padding = ('' + config.shape.spacing.padding).trim();
 config.shape.spacing.padding = config.shape.spacing.padding.length ? config.shape.spacing.padding.split(',').map(function (dim) {
-	return parseFloat(dim || 0, 10);
+	return parseFloat(dim || 0);
 }) : [];
 
 if (config.svg.rootAttributes && typeof config.svg.rootAttributes === 'string') {
