@@ -1,6 +1,5 @@
 var SVGSpriter = require('./lib/svg-sprite'),
 	path = require('path'),
-	mkdirp = require('mkdirp'),
 	fs = require('fs'),
 	glob = require('glob'),
 	cwd = path.join(__dirname, 'test', 'fixture', 'svg', 'single'),
@@ -42,7 +41,7 @@ addFixtureFiles(spriter, files).compile({
 	}
 }, function (error, result, cssData) {
 	for (var type in result.css) {
-		mkdirp.sync(path.dirname(result.css[type].path));
+		fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
 		fs.writeFileSync(result.css[type].path, result.css[type].contents);
 	}
 })
