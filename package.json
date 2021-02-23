@@ -34,7 +34,7 @@
   "dependencies": {
     "async": "^3.2.0",
     "css-selector-parser": "^1.4.1",
-    "cssmin": "^0.4.3",
+    "csso": "^4.2.0",
     "cssom": "^0.4.4",
     "glob": "^7.1.6",
     "js-yaml": "^4.0.0",
