@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8"/>
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-		<title>SVG &lt;view&gt; sprite preview | svg-sprite</title>
-		<style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23fff' d='M6 0h6v6H6zM0 6h6v6H0z'/%3E%3C/svg%3E") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
-		<style>i{text-indent:200%;white-space:nowrap;overflow:hidden;display:inline-block}</style>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <title>SVG &lt;view&gt; sprite preview | svg-sprite</title>
+        <style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23fff' d='M6 0h6v6H6zM0 6h6v6H0z'/%3E%3C/svg%3E") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
+        <style>i{text-indent:200%;white-space:nowrap;overflow:hidden;display:inline-block}</style>
 
 <!--
 
@@ -18,9 +18,9 @@ This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 <style type="text/css">
 {{#shapes}}{{#selector.shape}}.{{#classname}}{{expression}}{{/classname}}{{^last}},
 {{/last}}{{/selector.shape}} {
-	background: url("{{{example}}}") {{position.relative.xy}} no-repeat;
-	width: {{width.outer}}px;
-	height: {{height.outer}}px;
+    background: url("{{{example}}}") {{position.relative.xy}} no-repeat;
+    width: {{width.outer}}px;
+    height: {{height.outer}}px;
 }
 {{/shapes}}</style>
 
@@ -36,24 +36,24 @@ external stylesheet of course.
 -->
 
 <style type="text/css">
-{{#shapes}}	{{#selector.shape}}{{#last}}.{{#classname}}{{expression}}{{/classname}}-dims{{/last}}{{/selector.shape}} { width: {{width.outer}}px; height: {{height.outer}}px; }
+{{#shapes}} {{#selector.shape}}{{#last}}.{{#classname}}{{expression}}{{/classname}}-dims{{/last}}{{/selector.shape}} { width: {{width.outer}}px; height: {{height.outer}}px; }
 {{/shapes}}</style>
 
 <!--
 ====================================================================================================
 -->
 
-	</head>
-	<body>
-		<header>
-			<h1>SVG <code>&lt;view&gt;</code> sprite preview</h1>
-			<p>This preview features two methods of using the generated sprite. Please have a look at the HTML source for further details and be aware of the following constraints regarding the prepared <code>&lt;view&gt;</code> elements (technique B):</p>
-			<ul>
-				<li>Your browser has to <a href="http://caniuse.com/#feat=svg-fragment" target="_blank">support SVG fragment identifiers</a> for SVG stacks to work.</li>
-				<li>Support for SVG fragment identifiers hasn't always been that decent. For older browsers you might have to use a prolyfill (if available?).</li>
-			</ul>
-		</header>
-		<section>
+    </head>
+    <body>
+        <header>
+            <h1>SVG <code>&lt;view&gt;</code> sprite preview</h1>
+            <p>This preview features two methods of using the generated sprite. Please have a look at the HTML source for further details and be aware of the following constraints regarding the prepared <code>&lt;view&gt;</code> elements (technique B):</p>
+            <ul>
+                <li>Your browser has to <a href="http://caniuse.com/#feat=svg-fragment" target="_blank">support SVG fragment identifiers</a> for SVG stacks to work.</li>
+                <li>Support for SVG fragment identifiers hasn't always been that decent. For older browsers you might have to use a prolyfill (if available?).</li>
+            </ul>
+        </header>
+        <section>
 
 <!--
 
@@ -64,26 +64,26 @@ appropriately sized elements.
 
 -->
 
-			<h3>A) Conventional CSS sprite</h3>
-			<ul>
+            <h3>A) Conventional CSS sprite</h3>
+            <ul>
 
-{{#shapes}}				<li title="{{name}}">
-					<div class="icon-box">
+{{#shapes}}             <li title="{{name}}">
+                    <div class="icon-box">
 
-						<!-- {{name}} -->
-						<i class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.shape}}">{{name}}</i>
+                        <!-- {{name}} -->
+                        <i class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.shape}}">{{name}}</i>
 
-					</div>
-					<h2>{{name}}</h2>
-				</li>
-{{/shapes}}			</ul>
+                    </div>
+                    <h2>{{name}}</h2>
+                </li>
+{{/shapes}}         </ul>
 
 <!--
 ====================================================================================================
 -->
 
-		</section>
-		<section>
+        </section>
+        <section>
 
 <!--
 
@@ -94,27 +94,27 @@ pre-defined in the external sprite.
 
 -->
 
-			<h3>B) External sprite with pre-defined views referenced by fragment identifiers</h3>
-			<ul>
+            <h3>B) External sprite with pre-defined views referenced by fragment identifiers</h3>
+            <ul>
 
-{{#shapes}}				<li title="{{name}}">
-					<div class="icon-box">
+{{#shapes}}             <li title="{{name}}">
+                    <div class="icon-box">
 
-						<!-- {{name}} -->
-						<img src="{{{example}}}#{{name}}" class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}-dims{{/last}}{{/selector.shape}}" alt="{{name}}"/>
+                        <!-- {{name}} -->
+                        <img src="{{{example}}}#{{name}}" class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}-dims{{/last}}{{/selector.shape}}" alt="{{name}}"/>
 
-					</div>
-					<h2>{{name}}</h2>
-				</li>
-{{/shapes}}			</ul>
+                    </div>
+                    <h2>{{name}}</h2>
+                </li>
+{{/shapes}}         </ul>
 
 <!--
 ====================================================================================================
 -->
 
-		</section>
-		<footer>
-			<p>Generated at {{date}} by <a href="https://github.com/jkphl/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
-		</footer>
-	</body>
+        </section>
+        <footer>
+            <p>Generated at {{date}} by <a href="https://github.com/jkphl/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
+        </footer>
+    </body>
 </html>

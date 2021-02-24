@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8"/>
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-		<title>SVG CSS sprite preview | svg-sprite</title>
-		<style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23fff' d='M6 0h6v6H6zM0 6h6v6H0z'/%3E%3C/svg%3E") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
-		<style>i{text-indent:200%;white-space:nowrap;overflow:hidden;display:inline-block;background-size:{{spriteWidth}}px {{spriteHeight}}px!important}</style>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <title>SVG CSS sprite preview | svg-sprite</title>
+        <style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23fff' d='M6 0h6v6H6zM0 6h6v6H0z'/%3E%3C/svg%3E") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
+        <style>i{text-indent:200%;white-space:nowrap;overflow:hidden;display:inline-block;background-size:{{spriteWidth}}px {{spriteHeight}}px!important}</style>
 
 <!--
 
@@ -18,9 +18,9 @@ This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 <style type="text/css">
 {{#shapes}}{{#selector.shape}}.{{#classname}}{{expression}}{{/classname}}{{^last}},
 {{/last}}{{/selector.shape}} {
-	background: url("{{{example}}}") {{position.relative.xy}} no-repeat;
-	width: {{width.outer}}px;
-	height: {{height.outer}}px;
+    background: url("{{{example}}}") {{position.relative.xy}} no-repeat;
+    width: {{width.outer}}px;
+    height: {{height.outer}}px;
 }
 {{/shapes}}</style>
 
@@ -28,13 +28,13 @@ This is an all-in-one inline version of the CSS necessary to use the SVG sprite.
 ====================================================================================================
 -->
 
-	</head>
-	<body>
-		<header>
-			<h1>SVG CSS sprite preview</h1>
-			<p>This preview features the generated SVG file as a conventional CSS sprite. The shapes are displayed as background images of several <code>&lt;i&gt;</code> elements.</p>
-		</header>
-		<section>
+    </head>
+    <body>
+        <header>
+            <h1>SVG CSS sprite preview</h1>
+            <p>This preview features the generated SVG file as a conventional CSS sprite. The shapes are displayed as background images of several <code>&lt;i&gt;</code> elements.</p>
+        </header>
+        <section>
 
 <!--
 
@@ -45,26 +45,26 @@ appropriately sized elements.
 
 -->
 
-			<ul>
-{{#shapes}}				<li title="{{name}}">
-					<div class="icon-box">
+            <ul>
+{{#shapes}}             <li title="{{name}}">
+                    <div class="icon-box">
 
-						<!-- {{name}} -->
-						<i class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.shape}}">{{name}}</i>
+                        <!-- {{name}} -->
+                        <i class="{{#selector.shape}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.shape}}">{{name}}</i>
 
-					</div>
-					<h2>{{name}}</h2>
-				</li>
+                    </div>
+                    <h2>{{name}}</h2>
+                </li>
 {{/shapes}}
-			</ul>
+            </ul>
 
 <!--
 ====================================================================================================
 -->
 
-		</section>
-		<footer>
-			<p>Generated at {{date}} by <a  href="https://github.com/jkphl/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
-		</footer>
-	</body>
+        </section>
+        <footer>
+            <p>Generated at {{date}} by <a  href="https://github.com/jkphl/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
+        </footer>
+    </body>
 </html>
