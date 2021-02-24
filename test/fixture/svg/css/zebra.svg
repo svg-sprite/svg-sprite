@@ -4,9 +4,9 @@
   <defs>
     <style>
 #path3087{
-	fill:#96263f;
-	stroke:#EDD7DC;
-	stroke-width:1px;
+    fill:#96263f;
+    stroke:#EDD7DC;
+    stroke-width:1px;
 }
 .st0{
     display: block;
@@ -15,18 +15,18 @@
     position: static;
 }
 @media screen and (min-width: 325px){
-	#path3087{
-		fill:#26967C;
-		stroke:#def2ed;
-		stroke-width:2px;
-	}
+    #path3087{
+        fill:#26967C;
+        stroke:#def2ed;
+        stroke-width:2px;
+    }
 }
 @media screen and (min-width: 450px){
-	#path3087{
-		fill:#267896;
-		stroke:#e1edf2;
-		stroke-width:3px;
-	}
+    #path3087{
+        fill:#267896;
+        stroke:#e1edf2;
+        stroke-width:3px;
+    }
 }
 </style>
   </defs>
