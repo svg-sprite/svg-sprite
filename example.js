@@ -5,7 +5,7 @@ var SVGSpriter = require('./lib/svg-sprite'),
 	glob = require('glob'),
 	cwd = path.join(__dirname, 'test', 'fixture', 'svg', 'single'),
 	dest = path.normalize(path.join(__dirname, 'tmp')),
-	files = glob.glob.sync('**/weather*.svg', { cwd: cwd });
+	files = glob.sync('**/weather*.svg', { cwd: cwd });
 spriter = new SVGSpriter({
 	dest: dest,
 	log: 'debug'
