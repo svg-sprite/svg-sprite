@@ -1,6 +1,7 @@
 *.md.html
 **/*.md.html
 /.idea
+/.vscode/
 /node_modules/
 /npm-debug.log
 /coverage/

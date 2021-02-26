@@ -13,10 +13,9 @@
 // TODO fix/work around these
 /* eslint-disable no-unused-expressions, max-nested-callbacks */
 
-const { execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const svg2png = require('svg2png');
+const sharp = require('sharp');
 const should = require('should');
 const rimraf = require('rimraf');
 const glob = require('glob');
@@ -24,13 +23,12 @@ const File = require('vinyl');
 const _ = require('lodash');
 const looksSame = require('looks-same');
 const mustache = require('mustache');
-const phantomjs = require('phantomjs-prebuilt').path;
+const puppeteer = require('puppeteer');
 const sass = require('sass');
 const less = require('less');
 const stylus = require('stylus');
 const SVGSpriter = require('../lib/svg-sprite.js');
 
-const capturePhantomScript = path.resolve(__dirname, 'script/capture.phantom.js');
 const cwdWeather = path.join(__dirname, 'fixture/svg/single');
 const cwdAlign = path.join(__dirname, 'fixture/svg/css');
 const dest = path.join(__dirname, '../tmp');
@@ -95,24 +93,55 @@ function writeFile(file, content) {
 }
 
 /**
- * Capture a screenshot of a URL using PhantomJS (synchronous)
+ * Capture a screenshot of a URL using Pupeteer
  *
  * @param {String} src                Source file
  * @param {String} target             Screenshot file
- * @param {Function} cb               Function
+ * @param {Function} cb               Callback
  */
-function capturePhantom(src, target, cb) {
-    execFile(phantomjs, [capturePhantomScript, src, target], (err, stdout, stderr) => {
-        if (err) {
-            cb(err);
-        } else if (stdout.length > 0) {
-            cb(stdout.toString().trim() === 'success' ? null : new Error(`PhantomJS couldn't capture "${src}"`));
-        } else if (stderr.length > 0) {
-            cb(new Error(stderr.toString().trim()));
-        } else {
-            cb(new Error(`PhantomJS couldn't capture "${src}"`));
-        }
-    });
+function capturePuppeteer(src, target, cb) {
+    let _browser;
+    let _page;
+    try {
+        puppeteer
+            .launch()
+            .then(browser => {
+                _browser = browser;
+                return _browser;
+            })
+            .then(browser => {
+                _page = browser.newPage();
+                return _page;
+            })
+            .then(page => {
+                page.setViewport({
+                    width: 1280,
+                    height: 1024
+                });
+                return page;
+            })
+            .then(page => {
+                return page.goto(`file://${src}`);
+            })
+            .then(() => {
+                return _page;
+            })
+            .then(page => {
+                return page.screenshot({
+                    path: target,
+                    quality: undefined
+                });
+            })
+            .then(() => {
+                return _browser.close();
+            })
+            .then(() => {
+                cb();
+            });
+    } catch (error) {
+        console.error(error);
+        cb(new Error(error));
+    }
 }
 
 /**
@@ -135,23 +164,29 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
     };
 
     fs.promises.readFile(svg)
-        .then(svg2png)
         .then(buffer => {
-            fs.promises.writeFile(png, buffer)
-                .then(() => {
-                    looksSame(png, expected, (err, result) => {
-                        should(err).not.ok;
-                        should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
-                        done();
-                    });
-                    looksSame.createDiff({
-                        reference: expected,
-                        current: png,
-                        diff,
-                        highlightColor: '#ff00ff'
-                    }, () => {});
-                })
-                .catch(ecb);
+            sharp(buffer).toFile(png, err => {
+                if (err) {
+                    ecb(err);
+                }
+
+                looksSame(png, expected, (err, result) => {
+                    should(err).not.ok;
+                    should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
+                    done();
+                });
+                looksSame.createDiff({
+                    reference: expected,
+                    current: png,
+                    diff,
+                    highlightColor: '#ff00ff', // color to highlight the differences
+                    // strict: false, // strict comparsion
+                    // tolerance: 2.5,
+                    // antialiasingTolerance: 0,
+                    // ignoreAntialiasing: true, // ignore antialising by default
+                    // ignoreCaret: true // ignore caret by default
+                }, () => {});
+            });
         })
         .catch(ecb);
 }
@@ -343,7 +378,7 @@ describe('svg-sprite', () => {
                     const previewImage = path.join(__dirname, '../tmp/css/png/css.html.png');
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -367,7 +402,7 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
                             looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                 should(error).not.ok;
@@ -398,7 +433,7 @@ describe('svg-sprite', () => {
 
                             preview.should.be.ok;
 
-                            capturePhantom(preview, previewImage, error => {
+                            capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
                                 looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                     should(error).not.ok;
@@ -429,7 +464,7 @@ describe('svg-sprite', () => {
 
                             preview.should.be.ok;
 
-                            capturePhantom(preview, previewImage, error => {
+                            capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
                                 looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                     should(error).not.ok;
@@ -543,7 +578,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (vertical.centered)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/css/svg', svg.vertical),
                     path.join(__dirname, '../tmp/css/png/css.vertical.centered.png'),
@@ -563,7 +598,7 @@ describe('svg-sprite', () => {
 
                 preview.should.be.ok;
 
-                capturePhantom(preview, previewImage, error => {
+                capturePuppeteer(preview, previewImage, error => {
                     should(error).not.ok;
                     looksSame(previewImage, path.join(__dirname, 'expected/png/css.vertical.centered.html.png'), (error, result) => {
                         should(error).not.ok;
@@ -607,7 +642,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (horizontal.centered)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/css/svg', svg.horizontal),
                     path.join(__dirname, '../tmp/css/png/css.horizontal.centered.png'),
@@ -631,7 +666,7 @@ describe('svg-sprite', () => {
 
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.horizontal.centered.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -677,7 +712,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (packed.centered)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/css/svg', svg.packed),
                     path.join(__dirname, '../tmp/css/png/css.packed.centered.png'),
@@ -706,9 +741,9 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
-                            looksSame(previewImage, path.join(__dirname, 'expected/png/css.packed.aligned.html.png'), (error, result) => {
+                            looksSame(previewImage, path.join(__dirname, 'expected/png/css.packed.centered.html.png'), (error, result) => {
                                 should(error).not.ok;
                                 should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
                                 done();
@@ -758,7 +793,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (vertical.mixed)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/view/svg', svg.vertical),
                     path.join(__dirname, '../tmp/view/png/css.vertical.mixed.png'),
@@ -778,7 +813,7 @@ describe('svg-sprite', () => {
 
                 preview.should.be.ok;
 
-                capturePhantom(preview, previewImage, error => {
+                capturePuppeteer(preview, previewImage, error => {
                     should(error).not.ok;
                     looksSame(previewImage, path.join(__dirname, 'expected/png/css.vertical.mixed.html.png'), (error, result) => {
                         should(error).not.ok;
@@ -826,7 +861,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (horizontal.mixed)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/view/svg', svg.horizontal),
                     path.join(__dirname, '../tmp/view/png/css.horizontal.mixed.png'),
@@ -850,7 +885,7 @@ describe('svg-sprite', () => {
 
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.horizontal.mixed.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -896,7 +931,7 @@ describe('svg-sprite', () => {
                 });
             });
 
-            it('creates visually correct sprite', done => {
+            it('creates visually correct sprite (packed.mixed)', done => {
                 compareSvg2Png(
                     path.join(__dirname, '../tmp/view/svg', svg.packed),
                     path.join(__dirname, '../tmp/view/png/css.packed.mixed.png'),
@@ -925,7 +960,7 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
                             looksSame(previewImage, path.join(__dirname, 'expected/png/css.packed.aligned.html.png'), (error, result) => {
                                 should(error).not.ok;
