@@ -54,7 +54,7 @@
     "vinyl": "^2.2.1",
     "winston": "^3.3.3",
     "xmldom": "^0.2.1",
-    "xpath": "^0.0.27",
+    "xpath": "^0.0.32",
     "yargs": "^15.4.1"
   },
   "devDependencies": {
