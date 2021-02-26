@@ -161,8 +161,8 @@ before(function (done) {
 });
 
 describe('svg-sprite', function () {
-    var weather = glob.glob.sync('**/weather*.svg', { cwd: cwdWeather }),
-        align = glob.glob.sync('**/*.svg', { cwd: cwdAlign }),
+    var weather = glob.sync('**/weather*.svg', { cwd: cwdWeather }),
+        align = glob.sync('**/*.svg', { cwd: cwdAlign }),
         previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl', 'css.html'), 'utf-8');
 
     describe('with no arguments', function () {
