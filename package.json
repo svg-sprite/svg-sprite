@@ -43,7 +43,7 @@
     "glob": "^7.1.6",
     "js-yaml": "^3.14.1",
     "lodash": "^4.17.21",
-    "mkdirp": "^0.5.5",
+    "mkdirp": "^1.0.4",
     "mustache": "^4.1.0",
     "phantomjs-prebuilt": "^2.1.16",
     "prettysize": "^2.0.0",
