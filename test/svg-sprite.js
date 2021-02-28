@@ -18,7 +18,6 @@ var util = require('util');
 var svg2png = require('svg2png');
 var should = require('should'),
     path = require('path'),
-    mkdirp = require('mkdirp'),
     rimraf = require('rimraf'),
     glob = require('glob'),
     File = require('vinyl'),
@@ -70,7 +69,7 @@ function writeFiles(files) {
     for (var key in files) {
         if (_.isObject(files[key])) {
             if (files[key].constructor === File) {
-                mkdirp.sync(path.dirname(files[key].path));
+                fs.mkdirSync(path.dirname(files[key].path), { recursive: true });
                 fs.writeFileSync(files[key].path, files[key].contents);
                 ++written;
             } else {
@@ -90,7 +89,7 @@ function writeFiles(files) {
  */
 function writeFile(file, content) {
     try {
-        mkdirp.sync(path.dirname(file));
+        fs.mkdirSync(path.dirname(file), { recursive: true });
         fs.writeFileSync(file, content);
         return file;
     } catch (e) {
@@ -130,7 +129,7 @@ function capturePhantom(src, target, cb) {
  * @param {String} msg              Message
  */
 function compareSvg2Png(svg, png, expected, diff, done, msg) {
-    mkdirp.sync(path.dirname(png));
+    fs.mkdirSync(path.dirname(png), { recursive: true });
     var ecb = function (err) {
         console.log(err);
         should(err).not.ok;

@@ -18,7 +18,6 @@
 var _ = require('lodash'),
 	path = require('path'),
 	fs = require('fs'),
-	mkdirp = require('mkdirp'),
 	File = require('vinyl'),
 	yaml = require('js-yaml'),
 	glob = require('glob'),
@@ -130,7 +129,7 @@ function writeFiles(files) {
 	for (var key in files) {
 		if (_.isObject(files[key])) {
 			if (files[key].constructor === File) {
-				mkdirp.sync(path.dirname(files[key].path));
+				fs.mkdirSync(path.dirname(files[key].path), { recursive: true });
 				fs.writeFileSync(files[key].path, files[key].contents);
 				++written;
 			} else {
