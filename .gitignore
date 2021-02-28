@@ -1,9 +1,9 @@
 *.md.html
 **/*.md.html
 /.idea
-/node_modules
+/node_modules/
 /npm-debug.log
-/coverage
-/tmp
+/coverage/
+/tmp/
 /FEATURES.md
 /dev-scripts/

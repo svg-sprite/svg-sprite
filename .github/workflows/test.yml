@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [8, 10, 12, 14]
+        node: [10, 12, 14, 15]
 
     steps:
       - name: Clone repository
@@ -36,6 +36,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
+      - name: Run lint
+        run: npm run lint
+
       - name: Run tests
         run: npm test
         if: matrix.node != env.NODE_COV
@@ -53,6 +56,6 @@ jobs:
 
       - name: Run Coveralls
         uses: coverallsapp/github-action@master
-        if: github.repository == 'jkphl/svg-sprite' && matrix.node == env.NODE_COV
+        if: github.repository == 'svg-sprite/svg-sprite' && matrix.node == env.NODE_COV
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"

@@ -6,11 +6,11 @@
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
- * @see https://github.com/jkphl/svg-sprite
+ * @see https://github.com/svg-sprite/svg-sprite
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE.txt
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
  */
 
 var fs = require('fs');
@@ -37,6 +37,8 @@ var cwdWeather = path.join(__dirname, 'fixture', 'svg', 'single'),
     cwdAlign = path.join(__dirname, 'fixture', 'svg', 'css'),
     dest = path.normalize(path.join(__dirname, '..', 'tmp'));
 
+// This is so that we can fix tests on Node.js > 10 since the Array.sort algorithm changed
+var isNodeGreaterThan10 = process.version.split('.')[0].slice(1) > 10;
 var readFileP = util.promisify(fs.readFile);
 var writeFileP = util.promisify(fs.writeFile);
 
@@ -342,7 +344,7 @@ describe('svg-sprite', function () {
                     compareSvg2Png(
                         path.join(__dirname, '..', 'tmp', 'css', 'svg', svg.packed),
                         path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.png'),
-                        path.join(__dirname, 'expected', 'png', 'css.packed.png'),
+                        path.join(__dirname, 'expected', 'png', isNodeGreaterThan10 ? 'css.packed.12.png' : 'css.packed.png'),
                         path.join(__dirname, '..', 'tmp', 'css', 'png', 'css.packed.diff.png'),
                         done,
                         'The packed sprite doesn\'t match the expected one!'
@@ -512,7 +514,7 @@ describe('svg-sprite', function () {
                     compareSvg2Png(
                         path.join(__dirname, '..', 'tmp', 'view', 'svg', svg.packed),
                         path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.packed.png'),
-                        path.join(__dirname, 'expected', 'png', 'css.packed.png'),
+                        path.join(__dirname, 'expected', 'png', isNodeGreaterThan10 ? 'css.packed.12.png' : 'css.packed.png'),
                         path.join(__dirname, '..', 'tmp', 'view', 'png', 'view.packed.diff.png'),
                         done,
                         'The packed sprite doesn\'t match the expected one!'
