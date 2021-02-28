@@ -10,7 +10,7 @@
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE.txt
+ * @license MIT https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt
  */
 
 var fs = require('fs');
