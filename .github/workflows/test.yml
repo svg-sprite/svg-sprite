@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   FORCE_COLOR: 2
-  NODE_COV: 10 # The Node.js version to run coveralls on
+  NODE_COV: 14 # The Node.js version to run coveralls on
 
 jobs:
   run:
@@ -56,6 +56,6 @@ jobs:
 
       - name: Run Coveralls
         uses: coverallsapp/github-action@master
-        if: github.repository == 'svg-sprite/svg-sprite' && matrix.node == env.NODE_COV
+        if: matrix.node == env.NODE_COV
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
