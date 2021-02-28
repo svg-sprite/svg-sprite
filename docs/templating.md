@@ -1,7 +1,7 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
-This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
+This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
 Tweaking and adding output formats
@@ -235,13 +235,13 @@ Finds all hash signs in a string and encodes each of them to `%23`.
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
-[ci-url]: https://github.com/jkphl/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/jkphl/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
+[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
 
-[coveralls-url]: https://coveralls.io/github/jkphl/svg-sprite?branch=master
-[coveralls-image]: https://img.shields.io/coveralls/github/jkphl/svg-sprite/master
+[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
+[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master
 
-[depstat-url]: https://david-dm.org/jkphl/svg-sprite
-[depstat-image]: https://img.shields.io/david/jkphl/svg-sprite
-[devdepstat-url]: https://david-dm.org/jkphl/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/jkphl/svg-sprite
+[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
+[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
+[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
+[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite

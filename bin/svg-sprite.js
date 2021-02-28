@@ -3,11 +3,11 @@
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
- * @see https://github.com/jkphl/svg-sprite
+ * @see https://github.com/svg-sprite/svg-sprite
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
  */
 
 'use strict';
@@ -18,7 +18,6 @@
 var _ = require('lodash'),
 	path = require('path'),
 	fs = require('fs'),
-	mkdirp = require('mkdirp'),
 	File = require('vinyl'),
 	yaml = require('js-yaml'),
 	glob = require('glob'),
@@ -130,7 +129,7 @@ function writeFiles(files) {
 	for (var key in files) {
 		if (_.isObject(files[key])) {
 			if (files[key].constructor === File) {
-				mkdirp.sync(path.dirname(files[key].path));
+				fs.mkdirSync(path.dirname(files[key].path), { recursive: true });
 				fs.writeFileSync(files[key].path, files[key].contents);
 				++written;
 			} else {
