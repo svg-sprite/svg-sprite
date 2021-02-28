@@ -56,6 +56,6 @@ jobs:
 
       - name: Run Coveralls
         uses: coverallsapp/github-action@master
-        if: github.repository == 'jkphl/svg-sprite' && matrix.node == env.NODE_COV
+        if: github.repository == 'svg-sprite/svg-sprite' && matrix.node == env.NODE_COV
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"

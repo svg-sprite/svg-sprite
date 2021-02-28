@@ -3,11 +3,11 @@
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
- * @see https://github.com/jkphl/svg-sprite
+ * @see https://github.com/svg-sprite/svg-sprite
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://raw.github.com/jkphl/svg-sprite/master/LICENSE
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
  */
 
 'use strict';
