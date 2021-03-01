@@ -1,6 +1,6 @@
 /.buildpath
 /.project
 /.settings
-/node_modules
+/node_modules/
+/tmp/
 /npm-debug.log
-

@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
-		<meta name="description" content="svg-sprite : SVG sprites &amp; stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)" />
-		<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.min.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/prism.css" />
-		<title>svg-sprite</title>
-		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
-		<script src="javascripts/jquery.min.js"></script>
-	</head>
-	<body>
-		<div id="header_wrap" class="outer">
-			<header class="inner">
-				<a id="forkme_banner" href="https://github.com/jkphl/svg-sprite">View on GitHub</a>
-				<h1 id="project_title">svg-sprite</h1>
-				<h2 id="project_tagline">SVG sprites &amp; stacks galore — Node.js module that reads in a
-					bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with
-					suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)</h2>
-				<section id="downloads">
-					<a class="zip_download_link" href="https://github.com/jkphl/svg-sprite/zipball/master">Download this project as a .zip file</a>
-					<a class="tar_download_link" href="https://github.com/jkphl/svg-sprite/tarball/master" >Download this project as a tar.gz file</a>
-				</section>
-			</header>
-		</div>
-		<main role="main" class="outer">
-			<section class="inner">
-				<h3><a id="configuration-kickstarter" class="anchor" href="#configuration-kickstarter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration kickstarter</h3>
-				<p>This configurator lets you create a custom <a href="https://github.com/jkphl/svg-sprite" target="_blank">svg-sprite</a> configuration in seconds. Scroll down to see the result as <a href="#json">JSON</a>, <a href="#node">Node.js</a> project, <a href="#grunt">Gruntfile</a> or <a href="#gulp">Gulpfile</a>.</p>
-				<form id="configurator"></form>
-			</section>
-			<section class="inner">
-				<h3 class="tabs">
-					<a href="#json" id="json">JSON</a>
-					<a href="#node" id="node">Node.js<pre>'use strict';
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+        <meta name="description" content="svg-sprite : SVG sprites &amp; stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)" />
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/prism.css" />
+        <title>svg-sprite</title>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+        <script src="javascripts/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="forkme_banner" href="https://github.com/jkphl/svg-sprite">View on GitHub</a>
+                <h1 id="project_title">svg-sprite</h1>
+                <h2 id="project_tagline">SVG sprites &amp; stacks galore — Node.js module that reads in a
+                    bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with
+                    suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)</h2>
+                <section id="downloads">
+                    <a class="zip_download_link" href="https://github.com/jkphl/svg-sprite/zipball/master">Download this project as a .zip file</a>
+                    <a class="tar_download_link" href="https://github.com/jkphl/svg-sprite/tarball/master" >Download this project as a tar.gz file</a>
+                </section>
+            </header>
+        </div>
+        <main role="main" class="outer">
+            <section class="inner">
+                <h3><a id="configuration-kickstarter" class="anchor" href="#configuration-kickstarter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration kickstarter</h3>
+                <p>This configurator lets you create a custom <a href="https://github.com/jkphl/svg-sprite" target="_blank">svg-sprite</a> configuration in seconds. Scroll down to see the result as <a href="#json">JSON</a>, <a href="#node">Node.js</a> project, <a href="#grunt">Gruntfile</a> or <a href="#gulp">Gulpfile</a>.</p>
+                <form id="configurator"></form>
+            </section>
+            <section class="inner">
+                <h3 class="tabs">
+                    <a href="#json" id="json">JSON</a>
+                    <a href="#node" id="node">Node.js<pre>'use strict';
 
 var SVGSpriter    = require('svg-sprite'),
 path              = require('path'),
@@ -49,10 +49,10 @@ spriter.add(path.resolve(file), file, fs.readFileSync(path.resolve(file), {encod
 
 // Compile the sprite
 spriter.compile(function(error, result, cssData) {
-    
+
     // Run through all configured output modes
     for (var mode in result) {
-        
+
         // Run through all created resources and write them to disk
         for (var type in result[mode]) {
             mkdirp.sync(path.dirname(result[mode][type].path));
@@ -60,7 +60,7 @@ spriter.compile(function(error, result, cssData) {
         }
     }
 });</pre></a>
-					<a href="#grunt" id="grunt">Gruntfile<pre>'use strict';
+                    <a href="#grunt" id="grunt">Gruntfile<pre>'use strict';
 
 var baseDir  = 'svg/base/dir',   // &#60;-- Set to your SVG base directory
 svgGlob      = '**/*.svg',       // &#60;-- Glob to match your SVG files
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     // By default, compile the sprite(s)
     grunt.registerTask('default', ['svg_sprite']);
 };</pre></a>
-					<a href="#gulp" id="gulp">Gulpfile<pre>'use strict';
+                    <a href="#gulp" id="gulp">Gulpfile<pre>'use strict';
 
 var gulp     = require('gulp'),
 svgSprite    = require('gulp-svg-sprite'),
@@ -106,21 +106,21 @@ gulp.task('svgsprite', function() {
         .pipe(svgSprite(config)).on('error', function(error){ console.log(error); })
         .pipe(gulp.dest(outDir))
 });</pre></a>
-				</h3>
-				<code id="compiled" class="language-javascript"></code>
-			</section>
-		</main>
-		<div id="footer_wrap" class="outer">
-			<footer class="inner">
-				<p class="copyright">Copyright © 2015 <a href="https://jkphl.is" target="_blank">Joschi Kuphal</a> <a href="mailto:joschi@kuphal.net">&lt;joschi@kuphal.net&gt;</a> / <a href="https://twitter.com/jkphl" target="_blank">@jkphl</a></p>
-			</footer>
-		</div>
-		<script src="javascripts/prism.js" data-manual="data-manual"></script>
-		<script src="javascripts/main.min.js"></script>
-		<!--<script type="text/javascript">
+                </h3>
+                <code id="compiled" class="language-javascript"></code>
+            </section>
+        </main>
+        <div id="footer_wrap" class="outer">
+            <footer class="inner">
+                <p class="copyright">Copyright © 2015 <a href="https://jkphl.is" target="_blank">Joschi Kuphal</a> <a href="mailto:joschi@kuphal.net">&lt;joschi@kuphal.net&gt;</a> / <a href="https://twitter.com/jkphl" target="_blank">@jkphl</a></p>
+            </footer>
+        </div>
+        <script src="javascripts/prism.js" data-manual="data-manual"></script>
+        <script src="javascripts/main.min.js"></script>
+        <!--<script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
             try { _gat._getTracker("UA-43799919-6")._trackPageview(); } catch(err) {}
-		</script>-->
-	</body>
+        </script>-->
+    </body>
 </html>

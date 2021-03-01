@@ -14,10 +14,10 @@ spriter.add(path.resolve(file), file, fs.readFileSync(path.resolve(file), {encod
 
 // Compile the sprite
 spriter.compile(function(error, result, cssData) {
-    
+
     // Run through all configured output modes
     for (var mode in result) {
-        
+
         // Run through all created resources and write them to disk
         for (var type in result[mode]) {
             mkdirp.sync(path.dirname(result[mode][type].path));
