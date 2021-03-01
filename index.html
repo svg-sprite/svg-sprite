@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-        <meta name="description" content="svg-sprite : SVG sprites &amp; stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)" />
-        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.min.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/prism.css" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="svg-sprite : SVG sprites &amp; stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)">
+        <link rel="stylesheet" media="screen" href="stylesheets/main.min.css">
+        <link rel="stylesheet" media="screen" href="stylesheets/prism.css">
         <title>svg-sprite</title>
-        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
         <script src="javascripts/jquery.min.js"></script>
     </head>
     <body>
         <div id="header_wrap" class="outer">
             <header class="inner">
-                <a id="forkme_banner" href="https://github.com/jkphl/svg-sprite">View on GitHub</a>
+                <a id="forkme_banner" href="https://github.com/svg-sprite/grunt-svg-sprite">View on GitHub</a>
                 <h1 id="project_title">svg-sprite</h1>
                 <h2 id="project_tagline">SVG sprites &amp; stacks galore — Node.js module that reads in a
                     bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with
                     suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)</h2>
                 <section id="downloads">
-                    <a class="zip_download_link" href="https://github.com/jkphl/svg-sprite/zipball/master">Download this project as a .zip file</a>
-                    <a class="tar_download_link" href="https://github.com/jkphl/svg-sprite/tarball/master" >Download this project as a tar.gz file</a>
+                    <a class="zip_download_link" href="https://github.com/svg-sprite/svg-sprite/archive/master.zip">Download this project as a .zip file</a>
+                    <a class="tar_download_link" href="https://github.com/svg-sprite/svg-sprite/archive/master.tar.gz" >Download this project as a tar.gz file</a>
                 </section>
             </header>
         </div>
         <main role="main" class="outer">
             <section class="inner">
                 <h3><a id="configuration-kickstarter" class="anchor" href="#configuration-kickstarter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration kickstarter</h3>
-                <p>This configurator lets you create a custom <a href="https://github.com/jkphl/svg-sprite" target="_blank">svg-sprite</a> configuration in seconds. Scroll down to see the result as <a href="#json">JSON</a>, <a href="#node">Node.js</a> project, <a href="#grunt">Gruntfile</a> or <a href="#gulp">Gulpfile</a>.</p>
+                <p>This configurator lets you create a custom <a href="https://github.com/svg-sprite/grunt-svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a> configuration in seconds. Scroll down to see the result as <a href="#json">JSON</a>, <a href="#node">Node.js</a> project, <a href="#grunt">Gruntfile</a> or <a href="#gulp">Gulpfile</a>.</p>
                 <form id="configurator"></form>
             </section>
             <section class="inner">
@@ -112,15 +111,20 @@ gulp.task('svgsprite', function() {
         </main>
         <div id="footer_wrap" class="outer">
             <footer class="inner">
-                <p class="copyright">Copyright © 2015 <a href="https://jkphl.is" target="_blank">Joschi Kuphal</a> <a href="mailto:joschi@kuphal.net">&lt;joschi@kuphal.net&gt;</a> / <a href="https://twitter.com/jkphl" target="_blank">@jkphl</a></p>
+                <p class="copyright">Copyright © 2015 <a href="https://jkphl.is" target="_blank" rel="noopener noreferrer">Joschi Kuphal</a> <a href="mailto:joschi@kuphal.net">&lt;joschi@kuphal.net&gt;</a> / <a href="https://twitter.com/jkphl" target="_blank">@jkphl</a></p>
             </footer>
         </div>
         <script src="javascripts/prism.js" data-manual="data-manual"></script>
         <script src="javascripts/main.min.js"></script>
-        <!--<script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-            try { _gat._getTracker("UA-43799919-6")._trackPageview(); } catch(err) {}
-        </script>-->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-43799919-6', 'auto');
+            ga('set', 'anonymizeIp', true);
+            ga('send', 'pageview');
+        </script>
     </body>
 </html>
