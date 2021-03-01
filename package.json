@@ -1,27 +1,23 @@
 {
   "name": "svg-sprite-config",
   "version": "0.0.1",
-  "author": {
-    "name": "Joschi Kuphal",
-    "email": "joschi@kuphal.net",
-    "url": "http://jkphl.is"
-  },
+  "private": true,
+  "author": "Joschi Kuphal <joschi@kuphal.net> (https://jkphl.is)",
   "description": "SVG sprites & stacks galore — Node.js module that reads in a bunch of SVG files, optimizes them and creates SVG sprites in various flavours along with suitable stylesheet resources (e.g. CSS, Sass, LESS, Stylus, etc.)",
-  "homepage": "https://github.com/jkphl/svg-sprite",
+  "homepage": "https://github.com/svg-sprite/grunt-svg-sprite",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jkphl/svg-sprite.git"
+    "url": "git+https://github.com/svg-sprite/grunt-svg-sprite.git"
   },
   "bugs": {
-    "url": "https://github.com/jkphl/svg-sprite/issues"
+    "url": "https://github.com/svg-sprite/grunt-svg-sprite/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jkphl/svg-sprite/blob/master/LICENSE.txt"
-    }
-  ],
-  "main": "index.html",
+  "license": "MIT",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "build": "grunt",
+    "test": "npm run build"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-yaml": "^0.4.1",
@@ -33,26 +29,5 @@
     "grunt-contrib-cssmin": "~0.14.0",
     "matchdep": "~1.0.0"
   },
-  "keywords": [
-    "icon",
-    "icons",
-    "svg",
-    "png",
-    "sprite",
-    "spritesheet",
-    "stack",
-    "generator",
-    "css",
-    "sass",
-    "less",
-    "stylus",
-    "stylesheet",
-    "inline",
-    "html",
-    "vector",
-    "rwd",
-    "retina",
-    "mustache",
-    "gulpfriendly"
-  ]
+  "keywords": []
 }
