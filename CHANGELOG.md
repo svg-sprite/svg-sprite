@@ -286,8 +286,8 @@ About
 
 The [original svg-sprite](https://github.com/svg-sprite/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10) was my first-ever Node.js module and featured CSS sprites only. The `1.0` release is **rewritten from scratch** and introduces a bunch of new features like **less dependencies** (for improved Mac OS and Windows compatibility), support for **inline sprite formats** and the **removal of file-system access** so that other libraries can build on top of it more easily. Derived libraries include:
 
-* [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite) (a [Grunt](http://gruntjs.com) wrapper around *svg-sprite*)
-* [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) (a [Gulp](http://gulpjs.com) wrapper around *svg-sprite*)
+* [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite) (a [Grunt](https://gruntjs.com/) wrapper around *svg-sprite*)
+* [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) (a [Gulp](https://gulpjs.com/) wrapper around *svg-sprite*)
 * [svg-sprite-data](https://github.com/shakyShane/svg-sprite-data) by [Shane Osbourne](https://github.com/shakyShane) (based on the original svg-sprite)
 
-**_iconizr_**, another project of mine, is based on *svg-sprite* and adds PNG fallbacks for the sprites so you can use them as universal icon systems for websites ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](http://iconizr.com)).
+**_iconizr_**, another project of mine, is based on *svg-sprite* and adds PNG fallbacks for the sprites so you can use them as universal icon systems for websites ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](https://iconizr.com/)).

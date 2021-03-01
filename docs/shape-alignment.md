@@ -11,7 +11,7 @@ CSS sprites with `"vertical"` or `"horizontal"` layout use only one axis for pos
 
 ![Sprite with vertical layout and default x-axis positioning](../test/expected/png/css.vertical.default.png)
 
-To use these icons as centered background images, you would need them to be centered within the sprite as well. This is where the **extended alignment options** jump in. To control the placement of the shapes, use the `shape.align` option to specify the path of a [YAML](http://yaml.org/) file with the following format:
+To use these icons as centered background images, you would need them to be centered within the sprite as well. This is where the **extended alignment options** jump in. To control the placement of the shapes, use the `shape.align` option to specify the path of a [YAML](https://yaml.org/) file with the following format:
 
 ```yaml
 <shape-ID-or-path>:

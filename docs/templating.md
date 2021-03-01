@@ -9,7 +9,7 @@ Tweaking and adding output formats
 
 ### Sprite & shape variables
 
-For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](api.md#svgspritercompile-config--callback-). Example:  
+For each sprite generation process, a data object is constructed that is passed to the [Mustache](https://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](api.md#svgspritercompile-config--callback-). Example:  
 
 ```javascript
 {  

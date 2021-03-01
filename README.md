@@ -1,17 +1,17 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ====================================================================================================================================================================================================================================================================================================================================================================================================
 
-is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
+is a low-level [Node.js](https://nodejs.org/) module that **takes a bunch of [SVG](https://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
-* Traditional [CSS sprites](http://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) for use as background images,
+* Traditional [CSS sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)#Sprites_by_CSS) for use as background images,
 * CSS sprites with **pre-defined `<view>` elements**, useful for foreground images as well,
 * inline sprites using the **`<defs>` element**,
 * inline sprites using the **`<symbol>` element**
-* and [SVG stacks](http://simurai.com/blog/2012/04/02/svg-stacks).
+* and [SVG stacks](https://simurai.com/blog/2012/04/02/svg-stacks).
 
-It comes with a set of [Mustache](http://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](http://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](http://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](http://learnboost.github.io/stylus/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
+It comes with a set of [Mustache](https://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](https://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](https://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](https://stylus-lang.com/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
-For an up-to-date list of browsers supporting [SVG in general](http://caniuse.com/#feat=svg) respectively [SVG fragment identifiers](http://caniuse.com/#feat=svg-fragment) in particular (required for `<defs>` and `<symbol>` sprites as well as SVG stacks) please refer to [caniuse.com](http://caniuse.com/).
+For an up-to-date list of browsers supporting [SVG in general](https://caniuse.com/svg) respectively [SVG fragment identifiers](https://caniuse.com/svg-fragment) in particular (required for `<defs>` and `<symbol>` sprites as well as SVG stacks) please refer to [caniuse.com](https://caniuse.com/).
 
 Grunt, Gulp & Co.
 -----------------
@@ -34,7 +34,7 @@ Table of contents
     * [Output destinations](#output-destinations)
         * [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
     * [Full configuration documentation](docs/configuration.md)
-    * [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
+    * [Online configurator & project kickstarter](https://svg-sprite.github.io/svg-sprite/)
 * [Advanced techniques](#advanced-techniques)
     * [Meta data injection](docs/meta-data.md)
     * [Aligning and duplicating shapes](docs/shape-alignment.md)
@@ -337,7 +337,7 @@ The complete configuration documentation including all options [can be found her
 
 ### Online configurator & project kickstarter
 
-To get you quickly off the ground, I made a simple [online configurator](http://jkphl.github.io/svg-sprite) that lets you create a custom *svg-sprite* configuration in seconds. You may download the results as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at http://jkphl.github.io/svg-sprite.
+To get you quickly off the ground, I made a simple [online configurator](https://svg-sprite.github.io/svg-sprite/) that lets you create a custom *svg-sprite* configuration in seconds. You may download the results as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at https://svg-sprite.github.io/svg-sprite/.
 
 
 Advanced techniques
@@ -356,7 +356,7 @@ For CSS sprites using a `"horizontal"` or `"vertical"` layout it is sometimes de
 
 ### Tweaking and adding output formats
 
-*svg-sprite* uses [Mustache](http://mustache.github.io/) templates for rendering the various CSS resources. This makes it very easy to tailor the generated CSS / Sass / LESS / Stylus resources to your needs or add completely new output formats. Please refer to the [templating guide](docs/templating.md) to learn about the details.
+*svg-sprite* uses [Mustache](https://mustache.github.io/) templates for rendering the various CSS resources. This makes it very easy to tailor the generated CSS / Sass / LESS / Stylus resources to your needs or add completely new output formats. Please refer to the [templating guide](docs/templating.md) to learn about the details.
 
 
 Command line usage
