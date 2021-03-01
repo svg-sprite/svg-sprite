@@ -22,7 +22,7 @@ To use these icons as centered background images, you would need them to be cent
 * `<template-string-with-placeholder>` is a powerful feature that lets you **derive displaced copies** of your shapes. [See below](#creating-displaced-shape-copies) for an example. The string should contain the placeholder `"%s"` which gets replaced by the ID of the matched shape. If the placeholder cannot be found in the string, it will be used as suffix for the shape ID. 
 * `<positioning>` is a floating point value between `0` and `1`, expressing the relative placement of the shape on the secondary axis (0 - 100%).
 
-*svg-sprite*'s default behaviour can be expressed as follows:
+*svg-sprite*'s default behavior can be expressed as follows:
 
 ```yaml
 "*":

@@ -263,7 +263,7 @@
 * Improved error handling
 
 ## 1.0.1 Maintenance release
-* Updated module depencencies
+* Updated module dependencies
 
 ## 1.0.0 Next generation release
 * Rewritten from scratch ([#23](https://github.com/svg-sprite/svg-sprite/issues/23), [#30](https://github.com/svg-sprite/svg-sprite/issues/30))

@@ -232,7 +232,7 @@ Property                 | Type            | Default       | Description        
 
 ### Sprite SVG options
 
-The `svg` object holds common options that apply to each SVG sprite created. The common options might be overriden by mode configurations ([see below](#output-modes)).
+The `svg` object holds common options that apply to each SVG sprite created. The common options might be overridden by mode configurations ([see below](#output-modes)).
 
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
