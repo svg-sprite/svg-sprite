@@ -1,12 +1,14 @@
 /*
  * grunt-svg-sprite
- * https://github.com/jkphl/grunt-svg-sprite
+ * https://github.com/svg-sprite/grunt-svg-sprite
  *
  * Copyright (c) 2015 Joschi Kuphal <joschi@kuphal.net>
  * Licensed under the MIT license.
  */
 
 'use strict';
+
+var sass = require('node-sass');
 
 /**
  * Encode all HTML entities in a string
@@ -31,6 +33,7 @@ module.exports = function(grunt) {
 
         sass                    : {
             options             : {
+                implementation  : sass,
                 sourceMap       : true
             },
             dist                : {
@@ -83,7 +86,7 @@ module.exports = function(grunt) {
             },
             javascript : {
                 options : {
-//                  prefix: '$$'
+                    //prefix: '$$'
                 },
                 src : 'src/01_configurator.js',
                 dest : 'javascripts/main.js'
