@@ -8,7 +8,8 @@
 
 'use strict';
 
-var sass = require('node-sass');
+var autoprefixer = require('autoprefixer');
+var sass = require('sass');
 
 /**
  * Encode all HTML entities in a string
@@ -23,7 +24,8 @@ function htmlentities(str) {
 }
 
 module.exports = function(grunt) {
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    // Load any grunt plugins found in package.json.
+    require('load-grunt-tasks')(grunt);
 
     // Force use of Unix newlines
     grunt.util.linefeed = '\n';
@@ -33,8 +35,7 @@ module.exports = function(grunt) {
 
         sass                    : {
             options             : {
-                implementation  : sass,
-                sourceMap       : true
+                implementation  : sass
             },
             dist                : {
                 files           : [{
@@ -43,22 +44,19 @@ module.exports = function(grunt) {
                     src         : ['*.scss'],
                     dest        : 'stylesheets',
                     ext         : '.css'
-                }],
-                options: {
-                    sourcemap   : true,
-                    style       : 'nested'
-                }
+                }]
             }
         },
 
-        autoprefixer            : {
-            options             : {
-                browsers        : ['last 3 versions', 'ie 8'],
-                map             : true
+        postcss: {
+            options: {
+                processors: [
+                    autoprefixer()
+                ]
             },
-            dist                : {
+            dist: {
                 src             : ['stylesheets/03_configurator.css']
-            },
+            }
         },
 
         cssmin                  : {
@@ -136,7 +134,7 @@ module.exports = function(grunt) {
 
             css : {
                 files : ['stylesheets/*.css', '!stylesheets/*.min.css'],
-                tasks : ['autoprefixer', 'cssmin'],
+                tasks : ['postcss', 'cssmin'],
                 options : {
                     spawn : true
                 }
@@ -151,6 +149,6 @@ module.exports = function(grunt) {
         }
     });
     grunt.registerTask('compile', ['yaml', 'includereplace', 'uglify']);
-    grunt.registerTask('css', ['sass', 'autoprefixer', 'cssmin']);
+    grunt.registerTask('css', ['sass', 'postcss', 'cssmin']);
     grunt.registerTask('default', ['compile', 'css']);
 };

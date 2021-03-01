@@ -1,0 +1,7 @@
+# https://github.com/browserslist/browserslist#readme
+
+>= 0.5%
+last 3 major versions
+not dead
+Firefox ESR
+Explorer >= 8
