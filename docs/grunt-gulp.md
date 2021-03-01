@@ -56,7 +56,7 @@ gulp.src('assets/*.svg')
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master
