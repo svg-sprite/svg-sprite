@@ -1,11 +1,9 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+# svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
-Meta data injection
--------------------
+## Meta data injection
 
 By providing a simple [YAML](https://yaml.org/) file via the `shape.meta` configuration property, you can **inject titles and descriptions** into your SVG files before they get compiled as a sprite. Doing so may improve the accessibility of your SVGs. Please see the articles by [The Paciello Group](https://www.tpgi.com/using-aria-enhance-svg-accessibility/) and [Jonathan Neal](https://github.com/jonathantneal/svg4everybody#readability-and-accessibility) on how to use your SVG sprites in a most accessible way.
 
