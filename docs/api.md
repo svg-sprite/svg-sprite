@@ -20,7 +20,6 @@ To understand these methods' roles and interactions, please have a look at the f
 'use strict';
 
 var SVGSpriter = require('svg-sprite'),
-    mkdirp = require('mkdirp'),
     path = require('path'),
     fs = require('fs'),
 
@@ -61,7 +60,7 @@ spriter.compile(function (error, result, data) {
     for (var type in result.css) {
 
         // Recursively create directories as needed
-        mkdirp.sync(path.dirname(result.css[type].path));
+        fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
 
         // Write the generated resource to disk
         fs.writeFileSync(result.css[type].path, result.css[type].contents);
@@ -95,7 +94,6 @@ It is important to know that the spriter **optimizes the SVG files as soon as yo
 'use strict';
 
 var SVGSpriter = require('svg-sprite'),
-    mkdirp = require('mkdirp'),
     path = require('path'),
     fs = require('fs'),
     File = require('vinyl'),
@@ -126,7 +124,7 @@ glob.glob('**/*.svg', { cwd: cwd }, function (err, files) {
 
     spriter.compile(function (error, result, data) {
         for (var type in result.css) {
-            mkdirp.sync(path.dirname(result.css[type].path));
+            fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
             fs.writeFileSync(result.css[type].path, result.css[type].contents);
         }
     });
@@ -195,13 +193,12 @@ Please note that the resources are always returned as [vinyl](https://github.com
 ##### Shape access example
 
 ```js
-var mkdirp = require('mkdirp'),
-    path = require('path'),
+var path = require('path'),
     fs = require('fs');
 
 spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
     result.forEach(function (file) {
-        mkdirp.sync(path.dirname(file.path));
+        fs.mkdirSync(path.dirname(file.path), { recursive: true });
         fs.writeFileSync(file.path, file.contents);
     });
 });

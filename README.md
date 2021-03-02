@@ -81,7 +81,7 @@ spriter.compile(function(error, result) {
     /* Write `result` files to disk (or do whatever with them ...) */
     for (var mode in result) {
         for (var resource in result[mode]) {
-            mkdirp.sync(path.dirname(result[mode][resource].path));
+            fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
             fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
         }
     }
