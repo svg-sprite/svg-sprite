@@ -25,7 +25,7 @@ const SVGSpriter = require('../lib/svg-sprite');
 
 const config = {};
 let JSONConfig = { mode: {} };
-const map = {};
+const optionsMap = {};
 let yargs = require('yargs')
     .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
     .version()
@@ -69,11 +69,11 @@ function addOption(name, option) {
         }
 
         if ('map' in option) {
-            map[option.map] = name;
+            optionsMap[option.map] = name;
         }
     }
 
-    const children = _.omit(option, ['description', 'alias', 'default', 'map']);
+    const { description, alias: optAlias, default: optDefault, map, ...children } = option;
     for (const sub in children) {
         addOption(`${name}-${sub}`, children[sub]);
     }
@@ -137,12 +137,12 @@ try {
 const { argv } = yargs;
 
 // Map all arguments to a global configuration object
-for (const m in map) {
-    if (!(map[m] in argv)) {
+for (const map in optionsMap) {
+    if (!(optionsMap[map] in argv)) {
         continue;
     }
 
-    addConfigMap(config, m.split('.'), argv[map[m]]);
+    addConfigMap(config, map.split('.'), argv[optionsMap[map]]);
 }
 
 // Load external JSON config file
