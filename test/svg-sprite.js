@@ -21,7 +21,7 @@ const svg2png = require('svg2png');
 const should = require('should');
 const rimraf = require('rimraf');
 const glob = require('glob');
-const File = require('vinyl');
+const Vinyl = require('vinyl');
 const _ = require('lodash');
 const looksSame = require('looks-same');
 const mustache = require('mustache');
@@ -70,7 +70,7 @@ function writeFiles(files) {
         const file = files[key];
 
         if (_.isObject(file)) {
-            if (file.constructor === File) {
+            if (Vinyl.isVinyl(file)) {
                 fs.mkdirSync(path.dirname(file.path), { recursive: true });
                 fs.writeFileSync(file.path, file.contents);
                 ++written;
