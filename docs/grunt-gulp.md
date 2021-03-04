@@ -1,16 +1,15 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+# svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
-# Grunt & Gulp wrappers
+## Grunt & Gulp wrappers
 
-This document aims to compare the use of *svg-sprite* via it's [standard API](api.md) with the use of wrappers like the ones for Grunt and Gulp. The following examples are equivalent and have been simplified for the sake of clarity. Prerequisites like the necessary `require` calls or the construction of a [main configuration](configuration.md) object (`config`) have been omitted.
+This document aims to compare the use of *svg-sprite* via its [standard API](api.md) with the use of wrappers like the ones for Grunt and Gulp. The following examples are equivalent and have been simplified for the sake of clarity. Prerequisites like the necessary `require` calls or the construction of a [main configuration](configuration.md) object (`config`) have been omitted.
 
-## Standard API 
+## Standard API
 
-```javascript
+```js
 // Create spriter instance
 var spriter = new SVGSpriter(config);
 
@@ -27,7 +26,7 @@ spriter.compile(function (error, result) {
 
 ## Grunt task (using [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite))
 
-```javascript
+```js
 // svg-sprite Grunt task
 
 grunt.initConfig({
@@ -43,7 +42,7 @@ grunt.initConfig({
 
 ## Gulp task (using [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite))
 
-```javascript
+```js
 // svg-sprite Gulp task
 
 gulp.src('assets/*.svg')
@@ -56,7 +55,7 @@ gulp.src('assets/*.svg')
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master

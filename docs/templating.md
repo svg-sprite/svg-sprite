@@ -1,150 +1,148 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+# svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
-Tweaking and adding output formats
-----------------------------------
+## Tweaking and adding output formats
 
 ### Sprite & shape variables
 
-For each sprite generation process, a data object is constructed that is passed to the [Mustache](http://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](api.md#svgspritercompile-config--callback-). Example:  
+For each sprite generation process, a data object is constructed that is passed to the [Mustache](https://mustache.github.io/) templating engine for rendering the different resources. You can access these templating values via the `data` argument passed to the [compile() callback](api.md#svgspritercompile-config--callback-). Example:
 
-```javascript
-{  
+```js
+{
     // Data object for the `mymode` output key
     mymode: {
-    
+
         // Name of the current output mode
         mode: 'css',
-        
+
         // Key used for result files & data
         key: 'mymode',
-        
+
         // Indicator whether a `common` CSS class name has been specified
         hasCommon: false,
-        
+
         // Given CSS class name for `common` sprite shape properties (NULL if disabled)
         common: null,
-        
+
         // Effective `common` CSS class / mixin name (identical to `common`, defaulting to 'svg-common' if disabled)
         commonName: 'svg-common',
-        
+
         // Indicator whether a `mixin` name has been specified
         hasMixin: false,
-        
+
         // Mixin name for common sprite shape properties (NULL if disabled)
         mixinName: null,
-        
-        // Whether to create shape dimensioning CSS rules 
+
+        // Whether to create shape dimensioning CSS rules
         includeDimensions: true,
-        
+
         // Padding added to each shape (pixel)
         padding: {top: 30, right: 30, bottom: 30, left: 30},
-        
+
         // Overall sprite width (pixel)
         spriteWidth: 860,
-        
+
         // Overall sprite height (pixel)
         spriteHeight: 1020,
-        
+
         // Relative path from the stylesheet resource to the SVG sprite
         sprite: 'svg/sprite.css.svg',
-        
+
         // Relative path from the example resource to the SVG sprite (if configured)
         example: 'svg/sprite.css.svg'
-        
+
         // List of all shapes in the sprite
         shapes: [
-        
+
             // Single shape properties
-            {  
-            
+            {
+
                 // Shape name (possibly including state, e.g. "weather-clear-night~hover")
                 name: 'weather-clear-night',
-                
+
                 // Shape name excluding the state
                 base: 'weather-clear-night',
-                
+
                 // Shape width (pixel)
-                width: {  
-                    
+                width: {
+
                     // Excluding padding
                     inner: 800,
-                    
+
                     // Including padding
                     outer: 860
                 },
-                
+
                 // Shape height (pixel)
                 height: {
-                
+
                     // Excluding padding
                     inner: 960,
-                    
+
                     // Including padding
                     outer: 1020
                 },
-                
+
                 // First shape in the sprite
                 first: true,
-                
+
                 // Last shape in the sprite
                 last: false,
-                
+
                 // Shape position within the sprite
-                position: {  
-                
+                position: {
+
                     // Absolute position (pixel)
                     absolute: {
-                    
-                        // Horizontal position  
+
+                        // Horizontal position
                         x: 0,
-                        
+
                         // Horizontal position
                         y: -120,
-                        
+
                         // Compound position
                         xy: '0 -120px'
                     },
-                    
+
                     // Relative position (%)
-                    relative: { 
-                        
-                        // Horizontal position  
+                    relative: {
+
+                        // Horizontal position
                         x: 0,
-                        
+
                         // Vertical position
                         y: 33.333333,
-                        
+
                         // Compound position
                         xy: '0 33.333333%'
                     }
                 },
-                
+
                 // CSS selectors
                 selector: {
-                
+
                     // Shape positioning CSS rule
-                    shape: [  
-                        {  
+                    shape: [
+                        {
                             expression: '.svg-weather-clear-night',
                             raw: '.svg-weather-clear-night',
                             first: true, // First selector expression
                             last: false
                         },
-                        {  
+                        {
                             expression: '.svg-weather-clear-night\\:regular',
                             raw: '.svg-weather-clear-night:regular', // Unescaped version
                             first: false,
                             last: true // Last selector expression
                         }
                     ],
-                    
+
                     // Shape dimensioning CSS rule
-                    dimensions: [  
-                        {  
+                    dimensions: [
+                        {
                             expression: '.svg-weather-clear-night-dims',
                             raw: '.svg-weather-clear-night-dims',
                             first: true, // First selector expression
@@ -152,22 +150,22 @@ For each sprite generation process, a data object is constructed that is passed 
                         }
                     ]
                 },
-                
+
                 // Dimensioning rule strategy
-                dimensions: {  
-                
+                dimensions: {
+
                     // Render dimensions as part of positioning rule
                     inline: false,
-                    
+
                     // Render dimensions as separate dimensioning rule
                     extra: true
                 },
-                
+
                 // Shape SVG (inline embeddable version)
                 svg: '<svg> ... </svg>',
             }
         ],
-        
+
         // Current date (RFC-1123)
         date: 'Fri, 26 Dec 2014 12:06:55 GMT',
     }
@@ -213,7 +211,7 @@ would become
 
 #### escape
 
-Finds all backslashes in a string and escapes each of them with another backslash. 
+Finds all backslashes in a string and escapes each of them with another backslash.
 
 ```css
 {{#escape}}{{selector-with-backslash}}{{/escape}} {
@@ -223,7 +221,7 @@ Finds all backslashes in a string and escapes each of them with another backslas
 
 #### encodeHashSign
 
-Finds all hash signs in a string and encodes each of them to `%23`. 
+Finds all hash signs in a string and encodes each of them to `%23`.
 
 ```css
 .{{name}}-background {
@@ -236,7 +234,7 @@ Finds all hash signs in a string and encodes each of them to `%23`.
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master
