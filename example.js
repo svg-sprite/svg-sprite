@@ -5,7 +5,7 @@ const fs = require('fs');
 const glob = require('glob');
 const SVGSpriter = require('./lib/svg-sprite');
 
-const cwd = path.join(__dirname, 'test', 'fixture', 'svg', 'single');
+const cwd = path.join(__dirname, 'test/fixture/svg/single');
 const dest = path.join(__dirname, 'tmp');
 const files = glob.sync('**/weather*.svg', { cwd });
 
