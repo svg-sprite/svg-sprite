@@ -44,7 +44,7 @@
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "phantomjs-prebuilt": "^2.1.16",
-    "prettysize": "^2.0.0",
+    "pretty-bytes": "^5.6.0",
     "svgo": "^2.7.0",
     "vinyl": "^2.2.1",
     "winston": "^3.3.3",
