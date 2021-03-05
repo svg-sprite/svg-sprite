@@ -1,9 +1,9 @@
-"*"             :
-  "%s"          : .5
+"*":
+  "%s": .5
 
-weather-clear   :
-  -left         : 0
-  -right        : 1
+weather-clear:
+  -left: 0
+  -right: 1
 
-weather-storm   :
-  "%s"          : 0
+weather-storm:
+  "%s": 0
