@@ -1,11 +1,9 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+# svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
-Command line usage
-------------------
+## Command line usage
 
 You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get all the available options:
 
@@ -40,7 +38,7 @@ Options:
   --svg-dimattrs                 Whether to add width and height attributes to the sprite  [boolean] [default: true]
   --svg-rootattrs                Custom root attributes for the outermost <svg> element (external JSON file)
   --svg-precision                Floating point precision for CSS positioning values  [default: -1]
-  
+
   -c, --css                      Activates the «css» mode  [boolean] [default: false]
   --css-dest                     Mode specific output directory  [default: "css"]
   --cl, --css-layout             Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")  [default: "packed"]
@@ -68,7 +66,7 @@ Options:
   --cx, --css-example            Whether to render an example HTML document  [boolean] [default: false]
   --css-example-template         HTML document Mustache template (relative to svg-sprite basedir)  [default: "tmpl/css/sprite.html"]
   --css-example-dest             HTML document destination (relative to the --css-dest)  [default: "sprite.css.html"]
-  
+
   -v, --view                     Activates the «view» mode  [boolean] [default: false]
   --view-dest                    Mode specific output directory  [default: "view"]
   --vl, --view-layout            Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")  [default: "packed"]
@@ -96,7 +94,7 @@ Options:
   --vx, --view-example           Whether to render an example HTML document  [boolean] [default: false]
   --view-example-template        HTML document Mustache template (relative to svg-sprite basedir)  [default: "tmpl/view/sprite.html"]
   --view-example-dest            HTML document destination (relative to the --view-dest)  [default: "sprite.view.html"]
-  
+
   -d, --defs                     Activates the «defs» mode  [boolean] [default: false]
   --defs-dest                    Mode specific output directory  [default: "defs"]
   --defs-prefix                  CSS selector prefix for all shapes (including placeholders)  [default: ".svg-%s"]
@@ -122,7 +120,7 @@ Options:
   --dx, --defs-example           Whether to render an example HTML document  [boolean] [default: false]
   --defs-example-template        HTML document Mustache template (relative to svg-sprite basedir)  [default: "tmpl/defs/sprite.html"]
   --defs-example-dest            HTML document destination (relative to the --defs-dest)  [default: "sprite.defs.html"]
-  
+
   -s, --symbol                   Activates the «symbol» mode  [boolean] [default: false]
   --symbol-dest                  Mode specific output directory  [default: "symbol"]
   --symbol-prefix                CSS selector prefix for all shapes (including placeholders)  [default: ".svg-%s"]
@@ -148,7 +146,7 @@ Options:
   --sx, --symbol-example         Whether to render an example HTML document  [boolean] [default: false]
   --symbol-example-template      HTML document Mustache template (relative to svg-sprite basedir)  [default: "tmpl/symbol/sprite.html"]
   --symbol-example-dest          HTML document destination (relative to the --css-dest)  [default: "sprite.symbol.html"]
-  
+
   -S, --stack                    Activates the «stack» mode  [boolean] [default: false]
   --stack-dest                   Mode specific output directory  [default: "stack"]
   --stack-prefix                 CSS selector prefix for all shapes (including placeholders)  [default: ".svg-%s"]
@@ -173,54 +171,56 @@ Options:
   --Sx, --stack-example          Whether to render an example HTML document  [boolean] [default: false]
   --stack-example-template       HTML document Mustache template (relative to svg-sprite basedir)  [default: "tmpl/stack/sprite.html"]
   --stack-example-dest           HTML document destination (relative to the --css-dest)  [default: "sprite.stack.html"]
-  
+
   --variables                    Path to external JSON file with Mustache variable definitions
 ```
 
 ### Examples
 
-Both the following commands are doing the same (with the second one using the shorter argument syntax): They use the SVG files found in the directory `"assets"`, create a CSS sprite of them and write them to the subdirectory `"out"` along with accompanying CSS stylesheets. 
+Both the following commands are doing the same (with the second one using the shorter argument syntax): They use the SVG files found in the directory `"assets"`, create a CSS sprite of them and write them to the subdirectory `"out"` along with accompanying CSS stylesheets.
 
 ```bash
-$ svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
-$ svg-sprite -cD out --ccss --cx assets/*.svg
+svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
+# or
+svg-sprite -cD out --ccss --cx assets/*.svg
 ```
 
 The next one renders a Sass stylesheet (instead of plain CSS) and adds a 10px padding around all shapes in the sprite:
 
 ```bash
-$ svg-sprite -cD out --cscss -p 10 assets/*.svg
+svg-sprite -cD out --cscss -p 10 assets/*.svg
 ```
 
-Using config file (config.json in project base path) instead of command line options. Config file can be generated [with the online configurator](http://jkphl.github.io/svg-sprite/#json).
+Using config file (config.json in project base path) instead of command-line options. A config file can be generated [with the online configurator](https://svg-sprite.github.io/svg-sprite/#json).
 
 ```bash
-$ svg-sprite --config config.json assets/*.svg
+svg-sprite --config config.json assets/*.svg
 ```
 
 ### Advanced globbing
 
-Some shells don't support the double-star character `**` for matching files in an arbitrary directory depth, so you should wrap your glob expression in single quotes when using it in your pattern. This will prevent your shell from trying to resolve it and rather delegate globbing to Node instead (which does support the `**` character). 
- 
+Some shells don't support the double-star character `**` for matching files in an arbitrary directory depth, so you should wrap your glob expression in single quotes when using it in your pattern. This will prevent your shell from trying to resolve it and rather delegate globbing to Node instead (which does support the `**` character).
+
 ```bash
-$ svg-sprite --config config.json 'assets/**/*.svg'
+svg-sprite --config config.json 'assets/**/*.svg'
 ```
 
 The CLI typically uses only the basename of files for constructing the shape IDs in your sprite. That is, if an SVG source file is found at the path `assets/path/to/source.svg`, the shape inside the sprite will have the ID `source`. If you want to set a "base directory" from where ID traversal should start, simply add a symbolic link to that very same directory (`"./"`) in your pattern:
 
 ```bash
-$ svg-sprite --config config.json 'assets/./**/*.svg'
+svg-sprite --config config.json 'assets/./**/*.svg'
 ```
 
-The spriter will then use `path/to/source` for ID creation, resulting in the shape ID `path--to--source` (assuming you don't override the default shape ID generator function). Please be aware that the described feature won't work if the matched SVG files are symbolic links themselves. 
+The spriter will then use `path/to/source` for ID creation, resulting in the shape ID `path--to--source` (assuming you don't override the default shape ID generator function). Please be aware that the described feature won't work if the matched SVG files are symbolic links themselves.
 
 ### Inlined shape dimensions
 
 To get the shape dimensions inlined into the main shape CSS rules, you need to pass an empty dimension selector suffix. There are two ways of doing so:
 
 ```bash
-$ svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
-$ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
+svg-sprite -cD out --css-dimensions "" --ccss assets/*.svg
+# or
+svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
 ```
 
 
@@ -228,7 +228,7 @@ $ svg-sprite -cD out --css-dimensions= --ccss assets/*.svg
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master

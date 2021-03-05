@@ -6,7 +6,7 @@
   "homepage": "https://github.com/svg-sprite/svg-sprite",
   "repository": {
     "type": "git",
-    "url": "https://github.com/svg-sprite/svg-sprite.git"
+    "url": "git+https://github.com/svg-sprite/svg-sprite.git"
   },
   "bugs": {
     "url": "https://github.com/svg-sprite/svg-sprite/issues"
@@ -19,15 +19,11 @@
   "bin": {
     "svg-sprite": "./bin/svg-sprite.js"
   },
-  "directories": {
-    "test": "test"
-  },
   "files": [
     "bin",
     "docs",
     "lib",
-    "tmpl",
-    "CHANGELOG.md"
+    "tmpl"
   ],
   "scripts": {
     "lint": "jshint bin lib test",
@@ -51,7 +47,7 @@
     "winston": "^3.3.3",
     "xmldom": "^0.4.0",
     "xpath": "^0.0.32",
-    "yargs": "^15.4.1"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "c8": "^7.6.0",

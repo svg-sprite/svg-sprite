@@ -1,11 +1,9 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
-==========
+# svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
-Standard API
-------------
+## Standard API
 
 *svg-sprite* comes with four public methods:
 
@@ -14,15 +12,14 @@ Standard API
 * [SVGSpriter.compile([ config ,] callback )](#svgspritercompile-config--callback-) — Triggering the sprite compilation
 * [SVGSpriter.getShapes( dest , callback )](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
 
-To understand these methods' roles and interaction, please have a look at the following basic example first.
+To understand these methods' roles and interactions, please have a look at the following basic example first.
 
-### Usage example 
+### Usage example
 
-```javascript
+```js
 'use strict';
 
 var SVGSpriter = require('svg-sprite'),
-    mkdirp = require('mkdirp'),
     path = require('path'),
     fs = require('fs'),
 
@@ -63,7 +60,7 @@ spriter.compile(function (error, result, data) {
     for (var type in result.css) {
 
         // Recursively create directories as needed
-        mkdirp.sync(path.dirname(result.css[type].path));
+        fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
 
         // Write the generated resource to disk
         fs.writeFileSync(result.css[type].path, result.css[type].contents);
@@ -77,13 +74,13 @@ spriter.compile(function (error, result, data) {
 
 ##### Arguments
 
-1. **config** `{Object}` *(default: `{}`)* — [Main configuration](configuration.md) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). The `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)). 
+1. **config** `{Object}` *(default: `{}`)* — [Main configuration](configuration.md) for the spriting process. As all configuration properties are optional, you may provide an empty object here or omit the argument altogether (no output files will be created then, but the [added SVG files](#svgspriteraddfile--name-svg-) will be optimized nevertheless). The `mode` configuration properties may also be specified when calling the `.compile()` method ([see below](#svgspritercompile-config--callback-)).
 
 #### SVGSpriter.add(file [, name, svg ])
 
-**Registration of an SVG file** — Prior to compiliation, you'll need to register one or more SVG files for processing, obviously. As *svg-sprite* doesn't read the files from disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another (as you would do with the [Gulp wrapper](https://github.com/jkphl/gulp-svg-sprite) anyway). Please [see below](#example-using-glob-and-vinyl) for an example.
+**Registration of an SVG file** — Before compilation, you'll need to register one or more SVG files for processing. As *svg-sprite* doesn't read the files from the disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another (as you would do with the [Gulp wrapper](https://github.com/jkphl/gulp-svg-sprite) anyway). Please [see below](#example-using-glob-and-vinyl) for an example.
 
-It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way it is possibly to call the `.compile()` method several time, possibly passing in different render configurations without the need of repeating the optimization steps.
+It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way it is possible to call the `.compile()` method several times, possibly passing in different render configurations without the need of repeating the optimization steps.
 
 ##### Arguments
 
@@ -93,11 +90,10 @@ It is important to know that the spriter **optimizes the SVG files as soon as yo
 
 ##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/wearefractal/vinyl)
 
-```javascript
+```js
 'use strict';
 
 var SVGSpriter = require('svg-sprite'),
-    mkdirp = require('mkdirp'),
     path = require('path'),
     fs = require('fs'),
     File = require('vinyl'),
@@ -128,7 +124,7 @@ glob.glob('**/*.svg', { cwd: cwd }, function (err, files) {
 
     spriter.compile(function (error, result, data) {
         for (var type in result.css) {
-            mkdirp.sync(path.dirname(result.css[type].path));
+            fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
             fs.writeFileSync(result.css[type].path, result.css[type].contents);
         }
     });
@@ -149,9 +145,9 @@ glob.glob('**/*.svg', { cwd: cwd }, function (err, files) {
 
 ##### Compilation example
 
-Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example: 
+Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example:
 
-```javascript
+```js
 spriter.compile(
     {
         css: {
@@ -169,7 +165,7 @@ spriter.compile(
 
 The spriter is instructed to create a CSS sprite along with the accompanying stylesheet resource in Sass format and an example HTML document demonstrating the use of the sprite. The output will look something like this (shortened for brevity):
 
-```javascript
+```js
 {
     css: {
         sprite: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
@@ -181,29 +177,28 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 
 For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css and view](configuration.md#css--view-mode) output modes, there are additional items named after the configured [rendering configurations](configuration.md#rendering-configurations) (`scss` in the example).
 
-Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).  
+Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).
 
 #### SVGSpriter.getShapes( dest , callback )
 
-**Accessing the intermediate SVG resources** — Sometimes you may want to access the single transformed / optimized SVG files that *svg-sprite* produces in an intermediate step. Depending on the [configured shape transformations](configuration.md#shape-transformations) (e.g. SVG optimization with [SVGO](https://github.com/svg/svgo)), *svg-sprite* will need some time for transforming the files, which is why accessing them must be an asynchronous task.
+**Accessing the intermediate SVG resources** — Sometimes you may want to access the single transformed/optimized SVG files that *svg-sprite* produces in an intermediate step. Depending on the [configured shape transformations](configuration.md#shape-transformations) (e.g. SVG optimization with [SVGO](https://github.com/svg/svgo)), *svg-sprite* will need some time for transforming the files, which is why accessing them must be an asynchronous task.
 
 ##### Arguments
 
-1. **dest** `{String}` — Base directory for the SVG files in case the will be written to disk.
+1. **dest** `{String}` — Base directory for the SVG files in case they will be written to disk.
 2. **callback** `{Function}`: Callback triggered when the shapes are available, getting called with two arguments:
     * **error** `{Error}` — Error message in case the shape access has failed.
-    * **result** `{Array}` — Array of [vinyl](https://github.com/wearefractal/vinyl) carrying the intermediate SVGs.  
+    * **result** `{Array}` — Array of [vinyl](https://github.com/wearefractal/vinyl) carrying the intermediate SVGs.
 
 ##### Shape access example
 
-```javascript
-var mkdirp = require('mkdirp'),
-    path = require('path'),
+```js
+var path = require('path'),
     fs = require('fs');
 
 spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
     result.forEach(function (file) {
-        mkdirp.sync(path.dirname(file.path));
+        fs.mkdirSync(path.dirname(file.path), { recursive: true });
         fs.writeFileSync(file.path, file.contents);
     });
 });
@@ -214,7 +209,7 @@ spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=master
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master
