@@ -27,14 +27,14 @@ var _ = require('lodash'),
 	map = {},
 	yargs = require('yargs')
 		.usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
-		.version('version', 'Show version number', JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json'), { encoding: 'utf8' })).version)
+		.version()
 		.help('help', 'Display this help information')
 		.wrap(null)
 		.example('$0 --css --css-render-css --css-example --dest=out assets/*.svg', 'Create a CSS sprite of the given SVG files including example document to the subdirectory "out"')
 		.example('$0 -cD out --ccss --cx assets/*.svg', 'Same as above')
 		.example('$0 -cD out --cscss -p 10 assets/*.svg', 'Render Sass instead of CSS and add 10px padding around all shapes (no example document this time)')
 		.showHelpOnFail(true)
-		.demand(1);
+		.demandCommand(1);
 
 /**
  * Add a command line option

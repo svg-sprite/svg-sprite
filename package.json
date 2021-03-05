@@ -47,7 +47,7 @@
     "winston": "^3.3.3",
     "xmldom": "^0.4.0",
     "xpath": "^0.0.32",
-    "yargs": "^15.4.1"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "c8": "^7.6.0",

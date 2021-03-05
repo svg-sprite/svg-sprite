@@ -7,7 +7,7 @@ env:
   NODE_COV: 14 # The Node.js version to run coveralls on
 
 jobs:
-  run:
+  test:
     name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
 
@@ -35,9 +35,6 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
-
-      - name: Run lint
-        run: npm run lint
 
       - name: Run tests
         run: npm test
