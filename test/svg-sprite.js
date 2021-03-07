@@ -156,7 +156,7 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
 }
 
 before(function (done) {
-    rimraf(path.normalize(path.join(__dirname, '..', 'tmp')), function (/* error */) {
+    rimraf(path.join(__dirname, '../tmp'), function (/* error */) {
         done();
     });
 });
