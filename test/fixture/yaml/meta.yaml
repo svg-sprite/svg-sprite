@@ -1,16 +1,16 @@
-weather-clear-night   :
-  title               : Clear night
-  description         : Icon showing a moon without clouds
+weather-clear-night:
+  title: Clear night
+  description: Icon showing a moon without clouds
 
-weather-storm.svg     :
-  title               : Storm
-  description         : Icon showing clouds and two thunderbolts
+weather-storm.svg:
+  title: Storm
+  description: Icon showing clouds and two thunderbolts
 
-weather-storm~hover   :
-  title               : Storm & rain
-  description         : Icon showing a thunderstorm with rain
+weather-storm~hover:
+  title: Storm & rain
+  description: Icon showing a thunderstorm with rain
 
-zebra                 :
-  title               : Zebra
-  description         : Vector image showing a zebra that changes it's color when scaled
-  invalid             : This is an invalid property that should be discarded
+zebra:
+  title: Zebra
+  description: Vector image showing a zebra that changes its color when scaled
+  invalid: This is an invalid property that should be discarded

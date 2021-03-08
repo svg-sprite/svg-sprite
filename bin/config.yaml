@@ -1,759 +1,759 @@
 dest:
-  description             : Main output directory (base path)
-  alias                   : D
-  default                 : .
-  map                     : dest
+  description: Main output directory (base path)
+  alias: D
+  default: .
+  map: dest
 
 config:
-  description             : Path to external JSON config file
-  alias                   : C
+  description: Path to external JSON config file
+  alias: C
 
 log:
-  description             : Logging verbosity ("info", "verbose" or "debug")
-  alias                   : l
-  map                     : log
+  description: Logging verbosity ("info", "verbose" or "debug")
+  alias: l
+  map: log
 
 shape:
   id:
     separator:
-      description         : Separator for traversing a directory structure into a shape ID
-      default             : --
-      map                 : shape.id.separator
+      description: Separator for traversing a directory structure into a shape ID
+      default: --
+      map: shape.id.separator
 
     generator:
-      description         : ID generation callback [via CLI only template strings]
-      default             : "%s"
-      map                 : shape.id.generator
+      description: ID generation callback [via CLI only template strings]
+      default: "%s"
+      map: shape.id.generator
 
     pseudo:
-      description         : Separator for CSS pseudo classes
-      default             : "~"
-      map                 : shape.id.pseudo
+      description: Separator for CSS pseudo classes
+      default: "~"
+      map: shape.id.pseudo
 
     whitespace:
-      description         : Whitespace replacement string for shape IDs
-      default             : "_"
-      map                 : shape.id.whitespace
+      description: Whitespace replacement string for shape IDs
+      default: "_"
+      map: shape.id.whitespace
 
   dim:
     width:
-      description         : Maximum shape width in pixels
-      default             : 2000
-      alias               : w
-      map                 : shape.dimension.maxWidth
+      description: Maximum shape width in pixels
+      default: 2000
+      alias: w
+      map: shape.dimension.maxWidth
 
     height:
-      description         : Maximum shape height in pixels
-      default             : 2000
-      alias               : h
-      map                 : shape.dimension.maxHeight
+      description: Maximum shape height in pixels
+      default: 2000
+      alias: h
+      map: shape.dimension.maxHeight
 
     precision:
-      description         : Precision (decimal places) for dimension calculations
-      default             : 2
-      map                 : shape.dimension.precision
+      description: Precision (decimal places) for dimension calculations
+      default: 2
+      map: shape.dimension.precision
 
     attributes:
-      description         : Whether to add width and height attributes to the shapes
-      default             : false
-      map                 : shape.dimension.attributes
+      description: Whether to add width and height attributes to the shapes
+      default: false
+      map: shape.dimension.attributes
 
   spacing:
     padding:
-      description         : Padding around shape (up to 4 x comma-separated)
-      default             : 0,0,0,0
-      alias               : p
-      map                 : shape.spacing.padding
+      description: Padding around shape (up to 4 x comma-separated)
+      default: 0,0,0,0
+      alias: p
+      map: shape.spacing.padding
 
     box:
-      description         : Box sizing strategy ("content", "padding" or "icon")
-      default             : content
-      alias               : b
-      map                 : shape.spacing.box
+      description: Box sizing strategy ("content", "padding" or "icon")
+      default: content
+      alias: b
+      map: shape.spacing.box
 
   meta:
-    description           : Path to YAML file with meta information
-    alias                 : m
-    map                   : shape.meta
+    description: Path to YAML file with meta information
+    alias: m
+    map: shape.meta
 
   align:
-    description           : Path to YAML file with alignment information
-    alias                 : a
-    map                   : shape.align
+    description: Path to YAML file with alignment information
+    alias: a
+    map: shape.align
 
   dest:
-    description           : Path to output directory for intermediate SVG files
-    alias                 : ims
-    map                   : shape.dest
+    description: Path to output directory for intermediate SVG files
+    alias: ims
+    map: shape.dest
 
   transform:
-    description           : Comma-separated list of predefined transformers (see docs)
-    default               : svgo
-    map                   : shape.transform
+    description: Comma-separated list of predefined transformers (see docs)
+    default: svgo
+    map: shape.transform
 
     "*":
-      description           : External JSON config files for named transformers
+      description: External JSON config files for named transformers
 
 svg:
   xmldecl:
-    description           : Whether to include an XML declaration in SVG files
-    default               : true
-    map                   : svg.xmlDeclaration
+    description: Whether to include an XML declaration in SVG files
+    default: true
+    map: svg.xmlDeclaration
 
   doctype:
-    description           : Whether to include a doctype declaration in SVG files
-    default               : true
-    map                   : svg.doctypeDeclaration
+    description: Whether to include a doctype declaration in SVG files
+    default: true
+    map: svg.doctypeDeclaration
 
   namespace:
-    ids                   :
-      description         : Whether to apply ID namespacing to the sprite
-      default             : true
-      map                 : svg.namespaceIDs
+    ids:
+      description: Whether to apply ID namespacing to the sprite
+      default: true
+      map: svg.namespaceIDs
 
-    prefix                :
-      description         : What, if any, prefix to apply to the automatically generated id
-      default             : ''
-      map                 : svg.namespaceIDPrefix
+    prefix:
+      description: What, if any, prefix to apply to the automatically generated id
+      default: ""
+      map: svg.namespaceIDPrefix
 
-    classnames            :
-      description         : Whether to apply CSS class namespacing to the sprite
-      default             : true
-      map                 : svg.namespaceClassnames
+    classnames:
+      description: Whether to apply CSS class namespacing to the sprite
+      default: true
+      map: svg.namespaceClassnames
 
   dimattrs:
-    description           : Whether to add width and height attributes to the sprite
-    default               : true
-    map                   : svg.dimensionAttributes
+    description: Whether to add width and height attributes to the sprite
+    default: true
+    map: svg.dimensionAttributes
 
   rootattrs:
-    description           : Custom root attributes for the outermost <svg> element (external JSON file)
-    map                   : svg.rootAttributes
+    description: Custom root attributes for the outermost <svg> element (external JSON file)
+    map: svg.rootAttributes
 
   precision:
-    description           : Floating point precision for CSS positioning values
-    default               : -1
-    map                   : svg.precision
+    description: Floating point precision for CSS positioning values
+    default: -1
+    map: svg.precision
 
 css:
-  description             : Activates the «css» mode
-  default                 : false
-  alias                   : c
+  description: Activates the «css» mode
+  default: false
+  alias: c
 
   dest:
-    description           : Mode specific output directory
-    default               : css
-    map                   : mode.css.dest
+    description: Mode specific output directory
+    default: css
+    map: mode.css.dest
 
   layout:
-    description           : Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")
-    default               : packed
-    alias                 : cl
-    map                   : mode.css.layout
+    description: Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")
+    default: packed
+    alias: cl
+    map: mode.css.layout
 
   common:
-    description           : Common CSS rule selector for all shapes
-    default               :
-    map                   : mode.css.common
+    description: Common CSS rule selector for all shapes
+    default:
+    map: mode.css.common
 
   mixin:
-    description           : Preprocessor mixin name with properties for all shapes
-    default               :
-    map                   : mode.css.mixin
+    description: Preprocessor mixin name with properties for all shapes
+    default:
+    map: mode.css.mixin
 
   prefix:
-    description           : CSS selector prefix for all shapes (including placeholders)
-    default               : .svg-%s
-    map                   : mode.css.prefix
+    description: CSS selector prefix for all shapes (including placeholders)
+    default: .svg-%s
+    map: mode.css.prefix
 
   dimensions:
-    description           : CSS selector suffix for shape dimension rules ("" for inline)
-    default               : -dims
-    map                   : mode.css.dimensions
+    description: CSS selector suffix for shape dimension rules ("" for inline)
+    default: -dims
+    map: mode.css.dimensions
 
   sprite:
-    description           : Sprite path and filename (relative to --css-dest)
-    default               : svg/sprite.css.svg
-    alias                 : cs
-    map                   : mode.css.sprite
+    description: Sprite path and filename (relative to --css-dest)
+    default: svg/sprite.css.svg
+    alias: cs
+    map: mode.css.sprite
 
   bust:
-    description           : Enable cache busting
-    default               : true
-    map                   : mode.css.bust
+    description: Enable cache busting
+    default: true
+    map: mode.css.bust
 
   render:
     css:
-      description         : Whether to render a CSS stylesheet
-      default             : false
-      alias               : ccss
+      description: Whether to render a CSS stylesheet
+      default: false
+      alias: ccss
 
       template:
-        description       : CSS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.css
-        map               : mode.css.render.css.template
+        description: CSS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.css
+        map: mode.css.render.css.template
 
       dest:
-        description       : CSS stylesheet destination (relative to the --css-dest)
-        default           : sprite.css
-        map               : mode.css.render.css.dest
+        description: CSS stylesheet destination (relative to the --css-dest)
+        default: sprite.css
+        map: mode.css.render.css.dest
 
     scss:
-      description         : Whether to render a Sass stylesheet (SCSS)
-      default             : false
-      alias               : cscss
+      description: Whether to render a Sass stylesheet (SCSS)
+      default: false
+      alias: cscss
 
       template:
-        description       : Sass stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.scss
-        map               : mode.css.render.scss.template
+        description: Sass stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.scss
+        map: mode.css.render.scss.template
 
       dest:
-        description       : Sass stylesheet destination (relative to the --css-dest)
-        default           : sprite.scss
-        map               : mode.css.render.scss.dest
+        description: Sass stylesheet destination (relative to the --css-dest)
+        default: sprite.scss
+        map: mode.css.render.scss.dest
 
     less:
-      description         : Whether to render a LESS stylesheet
-      default             : false
-      alias               : cless
+      description: Whether to render a LESS stylesheet
+      default: false
+      alias: cless
 
       template:
-        description       : LESS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.less
-        map               : mode.css.render.less.template
+        description: LESS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.less
+        map: mode.css.render.less.template
 
       dest:
-        description       : LESS stylesheet destination (relative to the --css-dest)
-        default           : sprite.less
-        map               : mode.css.render.less.dest
+        description: LESS stylesheet destination (relative to the --css-dest)
+        default: sprite.less
+        map: mode.css.render.less.dest
 
     styl:
-      description         : Whether to render a Stylus stylesheet
-      default             : false
-      alias               : cstyl
+      description: Whether to render a Stylus stylesheet
+      default: false
+      alias: cstyl
 
       template:
-        description       : Stylus stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.styl
-        map               : mode.css.render.styl.template
+        description: Stylus stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.styl
+        map: mode.css.render.styl.template
 
       dest:
-        description       : styl stylesheet destination (relative to the --css-dest)
-        default           : sprite.styl
-        map               : mode.css.render.styl.dest
+        description: styl stylesheet destination (relative to the --css-dest)
+        default: sprite.styl
+        map: mode.css.render.styl.dest
 
     "*":
-      description         : Custom output renderings
+      description: Custom output renderings
       template:
-        description       : Custom output Mustache template (relative to svg-sprite basedir)
+        description: Custom output Mustache template (relative to svg-sprite basedir)
 
       dest:
-        description       : Custom output destination (relative to the --css-dest)
+        description: Custom output destination (relative to the --css-dest)
 
   example:
-    description           : Whether to render an example HTML document
-    default               : false
-    alias                 : cx
+    description: Whether to render an example HTML document
+    default: false
+    alias: cx
 
     template:
-      description         : HTML document Mustache template (relative to svg-sprite basedir)
-      default             : tmpl/css/sprite.html
-      map                 : mode.css.example.template
+      description: HTML document Mustache template (relative to svg-sprite basedir)
+      default: tmpl/css/sprite.html
+      map: mode.css.example.template
 
     dest:
-      description         : HTML document destination (relative to the --css-dest)
-      default             : sprite.css.html
-      map                 : mode.css.example.dest
+      description: HTML document destination (relative to the --css-dest)
+      default: sprite.css.html
+      map: mode.css.example.dest
 
 view:
-  description             : Activates the «view» mode
-  default                 : false
-  alias                   : v
+  description: Activates the «view» mode
+  default: false
+  alias: v
 
   dest:
-    description           : Mode specific output directory
-    default               : view
-    map                   : mode.view.dest
+    description: Mode specific output directory
+    default: view
+    map: mode.view.dest
 
   layout:
-    description           : Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")
-    default               : packed
-    alias                 : vl
-    map                   : mode.view.layout
+    description: Sprite layout ("vertical"/"horizontal"/"diagonal"/"packed")
+    default: packed
+    alias: vl
+    map: mode.view.layout
 
   common:
-    description           : Common CSS rule selector for all shapes
-    default               :
-    map                   : mode.view.common
+    description: Common CSS rule selector for all shapes
+    default:
+    map: mode.view.common
 
   mixin:
-    description           : Preprocessor mixin name with properties for all shapes
-    default               :
-    map                   : mode.view.mixin
+    description: Preprocessor mixin name with properties for all shapes
+    default:
+    map: mode.view.mixin
 
   prefix:
-    description           : CSS selector prefix for all shapes (including placeholders)
-    default               : .svg-%s
-    map                   : mode.view.prefix
+    description: CSS selector prefix for all shapes (including placeholders)
+    default: .svg-%s
+    map: mode.view.prefix
 
   dimensions:
-    description           : CSS selector suffix for shape dimension rules ("" for inline)
-    default               : -dims
-    map                   : mode.view.dimensions
+    description: CSS selector suffix for shape dimension rules ("" for inline)
+    default: -dims
+    map: mode.view.dimensions
 
   sprite:
-    description           : Sprite path and filename (relative to --view-dest)
-    default               : svg/sprite.css.svg
-    alias                 : vs
-    map                   : mode.view.sprite
+    description: Sprite path and filename (relative to --view-dest)
+    default: svg/sprite.css.svg
+    alias: vs
+    map: mode.view.sprite
 
   bust:
-    description           : Enable cache busting
-    default               : true
-    map                   : mode.view.bust
+    description: Enable cache busting
+    default: true
+    map: mode.view.bust
 
   render:
     css:
-      description         : Whether to render a CSS stylesheet
-      default             : false
-      alias               : vcss
+      description: Whether to render a CSS stylesheet
+      default: false
+      alias: vcss
 
       template:
-        description       : CSS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.css
-        map               : mode.view.render.css.template
+        description: CSS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.css
+        map: mode.view.render.css.template
 
       dest:
-        description       : CSS stylesheet destination (relative to the --view-dest)
-        default           : sprite.css
-        map               : mode.view.render.css.dest
+        description: CSS stylesheet destination (relative to the --view-dest)
+        default: sprite.css
+        map: mode.view.render.css.dest
 
     scss:
-      description         : Whether to render a Sass stylesheet (SCSS)
-      default             : false
-      alias               : vscss
+      description: Whether to render a Sass stylesheet (SCSS)
+      default: false
+      alias: vscss
 
       template:
-        description       : Sass stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.scss
-        map               : mode.view.render.scss.template
+        description: Sass stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.scss
+        map: mode.view.render.scss.template
 
       dest:
-        description       : Sass stylesheet destination (relative to the --view-dest)
-        default           : sprite.scss
-        map               : mode.view.render.scss.dest
+        description: Sass stylesheet destination (relative to the --view-dest)
+        default: sprite.scss
+        map: mode.view.render.scss.dest
 
     less:
-      description         : Whether to render a LESS stylesheet
-      default             : false
-      alias               : vless
+      description: Whether to render a LESS stylesheet
+      default: false
+      alias: vless
 
       template:
-        description       : LESS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.less
-        map               : mode.view.render.less.template
+        description: LESS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.less
+        map: mode.view.render.less.template
 
       dest:
-        description       : LESS stylesheet destination (relative to the --view-dest)
-        default           : sprite.less
-        map               : mode.view.render.less.dest
+        description: LESS stylesheet destination (relative to the --view-dest)
+        default: sprite.less
+        map: mode.view.render.less.dest
 
     styl:
-      description         : Whether to render a Stylus stylesheet
-      default             : false
-      alias               : vstyl
+      description: Whether to render a Stylus stylesheet
+      default: false
+      alias: vstyl
 
       template:
-        description       : Stylus stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/css/sprite.styl
-        map               : mode.view.render.styl.template
+        description: Stylus stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/css/sprite.styl
+        map: mode.view.render.styl.template
 
       dest:
-        description       : styl stylesheet destination (relative to the --view-dest)
-        default           : sprite.styl
-        map               : mode.view.render.styl.dest
+        description: styl stylesheet destination (relative to the --view-dest)
+        default: sprite.styl
+        map: mode.view.render.styl.dest
 
     "*":
-      description         : Custom output renderings
+      description: Custom output renderings
       template:
-        description       : Custom output Mustache template (relative to svg-sprite basedir)
+        description: Custom output Mustache template (relative to svg-sprite basedir)
 
       dest:
-        description       : Custom output destination (relative to the --view-dest)
+        description: Custom output destination (relative to the --view-dest)
 
   example:
-    description           : Whether to render an example HTML document
-    default               : false
-    alias                 : vx
+    description: Whether to render an example HTML document
+    default: false
+    alias: vx
 
     template:
-      description         : HTML document Mustache template (relative to svg-sprite basedir)
-      default             : tmpl/view/sprite.html
-      map                 : mode.view.example.template
+      description: HTML document Mustache template (relative to svg-sprite basedir)
+      default: tmpl/view/sprite.html
+      map: mode.view.example.template
 
     dest:
-      description         : HTML document destination (relative to the --view-dest)
-      default             : sprite.view.html
-      map                 : mode.view.example.dest
+      description: HTML document destination (relative to the --view-dest)
+      default: sprite.view.html
+      map: mode.view.example.dest
 
 defs:
-  description             : Activates the «defs» mode
-  default                 : false
-  alias                   : d
+  description: Activates the «defs» mode
+  default: false
+  alias: d
 
   dest:
-    description           : Mode specific output directory
-    default               : defs
-    map                   : mode.defs.dest
+    description: Mode specific output directory
+    default: defs
+    map: mode.defs.dest
 
   prefix:
-    description           : CSS selector prefix for all shapes (including placeholders)
-    default               : .svg-%s
-    map                   : mode.defs.prefix
+    description: CSS selector prefix for all shapes (including placeholders)
+    default: .svg-%s
+    map: mode.defs.prefix
 
   dimensions:
-    description           : CSS selector suffix for shape dimension rules ("" for inline)
-    default               : -dims
-    map                   : mode.defs.dimensions
+    description: CSS selector suffix for shape dimension rules ("" for inline)
+    default: -dims
+    map: mode.defs.dimensions
 
   sprite:
-    description           : Sprite path and filename (relative to --defs-dest)
-    default               : svg/sprite.css.svg
-    alias                 : ds
-    map                   : mode.defs.sprite
+    description: Sprite path and filename (relative to --defs-dest)
+    default: svg/sprite.css.svg
+    alias: ds
+    map: mode.defs.sprite
 
   bust:
-    description           : Enable cache busting
-    default               : false
-    map                   : mode.defs.bust
+    description: Enable cache busting
+    default: false
+    map: mode.defs.bust
 
   render:
     css:
-      description         : Whether to render a CSS stylesheet
-      default             : false
-      alias               : dcss
+      description: Whether to render a CSS stylesheet
+      default: false
+      alias: dcss
 
       template:
-        description       : CSS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.css
-        map               : mode.defs.render.css.template
+        description: CSS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.css
+        map: mode.defs.render.css.template
 
       dest:
-        description       : CSS stylesheet destination (relative to the --defs-dest)
-        default           : sprite.css
-        map               : mode.defs.render.css.dest
+        description: CSS stylesheet destination (relative to the --defs-dest)
+        default: sprite.css
+        map: mode.defs.render.css.dest
 
     scss:
-      description         : Whether to render a Sass stylesheet (SCSS)
-      default             : false
-      alias               : dscss
+      description: Whether to render a Sass stylesheet (SCSS)
+      default: false
+      alias: dscss
 
       template:
-        description       : Sass stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.scss
-        map               : mode.defs.render.scss.template
+        description: Sass stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.scss
+        map: mode.defs.render.scss.template
 
       dest:
-        description       : Sass stylesheet destination (relative to the --defs-dest)
-        default           : sprite.scss
-        map               : mode.defs.render.scss.dest
+        description: Sass stylesheet destination (relative to the --defs-dest)
+        default: sprite.scss
+        map: mode.defs.render.scss.dest
 
     less:
-      description         : Whether to render a LESS stylesheet
-      default             : false
-      alias               : dless
+      description: Whether to render a LESS stylesheet
+      default: false
+      alias: dless
 
       template:
-        description       : LESS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.less
-        map               : mode.defs.render.less.template
+        description: LESS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.less
+        map: mode.defs.render.less.template
 
       dest:
-        description       : LESS stylesheet destination (relative to the --defs-dest)
-        default           : sprite.less
-        map               : mode.defs.render.less.dest
+        description: LESS stylesheet destination (relative to the --defs-dest)
+        default: sprite.less
+        map: mode.defs.render.less.dest
 
     styl:
-      description         : Whether to render a Stylus stylesheet
-      default             : false
-      alias               : dstyl
+      description: Whether to render a Stylus stylesheet
+      default: false
+      alias: dstyl
 
       template:
-        description       : Stylus stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.styl
-        map               : mode.defs.render.styl.template
+        description: Stylus stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.styl
+        map: mode.defs.render.styl.template
 
       dest:
-        description       : styl stylesheet destination (relative to the --defs-dest)
-        default           : sprite.styl
-        map               : mode.defs.render.styl.dest
+        description: styl stylesheet destination (relative to the --defs-dest)
+        default: sprite.styl
+        map: mode.defs.render.styl.dest
 
     "*":
-      description         : Custom output renderings
+      description: Custom output renderings
       template:
-        description       : Custom output Mustache template (relative to svg-sprite basedir)
+        description: Custom output Mustache template (relative to svg-sprite basedir)
 
       dest:
-        description       : Custom output destination (relative to the --defs-dest)
+        description: Custom output destination (relative to the --defs-dest)
 
   inline:
-    description           : Create sprite variant suitable for inline embedding
-    default               : false
-    alias                 : di
-    map                   : mode.defs.inline
+    description: Create sprite variant suitable for inline embedding
+    default: false
+    alias: di
+    map: mode.defs.inline
 
   example:
-    description           : Whether to render an example HTML document
-    default               : false
-    alias                 : dx
+    description: Whether to render an example HTML document
+    default: false
+    alias: dx
 
     template:
-      description         : HTML document Mustache template (relative to svg-sprite basedir)
-      default             : tmpl/defs/sprite.html
-      map                 : mode.defs.example.template
+      description: HTML document Mustache template (relative to svg-sprite basedir)
+      default: tmpl/defs/sprite.html
+      map: mode.defs.example.template
 
     dest:
-      description         : HTML document destination (relative to the --defs-dest)
-      default             : sprite.defs.html
-      map                 : mode.defs.example.dest
+      description: HTML document destination (relative to the --defs-dest)
+      default: sprite.defs.html
+      map: mode.defs.example.dest
 
 symbol:
-  description             : Activates the «symbol» mode
-  default                 : false
-  alias                   : s
+  description: Activates the «symbol» mode
+  default: false
+  alias: s
 
   dest:
-    description           : Mode specific output directory
-    default               : symbol
-    map                   : mode.symbol.dest
+    description: Mode specific output directory
+    default: symbol
+    map: mode.symbol.dest
 
   prefix:
-    description           : CSS selector prefix for all shapes (including placeholders)
-    default               : .svg-%s
-    map                   : mode.symbol.prefix
+    description: CSS selector prefix for all shapes (including placeholders)
+    default: .svg-%s
+    map: mode.symbol.prefix
 
   dimensions:
-    description           : CSS selector suffix for shape dimension rules ("" for inline)
-    default               : -dims
-    map                   : mode.symbol.dimensions
+    description: CSS selector suffix for shape dimension rules ("" for inline)
+    default: -dims
+    map: mode.symbol.dimensions
 
   sprite:
-    description           : Sprite path and filename (relative to --css-dest)
-    default               : svg/sprite.css.svg
-    alias                 : ss
-    map                   : mode.symbol.sprite
+    description: Sprite path and filename (relative to --css-dest)
+    default: svg/sprite.css.svg
+    alias: ss
+    map: mode.symbol.sprite
 
   bust:
-    description           : Enable cache busting
-    default               : false
-    map                   : mode.symbol.bust
+    description: Enable cache busting
+    default: false
+    map: mode.symbol.bust
 
   render:
     css:
-      description         : Whether to render a CSS stylesheet
-      default             : false
-      alias               : scss
+      description: Whether to render a CSS stylesheet
+      default: false
+      alias: scss
 
       template:
-        description       : CSS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.css
-        map               : mode.symbol.render.css.template
+        description: CSS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.css
+        map: mode.symbol.render.css.template
 
       dest:
-        description       : CSS stylesheet destination (relative to the --symbol-dest)
-        default           : sprite.css
-        map               : mode.symbol.render.css.dest
+        description: CSS stylesheet destination (relative to the --symbol-dest)
+        default: sprite.css
+        map: mode.symbol.render.css.dest
 
     scss:
-      description         : Whether to render a Sass stylesheet (SCSS)
-      default             : false
-      alias               : sscss
+      description: Whether to render a Sass stylesheet (SCSS)
+      default: false
+      alias: sscss
 
       template:
-        description       : Sass stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.scss
-        map               : mode.symbol.render.scss.template
+        description: Sass stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.scss
+        map: mode.symbol.render.scss.template
 
       dest:
-        description       : Sass stylesheet destination (relative to the --symbol-dest)
-        default           : sprite.scss
-        map               : mode.symbol.render.scss.dest
+        description: Sass stylesheet destination (relative to the --symbol-dest)
+        default: sprite.scss
+        map: mode.symbol.render.scss.dest
 
     less:
-      description         : Whether to render a LESS stylesheet
-      default             : false
-      alias               : sless
+      description: Whether to render a LESS stylesheet
+      default: false
+      alias: sless
 
       template:
-        description       : LESS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.less
-        map               : mode.symbol.render.less.template
+        description: LESS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.less
+        map: mode.symbol.render.less.template
 
       dest:
-        description       : LESS stylesheet destination (relative to the --symbol-dest)
-        default           : sprite.less
-        map               : mode.symbol.render.less.dest
+        description: LESS stylesheet destination (relative to the --symbol-dest)
+        default: sprite.less
+        map: mode.symbol.render.less.dest
 
     styl:
-      description         : Whether to render a Stylus stylesheet
-      default             : false
-      alias               : sstyl
+      description: Whether to render a Stylus stylesheet
+      default: false
+      alias: sstyl
 
       template:
-        description       : Stylus stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.styl
-        map               : mode.symbol.render.styl.template
+        description: Stylus stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.styl
+        map: mode.symbol.render.styl.template
 
       dest:
-        description       : styl stylesheet destination (relative to the --symbol-dest)
-        default           : sprite.styl
-        map               : mode.symbol.render.styl.dest
+        description: styl stylesheet destination (relative to the --symbol-dest)
+        default: sprite.styl
+        map: mode.symbol.render.styl.dest
 
     "*":
-      description         : Custom output renderings
+      description: Custom output renderings
       template:
-        description       : Custom output Mustache template (relative to svg-sprite basedir)
+        description: Custom output Mustache template (relative to svg-sprite basedir)
 
       dest:
-        description       : Custom output destination (relative to the --symbol-dest)
+        description: Custom output destination (relative to the --symbol-dest)
 
   inline:
-    description           : Create sprite variant suitable for inline embedding
-    default               : false
-    alias                 : si
-    map                   : mode.symbol.inline
+    description: Create sprite variant suitable for inline embedding
+    default: false
+    alias: si
+    map: mode.symbol.inline
 
   example:
-    description           : Whether to render an example HTML document
-    default               : false
-    alias                 : sx
+    description: Whether to render an example HTML document
+    default: false
+    alias: sx
 
     template:
-      description         : HTML document Mustache template (relative to svg-sprite basedir)
-      default             : tmpl/symbol/sprite.html
-      map                 : mode.symbol.example.template
+      description: HTML document Mustache template (relative to svg-sprite basedir)
+      default: tmpl/symbol/sprite.html
+      map: mode.symbol.example.template
 
     dest:
-      description         : HTML document destination (relative to the --css-dest)
-      default             : sprite.symbol.html
-      map                 : mode.symbol.example.dest
+      description: HTML document destination (relative to the --css-dest)
+      default: sprite.symbol.html
+      map: mode.symbol.example.dest
 
 stack:
-  description             : Activates the «stack» mode
-  default                 : false
-  alias                   : S
+  description: Activates the «stack» mode
+  default: false
+  alias: S
 
   dest:
-    description           : Mode specific output directory
-    default               : stack
-    map                   : mode.stack.dest
+    description: Mode specific output directory
+    default: stack
+    map: mode.stack.dest
 
   prefix:
-    description           : CSS selector prefix for all shapes (including placeholders)
-    default               : .svg-%s
-    map                   : mode.stack.prefix
+    description: CSS selector prefix for all shapes (including placeholders)
+    default: .svg-%s
+    map: mode.stack.prefix
 
   dimensions:
-    description           : CSS selector suffix for shape dimension rules ("" for inline)
-    default               : -dims
-    map                   : mode.stack.dimensions
+    description: CSS selector suffix for shape dimension rules ("" for inline)
+    default: -dims
+    map: mode.stack.dimensions
 
   sprite:
-    description           : Sprite path and filename (relative to --css-dest)
-    default               : svg/sprite.css.svg
-    alias                 : Ss
-    map                   : mode.stack.sprite
+    description: Sprite path and filename (relative to --css-dest)
+    default: svg/sprite.css.svg
+    alias: Ss
+    map: mode.stack.sprite
 
   bust:
-    description           : Enable cache busting
-    default               : false
-    map                   : mode.stack.bust
+    description: Enable cache busting
+    default: false
+    map: mode.stack.bust
 
   render:
     css:
-      description         : Whether to render a CSS stylesheet
-      default             : false
-      alias               : Scss
+      description: Whether to render a CSS stylesheet
+      default: false
+      alias: Scss
 
       template:
-        description       : CSS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.css
-        map               : mode.stack.render.css.template
+        description: CSS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.css
+        map: mode.stack.render.css.template
 
       dest:
-        description       : CSS stylesheet destination (relative to the --stack-dest)
-        default           : sprite.css
-        map               : mode.stack.render.css.dest
+        description: CSS stylesheet destination (relative to the --stack-dest)
+        default: sprite.css
+        map: mode.stack.render.css.dest
 
     scss:
-      description         : Whether to render a Sass stylesheet (SCSS)
-      default             : false
-      alias               : Sscss
+      description: Whether to render a Sass stylesheet (SCSS)
+      default: false
+      alias: Sscss
 
       template:
-        description       : Sass stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.scss
-        map               : mode.stack.render.scss.template
+        description: Sass stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.scss
+        map: mode.stack.render.scss.template
 
       dest:
-        description       : Sass stylesheet destination (relative to the --stack-dest)
-        default           : sprite.scss
-        map               : mode.stack.render.scss.dest
+        description: Sass stylesheet destination (relative to the --stack-dest)
+        default: sprite.scss
+        map: mode.stack.render.scss.dest
 
     less:
-      description         : Whether to render a LESS stylesheet
-      default             : false
-      alias               : Sless
+      description: Whether to render a LESS stylesheet
+      default: false
+      alias: Sless
 
       template:
-        description       : LESS stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.less
-        map               : mode.stack.render.less.template
+        description: LESS stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.less
+        map: mode.stack.render.less.template
 
       dest:
-        description       : LESS stylesheet destination (relative to the --stack-dest)
-        default           : sprite.less
-        map               : mode.stack.render.less.dest
+        description: LESS stylesheet destination (relative to the --stack-dest)
+        default: sprite.less
+        map: mode.stack.render.less.dest
 
     styl:
-      description         : Whether to render a Stylus stylesheet
-      default             : false
-      alias               : Sstyl
+      description: Whether to render a Stylus stylesheet
+      default: false
+      alias: Sstyl
 
       template:
-        description       : Stylus stylesheet Mustache template (relative to svg-sprite basedir)
-        default           : tmpl/common/sprite.styl
-        map               : mode.stack.render.styl.template
+        description: Stylus stylesheet Mustache template (relative to svg-sprite basedir)
+        default: tmpl/common/sprite.styl
+        map: mode.stack.render.styl.template
 
       dest:
-        description       : styl stylesheet destination (relative to the --stack-dest)
-        default           : sprite.styl
-        map               : mode.stack.render.styl.dest
+        description: styl stylesheet destination (relative to the --stack-dest)
+        default: sprite.styl
+        map: mode.stack.render.styl.dest
 
     "*":
-      description         : Custom output renderings
+      description: Custom output renderings
       template:
-        description       : Custom output Mustache template (relative to svg-sprite basedir)
+        description: Custom output Mustache template (relative to svg-sprite basedir)
 
       dest:
-        description       : Custom output destination (relative to the --stack-dest)
+        description: Custom output destination (relative to the --stack-dest)
 
   example:
-    description           : Whether to render an example HTML document
-    default               : false
-    alias                 : Sx
+    description: Whether to render an example HTML document
+    default: false
+    alias: Sx
 
     template:
-      description         : HTML document Mustache template (relative to svg-sprite basedir)
-      default             : tmpl/stack/sprite.html
-      map                 : mode.stack.example.template
+      description: HTML document Mustache template (relative to svg-sprite basedir)
+      default: tmpl/stack/sprite.html
+      map: mode.stack.example.template
 
     dest:
-      description         : HTML document destination (relative to the --css-dest)
-      default             : sprite.stack.html
-      map                 : mode.stack.example.dest
+      description: HTML document destination (relative to the --css-dest)
+      default: sprite.stack.html
+      map: mode.stack.example.dest
 
 variables:
-  description             : Path to external JSON file with Mustache variable definitions
-  map                     : "variables"
+  description: Path to external JSON file with Mustache variable definitions
+  map: "variables"
