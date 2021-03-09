@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
@@ -7,10 +9,8 @@
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE
  */
-
-'use strict';
 
 /**
  * Module dependencies.
