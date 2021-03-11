@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
@@ -7,10 +9,8 @@
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE
  */
-
-'use strict';
 
 /**
  * Module dependencies.
@@ -106,14 +106,16 @@ function addConfigMap(store, path, value) {
  */
 function mergeConfig(from, to) {
 	for (var f in from) {
-		if (_.isObject(from[f])) {
-			if (!_.isObject(to[f])) {
-				to[f] = from[f];
+		if (Object.prototype.hasOwnProperty.call(from, f)) {
+			if (Object.prototype.hasOwnProperty.call(to, f) && _.isObject(from[f])) {
+				if (!_.isObject(to[f])) {
+					to[f] = from[f];
+				} else {
+					mergeConfig(from[f], to[f]);
+				}
 			} else {
-				mergeConfig(from[f], to[f]);
+				to[f] = from[f];
 			}
-		} else {
-			to[f] = from[f];
 		}
 	}
 }
