@@ -1,8 +1,5 @@
 'use strict';
 
-/* jshint -W117 */
-/* jshint -W030 */
-
 /**
  * svg-sprite is a Node.js module for creating SVG sprites
  *
@@ -10,8 +7,11 @@
  *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
- * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE.txt
+ * @license MIT https://github.com/svg-sprite/svg-sprite/blob/master/LICENSE
  */
+
+/* jshint -W117 */
+/* jshint -W030 */
 
 var fs = require('fs');
 var util = require('util');
