@@ -279,7 +279,8 @@ if ('variables' in config) {
 }
 
 var spriter = new SVGSpriter(config);
-_.reduce(argv._, function (f, g) {
+
+argv._.reduce(function (f, g) {
 	return f.concat(glob.sync(g));
 }, []).forEach(function (file) {
 	var basename = file;
