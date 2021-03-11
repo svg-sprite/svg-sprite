@@ -106,14 +106,16 @@ function addConfigMap(store, path, value) {
  */
 function mergeConfig(from, to) {
 	for (var f in from) {
-		if (_.isObject(from[f])) {
-			if (!_.isObject(to[f])) {
-				to[f] = from[f];
+		if (Object.prototype.hasOwnProperty.call(from, f)) {
+			if (Object.prototype.hasOwnProperty.call(to, f) && _.isObject(from[f])) {
+				if (!_.isObject(to[f])) {
+					to[f] = from[f];
+				} else {
+					mergeConfig(from[f], to[f]);
+				}
 			} else {
-				mergeConfig(from[f], to[f]);
+				to[f] = from[f];
 			}
-		} else {
-			to[f] = from[f];
 		}
 	}
 }
