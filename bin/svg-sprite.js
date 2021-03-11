@@ -144,7 +144,7 @@ function writeFiles(files) {
 
 // Get document, or throw exception on error
 try {
-	var options = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'config.yaml'), 'utf8'));
+	var options = yaml.load(fs.readFileSync(path.resolve(__dirname, 'config.yaml'), 'utf8'));
 	for (var name in options) {
 		addOption(name, options[name]);
 	}
