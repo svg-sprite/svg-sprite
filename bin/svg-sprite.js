@@ -100,26 +100,6 @@ function addConfigMap(store, path, value) {
 }
 
 /**
- * Recursively merge two config objects
- *
- * @param {Object} from Source configuration
- * @param {Object} to Target configuration
- */
-function mergeConfig(from, to) {
-	for (var f in from) {
-		if (_.isObject(from[f])) {
-			if (!_.isObject(to[f])) {
-				to[f] = from[f];
-			} else {
-				mergeConfig(from[f], to[f]);
-			}
-		} else {
-			to[f] = from[f];
-		}
-	}
-}
-
-/**
  * Recursively write files to disc
  *
  * @param {Object} files Files
@@ -190,7 +170,7 @@ if (argv['config']) {
 			}
 		}
 
-		mergeConfig(externalConfig, config);
+		_.merge(config, externalConfig);
 	} catch (e) {
 		console.error('[ERROR] Skipping --config file due to errors ("%s")', e.message.trim());
 	}
