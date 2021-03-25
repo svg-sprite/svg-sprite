@@ -34,7 +34,7 @@ var should = require('should'),
 
 var cwdWeather = path.join(__dirname, 'fixture', 'svg', 'single'),
     cwdAlign = path.join(__dirname, 'fixture', 'svg', 'css'),
-    dest = path.normalize(path.join(__dirname, '..', 'tmp'));
+    dest = path.join(__dirname, '..', 'tmp');
 
 // This is so that we can fix tests on Node.js > 10 since the Array.sort algorithm changed
 var isNodeGreaterThan10 = process.version.split('.')[0].slice(1) > 10;
