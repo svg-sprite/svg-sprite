@@ -13,10 +13,8 @@
 // TODO fix/work around these
 /* eslint-disable no-unused-expressions, max-nested-callbacks */
 
-const { execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const svg2png = require('svg2png');
 const should = require('should');
 const rimraf = require('rimraf');
 const glob = require('glob');
@@ -24,13 +22,15 @@ const File = require('vinyl');
 const _ = require('lodash');
 const looksSame = require('looks-same');
 const mustache = require('mustache');
-const phantomjs = require('phantomjs-prebuilt').path;
 const sass = require('sass');
 const less = require('less');
 const stylus = require('stylus');
 const SVGSpriter = require('../lib/svg-sprite.js');
+const BrowserManager = require('../lib/browser-mananger.js');
+const convertSvg2Png = require('./helpers/convert-svg-2-png.js');
 
-const capturePhantomScript = path.resolve(__dirname, 'script/capture.phantom.js');
+const browserManager = new BrowserManager();
+
 const cwdWeather = path.join(__dirname, 'fixture/svg/single');
 const cwdAlign = path.join(__dirname, 'fixture/svg/css');
 const dest = path.join(__dirname, '../tmp');
@@ -95,24 +95,36 @@ function writeFile(file, content) {
 }
 
 /**
- * Capture a screenshot of a URL using PhantomJS (synchronous)
+ * Capture a screenshot of a URL using puppeteer
  *
  * @param {String} src                Source file
  * @param {String} target             Screenshot file
  * @param {Function} cb               Function
  */
-function capturePhantom(src, target, cb) {
-    execFile(phantomjs, [capturePhantomScript, src, target], (err, stdout, stderr) => {
-        if (err) {
-            cb(err);
-        } else if (stdout.length > 0) {
-            cb(stdout.toString().trim() === 'success' ? null : new Error(`PhantomJS couldn't capture "${src}"`));
-        } else if (stderr.length > 0) {
-            cb(new Error(stderr.toString().trim()));
-        } else {
-            cb(new Error(`PhantomJS couldn't capture "${src}"`));
+async function capturePuppeteer(src, target, cb) {
+    let page;
+
+    try {
+        const browser = await browserManager.getBrowser();
+        page = await browser.newPage();
+        await page.setViewport({
+            height: 1024,
+            width: 1280
+        });
+        await page.goto(`file://${src}`, { waitUntil: 'networkidle0' });
+        await page.screenshot({
+            omitBackground: true,
+            path: target,
+            type: 'png'
+        });
+        cb();
+    } catch (error) {
+        cb(error);
+    } finally {
+        if (page) {
+            await page.close();
         }
-    });
+    }
 }
 
 /**
@@ -134,24 +146,21 @@ function compareSvg2Png(svg, png, expected, diff, done, msg) {
         done();
     };
 
-    fs.promises.readFile(svg)
-        .then(svg2png)
-        .then(buffer => {
-            fs.promises.writeFile(png, buffer)
-                .then(() => {
-                    looksSame(png, expected, (err, result) => {
-                        should(err).not.ok;
-                        should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
-                        done();
-                    });
-                    looksSame.createDiff({
-                        reference: expected,
-                        current: png,
-                        diff,
-                        highlightColor: '#ff00ff'
-                    }, () => {});
-                })
-                .catch(ecb);
+    browserManager
+        .getBrowser()
+        .then(browser => convertSvg2Png(svg, png, browser))
+        .then(() => {
+            looksSame(png, expected, (err, result) => {
+                should(err).not.ok;
+                should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
+                done();
+            });
+            looksSame.createDiff({
+                reference: expected,
+                current: png,
+                diff,
+                highlightColor: '#ff00ff'
+            }, () => {});
         })
         .catch(ecb);
 }
@@ -163,6 +172,8 @@ before(done => {
 });
 
 describe('svg-sprite', () => {
+    after(() => browserManager.closeBrowser());
+
     const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
     const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/css.html'), 'utf-8');
@@ -343,7 +354,7 @@ describe('svg-sprite', () => {
                     const previewImage = path.join(__dirname, '../tmp/css/png/css.html.png');
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -367,7 +378,7 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
                             looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                 should(error).not.ok;
@@ -398,7 +409,7 @@ describe('svg-sprite', () => {
 
                             preview.should.be.ok;
 
-                            capturePhantom(preview, previewImage, error => {
+                            capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
                                 looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                     should(error).not.ok;
@@ -429,7 +440,7 @@ describe('svg-sprite', () => {
 
                             preview.should.be.ok;
 
-                            capturePhantom(preview, previewImage, error => {
+                            capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
                                 looksSame(previewImage, path.join(__dirname, 'expected/png/css.html.png'), (error, result) => {
                                     should(error).not.ok;
@@ -488,7 +499,7 @@ describe('svg-sprite', () => {
             //        const previewImage = path.join(__dirname, '../tmp/view/png/view.html.png');
             //        preview.should.be.ok;
             //
-            //        capturePhantom(preview, previewImage, error => {
+            //        capturePuppeteer(preview, previewImage, error => {
             //            should(error).not.ok;
             //            imageDiff({
             //                actualImage: previewImage,
@@ -563,7 +574,7 @@ describe('svg-sprite', () => {
 
                 preview.should.be.ok;
 
-                capturePhantom(preview, previewImage, error => {
+                capturePuppeteer(preview, previewImage, error => {
                     should(error).not.ok;
                     looksSame(previewImage, path.join(__dirname, 'expected/png/css.vertical.centered.html.png'), (error, result) => {
                         should(error).not.ok;
@@ -631,7 +642,7 @@ describe('svg-sprite', () => {
 
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.horizontal.centered.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -706,7 +717,7 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
                             looksSame(previewImage, path.join(__dirname, 'expected/png/css.packed.aligned.html.png'), (error, result) => {
                                 should(error).not.ok;
@@ -778,7 +789,7 @@ describe('svg-sprite', () => {
 
                 preview.should.be.ok;
 
-                capturePhantom(preview, previewImage, error => {
+                capturePuppeteer(preview, previewImage, error => {
                     should(error).not.ok;
                     looksSame(previewImage, path.join(__dirname, 'expected/png/css.vertical.mixed.html.png'), (error, result) => {
                         should(error).not.ok;
@@ -850,7 +861,7 @@ describe('svg-sprite', () => {
 
                     preview.should.be.ok;
 
-                    capturePhantom(preview, previewImage, error => {
+                    capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
                         looksSame(previewImage, path.join(__dirname, 'expected/png/css.horizontal.mixed.html.png'), (error, result) => {
                             should(error).not.ok;
@@ -925,7 +936,7 @@ describe('svg-sprite', () => {
 
                         preview.should.be.ok;
 
-                        capturePhantom(preview, previewImage, error => {
+                        capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
                             looksSame(previewImage, path.join(__dirname, 'expected/png/css.packed.aligned.html.png'), (error, result) => {
                                 should(error).not.ok;
