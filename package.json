@@ -34,7 +34,8 @@
   "scripts": {
     "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js",
     "lint": "jshint bin lib test",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly"
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly",
+    "example": "node example.js"
   },
   "dependencies": {
     "async": "^3.2.0",

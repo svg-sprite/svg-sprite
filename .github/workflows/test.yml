@@ -29,6 +29,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
+      - name: Run example
+        run: npm run example
+
       - name: Run tests
         run: npm test
         if: matrix.node != env.NODE_COV
