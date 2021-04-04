@@ -42,7 +42,7 @@
 
 * Updated dependencies
 * Fixed LESS template mixin call ([#187](https://github.com/svg-sprite/svg-sprite/pull/187))
-* Fixed broken keyframe animation support ([gulp-svg-sprite #63](https://github.com/jkphl/gulp-svg-sprite/issues/63))
+* Fixed broken keyframe animation support ([gulp-svg-sprite #63](https://github.com/svg-sprite/gulp-svg-sprite/issues/63))
 
 ## 1.3.5 Bugfix release (2016-08-15)
 
@@ -69,14 +69,14 @@
 
 ## 1.3.1 Bugfix release (2016-04-17)
 
-* Fixed modeless run ([#158](https://github.com/svg-sprite/svg-sprite/issues/158), [gulp-svg-sprite #42](https://github.com/jkphl/gulp-svg-sprite/issues/42))
-* Fixed broken shape dimension attribute removal in symbol mode ([gulp-svg-sprite #51](https://github.com/jkphl/gulp-svg-sprite/issues/51))
+* Fixed modeless run ([#158](https://github.com/svg-sprite/svg-sprite/issues/158), [gulp-svg-sprite #42](https://github.com/svg-sprite/gulp-svg-sprite/issues/42))
+* Fixed broken shape dimension attribute removal in symbol mode ([gulp-svg-sprite #51](https://github.com/svg-sprite/gulp-svg-sprite/issues/51))
 
 ## 1.3.0 Major maintenance release (2016-04-14)
 
 * Updated dependencies
 * ~~Tweaked .gitignore to ignore symlinked test files (closes #140)~~ Reverted & made the files real copies
-* Updated documentation ([grunt-svg-sprite #69](https://github.com/jkphl/grunt-svg-sprite/issues/69))
+* Updated documentation ([grunt-svg-sprite #69](https://github.com/svg-sprite/grunt-svg-sprite/issues/69))
 * Removed redundant require ([#156](https://github.com/svg-sprite/svg-sprite/issues/156))
 * Dropped support for Node.js < 4.0 and io.js
 * Added explicit sprite size in example document ([#138](https://github.com/svg-sprite/svg-sprite/issues/138))
@@ -114,12 +114,12 @@
 
 * Updated dependencies & test fixture
 * Added Node.js versions 4 & 5 to Travis tests
-* Fixed broken svg4everybody links ([#122](https://github.com/svg-sprite/svg-sprite/issues/122), [gulp-svg-sprite #39](https://github.com/jkphl/gulp-svg-sprite/issues/39))
+* Fixed broken svg4everybody links ([#122](https://github.com/svg-sprite/svg-sprite/issues/122), [gulp-svg-sprite #39](https://github.com/svg-sprite/gulp-svg-sprite/issues/39))
 
 ## 1.2.13 Maintenance release (2015-11-06)
 
 * Updated dependencies
-* Support for source files outside the cwd ([grunt-svg-sprite #62](https://github.com/jkphl/grunt-svg-sprite/issues/62))
+* Support for source files outside the cwd ([grunt-svg-sprite #62](https://github.com/svg-sprite/grunt-svg-sprite/issues/62))
 
 ## 1.2.12 Maintenance release (2015-10-24)
 
@@ -173,7 +173,7 @@
 
 ## 1.2.2 Feature release (2015-06-05)
 
-* Introduced "icon" box sizing strategy ([#57](https://github.com/svg-sprite/svg-sprite/pull/57), [grunt-svg-sprite #35](https://github.com/jkphl/grunt-svg-sprite/issues/35#issuecomment-74232726))
+* Introduced "icon" box sizing strategy ([#57](https://github.com/svg-sprite/svg-sprite/pull/57), [grunt-svg-sprite #35](https://github.com/svg-sprite/grunt-svg-sprite/issues/35#issuecomment-74232726))
 
 ## 1.2.1 Bugfix release (2015-06-04)
 
@@ -229,7 +229,7 @@
 * Optimized stylesheet templates
 * Introduced boolean hasCommon template variable
 * Updated dependencies
-* Fixed incomplete dimension CSS selector suffix ([grunt-svg-sprite #31](https://github.com/jkphl/grunt-svg-sprite/issues/31))
+* Fixed incomplete dimension CSS selector suffix ([grunt-svg-sprite #31](https://github.com/svg-sprite/grunt-svg-sprite/issues/31))
 
 ## 1.0.16 Bugfix release (2015-02-11)
 
@@ -250,7 +250,7 @@
 
 ## 1.0.13 Maintenance release (2015-01-28)
 
-* Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/jkphl/gulp-svg-sprite/issues/6))
+* Fixed windows path separator bug ([gulp-svg-sprite #6](https://github.com/svg-sprite/gulp-svg-sprite/issues/6))
 * Made dimension attributes (width & height) optional ([#45](https://github.com/svg-sprite/svg-sprite/issues/45))
 * Added cache busting option for non-CSS sprites ([#48](https://github.com/svg-sprite/svg-sprite/issues/48))
 
@@ -281,16 +281,16 @@
 
 ## 1.0.8 Bugfix release
 
-* Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/jkphl/grunt-svg-sprite/issues/29))
+* Fixed broken rendering template path resolution ([grunt-svg-sprite #29](https://github.com/svg-sprite/grunt-svg-sprite/issues/29))
 
 ## 1.0.7 Feature release
 
 * Improved error handling
-* Improved XML & DOCTYPE declaration handling and fixed ([grunt-svg-sprite #28](https://github.com/jkphl/grunt-svg-sprite/issues/28))
+* Improved XML & DOCTYPE declaration handling and fixed ([grunt-svg-sprite #28](https://github.com/svg-sprite/grunt-svg-sprite/issues/28))
 
 ## 1.0.6 Feature release
 
-* Made shape ID namespacing configurable ([grunt-svg-sprite #27](https://github.com/jkphl/grunt-svg-sprite/issues/27))
+* Made shape ID namespacing configurable ([grunt-svg-sprite #27](https://github.com/svg-sprite/grunt-svg-sprite/issues/27))
 * Added extended alignment options ([#33](https://github.com/svg-sprite/svg-sprite/issues/33))
 
 ## 1.0.5 Bufix release
@@ -300,7 +300,7 @@
 
 ## 1.0.4 Bufix release
 
-* Fixed XML & doctype declaration bug with inline sprites ([gulp-svg-sprite #2](https://github.com/jkphl/gulp-svg-sprite/issues/2))
+* Fixed XML & doctype declaration bug with inline sprites ([gulp-svg-sprite #2](https://github.com/svg-sprite/gulp-svg-sprite/issues/2))
 * Added support for ID generator templates ([#37](https://github.com/svg-sprite/svg-sprite/issues/37))
 
 ## 1.0.3 Bufix release
@@ -318,11 +318,11 @@
 ## 1.0.0 Next generation release
 
 * Rewritten from scratch ([#23](https://github.com/svg-sprite/svg-sprite/issues/23), [#30](https://github.com/svg-sprite/svg-sprite/issues/30))
-* Dropped [libxmljs](https://github.com/polotek/libxmljs) dependency for improving Windows support (e.g. [grunt-svg-sprite #14](https://github.com/jkphl/grunt-svg-sprite/issues/14))
-* Added support for `view`, `symbol` and `stack` modes ([#27](https://github.com/svg-sprite/svg-sprite/issues/27), [#35](https://github.com/svg-sprite/svg-sprite/issues/35), [grunt-svg-sprite #24](https://github.com/jkphl/grunt-svg-sprite/issues/24))
+* Dropped [libxmljs](https://github.com/polotek/libxmljs) dependency for improving Windows support (e.g. [grunt-svg-sprite #14](https://github.com/svg-sprite/grunt-svg-sprite/issues/14))
+* Added support for `view`, `symbol` and `stack` modes ([#27](https://github.com/svg-sprite/svg-sprite/issues/27), [#35](https://github.com/svg-sprite/svg-sprite/issues/35), [grunt-svg-sprite #24](https://github.com/svg-sprite/grunt-svg-sprite/issues/24))
 * Strip off all file access methods, making the module a good basis for 3rd party tools (like Grunt & Gulp plugins) ([#21](https://github.com/svg-sprite/svg-sprite/issues/21), [#25](https://github.com/svg-sprite/svg-sprite/issues/25))
 * Improved command line version ([#34](https://github.com/svg-sprite/svg-sprite/issues/34))
-* Switched to relative positioning in CSS sprites ([grunt-svg-sprite #23](https://github.com/jkphl/grunt-svg-sprite/issues/23))
+* Switched to relative positioning in CSS sprites ([grunt-svg-sprite #23](https://github.com/svg-sprite/grunt-svg-sprite/issues/23))
 * Made the configuration of Mustache templates and destinations more intuitive
 * Enabled customization of shape IDs
 * Enabled custom SVG transformations
@@ -336,8 +336,8 @@ For older release notes please [see here](https://github.com/svg-sprite/svg-spri
 
 The [original svg-sprite](https://github.com/svg-sprite/svg-sprite/tree/bbd051e940e7b6373ed56277251a8affb03b1c10) was my first-ever Node.js module and featured CSS sprites only. The `1.0` release is **rewritten from scratch** and introduces a bunch of new features like **less dependencies** (for improved Mac OS and Windows compatibility), support for **inline sprite formats** and the **removal of file-system access** so that other libraries can build on top of it more easily. Derived libraries include:
 
-* [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite) (a [Grunt](https://gruntjs.com/) wrapper around *svg-sprite*)
-* [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite) (a [Gulp](https://gulpjs.com/) wrapper around *svg-sprite*)
+* [grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite) (a [Grunt](https://gruntjs.com/) wrapper around *svg-sprite*)
+* [gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite) (a [Gulp](https://gulpjs.com/) wrapper around *svg-sprite*)
 * [svg-sprite-data](https://github.com/shakyShane/svg-sprite-data) by [Shane Osbourne](https://github.com/shakyShane) (based on the original svg-sprite)
 
 **_iconizr_**, another project of mine, is based on *svg-sprite* and adds PNG fallbacks for the sprites so you can use them as universal icon systems for websites ([Node.js module](https://github.com/jkphl/node-iconizr), [Grunt plugin](https://github.com/jkphl/grunt-iconizr), [PHP version](https://github.com/jkphl/iconizr) and [online service](https://iconizr.com/)).
