@@ -80,17 +80,17 @@ spriter.compile(function (error, result, data) {
 
 #### SVGSpriter.add(file [, name, svg ])
 
-**Registration of an SVG file** — Before compilation, you'll need to register one or more SVG files for processing. As *svg-sprite* doesn't read the files from the disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/wearefractal/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another (as you would do with the [Gulp wrapper](https://github.com/jkphl/gulp-svg-sprite) anyway). Please [see below](#example-using-glob-and-vinyl) for an example.
+**Registration of an SVG file** — Before compilation, you'll need to register one or more SVG files for processing. As *svg-sprite* doesn't read the files from the disk itself, you'll have to pass both the path and the file contents explicitly. Alternatively, you may pass a [vinyl](https://github.com/gulpjs/vinyl) file object as the first argument to `.add()`, which comes in handy when piping resources from one process to another (as you would do with the [Gulp wrapper](https://github.com/svg-sprite/gulp-svg-sprite) anyway). Please [see below](#example-using-glob-and-vinyl) for an example.
 
 It is important to know that the spriter **optimizes the SVG files as soon as you register them**, not just when you [compile your sprite](#svgspritercompile-config--callback-). This way it is possible to call the `.compile()` method several times, possibly passing in different render configurations without the need of repeating the optimization steps.
 
 ##### Arguments
 
-1. **file** `{String|File}` — Absolute path to the SVG file or a [vinyl](https://github.com/wearefractal/vinyl) file object carrying all the necessary values (the following arguments are ignored then).
+1. **file** `{String|File}` — Absolute path to the SVG file or a [vinyl](https://github.com/gulpjs/vinyl) file object carrying all the necessary values (the following arguments are ignored then).
 2. **name** `{String}` *(ignored with vinyl file)* — The "local" part of the file path, possibly including subdirectories which will get traversed to CSS selectors using the `shape.id.separator` [configuration option](configuration.md#shape-ids). You will want to pay attention to this when recursively adding whole directories of SVG files (e.g. via [glob](#example-using-glob-and-vinyl)). When `name` is empty, *svg-sprite* will use the basename of the `file` argument. As an example, setting `name` to `"deeply/nested/asset.svg"` while giving `"/path/to/my/deeply/nested/asset.svg"` for `file` will translate to the CSS selector `"deeply--nested--asset"`.
 3. **svg** `{String}` *(ignored with vinyl file)*: SVG file content.
 
-##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/wearefractal/vinyl)
+##### Example using [glob](https://github.com/isaacs/node-glob) and [vinyl](https://github.com/gulpjs/vinyl)
 
 ```js
 'use strict';
@@ -179,7 +179,7 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 
 For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css and view](configuration.md#css--view-mode) output modes, there are additional items named after the configured [rendering configurations](configuration.md#rendering-configurations) (`scss` in the example).
 
-Please note that the resources are always returned as [vinyl](https://github.com/wearefractal/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).
+Please note that the resources are always returned as [vinyl](https://github.com/gulpjs/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).
 
 #### SVGSpriter.getShapes( dest , callback )
 
@@ -190,7 +190,7 @@ Please note that the resources are always returned as [vinyl](https://github.com
 1. **dest** `{String}` — Base directory for the SVG files in case they will be written to disk.
 2. **callback** `{Function}`: Callback triggered when the shapes are available, getting called with two arguments:
     * **error** `{Error}` — Error message in case the shape access has failed.
-    * **result** `{Array}` — Array of [vinyl](https://github.com/wearefractal/vinyl) carrying the intermediate SVGs.
+    * **result** `{Array}` — Array of [vinyl](https://github.com/gulpjs/vinyl) carrying the intermediate SVGs.
 
 ##### Shape access example
 

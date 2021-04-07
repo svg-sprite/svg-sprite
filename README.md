@@ -16,7 +16,7 @@ For an up-to-date list of browsers supporting [SVG in general](https://caniuse.c
 
 ## Grunt, Gulp & Co.
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
 
 
 ## Table of contents
@@ -313,7 +313,7 @@ cwd $   <dest>/                                .                     Main output
 
 By default, stylesheet resources are generated directly into the respective **mode's base directory**.
 
-> "Oh wait! Didn't you say that *svg-sprite* doesn't access the file system? So why do you need output directories at all?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/wearefractal/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file paths (e.g. the path of an SVG sprite as used by a CSS stylesheet).
+> "Oh wait! Didn't you say that *svg-sprite* doesn't access the file system? So why do you need output directories at all?" — Well, good point. *svg-sprite* uses [vinyl](https://github.com/gulpjs/vinyl) file objects to pass along virtual resources and to specify where they **are intended to be located**. This is especially important for relative file paths (e.g. the path of an SVG sprite as used by a CSS stylesheet).
 
 
 #### Pre-processor formats and the sprite location

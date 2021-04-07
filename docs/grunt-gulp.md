@@ -26,7 +26,7 @@ spriter.compile(function (error, result) {
 });
 ```
 
-## Grunt task (using [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite))
+## Grunt task (using [grunt-svg-sprite](https://github.com/svg-sprite/svg-sprite))
 
 ```js
 // svg-sprite Grunt task
@@ -42,7 +42,7 @@ grunt.initConfig({
 });
 ```
 
-## Gulp task (using [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite))
+## Gulp task (using [gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite))
 
 ```js
 // svg-sprite Gulp task

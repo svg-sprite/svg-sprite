@@ -29,6 +29,7 @@
     "lint": "jshint bin lib test",
     "mocha": "_mocha --reporter spec test/svg-sprite.js",
     "coverage": "c8 npm run mocha",
+    "example": "node example.js",
     "test": "npm run mocha"
   },
   "dependencies": {
