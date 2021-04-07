@@ -411,10 +411,10 @@ describe('svg-sprite', function () {
                     this.timeout(20000);
 
                     var lessFile = path.join(__dirname, '..', 'tmp', 'css', 'sprite.less');
-                    fs.readFile(lessFile, function (err, lessText) {
+                    fs.readFile(lessFile, 'utf-8', function (err, lessText) {
                         should(err).not.ok;
 
-                        less.render(lessText.toString(), {}, function (error, output) {
+                        less.render(lessText, {}, function (error, output) {
                             should(error).not.ok;
                             should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.less.css'), output.css)).be.ok;
 
@@ -441,10 +441,10 @@ describe('svg-sprite', function () {
                     this.timeout(20000);
 
                     var stylusFile = path.join(__dirname, '..', 'tmp', 'css', 'sprite.styl');
-                    fs.readFile(stylusFile, function (err, stylusText) {
+                    fs.readFile(stylusFile, 'utf-8', function (err, stylusText) {
                         should(err).not.ok;
 
-                        stylus.render(stylusText.toString(), {}, function (error, output) {
+                        stylus.render(stylusText, {}, function (error, output) {
                             should(error).not.ok;
                             should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.styl.css'), output)).be.ok;
 
@@ -740,10 +740,10 @@ describe('svg-sprite', function () {
                 this.timeout(20000);
 
                 var lessFile = path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.less');
-                fs.readFile(lessFile, function (err, lessText) {
+                fs.readFile(lessFile, 'utf-8', function (err, lessText) {
                     should(err).not.ok;
 
-                    less.render(lessText.toString(), {}, function (error, output) {
+                    less.render(lessText, {}, function (error, output) {
                         should(error).not.ok;
                         should(writeFile(path.join(__dirname, '..', 'tmp', 'css', 'sprite.centered.less.css'), output.css)).be.ok;
 
@@ -973,10 +973,10 @@ describe('svg-sprite', function () {
                 this.timeout(20000);
 
                 var lessFile = path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.less');
-                fs.readFile(lessFile, function (err, lessText) {
+                fs.readFile(lessFile, 'utf-8', function (err, lessText) {
                     should(err).not.ok;
 
-                    less.render(lessText.toString(), {}, function (error, output) {
+                    less.render(lessText, {}, function (error, output) {
                         should(error).not.ok;
                         should(writeFile(path.join(__dirname, '..', 'tmp', 'view', 'sprite.mixed.less.css'), output.css)).be.ok;
 
