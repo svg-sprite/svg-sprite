@@ -28,7 +28,7 @@
   "scripts": {
     "lint": "xo",
     "fix": "npm run lint -- --fix",
-    "mocha": "_mocha --reporter spec test/svg-sprite.js",
+    "mocha": "_mocha --timeout 10000 test/svg-sprite.js",
     "coverage": "c8 npm run mocha",
     "example": "node example.js",
     "test": "npm run mocha"
