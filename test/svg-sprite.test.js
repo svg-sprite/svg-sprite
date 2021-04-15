@@ -43,11 +43,12 @@ require('./helpers/resvg-preheat.js');
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
  * @param {String} cwd                Working directory
+ * @param {Boolean=} resolvePaths     Whether to resolve the paths of SVG files
  */
-function addFixtureFiles(spriter, files, cwd) {
+function addFixtureFiles(spriter, files, cwd, resolvePaths = true) {
     files.forEach(file => {
         spriter.add(
-            path.resolve(path.join(cwd, file)),
+            resolvePaths ? path.resolve(path.join(cwd, file)) : file,
             file,
             fs.readFileSync(path.join(cwd, file), 'utf-8')
         );
@@ -202,8 +203,36 @@ describe('svg-sprite', () => {
         });
 
         describe(`with ${weather.length} SVG files`, () => {
+            const spriter = new SVGSpriter({
+                shape: {
+                    dest: 'svg'
+                }
+            });
+
             it(`returns ${weather.length} optimized shapes`, done => {
                 addFixtureFiles(spriter, weather, cwdWeather);
+                spriter.compile((error, result, data) => {
+                    should(error).not.ok;
+                    should(result).be.an.Object;
+                    should(result).have.property('shapes');
+                    should(result.shapes).be.an.Array;
+                    should(result.shapes).have.lengthOf(weather.length);
+                    should(data).be.an.Object;
+                    should(data).be.empty;
+                    done();
+                });
+            });
+        });
+
+        describe(`with ${weather.length} relative path SVG files`, () => {
+            const spriter = new SVGSpriter({
+                shape: {
+                    dest: 'svg'
+                }
+            });
+
+            it(`returns ${weather.length} optimized shapes`, done => {
+                addFixtureFiles(spriter, weather, cwdWeather, false);
                 spriter.compile((error, result, data) => {
                     should(error).not.ok;
                     should(result).be.an.Object;
