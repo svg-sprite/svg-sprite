@@ -38,7 +38,7 @@
     "css-selector-parser": "^1.4.1",
     "csso": "^4.2.0",
     "cssom": "^0.4.4",
-    "glob": "^7.1.6",
+    "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
