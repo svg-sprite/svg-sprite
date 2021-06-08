@@ -108,6 +108,8 @@
       "capitalized-comments": "off",
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
+      "import/extensions": "off",
+      "import/order": "off",
       "max-depth": [
         "warn",
         5
@@ -129,6 +131,8 @@
       "unicorn/no-array-for-each": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/no-for-loop": "off",
+      "unicorn/numeric-separators-style": "off",
+      "unicorn/prefer-module": "off",
       "unicorn/prefer-query-selector": "off",
       "unicorn/prefer-reflect-apply": "off",
       "unicorn/prefer-string-slice": "off",
