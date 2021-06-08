@@ -1,0 +1,63 @@
+name: Tests
+
+on: [push, pull_request]
+
+env:
+  FORCE_COLOR: 2
+  NODE_COV: 14 # The Node.js version to run coveralls on
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [6, 8, 10, 12, 14]
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Set up npm cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('package.json') }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install npm dependencies
+        run: npm install
+        if: matrix.node == '6'
+
+      - name: Install npm dependencies
+        run: npm ci
+        if: matrix.node != '6'
+
+      - name: Run tests
+        run: npm test
+        if: matrix.node != env.NODE_COV
+
+      - name: Run tests with coverage
+        run: npm run coverage
+        if: matrix.node == env.NODE_COV
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: svg-sprite-ci-${{ matrix.node }}-${{ github.sha }}
+          path: tmp/
+
+      - name: Run Coveralls
+        uses: coverallsapp/github-action@master
+        if: matrix.node == env.NODE_COV
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
