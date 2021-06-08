@@ -62,14 +62,12 @@
     "jshint": "^2.13.0",
     "less": "^3.13.1",
     "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "*",
     "node-sass": "^4.14.1",
     "pn": "^1.1.0",
     "rimraf": "",
     "should": "",
     "stylus": "^0.54.8",
-    "svg2png": "github:jkphl/svg2png",
-    "vinyl-fs": "^3.0.3"
+    "svg2png": "github:jkphl/svg2png"
   },
   "keywords": [
     "icon",
