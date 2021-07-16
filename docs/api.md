@@ -43,7 +43,7 @@ var SVGSpriter = require('svg-sprite'),
 spriter.add(
     path.resolve('assets/example-1.svg'),
     'example-1.svg',
-    fs.readFileSync('assets/example-1.svg', { encoding: 'utf-8' })
+    fs.readFileSync('assets/example-1.svg', 'utf-8')
 );
 
 /* ... */
@@ -51,7 +51,7 @@ spriter.add(
 spriter.add(
     path.resolve('assets/example-x.svg'),
     'example-x.svg',
-    fs.readFileSync('assets/example-x.svg', { encoding: 'utf-8' })
+    fs.readFileSync('assets/example-x.svg', 'utf-8')
 );
 
 // 3. Trigger the (asynchronous) compilation process

@@ -16,8 +16,8 @@ This document aims to compare the use of *svg-sprite* via its [standard API](api
 var spriter = new SVGSpriter(config);
 
 // Add SVG source files — the manual way ...
-spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', { encoding: 'utf-8' }));
-spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', { encoding: 'utf-8' }));
+spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', 'utf-8'));
+spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8'));
 /* ... */
 
 // Compile sprite
