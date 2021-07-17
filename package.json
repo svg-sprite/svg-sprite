@@ -37,14 +37,14 @@
     "async": "^3.2.0",
     "css-selector-parser": "^1.4.1",
     "csso": "^4.2.0",
-    "cssom": "^0.4.4",
-    "glob": "^7.1.6",
+    "cssom": "^0.5.0",
+    "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "phantomjs-prebuilt": "^2.1.16",
     "prettysize": "^2.0.0",
-    "svgo": "^2.3.0",
+    "svgo": "^2.3.1",
     "vinyl": "^2.2.1",
     "winston": "^3.3.3",
     "xmldom": "^0.6.0",
@@ -52,16 +52,16 @@
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "c8": "^7.7.1",
+    "c8": "^7.7.3",
     "less": "^4.1.1",
     "looks-same": "^7.3.0",
     "mocha": "^8.3.2",
     "rimraf": "^3.0.2",
-    "sass": "^1.32.11",
+    "sass": "^1.35.2",
     "should": "^13.2.3",
     "stylus": "^0.54.8",
     "svg2png": "^4.1.1",
-    "xo": "^0.39.1"
+    "xo": "^0.40.2"
   },
   "keywords": [
     "icon",
@@ -108,6 +108,8 @@
       "capitalized-comments": "off",
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
+      "import/extensions": "off",
+      "import/order": "off",
       "max-depth": [
         "warn",
         5
@@ -129,6 +131,8 @@
       "unicorn/no-array-for-each": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/no-for-loop": "off",
+      "unicorn/numeric-separators-style": "off",
+      "unicorn/prefer-module": "off",
       "unicorn/prefer-query-selector": "off",
       "unicorn/prefer-reflect-apply": "off",
       "unicorn/prefer-string-slice": "off",
