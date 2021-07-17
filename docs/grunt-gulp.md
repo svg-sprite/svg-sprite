@@ -1,7 +1,7 @@
 svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
 ==========
 
-This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/jkphl/svg-sprite).
+This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
 # Grunt & Gulp wrappers
@@ -25,7 +25,7 @@ spriter.compile(function (error, result) {
 });
 ```
 
-## Grunt task (using [grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite))
+## Grunt task (using [grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite))
 
 ```javascript
 // svg-sprite Grunt task
@@ -41,7 +41,7 @@ grunt.initConfig({
 });
 ```
 
-## Gulp task (using [gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite))
+## Gulp task (using [gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite))
 
 ```javascript
 // svg-sprite Gulp task
@@ -55,13 +55,13 @@ gulp.src('assets/*.svg')
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 
-[ci-url]: https://github.com/jkphl/svg-sprite/actions?query=workflow%3ATests+branch%3A1.5.x
-[ci-image]: https://github.com/jkphl/svg-sprite/workflows/Tests/badge.svg?branch=1.5.x
+[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3A1.5.x
+[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=1.5.x
 
-[coveralls-url]: https://coveralls.io/github/jkphl/svg-sprite?branch=1.5.x
-[coveralls-image]: https://img.shields.io/coveralls/github/jkphl/svg-sprite/1.5.x
+[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=1.5.x
+[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/1.5.x
 
-[depstat-url]: https://david-dm.org/jkphl/svg-sprite
-[depstat-image]: https://img.shields.io/david/jkphl/svg-sprite
-[devdepstat-url]: https://david-dm.org/jkphl/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/jkphl/svg-sprite
+[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
+[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
+[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
+[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite

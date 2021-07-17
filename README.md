@@ -16,7 +16,7 @@ For an up-to-date list of browsers supporting [SVG in general](http://caniuse.co
 Grunt, Gulp & Co.
 -----------------
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/jkphl/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/jkphl/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
 
 
 Table of contents
@@ -34,7 +34,7 @@ Table of contents
     * [Output destinations](#output-destinations)
         * [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
     * [Full configuration documentation](docs/configuration.md)
-    * [Online configurator & project kickstarter](http://jkphl.github.io/svg-sprite)
+    * [Online configurator & project kickstarter](https://svg-sprite.github.io/svg-sprite/)
 * [Advanced techniques](#advanced-techniques)
     * [Meta data injection](docs/meta-data.md)
     * [Aligning and duplicating shapes](docs/shape-alignment.md)
@@ -336,7 +336,7 @@ The complete configuration documentation including all options [can be found her
 
 ### Online configurator & project kickstarter
 
-To get you quickly off the ground, I made a simple [online configurator](http://jkphl.github.io/svg-sprite) that lets you create a custom *svg-sprite* configuration in seconds. You may download the results as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at http://jkphl.github.io/svg-sprite.
+To get you quickly off the ground, I made a simple [online configurator](https://svg-sprite.github.io/svg-sprite/) that lets you create a custom *svg-sprite* configuration in seconds. You may download the results as plain JSON, Node.js project, Gruntfile or Gulpfile. Please visit the configurator at https://svg-sprite.github.io/svg-sprite/.
 
 
 Advanced techniques
@@ -384,20 +384,20 @@ Please refer to the [changelog](CHANGELOG.md) for a complete release history.
 
 Legal
 -----
-Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl). *svg-sprite* is licensed under the terms of the [MIT license](LICENSE.txt). The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
+Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl). *svg-sprite* is licensed under the terms of the [MIT license](LICENSE). The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
 
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
-[ci-url]: https://github.com/jkphl/svg-sprite/actions?query=workflow%3ATests+branch%3A1.5.x
-[ci-image]: https://github.com/jkphl/svg-sprite/workflows/Tests/badge.svg?branch=1.5.x
+[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3A1.5.x
+[ci-image]: https://github.com/svg-sprite/svg-sprite/workflows/Tests/badge.svg?branch=1.5.x
 
-[coveralls-url]: https://coveralls.io/github/jkphl/svg-sprite?branch=1.5.x
-[coveralls-image]: https://img.shields.io/coveralls/github/jkphl/svg-sprite/1.5.x
+[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=1.5.x
+[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/1.5.x
 
-[depstat-url]: https://david-dm.org/jkphl/svg-sprite
-[depstat-image]: https://img.shields.io/david/jkphl/svg-sprite
-[devdepstat-url]: https://david-dm.org/jkphl/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/jkphl/svg-sprite
+[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
+[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
+[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
+[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite
