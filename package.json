@@ -61,7 +61,7 @@
     "should": "^13.2.3",
     "stylus": "^0.54.8",
     "svg2png": "^4.1.1",
-    "xo": "^0.40.2"
+    "xo": "^0.42.0"
   },
   "keywords": [
     "icon",
@@ -105,7 +105,9 @@
   "xo": {
     "space": 4,
     "rules": {
+      "arrow-body-style": "off",
       "capitalized-comments": "off",
+      "comma-dangle": "off",
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
       "import/extensions": "off",
@@ -120,6 +122,10 @@
         "error",
         "always"
       ],
+      "operator-linebreak": [
+        "error",
+        "after"
+      ],
       "prefer-template": "error",
       "promise/prefer-await-to-then": "off",
       "space-before-function-paren": [
@@ -129,6 +135,7 @@
       "spaced-comment": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-method-this-argument": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/no-for-loop": "off",
       "unicorn/numeric-separators-style": "off",
