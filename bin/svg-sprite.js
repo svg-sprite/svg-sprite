@@ -207,7 +207,7 @@ if (typeof config.shape.transform === 'string') {
                 if (`shape-transform-${transform}` in argv) {
                     try {
                         const transformConfigFile = argv[`shape-transform-${transform}`];
-                        const transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), { encoding: 'utf8' });
+                        const transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), 'utf8');
                         const transformConfig = transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
                         this.push(_.zipObject([transform], [transformConfig]));
                     } catch {}

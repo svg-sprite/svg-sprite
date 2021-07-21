@@ -53,7 +53,7 @@ function addFixtureFiles(spriter, files, cwd) {
         spriter.add(
             path.resolve(path.join(cwd, file)),
             file,
-            fs.readFileSync(path.join(cwd, file), { encoding: 'utf-8' })
+            fs.readFileSync(path.join(cwd, file), 'utf-8')
         );
     });
 }
