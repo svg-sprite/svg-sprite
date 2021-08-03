@@ -16,6 +16,7 @@
 const { execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const process = require('process');
 const { promisify } = require('util');
 const svg2png = require('svg2png');
 const should = require('should');
