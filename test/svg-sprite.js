@@ -16,6 +16,7 @@
 const { execFile } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const process = require('process');
 const { promisify } = require('util');
 const svg2png = require('svg2png');
 const should = require('should');
@@ -53,7 +54,7 @@ function addFixtureFiles(spriter, files, cwd) {
         spriter.add(
             path.resolve(path.join(cwd, file)),
             file,
-            fs.readFileSync(path.join(cwd, file), { encoding: 'utf-8' })
+            fs.readFileSync(path.join(cwd, file), 'utf-8')
         );
     });
 }
