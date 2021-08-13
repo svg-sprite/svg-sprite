@@ -21,12 +21,10 @@ const _ = require('lodash');
 const File = require('vinyl');
 const yaml = require('js-yaml');
 const glob = require('glob');
+let yargs = require('yargs');
 const SVGSpriter = require('../lib/svg-sprite');
 
-const config = {};
-let JSONConfig = { mode: {} };
-const optionsMap = {};
-let yargs = require('yargs')
+yargs
     .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
     .version()
     .help('help', 'Display this help information')
@@ -36,6 +34,10 @@ let yargs = require('yargs')
     .example('$0 -cD out --cscss -p 10 assets/*.svg', 'Render Sass instead of CSS and add 10px padding around all shapes (no example document this time)')
     .showHelpOnFail(true)
     .demandCommand(1);
+
+const config = {};
+let JSONConfig = { mode: {} };
+const optionsMap = {};
 
 /**
  * Add a command line option

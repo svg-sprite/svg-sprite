@@ -111,7 +111,6 @@
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
       "import/extensions": "off",
-      "import/order": "off",
       "max-depth": [
         "warn",
         5
