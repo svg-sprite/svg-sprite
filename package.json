@@ -110,7 +110,6 @@
       "comma-dangle": "off",
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
-      "import/extensions": "off",
       "max-depth": [
         "warn",
         5

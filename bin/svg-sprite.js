@@ -22,7 +22,7 @@ const File = require('vinyl');
 const yaml = require('js-yaml');
 const glob = require('glob');
 let yargs = require('yargs');
-const SVGSpriter = require('../lib/svg-sprite');
+const SVGSpriter = require('../lib/svg-sprite.js');
 
 yargs
     .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')

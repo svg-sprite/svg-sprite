@@ -28,7 +28,7 @@ const phantomjs = require('phantomjs-prebuilt').path;
 const sass = require('sass');
 const less = require('less');
 const stylus = require('stylus');
-const SVGSpriter = require('../lib/svg-sprite');
+const SVGSpriter = require('../lib/svg-sprite.js');
 
 const capturePhantomScript = path.resolve(__dirname, 'script/capture.phantom.js');
 const cwdWeather = path.join(__dirname, 'fixture/svg/single');

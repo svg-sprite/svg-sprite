@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
-const SVGSpriter = require('./lib/svg-sprite');
+const SVGSpriter = require('./lib/svg-sprite.js');
 
 const cwd = path.join(__dirname, 'test/fixture/svg/single');
 const dest = path.join(__dirname, 'tmp');
