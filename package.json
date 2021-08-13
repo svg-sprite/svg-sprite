@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=10.12.0"
+    "node": ">=12"
   },
   "main": "lib/svg-sprite.js",
   "bin": {
@@ -118,6 +118,7 @@
       ],
       "max-params": "off",
       "no-negated-condition": "off",
+      "node/prefer-promises/fs": "off",
       "object-curly-spacing": [
         "error",
         "always"
