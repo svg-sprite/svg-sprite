@@ -272,7 +272,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 }
 ```
 
-The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/jindw/xmldom), so you may require a parser instance `var DOMParser = require('xmldom').DOMParser; /* ... */` within your callback ...).
+The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/xmldom/xmldom), so you may require a parser instance `var DOMParser = require('@xmldom/xmldom').DOMParser; /* ... */` within your callback ...).
 
 
 ### Custom templating variables
