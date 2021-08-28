@@ -107,7 +107,10 @@
     "rules": {
       "arrow-body-style": "off",
       "capitalized-comments": "off",
-      "comma-dangle": "off",
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
       "max-depth": [
