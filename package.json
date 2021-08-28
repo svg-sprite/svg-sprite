@@ -28,10 +28,13 @@
   "scripts": {
     "lint": "xo",
     "fix": "npm run lint -- --fix",
-    "mocha": "_mocha --timeout 30000 test",
+    "mocha": "_mocha --timeout 10000 test",
     "coverage": "c8 npm run mocha",
     "example": "node example.js",
     "test": "npm run mocha"
+  },
+  "peerDependencies": {
+    "puppeteer": "^12.0.0 || ^13.0.0"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.8.0",
@@ -44,7 +47,6 @@
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "prettysize": "^2.0.0",
-    "puppeteer-core": "^13.1.3",
     "svgo": "^2.8.0",
     "vinyl": "^2.2.1",
     "winston": "^3.5.1",
@@ -56,6 +58,7 @@
     "less": "^4.1.2",
     "looks-same": "^7.3.0",
     "mocha": "^9.2.0",
+    "puppeteer": "^13.1.3",
     "rimraf": "^3.0.2",
     "sass": "^1.49.7",
     "should": "^13.2.3",
