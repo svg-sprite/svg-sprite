@@ -34,7 +34,7 @@
     "test": "npm run mocha"
   },
   "dependencies": {
-    "@xmldom/xmldom": "^0.7.3",
+    "@xmldom/xmldom": "^0.7.4",
     "async": "^3.2.1",
     "css-selector-parser": "^1.4.1",
     "csso": "^4.2.0",
