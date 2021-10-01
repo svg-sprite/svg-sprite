@@ -38,12 +38,12 @@
     "example": "node example.js"
   },
   "dependencies": {
-    "@xmldom/xmldom": "^0.7.2",
+    "@xmldom/xmldom": "^0.7.5",
     "async": "^3.2.1",
     "css-selector-parser": "^1.4.1",
     "cssmin": "^0.4.3",
-    "cssom": "^0.4.4",
-    "glob": "^7.1.7",
+    "cssom": "^0.5.0",
+    "glob": "^7.2.0",
     "js-yaml": "^3.14.1",
     "lodash": "^4.17.21",
     "mkdirp": "^0.5.5",
@@ -64,9 +64,9 @@
     "mocha": "^7.2.0",
     "pn": "^1.1.0",
     "rimraf": "^3.0.2",
-    "sass": "^1.38.0",
+    "sass": "^1.42.1",
     "should": "^13.2.3",
-    "stylus": "^0.54.8",
+    "stylus": "^0.55.0",
     "svg2png": "^4.1.1"
   },
   "keywords": [
