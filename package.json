@@ -45,7 +45,7 @@
     "mustache": "^4.2.0",
     "phantomjs-prebuilt": "^2.1.16",
     "prettysize": "^2.0.0",
-    "svgo": "^2.5.0",
+    "svgo": "^2.7.0",
     "vinyl": "^2.2.1",
     "winston": "^3.3.3",
     "xpath": "^0.0.32",
