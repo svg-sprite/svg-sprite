@@ -61,7 +61,7 @@
     "should": "^13.2.3",
     "stylus": "^0.55.0",
     "svg2png": "^4.1.1",
-    "xo": "^0.44.0"
+    "xo": "^0.45.0"
   },
   "keywords": [
     "icon",
@@ -118,6 +118,7 @@
         5
       ],
       "max-params": "off",
+      "no-bitwise": "off",
       "no-negated-condition": "off",
       "node/prefer-promises/fs": "off",
       "object-curly-spacing": [
