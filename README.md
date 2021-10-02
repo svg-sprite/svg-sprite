@@ -385,11 +385,11 @@ Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
-[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amaster
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/master
+[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
 
-[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=master
-[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/master
+[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
+[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
 
 [depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
 [depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
