@@ -12,30 +12,39 @@ const files = glob.sync('**/weather*.svg', { cwd });
 const spriter = new SVGSpriter({
     dest,
     log: 'debug',
+    svg: {
+        doctypeDeclaration: false,
+        xmlDeclaration: false
+    },
     shape: {
         transform: [{
             svgo: {
                 multipass: true,
-                plugins: [{
-                    name: 'preset-default',
-                    params: {
-                        overrides: {
-                            cleanupListOfValues: true,
-                            removeAttrs: {
-                                attrs: [
-                                    'data-name',
-                                    'fill',
-                                    'clip-rule'
-                                ]
-                            },
-                            removeUnknownsAndDefaults: {
-                                keepRoleAttr: true
-                            },
-                            removeViewBox: false,
-                            sortAttrs: true
+                plugins: [
+                    {
+                        name: 'preset-default',
+                        params: {
+                            overrides: {
+                                removeUnknownsAndDefaults: {
+                                    keepRoleAttr: true
+                                },
+                                removeViewBox: false
+                            }
+                        }
+                    },
+                    'cleanupListOfValues',
+                    'convertStyleToAttrs',
+                    'sortAttrs',
+                    {
+                        name: 'removeAttrs',
+                        params: {
+                            attrs: [
+                                'clip-rule',
+                                'data-name'
+                            ]
                         }
                     }
-                }]
+                ]
             }
         }]
     }
