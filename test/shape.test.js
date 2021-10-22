@@ -1,10 +1,12 @@
 'use strict';
 
+const assert = require('assert').strict;
 const { readFileSync } = require('fs');
 const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
-const should = require('should');
 const SVGSpriter = require('../lib/svg-sprite.js');
+
+const isObject = obj => typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
 describe('shape', () => {
     it('should calculate the dimensions if the svg does not contain viewBox or height/width properties', done => {
@@ -24,18 +26,16 @@ describe('shape', () => {
 
         spriter.compile((error, result) => {
             try {
-                /* eslint-disable no-unused-expressions */
-                should(error).not.ok;
-                should(result).be.an.Object;
-                should(result).have.property('shapes');
-                should(result.shapes).be.an.Array;
-                /* eslint-enable no-unused-expressions */
+                assert.ifError(error);
+                assert.equal(isObject(result), true);
+                assert.notEqual(typeof result.shapes, 'undefined');
+                assert.equal(Array.isArray(result.shapes), true);
 
                 const svg = result.shapes[0]._contents.toString();
                 const dom = new DOMParser().parseFromString(svg, 'text/xml');
 
-                should(dom.documentElement.getAttribute('height')).equal('43');
-                should(dom.documentElement.getAttribute('width')).equal('43');
+                assert.equal(dom.documentElement.getAttribute('height'), '43');
+                assert.equal(dom.documentElement.getAttribute('width'), '43');
 
                 done();
             } catch (error) {
