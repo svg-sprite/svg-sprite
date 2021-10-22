@@ -1,6 +1,6 @@
 'use strict';
 
-const should = require('should');
+const assert = require('assert').strict;
 const BrowserManager = require('../lib/browser-mananger.js');
 
 describe('BrowserManager', () => {
@@ -11,8 +11,9 @@ describe('BrowserManager', () => {
             browserManager.getBrowser()
         ]);
 
-        should.ok(instance1);
-        should.equal(instance1, instance2);
+        assert.ok(instance1);
+        assert.ok(instance2);
+        assert.deepEqual(instance1, instance2);
 
         await browserManager.closeBrowser();
     });
@@ -35,7 +36,7 @@ describe('BrowserManager', () => {
         const browserManager1 = new BrowserManager();
         const browserManager2 = new BrowserManager();
 
-        should.notEqual(await browserManager1.getBrowser(), await browserManager2.getBrowser());
+        assert.notDeepEqual(await browserManager1.getBrowser(), await browserManager2.getBrowser());
 
         await browserManager1.closeBrowser();
         await browserManager2.closeBrowser();

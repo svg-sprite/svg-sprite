@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('assert');
+const assert = require('assert').strict;
 const asyncIniter = require('../lib/async-init.js');
 
 const delay = ms => new Promise(resolve => {
@@ -25,7 +25,7 @@ describe('async-init', () => {
             asyncInit(fn),
             asyncInit(fn)
         ]);
-        assert.deepStrictEqual(result, [0, 0, 0, 0, 0]);
+        assert.deepEqual(result, [0, 0, 0, 0, 0]);
     });
 
     it('should support more instantiation', () => {
@@ -45,11 +45,11 @@ describe('async-init', () => {
         const asyncInit2 = asyncIniter();
 
         return Promise.all([
-            asyncInit1(fn1).then(result => assert.strictEqual(result, 'fno1')),
-            asyncInit2(fn2).then(result => assert.strictEqual(result, 'fno2')),
-            asyncInit2(fn2).then(result => assert.strictEqual(result, 'fno2')),
-            asyncInit1(fn1).then(result => assert.strictEqual(result, 'fno1')),
-            asyncInit2(fn2).then(result => assert.strictEqual(result, 'fno2'))
+            asyncInit1(fn1).then(result => assert.equal(result, 'fno1')),
+            asyncInit2(fn2).then(result => assert.equal(result, 'fno2')),
+            asyncInit2(fn2).then(result => assert.equal(result, 'fno2')),
+            asyncInit1(fn1).then(result => assert.equal(result, 'fno1')),
+            asyncInit2(fn2).then(result => assert.equal(result, 'fno2'))
         ]);
     });
 
@@ -67,7 +67,7 @@ describe('async-init', () => {
             asyncInit(fn1)
         ]);
 
-        assert.strictEqual(instance1, instance2);
+        assert.equal(instance1, instance2);
     });
 
     it('should equal the references of singleton objects if they are created separately', async() => {
@@ -82,7 +82,7 @@ describe('async-init', () => {
         const instance1 = await asyncInit(fn1);
         const instance2 = await asyncInit(fn1);
 
-        assert.strictEqual(instance1, instance2);
+        assert.equal(instance1, instance2);
     });
     it('should handle exceptions correctly', async() => {
         function fn() {
@@ -98,9 +98,9 @@ describe('async-init', () => {
                 asyncInit(fn),
                 asyncInit(fn)
             ]);
-            assert.strictEqual(true, false);
+            assert.equal(true, false);
         } catch (error) {
-            assert.strictEqual(error.message, 'Custom error');
+            assert.equal(error.message, 'Custom error');
         }
     });
 
@@ -117,22 +117,22 @@ describe('async-init', () => {
         await Promise.all([
             asyncInit(fn)
                 .then(() => {
-                    assert.strictEqual(true, false);
+                    assert.equal(true, false);
                 })
                 .catch(error => {
-                    assert.deepStrictEqual(error.message, 'Custom error');
+                    assert.deepEqual(error.message, 'Custom error');
                     errorCounts++;
                 }),
             asyncInit(fn)
                 .then(() => {
-                    assert.strictEqual(true, false);
+                    assert.equal(true, false);
                 })
                 .catch(error => {
-                    assert.deepStrictEqual(error.message, 'Custom error');
+                    assert.deepEqual(error.message, 'Custom error');
                     errorCounts++;
                 })
         ]);
 
-        assert.strictEqual(errorCounts, 2);
+        assert.equal(errorCounts, 2);
     });
 });
