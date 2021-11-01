@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.7.5",
-    "async": "^3.2.1",
+    "async": "^3.2.2",
     "css-selector-parser": "^1.4.1",
     "csso": "^4.2.0",
     "cssom": "^0.5.0",
