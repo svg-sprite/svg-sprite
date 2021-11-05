@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
+[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 svg-sprite is a low-level [Node.js](https://nodejs.org/) module that **takes a bunch of [SVG](https://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
@@ -390,8 +390,3 @@ Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
-
-[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
-[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
-[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite
