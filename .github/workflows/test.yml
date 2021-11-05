@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 env:
   FORCE_COLOR: 2
-  NODE_COV: 14 # The Node.js version to run coveralls on
+  NODE_COV: 16 # The Node.js version to run coveralls on
 
 jobs:
   test:
