@@ -1,4 +1,4 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![NPM downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
+svg-sprite [![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 ====================================================================================================================================================================================================================================================================================================================================================================================================
 
 is a low-level [Node.js](http://nodejs.org/) module that **takes a bunch of [SVG](http://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
@@ -396,8 +396,3 @@ Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=1.5.x
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/1.5.x
-
-[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
-[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
-[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite

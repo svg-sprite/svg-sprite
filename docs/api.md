@@ -1,4 +1,4 @@
-svg-sprite [![NPM version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Development Dependency Status][devdepstat-image]][devdepstat-url]
+svg-sprite [![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 ==========
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
@@ -218,8 +218,3 @@ spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=1.5.x
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/1.5.x
-
-[depstat-url]: https://david-dm.org/svg-sprite/svg-sprite
-[depstat-image]: https://img.shields.io/david/svg-sprite/svg-sprite
-[devdepstat-url]: https://david-dm.org/svg-sprite/svg-sprite?type=dev
-[devdepstat-image]: https://img.shields.io/david/dev/svg-sprite/svg-sprite
