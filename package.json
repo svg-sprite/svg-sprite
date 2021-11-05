@@ -6,7 +6,7 @@
   "homepage": "https://github.com/svg-sprite/svg-sprite",
   "repository": {
     "type": "git",
-    "url": "https://github.com/svg-sprite/svg-sprite.git"
+    "url": "git+https://github.com/svg-sprite/svg-sprite.git"
   },
   "bugs": {
     "url": "https://github.com/svg-sprite/svg-sprite/issues"
@@ -19,9 +19,6 @@
   "bin": {
     "svg-sprite": "./bin/svg-sprite.js"
   },
-  "directories": {
-    "test": "test"
-  },
   "files": [
     "bin",
     "docs",
@@ -32,10 +29,11 @@
     "reporter": "spec"
   },
   "scripts": {
-    "test": "istanbul test node_modules/mocha/bin/_mocha --report html -- test/svg-sprite.js",
     "lint": "jshint bin lib test",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly",
-    "example": "node example.js"
+    "mocha": "_mocha test/svg-sprite.js",
+    "coverage": "c8 npm run mocha",
+    "example": "node example.js",
+    "test": "npm run mocha"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.7.5",
@@ -57,7 +55,7 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "istanbul": "^0.4.5",
+    "c8": "^7.10.0",
     "jshint": "^2.13.1",
     "less": "^3.13.1",
     "looks-same": "^7.3.0",
@@ -90,5 +88,15 @@
     "retina",
     "mustache",
     "gulpfriendly"
-  ]
+  ],
+  "c8": {
+    "include": [
+      "lib/**/*.js"
+    ],
+    "reporter": [
+      "html",
+      "lcov",
+      "text-summary"
+    ]
+  }
 }
