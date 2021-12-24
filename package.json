@@ -34,10 +34,10 @@
     "test": "npm run mocha"
   },
   "dependencies": {
-    "@xmldom/xmldom": "^0.7.5",
+    "@xmldom/xmldom": "^0.8.0",
     "async": "^3.2.2",
     "css-selector-parser": "^1.4.1",
-    "csso": "^4.2.0",
+    "csso": "^5.0.2",
     "cssom": "^0.5.0",
     "glob": "^7.2.0",
     "js-yaml": "^4.1.0",
@@ -49,7 +49,7 @@
     "vinyl": "^2.2.1",
     "winston": "^3.3.3",
     "xpath": "^0.0.32",
-    "yargs": "^17.2.1"
+    "yargs": "^17.3.1"
   },
   "devDependencies": {
     "c8": "^7.10.0",
@@ -57,11 +57,11 @@
     "looks-same": "^7.3.0",
     "mocha": "^9.1.3",
     "rimraf": "^3.0.2",
-    "sass": "^1.43.4",
+    "sass": "^1.45.1",
     "should": "^13.2.3",
-    "stylus": "^0.55.0",
+    "stylus": "^0.56.0",
     "svg2png": "^4.1.1",
-    "xo": "^0.46.4"
+    "xo": "^0.47.0"
   },
   "keywords": [
     "icon",
@@ -141,6 +141,7 @@
       "unicorn/no-array-method-this-argument": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/no-for-loop": "off",
+      "unicorn/prefer-code-point": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-query-selector": "off",
       "unicorn/prefer-reflect-apply": "off",
