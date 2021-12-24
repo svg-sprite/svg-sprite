@@ -321,7 +321,7 @@ By default, stylesheet resources are generated directly into the respective **mo
 Special care needs to be taken when you create a **CSS sprite** («css» or «view» mode) along with a stylesheet in one of the **pre-processor formats** (Sass, LESS, Stylus, etc.). In this case, calculating the correct relative SVG sprite path as used by the stylesheets can become tricky, as your (future) plain CSS compilation doesn't necessarily lie side by side with the pre-processor file. *svg-sprite* doesn't know anything about your pre-processor workflow, so it might have to estimate the location of the CSS file:
 
 1. If you **truly configured CSS output** in addition to the pre-processor format, *svg-sprite* uses your custom `mode.<mode>.render.css.dest` as the CSS stylesheet location.
-2. If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `TRUE`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
+2. If you just **enabled CSS output** by setting `mode.<mode>.render.css` to `true`, the default value applies, which is `mode.<mode>.dest / "sprite.css"`.
 3. The same holds true when you **don't enable CSS output** at all. *svg-sprite* then simply assumes that the CSS file will be created where the defaults would put it, which is again `mode.<mode>.dest / "sprite.css"`.
 
 So even if you don't enable plain CSS output explicitly, please make sure to set `mode.<mode>.dest` to **where your final CSS file is intended to be**.
