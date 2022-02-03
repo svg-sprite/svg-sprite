@@ -152,7 +152,6 @@
       "unicorn/no-array-for-each": "off",
       "unicorn/no-array-method-this-argument": "off",
       "unicorn/no-array-reduce": "off",
-      "unicorn/no-for-loop": "off",
       "unicorn/prefer-code-point": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-reflect-apply": "off",

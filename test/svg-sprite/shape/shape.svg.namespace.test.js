@@ -116,9 +116,11 @@ describe('testing setNamespace()', () => {
             expect(mockSelect.mock.calls[1][0]).toBe('//@xlink:href');
             expect(mockSelect.mock.calls[2][0]).toBe('//@href');
 
-            ['style', 'fill', 'stroke', 'filter', 'clip-path', 'mask', 'marker-start', 'marker-end', 'marker-mid'].forEach((ref, i) => {
+            const attributes = ['style', 'fill', 'stroke', 'filter', 'clip-path', 'mask', 'marker-start', 'marker-end', 'marker-mid'];
+
+            for (const [i, ref] of attributes.entries()) {
                 expect(mockSelect.mock.calls[3 + i][0]).toBe(`//@${ref}`);
-            });
+            }
 
             expect(mockSelect.mock.calls[12][0]).toBe('//svg:style');
             expect(mockSelect.mock.calls[13][0]).toBe('//svg:style');

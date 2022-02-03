@@ -79,7 +79,7 @@ describe('testing SVGShape initialization', () => {
 
         expect.assertions(weather.length * 2);
 
-        weather.forEach(weatherFile => {
+        for (const weatherFile of weather) {
             const svgFileBuffer = fs.readFileSync(path.join(cwdWeather, weatherFile));
 
             expect(() => {
@@ -89,6 +89,6 @@ describe('testing SVGShape initialization', () => {
                 }), spriter);
             }).not.toThrow(ArgumentError);
             expect(fixXMLString).not.toHaveBeenCalled();
-        });
+        }
     });
 });

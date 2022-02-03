@@ -83,10 +83,10 @@ spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8
 // Compile the sprite
 spriter.compile((error, result) => {
     /* Write `result` files to disk (or do whatever with them ...) */
-    for (const mode in result) {
-        for (const resource in result[mode]) {
-            fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
-            fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
+    for (const mode of Object.values(result)) {
+        for (const resource of Object.values(mode)) {
+            fs.mkdirSync(path.dirname(resource.path), { recursive: true });
+            fs.writeFileSync(resource.path, resource.contents);
         }
     }
 });
@@ -94,10 +94,10 @@ spriter.compile((error, result) => {
 // Or compile the sprite async
 const { result } = await spriter.compileAsync();
 /* Write `result` files to disk (or do whatever with them ...) */
-for (const mode in result) {
-    for (const resource in result[mode]) {
-        fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
-        fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
+for (const mode of Object.values(result)) {
+    for (const resource of Object.values(mode)) {
+        fs.mkdirSync(path.dirname(resource.path), { recursive: true });
+        fs.writeFileSync(resource.path, resource.contents);
     }
 }
 

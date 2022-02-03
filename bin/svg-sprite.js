@@ -108,9 +108,7 @@ function addConfigMap(store, path, value) {
  */
 function writeFiles(files) {
     let written = 0;
-    for (const key in files) {
-        const file = files[key];
-
+    for (const file of Object.values(files)) {
         if (isObject(file)) {
             if (file.constructor === File) {
                 fs.mkdirSync(path.dirname(file.path), { recursive: true });
@@ -262,22 +260,22 @@ if ('variables' in config) {
 }
 
 const spriter = new SVGSpriter(config);
+const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
 
-argv._.reduce((f, g) => [...f, ...glob.sync(g)], [])
-    .forEach(file => {
-        let basename = file;
-        file = path.resolve(file);
-        const stat = fs.lstatSync(file);
-        if (stat.isSymbolicLink()) {
-            file = fs.readlinkSync(file);
-            basename = path.basename(file);
-        } else {
-            const basepos = basename.lastIndexOf('./');
-            basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
-        }
+for (let file of files) {
+    let basename = file;
+    file = path.resolve(file);
+    const stat = fs.lstatSync(file);
+    if (stat.isSymbolicLink()) {
+        file = fs.readlinkSync(file);
+        basename = path.basename(file);
+    } else {
+        const basepos = basename.lastIndexOf('./');
+        basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
+    }
 
-        spriter.add(file, basename, fs.readFileSync(file));
-    });
+    spriter.add(file, basename, fs.readFileSync(file));
+}
 
 spriter.compile((error, result) => {
     if (error) {

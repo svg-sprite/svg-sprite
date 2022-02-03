@@ -12,13 +12,13 @@ const path = require('path');
  * @param {boolean} resolvePaths      Whether to resolve the paths of SVG files
  */
 function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
-    files.forEach(file => {
+    for (const file of files) {
         spriter.add(
             resolvePaths ? path.resolve(path.join(cwd, file)) : file,
             file,
             fs.readFileSync(path.join(cwd, file), 'utf8')
         );
-    });
+    }
 }
 
 /**
