@@ -28,7 +28,7 @@
   "scripts": {
     "lint": "xo",
     "fix": "npm run lint -- --fix",
-    "mocha": "_mocha --timeout 10000 test/**/*.test.js",
+    "mocha": "_mocha test/**/*.test.js",
     "coverage": "c8 npm run mocha",
     "example": "node example.js",
     "test": "npm run mocha"
@@ -87,13 +87,6 @@
     "mustache",
     "gulpfriendly"
   ],
-  "mocha": {
-    "check-leaks": true,
-    "throw-deprecation": true,
-    "trace-deprecation": true,
-    "trace-warnings": true,
-    "use_strict": true
-  },
   "xo": {
     "space": 4,
     "rules": {
