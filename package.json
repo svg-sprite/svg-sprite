@@ -87,16 +87,6 @@
     "mustache",
     "gulpfriendly"
   ],
-  "c8": {
-    "include": [
-      "lib/**/*.js"
-    ],
-    "reporter": [
-      "html",
-      "lcov",
-      "text-summary"
-    ]
-  },
   "mocha": {
     "check-leaks": true,
     "throw-deprecation": true,
