@@ -18,25 +18,30 @@ describe('BrowserManager', () => {
         await browserManager.closeBrowser();
     });
 
-    it('should not throw an exception when the instance does not exist but calls closeBrowser', () => {
+    it('should not throw any exceptions when the instance does not exist but calls closeBrowser', async() => {
         const browserManager = new BrowserManager();
 
-        return browserManager.closeBrowser();
+        await assert.doesNotReject(async() => {
+            await browserManager.closeBrowser();
+        }, Error);
     });
 
-    it('should not throw an exception when the instance does not exist but calls closeBrowser multiple times', async() => {
+    it('should not throw any exceptions when the instance does not exist but calls closeBrowser multiple times', async() => {
         const browserManager = new BrowserManager();
 
         await browserManager.getBrowser();
         await browserManager.closeBrowser();
-        await browserManager.closeBrowser();
+
+        await assert.doesNotReject(async() => {
+            await browserManager.closeBrowser();
+        }, Error);
     });
 
     it('should create a separate browser instance/manager', async() => {
         const browserManager1 = new BrowserManager();
         const browserManager2 = new BrowserManager();
 
-        assert.notDeepEqual(await browserManager1.getBrowser(), await browserManager2.getBrowser());
+        assert.notEqual(await browserManager1.getBrowser(), await browserManager2.getBrowser());
 
         await browserManager1.closeBrowser();
         await browserManager2.closeBrowser();
