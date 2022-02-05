@@ -8,39 +8,59 @@ const SVGSpriter = require('../lib/svg-sprite.js');
 
 const isObject = obj => typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
+const expectations = [{
+    svg: 'without-dims.svg',
+    result: {
+        width: 43,
+        height: 43
+    }
+}, {
+    svg: 'without-dims-2048x2048.svg',
+    result: {
+        width: 2048,
+        height: 2048
+    }
+}];
+
 describe('shape', () => {
-    it('should calculate the dimensions if the svg does not contain viewBox or height/width properties', done => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
+    expectations.forEach(expectation => {
+        it(`should calculate the dimensions if the ${expectation.svg} does not contain viewBox or height/width properties (${expectation.result.width}x${expectation.result.height})`, done => {
+            const spriter = new SVGSpriter({
+                shape: {
+                    dest: 'svg',
+                    dimension: {
+                        maxWidth: 4000,
+                        maxHeight: 4000
+                    }
+                }
+            });
 
-        const svgFilePath = path.join(__dirname, 'fixture/svg/weather-clear-dimension-calculation.svg');
+            const svgFilePath = path.join(__dirname, `fixture/svg/special/${expectation.svg}`);
 
-        spriter.add(
-            svgFilePath,
-            'weather-clear-dimension-calculation.svg',
-            readFileSync(svgFilePath, 'utf-8')
-        );
+            spriter.add(
+                svgFilePath,
+                expectation.svg,
+                readFileSync(svgFilePath, 'utf-8')
+            );
 
-        spriter.compile((error, result) => {
-            try {
-                assert.ifError(error);
-                assert.equal(isObject(result), true);
-                assert.notEqual(typeof result.shapes, 'undefined');
-                assert.equal(Array.isArray(result.shapes), true);
+            spriter.compile((error, result) => {
+                try {
+                    assert.ifError(error);
+                    assert.equal(isObject(result), true);
+                    assert.notEqual(typeof result.shapes, 'undefined');
+                    assert.equal(Array.isArray(result.shapes), true);
 
-                const svg = result.shapes[0]._contents.toString();
-                const dom = new DOMParser().parseFromString(svg, 'text/xml');
+                    const svg = result.shapes[0]._contents.toString();
+                    const dom = new DOMParser().parseFromString(svg, 'text/xml');
 
-                assert.equal(dom.documentElement.getAttribute('height'), '43');
-                assert.equal(dom.documentElement.getAttribute('width'), '43');
+                    assert.equal(dom.documentElement.getAttribute('height'), expectation.result.height.toString());
+                    assert.equal(dom.documentElement.getAttribute('width'), expectation.result.width.toString());
 
-                done();
-            } catch (error) {
-                done(error);
-            }
+                    done();
+                } catch (compilationError) {
+                    done(compilationError);
+                }
+            });
         });
     });
 });
