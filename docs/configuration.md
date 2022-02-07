@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
@@ -210,7 +210,7 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
                  * @param {Function} callback Callback
                  * @return {void}
                  */
-                function(shape, sprite, callback) {
+                (shape, sprite, callback) => {
                     /* ... */
                     callback(null);
                 }
@@ -266,7 +266,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
              * @param {String} svg Sprite SVG
              * @return {String} Processed SVG
              */
-            function(svg) {
+            svg => {
                 /* ... */
                 return svg;
             },
@@ -277,7 +277,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 }
 ```
 
-The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/xmldom/xmldom), so you may require a parser instance `var DOMParser = require('@xmldom/xmldom').DOMParser; /* ... */` within your callback ...).
+The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/xmldom/xmldom), so you may require a parser instance `const DOMParser = require('@xmldom/xmldom').DOMParser; /* ... */` within your callback ...).
 
 
 ### Custom templating variables
@@ -287,11 +287,9 @@ The top-level `variables` object lets you define global variables that are passe
 ```js
 {
     variables: {
-        now: +new Date(),
-        png: function() {
-            return function(sprite, render) {
-                return render(sprite).split('.svg').join('.png');
-            }
+        now: Number(new Date()),
+        png() {
+            return (sprite, render) => render(sprite).split('.svg').join('.png');
         }
     }
 }
@@ -469,9 +467,10 @@ To **disable the rendering** without removing the whole structure, simply set th
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main

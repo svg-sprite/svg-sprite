@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
@@ -21,22 +21,22 @@ To understand these methods' roles and interactions, please have a look at the f
 ```js
 'use strict';
 
-var SVGSpriter = require('svg-sprite'),
-    path = require('path'),
-    fs = require('fs'),
+const path = require('path');
+const fs = require('fs');
+const SVGSpriter = require('svg-sprite'),
 
 // 1. Create and configure a spriter instance
 // ====================================================================
-    spriter = new SVGSpriter({
-        dest: 'out',        // Main output directory
-        mode: {
-            css: {                // Create a CSS sprite
-                render: {
-                    css: true            // Render a CSS stylesheet
-                }
+const spriter = new SVGSpriter({
+    dest: 'out', // Main output directory
+    mode: {
+        css: { // Create a CSS sprite
+            render: {
+                css: true // Render a CSS stylesheet
             }
         }
-    });
+    }
+});
 
 // 2. Add some SVG files to process
 // ====================================================================
@@ -56,14 +56,11 @@ spriter.add(
 
 // 3. Trigger the (asynchronous) compilation process
 // ====================================================================
-spriter.compile(function (error, result, data) {
-
+spriter.compile((error, result, data) => {
     // Run through all files that have been created for the `css` mode
-    for (var type in result.css) {
-
+    for (const type in result.css) {
         // Recursively create directories as needed
         fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
-
         // Write the generated resource to disk
         fs.writeFileSync(result.css[type].path, result.css[type].contents);
     }
@@ -95,37 +92,37 @@ It is important to know that the spriter **optimizes the SVG files as soon as yo
 ```js
 'use strict';
 
-var SVGSpriter = require('svg-sprite'),
-    path = require('path'),
-    fs = require('fs'),
-    File = require('vinyl'),
-    glob = require('glob'),
-    spriter = new SVGSpriter({
-        dest: 'out',
-        mode: {
-            css: {
-                render: {
-                    css: true
-                }
+const fs = require('fs');
+const path = require('path');
+const SVGSpriter = require('svg-sprite');
+const File = require('vinyl');
+const glob = require('glob');
+
+const spriter = new SVGSpriter({
+    dest: 'out',
+    mode: {
+        css: {
+            render: {
+                css: true
             }
         }
-    }),
-    cwd = path.resolve('assets');
+    }
+});
+const cwd = path.resolve('assets');
 
 // Find SVG files recursively via `glob`
-glob.glob('**/*.svg', { cwd: cwd }, function (err, files) {
-    files.forEach(function (file) {
-
+glob.sync('**/*.svg', { cwd }, (err, files) => {
+    files.forEach(file => {
         // Create and add a vinyl file instance for each SVG
         spriter.add(new File({
-            path: path.join(cwd, file),                      // Absolute path to the SVG file
-            base: cwd,                                       // Base path (see `name` argument)
-            contents: fs.readFileSync(path.join(cwd, file))  // SVG file contents
+            path: path.join(cwd, file), // Absolute path to the SVG file
+            base: cwd, // Base path (see `name` argument)
+            contents: fs.readFileSync(path.join(cwd, file)) // SVG file contents
         }));
     })
 
-    spriter.compile(function (error, result, data) {
-        for (var type in result.css) {
+    spriter.compile((error, result, data) => {
+        for (const type in result.css) {
             fs.mkdirSync(path.dirname(result.css[type].path), { recursive: true });
             fs.writeFileSync(result.css[type].path, result.css[type].contents);
         }
@@ -159,7 +156,7 @@ spriter.compile(
             example: true
         }
     },
-    function (error, result, data) {
+    (error, result, data) => {
         console.log(result);
     }
 );
@@ -195,11 +192,11 @@ Please note that the resources are always returned as [vinyl](https://github.com
 ##### Shape access example
 
 ```js
-var path = require('path'),
-    fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
-spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
-    result.forEach(function (file) {
+spriter.getShapes(path.resolve('tmp/svg'), (error, result) => {
+    result.forEach(file => {
         fs.mkdirSync(path.dirname(file.path), { recursive: true });
         fs.writeFileSync(file.path, file.contents);
     });
@@ -209,9 +206,10 @@ spriter.getShapes(path.resolve('tmp/svg'), function (error, result) {
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main

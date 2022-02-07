@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
@@ -13,7 +13,7 @@ This document aims to compare the use of *svg-sprite* via its [standard API](api
 
 ```js
 // Create spriter instance
-var spriter = new SVGSpriter(config);
+const spriter = new SVGSpriter(config);
 
 // Add SVG source files — the manual way ...
 spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', 'utf-8'));
@@ -21,7 +21,7 @@ spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8
 /* ... */
 
 // Compile sprite
-spriter.compile(function (error, result) {
+spriter.compile((error, result) => {
     /* ... Write `result` files to disk or do whatever with them ... */
 });
 ```
@@ -37,8 +37,8 @@ grunt.initConfig({
             src: ['assets/**/*.svg'],
             dest: 'out',
             options: config
-        },
-    },
+        }
+    }
 });
 ```
 
@@ -55,9 +55,10 @@ gulp.src('assets/*.svg')
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
