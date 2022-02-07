@@ -71,7 +71,7 @@ The procedure is the very same for all supported sprite types («modes»).
 
 ```js
 // Create spriter instance (see below for `config` examples)
-var spriter = new SVGSpriter(config);
+const spriter = new SVGSpriter(config);
 
 // Add SVG source files — the manual way ...
 spriter.add('assets/svg-1.svg', null, fs.readFileSync('assets/svg-1.svg', 'utf-8'));
@@ -79,10 +79,10 @@ spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8
 /* ... */
 
 // Compile the sprite
-spriter.compile(function(error, result) {
+spriter.compile((error, result) => {
     /* Write `result` files to disk (or do whatever with them ...) */
-    for (var mode in result) {
-        for (var resource in result[mode]) {
+    for (const mode in result) {
+        for (const resource in result[mode]) {
             fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
             fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
         }
@@ -118,7 +118,7 @@ Many configuration properties (all except `mode`) apply to all sprites created b
 ```js
 // Common svg-sprite config options and their default values
 
-var config = {
+const config = {
     dest: '.', // Main output directory
     log: null, // Logging verbosity (default: no logging)
     shape: { // SVG shape related options
@@ -164,7 +164,7 @@ At the moment, *svg-sprite* supports **five different output modes** (i.e. sprit
 To enable the creation of a specific sprite type with default values, simply set the appropriate `mode` property to `true`:
 
 ```js
-var config = {
+const config = {
     mode: {
         css: true, // Create a «css» sprite
         view: true, // Create a «view» sprite
@@ -180,7 +180,7 @@ To further configure a sprite, pass in an object with configuration options:
 ```js
 // «symbol» sprite with CSS stylesheet resource
 
-var config = {
+const config = {
     mode: {
         css: {
             // Configuration for the «css» sprite
@@ -198,7 +198,7 @@ Many `mode` properties are shared between the different sprite types, but there 
 ```js
 // Common mode properties
 
-var config = {
+const config = {
     mode: {
         <mode>: {
             dest: "<mode>", // Mode specific output directory
@@ -232,7 +232,7 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 ```js
 // «symbol» sprite with CSS stylesheet resource
 
-var config = {
+const config = {
     mode: {
         inline: true, // Prepare for inline embedding
         symbol: true // Create a «symbol» sprite
@@ -248,7 +248,7 @@ Traditional **CSS sprite** with a **Sass stylesheet**:
 ```js
 // «css» sprite with Sass stylesheet resource
 
-var config = {
+const config = {
     mode: {
         css: { // Create a «css» sprite
             render: {
@@ -267,7 +267,7 @@ var config = {
 ```js
 // «defs», «symbol» and «stack» sprites in parallel
 
-var config = {
+const config = {
     mode: {
         defs: true,
         symbol: true,
@@ -284,7 +284,7 @@ var config = {
 ```js
 // Just optimize source SVG files, create no sprite
 
-var config = {
+const config = {
     shape: {
         dest: 'path/to/out/dir'
     }
@@ -386,7 +386,7 @@ Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
