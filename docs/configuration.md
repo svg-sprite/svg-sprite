@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
@@ -61,7 +61,7 @@ Property                 | Type            | Default       | Description        
 
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
-`log`                    | String∣Logger   |               | *svg-sprite* uses [winston](https://github.com/flatiron/winston) for logging, but output is turned off by default. To activate and use the pre-configured console logger, you need to pass the desired log level (`'info'`, `'verbose'` or `'debug'`). Alternatively, you can pass your own custom `winston.Logger` instance (which needs to handle at least these three log levels). Falsy values like `""`, `false` or `null` will disable logging. |
+`log`                    | String\|Logger  |               | *svg-sprite* uses [winston](https://github.com/winstonjs/winston) for logging, but output is turned off by default. To activate and use the pre-configured console logger, you need to pass the desired log level (`'info'`, `'verbose'` or `'debug'`). Alternatively, you can pass your own custom `winston.Logger` instance (which needs to handle at least these three log levels). Falsy values like `""`, `false` or `null` will disable logging. |
 
 
 ### SVG shape configuration
@@ -99,28 +99,28 @@ shape: {
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.id.separator`     | String          | `"--"`        | Separator for traversing a directory structure into a shape ID. Im empty, no directory traversal will happen and only the file name part (without the parent directory names) will be considered for the shape ID. |
-`shape.id.generator`     | Function∣String | See desc.     | Callback for translating the local part of a shape's file name into a shape ID. The callback's signature is `function(name, file) { /* ... */ return id; }`, where `name` is the relative path of the source file within the base directory and `file` the original [vinyl](https://github.com/gulpjs/vinyl) file object. By default, the file extension `".svg"` is stripped off the `name` value and directory structures are traversed using the `id.separator` as replacement for the directory separator. You may also provide a template string (e.g. `"icon-%s"`), in which case the placeholder `"%s"` gets substituted with the traversed local file name. If the string doesn't contain any placeholder, it is used as a prefix to the local file name. |
-`shape.id.pseudo`        | String          | `"~"`         | String separator for pseudo CSS classes in file names. Example: `my-icon.svg` and `my-icon~hover.svg` for an icon with a regular and a `:hover` state. |
-`shape.id.whitespace`    | String          | `"_"`         | Replacement string for whitespace characters in file names during shape ID generation. Example: By default, `My Custom Icon.svg` will result in the shape ID `my_custom_icon`. |
+`shape.id.separator`     | String           | `"--"`       | Separator for traversing a directory structure into a shape ID. Im empty, no directory traversal will happen and only the file name part (without the parent directory names) will be considered for the shape ID. |
+`shape.id.generator`     | Function\|String | See desc.    | Callback for translating the local part of a shape's file name into a shape ID. The callback's signature is `function(name, file) { /* ... */ return id; }`, where `name` is the relative path of the source file within the base directory and `file` the original [vinyl](https://github.com/gulpjs/vinyl) file object. By default, the file extension `".svg"` is stripped off the `name` value and directory structures are traversed using the `id.separator` as replacement for the directory separator. You may also provide a template string (e.g. `"icon-%s"`), in which case the placeholder `"%s"` gets substituted with the traversed local file name. If the string doesn't contain any placeholder, it is used as a prefix to the local file name. |
+`shape.id.pseudo`        | String           | `"~"`        | String separator for pseudo CSS classes in file names. Example: `my-icon.svg` and `my-icon~hover.svg` for an icon with a regular and a `:hover` state. |
+`shape.id.whitespace`    | String           | `"_"`        | Replacement string for whitespace characters in file names during shape ID generation. Example: By default, `My Custom Icon.svg` will result in the shape ID `my_custom_icon`. |
 
 
 #### Shape dimensions
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.dimension.maxWidth`     | Integer         | `2000`        | Maximum shape width in pixels |
-`shape.dimension.maxHeight`    | Integer         | `2000`        | Maximum shape height in pixels |
-`shape.dimension.precision`    | Integer         | `2`           | Precision (number of decimal places) for dimension calculations |
-`shape.dimension.attributes`   | Boolean         | `false`       | Whether to add `width` and `height` attributes to embedded shapes («defs» and «stack» mode only) |
+`shape.dimension.maxWidth`   | Integer     | `2000`        | Maximum shape width in pixels |
+`shape.dimension.maxHeight`  | Integer     | `2000`        | Maximum shape height in pixels |
+`shape.dimension.precision`  | Integer     | `2`           | Precision (number of decimal places) for dimension calculations |
+`shape.dimension.attributes` | Boolean     | `false`       | Whether to add `width` and `height` attributes to embedded shapes («defs» and «stack» mode only) |
 
 
 #### Shape spacing
 
 Property                 | Type            | Default       | Description                                |
 -------------------------| --------------- | ------------- | ------------------------------------------ |
-`shape.spacing.padding`        | Integer/Array   | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
-`shape.spacing.box`            | String          | `"content"`   | Box sizing strategy, similar to CSS. When set to `"content"`, the `shape.spacing.padding` values will get applied to the outside of each shape, effectively increasing the shape's bounding box. When set to `"padding"`, the content plus the given `spacing.padding` values will stay within the dimension contraints `shape.dimension.max*` (they are the bounding box' maxima). When set to `"icon"`, the `shape.dimension.max*` values are used as fixed dimensions for the bounding box around each shape. The shapes get either up- or downscaled proportionally to fit this bounding box (including `shape.spacing.padding`), resulting in all equally sized and distributed shape tiles (best fit for a set of same size icons). |
+`shape.spacing.padding`  | Integer\|Array | `0`           | Padding around shape. May be a single pixel value (which is then applied to all four edges) or an Array of Integers with a length between 1 and 4 (same syntax as for CSS padding) |
+`shape.spacing.box`      | String         | `"content"`   | Box sizing strategy, similar to CSS. When set to `"content"`, the `shape.spacing.padding` values will get applied to the outside of each shape, effectively increasing the shape's bounding box. When set to `"padding"`, the content plus the given `spacing.padding` values will stay within the dimension contraints `shape.dimension.max*` (they are the bounding box' maxima). When set to `"icon"`, the `shape.dimension.max*` values are used as fixed dimensions for the bounding box around each shape. The shapes get either up- or downscaled proportionally to fit this bounding box (including `shape.spacing.padding`), resulting in all equally sized and distributed shape tiles (best fit for a set of same size icons). |
 
 #### Shape transformations
 
@@ -210,7 +210,7 @@ To use a custom callback for transforming a shape's SVG, pass a function with th
                  * @param {Function} callback Callback
                  * @return {void}
                  */
-                function(shape, sprite, callback) {
+                (shape, sprite, callback) => {
                     /* ... */
                     callback(null);
                 }
@@ -240,15 +240,15 @@ The `svg` object holds common options that apply to each SVG sprite created. The
 
 Property                 | Type            | Default       | Description                                |
 ------------------------ | --------------- | ------------- | ------------------------------------------ |
-`svg.xmlDeclaration`         | Boolean∣String  | `true`        | Output an XML declaration at the very beginning of each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<?xml version="1.0" encoding="utf-8"?>`). If you set this to `TRUE`, *svg-sprite* will look at the registered shapes for an XML declaration and use the first one it can find. |
-`svg.doctypeDeclaration`     | Boolean∣String  | `true`        | Include a `<DOCTYPE>` declaration in each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">`). If you set this to `TRUE`, *svg-sprite* will look at the registered shapes for a DOCTYPE declaration and use the first one it can find. |
-`svg.namespaceIDs`           | Boolean         | `true`        | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `FALSE` then and be aware that you might also want to disable SVGO's ID minification (`shape.transform.svgo.plugins.params.overrides: {cleanupIDs: false}`). |
-`svg.namespaceIDPrefix`           | String         |         | Under some circumstances, the automatically generated ID namespaces might interfere with external scripts (e.g. see [this issue](namespaceIDPrefix) for a problem detected with Google Analytics). In these situations it might be helpful to prefix all IDs with a custom prefix set with this option. |
-`svg.namespaceClassnames`    | Boolean         | `true`        | In order to avoid CSS class name ambiguities, the default behavior is to namespace CSS class names in the source SVGs before compiling them into a sprite. Each class name is prepended with a unique string. Disable this option to keep the class names untouched. |
-`svg.dimensionAttributes`    | Boolean         | `true`        | If truthy, `width` and `height` attributes will be set on the sprite's `<svg>` element (where applicable). |
-`svg.rootAttributes`         | Object          |               | Shorthand for applying custom attributes to the outermost `<svg>` element. Please be aware that certain attributes (e.g. `viewBox`) will be calculated dynamically and override custom `rootAttributes` in any case. |
-`svg.precision`              | Integer         |               | Floating point precision for CSS positioning values (defaults to `-1` meaning highest possible precision). |
-`svg.transform`              | Function∣Array  |               | Callback (or list of callbacks) that will be applied to the resulting SVG sprites as global [post-processing transformation](#svg-sprite-customization). |
+`svg.xmlDeclaration`         | Boolean\|String | `true`    | Output an XML declaration at the very beginning of each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<?xml version="1.0" encoding="utf-8"?>`). If you set this to `true`, *svg-sprite* will look at the registered shapes for an XML declaration and use the first one it can find. |
+`svg.doctypeDeclaration`     | Boolean\|String | `true`    | Include a `<DOCTYPE>` declaration in each compiled sprite. If you provide a non-empty string here, it will be used one-to-one as declaration (e.g. `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">`). If you set this to `true`, *svg-sprite* will look at the registered shapes for a DOCTYPE declaration and use the first one it can find. |
+`svg.namespaceIDs`           | Boolean         | `true`    | In order to avoid ID clashes, the default behavior is to namespace all IDs in the source SVGs before compiling them into a sprite. Each ID is prepended with a unique string. In some situations, it might be desirable to disable ID namespacing, e.g. when you want to script the resulting sprite. Just set `svg.namespaceIDs` to `false` then and be aware that you might also want to disable SVGO's ID minification (`shape.transform.svgo.plugins.params.overrides: {cleanupIDs: false}`). |
+`svg.namespaceIDPrefix`      | String          |           | Under some circumstances, the automatically generated ID namespaces might interfere with external scripts (e.g. see [this issue](namespaceIDPrefix) for a problem detected with Google Analytics). In these situations it might be helpful to prefix all IDs with a custom prefix set with this option. |
+`svg.namespaceClassnames`    | Boolean         | `true`    | In order to avoid CSS class name ambiguities, the default behavior is to namespace CSS class names in the source SVGs before compiling them into a sprite. Each class name is prepended with a unique string. Disable this option to keep the class names untouched. |
+`svg.dimensionAttributes`    | Boolean         | `true`    | If truthy, `width` and `height` attributes will be set on the sprite's `<svg>` element (where applicable). |
+`svg.rootAttributes`         | Object          |           | Shorthand for applying custom attributes to the outermost `<svg>` element. Please be aware that certain attributes (e.g. `viewBox`) will be calculated dynamically and override custom `rootAttributes` in any case. |
+`svg.precision`              | Integer         |           | Floating point precision for CSS positioning values (defaults to `-1` meaning highest possible precision). |
+`svg.transform`              | Function\|Array |           | Callback (or list of callbacks) that will be applied to the resulting SVG sprites as global [post-processing transformation](#svg-sprite-customization). |
 
 
 #### SVG sprite customization
@@ -266,7 +266,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
              * @param {String} svg Sprite SVG
              * @return {String} Processed SVG
              */
-            function(svg) {
+            svg => {
                 /* ... */
                 return svg;
             },
@@ -277,7 +277,7 @@ The `svg.transform` option can be used to post-process and customize the SVG spr
 }
 ```
 
-The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/xmldom/xmldom), so you may require a parser instance `var DOMParser = require('@xmldom/xmldom').DOMParser; /* ... */` within your callback ...).
+The callbacks are processed synchronously and in the given order. Each one is passed to the sprite's SVG source as its first (and only) argument and is expected to return the modified SVG source after transformation. It's completely up to what you do with the SVG source, just don't forget to return it in the end. You may e.g. run some regex or even full-blown DOM operations on the SVG contents (*svg-sprite* depends on [xmldom](https://github.com/xmldom/xmldom), so you may require a parser instance `const DOMParser = require('@xmldom/xmldom').DOMParser; /* ... */` within your callback ...).
 
 
 ### Custom templating variables
@@ -287,11 +287,9 @@ The top-level `variables` object lets you define global variables that are passe
 ```js
 {
     variables: {
-        now: +new Date(),
-        png: function() {
-            return function(sprite, render) {
-                return render(sprite).split('.svg').join('.png');
-            }
+        now: Number(new Date()),
+        png() {
+            return (sprite, render) => render(sprite).split('.svg').join('.png');
         }
     }
 }
@@ -358,9 +356,9 @@ Property         | Type            | Default       | Description                
 ---------------- | --------------- | ------------- | ------------------------------------------ |
 `mode.<mode>.dest`           | String          | `"<mode>"`       | Base directory for sprite and CSS file output. If not absolute, the path will be resolved using the main output directory (see global `dest` option). |
 `mode.<mode>.prefix`         | String          | `".svg-%s"`    | Used for prefixing the [shape ID](#shape-ids) during CSS selector construction. If the value is empty, no prefix will be used. The prefix may contain the placeholder `"%s"` (e.g. `".svg %s-svg"`), which will then get replaced by the shape ID. Please be aware that `"%"` is a special character in this context and that you'll have to escape it by another percent sign (`"%%"`) in case you want to output it to your stylesheets (e.g. for a [Sass placeholder selector](https://sass-lang.com/documentation/style-rules/placeholder-selectors)). |
-`mode.<mode>.dimensions`     | String/Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as suffix to `mode.<mode>.prefix` during CSS selector construction and may contain the placeholder `"%s"`, which will get replaced by the value of `mode.<mode>.prefix`. A boolean `TRUE` will cause the dimensions to be included directly into each shape's CSS rule (only available for «css» and «view» sprites). |
+`mode.<mode>.dimensions`     | String\|Boolean  | `"-dims"`     | A non-empty string value will trigger the creation of additional CSS rules specifying the dimensions of each shape in the sprite. The string will be used as suffix to `mode.<mode>.prefix` during CSS selector construction and may contain the placeholder `"%s"`, which will get replaced by the value of `mode.<mode>.prefix`. A boolean `true` will cause the dimensions to be included directly into each shape's CSS rule (only available for «css» and «view» sprites). |
 `mode.<mode>.sprite`         | String          | `"svg/sprite.<mode>.svg"` | SVG sprite path and file name, relative to the `mode.<mode>.dest` directory (see above). You may omit the file extension, in which case it will be set to `".svg"` automatically. |
-`mode.<mode>.bust`           | Boolean         | `true∣false`        | Add a content based hash to the name of the sprite file so that clients reliably reload the sprite when its content changes («cache busting»). Defaults to `false` except for «css» and «view» sprites. |
+`mode.<mode>.bust`           | Boolean         | `true\|false`        | Add a content based hash to the name of the sprite file so that clients reliably reload the sprite when its content changes («cache busting»). Defaults to `false` except for «css» and «view» sprites. |
 `mode.<mode>.render`         | Object of [Rendering configs](#rendering-configurations)          | `{}`     | Collection of [stylesheet rendering configurations](#rendering-configurations). The keys are used as file extensions as well as file return keys. At present, there are default templates for the file extensions `css` ([CSS](https://www.w3.org/Style/CSS/)), `scss` ([Sass](https://sass-lang.com/)), `less` ([Less](http://lesscss.org/)) and `styl` ([Stylus](https://stylus-lang.com/)), which all reside in the directory `tmpl/css`. Example: `{css: true, scss: {dest: '_sprite.scss'}}` |
 `mode.<mode>.example`        | [Rendering config](#rendering-configurations) | `false`       | Enabling this will trigger the creation of an HTML document demoing the usage of the sprite. Please see below for details on [rendering configurations](#rendering-configurations). |
 `mode.<mode>.example.template` | String        | `"tmpl/<mode>/sprite.html"`     | HTML document Mustache template |
@@ -380,9 +378,9 @@ In addition to the [common mode properties](#common-mode-properties), «css» an
 
 Property         | Type            | Default       | Description                                |
 ---------------- | --------------- | ------------- | ------------------------------------------ |
-`mode.<mode>.layout`         | String          | `"packed"`    | The arrangement of the shapes within the sprite. Might be `"vertical"`, `"horizontal"`, `"diagonal"` or `"packed"` (with the latter being the most compact type). It depends on your project which layout is best for you. |
-`mode.<mode>.common`         | String          |               | If given and not empty, this will be the selector name of a CSS rule commonly specifying the `background-image` and `background-repeat` properties for all the shapes in the sprite (thus saving some bytes by not unnecessarily repeating them for each shape) |
-`mode.<mode>.mixin`          | String          |               | If given and not empty, a mixin with this name will be added to supporting output formats (e.g. Sass, LESS, Stylus), specifying the `background-image` and `background-repeat` properties for all the shapes in the sprite. You may use it for creating custom CSS within **@media rules**. The mixin acts much like the `common` rule. In fact, you can even combine the two — if both are enabled, the `common` rule will use the `mixin` internally. |
+`mode.<mode>.layout` | String      | `"packed"`    | The arrangement of the shapes within the sprite. Might be `"vertical"`, `"horizontal"`, `"diagonal"` or `"packed"` (with the latter being the most compact type). It depends on your project which layout is best for you. |
+`mode.<mode>.common` | String      |               | If given and not empty, this will be the selector name of a CSS rule commonly specifying the `background-image` and `background-repeat` properties for all the shapes in the sprite (thus saving some bytes by not unnecessarily repeating them for each shape) |
+`mode.<mode>.mixin`  | String      |               | If given and not empty, a mixin with this name will be added to supporting output formats (e.g. Sass, LESS, Stylus), specifying the `background-image` and `background-repeat` properties for all the shapes in the sprite. You may use it for creating custom CSS within **@media rules**. The mixin acts much like the `common` rule. In fact, you can even combine the two — if both are enabled, the `common` rule will use the `mixin` internally. |
 
 
 ##### «defs» & «symbol» mode
@@ -396,7 +394,7 @@ For both «defs» and «symbol» sprites you will have to use something like [SV
 
 Property         | Type            | Default       | Description                                |
 ---------------- | --------------- | ------------- | ------------------------------------------ |
-`mode.<mode>.inline`         | Boolean         | `false`       | If you want to embed the sprite into your HTML source, you will want to set this to `true` in order to prevent the creation of SVG namespace declarations and to set some other attributes for effectively hiding the library sprite. |
+`mode.<mode>.inline` | Boolean     | `false`       | If you want to embed the sprite into your HTML source, you will want to set this to `true` in order to prevent the creation of SVG namespace declarations and to set some other attributes for effectively hiding the library sprite. |
 
 
 ##### «stack» mode
@@ -469,9 +467,10 @@ To **disable the rendering** without removing the whole structure, simply set th
 
 [npm-url]: https://npmjs.org/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main
+[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
 
 [coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
 [coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
