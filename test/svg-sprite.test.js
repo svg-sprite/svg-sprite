@@ -138,12 +138,10 @@ async function capturePuppeteer(src, target, cb) {
  */
 async function compareSvg2Png(svg, png, expected, diff, done, msg) {
     fs.mkdirSync(path.dirname(png), { recursive: true });
-    let browser;
 
     try {
-        browser = await puppeteer.launch();
-        await convertSvg2Png(svg, png, browser);
-        await looksSame(png, expected, (err, result) => {
+        await convertSvg2Png(svg, png);
+        looksSame(png, expected, (err, result) => {
             should(result).ok;
             should(err).not.ok;
             should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
@@ -159,10 +157,6 @@ async function compareSvg2Png(svg, png, expected, diff, done, msg) {
         console.error(error);
         should(error).not.ok;
         done();
-    } finally {
-        if (browser) {
-            await browser.close();
-        }
     }
 }
 

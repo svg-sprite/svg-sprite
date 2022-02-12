@@ -1,21 +1,21 @@
 'use strict';
 
-async function convertSvg2Png(svgPath, pngPath, browser) {
-    let page;
+const resvg = require('@resvg/resvg-js');
+const {readFile, writeFile} = require('fs').promises;
 
+async function convertSvg2Png(svgPath, pngPath) {
     try {
-        page = await browser.newPage();
-        await page.goto(`file://${svgPath}`);
-        const svg = await page.$('svg');
-        await svg.screenshot({
-            omitBackground: true,
-            path: pngPath,
-            type: 'png'
+        const svg = await readFile(svgPath);
+        const pngData = await resvg.renderAsync(svg, {
+            fitTo: {mode: 'original'}
         });
-    } finally {
-        if (page) {
-            await page.close();
-        }
+
+        await writeFile(pngPath, pngData);
+    } catch (error) {
+        const e = new Error(error);
+        e.name = 'ConvertError';
+        e.errno = 1_400_444_333;
+        throw e;
     }
 }
 
