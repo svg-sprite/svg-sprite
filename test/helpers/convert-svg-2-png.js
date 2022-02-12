@@ -1,13 +1,13 @@
 'use strict';
 
+const { readFile, writeFile } = require('fs').promises;
 const resvg = require('@resvg/resvg-js');
-const {readFile, writeFile} = require('fs').promises;
 
 async function convertSvg2Png(svgPath, pngPath) {
     try {
         const svg = await readFile(svgPath);
         const pngData = await resvg.renderAsync(svg, {
-            fitTo: {mode: 'original'}
+            fitTo: { mode: 'original' }
         });
 
         await writeFile(pngPath, pngData);
