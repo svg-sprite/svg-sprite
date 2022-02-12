@@ -9,13 +9,13 @@ const SVGSpriter = require('../lib/svg-sprite.js');
 const isObject = obj => typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
 const expectations = [{
-    svg: 'without-dims.svg',
+    svg: '46x46.svg',
     result: {
-        width: 43,
-        height: 43
+        width: 46,
+        height: 46
     }
 }, {
-    svg: 'without-dims-2048x2048.svg',
+    svg: '2048x2048.svg',
     result: {
         width: 2048,
         height: 2048
@@ -35,7 +35,7 @@ describe('shape', () => {
                 }
             });
 
-            const svgFilePath = path.join(__dirname, `fixture/svg/special/${expectation.svg}`);
+            const svgFilePath = path.join(__dirname, `fixture/svg/special/without-dims/${expectation.svg}`);
 
             spriter.add(
                 svgFilePath,

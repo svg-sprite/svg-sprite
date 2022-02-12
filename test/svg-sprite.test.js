@@ -25,11 +25,9 @@ const mustache = require('mustache');
 const sass = require('sass');
 const less = require('less');
 const stylus = require('stylus');
+const puppeteer = require('puppeteer');
 const SVGSpriter = require('../lib/svg-sprite.js');
-const BrowserManager = require('../lib/browser-mananger.js');
 const convertSvg2Png = require('./helpers/convert-svg-2-png.js');
-
-const browserManager = new BrowserManager();
 
 const cwdWeather = path.join(__dirname, 'fixture/svg/single');
 const cwdWithoutDims = path.join(__dirname, 'fixture/svg/special/without-dims');
@@ -103,11 +101,11 @@ function writeFile(file, content) {
  * @param {Function} cb               Function
  */
 async function capturePuppeteer(src, target, cb) {
-    let page;
+    let browser;
 
     try {
-        const browser = await browserManager.getBrowser();
-        page = await browser.newPage();
+        browser = await puppeteer.launch();
+        const page = await browser.newPage();
         await page.setViewport({
             height: 1024,
             width: 1280
@@ -122,8 +120,8 @@ async function capturePuppeteer(src, target, cb) {
     } catch (error) {
         cb(error);
     } finally {
-        if (page) {
-            await page.close();
+        if (browser) {
+            await browser.close();
         }
     }
 }
@@ -138,32 +136,34 @@ async function capturePuppeteer(src, target, cb) {
  * @param {Function} done             Callback
  * @param {String} msg                Message
  */
-function compareSvg2Png(svg, png, expected, diff, done, msg) {
+async function compareSvg2Png(svg, png, expected, diff, done, msg) {
     fs.mkdirSync(path.dirname(png), { recursive: true });
+    let browser;
 
-    const ecb = function(err) {
-        console.log(err);
-        should(err).not.ok;
+    try {
+        browser = await puppeteer.launch();
+        await convertSvg2Png(svg, png, browser);
+        await looksSame(png, expected, (err, result) => {
+            should(result).ok;
+            should(err).not.ok;
+            should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
+            done();
+        });
+        looksSame.createDiff({
+            reference: expected,
+            current: png,
+            diff,
+            highlightColor: '#ff00ff'
+        }, () => {});
+    } catch (error) {
+        console.error(error);
+        should(error).not.ok;
         done();
-    };
-
-    browserManager
-        .getBrowser()
-        .then(browser => convertSvg2Png(svg, png, browser))
-        .then(() => {
-            looksSame(png, expected, (err, result) => {
-                should(err).not.ok;
-                should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
-                done();
-            });
-            looksSame.createDiff({
-                reference: expected,
-                current: png,
-                diff,
-                highlightColor: '#ff00ff'
-            }, () => {});
-        })
-        .catch(ecb);
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
+    }
 }
 
 before(done => {
@@ -173,8 +173,6 @@ before(done => {
 });
 
 describe('svg-sprite', () => {
-    after(() => browserManager.closeBrowser());
-
     const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
     const withoutDims = glob.sync('**/*.svg', { cwd: cwdWithoutDims });
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
@@ -451,7 +449,7 @@ describe('svg-sprite', () => {
 
                                 const out = mustache.render(previewTemplate, data);
                                 const preview = writeFile(path.join(__dirname, '../tmp/css/html/styl.html'), out);
-                                const previewImage = path.join(__dirname, '../tmp/css/png/styl.html.png');
+                                const previewImage = path.join(__dirname, `../tmp/css/png/styl${testConfig.namespace}.html.png`);
 
                                 preview.should.be.ok;
 
@@ -474,7 +472,7 @@ describe('svg-sprite', () => {
                 it('creates 2 files for packed layout', done => {
                     spriter.compile({
                         view: {
-                            sprite: 'svg/view.packed.svg',
+                            sprite: `svg/view.packed${testConfig.namespace}.svg`,
                             layout: 'packed',
                             dimensions: '-dims',
                             render: {
@@ -495,39 +493,37 @@ describe('svg-sprite', () => {
                     it('packed layout', done => {
                         compareSvg2Png(
                             path.join(__dirname, '../tmp/view/svg', svg.packed),
-                            path.join(__dirname, '../tmp/view/png/view.packed.png'),
+                            path.join(__dirname, `../tmp/view/png/view.packed${testConfig.namespace}.png`),
                             path.join(__dirname, `expected/png/css.packed${testConfig.namespace}.png`),
-                            path.join(__dirname, '../tmp/view/png/view.packed.diff.png'),
+                            path.join(__dirname, `../tmp/view/png/view.packed${testConfig.namespace}.diff.png`),
                             done,
                             'The packed sprite doesn\'t match the expected one!'
                         );
                     });
                 });
 
-                // Cannot be tested at the moment as PhantomJS 1.9 doesn't support fragment identifiers with SVG
-                //describe('creates a visually correct stylesheet resource in', () => {
-                //    it('CSS format', done => {
-                //        data.css = '../sprite.css';
-                //        const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/view.html'), 'utf-8');
-                //        const out = mustache.render(previewTemplate, data);
-                //        const preview = writeFile(path.join(__dirname, '../tmp/view/html/view.html'), out);
-                //        const previewImage = path.join(__dirname, '../tmp/view/png/view.html.png');
-                //        preview.should.be.ok;
-                //
-                //        capturePuppeteer(preview, previewImage, error => {
-                //            should(error).not.ok;
-                //            imageDiff({
-                //                actualImage: previewImage,
-                //                expectedImage: path.join(__dirname, 'expected/png/view.html.png'),
-                //                diffImage: path.join(__dirname, '../tmp/view/png/view.html.diff.png')
-                //            }, (error, imagesAreSame) => {
-                //                should(error).not.ok;
-                //                should.ok(imagesAreSame, 'The generated CSS preview doesn\'t match the expected one!');
-                //                done();
-                //            });
-                //        });
-                //    });
-                //});
+                describe('creates a visually correct stylesheet resource in', () => {
+                    it('CSS format', done => {
+                        data.css = '../sprite.css';
+                        const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/view.html'), 'utf-8');
+                        const out = mustache.render(previewTemplate, data);
+                        const preview = writeFile(path.join(__dirname, '../tmp/view/html/view.html'), out);
+                        const previewImage = path.join(__dirname, `../tmp/view/png/view.html${testConfig.namespace}.png`);
+                        preview.should.be.ok;
+
+                        capturePuppeteer(preview, previewImage, error => {
+                            should(error).not.ok;
+                            looksSame(
+                                previewImage,
+                                path.join(__dirname, `expected/png/view.html${testConfig.namespace}.png`)
+                                , (error, result) => {
+                                    should(error).not.ok;
+                                    should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
+                                    done();
+                                });
+                        });
+                    });
+                });
             });
         });
     });
