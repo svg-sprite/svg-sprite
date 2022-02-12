@@ -9,7 +9,7 @@ This file is part of the documentation of *svg-sprite* — a free low-level Node
 
 You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get all the available options:
 
-```bash
+```text
 Usage: svg-sprite [options] files
 
 Options:
