@@ -33,9 +33,6 @@
     "example": "node example.js",
     "test": "npm run mocha"
   },
-  "peerDependencies": {
-    "puppeteer": "^12.0.0 || ^13.0.0"
-  },
   "dependencies": {
     "@resvg/resvg-js": "^1.4.0",
     "@xmldom/xmldom": "^0.8.0",
