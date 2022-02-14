@@ -13,7 +13,7 @@ describe('testing fixing svg string', () => {
                                                             d"
                                                             viewBox="0 0 0 16
                                                                                                  16"></svg>`),
-                     '<svg fill="r e d" viewBox="0 0 0 16 16"/>');
+        '<svg fill="r e d" viewBox="0 0 0 16 16"/>');
     });
 
     it('should return valid svg file on svg with multiline attribute values', () => {
