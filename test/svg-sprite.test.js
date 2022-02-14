@@ -525,6 +525,28 @@ describe('svg-sprite', () => {
                     });
                 });
             });
+
+            // Test the universal mode
+            describe('in «universal» mode', () => {
+                it('creates 2 files for layout', done => {
+                    spriter.compile({
+                        universal: {
+                            sprite: `svg/universal.packed${testConfig.namespace}.svg`,
+                            dimensions: '-dims',
+                            layout: 'packed',
+                            render: {
+                                css: true
+                            }
+                        }
+                    }, (error, result, cssData) => {
+                        result.universal.should.be.an.Object;
+                        writeFiles(result).should.be.exactly(2);
+                        data = cssData.view;
+                        svg.univeral = path.basename(result.universal.sprite.path);
+                        done();
+                    });
+                });
+            });
         });
     });
 
