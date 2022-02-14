@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 const { Buffer } = require('buffer');
 const path = require('path');
 const fs = require('fs');
@@ -23,6 +23,7 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }, Error);
     });
+
     it('should not throw an error on valid svg file with multiline attribute values', () => {
         const spriter = new SVGSpriter({
             shape: {
@@ -41,6 +42,7 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }, Error);
     });
+
     it('should not throw an error on valid svg file with mutliple multilined attritbutes values', () => {
         const spriter = new SVGSpriter({
             shape: {
@@ -62,6 +64,7 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }, Error);
     });
+
     it('should throw an error on invalid file', () => {
         const spriter = new SVGSpriter({
             shape: {
@@ -76,6 +79,7 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }, Error);
     });
+
     it('should throw an error on non-svg files', () => {
         const spriter = new SVGSpriter({
             shape: {
@@ -105,6 +109,7 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }, Error);
     });
+
     it('should not throw an error on actual valid svg files', () => {
         const spriter = new SVGSpriter({
             shape: {
