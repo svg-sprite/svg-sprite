@@ -183,10 +183,14 @@ describe('svg-sprite', () => {
     const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/css.html'), 'utf-8');
 
     describe('with no arguments', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
+        let spriter;
+
+        beforeEach(() => {
+            spriter = new SVGSpriter({
+                shape: {
+                    dest: 'svg'
+                }
+            });
         });
 
         describe('with no SVG files', () => {
@@ -203,12 +207,6 @@ describe('svg-sprite', () => {
         });
 
         describe(`with ${weather.length} SVG files`, () => {
-            const spriter = new SVGSpriter({
-                shape: {
-                    dest: 'svg'
-                }
-            });
-
             it(`returns ${weather.length} optimized shapes`, done => {
                 addFixtureFiles(spriter, weather, cwdWeather);
                 spriter.compile((error, result, data) => {
@@ -225,12 +223,6 @@ describe('svg-sprite', () => {
         });
 
         describe(`with ${weather.length} relative path SVG files`, () => {
-            const spriter = new SVGSpriter({
-                shape: {
-                    dest: 'svg'
-                }
-            });
-
             it(`returns ${weather.length} optimized shapes`, done => {
                 addFixtureFiles(spriter, weather, cwdWeather, false);
                 spriter.compile((error, result, data) => {
