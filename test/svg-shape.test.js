@@ -8,13 +8,17 @@ const getShape = require('../lib/svg-sprite/shape.js');
 const SVGSpriter = require('../lib/svg-sprite.js');
 
 describe('testing SVGShape initialization', () => {
-    it('should not throw an error on valid svg file with multiline attribute values', () => {
-        const spriter = new SVGSpriter({
+    let spriter;
+
+    beforeEach(() => {
+        spriter = new SVGSpriter({
             shape: {
                 dest: 'svg'
             }
         });
+    });
 
+    it('should not throw an error on valid svg file with multiline attribute values', () => {
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,
@@ -25,12 +29,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error on valid svg file with multiline attribute values', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,
@@ -44,12 +42,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error on valid svg file with mutliple multilined attritbutes values', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,
@@ -66,12 +58,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should throw an error on invalid file', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         assert.throws(() => {
             getShape(new File({
                 path: __dirname,
@@ -81,12 +67,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should throw an error on non-svg files', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         assert.throws(() => {
             getShape(new File({
                 path: __dirname,
@@ -96,12 +76,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error on valid svg file with normal values', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,
@@ -111,12 +85,6 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error on actual valid svg files', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
-        });
-
         const cwdWeather = path.join(__dirname, 'fixture/svg/single');
         const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 
