@@ -1,4 +1,9 @@
 {
+  "all": true,
+  "include": [
+    "bin",
+    "lib"
+  ],
   "reporter": [
     "html",
     "lcov",
