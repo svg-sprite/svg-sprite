@@ -143,18 +143,18 @@ async function compareSvg2Png(svg, png, expected, diff, done, msg) {
     try {
         browser = await puppeteer.launch();
         await convertSvg2Png(svg, png, browser);
-        await looksSame(png, expected, (err, result) => {
-            should(result).ok;
-            should(err).not.ok;
-            should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
-            done();
-        });
         looksSame.createDiff({
             reference: expected,
             current: png,
             diff,
             highlightColor: '#ff00ff'
         }, () => {});
+        await looksSame(png, expected, (err, result) => {
+            should(result).ok;
+            should(err).not.ok;
+            should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
+            done();
+        });
     } catch (error) {
         console.error(error);
         should(error).not.ok;
@@ -529,10 +529,13 @@ describe('svg-sprite', () => {
             // Test the universal mode
             describe('in «universal» mode', () => {
                 it('creates 2 files for layout', done => {
+                    spriter = new SVGSpriter({
+                        dest
+                    });
+                    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
                     spriter.compile({
                         universal: {
                             sprite: `svg/universal.packed${testConfig.namespace}.svg`,
-                            dimensions: '-dims',
                             layout: 'packed',
                             render: {
                                 css: true
@@ -541,9 +544,47 @@ describe('svg-sprite', () => {
                     }, (error, result, cssData) => {
                         result.universal.should.be.an.Object;
                         writeFiles(result).should.be.exactly(2);
-                        data = cssData.view;
+                        data = cssData.universal;
                         svg.univeral = path.basename(result.universal.sprite.path);
                         done();
+                    });
+                });
+
+                describe('creates visually correct sprite with', () => {
+                    // Packed layout
+                    it('packed layout', done => {
+                        compareSvg2Png(
+                            path.join(__dirname, '../tmp/universal/svg', svg.univeral),
+                            path.join(__dirname, `../tmp/universal/png/universal.packed${testConfig.namespace}.png`),
+                            path.join(__dirname, `expected/png/universal.packed${testConfig.namespace}.png`),
+                            path.join(__dirname, `../tmp/universal/png/universal.packed${testConfig.namespace}.diff.png`),
+                            done,
+                            'The packed sprite doesn\'t match the expected one!'
+                        );
+                    });
+                });
+
+                describe('creates a visually correct stylesheet resource in', () => {
+                    it('CSS format', done => {
+                        data.css = '../sprite.css';
+                        data.svg = fs.readFileSync(path.join(__dirname, '../tmp/universal/svg', svg.univeral)).toString();
+                        const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/universal.html'), 'utf-8');
+                        const out = mustache.render(previewTemplate, data);
+                        const preview = writeFile(path.join(__dirname, '../tmp/universal/html/universal.html'), out);
+                        const previewImage = path.join(__dirname, `../tmp/universal/png/universal.html${testConfig.namespace}.png`);
+                        preview.should.be.ok;
+
+                        capturePuppeteer(preview, previewImage, error => {
+                            should(error).not.ok;
+                            looksSame(
+                                previewImage,
+                                path.join(__dirname, `expected/png/universal.html${testConfig.namespace}.png`)
+                                , (error, result) => {
+                                    should(error).not.ok;
+                                    should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
+                                    done();
+                                });
+                        });
                     });
                 });
             });
