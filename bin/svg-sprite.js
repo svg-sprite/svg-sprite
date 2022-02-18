@@ -15,6 +15,7 @@
  * Module dependencies.
  */
 const fs = require('node:fs');
+const fsPromises = require('node:fs').promises;
 const path = require('node:path');
 const merge = require('lodash.merge');
 const File = require('vinyl');
@@ -23,6 +24,8 @@ const glob = require('glob');
 let yargs = require('yargs');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const { isObject, zipObject } = require('../lib/svg-sprite/utils/index.js');
+
+console.time('build');
 
 yargs
   .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -106,22 +109,27 @@ function addConfigMap(store, path, value) {
  * @param {object} files Files
  * @returns {number}     Number of written files
  */
-function writeFiles(files) {
+async function writeFiles(files) {
   let written = 0;
+  const promises = [];
 
   for (const file of Object.values(files)) {
     if (!isObject(file)) {
       continue;
     }
 
-    if (file.constructor === File) {
-      fs.mkdirSync(path.dirname(file.path), { recursive: true });
-      fs.writeFileSync(file.path, file.contents);
-      ++written;
-    } else {
-      written += writeFiles(file);
-    }
+    promises.push(async() => {
+      if (file.constructor === File) {
+        await fsPromises.mkdir(path.dirname(file.path), { recursive: true });
+        await fsPromises.writeFile(file.path, file.contents);
+        ++written;
+      } else {
+        written += writeFiles(file);
+      }
+    });
   }
+
+  await Promise.all(promises);
 
   return written;
 }
@@ -268,28 +276,48 @@ if ('variables' in config) {
 }
 
 const spriter = new SVGSpriter(config);
-const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
 
-for (let file of files) {
-  let basename = file;
-  file = path.resolve(file); // TODO: get rid of variable redefinition
-  const stat = fs.lstatSync(file);
+const globPromise = pattern => {
+  return new Promise((resolve, reject) => {
+    glob(pattern, (error, matches) => {
+      if (error) {
+        return reject(error);
+      }
 
-  if (stat.isSymbolicLink()) {
-    file = fs.readlinkSync(file);
-    basename = path.basename(file);
-  } else {
-    const basepos = basename.lastIndexOf('./');
-    basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
-  }
+      resolve(matches);
+    });
+  });
+};
 
-  spriter.add(file, basename, fs.readFileSync(file));
-}
+const globPromises = argv._.map(g => globPromise(g));
 
-spriter.compile((error, result) => {
-  if (error) {
-    console.error(error);
-  } else {
-    writeFiles(result);
-  }
+Promise.all(globPromises).then(matches => {
+  const promises = matches.flat()
+    .map(async file => {
+      let basename = file;
+      file = path.resolve(file);
+      const stat = await fsPromises.lstat(file);
+      if (stat.isSymbolicLink()) {
+        file = await fsPromises.readlink(file);
+        basename = path.basename(file);
+      } else {
+        const basepos = basename.lastIndexOf('./');
+        basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
+      }
+
+      spriter.add(file, basename, await fsPromises.readFile(file));
+    });
+  return Promise.all(promises);
+}).then(() => {
+  spriter.compile(async(error, result) => {
+    if (error) {
+      console.error(error);
+    } else {
+      writeFiles(result);
+      console.timeEnd('build');
+    }
+  });
+// eslint-disable-next-line unicorn/prefer-top-level-await
+}).catch(error => {
+  console.error(error);
 });
