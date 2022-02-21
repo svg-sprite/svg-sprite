@@ -11,7 +11,7 @@ describe('testing SVGSpriter', () => {
     const TEST_SVG = 'fixture/svg/single/weather-clear.svg';
     const TEST_EMPTY_SVG = '<svg></svg>';
 
-    before(() => {
+    beforeEach(() => {
         spriter = new SVGSpriter({
             shape: {
                 dest: 'svg'
