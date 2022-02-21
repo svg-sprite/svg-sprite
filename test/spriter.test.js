@@ -6,10 +6,11 @@ const File = require('vinyl');
 const sinon = require('sinon');
 const SVGSpriter = require('../lib/svg-sprite.js');
 
+const TEST_SVG = 'fixture/svg/single/weather-clear.svg';
+const TEST_EMPTY_SVG = '<svg></svg>';
+
 describe('testing SVGSpriter', () => {
     let spriter;
-    const TEST_SVG = 'fixture/svg/single/weather-clear.svg';
-    const TEST_EMPTY_SVG = '<svg></svg>';
 
     beforeEach(() => {
         spriter = new SVGSpriter({
@@ -22,7 +23,6 @@ describe('testing SVGSpriter', () => {
     describe('testing add()', () => {
         describe('testing adding vinyl file', () => {
             it('should transform file.base of Vinyl file with path.resolve and add to _queue as vinyl file', () => {
-                const TEST_SVG = 'fixture/svg/single/weather-clear.svg';
                 const TEST_FILE = new File({
                     base: path.dirname(TEST_SVG),
                     path: TEST_SVG,
