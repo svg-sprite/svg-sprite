@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const assert = require('assert');
+const assert = require('assert').strict;
 const { Buffer } = require('buffer');
 const File = require('vinyl');
 const sinon = require('sinon');
