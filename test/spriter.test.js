@@ -84,7 +84,7 @@ describe('testing SVGSpriter', () => {
                 }, Error);
             });
 
-            it('should create vinyl file and add it to _queue', () => {
+            it('should create vinyl file from passed relative file and add it to _queue', () => {
                 spriter._queue = {
                     add: sinon.stub()
                 };
@@ -93,7 +93,21 @@ describe('testing SVGSpriter', () => {
                 const addedFile = spriter._queue.add.getCall(0).args[0];
                 assert.deepEqual(addedFile, new File({
                     base: path.dirname(path.resolve(TEST_SVG)),
-                    path: TEST_SVG,
+                    path: path.resolve(TEST_SVG),
+                    contents: Buffer.from(TEST_EMPTY_SVG)
+                }));
+            });
+
+            it('should create vinyl file from passed absolute file and add it to _queue', () => {
+                spriter._queue = {
+                    add: sinon.stub()
+                };
+                spriter.add(path.resolve(TEST_SVG), 'weather-clear.svg', TEST_EMPTY_SVG);
+
+                const addedFile = spriter._queue.add.getCall(0).args[0];
+                assert.deepEqual(addedFile, new File({
+                    base: path.dirname(path.resolve(TEST_SVG)),
+                    path: path.resolve(TEST_SVG),
                     contents: Buffer.from(TEST_EMPTY_SVG)
                 }));
             });

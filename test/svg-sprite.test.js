@@ -43,9 +43,9 @@ require('./helpers/resvg-preheat.js');
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
  * @param {String} cwd                Working directory
- * @param {Boolean=} resolvePaths     Whether to resolve the paths of SVG files
+ * @param {Boolean} resolvePaths      Whether to resolve the paths of SVG files
  */
-function addFixtureFiles(spriter, files, cwd, resolvePaths = true) {
+function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
     files.forEach(file => {
         spriter.add(
             resolvePaths ? path.resolve(path.join(cwd, file)) : file,
@@ -53,6 +53,28 @@ function addFixtureFiles(spriter, files, cwd, resolvePaths = true) {
             fs.readFileSync(path.join(cwd, file), 'utf-8')
         );
     });
+}
+
+/**
+ * Add a bunch of SVG files
+ *
+ * @param {SVGSpriter} spriter        Spriter instance
+ * @param {Array} files               SVG files
+ * @param {String} cwd                Working directory
+ */
+function addFixtureFiles(spriter, files, cwd) {
+    return addFixtureFilesBase(spriter, files, cwd, true);
+}
+
+/**
+ * Add a bunch of SVG files with relative paths
+ *
+ * @param {SVGSpriter} spriter        Spriter instance
+ * @param {Array} files               SVG files
+ * @param {String} cwd                Working directory
+ */
+function addRelativeFixtureFiles(spriter, files, cwd) {
+    return addFixtureFilesBase(spriter, files, cwd, false);
 }
 
 /**
@@ -222,9 +244,9 @@ describe('svg-sprite', () => {
             });
         });
 
-        describe(`with ${weather.length} relative path SVG files`, () => {
+        describe(`with ${weather.length} SVG files with relative paths`, () => {
             it(`returns ${weather.length} optimized shapes`, done => {
-                addFixtureFiles(spriter, weather, cwdWeather, false);
+                addRelativeFixtureFiles(spriter, weather, cwdWeather);
                 spriter.compile((error, result, data) => {
                     should(error).not.ok;
                     should(result).be.an.Object;
