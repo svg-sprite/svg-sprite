@@ -1,6 +1,6 @@
+const assert = require('assert').strict;
 const fs = require('fs');
 const path = require('path');
-const assert = require('assert').strict;
 const { Buffer } = require('buffer');
 const File = require('vinyl');
 const sinon = require('sinon');
@@ -47,6 +47,7 @@ describe('testing SVGSpriter', () => {
                     spriter.add(TEST_SVG, path.resolve(TEST_SVG), TEST_EMPTY_SVG);
                 }, Error);
             });
+
             it('should raise an error when passing less than 3 arguments', () => {
                 assert.throws(() => {
                     spriter.add(TEST_SVG);
@@ -55,16 +56,19 @@ describe('testing SVGSpriter', () => {
                     spriter.add(TEST_SVG, null);
                 });
             });
+
             it('should throw an error if passed file arg is empty', () => {
                 assert.throws(() => {
                     spriter.add('', null, TEST_EMPTY_SVG);
                 }, Error);
             });
+
             it('should throw an error if passed name arg is empty and file path is not valid', () => {
                 assert.throws(() => {
                     spriter.add(' ', '../', TEST_EMPTY_SVG);
                 }, Error);
             });
+
             it('should throw an error if passed svg arg is empty', () => {
                 assert.throws(() => {
                     spriter.add(TEST_SVG, null, '');
@@ -73,6 +77,7 @@ describe('testing SVGSpriter', () => {
                     spriter.add(TEST_SVG, null, ' ');
                 }, Error);
             });
+
             it('should throw an error if passed name differs from the ending of passed file path', () => {
                 assert.throws(() => {
                     spriter.add(TEST_SVG, 'absolutely-random-string', TEST_EMPTY_SVG);
