@@ -43,15 +43,38 @@ require('./helpers/resvg-preheat.js');
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
  * @param {String} cwd                Working directory
+ * @param {Boolean} resolvePaths      Whether to resolve the paths of SVG files
  */
-function addFixtureFiles(spriter, files, cwd) {
+function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
     files.forEach(file => {
         spriter.add(
-            path.resolve(path.join(cwd, file)),
+            resolvePaths ? path.resolve(path.join(cwd, file)) : file,
             file,
             fs.readFileSync(path.join(cwd, file), 'utf-8')
         );
     });
+}
+
+/**
+ * Add a bunch of SVG files
+ *
+ * @param {SVGSpriter} spriter        Spriter instance
+ * @param {Array} files               SVG files
+ * @param {String} cwd                Working directory
+ */
+function addFixtureFiles(spriter, files, cwd) {
+    return addFixtureFilesBase(spriter, files, cwd, true);
+}
+
+/**
+ * Add a bunch of SVG files with relative paths
+ *
+ * @param {SVGSpriter} spriter        Spriter instance
+ * @param {Array} files               SVG files
+ * @param {String} cwd                Working directory
+ */
+function addRelativeFixtureFiles(spriter, files, cwd) {
+    return addFixtureFilesBase(spriter, files, cwd, false);
 }
 
 /**
@@ -182,10 +205,14 @@ describe('svg-sprite', () => {
     const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/css.html'), 'utf-8');
 
     describe('with no arguments', () => {
-        const spriter = new SVGSpriter({
-            shape: {
-                dest: 'svg'
-            }
+        let spriter;
+
+        beforeEach(() => {
+            spriter = new SVGSpriter({
+                shape: {
+                    dest: 'svg'
+                }
+            });
         });
 
         describe('with no SVG files', () => {
@@ -204,6 +231,22 @@ describe('svg-sprite', () => {
         describe(`with ${weather.length} SVG files`, () => {
             it(`returns ${weather.length} optimized shapes`, done => {
                 addFixtureFiles(spriter, weather, cwdWeather);
+                spriter.compile((error, result, data) => {
+                    should(error).not.ok;
+                    should(result).be.an.Object;
+                    should(result).have.property('shapes');
+                    should(result.shapes).be.an.Array;
+                    should(result.shapes).have.lengthOf(weather.length);
+                    should(data).be.an.Object;
+                    should(data).be.empty;
+                    done();
+                });
+            });
+        });
+
+        describe(`with ${weather.length} SVG files with relative paths`, () => {
+            it(`returns ${weather.length} optimized shapes`, done => {
+                addRelativeFixtureFiles(spriter, weather, cwdWeather);
                 spriter.compile((error, result, data) => {
                     should(error).not.ok;
                     should(result).be.an.Object;
