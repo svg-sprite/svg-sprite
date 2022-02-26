@@ -5,9 +5,11 @@ const { readFileSync } = require('fs');
 const path = require('path');
 const calculateSvgDimensions = require('../lib/svg-sprite/calculate-svg-dimensions.js');
 
+// eslint-disable-next-line import/no-unassigned-import
+require('./helpers/resvg-preheat.js');
+
 describe('calculateSvgDimensions', () => {
-    it('should return the expected dimensions from 46x46 fixture', function() {
-        this.timeout(30_000);
+    it('should return the expected dimensions from 46x46 fixture', () => {
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
         const dimensions = calculateSvgDimensions(svg);

@@ -34,6 +34,9 @@ const cwdWithoutDims = path.join(__dirname, 'fixture/svg/special/without-dims');
 const cwdAlign = path.join(__dirname, 'fixture/svg/css');
 const dest = path.join(__dirname, '../tmp');
 
+// eslint-disable-next-line import/no-unassigned-import
+require('./helpers/resvg-preheat.js');
+
 /**
  * Add a bunch of SVG files
  *
