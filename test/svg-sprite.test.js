@@ -525,6 +525,58 @@ describe('svg-sprite', () => {
                     });
                 });
             });
+
+            // Test the symbol mode
+            describe('in «symbol» mode', () => {
+                it('creates 2 files for packed layout', done => {
+                    spriter = new SVGSpriter({
+                        dest
+                    });
+                    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+                    spriter.compile({
+                        symbol: {
+                            sprite: `svg/symbol${testConfig.namespace}.svg`,
+                            render: {
+                                css: true
+                            }
+                        }
+                    }, (error, result, cssData) => {
+                        result.symbol.should.be.an.Object;
+                        writeFiles(result).should.be.exactly(2);
+                        data = cssData.symbol;
+                        svg.symbol = path.basename(result.symbol.sprite.path);
+                        done();
+                    });
+                });
+
+                describe('creates a visually correct stylesheet resource in', () => {
+                    it('CSS format', done => {
+                        data.svg = fs.readFileSync(path.join(__dirname, '../tmp/symbol/svg', svg.symbol)).toString();
+                        data.css = '../sprite.css';
+                        const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/symbol.html'), 'utf-8');
+                        const out = mustache.render(previewTemplate, data);
+                        const preview = writeFile(path.join(__dirname, '../tmp/symbol/html/symbol.html'), out);
+                        const previewImage = path.join(__dirname, `../tmp/symbol/symbol.html${testConfig.namespace}.png`);
+                        preview.should.be.ok;
+
+                        capturePuppeteer(preview, previewImage, error => {
+                            should(error).not.ok;
+                            if (error) {
+                                return done(error);
+                            }
+
+                            looksSame(
+                                previewImage,
+                                path.join(__dirname, `expected/png/symbol.html${testConfig.namespace}.png`)
+                                , (error, result) => {
+                                    should(error).not.ok;
+                                    should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
+                                    done();
+                                });
+                        });
+                    });
+                });
+            });
         });
     });
 
