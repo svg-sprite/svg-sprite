@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert').strict;
 const { Buffer } = require('buffer');
 const path = require('path');
@@ -18,7 +20,7 @@ describe('testing SVGShape initialization', () => {
         });
     });
 
-    it('should not throw an error on valid svg file with multiline attribute values', () => {
+    it('should not throw an error on valid svg file with multiline attribute values 1', () => {
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,
@@ -28,7 +30,7 @@ describe('testing SVGShape initialization', () => {
         }, Error);
     });
 
-    it('should not throw an error on valid svg file with multiline attribute values', () => {
+    it('should not throw an error on valid svg file with multiline attribute values 2', () => {
         assert.doesNotThrow(() => {
             getShape(new File({
                 path: __dirname,

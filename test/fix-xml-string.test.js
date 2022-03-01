@@ -1,13 +1,15 @@
+'use strict';
+
 const assert = require('assert').strict;
 const fixXMLString = require('../lib/svg-sprite/fix-xml-string.js');
 
 describe('testing fixing svg string', () => {
-    it('should return valid svg file on svg with multiline attribute values', () => {
+    it('should return valid svg file on svg with multiline attribute values 1', () => {
         assert.equal(fixXMLString(`<svg viewBox="0 0 0 16
                                      16"></svg>`), '<svg viewBox="0 0 0 16 16"/>');
     });
 
-    it('should return valid svg file on svg with multiline attribute values', () => {
+    it('should return valid svg file on svg with multiline attribute values 2', () => {
         assert.equal(fixXMLString(`<svg fill="r
                                                             e
                                                             d"
@@ -16,7 +18,7 @@ describe('testing fixing svg string', () => {
         '<svg fill="r e d" viewBox="0 0 0 16 16"/>');
     });
 
-    it('should return valid svg file on svg with multiline attribute values', () => {
+    it('should return valid svg file on svg with multiline attribute values 3', () => {
         assert.equal(fixXMLString(`<svg fill="r
                                                             e
                                                             d"
