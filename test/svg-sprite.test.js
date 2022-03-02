@@ -29,10 +29,9 @@ const compareSvg2PngHelper = require('./helpers/compare-svg-2-png.js');
 const capturePuppeteer = require('./helpers/capture-puppeteer.js');
 const writeFiles = require('./helpers/write-files.js');
 const writeFile = require('./helpers/write-file.js');
-const { addFixtureFiles, addRelativeFixtureFiles } = require('./helpers/add-files.js');
+const { addFixtureFiles } = require('./helpers/add-files.js');
 const testConfigs = require('./helpers/test-configs.js');
 
-const cwdWeather = path.join(__dirname, 'fixture/svg/single');
 const cwdAlign = path.join(__dirname, 'fixture/svg/css');
 const tmpPath = require('./helpers/tmp-path.js');
 const expectationsPath = require('./helpers/expectations-path.js');
@@ -71,66 +70,8 @@ before(done => {
 });
 
 describe('svg-sprite', () => {
-    const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
     const previewTemplate = fs.readFileSync(path.join(__dirname, 'tmpl/css.html'), 'utf-8');
-
-    describe('with no arguments', () => {
-        let spriter;
-
-        beforeEach(() => {
-            spriter = new SVGSpriter({
-                shape: {
-                    dest: 'svg'
-                }
-            });
-        });
-
-        describe('with no SVG files', () => {
-            it('has an empty result', done => {
-                spriter.compile((error, result, data) => {
-                    should(error).not.ok;
-                    should(result).be.an.Object;
-                    should(result).be.empty;
-                    should(data).be.an.Object;
-                    should(data).be.empty;
-                    done();
-                });
-            });
-        });
-
-        describe(`with ${weather.length} SVG files`, () => {
-            it(`returns ${weather.length} optimized shapes`, done => {
-                addFixtureFiles(spriter, weather, cwdWeather);
-                spriter.compile((error, result, data) => {
-                    should(error).not.ok;
-                    should(result).be.an.Object;
-                    should(result).have.property('shapes');
-                    should(result.shapes).be.an.Array;
-                    should(result.shapes).have.lengthOf(weather.length);
-                    should(data).be.an.Object;
-                    should(data).be.empty;
-                    done();
-                });
-            });
-        });
-
-        describe(`with ${weather.length} SVG files with relative paths`, () => {
-            it(`returns ${weather.length} optimized shapes`, done => {
-                addRelativeFixtureFiles(spriter, weather, cwdWeather);
-                spriter.compile((error, result, data) => {
-                    should(error).not.ok;
-                    should(result).be.an.Object;
-                    should(result).have.property('shapes');
-                    should(result.shapes).be.an.Array;
-                    should(result.shapes).have.lengthOf(weather.length);
-                    should(data).be.an.Object;
-                    should(data).be.empty;
-                    done();
-                });
-            });
-        });
-    });
 
     // Test the minimum configuration
     [testConfigs.DEFAULT, testConfigs.WITHOUT_DIMS].forEach(testConfig => {
