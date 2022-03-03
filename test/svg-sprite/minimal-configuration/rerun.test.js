@@ -7,8 +7,9 @@ const should = require('should');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 const tmpPath = require('../../helpers/tmp-path.js');
+const fixturesPath = require('../../helpers/fixtures-path.js');
 
-const cwd = path.join(__dirname, '../../fixture/svg/single');
+const cwd = path.join(fixturesPath, 'svg/single');
 const weather = glob.sync('**/weather*.svg', { cwd });
 
 describe('testing rerun', () => {

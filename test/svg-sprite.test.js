@@ -30,8 +30,9 @@ const writeFiles = require('./helpers/write-files.js');
 const writeFile = require('./helpers/write-file.js');
 const { addFixtureFiles } = require('./helpers/add-files.js');
 const testConfigs = require('./helpers/test-configs.js');
+const fixturesPath = require('./helpers/fixtures-path.js');
 
-const cwdAlign = path.join(__dirname, 'fixture/svg/css');
+const cwdAlign = path.join(fixturesPath, 'svg/css');
 const tmpPath = require('./helpers/tmp-path.js');
 const expectationsPath = require('./helpers/expectations-path.js');
 
@@ -417,7 +418,7 @@ describe('svg-sprite', () => {
                 spriter = new SVGSpriter({
                     dest,
                     shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.centered.yaml'),
+                        align: path.join(fixturesPath, 'yaml/align.centered.yaml'),
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
@@ -481,7 +482,7 @@ describe('svg-sprite', () => {
                 spriter = new SVGSpriter({
                     dest,
                     shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.centered.yaml'),
+                        align: path.join(fixturesPath, 'yaml/align.centered.yaml'),
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
@@ -551,7 +552,7 @@ describe('svg-sprite', () => {
                 spriter = new SVGSpriter({
                     dest,
                     shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.centered.yaml'),
+                        align: path.join(fixturesPath, 'yaml/align.centered.yaml'),
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
@@ -632,7 +633,7 @@ describe('svg-sprite', () => {
                 spriter = new SVGSpriter({
                     dest,
                     shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.mixed.yaml'),
+                        align: path.join(fixturesPath, 'yaml/align.mixed.yaml'),
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
@@ -696,7 +697,7 @@ describe('svg-sprite', () => {
                 spriter = new SVGSpriter({
                     dest,
                     shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.mixed.yaml'),
+                        align: path.join(fixturesPath, 'yaml/align.mixed.yaml'),
                         dimension: {
                             maxWidth: 200,
                             maxHeight: 200
@@ -762,81 +763,6 @@ describe('svg-sprite', () => {
                     });
                 }
                 );
-            });
-        });
-
-        describe('with «view» mode, packed layout and LESS render type', () => {
-            it('creates 2 files', done => {
-                spriter = new SVGSpriter({
-                    dest,
-                    shape: {
-                        align: path.join(__dirname, 'fixture/yaml/align.mixed.yaml'),
-                        dimension: {
-                            maxWidth: 200,
-                            maxHeight: 200
-                        }
-                    }
-                });
-                addFixtureFiles(spriter, align, cwdAlign);
-                spriter.compile({
-                    view: {
-                        sprite: 'svg/view.packed.mixed.svg',
-                        layout: 'packed',
-                        dimensions: true,
-                        render: {
-                            less: {
-                                dest: 'sprite.mixed.less'
-                            }
-                        }
-                    }
-                }, (error, result, cssData) => {
-                    result.view.should.be.an.Object;
-                    writeFiles(result).should.be.exactly(2);
-                    data = cssData.view;
-                    svg.packed = path.basename(result.view.sprite.path);
-                    done();
-                });
-            });
-
-            it('creates visually correct sprite', done => {
-                compareSvg2Png(
-                    path.join(tmpPath, 'view/svg', svg.packed),
-                    path.join(tmpPath, 'view/png/css.packed.mixed.png'),
-                    path.join(expectationsPath, '/png/css.packed.aligned.png'),
-                    path.join(tmpPath, 'view/png/css.packed.mixed.diff.png'),
-                    done,
-                    'The packed sprite doesn\'t match the expected one!'
-                );
-            });
-
-            it('creates a visually correct stylesheet resource', done => {
-                const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
-
-                fs.readFile(lessFile, 'utf-8', (err, lessText) => {
-                    should(err).not.ok;
-
-                    less.render(lessText, {}, (error, output) => {
-                        should(error).not.ok;
-                        should(writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css)).be.ok;
-
-                        data.css = '../sprite.mixed.less.css';
-
-                        const out = mustache.render(previewTemplate, data);
-                        const preview = writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
-                        const previewImage = path.join(tmpPath, 'view/png/less.packed.mixed.html.png');
-
-                        preview.should.be.ok;
-
-                        capturePuppeteer(preview, previewImage, error => {
-                            should(error).not.ok;
-                            looksSame(previewImage, path.join(expectationsPath, '/png/css.packed.aligned.html.png'), (error, result) => {
-                                should(error).not.ok;
-                                should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
-                                done();
-                            });
-                        });
-                    });
-                });
             });
         });
     });
