@@ -22,6 +22,7 @@ const yaml = require('js-yaml');
 const glob = require('glob');
 let yargs = require('yargs');
 const SVGSpriter = require('../lib/svg-sprite.js');
+const { isObject } = require('../lib/svg-sprite/utils/index.js');
 
 yargs
     .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -89,7 +90,7 @@ function addOption(name, option) {
 function addConfigMap(store, path, value) {
     const key = path.shift();
     if (path.length) {
-        if (!(key in store) || !_.isObject(store[key])) {
+        if (!(key in store) || !isObject(store[key])) {
             store[key] = {};
         }
 
@@ -110,7 +111,7 @@ function writeFiles(files) {
     for (const key in files) {
         const file = files[key];
 
-        if (_.isObject(file)) {
+        if (isObject(file)) {
             if (file.constructor === File) {
                 fs.mkdirSync(path.dirname(file.path), { recursive: true });
                 fs.writeFileSync(file.path, file.contents);
@@ -161,7 +162,7 @@ if (argv.config) {
         }
 
         // Expand shorthand mode definitions
-        if ('mode' in externalConfig && _.isObject(externalConfig.mode)) {
+        if ('mode' in externalConfig && isObject(externalConfig.mode)) {
             for (const emode in externalConfig.mode) {
                 if (externalConfig.mode[emode] === true) {
                     const defaultEmode = {
