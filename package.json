@@ -21,7 +21,6 @@
   },
   "files": [
     "bin",
-    "docs",
     "lib",
     "tmpl"
   ],
