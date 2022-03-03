@@ -82,7 +82,7 @@ describe('svg-sprite', () => {
 
             // Test the CSS mode
             describe('in «css» mode and all render types enabled', () => {
-                it('creates 5 files for vertical layout', done => {
+                before(done => {
                     spriter = new SVGSpriter({
                         dest
                     });
@@ -99,56 +99,38 @@ describe('svg-sprite', () => {
                                 styl: true
                             }
                         }
-                    }, (error, result, cssData) => {
-                        result.css.should.be.an.Object;
-                        writeFiles(result).should.be.exactly(5);
+                    }, async(error, result, cssData) => {
+                        writeFiles(result);
                         data = cssData.css;
                         svg.vertical = path.basename(result.css.sprite.path);
-                        done();
-                    });
-                });
 
-                describe('then rerun with all render types disabled', () => {
-                    it('creates 1 additional file for horizontal layout', done => {
-                        spriter.compile({
-                            css: {
-                                sprite: `svg/css.horizontal${testConfig.namespace}.svg`,
-                                layout: 'horizontal'
-                            }
-                        }, (error, result) => {
-                            result.css.should.be.an.Object;
-                            writeFiles(result).should.be.exactly(1);
-                            svg.horizontal = path.basename(result.css.sprite.path);
-                            done();
-                        });
-                    });
+                        const otherLayouts = ['horizontal', 'diagonal', 'packed'];
 
-                    it('creates 1 additional file for diagonal layout', done => {
-                        spriter.compile({
-                            css: {
-                                sprite: `svg/css.diagonal${testConfig.namespace}.svg`,
-                                layout: 'diagonal'
-                            }
-                        }, (error, result) => {
-                            result.css.should.be.an.Object;
-                            writeFiles(result).should.be.exactly(1);
-                            svg.diagonal = path.basename(result.css.sprite.path);
-                            done();
-                        });
-                    });
+                        const promises = otherLayouts.map(layout => {
+                            return new Promise((resolve, reject) => {
+                                spriter.compile({
+                                    css: {
+                                        sprite: `svg/css.${layout}${testConfig.namespace}.svg`,
+                                        layout
+                                    }
+                                }, (err, result) => {
+                                    if (err) {
+                                        return reject(err);
+                                    }
 
-                    it('creates 1 additional file for packed layout', done => {
-                        spriter.compile({
-                            css: {
-                                sprite: `svg/css.packed${testConfig.namespace}.svg`,
-                                layout: 'packed'
-                            }
-                        }, (error, result) => {
-                            result.css.should.be.an.Object;
-                            writeFiles(result).should.be.exactly(1);
-                            svg.packed = path.basename(result.css.sprite.path);
-                            done();
+                                    writeFiles(result);
+                                    svg[layout] = path.basename(result.css.sprite.path);
+                                    resolve();
+                                });
+                            });
                         });
+
+                        try {
+                            await Promise.all(promises);
+                            done();
+                        } catch (error_) {
+                            done(error_);
+                        }
                     });
                 });
 
