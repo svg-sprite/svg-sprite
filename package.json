@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "c8": "^7.11.0",
+    "eslint-plugin-jsdoc": "^37.9.6",
     "less": "^4.1.2",
     "looks-same": "^7.3.0",
     "mocha": "^9.2.1",
@@ -88,6 +89,12 @@
   ],
   "xo": {
     "space": 4,
+    "plugins": [
+      "jsdoc"
+    ],
+    "extends": [
+      "plugin:jsdoc/recommended"
+    ],
     "rules": {
       "arrow-body-style": "off",
       "capitalized-comments": "off",
@@ -97,6 +104,14 @@
       ],
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
+      "jsdoc/check-values": [
+        "warn",
+        {
+          "allowedLicenses": ["MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE"]
+        }
+      ],
+      "jsdoc/no-undefined-types": ["error", {"definedTypes": ["SVGSpriter", "File", "SVGShape", "SVGSprite", "puppeteer", "HTMLElement"]}],
+      "jsdoc/require-returns": "error",
       "max-depth": [
         "warn",
         5

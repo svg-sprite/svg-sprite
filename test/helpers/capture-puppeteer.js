@@ -5,8 +5,8 @@ const puppeteer = require('puppeteer');
 /**
  * Capture a screenshot of a URL using puppeteer
  *
- * @param {String} src                Source file
- * @param {String} target             Screenshot file
+ * @param {string} src                Source file
+ * @param {string} target             Screenshot file
  * @param {Function} cb               Function
  */
 module.exports = async(src, target, cb) => {

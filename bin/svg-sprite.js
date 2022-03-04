@@ -6,7 +6,6 @@
  * svg-sprite is a Node.js module for creating SVG sprites
  *
  * @see https://github.com/svg-sprite/svg-sprite
- *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
  * @license MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE
@@ -42,9 +41,8 @@ const optionsMap = {};
 /**
  * Add a command line option
  *
- * @param {String} name Option name
- * @param {Object} option Option configuration
- * @return {void}
+ * @param {string} name Option name
+ * @param {object} option Option configuration
  */
 function addOption(name, option) {
     let alias = name;
@@ -84,9 +82,9 @@ function addOption(name, option) {
 /**
  * Add a value to the global configuration
  *
- * @param {Object} store Configuration
- * @param {Array} path Path
- * @param {Mixed} value Value
+ * @param {object} store Configuration
+ * @param {Array<string>} path Path
+ * @param {any} value Value
  */
 function addConfigMap(store, path, value) {
     const key = path.shift();
@@ -104,8 +102,8 @@ function addConfigMap(store, path, value) {
 /**
  * Recursively write files to disc
  *
- * @param {Object} files Files
- * @return {Number} Number of written files
+ * @param {object} files Files
+ * @returns {number}     Number of written files
  */
 function writeFiles(files) {
     let written = 0;

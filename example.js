@@ -55,7 +55,7 @@ const spriter = new SVGSpriter({
  *
  * @param {SVGSpriter} spriter          Spriter instance
  * @param {Array} files                 SVG files
- * @return {SVGSpriter}                 Spriter instance
+ * @returns {SVGSpriter}                Spriter instance
  */
 function addFixtureFiles(spriter, files) {
     files.forEach(file => {

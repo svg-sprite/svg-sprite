@@ -8,8 +8,8 @@ const File = require('vinyl');
 /**
  * Recursively write files to disc
  *
- * @param {Object} files              Files
- * @return {Number}                   Number of written files
+ * @param {object} files              Files
+ * @returns {number}                  Number of written files
  */
 module.exports = function writeFiles(files) {
     let written = 0;

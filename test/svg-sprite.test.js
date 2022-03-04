@@ -4,7 +4,6 @@
  * svg-sprite is a Node.js module for creating SVG sprites
  *
  * @see https://github.com/svg-sprite/svg-sprite
- *
  * @author Joschi Kuphal <joschi@kuphal.net> (https://github.com/jkphl)
  * @copyright © 2018 Joschi Kuphal
  * @license MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE
@@ -41,12 +40,12 @@ const dest = tmpPath;
 /**
  * Rasterize an SVG file and compare it to an expected image
  *
- * @param {String} svg                SVG file path
- * @param {String} png                PNG file path
- * @param {String} expected           Expected PNG file path
- * @param {String} diff               Diff file path
+ * @param {string} svg                SVG file path
+ * @param {string} png                PNG file path
+ * @param {string} expected           Expected PNG file path
+ * @param {string} diff               Diff file path
  * @param {Function} done             Callback
- * @param {String} msg                Message
+ * @param {string} msg                Message
  */
 async function compareSvg2Png(svg, png, expected, diff, done, msg) {
     try {

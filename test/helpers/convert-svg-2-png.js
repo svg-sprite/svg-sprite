@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * @param {string} svgPath svg path
+ * @param {string} pngPath png path
+ * @param {puppeteer.Browser} browser puppeteer browser
+ */
 async function convertSvg2Png(svgPath, pngPath, browser) {
     let page;
 
