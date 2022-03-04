@@ -3,39 +3,34 @@
 const assert = require('assert').strict;
 const { isFunction, isObject } = require('../lib/svg-sprite/utils/index.js');
 
-describe('testing utils', () => {
+describe('utils', () => {
     describe('isFunction', () => {
         it('should return true for a class', () => {
             assert.equal(isFunction(class {}), true);
         });
 
         it('should return true for a function', () => {
-            assert.equal(
-                isFunction(() => {}),
-                true
-            );
+            assert.equal(isFunction(() => {}), true);
         });
 
-        it('should return true for async function', () => {
-            assert.equal(
-                isFunction(async() => {}),
-                true
-            );
+        it('should return true for an async function', () => {
+            assert.equal(isFunction(async() => {}), true);
         });
 
         it('should return true for generator function', () => {
-            assert.equal(
-                isFunction(function * () {}),
-                true
-            );
+            assert.equal(isFunction(function * () {}), true);
         });
 
         it('should return false for a RegExp', () => {
             assert.equal(isFunction(/a/g), false);
         });
 
-        it('should return false for null', () => {
+        it('should return false for a null value', () => {
             assert.equal(isFunction(null), false);
+        });
+
+        it('should return false for an undefined value', () => {
+            assert.equal(isFunction(undefined), false);
         });
     });
 
@@ -54,6 +49,10 @@ describe('testing utils', () => {
 
         it('should return false for a null value', () => {
             assert.equal(isObject(null), false);
+        });
+
+        it('should return false for an undefined value', () => {
+            assert.equal(isObject(undefined), false);
         });
     });
 });
