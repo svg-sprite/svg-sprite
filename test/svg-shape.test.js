@@ -8,6 +8,7 @@ const File = require('vinyl');
 const glob = require('glob');
 const getShape = require('../lib/svg-sprite/shape.js');
 const SVGSpriter = require('../lib/svg-sprite.js');
+const fixturesPath = require('./helpers/fixtures-path.js');
 
 describe('testing SVGShape initialization', () => {
     let spriter;
@@ -87,7 +88,7 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error on actual valid svg files', () => {
-        const cwdWeather = path.join(__dirname, 'fixture/svg/single');
+        const cwdWeather = path.join(fixturesPath, 'svg/single');
         const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 
         weather.forEach(weatherFile => {
