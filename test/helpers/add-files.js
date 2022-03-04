@@ -8,8 +8,8 @@ const path = require('path');
  *
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
- * @param {String} cwd                Working directory
- * @param {Boolean} resolvePaths      Whether to resolve the paths of SVG files
+ * @param {string} cwd                Working directory
+ * @param {boolean} resolvePaths      Whether to resolve the paths of SVG files
  */
 function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
     files.forEach(file => {
@@ -26,10 +26,10 @@ function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
  *
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
- * @param {String} cwd                Working directory
+ * @param {string} cwd                Working directory
  */
 function addFixtureFiles(spriter, files, cwd) {
-    return addFixtureFilesBase(spriter, files, cwd, true);
+    addFixtureFilesBase(spriter, files, cwd, true);
 }
 
 /**
@@ -37,10 +37,10 @@ function addFixtureFiles(spriter, files, cwd) {
  *
  * @param {SVGSpriter} spriter        Spriter instance
  * @param {Array} files               SVG files
- * @param {String} cwd                Working directory
+ * @param {string} cwd                Working directory
  */
 function addRelativeFixtureFiles(spriter, files, cwd) {
-    return addFixtureFilesBase(spriter, files, cwd, false);
+    addFixtureFilesBase(spriter, files, cwd, false);
 }
 
 module.exports = {

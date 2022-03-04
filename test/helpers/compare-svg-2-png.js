@@ -9,10 +9,10 @@ const convertSvg2Png = require('./convert-svg-2-png.js');
 /**
  * Rasterize an SVG file and compare it to an expected image
  *
- * @param {String} svg                SVG file path
- * @param {String} png                PNG file path
- * @param {String} expected           Expected PNG file path
- * @param {String} diff               Diff file path
+ * @param {string} svg                SVG file path
+ * @param {string} png                PNG file path
+ * @param {string} expected           Expected PNG file path
+ * @param {string} diff               Diff file path
  * @param {Function} done             Callback
  */
 module.exports = async(svg, png, expected, diff, done) => {
