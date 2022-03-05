@@ -107,10 +107,24 @@
       "jsdoc/check-values": [
         "warn",
         {
-          "allowedLicenses": ["MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE"]
+          "allowedLicenses": [
+            "MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE"
+          ]
         }
       ],
-      "jsdoc/no-undefined-types": ["error", {"definedTypes": ["SVGSpriter", "File", "SVGShape", "SVGSprite", "puppeteer", "HTMLElement"]}],
+      "jsdoc/no-undefined-types": [
+        "error",
+        {
+          "definedTypes": [
+            "SVGSpriter",
+            "File",
+            "SVGShape",
+            "SVGSprite",
+            "puppeteer",
+            "HTMLElement"
+          ]
+        }
+      ],
       "jsdoc/require-returns": "error",
       "max-depth": [
         "warn",
