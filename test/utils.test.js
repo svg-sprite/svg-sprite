@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assert').strict;
-const { isFunction, isObject } = require('../lib/svg-sprite/utils/index.js');
+const { isFunction, isObject, isString } = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
     describe('isFunction', () => {
@@ -81,6 +81,32 @@ describe('utils', () => {
 
         it('should return false for a boolean value', () => {
             assert.equal(isObject(false), false);
+        });
+    });
+
+    describe('isString', () => {
+        it('should return true for a string', () => {
+            assert.equal(isString('test'), true);
+        });
+
+        it('should return false for an array', () => {
+            assert.equal(isString([1, 2, 3]), false);
+        });
+
+        it('should return false for a Function constructor', () => {
+            assert.equal(isString(Function), false);
+        });
+
+        it('should return false for a null value', () => {
+            assert.equal(isString(null), false);
+        });
+
+        it('should return false for an undefined value', () => {
+            assert.equal(isString(undefined), false);
+        });
+
+        it('should return false for a boolean value', () => {
+            assert.equal(isString(false), false);
         });
     });
 });
