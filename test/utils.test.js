@@ -74,5 +74,13 @@ describe('utils', () => {
         it('should return false for an undefined value', () => {
             assert.equal(isObject(undefined), false);
         });
+
+        it('should return false for a string value', () => {
+            assert.equal(isObject('test'), false);
+        });
+
+        it('should return false for a boolean value', () => {
+            assert.equal(isObject(false), false);
+        });
     });
 });
