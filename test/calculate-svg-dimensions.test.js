@@ -3,7 +3,7 @@
 const assert = require('assert').strict;
 const { readFileSync } = require('fs');
 const path = require('path');
-const calculateSvgDimensions = require('../lib/svg-sprite/calculate-svg-dimensions.js');
+const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
 const fixturesPath = require('./helpers/fixtures-path.js');
 
 describe('calculateSvgDimensions', () => {

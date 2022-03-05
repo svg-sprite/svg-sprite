@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assert').strict;
-const fixXMLString = require('../lib/svg-sprite/fix-xml-string.js');
+const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
 
 describe('testing fixing svg string', () => {
     it('should return valid svg file on svg with multiline attribute values 1', () => {
