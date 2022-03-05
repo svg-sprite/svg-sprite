@@ -75,8 +75,8 @@ function addOption(name, option) {
     }
 
     const { description, alias: optAlias, default: optDefault, map, ...children } = option;
-    for (const sub in children) {
-        addOption(`${name}-${sub}`, children[sub]);
+    for (const [key, value] of Object.entries(children)) {
+        addOption(`${name}-${key}`, value);
     }
 }
 
@@ -126,8 +126,8 @@ function writeFiles(files) {
 // Get document, or throw exception on error
 try {
     const options = yaml.load(fs.readFileSync(path.resolve(__dirname, 'config.yaml'), 'utf8'));
-    for (const name in options) {
-        addOption(name, options[name]);
+    for (const [key, value] of Object.entries(options)) {
+        addOption(key, value);
     }
 } catch (error) {
     console.log(error);
@@ -136,12 +136,12 @@ try {
 const { argv } = yargs;
 
 // Map all arguments to a global configuration object
-for (const map in optionsMap) {
-    if (!(optionsMap[map] in argv)) {
+for (const [key, value] of Object.entries(optionsMap)) {
+    if (!(value in argv)) {
         continue;
     }
 
-    addConfigMap(config, map.split('.'), argv[optionsMap[map]]);
+    addConfigMap(config, key.split('.'), argv[value]);
 }
 
 // Load external JSON config file
@@ -238,7 +238,7 @@ if (typeof config.shape.transform === 'string') {
 }, config.mode);
 
 // Remove excessive example options
-for (const mode in config.mode) {
+for (const mode of Object.keys(config.mode)) {
     const example = `${mode}-example`;
     if (!argv[example] && (!(mode in JSONConfig.mode) || !('example' in JSONConfig.mode[mode])) && 'example' in config.mode[mode]) {
         delete config.mode[mode].example;
