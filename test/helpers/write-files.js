@@ -8,7 +8,7 @@ const { isObject } = require('../../lib/svg-sprite/utils/index.js');
 /**
  * Recursively write files to disc
  *
- * @param {object} files              Files
+ * @param {object|Array} files        Files
  * @returns {number}                  Number of written files
  */
 module.exports = function writeFiles(files) {
@@ -16,7 +16,7 @@ module.exports = function writeFiles(files) {
     for (const key in files) {
         const file = files[key];
 
-        if (isObject(file)) {
+        if (isObject(file) || Array.isArray(file)) {
             if (file.constructor === File) {
                 fs.mkdirSync(path.dirname(file.path), { recursive: true });
                 fs.writeFileSync(file.path, file.contents);

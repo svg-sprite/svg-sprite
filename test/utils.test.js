@@ -59,12 +59,12 @@ describe('utils', () => {
             assert.equal(isObject({}), true);
         });
 
-        it('should return true for an array', () => {
-            assert.equal(isObject([1, 2, 3]), true);
+        it('should return false for an array', () => {
+            assert.equal(isObject([1, 2, 3]), false);
         });
 
-        it('should return true for a Function constructor', () => {
-            assert.equal(isObject(Function), true);
+        it('should return false for a Function constructor', () => {
+            assert.equal(isObject(Function), false);
         });
 
         it('should return false for a null value', () => {
