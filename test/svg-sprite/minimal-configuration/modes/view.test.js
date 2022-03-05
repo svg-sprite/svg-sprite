@@ -16,7 +16,7 @@ const expectationsPath = require('../../../helpers/expectations-path.js');
 const writeFile = require('../../../helpers/write-file.js');
 const capturePuppeteer = require('../../../helpers/capture-puppeteer.js');
 const fixturesPath = require('../../../helpers/fixtures-path.js');
-const compareSvg2PngHelper = require('../../../helpers/compare-svg-2-png.js');
+const compareSvg2PngHelper = require('../../../helpers/compare-svg-2-png-helper.js');
 
 /**
  * Rasterize an SVG file and compare it to an expected image
@@ -43,7 +43,7 @@ async function compareSvg2Png(svg, png, expected, diff, done, msg) {
     }
 }
 
-describe('with «view» mode, packed layout and LESS render type', () => {
+describe('svg-sprite: with «view» mode, packed layout and LESS render type', () => {
     let spriter;
     const cwdAlign = path.join(fixturesPath, 'svg/css');
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
