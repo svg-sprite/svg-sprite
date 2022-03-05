@@ -14,7 +14,7 @@ const compareSvg2PngHelper = require('./compare-svg-2-png-helper.js');
  * @param {Function} done             Callback
  * @param {string} msg                Message
  */
-module.exports = async function(svg, png, expected, diff, done, msg) {
+module.exports = async(svg, png, expected, diff, done, msg) => {
     try {
         await compareSvg2PngHelper(svg, png, expected, diff, (error, result) => {
             should(result).ok;

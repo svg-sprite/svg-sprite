@@ -162,8 +162,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
                         done();
                     });
                 });
-            }
-            );
+            });
         });
     });
 });

@@ -199,8 +199,7 @@ describe('svg-sprite', () => {
                                     done();
                                 });
                             });
-                        }
-                        );
+                        });
                     });
 
                     // LESS
@@ -315,8 +314,8 @@ describe('svg-sprite', () => {
                             should(error).not.ok;
                             looksSame(
                                 previewImage,
-                                path.join(expectationsPath, `png/view.html${testConfig.namespace}.png`)
-                                , (error, result) => {
+                                path.join(expectationsPath, `png/view.html${testConfig.namespace}.png`),
+                                (error, result) => {
                                     should(error).not.ok;
                                     should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
                                     done();
@@ -367,8 +366,8 @@ describe('svg-sprite', () => {
 
                             looksSame(
                                 previewImage,
-                                path.join(expectationsPath, `png/symbol.html${testConfig.namespace}.png`)
-                                , (error, result) => {
+                                path.join(expectationsPath, `png/symbol.html${testConfig.namespace}.png`),
+                                (error, result) => {
                                     should(error).not.ok;
                                     should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
                                     done();

@@ -158,8 +158,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         done();
                     });
                 });
-            }
-            );
+            });
         });
     });
 
