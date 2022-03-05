@@ -32,6 +32,26 @@ describe('utils', () => {
         it('should return false for an undefined value', () => {
             assert.equal(isFunction(undefined), false);
         });
+
+        it('should return false for a plain object', () => {
+            assert.equal(isFunction({}), false);
+        });
+
+        it('should return false for an array', () => {
+            assert.equal(isFunction([1, 2, 3]), false);
+        });
+
+        it('should return false for a numeric value', () => {
+            assert.equal(isFunction(123), false);
+        });
+
+        it('should return false for a string', () => {
+            assert.equal(isFunction('test'), false);
+        });
+
+        it('should return false for a boolean value', () => {
+            assert.equal(isFunction(false), false);
+        });
     });
 
     describe('isObject', () => {
