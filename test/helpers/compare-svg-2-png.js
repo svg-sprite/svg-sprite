@@ -1,10 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const puppeteer = require('puppeteer');
-const looksSame = require('looks-same');
-const convertSvg2Png = require('./convert-svg-2-png.js');
+/* eslint-disable no-unused-expressions */
+const should = require('should');
+const compareSvg2PngHelper = require('./compare-svg-2-png-helper.js');
 
 /**
  * Rasterize an SVG file and compare it to an expected image
@@ -14,29 +12,19 @@ const convertSvg2Png = require('./convert-svg-2-png.js');
  * @param {string} expected           Expected PNG file path
  * @param {string} diff               Diff file path
  * @param {Function} done             Callback
+ * @param {string} msg                Message
  */
-module.exports = async(svg, png, expected, diff, done) => {
-    fs.mkdirSync(path.dirname(png), { recursive: true });
-    let browser;
-
+module.exports = async(svg, png, expected, diff, done, msg) => {
     try {
-        browser = await puppeteer.launch();
-        await convertSvg2Png(svg, png, browser);
-        looksSame.createDiff({
-            reference: expected,
-            current: png,
-            diff,
-            highlightColor: '#ff00ff'
-        }, () => {});
-        await looksSame(png, expected, (err, result) => {
-            done(err, result);
+        await compareSvg2PngHelper(svg, png, expected, diff, (error, result) => {
+            should(result).ok;
+            should(error).not.ok;
+            should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
+            done();
         });
     } catch (error) {
         console.error(error);
-        done(error);
-    } finally {
-        if (browser) {
-            await browser.close();
-        }
+        should(error).not.ok;
+        done();
     }
 };
