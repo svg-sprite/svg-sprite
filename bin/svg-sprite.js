@@ -201,7 +201,8 @@ if (typeof config.shape.transform === 'string') {
     const transform = String(config.shape.transform).trim();
     config.shape.transform = [];
     (transform.length ? transform.split(',').map(trans => String(trans).trim()) : [])
-        .forEach(function(transform) {
+        // TODO
+        .forEach(function(transform) { // eslint-disable-line unicorn/no-array-for-each
             if (transform.length) {
                 if (`shape-transform-${transform}` in argv) {
                     try {
@@ -218,6 +219,8 @@ if (typeof config.shape.transform === 'string') {
 }
 
 // Run through all sprite modes
+// TODO
+// eslint-disable-next-line unicorn/no-array-for-each
 ['css', 'view', 'defs', 'symbol', 'stack'].forEach(function(mode) {
     if (!argv[mode] && !(mode in JSONConfig.mode)) {
         delete this[mode];
@@ -225,6 +228,8 @@ if (typeof config.shape.transform === 'string') {
     }
 
     // Remove excessive render types
+    // TODO
+    // eslint-disable-next-line unicorn/no-array-for-each
     ['css', 'scss', 'less', 'styl'].forEach(function(render) {
         const arg = `${mode}-render-${render}`;
         if (render in this && !argv[arg] && (!(mode in JSONConfig.mode) || !('render' in JSONConfig.mode[mode]) || !(render in JSONConfig.mode[mode].render))) {
