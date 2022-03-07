@@ -15,7 +15,6 @@
 const fs = require('fs');
 const path = require('path');
 const should = require('should');
-const rimraf = require('rimraf');
 const looksSame = require('looks-same');
 const mustache = require('mustache');
 const sass = require('sass');
@@ -31,15 +30,17 @@ const testConfigs = require('./helpers/test-configs.js');
 
 const tmpPath = require('./helpers/tmp-path.js');
 const expectationsPath = require('./helpers/expectations-path.js');
+const compareSvg2Png = require('./helpers/compare-svg-2-png.js');
 
 const dest = tmpPath;
 
-const compareSvg2Png = require('./helpers/compare-svg-2-png.js');
+// This is needed so that we don't hit the `fs.rmdir`
+// deprecation warnings on Node.js >= 14.14.0
+// TODO Drop this when we drop support for Node.js 12
+const rm = fs.promises.rm || fs.promises.rmdir;
 
-before(done => {
-    rimraf(path.join(__dirname, '../tmp'), () => {
-        done();
-    });
+before(async() => {
+    await rm(path.join(__dirname, '../tmp'), { force: true, recursive: true });
 });
 
 describe('svg-sprite', () => {

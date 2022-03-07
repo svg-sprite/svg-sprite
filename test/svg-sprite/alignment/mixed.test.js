@@ -16,12 +16,11 @@ const tmpPath = require('../../helpers/tmp-path.js');
 const expectationsPath = require('../../helpers/expectations-path.js');
 const writeFile = require('../../helpers/write-file.js');
 const capturePuppeteer = require('../../helpers/capture-puppeteer.js');
+const compareSvg2Png = require('../../helpers/compare-svg-2-png.js');
 
 const cwdAlign = path.join(fixturesPath, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf-8');
-
-const compareSvg2Png = require('../../helpers/compare-svg-2-png.js');
 
 describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () => {
     describe('with «view» mode, vertical layout and CSS render type', () => {
