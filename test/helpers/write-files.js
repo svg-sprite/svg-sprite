@@ -8,7 +8,7 @@ const { isObject } = require('../../lib/svg-sprite/utils/index.js');
 /**
  * Recursively write files to disc
  *
- * @param {object|Array} files        Files
+ * @param {object | Array} files      Files
  * @returns {number}                  Number of written files
  */
 module.exports = function writeFiles(files) {
