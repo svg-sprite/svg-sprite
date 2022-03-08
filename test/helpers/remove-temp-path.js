@@ -10,5 +10,4 @@ const rm = fs.promises.rm || fs.promises.rmdir;
 
 module.exports = async() => {
     await rm(tmpPath, { force: true, recursive: true });
-    console.info('tmp path removed');
 };
