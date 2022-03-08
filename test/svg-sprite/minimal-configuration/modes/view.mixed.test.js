@@ -16,32 +16,9 @@ const expectationsPath = require('../../../helpers/expectations-path.js');
 const writeFile = require('../../../helpers/write-file.js');
 const capturePuppeteer = require('../../../helpers/capture-puppeteer.js');
 const fixturesPath = require('../../../helpers/fixtures-path.js');
-const compareSvg2PngHelper = require('../../../helpers/compare-svg-2-png-helper.js');
+const compareSvg2Png = require('../../../helpers/compare-svg-2-png.js');
 
-/**
- * Rasterize an SVG file and compare it to an expected image
- *
- * @param {string} svg                SVG file path
- * @param {string} png                PNG file path
- * @param {string} expected           Expected PNG file path
- * @param {string} diff               Diff file path
- * @param {Function} done             Callback
- * @param {string} msg                Message
- */
-async function compareSvg2Png(svg, png, expected, diff, done, msg) {
-    try {
-        await compareSvg2PngHelper(svg, png, expected, diff, (error, result) => {
-            should(result).ok;
-            should(error).not.ok;
-            should.ok(result.equal, msg + JSON.stringify(result.diffClusters) + png);
-            done();
-        });
-    } catch (error) {
-        console.error(error);
-        should(error).not.ok;
-        done();
-    }
-}
+const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 describe('svg-sprite: with «view» mode, packed layout and LESS render type', () => {
     let spriter;
@@ -51,6 +28,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     let packedSvg;
     let data = {};
 
+    before(removeTmpPath);
     before('creates 2 files', done => {
         spriter = new SVGSpriter({
             dest: tmpPath,

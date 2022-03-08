@@ -18,6 +18,7 @@ const expectationsPath = require('../../helpers/expectations-path.js');
 const writeFile = require('../../helpers/write-file.js');
 const capturePuppeteer = require('../../helpers/capture-puppeteer.js');
 const compareSvg2Png = require('../../helpers/compare-svg-2-png.js');
+const removeTmpPath = require('../../helpers/remove-temp-path.js');
 
 const cwdAlign = path.join(fixturesPath, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
@@ -28,6 +29,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let spriter = null;
         let data = null;
         let svgPath = null;
+
+        before(removeTmpPath);
 
         before('creates 2 files', done => {
             spriter = new SVGSpriter({

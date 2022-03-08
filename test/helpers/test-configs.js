@@ -9,7 +9,7 @@ const cwdWithoutDims = path.join(fixturesPath, 'svg/special/without-dims');
 const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 const withoutDims = glob.sync('**/*.svg', { cwd: cwdWithoutDims });
 
-module.exports = {
+const constants = {
     DEFAULT: {
         name: 'weather',
         namespace: '',
@@ -22,4 +22,8 @@ module.exports = {
         files: withoutDims,
         cwd: cwdWithoutDims
     }
+
 };
+
+module.exports = [constants.DEFAULT, constants.WITHOUT_DIMS];
+module.exports.constants = constants;
