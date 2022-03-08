@@ -5,9 +5,8 @@ const { readFileSync } = require('fs');
 const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
 const SVGSpriter = require('../lib/svg-sprite.js');
+const { isObject } = require('../lib/svg-sprite/utils/index.js');
 const fixturesPath = require('./helpers/fixtures-path.js');
-
-const isObject = obj => typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
 const expectations = [{
     svg: '46x46.svg',
