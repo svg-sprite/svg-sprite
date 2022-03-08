@@ -1,3 +1,7 @@
+Newer release notes are published on the GitHub release page: <https://github.com/svg-sprite/svg-sprite/releases>
+
+---
+
 ## 1.6.0-alpha Maintenance pre-release (2020-01-18)
 
 * Remove support for Node < 8.0
