@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const tmpPath = require('./tmp-path.js');
+const { paths } = require('./constants.js');
 
 // This is needed so that we don't hit the `fs.rmdir`
 // deprecation warnings on Node.js >= 14.14.0
@@ -9,5 +9,5 @@ const tmpPath = require('./tmp-path.js');
 const rm = fs.promises.rm || fs.promises.rmdir;
 
 module.exports = async() => {
-    await rm(tmpPath, { force: true, recursive: true });
+    await rm(paths.tmp, { force: true, recursive: true });
 };

@@ -6,16 +6,16 @@ const glob = require('glob');
 const should = require('should');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
-const tmpPath = require('../../helpers/tmp-path.js');
-const fixturesPath = require('../../helpers/fixtures-path.js');
 
-const cwd = path.join(fixturesPath, 'svg/single');
+const { paths } = require('../../helpers/constants.js');
+
+const cwd = path.join(paths.fixtures, 'svg/single');
 const weather = glob.sync('**/weather*.svg', { cwd });
 
 describe('testing rerun', () => {
     it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', done => {
         const spriter = new SVGSpriter({
-            dest: tmpPath
+            dest: paths.tmp
         });
 
         addFixtureFiles(spriter, weather, cwd);

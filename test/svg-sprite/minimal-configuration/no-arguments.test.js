@@ -6,9 +6,10 @@ const should = require('should');
 const glob = require('glob');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles, addRelativeFixtureFiles } = require('../../helpers/add-files.js');
-const fixturesPath = require('../../helpers/fixtures-path.js');
 
-const cwdWeather = path.join(fixturesPath, 'svg/single');
+const { paths } = require('../../helpers/constants.js');
+
+const cwdWeather = path.join(paths.fixtures, 'svg/single');
 const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 
 describe('svg-sprite: with no arguments', () => {

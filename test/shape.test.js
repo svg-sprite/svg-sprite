@@ -6,7 +6,8 @@ const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const { isObject } = require('../lib/svg-sprite/utils/index.js');
-const fixturesPath = require('./helpers/fixtures-path.js');
+
+const { paths } = require('./helpers/constants.js');
 
 const expectations = [{
     svg: '46x46.svg',
@@ -35,7 +36,7 @@ describe('shape', () => {
                 }
             });
 
-            const svgFilePath = path.join(fixturesPath, `svg/special/without-dims/${expectation.svg}`);
+            const svgFilePath = path.join(paths.fixtures, `svg/special/without-dims/${expectation.svg}`);
 
             spriter.add(
                 svgFilePath,

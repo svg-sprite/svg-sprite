@@ -18,8 +18,7 @@ const writeFile = require('../../../helpers/write-file.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const testConfigs = require('../../../helpers/test-configs.js');
 
-const tmpPath = require('../../../helpers/tmp-path.js');
-const expectationsPath = require('../../../helpers/expectations-path.js');
+const { paths } = require('../../../helpers/constants.js');
 const compareSvg2Png = require('../../../helpers/compare-svg-2-png.js');
 
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
@@ -39,7 +38,7 @@ testConfigs.forEach(testConfig => {
         describe('in «css» mode and all render types enabled', () => {
             before(done => {
                 spriter = new SVGSpriter({
-                    dest: tmpPath
+                    dest: paths.tmp
                 });
                 addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
                 spriter.compile({
@@ -94,10 +93,10 @@ testConfigs.forEach(testConfig => {
                 // Vertical layout
                 it('vertical layout', done => {
                     compareSvg2Png(
-                        path.join(tmpPath, 'css/svg', svg.vertical),
-                        path.join(tmpPath, `css/png/css.vertical${testConfig.namespace}.png`),
-                        path.join(expectationsPath, `png/css.vertical${testConfig.namespace}.png`),
-                        path.join(tmpPath, `css/png/css.vertical${testConfig.namespace}.diff.png`),
+                        path.join(paths.tmp, 'css/svg', svg.vertical),
+                        path.join(paths.tmp, `css/png/css.vertical${testConfig.namespace}.png`),
+                        path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`),
+                        path.join(paths.tmp, `css/png/css.vertical${testConfig.namespace}.diff.png`),
                         done,
                         'The vertical sprite doesn\'t match the expected one!'
                     );
@@ -106,10 +105,10 @@ testConfigs.forEach(testConfig => {
                 // Horizontal layout
                 it('horizontal layout', done => {
                     compareSvg2Png(
-                        path.join(tmpPath, 'css/svg', svg.horizontal),
-                        path.join(tmpPath, `css/png/css.horizontal${testConfig.namespace}.png`),
-                        path.join(expectationsPath, `png/css.horizontal${testConfig.namespace}.png`),
-                        path.join(tmpPath, `css/png/css.horizontal${testConfig.namespace}.diff.png`),
+                        path.join(paths.tmp, 'css/svg', svg.horizontal),
+                        path.join(paths.tmp, `css/png/css.horizontal${testConfig.namespace}.png`),
+                        path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`),
+                        path.join(paths.tmp, `css/png/css.horizontal${testConfig.namespace}.diff.png`),
                         done,
                         'The horizontal sprite doesn\'t match the expected one!'
                     );
@@ -118,10 +117,10 @@ testConfigs.forEach(testConfig => {
                 // Diagonal layout
                 it('diagonal layout', done => {
                     compareSvg2Png(
-                        path.join(tmpPath, 'css/svg', svg.diagonal),
-                        path.join(tmpPath, `css/png/css.diagonal${testConfig.namespace}.png`),
-                        path.join(expectationsPath, `png/css.diagonal${testConfig.namespace}.png`),
-                        path.join(tmpPath, `css/png/css.diagonal${testConfig.namespace}.diff.png`),
+                        path.join(paths.tmp, 'css/svg', svg.diagonal),
+                        path.join(paths.tmp, `css/png/css.diagonal${testConfig.namespace}.png`),
+                        path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`),
+                        path.join(paths.tmp, `css/png/css.diagonal${testConfig.namespace}.diff.png`),
                         done,
                         'The diagonal sprite doesn\'t match the expected one!'
                     );
@@ -130,10 +129,10 @@ testConfigs.forEach(testConfig => {
                 // Packed layout
                 it('packed layout', done => {
                     compareSvg2Png(
-                        path.join(tmpPath, 'css/svg', svg.packed),
-                        path.join(tmpPath, `css/png/css.packed${testConfig.namespace}.png`),
-                        path.join(expectationsPath, `png/css.packed${testConfig.namespace}.png`),
-                        path.join(tmpPath, `css/png/css.packed${testConfig.namespace}.diff.png`),
+                        path.join(paths.tmp, 'css/svg', svg.packed),
+                        path.join(paths.tmp, `css/png/css.packed${testConfig.namespace}.png`),
+                        path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`),
+                        path.join(paths.tmp, `css/png/css.packed${testConfig.namespace}.diff.png`),
                         done,
                         'The packed sprite doesn\'t match the expected one!'
                     );
@@ -146,13 +145,13 @@ testConfigs.forEach(testConfig => {
                 it('CSS format', done => {
                     data.css = '../sprite.css';
                     const out = mustache.render(previewTemplate, data);
-                    const preview = writeFile(path.join(tmpPath, 'css/html/css.html'), out);
-                    const previewImage = path.join(tmpPath, `css/png/css.html${testConfig.namespace}.png`);
+                    const preview = writeFile(path.join(paths.tmp, 'css/html/css.html'), out);
+                    const previewImage = path.join(paths.tmp, `css/png/css.html${testConfig.namespace}.png`);
                     preview.should.be.ok;
 
                     capturePuppeteer(preview, previewImage, error => {
                         should(error).not.ok;
-                        looksSame(previewImage, path.join(expectationsPath, `png/css.html${testConfig.namespace}.png`), (error, result) => {
+                        looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
                             should(error).not.ok;
                             should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
                             done();
@@ -162,21 +161,21 @@ testConfigs.forEach(testConfig => {
 
                 // Sass
                 it('Sass format', done => {
-                    sass.render({ file: path.join(tmpPath, 'css/sprite.scss') }, (err, scssText) => {
+                    sass.render({ file: path.join(paths.tmp, 'css/sprite.scss') }, (err, scssText) => {
                         should(err).not.ok;
-                        should(writeFile(path.join(tmpPath, 'css/sprite.scss.css'), scssText.css)).be.ok;
+                        should(writeFile(path.join(paths.tmp, 'css/sprite.scss.css'), scssText.css)).be.ok;
 
                         data.css = '../sprite.scss.css';
 
                         const out = mustache.render(previewTemplate, data);
-                        const preview = writeFile(path.join(tmpPath, 'css/html/scss.html'), out);
-                        const previewImage = path.join(tmpPath, `css/png/scss.html${testConfig.namespace}.png`);
+                        const preview = writeFile(path.join(paths.tmp, 'css/html/scss.html'), out);
+                        const previewImage = path.join(paths.tmp, `css/png/scss.html${testConfig.namespace}.png`);
 
                         preview.should.be.ok;
 
                         capturePuppeteer(preview, previewImage, error => {
                             should(error).not.ok;
-                            looksSame(previewImage, path.join(expectationsPath, `png/css.html${testConfig.namespace}.png`), (error, result) => {
+                            looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
                                 should(error).not.ok;
                                 should.ok(result.equal, 'The generated Sass preview doesn\'t match the expected one!');
                                 done();
@@ -187,26 +186,26 @@ testConfigs.forEach(testConfig => {
 
                 // LESS
                 it('LESS format', done => {
-                    const lessFile = path.join(tmpPath, 'css/sprite.less');
+                    const lessFile = path.join(paths.tmp, 'css/sprite.less');
 
                     fs.readFile(lessFile, 'utf-8', (err, lessText) => {
                         should(err).not.ok;
 
                         less.render(lessText, {}, (error, output) => {
                             should(error).not.ok;
-                            should(writeFile(path.join(tmpPath, 'css/sprite.less.css'), output.css)).be.ok;
+                            should(writeFile(path.join(paths.tmp, 'css/sprite.less.css'), output.css)).be.ok;
 
                             data.css = '../sprite.less.css';
 
                             const out = mustache.render(previewTemplate, data);
-                            const preview = writeFile(path.join(tmpPath, 'css/html/less.html'), out);
-                            const previewImage = path.join(tmpPath, 'css/png/less.html.png');
+                            const preview = writeFile(path.join(paths.tmp, 'css/html/less.html'), out);
+                            const previewImage = path.join(paths.tmp, 'css/png/less.html.png');
 
                             preview.should.be.ok;
 
                             capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
-                                looksSame(previewImage, path.join(expectationsPath, `png/css.html${testConfig.namespace}.png`), (error, result) => {
+                                looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
                                     should(error).not.ok;
                                     should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
                                     done();
@@ -218,26 +217,26 @@ testConfigs.forEach(testConfig => {
 
                 // Stylus
                 it('Stylus format', done => {
-                    const stylusFile = path.join(tmpPath, 'css/sprite.styl');
+                    const stylusFile = path.join(paths.tmp, 'css/sprite.styl');
 
                     fs.readFile(stylusFile, 'utf-8', (err, stylusText) => {
                         should(err).not.ok;
 
                         stylus.render(stylusText, {}, (error, output) => {
                             should(error).not.ok;
-                            should(writeFile(path.join(tmpPath, 'css/sprite.styl.css'), output)).be.ok;
+                            should(writeFile(path.join(paths.tmp, 'css/sprite.styl.css'), output)).be.ok;
 
                             data.css = '../sprite.styl.css';
 
                             const out = mustache.render(previewTemplate, data);
-                            const preview = writeFile(path.join(tmpPath, 'css/html/styl.html'), out);
-                            const previewImage = path.join(tmpPath, `css/png/styl${testConfig.namespace}.html.png`);
+                            const preview = writeFile(path.join(paths.tmp, 'css/html/styl.html'), out);
+                            const previewImage = path.join(paths.tmp, `css/png/styl${testConfig.namespace}.html.png`);
 
                             preview.should.be.ok;
 
                             capturePuppeteer(preview, previewImage, error => {
                                 should(error).not.ok;
-                                looksSame(previewImage, path.join(expectationsPath, `png/css.html${testConfig.namespace}.png`), (error, result) => {
+                                looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
                                     should(error).not.ok;
                                     should.ok(result.equal, 'The generated Stylus preview doesn\'t match the expected one!');
                                     done();

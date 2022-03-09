@@ -10,11 +10,10 @@ const looksSame = require('looks-same');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const writeFiles = require('../../../helpers/write-files.js');
-const tmpPath = require('../../../helpers/tmp-path.js');
 const writeFile = require('../../../helpers/write-file.js');
 const capturePuppeteer = require('../../../helpers/capture-puppeteer.js');
-const expectationsPath = require('../../../helpers/expectations-path.js');
 const testConfigs = require('../../../helpers/test-configs.js');
+const { paths } = require('../../../helpers/constants.js');
 
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
@@ -27,7 +26,7 @@ testConfigs.forEach(testConfig => {
         let spriter;
         before('creates 2 files for packed layout', done => {
             spriter = new SVGSpriter({
-                dest: tmpPath
+                dest: paths.tmp
             });
             addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
             spriter.compile({
@@ -46,12 +45,12 @@ testConfigs.forEach(testConfig => {
         });
 
         it('creates a visually correct stylesheet resource in CSS format', done => {
-            data.svg = fs.readFileSync(path.join(tmpPath, 'symbol/svg', svg)).toString();
+            data.svg = fs.readFileSync(path.join(paths.tmp, 'symbol/svg', svg)).toString();
             data.css = '../sprite.css';
             const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
-            const previewImage = path.join(tmpPath, `symbol/symbol.html${testConfig.namespace}.png`);
+            const preview = writeFile(path.join(paths.tmp, 'symbol/html/symbol.html'), out);
+            const previewImage = path.join(paths.tmp, `symbol/symbol.html${testConfig.namespace}.png`);
             preview.should.be.ok;
 
             capturePuppeteer(preview, previewImage, error => {
@@ -62,7 +61,7 @@ testConfigs.forEach(testConfig => {
 
                 looksSame(
                     previewImage,
-                    path.join(expectationsPath, `png/symbol.html${testConfig.namespace}.png`),
+                    path.join(paths.expectations, `png/symbol.html${testConfig.namespace}.png`),
                     (error, result) => {
                         should(error).not.ok;
                         should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
