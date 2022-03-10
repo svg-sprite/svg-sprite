@@ -465,7 +465,7 @@ To **disable the rendering** without removing the whole structure, simply set th
 ```
 
 
-[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-url]: https://www.npmjs.com/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 

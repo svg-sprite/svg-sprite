@@ -65,7 +65,7 @@ Remember that the omitting the placeholder `"%s"`will make the template strings 
 As the displaced copies are created with the `<use>` element, your sprite doesn't get significantly bigger in file size by duplicating shapes this way. For each of the duplicates, an **individual CSS rule** is created in the stylesheet resources, using the virtual shape ID as selector class name.
 
 
-[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-url]: https://www.npmjs.com/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 

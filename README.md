@@ -381,7 +381,7 @@ Please refer to the [changelog](CHANGELOG.md) for a complete release history.
 Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.com/jkphl). *svg-sprite* is licensed under the terms of the [MIT license](LICENSE). The contained example SVG icons are part of the [Tango Icon Library](http://tango.freedesktop.org/Tango_Icon_Library) and belong to the Public Domain.
 
 
-[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-url]: https://www.npmjs.com/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 

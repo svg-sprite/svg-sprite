@@ -43,7 +43,7 @@ For each of your shapes, *svg-sprite* will look for `title` and `description` ke
 Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, *svg-sprite* will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.
 
 
-[npm-url]: https://npmjs.org/package/svg-sprite
+[npm-url]: https://www.npmjs.com/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
 
