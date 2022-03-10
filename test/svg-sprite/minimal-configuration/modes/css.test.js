@@ -27,7 +27,7 @@ const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 // Test the minimum configuration
 testConfigs.forEach(testConfig => {
-    describe(`svg-sprite: ${testConfig.name}: with minimum configuration and ${testConfig.files.length} SVG files`, () => {
+    describe(`svg-sprite: ${testConfig.name}, with minimum configuration and ${testConfig.files.length} SVG files`, () => {
         let spriter = null;
         let data = null;
         const svg = {};

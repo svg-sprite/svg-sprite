@@ -18,7 +18,7 @@ const { paths } = require('../../../helpers/constants.js');
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 testConfigs.forEach(testConfig => {
-    describe(`svg-sprite: ${testConfig.name}: in «symbol» mode`, () => {
+    describe(`svg-sprite: ${testConfig.name} in «symbol» mode`, () => {
         before(removeTmpPath);
 
         let svg;

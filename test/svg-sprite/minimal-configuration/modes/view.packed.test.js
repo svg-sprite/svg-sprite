@@ -22,7 +22,7 @@ testConfigs.forEach(testConfig => {
     let svg;
     let data = {};
     // Test the view mode
-    describe(`svg-sprite: ${testConfig.name}: in «view» mode`, () => {
+    describe(`svg-sprite: ${testConfig.name} in «view» mode`, () => {
         before(removeTmpPath);
         before('creates 2 files for packed layout', done => {
             spriter = new SVGSpriter({
