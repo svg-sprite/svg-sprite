@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks */
+/* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
 const fs = require('fs');
 const path = require('path');
 const { Buffer } = require('buffer');
@@ -35,8 +35,8 @@ describe('testing SVGSpriter', () => {
                 };
 
                 spriter.add(TEST_FILE);
-                expect(TEST_FILE.base).toEqual(path.resolve(TEST_FILE.base));
 
+                expect(TEST_FILE.base).toStrictEqual(path.resolve(TEST_FILE.base));
                 expect(spriter._queue.add).toHaveBeenCalledWith(TEST_FILE);
             });
         });

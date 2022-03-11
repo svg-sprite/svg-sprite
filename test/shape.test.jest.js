@@ -34,6 +34,8 @@ describe('testing shapes', () => {
         svg, dimension
     // eslint-disable-next-line jest/no-done-callback
     }, done) => {
+        expect.hasAssertions();
+
         const spriter = new SVGSpriter({
             shape: {
                 dest: 'svg',
@@ -64,8 +66,8 @@ describe('testing shapes', () => {
             const svg = result.shapes[0]._contents.toString();
             const dom = new DOMParser().parseFromString(svg, 'text/xml');
 
-            expect(dom.documentElement.getAttribute('height')).toEqual(dimension.height.toString());
-            expect(dom.documentElement.getAttribute('width')).toEqual(dimension.width.toString());
+            expect(dom.documentElement.getAttribute('height')).toStrictEqual(dimension.height.toString());
+            expect(dom.documentElement.getAttribute('width')).toStrictEqual(dimension.width.toString());
 
             done();
         });

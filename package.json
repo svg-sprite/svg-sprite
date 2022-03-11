@@ -58,6 +58,7 @@
   "devDependencies": {
     "c8": "^7.11.0",
     "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsdoc": "^37.9.7",
     "jest": "^27.5.1",
     "less": "^4.1.2",
@@ -96,7 +97,8 @@
     "space": 4,
     "plugins": [
       "jsdoc",
-      "jest"
+      "jest",
+      "jest-formatting"
     ],
     "extends": [
       "plugin:jsdoc/recommended"
@@ -110,6 +112,7 @@
       ],
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
+      "jest/no-hooks": "off",
       "jsdoc/check-values": [
         "warn",
         {
@@ -179,7 +182,8 @@
           "jest.setup.js"
         ],
         "extends": [
-          "plugin:jest/recommended"
+          "plugin:jest/all",
+          "plugin:jest-formatting/strict"
         ],
         "envs": [
           "jest/globals"

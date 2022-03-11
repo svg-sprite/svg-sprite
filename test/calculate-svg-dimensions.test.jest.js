@@ -6,6 +6,8 @@ const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-di
 
 describe('calculateSvgDimensions', () => {
     it('should return the expected dimensions from 46x46 fixture', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 
@@ -13,6 +15,8 @@ describe('calculateSvgDimensions', () => {
     });
 
     it('should return the expected dimensions from 2048x2048 fixture', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/2048x2048.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 
@@ -20,6 +24,8 @@ describe('calculateSvgDimensions', () => {
     });
 
     it('should return the expected dimensions from 32x32 fixture', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/32x32.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 
@@ -27,6 +33,8 @@ describe('calculateSvgDimensions', () => {
     });
 
     it('should return the expected dimensions from 100x100 fixture', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/100x100.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 
@@ -34,6 +42,8 @@ describe('calculateSvgDimensions', () => {
     });
 
     it('should return the expected dimensions from 231x69 fixture', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/231x69.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 
@@ -41,6 +51,8 @@ describe('calculateSvgDimensions', () => {
     });
 
     it('should return same results no each run', () => {
+        expect.hasAssertions();
+
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
         const svg = readFileSync(svgFilePath, 'utf-8');
 

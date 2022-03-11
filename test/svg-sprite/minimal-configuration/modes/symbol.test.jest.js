@@ -22,12 +22,15 @@ describe.each`
     const testConfig = constants[testConfigKey];
 
     let svg;
-    let data = {};
     let spriter;
+    let data;
 
     beforeAll(removeTmpPath.bind(null, tmpPath));
-    // eslint-disable-next-line jest/no-done-callback
+
+    // eslint-disable-next-line jest/no-done-callback, jest/no-duplicate-hooks
     beforeAll(done => {
+        data = {};
+
         spriter = new SVGSpriter({
             dest: tmpPath
         });
@@ -47,6 +50,8 @@ describe.each`
     });
 
     it('creates a visually correct stylesheet resource in CSS format', async() => {
+        expect.hasAssertions();
+
         data.svg = fs.readFileSync(path.join(tmpPath, 'symbol/svg', svg)).toString();
         data.css = '../sprite.css';
         const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');

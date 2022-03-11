@@ -27,7 +27,10 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error and should call fixXMLString if fixXMLString is not throwing error', () => {
+        expect.hasAssertions();
+
         fixXMLString.mockReturnValueOnce(FIXED_TEST_SVG);
+
         expect(() => {
             getShape(new File({
                 path: __dirname,
@@ -38,9 +41,12 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should throw error and should call fixXMLString if fixXMLString is throwing error', () => {
+        expect.hasAssertions();
+
         fixXMLString.mockImplementation(() => {
             throw new Error('some error');
         });
+
         expect(() => {
             getShape(new File({
                 path: __dirname,
@@ -48,11 +54,13 @@ describe('testing SVGShape initialization', () => {
             }), spriter);
         }).toThrow(new Error('Invalid SVG file'));
         expect(fixXMLString).toHaveBeenCalledWith(TEST_SVG);
-        expect(fixXMLString).toHaveBeenCalled();
     });
 
     it('should throw an error and should call fixXMLString on non-svg files', () => {
+        expect.hasAssertions();
+
         const TEST_NON_SVG = '<div class="test">123</div>';
+
         expect(() => {
             getShape(new File({
                 path: __dirname,
@@ -63,6 +71,8 @@ describe('testing SVGShape initialization', () => {
     });
 
     it('should not throw an error and should not call fixXMLString on actual valid svg files', () => {
+        expect.hasAssertions();
+
         const cwdWeather = path.join(__dirname, 'fixture/svg/single');
         const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 
@@ -70,6 +80,7 @@ describe('testing SVGShape initialization', () => {
 
         weather.forEach(weatherFile => {
             const svgFileBuffer = fs.readFileSync(path.join(cwdWeather, weatherFile));
+
             expect(() => {
                 getShape(new File({
                     path: __dirname,

@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const looksSame = require('looks-same');
 const compareSvg2PngHelper = require('./test/helpers/compare-svg-2-png-helper.js');
@@ -35,6 +37,7 @@ const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) 
     });
 };
 
+// eslint-disable-next-line jest/require-hook
 expect.extend({
     async toBeVisuallyEqual(receivedSVGPath, resultPNGPath, expectedPNGPath) {
         const isEqual = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);

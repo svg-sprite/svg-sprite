@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     clearMocks: true,
     resetMocks: true,
@@ -19,6 +21,6 @@ module.exports = {
     ],
 
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-
+    globalSetup: '<rootDir>/jest.setup.global.js',
     verbose: true
 };
