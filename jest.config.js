@@ -20,6 +20,5 @@ module.exports = {
 
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
-    verbose: true,
-    maxWorkers: '50%'
+    verbose: true
 };
