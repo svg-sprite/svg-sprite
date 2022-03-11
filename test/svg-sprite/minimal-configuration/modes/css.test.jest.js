@@ -94,7 +94,8 @@ describe('testing minimal config', () => {
             // Vertical layout
             it('vertical layout', async() => {
                 expect.hasAssertions();
-                await expect(path.join(tmpPath, 'css/svg', svg.vertical)).toBeVisuallyEqual(path.join(tmpPath, `css/png/css.vertical${testConfig.namespace}.png`),
+                await expect(path.join(tmpPath, 'css/svg', svg.vertical)).toBeVisuallyEqual(
+                    path.join(tmpPath, `css/png/css.vertical${testConfig.namespace}.png`),
                     path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`)
                 );
             });

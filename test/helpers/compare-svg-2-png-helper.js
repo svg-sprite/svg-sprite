@@ -23,7 +23,7 @@ module.exports = async(svg, png, expected, diff, done) => {
         browser = await puppeteer.launch();
         await convertSvg2Png(svg, png, browser);
         await looksSame(png, expected, (err, result) => {
-            if (!result.equal) {
+            if (!err && !result.equal) {
                 looksSame.createDiff({
                     reference: expected,
                     current: png,

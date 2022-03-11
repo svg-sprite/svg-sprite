@@ -21,12 +21,12 @@ const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPat
 
 const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) => {
     return new Promise((resolve, reject) => {
-        capturePuppeteer(previewHTML, previewImage, error => {
+        capturePuppeteer(previewHTML, previewImage, async error => {
             if (error) {
                 return reject(error);
             }
 
-            looksSame(previewImage, expectedPNGPath, (error, result) => {
+            await looksSame(previewImage, expectedPNGPath, (error, result) => {
                 if (error) {
                     return reject(error);
                 }
