@@ -14,7 +14,7 @@ const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPat
                 return reject(err);
             }
 
-            resolve(result.equal);
+            resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });
         });
     });
 };
@@ -31,7 +31,7 @@ const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) 
                     return reject(error);
                 }
 
-                resolve(result.equal);
+                resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });
             });
         });
     });
@@ -39,22 +39,63 @@ const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) 
 
 // eslint-disable-next-line jest/require-hook
 expect.extend({
-    async toBeVisuallyEqual(receivedSVGPath, resultPNGPath, expectedPNGPath) {
-        const isEqual = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
+    async toBeVisuallyEqual(receivedSVGPath, expectedPNGPath) {
+        const options = {
+            comment: 'SVG is equal to expected PNG',
+            isNot: this.isNot,
+            promise: this.promise
+        };
+
+        const resultPNGPath = path.join(path.dirname(receivedSVGPath), receivedSVGPath.replace('.svg', '.svg.png'));
+        const { isEqual, difference } = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
+
+        const expected = path.basename(receivedSVGPath);
+        const received = path.basename(expectedPNGPath);
+
+        const message = isEqual ?
+            () => `${this.utils.matcherHint('toBeVisuallyEqual', undefined, undefined, options)
+            }\n\n` +
+                `Expected: not ${this.utils.printExpected(expected)}\n` +
+                `Received: ${this.utils.printReceived(received)}` :
+            () => `${this.utils.matcherHint('toBeVisuallyEqual', undefined, undefined, options)
+            }\n\n` +
+                `${this.utils.printReceived('Difference:')} ${difference}\n` +
+                `Expected: ${this.utils.printExpected(expected)}\n` +
+                `Received: ${this.utils.printReceived(received)}`;
 
         return {
             pass: isEqual,
-            message: () => `expected ${receivedSVGPath} ${isEqual ? '' : 'not'} to be visually correct to ${expectedPNGPath}`
+            message
         };
     },
 
     async toBeVisuallyCorrectAsHTML(receivedHTMLPath, expectedPNGPath) {
+        const options = {
+            comment: 'HTML is equal to expected PNG',
+            isNot: this.isNot,
+            promise: this.promise
+        };
+
         const previewImagePath = path.join(path.dirname(receivedHTMLPath), `${path.basename(receivedHTMLPath)}.png`);
-        const isEqual = await capturePuppeteerAsync(receivedHTMLPath, previewImagePath, expectedPNGPath);
+        const { isEqual, difference } = await capturePuppeteerAsync(receivedHTMLPath, previewImagePath, expectedPNGPath);
+
+        const expected = path.basename(receivedHTMLPath);
+        const received = path.basename(expectedPNGPath);
+
+        const message = isEqual ?
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTML', undefined, undefined, options)
+            }\n\n` +
+                `Expected: not ${this.utils.printExpected(expected)}\n` +
+                `Received: ${this.utils.printReceived(received)}` :
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTML', undefined, undefined, options)
+            }\n\n` +
+                `${this.utils.printReceived('Difference:')} ${difference}\n` +
+                `Expected: ${this.utils.printExpected(expected)}\n` +
+                `Received: ${this.utils.printReceived(received)}`;
 
         return {
             pass: isEqual,
-            message: () => `expected html ${receivedHTMLPath} ${isEqual ? '' : 'not'} to be visually correct to ${expectedPNGPath}`
+            message
         };
     }
 });

@@ -64,7 +64,6 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
             await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(tmpPath, 'css/png/css.vertical.centered.png'),
                 path.join(paths.expectations, '/png/css.vertical.centered.png')
             );
         });
@@ -120,7 +119,6 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
             await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(tmpPath, 'css/png/css.horizontal.centered.png'),
                 path.join(paths.expectations, '/png/css.horizontal.centered.png')
             );
         });
@@ -185,7 +183,6 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             expect.hasAssertions();
             await expect(
                 path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(tmpPath, 'css/png/css.packed.centered.png'),
                 path.join(paths.expectations, '/png/css.packed.aligned.png')
             );
         });
