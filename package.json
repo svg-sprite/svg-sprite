@@ -34,7 +34,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@resvg/resvg-js": "^1.4.0",
+    "@resvg/resvg-js": "^2.0.0",
     "@xmldom/xmldom": "^0.8.2",
     "async": "^3.2.3",
     "css-selector-parser": "^1.4.1",
