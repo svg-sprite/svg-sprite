@@ -12,6 +12,7 @@ This document aims to compare the use of *svg-sprite* via its [standard API](api
 ## Standard API
 
 ```js
+const fs = require('fs');
 // Create spriter instance
 const spriter = new SVGSpriter(config);
 

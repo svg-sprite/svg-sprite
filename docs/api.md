@@ -21,8 +21,8 @@ To understand these methods' roles and interactions, please have a look at the f
 ```js
 'use strict';
 
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 const SVGSpriter = require('svg-sprite'),
 
 // 1. Create and configure a spriter instance

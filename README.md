@@ -70,6 +70,8 @@ The procedure is the very same for all supported sprite types («modes»).
 ### Usage pattern
 
 ```js
+const fs = require('fs');
+const path = require('path');
 // Create spriter instance (see below for `config` examples)
 const spriter = new SVGSpriter(config);
 
