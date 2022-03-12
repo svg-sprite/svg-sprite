@@ -19,16 +19,25 @@ const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPat
     });
 };
 
-const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) => {
+const capturePuppeteerAsync = (previewHTML, previewImage, expectedPNGPath) => {
     return new Promise((resolve, reject) => {
-        capturePuppeteer(previewHTML, previewImage, async error => {
+        capturePuppeteer(previewHTML, previewImage, error => {
             if (error) {
                 return reject(error);
             }
 
-            await looksSame(previewImage, expectedPNGPath, (error, result) => {
+            looksSame(previewImage, expectedPNGPath, (error, result) => {
                 if (error) {
                     return reject(error);
+                }
+
+                if (!result.equal) {
+                    looksSame.createDiff({
+                        reference: expectedPNGPath,
+                        current: previewImage,
+                        diff: path.join(path.dirname(previewImage), path.basename(previewImage).replace('.png', '.diff.png')),
+                        highlightColor: '#ff00ff'
+                    }, () => {});
                 }
 
                 resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });
@@ -46,7 +55,7 @@ expect.extend({
             promise: this.promise
         };
 
-        const resultPNGPath = path.join(path.dirname(receivedSVGPath), receivedSVGPath.replace('.svg', '.svg.png'));
+        const resultPNGPath = path.join(path.dirname(receivedSVGPath), path.basename(receivedSVGPath).replace('.svg', '.svg.png'));
         const { isEqual, difference } = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
 
         const expected = path.basename(receivedSVGPath);

@@ -45,10 +45,18 @@ describe('testing minimal config', () => {
                     layout: 'vertical',
                     dimensions: true,
                     render: {
-                        css: true,
-                        scss: true,
-                        less: true,
-                        styl: true
+                        css: {
+                            dest: `sprite${testConfig.namespace}.css`
+                        },
+                        scss: {
+                            dest: `sprite${testConfig.namespace}.scss`
+                        },
+                        less: {
+                            dest: `sprite${testConfig.namespace}.less`
+                        },
+                        styl: {
+                            dest: `sprite${testConfig.namespace}.styl`
+                        }
                     }
                 }
             });
@@ -117,12 +125,12 @@ describe('testing minimal config', () => {
         // Test stylesheet resources
         describe('creates a visually correct stylesheet resource in', () => {
             // Plain CSS
-            it('CSS format', async() => {
+            it('cSS format', async() => {
                 expect.hasAssertions();
 
-                data.css = '../sprite.css';
+                data.css = `../sprite${testConfig.namespace}.css`;
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/css.html'), out);
+                const preview = writeFile(path.join(tmpPath, `css/html/css${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -131,13 +139,13 @@ describe('testing minimal config', () => {
             it('sass format', async() => {
                 expect.hasAssertions();
 
-                const scssText = sass.renderSync({ file: path.join(tmpPath, 'css/sprite.scss') });
-                writeFile(path.join(tmpPath, 'css/sprite.scss.css'), scssText.css);
+                const scssText = sass.renderSync({ file: path.join(tmpPath, `css/sprite${testConfig.namespace}.scss`) });
+                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.scss.css`), scssText.css);
 
-                data.css = '../sprite.scss.css';
+                data.css = `../sprite${testConfig.namespace}.scss.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/scss.html'), out);
+                const preview = writeFile(path.join(tmpPath, `css/html/scss${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -146,16 +154,16 @@ describe('testing minimal config', () => {
             it('lESS format', async() => {
                 expect.hasAssertions();
 
-                const lessFile = path.join(tmpPath, 'css/sprite.less');
+                const lessFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.less`);
                 const lessText = fs.readFileSync(lessFile, 'utf-8');
 
                 const output = await asyncRenderers.less(lessText, {});
-                writeFile(path.join(tmpPath, 'css/sprite.less.css'), output.css);
+                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
 
-                data.css = '../sprite.less.css';
+                data.css = `../sprite${testConfig.namespace}.less.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/less.html'), out);
+                const preview = writeFile(path.join(tmpPath, `css/html/less${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -164,17 +172,17 @@ describe('testing minimal config', () => {
             it('stylus format', async() => {
                 expect.hasAssertions();
 
-                const stylusFile = path.join(tmpPath, 'css/sprite.styl');
+                const stylusFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.styl`);
                 const stylusText = fs.readFileSync(stylusFile, 'utf-8');
 
                 const output = await asyncRenderers.stylus(stylusText, {});
 
-                writeFile(path.join(tmpPath, 'css/sprite.styl.css'), output);
+                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);
 
-                data.css = '../sprite.styl.css';
+                data.css = `../sprite${testConfig.namespace}.styl.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/styl.html'), out);
+                const preview = writeFile(path.join(tmpPath, `css/html/styl${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
