@@ -1,18 +1,16 @@
 'use strict';
 
-/* eslint-disable jest/no-done-callback */
-
 const path = require('path');
 const fs = require('fs');
 const mustache = require('mustache');
 const sass = require('sass');
 const glob = require('glob');
-const less = require('less');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 const writeFiles = require('../../helpers/write-files.js');
 const writeFile = require('../../helpers/write-file.js');
 const removeTmpPath = require('../../helpers/remove-temp-path.js');
+const asyncRenderers = require('../../helpers/async-renderers.js');
 
 const { paths } = require('../../helpers/constants.js');
 
@@ -30,7 +28,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let data = null;
         let svgPath = null;
 
-        beforeAll(done => {
+        beforeAll(async() => {
             spriter = new SVGSpriter({
                 dest: tmpPath,
                 shape: {
@@ -42,7 +40,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.vertical.centered.svg',
                     layout: 'vertical',
@@ -53,12 +51,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                writeFiles(result);
-                data = cssData.css;
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            writeFiles(result);
+            data = cssData.css;
+            svgPath = path.basename(result.css.sprite.path);
         });
 
         it('creates visually correct sprite', async() => {
@@ -85,7 +81,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let data = null;
         let svgPath = null;
 
-        beforeAll(done => {
+        beforeAll(async() => {
             spriter = new SVGSpriter({
                 dest: tmpPath,
                 shape: {
@@ -97,7 +93,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.horizontal.centered.svg',
                     layout: 'horizontal',
@@ -108,12 +104,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                data = cssData.css;
-                writeFiles(result.css);
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            data = cssData.css;
+            writeFiles(result.css);
+            svgPath = path.basename(result.css.sprite.path);
         });
 
         it('creates visually correct sprite', async() => {
@@ -123,23 +117,19 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             );
         });
 
-        it('creates a visually correct stylesheet resource', done => {
+        it('creates a visually correct stylesheet resource', async() => {
             expect.hasAssertions();
 
-            sass.render({ file: path.join(tmpPath, 'css/sprite.centered.scss') }, async(err, scssText) => {
-                expect(err).toBeNull();
+            const scssText = sass.renderSync({ file: path.join(tmpPath, 'css/sprite.centered.scss') });
 
-                writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
+            writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
 
-                data.css = '../sprite.centered.scss.css';
+            data.css = '../sprite.centered.scss.css';
 
-                const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
+            const out = mustache.render(previewTemplate, data);
+            const preview = writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.horizontal.centered.html.png'));
-
-                done();
-            });
+            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.horizontal.centered.html.png'));
         });
     });
 
@@ -148,7 +138,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let data = null;
         let svgPath = null;
 
-        beforeAll(done => {
+        beforeAll(async() => {
             spriter = new SVGSpriter({
                 dest: tmpPath,
                 shape: {
@@ -160,7 +150,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.packed.centered.svg',
                     layout: 'packed',
@@ -171,12 +161,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                writeFiles(result);
-                data = cssData.css;
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            writeFiles(result);
+            data = cssData.css;
+            svgPath = path.basename(result.css.sprite.path);
         });
 
         it('creates visually correct sprite', async() => {
@@ -187,27 +175,23 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             );
         });
 
-        it('creates a visually correct stylesheet resource', done => {
+        it('creates a visually correct stylesheet resource', async() => {
             expect.hasAssertions();
 
             const lessFile = path.join(tmpPath, 'css/sprite.centered.less');
 
             const lessText = fs.readFileSync(lessFile, 'utf-8');
 
-            less.render(lessText, {}, async(error, output) => {
-                expect(error).toBeNull();
+            const output = await asyncRenderers.less(lessText, {});
 
-                writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
+            writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
 
-                data.css = '../sprite.centered.less.css';
+            data.css = '../sprite.centered.less.css';
 
-                const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
+            const out = mustache.render(previewTemplate, data);
+            const preview = writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
-
-                done();
-            });
+            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
         });
     });
 });

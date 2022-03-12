@@ -27,26 +27,24 @@ describe.each`
 
     beforeAll(removeTmpPath.bind(null, tmpPath));
 
-    // eslint-disable-next-line jest/no-done-callback, jest/no-duplicate-hooks
-    beforeAll(done => {
+    // eslint-disable-next-line jest/no-duplicate-hooks
+    beforeAll(async() => {
         data = {};
 
         spriter = new SVGSpriter({
             dest: tmpPath
         });
         addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
-        spriter.compile({
+        const { result, data: cssData } = await spriter.compileAsync({
             symbol: {
                 sprite: `svg/symbol${testConfig.namespace}.svg`, render: {
                     css: true
                 }
             }
-        }, (error, result, cssData) => {
-            writeFiles(result);
-            data = cssData.symbol;
-            svg = path.basename(result.symbol.sprite.path);
-            done();
         });
+        writeFiles(result);
+        data = cssData.symbol;
+        svg = path.basename(result.symbol.sprite.path);
     });
 
     it('creates a visually correct stylesheet resource in CSS format', async() => {

@@ -21,57 +21,45 @@ describe('svg-sprite: with no arguments', () => {
         });
     });
 
-    // eslint-disable-next-line jest/no-done-callback
-    it('with no SVG files has an empty result', done => {
-        expect.assertions(7);
+    it('with no SVG files has an empty result', async() => {
+        expect.assertions(6);
 
-        spriter.compile((error, result, data) => {
-            expect(error).toBeNull();
-            expect(result).toBeInstanceOf(Object);
-            expect(result).toHaveProperty('shapes');
-            expect(result.shapes).toBeInstanceOf(Array);
-            expect(result.shapes).toHaveLength(0);
-            expect(data).toBeInstanceOf(Object);
-            expect(data).toStrictEqual({});
+        const { result, data } = await spriter.compileAsync();
 
-            done();
-        });
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(0);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 
-    // eslint-disable-next-line jest/no-done-callback
-    it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, done => {
-        expect.assertions(7);
+    it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, async() => {
+        expect.assertions(6);
 
         addFixtureFiles(spriter, weather, cwdWeather);
-        spriter.compile((error, result, data) => {
-            expect(error).toBeNull();
-            expect(result).toBeInstanceOf(Object);
-            expect(result).toHaveProperty('shapes');
-            expect(result.shapes).toBeInstanceOf(Array);
-            expect(result.shapes).toHaveLength(weather.length);
-            expect(data).toBeInstanceOf(Object);
-            expect(data).toStrictEqual({});
+        const { result, data } = await spriter.compileAsync();
 
-            done();
-        });
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(weather.length);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 
-    // eslint-disable-next-line jest/no-done-callback
-    it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, done => {
-        expect.assertions(7);
+    it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, async() => {
+        expect.assertions(6);
 
         addRelativeFixtureFiles(spriter, weather, cwdWeather);
 
-        spriter.compile((error, result, data) => {
-            expect(error).toBeNull();
-            expect(result).toBeInstanceOf(Object);
-            expect(result).toHaveProperty('shapes');
-            expect(result.shapes).toBeInstanceOf(Array);
-            expect(result.shapes).toHaveLength(weather.length);
-            expect(data).toBeInstanceOf(Object);
-            expect(data).toStrictEqual({});
+        const { result, data } = await spriter.compileAsync();
 
-            done();
-        });
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(weather.length);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 });

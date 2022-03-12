@@ -30,10 +30,9 @@ describe('testing shapes', () => {
             svg                    | dimension
             ${expectations[0].svg} | ${expectations[0].result}
             ${expectations[1].svg} | ${expectations[1].result}
-        `('should call calculateSvgDimensions if the $svg does not contain viewBox or height/width properties ($dimension)', ({
+        `('should call calculateSvgDimensions if the $svg does not contain viewBox or height/width properties ($dimension)', async({
         svg, dimension
-    // eslint-disable-next-line jest/no-done-callback
-    }, done) => {
+    }) => {
         expect.hasAssertions();
 
         const spriter = new SVGSpriter({
@@ -58,18 +57,14 @@ describe('testing shapes', () => {
 
         expect(calculateSvgDimensions).toHaveBeenCalledWith(new DOMParser().parseFromString(`${DEFAULT_XML_DECLARATION}${TEST_SVG}`).toString());
 
-        spriter.compile((error, result) => {
-            expect(error).toBeNull();
-            expect(result).toBeInstanceOf(Object);
-            expect(result.shapes).toBeInstanceOf(Array);
+        const { result } = await spriter.compileAsync();
 
-            const svg = result.shapes[0]._contents.toString();
-            const dom = new DOMParser().parseFromString(svg, 'text/xml');
+        expect(result).toBeInstanceOf(Object);
+        expect(result.shapes).toBeInstanceOf(Array);
 
-            expect(dom.documentElement.getAttribute('height')).toStrictEqual(dimension.height.toString());
-            expect(dom.documentElement.getAttribute('width')).toStrictEqual(dimension.width.toString());
+        const dom = new DOMParser().parseFromString(result.shapes[0]._contents.toString(), 'text/xml');
 
-            done();
-        });
+        expect(dom.documentElement.getAttribute('height')).toStrictEqual(dimension.height.toString());
+        expect(dom.documentElement.getAttribute('width')).toStrictEqual(dimension.width.toString());
     });
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks */
 const path = require('path');
 const glob = require('glob');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
@@ -17,9 +16,8 @@ const tmpPath = path.join(paths.tmp, 'rerun');
 describe('testing rerun', () => {
     beforeAll(removeTmpPath.bind(null, tmpPath));
 
-    // eslint-disable-next-line jest/no-done-callback
-    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', done => {
-        expect.assertions(12);
+    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', async() => {
+        expect.assertions(11);
 
         const spriter = new SVGSpriter({
             dest: tmpPath
@@ -27,7 +25,7 @@ describe('testing rerun', () => {
 
         addFixtureFiles(spriter, weather, cwd);
 
-        spriter.compile({
+        const { result: firstResult } = await spriter.compileAsync({
             css: {
                 sprite: 'svg/css.vertical.svg',
                 layout: 'vertical',
@@ -39,36 +37,30 @@ describe('testing rerun', () => {
                     styl: true
                 }
             }
-        }, async(error, firstResult) => {
-            expect(error).toBeNull();
-            expect(firstResult.css).toBeInstanceOf(Object);
-            expect(Object.values(firstResult.css)).toHaveLength(5);
+        });
 
-            const otherLayouts = ['horizontal', 'diagonal', 'packed'];
+        expect(firstResult.css).toBeInstanceOf(Object);
+        expect(Object.values(firstResult.css)).toHaveLength(5);
 
-            const promises = otherLayouts.map(mode => {
-                return new Promise(resolve => {
-                    spriter.compile({
-                        css: {
-                            sprite: `svg/css.${mode}.svg`,
-                            layout: 'horizontal'
-                        }
-                    }, (err, result) => {
-                        expect(error).toBeNull();
-                        expect(result.css).toBeInstanceOf(Object);
-                        expect(Object.values(result.css)).toHaveLength(1);
+        const otherLayouts = ['horizontal', 'diagonal', 'packed'];
 
-                        resolve();
-                    });
+        const promises = otherLayouts.map(mode => {
+            return new Promise(resolve => {
+                spriter.compile({
+                    css: {
+                        sprite: `svg/css.${mode}.svg`,
+                        layout: 'horizontal'
+                    }
+                }, (err, result) => {
+                    expect(err).toBeNull();
+                    expect(result.css).toBeInstanceOf(Object);
+                    expect(Object.values(result.css)).toHaveLength(1);
+
+                    resolve();
                 });
             });
-
-            try {
-                await Promise.all(promises);
-                done();
-            } catch (error) {
-                done(error);
-            }
         });
+
+        await Promise.all(promises);
     });
 });
