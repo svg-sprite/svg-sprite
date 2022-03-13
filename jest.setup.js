@@ -9,9 +9,9 @@ const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPat
     return new Promise((resolve, reject) => {
         const ext = path.extname(resultPNGPath);
         const diffPath = resultPNGPath.replace(`.${ext}`, `.diff.${ext}`);
-        compareSvg2PngHelper(receivedSVGPath, resultPNGPath, expectedPNGPath, diffPath, (err, result) => {
-            if (err) {
-                return reject(err);
+        compareSvg2PngHelper(receivedSVGPath, resultPNGPath, expectedPNGPath, diffPath, (error, result) => {
+            if (error) {
+                return reject(error);
             }
 
             resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });

@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert').strict;
 const { Buffer } = require('buffer');
 const path = require('path');
 const fs = require('fs');
@@ -8,7 +7,13 @@ const File = require('vinyl');
 const glob = require('glob');
 const getShape = require('../lib/svg-sprite/shape.js');
 const SVGSpriter = require('../lib/svg-sprite.js');
-const { paths } = require('./helpers/constants.js');
+const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
+
+jest.mock('../lib/svg-sprite/utils/fix-xml-string.js', () => jest.fn());
+
+const TEST_SVG = `<svg viewBox="0 0
+                                16 16"></svg>`;
+const FIXED_TEST_SVG = '<svg viewBox="0 0 16 16"></svg>';
 
 describe('testing SVGShape initialization', () => {
     let spriter;
@@ -21,84 +26,68 @@ describe('testing SVGShape initialization', () => {
         });
     });
 
-    it('should not throw an error on valid svg file with multiline attribute values 1', () => {
-        assert.doesNotThrow(() => {
+    it('should not throw an error and should call fixXMLString if fixXMLString is not throwing error', () => {
+        expect.hasAssertions();
+
+        fixXMLString.mockReturnValueOnce(FIXED_TEST_SVG);
+
+        expect(() => {
             getShape(new File({
                 path: __dirname,
-                contents: Buffer.from(`<svg viewBox="0 0 0 16
-                                     16"></svg>`)
+                contents: Buffer.from(TEST_SVG)
             }), spriter);
-        }, Error);
+        }).not.toThrow(Error);
+        expect(fixXMLString).toHaveBeenCalledWith(TEST_SVG);
     });
 
-    it('should not throw an error on valid svg file with multiline attribute values 2', () => {
-        assert.doesNotThrow(() => {
+    it('should throw error and should call fixXMLString if fixXMLString is throwing error', () => {
+        expect.hasAssertions();
+
+        fixXMLString.mockImplementation(() => {
+            throw new Error('some error');
+        });
+
+        expect(() => {
             getShape(new File({
                 path: __dirname,
-                contents: Buffer.from(`<svg fill="r
-                                                            e
-                                                            d"
-                                                            viewBox="0 0 0 16
-                                                                                                 16"></svg>`)
+                contents: Buffer.from(TEST_SVG)
             }), spriter);
-        }, Error);
+        }).toThrow(new Error('Invalid SVG file'));
+        expect(fixXMLString).toHaveBeenCalledWith(TEST_SVG);
     });
 
-    it('should not throw an error on valid svg file with mutliple multilined attritbutes values', () => {
-        assert.doesNotThrow(() => {
+    it('should throw an error and should call fixXMLString on non-svg files', () => {
+        expect.hasAssertions();
+
+        const TEST_NON_SVG = '<div class="test">123</div>';
+
+        expect(() => {
             getShape(new File({
                 path: __dirname,
-                contents: Buffer.from(`<svg fill="r
-                                                            e
-                                                            d"
-                                                            viewBox="0
-                                                            0
-                                                            0
-                                                            16
-                                                            16"></svg>`)
+                contents: Buffer.from(TEST_NON_SVG)
             }), spriter);
-        }, Error);
+        }).toThrow(Error);
+        expect(fixXMLString).toHaveBeenCalledWith(TEST_NON_SVG);
     });
 
-    it('should throw an error on invalid file', () => {
-        assert.throws(() => {
-            getShape(new File({
-                path: __dirname,
-                contents: Buffer.from('<svg viewBox=></svg>')
-            }), spriter);
-        }, Error);
-    });
+    it('should not throw an error and should not call fixXMLString on actual valid svg files', () => {
+        expect.hasAssertions();
 
-    it('should throw an error on non-svg files', () => {
-        assert.throws(() => {
-            getShape(new File({
-                path: __dirname,
-                contents: Buffer.from('<div class="test">123</div>')
-            }), spriter);
-        }, Error);
-    });
-
-    it('should not throw an error on valid svg file with normal values', () => {
-        assert.doesNotThrow(() => {
-            getShape(new File({
-                path: __dirname,
-                contents: Buffer.from('<svg viewBox="0 0 0 16 16"></svg>')
-            }), spriter);
-        }, Error);
-    });
-
-    it('should not throw an error on actual valid svg files', () => {
-        const cwdWeather = path.join(paths.fixtures, 'svg/single');
+        const cwdWeather = path.join(__dirname, 'fixture/svg/single');
         const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
+
+        expect.assertions(weather.length * 2);
 
         weather.forEach(weatherFile => {
             const svgFileBuffer = fs.readFileSync(path.join(cwdWeather, weatherFile));
-            assert.doesNotThrow(() => {
+
+            expect(() => {
                 getShape(new File({
                     path: __dirname,
                     contents: svgFileBuffer
                 }), spriter);
-            }, Error);
+            }).not.toThrow(Error);
+            expect(fixXMLString).not.toHaveBeenCalled();
         });
     });
 });

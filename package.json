@@ -27,13 +27,10 @@
   "scripts": {
     "lint": "xo",
     "fix": "xo --fix",
-    "mocha": "mocha \"test/**/*.test.js\"",
-    "coverage": "c8 npm run mocha",
-    "coverage:jest": "c8 npm run test:jest",
-    "coverage:jest:native": "jest --coverage",
+    "jest": "jest",
+    "coverage": "jest --coverage",
     "example": "node example.js",
-    "test": "npm run mocha",
-    "test:jest": "jest",
+    "test": "jest",
     "test:watch": "jest --watch"
   },
   "dependencies": {
@@ -56,18 +53,14 @@
     "yargs": "^17.3.1"
   },
   "devDependencies": {
-    "c8": "^7.11.0",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsdoc": "^37.9.7",
     "jest": "^27.5.1",
     "less": "^4.1.2",
     "looks-same": "^7.3.0",
-    "mocha": "^9.2.1",
     "puppeteer": "^13.5.1",
     "sass": "^1.49.9",
-    "should": "^13.2.3",
-    "sinon": "^13.0.1",
     "stylus": "^0.56.0",
     "xo": "^0.48.0"
   },
@@ -171,14 +164,8 @@
     },
     "overrides": [
       {
-        "files": "test/**/*.js",
-        "envs": [
-          "mocha"
-        ]
-      },
-      {
         "files": [
-          "test/**/*test.jest.js",
+          "test/**/*test.js",
           "jest.setup.js"
         ],
         "extends": [

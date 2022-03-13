@@ -1,26 +1,31 @@
 'use strict';
 
-/* eslint-disable no-unused-expressions, max-nested-callbacks */
 const path = require('path');
 const glob = require('glob');
-const should = require('should');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 
 const { paths } = require('../../helpers/constants.js');
+const removeTmpPath = require('../../helpers/remove-temp-path.js');
 
 const cwd = path.join(paths.fixtures, 'svg/single');
 const weather = glob.sync('**/weather*.svg', { cwd });
 
+const tmpPath = path.join(paths.tmp, 'rerun');
+
 describe('testing rerun', () => {
-    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', done => {
+    beforeAll(removeTmpPath.bind(null, tmpPath));
+
+    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', async() => {
+        expect.assertions(11);
+
         const spriter = new SVGSpriter({
-            dest: paths.tmp
+            dest: tmpPath
         });
 
         addFixtureFiles(spriter, weather, cwd);
 
-        spriter.compile({
+        const { result: firstResult } = await spriter.compileAsync({
             css: {
                 sprite: 'svg/css.vertical.svg',
                 layout: 'vertical',
@@ -32,41 +37,30 @@ describe('testing rerun', () => {
                     styl: true
                 }
             }
-        }, async(error, firstResult) => {
-            if (error) {
-                return done(error);
-            }
+        });
 
-            should(firstResult.css).be.an.Object;
-            should(Object.values(firstResult.css).length).be.exactly(5);
+        expect(firstResult.css).toBeInstanceOf(Object);
+        expect(Object.values(firstResult.css)).toHaveLength(5);
 
-            const otherLayouts = ['horizontal', 'diagonal', 'packed'];
+        const otherLayouts = ['horizontal', 'diagonal', 'packed'];
 
-            const promises = otherLayouts.map(mode => {
-                return new Promise((resolve, reject) => {
-                    spriter.compile({
-                        css: {
-                            sprite: `svg/css.${mode}.svg`,
-                            layout: 'horizontal'
-                        }
-                    }, (err, result) => {
-                        if (err) {
-                            return reject(err);
-                        }
+        const promises = otherLayouts.map(mode => {
+            return new Promise(resolve => {
+                spriter.compile({
+                    css: {
+                        sprite: `svg/css.${mode}.svg`,
+                        layout: 'horizontal'
+                    }
+                }, (err, result) => {
+                    expect(err).toBeNull();
+                    expect(result.css).toBeInstanceOf(Object);
+                    expect(Object.values(result.css)).toHaveLength(1);
 
-                        should(result.css).be.an.Object;
-                        should(Object.values(result.css).length).be.exactly(1);
-                        resolve();
-                    });
+                    resolve();
                 });
             });
-
-            try {
-                await Promise.all(promises);
-                done();
-            } catch (error) {
-                done(error);
-            }
         });
+
+        await Promise.all(promises);
     });
 });

@@ -1,21 +1,16 @@
 'use strict';
 
-/* eslint-disable no-unused-expressions, max-nested-callbacks */
 const path = require('path');
 const fs = require('fs');
 const mustache = require('mustache');
-const should = require('should');
-const looksSame = require('looks-same');
 const sass = require('sass');
 const glob = require('glob');
-const less = require('less');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 const writeFiles = require('../../helpers/write-files.js');
 const writeFile = require('../../helpers/write-file.js');
-const capturePuppeteer = require('../../helpers/capture-puppeteer.js');
-const compareSvg2Png = require('../../helpers/compare-svg-2-png.js');
 const removeTmpPath = require('../../helpers/remove-temp-path.js');
+const asyncRenderers = require('../../helpers/async-renderers.js');
 
 const { paths } = require('../../helpers/constants.js');
 
@@ -23,17 +18,19 @@ const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf-8');
 
+const tmpPath = path.join(paths.tmp, 'center');
+
 describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, () => {
+    beforeAll(removeTmpPath.bind(null, tmpPath));
+
     describe('with «css» mode, vertical layout and CSS render type', () => {
         let spriter = null;
         let data = null;
         let svgPath = null;
 
-        before(removeTmpPath);
-
-        before('creates 2 files', done => {
+        beforeAll(async() => {
             spriter = new SVGSpriter({
-                dest: paths.tmp,
+                dest: tmpPath,
                 shape: {
                     align: path.join(paths.fixtures, 'yaml/align.centered.yaml'),
                     dimension: {
@@ -43,7 +40,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.vertical.centered.svg',
                     layout: 'vertical',
@@ -54,42 +51,28 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                writeFiles(result);
-                data = cssData.css;
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            writeFiles(result);
+            data = cssData.css;
+            svgPath = path.basename(result.css.sprite.path);
         });
 
-        it('creates visually correct sprite', done => {
-            compareSvg2Png(
-                path.join(paths.tmp, 'css/svg', svgPath),
-                path.join(paths.tmp, 'css/png/css.vertical.centered.png'),
-                path.join(paths.expectations, '/png/css.vertical.centered.png'),
-                path.join(paths.tmp, 'css/png/css.vertical.centered.diff.png'),
-                done,
-                'The vertical sprite doesn\'t match the expected one!'
+        it('creates visually correct sprite', async() => {
+            expect.hasAssertions();
+            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
+                path.join(paths.expectations, '/png/css.vertical.centered.png')
             );
         });
 
-        it('creates a visually correct stylesheet resource', done => {
+        it('creates a visually correct stylesheet resource', async() => {
+            expect.hasAssertions();
+
             data.css = '../sprite.centered.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(paths.tmp, 'css/html/css.vertical.centered.html'), out);
-            const previewImage = path.join(paths.tmp, 'css/png/css.vertical.centered.html.png');
+            const preview = writeFile(path.join(tmpPath, 'css/html/css.vertical.centered.html'), out);
 
-            preview.should.be.ok;
-
-            capturePuppeteer(preview, previewImage, error => {
-                should(error).not.ok;
-                looksSame(previewImage, path.join(paths.expectations, '/png/css.vertical.centered.html.png'), (error, result) => {
-                    should(error).not.ok;
-                    should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
-                    done();
-                });
-            });
+            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, 'png/css.vertical.centered.html.png'));
         });
     });
 
@@ -97,9 +80,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let spriter = null;
         let data = null;
         let svgPath = null;
-        before(done => {
+
+        beforeAll(async() => {
             spriter = new SVGSpriter({
-                dest: paths.tmp,
+                dest: tmpPath,
                 shape: {
                     align: path.join(paths.fixtures, 'yaml/align.centered.yaml'),
                     dimension: {
@@ -109,7 +93,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.horizontal.centered.svg',
                     layout: 'horizontal',
@@ -120,47 +104,32 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                data = cssData.css;
-                writeFiles(result.css);
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            data = cssData.css;
+            writeFiles(result.css);
+            svgPath = path.basename(result.css.sprite.path);
         });
 
-        it('creates visually correct sprite', done => {
-            compareSvg2Png(
-                path.join(paths.tmp, 'css/svg', svgPath),
-                path.join(paths.tmp, 'css/png/css.horizontal.centered.png'),
-                path.join(paths.expectations, '/png/css.horizontal.centered.png'),
-                path.join(paths.tmp, 'css/png/css.horizontal.centered.diff.png'),
-                done,
-                'The horizontal sprite doesn\'t match the expected one!'
+        it('creates visually correct sprite', async() => {
+            expect.hasAssertions();
+            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
+                path.join(paths.expectations, '/png/css.horizontal.centered.png')
             );
         });
 
-        it('creates a visually correct stylesheet resource', done => {
-            sass.render({ file: path.join(paths.tmp, 'css/sprite.centered.scss') }, (err, scssText) => {
-                should(err).not.ok;
-                should(writeFile(path.join(paths.tmp, 'css/sprite.centered.scss.css'), scssText.css)).be.ok;
+        it('creates a visually correct stylesheet resource', async() => {
+            expect.hasAssertions();
 
-                data.css = '../sprite.centered.scss.css';
+            const scssText = sass.renderSync({ file: path.join(tmpPath, 'css/sprite.centered.scss') });
 
-                const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(paths.tmp, 'css/html/scss.horizontal.centered.html'), out);
-                const previewImage = path.join(paths.tmp, 'css/png/scss.horizontal.centered.html.png');
+            writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
 
-                preview.should.be.ok;
+            data.css = '../sprite.centered.scss.css';
 
-                capturePuppeteer(preview, previewImage, error => {
-                    should(error).not.ok;
-                    looksSame(previewImage, path.join(paths.expectations, '/png/css.horizontal.centered.html.png'), (error, result) => {
-                        should(error).not.ok;
-                        should.ok(result.equal, 'The generated Sass preview doesn\'t match the expected one!');
-                        done();
-                    });
-                });
-            });
+            const out = mustache.render(previewTemplate, data);
+            const preview = writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
+
+            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.horizontal.centered.html.png'));
         });
     });
 
@@ -168,9 +137,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
         let spriter = null;
         let data = null;
         let svgPath = null;
-        before('creates 2 files', done => {
+
+        beforeAll(async() => {
             spriter = new SVGSpriter({
-                dest: paths.tmp,
+                dest: tmpPath,
                 shape: {
                     align: path.join(paths.fixtures, 'yaml/align.centered.yaml'),
                     dimension: {
@@ -180,7 +150,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                 }
             });
             addFixtureFiles(spriter, align, cwdAlign);
-            spriter.compile({
+            const { result, data: cssData } = await spriter.compileAsync({
                 css: {
                     sprite: 'svg/css.packed.centered.svg',
                     layout: 'packed',
@@ -191,53 +161,37 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
                         }
                     }
                 }
-            }, (error, result, cssData) => {
-                writeFiles(result);
-                data = cssData.css;
-                svgPath = path.basename(result.css.sprite.path);
-                done();
             });
+            writeFiles(result);
+            data = cssData.css;
+            svgPath = path.basename(result.css.sprite.path);
         });
 
-        it('creates visually correct sprite', done => {
-            compareSvg2Png(
-                path.join(paths.tmp, 'css/svg', svgPath),
-                path.join(paths.tmp, 'css/png/css.packed.centered.png'),
-                path.join(paths.expectations, '/png/css.packed.aligned.png'),
-                path.join(paths.tmp, 'css/png/css.packed.centered.diff.png'),
-                done,
-                'The packed sprite doesn\'t match the expected one!'
+        it('creates visually correct sprite', async() => {
+            expect.hasAssertions();
+            await expect(
+                path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
+                path.join(paths.expectations, '/png/css.packed.aligned.png')
             );
         });
 
-        it('creates a visually correct stylesheet resource', done => {
-            const lessFile = path.join(paths.tmp, 'css/sprite.centered.less');
+        it('creates a visually correct stylesheet resource', async() => {
+            expect.hasAssertions();
 
-            fs.readFile(lessFile, 'utf-8', (err, lessText) => {
-                should(err).not.ok;
+            const lessFile = path.join(tmpPath, 'css/sprite.centered.less');
 
-                less.render(lessText, {}, (error, output) => {
-                    should(error).not.ok;
-                    should(writeFile(path.join(paths.tmp, 'css/sprite.centered.less.css'), output.css)).be.ok;
+            const lessText = fs.readFileSync(lessFile, 'utf-8');
 
-                    data.css = '../sprite.centered.less.css';
+            const output = await asyncRenderers.less(lessText, {});
 
-                    const out = mustache.render(previewTemplate, data);
-                    const preview = writeFile(path.join(paths.tmp, 'css/html/less.packed.centered.html'), out);
-                    const previewImage = path.join(paths.tmp, 'css/png/less.packed.centered.html.png');
+            writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
 
-                    preview.should.be.ok;
+            data.css = '../sprite.centered.less.css';
 
-                    capturePuppeteer(preview, previewImage, error => {
-                        should(error).not.ok;
-                        looksSame(previewImage, path.join(paths.expectations, '/png/css.packed.aligned.html.png'), (error, result) => {
-                            should(error).not.ok;
-                            should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
-                            done();
-                        });
-                    });
-                });
-            });
+            const out = mustache.render(previewTemplate, data);
+            const preview = writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
+
+            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
         });
     });
 });

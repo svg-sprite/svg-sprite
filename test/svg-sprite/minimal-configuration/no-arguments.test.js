@@ -1,8 +1,6 @@
 'use strict';
 
-/* eslint-disable no-unused-expressions */
 const path = require('path');
-const should = require('should');
 const glob = require('glob');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles, addRelativeFixtureFiles } = require('../../helpers/add-files.js');
@@ -23,42 +21,45 @@ describe('svg-sprite: with no arguments', () => {
         });
     });
 
-    describe('with no SVG files', () => {
-        it('has an empty result', async() => {
-            const { result, data } = await spriter.compileAsync();
+    it('with no SVG files has an empty result', async() => {
+        expect.assertions(6);
 
-            should(result).be.an.Object;
-            should(result).be.empty;
-            should(data).be.an.Object;
-            should(data).be.empty;
-        });
+        const { result, data } = await spriter.compileAsync();
+
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(0);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 
-    describe(`with ${weather.length} SVG files`, () => {
-        it(`returns ${weather.length} optimized shapes`, async() => {
-            addFixtureFiles(spriter, weather, cwdWeather);
-            const { result, data } = await spriter.compileAsync();
+    it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, async() => {
+        expect.assertions(6);
 
-            should(result).be.an.Object;
-            should(result).have.property('shapes');
-            should(result.shapes).be.an.Array;
-            should(result.shapes).have.lengthOf(weather.length);
-            should(data).be.an.Object;
-            should(data).be.empty;
-        });
+        addFixtureFiles(spriter, weather, cwdWeather);
+        const { result, data } = await spriter.compileAsync();
+
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(weather.length);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 
-    describe(`with ${weather.length} SVG files with relative paths`, () => {
-        it(`returns ${weather.length} optimized shapes`, async() => {
-            addRelativeFixtureFiles(spriter, weather, cwdWeather);
-            const { result, data } = await spriter.compileAsync();
+    it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, async() => {
+        expect.assertions(6);
 
-            should(result).be.an.Object;
-            should(result).have.property('shapes');
-            should(result.shapes).be.an.Array;
-            should(result.shapes).have.lengthOf(weather.length);
-            should(data).be.an.Object;
-            should(data).be.empty;
-        });
+        addRelativeFixtureFiles(spriter, weather, cwdWeather);
+
+        const { result, data } = await spriter.compileAsync();
+
+        expect(result).toBeInstanceOf(Object);
+        expect(result).toHaveProperty('shapes');
+        expect(result.shapes).toBeInstanceOf(Array);
+        expect(result.shapes).toHaveLength(weather.length);
+        expect(data).toBeInstanceOf(Object);
+        expect(data).toStrictEqual({});
     });
 });
