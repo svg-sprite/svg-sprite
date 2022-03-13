@@ -8,11 +8,9 @@ const { constants: testConfigs } = require('../../../helpers/test-configs.js');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const writeFiles = require('../../../helpers/write-files.js');
-
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 const { paths } = require('../../../helpers/constants.js');
 const writeFile = require('../../../helpers/write-file.js');
-
 const asyncRenderers = require('../../../helpers/async-renderers.js');
 
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
@@ -129,7 +127,7 @@ describe('testing minimal config', () => {
 
                 data.css = `../sprite${testConfig.namespace}.css`;
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, `css/html/css${testConfig.namespace}.html`), out);
+                const preview = await writeFile(path.join(tmpPath, `css/html/css${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -139,12 +137,12 @@ describe('testing minimal config', () => {
                 expect.hasAssertions();
 
                 const scssText = sass.renderSync({ file: path.join(tmpPath, `css/sprite${testConfig.namespace}.scss`) });
-                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.scss.css`), scssText.css);
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.scss.css`), scssText.css);
 
                 data.css = `../sprite${testConfig.namespace}.scss.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, `css/html/scss${testConfig.namespace}.html`), out);
+                const preview = await writeFile(path.join(tmpPath, `css/html/scss${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -157,12 +155,12 @@ describe('testing minimal config', () => {
                 const lessText = fs.readFileSync(lessFile, 'utf-8');
 
                 const output = await asyncRenderers.less(lessText, {});
-                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
 
                 data.css = `../sprite${testConfig.namespace}.less.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, `css/html/less${testConfig.namespace}.html`), out);
+                const preview = await writeFile(path.join(tmpPath, `css/html/less${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });
@@ -176,12 +174,12 @@ describe('testing minimal config', () => {
 
                 const output = await asyncRenderers.stylus(stylusText, {});
 
-                writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);
 
                 data.css = `../sprite${testConfig.namespace}.styl.css`;
 
                 const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(tmpPath, `css/html/styl${testConfig.namespace}.html`), out);
+                const preview = await writeFile(path.join(tmpPath, `css/html/styl${testConfig.namespace}.html`), out);
 
                 await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
             });

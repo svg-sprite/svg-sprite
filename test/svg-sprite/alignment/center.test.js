@@ -11,7 +11,6 @@ const writeFiles = require('../../helpers/write-files.js');
 const writeFile = require('../../helpers/write-file.js');
 const removeTmpPath = require('../../helpers/remove-temp-path.js');
 const asyncRenderers = require('../../helpers/async-renderers.js');
-
 const { paths } = require('../../helpers/constants.js');
 
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
@@ -70,7 +69,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             data.css = '../sprite.centered.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'css/html/css.vertical.centered.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'css/html/css.vertical.centered.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, 'png/css.vertical.centered.html.png'));
         });
@@ -122,12 +121,12 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
             const scssText = sass.renderSync({ file: path.join(tmpPath, 'css/sprite.centered.scss') });
 
-            writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
+            await writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
 
             data.css = '../sprite.centered.scss.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.horizontal.centered.html.png'));
         });
@@ -184,12 +183,12 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
             const output = await asyncRenderers.less(lessText, {});
 
-            writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
+            await writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
 
             data.css = '../sprite.centered.less.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
         });

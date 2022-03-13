@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const puppeteer = require('puppeteer');
 const looksSame = require('looks-same');
@@ -16,7 +16,7 @@ const convertSvg2Png = require('./convert-svg-2-png.js');
  * @param {Function} done             Callback
  */
 module.exports = async(svg, png, expected, diff, done) => {
-    fs.mkdirSync(path.dirname(png), { recursive: true });
+    await fs.mkdir(path.dirname(png), { recursive: true });
     let browser;
 
     try {

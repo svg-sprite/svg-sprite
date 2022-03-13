@@ -68,7 +68,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
             data.css = '../sprite.mixed.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'view/html/css.vertical.mixed.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'view/html/css.vertical.mixed.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(
                 path.join(paths.expectations, '/png/css.vertical.mixed.html.png')
@@ -126,12 +126,12 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
             expect.hasAssertions();
 
             const scssText = sass.renderSync({ file: path.join(tmpPath, 'view/sprite.mixed.scss') });
-            writeFile(path.join(tmpPath, 'view/sprite.mixed.scss.css'), scssText.css);
+            await writeFile(path.join(tmpPath, 'view/sprite.mixed.scss.css'), scssText.css);
 
             data.css = '../sprite.mixed.scss.css';
 
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'view/html/scss.horizontal.mixed.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'view/html/scss.horizontal.mixed.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, 'png/css.horizontal.mixed.html.png'));
         });

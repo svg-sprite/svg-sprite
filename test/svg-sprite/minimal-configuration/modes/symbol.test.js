@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 const mustache = require('mustache');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
@@ -9,7 +9,6 @@ const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
 const { constants } = require('../../../helpers/test-configs.js');
 const { paths } = require('../../../helpers/constants.js');
-
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 describe.each`
@@ -48,11 +47,12 @@ describe.each`
     it('creates a visually correct stylesheet resource in CSS format', async() => {
         expect.hasAssertions();
 
-        data.svg = fs.readFileSync(path.join(tmpPath, 'symbol/svg', svg)).toString();
+        const svgData = await fs.readFile(path.join(tmpPath, 'symbol/svg', svg));
+        data.svg = svgData.toString();
         data.css = '../sprite.css';
-        const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');
+        const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');
         const out = mustache.render(previewTemplate, data);
-        const preview = writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
+        const preview = await writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
 
         await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/symbol.html${testConfig.namespace}.png`));
     });

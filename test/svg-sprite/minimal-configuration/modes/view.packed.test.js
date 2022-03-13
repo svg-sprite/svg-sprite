@@ -1,14 +1,13 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 const mustache = require('mustache');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const { paths } = require('../../../helpers/constants.js');
-
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 const { constants } = require('../../../helpers/test-configs.js');
 
@@ -62,9 +61,9 @@ describe.each`
             expect.hasAssertions();
 
             data.css = '../sprite.css';
-            const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/view.html'), 'utf-8');
+            const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/view.html'), 'utf-8');
             const out = mustache.render(previewTemplate, data);
-            const preview = writeFile(path.join(tmpPath, 'view/html/view.html'), out);
+            const preview = await writeFile(path.join(tmpPath, 'view/html/view.html'), out);
 
             await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/view.html${testConfig.namespace}.png`));
         });

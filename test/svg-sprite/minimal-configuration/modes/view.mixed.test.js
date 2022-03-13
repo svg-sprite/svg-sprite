@@ -9,9 +9,7 @@ const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
 const asyncRenderers = require('../../../helpers/async-renderers.js');
-
 const { paths } = require('../../../helpers/constants.js');
-
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 const tmpPath = path.join(paths.tmp, 'view.mixed');
@@ -70,12 +68,12 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
         const lessText = fs.readFileSync(lessFile, 'utf-8');
         const output = await asyncRenderers.less(lessText, {});
-        writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);
+        await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);
 
         data.css = '../sprite.mixed.less.css';
 
         const out = mustache.render(previewTemplate, data);
-        const preview = writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
+        const preview = await writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
 
         await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
     });
