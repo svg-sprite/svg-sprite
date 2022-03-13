@@ -51,8 +51,8 @@ describe('testing rerun', () => {
                         sprite: `svg/css.${mode}.svg`,
                         layout: 'horizontal'
                     }
-                }, (err, result) => {
-                    expect(err).toBeNull();
+                }, (error, result) => {
+                    expect(error).toBeNull();
                     expect(result.css).toBeInstanceOf(Object);
                     expect(Object.values(result.css)).toHaveLength(1);
 

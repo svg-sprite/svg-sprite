@@ -71,9 +71,9 @@ describe('testing minimal config', () => {
                             sprite: `svg/css.${layout}${testConfig.namespace}.svg`,
                             layout
                         }
-                    }, (err, result) => {
-                        if (err) {
-                            return reject(err);
+                    }, (error, result) => {
+                        if (error) {
+                            return reject(error);
                         }
 
                         writeFiles(result);

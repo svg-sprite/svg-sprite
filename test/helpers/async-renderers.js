@@ -6,9 +6,9 @@ const less = require('less');
 module.exports = {
     async stylus(...args) {
         return new Promise((resolve, reject) => {
-            stylus.render(...args, (err, result) => {
-                if (err) {
-                    return reject(err);
+            stylus.render(...args, (error, result) => {
+                if (error) {
+                    return reject(error);
                 }
 
                 resolve(result);
@@ -17,9 +17,9 @@ module.exports = {
     },
     async less(...args) {
         return new Promise((resolve, reject) => {
-            less.render(...args, (err, result) => {
-                if (err) {
-                    return reject(err);
+            less.render(...args, (error, result) => {
+                if (error) {
+                    return reject(error);
                 }
 
                 resolve(result);
