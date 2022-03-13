@@ -17,14 +17,10 @@ const asyncRenderers = require('../../../helpers/async-renderers.js');
 
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
 
-const tmpPath = path.join(paths.tmp, 'css');
-
 describe('testing minimal config', () => {
     let spriter;
     const svg = {};
     let data;
-
-    beforeAll(removeTmpPath.bind(null, tmpPath));
 
     describe.each`
         name          | testConfigKey
@@ -33,7 +29,10 @@ describe('testing minimal config', () => {
     `('$name: with minimum configuration', ({ testConfigKey }) => {
         const testConfig = testConfigs[testConfigKey];
 
+        const tmpPath = path.join(paths.tmp, `css${testConfig.namespace}`);
+
         beforeAll(async() => {
+            await removeTmpPath(tmpPath);
             data = {};
             spriter = new SVGSpriter({
                 dest: tmpPath

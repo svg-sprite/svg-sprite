@@ -12,8 +12,6 @@ const { paths } = require('../../../helpers/constants.js');
 
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
-const tmpPath = path.join(paths.tmp, 'symbol');
-
 describe.each`
         name          | testConfigKey
         ${'default'}  | ${'DEFAULT'}
@@ -21,14 +19,14 @@ describe.each`
 `('svg-sprite: $name: «symbol» mode', ({ testConfigKey }) => {
     const testConfig = constants[testConfigKey];
 
+    const tmpPath = path.join(paths.tmp, `symbol${testConfig.namespace}`);
+
     let svg;
     let spriter;
     let data;
 
-    beforeAll(removeTmpPath.bind(null, tmpPath));
-
-    // eslint-disable-next-line jest/no-duplicate-hooks
     beforeAll(async() => {
+        await removeTmpPath(tmpPath);
         data = {};
 
         spriter = new SVGSpriter({
