@@ -89,9 +89,7 @@
   "xo": {
     "space": 4,
     "plugins": [
-      "jsdoc",
-      "jest",
-      "jest-formatting"
+      "jsdoc"
     ],
     "extends": [
       "plugin:jsdoc/recommended"
@@ -105,7 +103,6 @@
       ],
       "eslint-comments/disable-enable-pair": "off",
       "guard-for-in": "off",
-      "jest/no-hooks": "off",
       "jsdoc/check-values": [
         "warn",
         {
@@ -165,8 +162,12 @@
     "overrides": [
       {
         "files": [
-          "test/**/*test.js",
+          "test/**/*.test.js",
           "jest.setup.js"
+        ],
+        "plugins": [
+          "jest",
+          "jest-formatting"
         ],
         "extends": [
           "plugin:jest/all",
@@ -174,7 +175,11 @@
         ],
         "envs": [
           "jest/globals"
-        ]
+        ],
+        "rules": {
+          "jest/no-hooks": "off",
+          "jest/prefer-lowercase-title": "off"
+        }
       }
     ]
   }
