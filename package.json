@@ -132,7 +132,6 @@
       "max-params": "off",
       "no-bitwise": "off",
       "no-negated-condition": "off",
-      "node/prefer-promises/fs": "off",
       "object-curly-spacing": [
         "error",
         "always"
@@ -142,7 +141,6 @@
         "after"
       ],
       "prefer-template": "error",
-      "promise/prefer-await-to-then": "off",
       "space-before-function-paren": [
         "error",
         "never"
