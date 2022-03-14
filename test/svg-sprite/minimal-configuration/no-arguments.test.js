@@ -24,47 +24,41 @@ describe('svg-sprite: with no arguments', () => {
     });
 
     describe('with no SVG files', () => {
-        it('has an empty result', done => {
-            spriter.compile((error, result, data) => {
-                should(error).not.ok;
-                should(result).be.an.Object;
-                should(result).be.empty;
-                should(data).be.an.Object;
-                should(data).be.empty;
-                done();
-            });
+        it('has an empty result', async() => {
+            const { result, data } = await spriter.compileAsync();
+
+            should(result).be.an.Object;
+            should(result).be.empty;
+            should(data).be.an.Object;
+            should(data).be.empty;
         });
     });
 
     describe(`with ${weather.length} SVG files`, () => {
-        it(`returns ${weather.length} optimized shapes`, done => {
+        it(`returns ${weather.length} optimized shapes`, async() => {
             addFixtureFiles(spriter, weather, cwdWeather);
-            spriter.compile((error, result, data) => {
-                should(error).not.ok;
-                should(result).be.an.Object;
-                should(result).have.property('shapes');
-                should(result.shapes).be.an.Array;
-                should(result.shapes).have.lengthOf(weather.length);
-                should(data).be.an.Object;
-                should(data).be.empty;
-                done();
-            });
+            const { result, data } = await spriter.compileAsync();
+
+            should(result).be.an.Object;
+            should(result).have.property('shapes');
+            should(result.shapes).be.an.Array;
+            should(result.shapes).have.lengthOf(weather.length);
+            should(data).be.an.Object;
+            should(data).be.empty;
         });
     });
 
     describe(`with ${weather.length} SVG files with relative paths`, () => {
-        it(`returns ${weather.length} optimized shapes`, done => {
+        it(`returns ${weather.length} optimized shapes`, async() => {
             addRelativeFixtureFiles(spriter, weather, cwdWeather);
-            spriter.compile((error, result, data) => {
-                should(error).not.ok;
-                should(result).be.an.Object;
-                should(result).have.property('shapes');
-                should(result.shapes).be.an.Array;
-                should(result.shapes).have.lengthOf(weather.length);
-                should(data).be.an.Object;
-                should(data).be.empty;
-                done();
-            });
+            const { result, data } = await spriter.compileAsync();
+
+            should(result).be.an.Object;
+            should(result).have.property('shapes');
+            should(result.shapes).be.an.Array;
+            should(result.shapes).have.lengthOf(weather.length);
+            should(data).be.an.Object;
+            should(data).be.empty;
         });
     });
 });

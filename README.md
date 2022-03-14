@@ -90,6 +90,17 @@ spriter.compile((error, result) => {
         }
     }
 });
+
+// Or compile the sprite async
+const { result } = await spriter.compileAsync();
+/* Write `result` files to disk (or do whatever with them ...) */
+for (const mode in result) {
+    for (const resource in result[mode]) {
+        fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
+        fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
+    }
+}
+
 ```
 
 As you can see, big parts of the above are dealing with disk I/O. In this regard, you can make your life easier by [using the Grunt or Gulp wrappers](docs/grunt-gulp.md) instead of the [standard API](docs/api.md).
