@@ -56,7 +56,7 @@ gulp.src('assets/*.svg')
 
 [npm-url]: https://www.npmjs.com/package/svg-sprite
 [npm-image]: https://img.shields.io/npm/v/svg-sprite
-[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite.svg
+[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite
 
 [ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
 [ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
