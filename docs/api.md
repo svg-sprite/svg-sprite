@@ -185,16 +185,19 @@ Please note that the resources are always returned as [vinyl](https://github.com
 
 ##### Arguments
 
-1. **config** `{Object}` *(optional)* — Configuration object (same as in [SVGSpriter.compile](#svgspritercompile-config--callback-))
+**config** `{Object}` *(optional)* — Configuration object (same as in [SVGSpriter.compile](#svgspritercompile-config--callback-))
 
 ##### Returns
-1. Promise
-    * **Compilation Result** `{Object}` Object containing fields:
-      * **result** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
-      * **data** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+
+Promise
+
+* **Compilation Result** `{Object}` Object containing fields:
+    * **result** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+    * **data** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
 
 ##### Throws
-1. **error** `{Error}` — Error message in case the compilation has failed
+
+**error** `{Error}` — Error message in case the compilation has failed
 
 ##### Compilation example
 
