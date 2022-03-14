@@ -13,7 +13,7 @@ This file is part of the documentation of *svg-sprite* — a free low-level Node
 * [SVGSpriter.add(file [, name, svg ])](#svgspriteraddfile--name-svg-) — Registering source SVG files
 * [SVGSpriter.compile([ config ,] callback )](#svgspritercompile-config--callback-) — Triggering the sprite compilation
 * [SVGSpriter.compileAsync([ config ,])](#svgspritercompileasync-config-) — Triggering the sprite compilation
-* [SVGSpriter.getShapes( dest , callback )](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
+* [SVGSpriter.getShapes(dest , callback)](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
 
 To understand these methods' roles and interactions, please have a look at the following basic example first.
 
@@ -27,7 +27,6 @@ const path = require('path');
 const SVGSpriter = require('svg-sprite'),
 
 // 1. Create and configure a spriter instance
-// ====================================================================
 const spriter = new SVGSpriter({
     dest: 'out', // Main output directory
     mode: {
@@ -40,7 +39,6 @@ const spriter = new SVGSpriter({
 });
 
 // 2. Add some SVG files to process
-// ====================================================================
 spriter.add(
     path.resolve('assets/example-1.svg'),
     'example-1.svg',
@@ -56,7 +54,6 @@ spriter.add(
 );
 
 // 3. Trigger the (asynchronous) compilation process
-// ====================================================================
 spriter.compile((error, result, data) => {
     // Run through all files that have been created for the `css` mode
     for (const type in result.css) {
