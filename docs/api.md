@@ -12,7 +12,8 @@ This file is part of the documentation of *svg-sprite* — a free low-level Node
 * [SVGSpriter([ config ])](#svgspriter-config-) — The spriter's constructor (always the entry point)
 * [SVGSpriter.add(file [, name, svg ])](#svgspriteraddfile--name-svg-) — Registering source SVG files
 * [SVGSpriter.compile([ config ,] callback )](#svgspritercompile-config--callback-) — Triggering the sprite compilation
-* [SVGSpriter.getShapes( dest , callback )](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
+* [SVGSpriter.compileAsync([ config ,])](#svgspritercompileasync-config-) — Triggering the sprite compilation
+* [SVGSpriter.getShapes(dest , callback)](#svgspritergetshapes-dest--callback-) — Accessing the intermediate SVG resources
 
 To understand these methods' roles and interactions, please have a look at the following basic example first.
 
@@ -177,6 +178,47 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 For each configured output mode (`css` in the example), the `result` object holds an item containing the resources generated for this particular mode. There is always a `sprite` resource (obviously) and possibly an `example` resource for the demo HTML document (if configured). For the [css and view](configuration.md#css--view-mode) output modes, there are additional items named after the configured [rendering configurations](configuration.md#rendering-configurations) (`scss` in the example).
 
 Please note that the resources are always returned as [vinyl](https://github.com/gulpjs/vinyl) files. Have a look above for an [example of how to write these files to disk](#example-using-glob-and-vinyl).
+
+#### SVGSpriter.compileAsync([ config ,])
+
+**Sprite async compilation** — Simple Promise wrapper on [SVGSpriter.compile](#svgspritercompile-config--callback-).
+
+##### Arguments
+
+**config** `{Object}` *(optional)* — Configuration object (same as in [SVGSpriter.compile](#svgspritercompile-config--callback-))
+
+##### Returns
+
+Promise
+
+* **Compilation Result** `{Object}` Object containing fields:
+    * **result** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+    * **data** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+
+##### Throws
+
+**error** `{Error}` — Error message in case the compilation has failed
+
+##### Compilation example
+
+Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example:
+
+```js
+try {
+    const { result, data } = await spriter.compileAsync({
+        css: {
+            render: {
+                scss: true
+            },
+            example: true
+        }
+    });
+
+    console.log(result, data);
+} catch (error) {
+    console.error(error);
+}
+```
 
 #### SVGSpriter.getShapes( dest , callback )
 
