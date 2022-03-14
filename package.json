@@ -163,7 +163,7 @@
       {
         "files": [
           "test/**/*.test.js",
-          "jest.setup.js"
+          "test/jest/*.js"
         ],
         "plugins": [
           "jest",

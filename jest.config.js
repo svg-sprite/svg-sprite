@@ -20,8 +20,8 @@ module.exports = {
     testPathIgnorePatterns: [
         '/node_modules/'
     ],
-    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-    globalSetup: '<rootDir>/jest.setup.global.js',
+    setupFilesAfterEnv: ['<rootDir>/test/jest/setup.js'],
+    globalSetup: '<rootDir>/test/jest/setup.global.js',
     verbose: false,
     testTimeout: 10_000
 };

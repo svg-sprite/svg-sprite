@@ -2,8 +2,8 @@
 
 const path = require('path');
 const looksSame = require('looks-same');
-const compareSvg2PngHelper = require('./test/helpers/compare-svg-2-png-helper.js');
-const capturePuppeteer = require('./test/helpers/capture-puppeteer.js');
+const compareSvg2PngHelper = require('../helpers/compare-svg-2-png-helper.js');
+const capturePuppeteer = require('../helpers/capture-puppeteer.js');
 
 const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPath) => {
     return new Promise((resolve, reject) => {
