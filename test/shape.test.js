@@ -5,7 +5,6 @@ const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
-const { DEFAULT_XML_DECLARATION } = require('../lib/svg-sprite/constants.js');
 
 jest.mock('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
 
@@ -51,7 +50,9 @@ describe('testing shapes', () => {
 
         spriter.add(svgFilePath, svg, Buffer.from(TEST_SVG));
 
-        expect(calculateSvgDimensions).toHaveBeenCalledWith(new DOMParser().parseFromString(`${DEFAULT_XML_DECLARATION}${TEST_SVG}`).toString());
+        expect(calculateSvgDimensions).toHaveBeenCalledWith(
+            new DOMParser().parseFromString(`<?xml version="1.0" encoding="utf-8"?>${TEST_SVG}`).toString()
+        );
 
         const { result } = await spriter.compileAsync();
 
