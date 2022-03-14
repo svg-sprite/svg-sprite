@@ -61,7 +61,7 @@ describe('testing shapes', () => {
 
         const dom = new DOMParser().parseFromString(result.shapes[0]._contents.toString(), 'text/xml');
 
-        expect(dom.documentElement.getAttribute('height')).toStrictEqual(dimension.height.toString());
-        expect(dom.documentElement.getAttribute('width')).toStrictEqual(dimension.width.toString());
+        expect(dom.documentElement.getAttribute('height')).toBe(dimension.height.toString());
+        expect(dom.documentElement.getAttribute('width')).toBe(dimension.width.toString());
     });
 });
