@@ -27,6 +27,7 @@ const path = require('path');
 const SVGSpriter = require('svg-sprite'),
 
 // 1. Create and configure a spriter instance
+// ====================================================================
 const spriter = new SVGSpriter({
     dest: 'out', // Main output directory
     mode: {
@@ -39,6 +40,7 @@ const spriter = new SVGSpriter({
 });
 
 // 2. Add some SVG files to process
+// ====================================================================
 spriter.add(
     path.resolve('assets/example-1.svg'),
     'example-1.svg',
@@ -54,6 +56,7 @@ spriter.add(
 );
 
 // 3. Trigger the (asynchronous) compilation process
+// ====================================================================
 spriter.compile((error, result, data) => {
     // Run through all files that have been created for the `css` mode
     for (const type in result.css) {
