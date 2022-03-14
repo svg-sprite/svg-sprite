@@ -53,7 +53,8 @@ describe.each`
         const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
+        const expected = path.join(paths.expectations, `png/symbol.html${testConfig.namespace}.png`);
 
-        await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/symbol.html${testConfig.namespace}.png`));
+        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
 });

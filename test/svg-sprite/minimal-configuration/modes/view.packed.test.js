@@ -49,7 +49,11 @@ describe.each`
         // Packed layout
         it('creates visually correct sprite with packed layout', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'view/svg', svg)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`));
+
+            const input = path.join(tmpPath, 'view/svg', svg);
+            const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource in CSS format', async() => {
@@ -60,8 +64,9 @@ describe.each`
             const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/view.html'), 'utf-8');
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/view.html'), out);
+            const expected = path.join(paths.expectations, `png/view.html${testConfig.namespace}.png`);
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/view.html${testConfig.namespace}.png`));
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 });

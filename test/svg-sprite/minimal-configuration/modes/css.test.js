@@ -88,25 +88,41 @@ describe('testing minimal config', () => {
             // Vertical layout
             it('vertical layout', async() => {
                 expect.hasAssertions();
-                await expect(path.join(tmpPath, 'css/svg', svg.vertical)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`));
+
+                const input = path.join(tmpPath, 'css/svg', svg.vertical);
+                const expected = path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`);
+
+                await expect(input).toBeVisuallyEqualTo(expected);
             });
 
             // Horizontal layout
             it('horizontal layout', async() => {
                 expect.hasAssertions();
-                await expect(path.join(tmpPath, 'css/svg', svg.horizontal)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`));
+
+                const input = path.join(tmpPath, 'css/svg', svg.horizontal);
+                const expected = path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`);
+
+                await expect(input).toBeVisuallyEqualTo(expected);
             });
 
             // Diagonal layout
             it('diagonal layout', async() => {
                 expect.hasAssertions();
-                await expect(path.join(tmpPath, 'css/svg', svg.diagonal)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`));
+
+                const input = path.join(tmpPath, 'css/svg', svg.diagonal);
+                const expected = path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`);
+
+                await expect(input).toBeVisuallyEqualTo(expected);
             });
 
             // Packed layout
             it('packed layout', async() => {
                 expect.hasAssertions();
-                await expect(path.join(tmpPath, 'css/svg', svg.packed)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`));
+
+                const input = path.join(tmpPath, 'css/svg', svg.packed);
+                const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
+
+                await expect(input).toBeVisuallyEqualTo(expected);
             });
         });
 
@@ -120,8 +136,9 @@ describe('testing minimal config', () => {
 
                 const out = mustache.render(previewTemplate, data);
                 const preview = await writeFile(path.join(tmpPath, `css/html/css${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
             });
 
             // Sass
@@ -135,8 +152,9 @@ describe('testing minimal config', () => {
 
                 const out = mustache.render(previewTemplate, data);
                 const preview = await writeFile(path.join(tmpPath, `css/html/scss${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
             });
 
             // LESS
@@ -153,8 +171,9 @@ describe('testing minimal config', () => {
 
                 const out = mustache.render(previewTemplate, data);
                 const preview = await writeFile(path.join(tmpPath, `css/html/less${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
             });
 
             // Stylus
@@ -171,8 +190,9 @@ describe('testing minimal config', () => {
 
                 const out = mustache.render(previewTemplate, data);
                 const preview = await writeFile(path.join(tmpPath, `css/html/styl${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`));
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
             });
         });
     });

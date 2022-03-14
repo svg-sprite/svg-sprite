@@ -56,7 +56,11 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
 
     it('creates visually correct sprite', async() => {
         expect.hasAssertions();
-        await expect(path.join(tmpPath, 'view/svg', packedSvg)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.packed.aligned.png'));
+
+        const input = path.join(tmpPath, 'view/svg', packedSvg);
+        const expected = path.join(paths.expectations, '/png/css.packed.aligned.png');
+
+        await expect(input).toBeVisuallyEqualTo(expected);
     });
 
     it('creates a visually correct stylesheet resource', async() => {
@@ -72,7 +76,8 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
 
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
+        const expected = path.join(paths.expectations, 'png/css.packed.aligned.html.png');
 
-        await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
+        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
 });

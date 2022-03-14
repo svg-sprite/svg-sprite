@@ -57,7 +57,11 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'view/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.vertical.mixed.png'));
+
+            const input = path.join(tmpPath, 'view/svg', svgPath);
+            const expected = path.join(paths.expectations, '/png/css.vertical.mixed.png');
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -67,8 +71,9 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
 
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/css.vertical.mixed.html'), out);
+            const expected = path.join(paths.expectations, '/png/css.vertical.mixed.html.png');
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.vertical.mixed.html.png'));
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 
@@ -112,7 +117,11 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'view/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.horizontal.mixed.png'));
+
+            const input = path.join(tmpPath, 'view/svg', svgPath);
+            const expected = path.join(paths.expectations, '/png/css.horizontal.mixed.png');
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -125,8 +134,9 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
 
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/scss.horizontal.mixed.html'), out);
+            const expected = path.join(paths.expectations, 'png/css.horizontal.mixed.html.png');
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, 'png/css.horizontal.mixed.html.png'));
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 });

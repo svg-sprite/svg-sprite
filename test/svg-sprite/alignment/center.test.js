@@ -58,7 +58,11 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.vertical.centered.png'));
+
+            const input = path.join(tmpPath, 'css/svg', svgPath);
+            const expected = path.join(paths.expectations, '/png/css.vertical.centered.png');
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -69,7 +73,9 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'css/html/css.vertical.centered.html'), out);
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, 'png/css.vertical.centered.html.png'));
+            const expected = path.join(paths.expectations, 'png/css.vertical.centered.html.png');
+
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 
@@ -109,7 +115,11 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.horizontal.centered.png'));
+
+            const input = path.join(tmpPath, 'css/svg', svgPath);
+            const expected = path.join(paths.expectations, '/png/css.horizontal.centered.png');
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -123,8 +133,9 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
+            const expected = path.join(paths.expectations, '/png/css.horizontal.centered.html.png');
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.horizontal.centered.html.png'));
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 
@@ -164,7 +175,11 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.packed.aligned.png'));
+
+            const input = path.join(tmpPath, 'css/svg', svgPath);
+            const expected = path.join(paths.expectations, '/png/css.packed.aligned.png');
+
+            await expect(input).toBeVisuallyEqualTo(expected);
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -180,8 +195,9 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
+            const expected = path.join(paths.expectations, '/png/css.packed.aligned.html.png');
 
-            await expect(preview).toBeVisuallyCorrectAsHTML(path.join(paths.expectations, '/png/css.packed.aligned.html.png'));
+            await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
     });
 });

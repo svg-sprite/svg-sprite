@@ -48,7 +48,7 @@ const capturePuppeteerAsync = (previewHTML, previewImage, expectedPNGPath) => {
 
 // eslint-disable-next-line jest/require-hook
 expect.extend({
-    async toBeVisuallyEqual(receivedSVGPath, expectedPNGPath) {
+    async toBeVisuallyEqualTo(receivedSVGPath, expectedPNGPath) {
         const options = {
             comment: 'SVG is equal to expected PNG',
             isNot: this.isNot,
@@ -62,11 +62,11 @@ expect.extend({
         const received = path.basename(expectedPNGPath);
 
         const message = isEqual ?
-            () => `${this.utils.matcherHint('toBeVisuallyEqual', undefined, undefined, options)
+            () => `${this.utils.matcherHint('toBeVisuallyEqualTo', undefined, undefined, options)
             }\n\n` +
                 `Expected: not ${this.utils.printExpected(expected)}\n` +
                 `Received: ${this.utils.printReceived(received)}` :
-            () => `${this.utils.matcherHint('toBeVisuallyEqual', undefined, undefined, options)
+            () => `${this.utils.matcherHint('toBeVisuallyEqualTo', undefined, undefined, options)
             }\n\n` +
                 `${this.utils.printReceived('Difference:')} ${difference}\n` +
                 `Expected: ${this.utils.printExpected(expected)}\n` +
@@ -78,7 +78,7 @@ expect.extend({
         };
     },
 
-    async toBeVisuallyCorrectAsHTML(receivedHTMLPath, expectedPNGPath) {
+    async toBeVisuallyCorrectAsHTMLTo(receivedHTMLPath, expectedPNGPath) {
         const options = {
             comment: 'HTML is equal to expected PNG',
             isNot: this.isNot,
@@ -92,11 +92,11 @@ expect.extend({
         const received = path.basename(expectedPNGPath);
 
         const message = isEqual ?
-            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTML', undefined, undefined, options)
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)
             }\n\n` +
                 `Expected: not ${this.utils.printExpected(expected)}\n` +
                 `Received: ${this.utils.printReceived(received)}` :
-            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTML', undefined, undefined, options)
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)
             }\n\n` +
                 `${this.utils.printReceived('Difference:')} ${difference}\n` +
                 `Expected: ${this.utils.printExpected(expected)}\n` +
