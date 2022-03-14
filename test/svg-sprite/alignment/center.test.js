@@ -58,9 +58,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(paths.expectations, '/png/css.vertical.centered.png')
-            );
+            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.vertical.centered.png'));
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -111,9 +109,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(paths.expectations, '/png/css.horizontal.centered.png')
-            );
+            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.horizontal.centered.png'));
         });
 
         it('creates a visually correct stylesheet resource', async() => {
@@ -168,19 +164,14 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
 
         it('creates visually correct sprite', async() => {
             expect.hasAssertions();
-            await expect(
-                path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(
-                path.join(paths.expectations, '/png/css.packed.aligned.png')
-            );
+            await expect(path.join(tmpPath, 'css/svg', svgPath)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.packed.aligned.png'));
         });
 
         it('creates a visually correct stylesheet resource', async() => {
             expect.hasAssertions();
 
             const lessFile = path.join(tmpPath, 'css/sprite.centered.less');
-
             const lessText = fs.readFileSync(lessFile, 'utf-8');
-
             const output = await asyncRenderers.less(lessText, {});
 
             await writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);

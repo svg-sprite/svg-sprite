@@ -29,9 +29,7 @@ describe.each`
     describe(`svg-sprite: ${testConfig.name} in «view» mode`, () => {
         beforeAll(async() => {
             data = {};
-            spriter = new SVGSpriter({
-                dest: tmpPath
-            });
+            spriter = new SVGSpriter({ dest: tmpPath });
             addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
             const { result, data: cssData } = await spriter.compileAsync({
                 view: {
@@ -51,16 +49,14 @@ describe.each`
         // Packed layout
         it('creates visually correct sprite with packed layout', async() => {
             expect.hasAssertions();
-            await expect(
-                path.join(tmpPath, 'view/svg', svg)).toBeVisuallyEqual(
-                path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`)
-            );
+            await expect(path.join(tmpPath, 'view/svg', svg)).toBeVisuallyEqual(path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`));
         });
 
         it('creates a visually correct stylesheet resource in CSS format', async() => {
             expect.hasAssertions();
 
             data.css = '../sprite.css';
+
             const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/view.html'), 'utf-8');
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/view.html'), out);

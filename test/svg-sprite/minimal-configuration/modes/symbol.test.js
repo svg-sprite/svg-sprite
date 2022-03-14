@@ -28,9 +28,7 @@ describe.each`
         await removeTmpPath(tmpPath);
         data = {};
 
-        spriter = new SVGSpriter({
-            dest: tmpPath
-        });
+        spriter = new SVGSpriter({ dest: tmpPath });
         addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
         const { result, data: cssData } = await spriter.compileAsync({
             symbol: {
@@ -48,8 +46,10 @@ describe.each`
         expect.hasAssertions();
 
         const svgData = await fs.readFile(path.join(tmpPath, 'symbol/svg', svg));
+
         data.svg = svgData.toString();
         data.css = '../sprite.css';
+
         const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf-8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);

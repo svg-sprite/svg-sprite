@@ -18,9 +18,7 @@ describe('testing rerun', () => {
     it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', async() => {
         expect.assertions(11);
 
-        const spriter = new SVGSpriter({
-            dest: tmpPath
-        });
+        const spriter = new SVGSpriter({ dest: tmpPath });
 
         addFixtureFiles(spriter, weather, cwd);
 

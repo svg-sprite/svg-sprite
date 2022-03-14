@@ -1,7 +1,7 @@
 'use strict';
 
-const path = require('path');
 const { Buffer } = require('buffer');
+const path = require('path');
 const { DOMParser } = require('@xmldom/xmldom');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
@@ -49,11 +49,7 @@ describe('testing shapes', () => {
 
         const svgFilePath = path.join(__dirname, `fixture/svg/special/without-dims/${svg}`);
 
-        spriter.add(
-            svgFilePath,
-            svg,
-            Buffer.from(TEST_SVG)
-        );
+        spriter.add(svgFilePath, svg, Buffer.from(TEST_SVG));
 
         expect(calculateSvgDimensions).toHaveBeenCalledWith(new DOMParser().parseFromString(`${DEFAULT_XML_DECLARATION}${TEST_SVG}`).toString());
 

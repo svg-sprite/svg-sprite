@@ -56,10 +56,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
 
     it('creates visually correct sprite', async() => {
         expect.hasAssertions();
-        await expect(
-            path.join(tmpPath, 'view/svg', packedSvg)).toBeVisuallyEqual(
-            path.join(paths.expectations, '/png/css.packed.aligned.png')
-        );
+        await expect(path.join(tmpPath, 'view/svg', packedSvg)).toBeVisuallyEqual(path.join(paths.expectations, '/png/css.packed.aligned.png'));
     });
 
     it('creates a visually correct stylesheet resource', async() => {
@@ -68,6 +65,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
         const lessText = fs.readFileSync(lessFile, 'utf-8');
         const output = await asyncRenderers.less(lessText, {});
+
         await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);
 
         data.css = '../sprite.mixed.less.css';
