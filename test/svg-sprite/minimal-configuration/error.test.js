@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert').strict;
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 
 class TestError extends Error {}
@@ -14,25 +13,29 @@ describe('svg-sprite: errors', () => {
                 dest: 'svg'
             }
         });
+        jest.spyOn(spriter, '_layout').mockImplementation().mockImplementation((_, cb) => {
+            cb(new TestError(), {}, {});
+        });
     });
 
     it('should throw error if compilation has failed in async mode', async() => {
-        spriter._layout = (_, cb) => {
-            cb(new TestError(), {}, {});
-        };
-
-        await assert.rejects(async() => {
+        expect.hasAssertions();
+        await expect(async() => {
             await spriter.compileAsync();
-        }, TestError);
+        }).rejects.toThrow(TestError);
     });
 
+    // eslint-disable-next-line jest/no-done-callback
     it('should throw error if compilation has failed in callback mode', done => {
+        expect.hasAssertions();
+
         spriter._layout = (_, cb) => {
             cb(new TestError('test'), {}, {});
         };
 
         spriter.compile(error => {
-            assert.equal(error instanceof TestError, true);
+            expect(error).toBeInstanceOf(TestError);
+
             done();
         });
     });
