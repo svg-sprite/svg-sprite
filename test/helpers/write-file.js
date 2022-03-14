@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs').promises;
+const { mkdir, writeFile } = require('fs').promises;
 const path = require('path');
 
 /**
@@ -12,8 +12,8 @@ const path = require('path');
  */
 module.exports = async(file, content) => {
     try {
-        await fs.mkdir(path.dirname(file), { recursive: true });
-        await fs.writeFile(file, content);
+        await mkdir(path.dirname(file), { recursive: true });
+        await writeFile(file, content);
         return file;
     } catch {
         return null;
