@@ -205,23 +205,19 @@ Depending on the particular mode and render configuration, quite a lot of resour
 
 ```js
 try {
-    const { result, data } = await spriter.compileAsync(
-        {
-            css: {
-                render: {
-                    scss: true
-                },
-                example: true
-            }
+    const { result, data } = await spriter.compileAsync({
+        css: {
+            render: {
+                scss: true
+            },
+            example: true
         }
-    );
+    });
 
     console.log(result, data);
-
 } catch (error) {
     console.error(error);
 }
-
 ```
 
 #### SVGSpriter.getShapes( dest , callback )
