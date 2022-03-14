@@ -1,4 +1,6 @@
-const { strict: assert } = require('assert');
+'use strict';
+
+const assert = require('assert').strict;
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 
 class TestError extends Error {}
