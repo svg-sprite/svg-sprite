@@ -47,13 +47,11 @@ Being a low-level library with support for [Node.js streams](https://github.com/
 
 ## Installation
 
-To install *svg-sprite* globally, run
+To install *svg-sprite* globally, run:
 
 ```bash
 npm install svg-sprite -g
 ```
-
-on the command line.
 
 
 ## Getting started
@@ -238,7 +236,7 @@ const config = {
 #### Basic examples
 
 
-##### A.) Standalone sprite
+##### A) Standalone sprite
 
 Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your HTML source):
 
@@ -254,7 +252,7 @@ const config = {
 ```
 
 
-##### B.) CSS sprite with Sass resource
+##### B) CSS sprite with Sass resource
 
 Traditional **CSS sprite** with a **Sass stylesheet**:
 
@@ -273,7 +271,7 @@ const config = {
 ```
 
 
-##### C.) Multiple sprites
+##### C) Multiple sprites
 
 **`<defs>` sprite**, **`<symbol>` sprite** and an **SVG stack** all at once:
 
@@ -290,7 +288,7 @@ const config = {
 ```
 
 
-##### D.) No sprite at all
+##### D) No sprite at all
 
 `mode`-less run, returning the **optimized SVG shapes only**:
 
@@ -386,7 +384,7 @@ Please refer to the [CLI guide](docs/command-line.md) for further details.
 
 ## Changelog
 
-Please refer to the [changelog](CHANGELOG.md) for a complete release history.
+Please refer to the [GitHub releases](https://github.com/svg-sprite/svg-sprite/releases) for a complete release history.
 
 
 ## Legal
