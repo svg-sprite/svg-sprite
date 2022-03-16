@@ -2,7 +2,13 @@
 
 /* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
 
-const { isFunction, isObject, isString, isPlainObject } = require('../lib/svg-sprite/utils/index.js');
+const {
+    isFunction,
+    isObject,
+    isString,
+    isPlainObject,
+    zipObject
+} = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
     describe('isFunction', () => {
@@ -191,6 +197,16 @@ describe('utils', () => {
 
         it('should return false for a Symbol', () => {
             expect(isPlainObject(Symbol('test'))).toBe(false);
+        });
+    });
+
+    describe('zipObject', () => {
+        it('should return the zipped object', () => {
+            expect(zipObject(['a', 'b'], [1, 2])).toStrictEqual({ a: 1, b: 2 });
+        });
+
+        it('should not fail with empty arrays', () => {
+            expect(zipObject([], [])).toStrictEqual({});
         });
     });
 });
