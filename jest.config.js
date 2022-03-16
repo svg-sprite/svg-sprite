@@ -22,5 +22,5 @@ module.exports = {
     ],
     setupFilesAfterEnv: ['<rootDir>/test/jest/setup.js'],
     globalSetup: '<rootDir>/test/jest/setup.global.js',
-    testTimeout: 10_000
+    testTimeout: 15_000
 };

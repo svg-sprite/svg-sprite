@@ -59,7 +59,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
             expect.hasAssertions();
 
             const input = path.join(tmpPath, 'view/svg', svgPath);
-            const expected = path.join(paths.expectations, '/png/css.vertical.mixed.png');
+            const expected = path.join(paths.expectations, 'png/css.vertical.mixed.png');
 
             await expect(input).toBeVisuallyEqualTo(expected);
         });
@@ -71,7 +71,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
 
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/css.vertical.mixed.html'), out);
-            const expected = path.join(paths.expectations, '/png/css.vertical.mixed.html.png');
+            const expected = path.join(paths.expectations, 'png/css.vertical.mixed.html.png');
 
             await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
         });
@@ -119,7 +119,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
             expect.hasAssertions();
 
             const input = path.join(tmpPath, 'view/svg', svgPath);
-            const expected = path.join(paths.expectations, '/png/css.horizontal.mixed.png');
+            const expected = path.join(paths.expectations, 'png/css.horizontal.mixed.png');
 
             await expect(input).toBeVisuallyEqualTo(expected);
         });

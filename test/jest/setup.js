@@ -31,16 +31,21 @@ const capturePuppeteerAsync = (previewHTML, previewImage, expectedPNGPath) => {
                     return reject(error);
                 }
 
+                const res = { isEqual: result.equal, difference: JSON.stringify(result.diffClusters) };
+
                 if (!result.equal) {
                     looksSame.createDiff({
                         reference: expectedPNGPath,
                         current: previewImage,
                         diff: path.join(path.dirname(previewImage), path.basename(previewImage).replace('.png', '.diff.png')),
                         highlightColor: '#ff00ff'
-                    }, () => {});
+                    }, () => {
+                        resolve(res);
+                    });
+                    return;
                 }
 
-                resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });
+                resolve(res);
             });
         });
     });
@@ -68,9 +73,9 @@ expect.extend({
                 `Received: ${this.utils.printReceived(received)}` :
             () => `${this.utils.matcherHint('toBeVisuallyEqualTo', undefined, undefined, options)
             }\n\n` +
-                `${this.utils.printReceived('Difference:')} ${difference}\n` +
-                `Expected: ${this.utils.printExpected(expected)}\n` +
-                `Received: ${this.utils.printReceived(received)}`;
+                `${this.utils.printReceived('Difference:')} ${expected} -> ${received}\n` +
+                `Expected: ${this.utils.printExpected('no difference')}\n` +
+                `Received: ${this.utils.printReceived(difference)}`;
 
         return {
             pass: isEqual,
@@ -98,9 +103,9 @@ expect.extend({
                 `Received: ${this.utils.printReceived(received)}` :
             () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)
             }\n\n` +
-                `${this.utils.printReceived('Difference:')} ${difference}\n` +
-                `Expected: ${this.utils.printExpected(expected)}\n` +
-                `Received: ${this.utils.printReceived(received)}`;
+                `${this.utils.printReceived('Difference:')} ${expected} -> ${received}\n` +
+                `Expected: ${this.utils.printExpected('no difference')}\n` +
+                `Received: ${this.utils.printReceived(difference)}`;
 
         return {
             pass: isEqual,
