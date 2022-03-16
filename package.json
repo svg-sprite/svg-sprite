@@ -27,6 +27,7 @@
   "scripts": {
     "lint": "xo",
     "fix": "xo --fix",
+    "format": "prettier --write --ignore-path .gitignore .",
     "jest": "jest",
     "example": "node example.js",
     "test": "jest",
@@ -62,6 +63,7 @@
     "pixelmatch": "^5.3.0",
     "playwright-chromium": "1.21.1",
     "pngjs": "^7.0.0",
+    "prettier-plugin-jsdoc": "^0.4.2",
     "sass": "^1.62.0",
     "stylus": "^0.59.0",
     "xo": "^0.54.1"
@@ -89,7 +91,7 @@
     "gulpfriendly"
   ],
   "xo": {
-    "space": 4,
+    "prettier": true,
     "plugins": [
       "jsdoc"
     ],
@@ -99,10 +101,6 @@
     "rules": {
       "arrow-body-style": "off",
       "capitalized-comments": "off",
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
       "eslint-comments/disable-enable-pair": "off",
       "jsdoc/check-values": [
         "error",
@@ -126,6 +124,7 @@
         }
       ],
       "jsdoc/require-returns": "error",
+      "jsdoc/tag-lines": "off",
       "max-depth": [
         "warn",
         5
@@ -133,19 +132,7 @@
       "max-params": "off",
       "no-bitwise": "off",
       "no-negated-condition": "off",
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ],
-      "operator-linebreak": [
-        "error",
-        "after"
-      ],
       "prefer-template": "error",
-      "space-before-function-paren": [
-        "error",
-        "never"
-      ],
       "spaced-comment": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/no-array-method-this-argument": "off",
