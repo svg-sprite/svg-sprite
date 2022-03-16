@@ -22,7 +22,7 @@ const yaml = require('js-yaml');
 const glob = require('glob');
 let yargs = require('yargs');
 const SVGSpriter = require('../lib/svg-sprite.js');
-const { isObject } = require('../lib/svg-sprite/utils/index.js');
+const { isObject, zipObject } = require('../lib/svg-sprite/utils/index.js');
 
 yargs
     .usage('Create one or multiple sprites of the given SVG files, optionally along with some stylesheet resources.\nUsage: $0 [options] files')
@@ -210,7 +210,7 @@ if (typeof config.shape.transform === 'string') {
                         const transformConfigFile = argv[`shape-transform-${transform}`];
                         const transformConfigJSON = fs.readFileSync(path.resolve(transformConfigFile), 'utf8');
                         const transformConfig = transformConfigJSON.trim() ? JSON.parse(transformConfigJSON) : {};
-                        this.push(_.zipObject([transform], [transformConfig]));
+                        this.push(zipObject([transform], [transformConfig]));
                     } catch {}
                 } else {
                     this.push(transform);
