@@ -3,8 +3,9 @@
 const fs = require('fs').promises;
 const path = require('path');
 const puppeteer = require('puppeteer');
-const looksSame = require('looks-same');
+const { PNG } = require('pngjs');
 const convertSvg2Png = require('./convert-svg-2-png.js');
+const isPngsMatched = require('./is-pngs-matched.js');
 
 /**
  * Rasterize an SVG file and compare it to an expected image
@@ -22,18 +23,16 @@ module.exports = async(svg, png, expected, diff, done) => {
     try {
         browser = await puppeteer.launch();
         await convertSvg2Png(svg, png, browser);
-        await looksSame(png, expected, (error, result) => {
-            if (!error && !result.equal) {
-                looksSame.createDiff({
-                    reference: expected,
-                    current: png,
-                    diff,
-                    highlightColor: '#ff00ff'
-                }, () => {});
-            }
 
-            done(error, result);
-        });
+        const matchedResult = await isPngsMatched(png, expected);
+
+        if (matchedResult.isEqual) {
+            return done(null, matchedResult);
+        }
+
+        await fs.mkdir(path.dirname(diff), { recursive: true });
+        await fs.writeFile(diff, PNG.sync.write(matchedResult.diff));
+        done(null, matchedResult);
     } catch (error) {
         console.error(error);
         done(error);

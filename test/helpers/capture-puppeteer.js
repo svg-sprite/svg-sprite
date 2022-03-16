@@ -1,6 +1,7 @@
 'use strict';
 
 const puppeteer = require('puppeteer');
+const constants = require('./constants.js');
 
 /**
  * Capture a screenshot of a URL using puppeteer
@@ -17,8 +18,8 @@ module.exports = async(src, target, cb) => {
         browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setViewport({
-            height: 1024,
-            width: 1280
+            height: constants.puppeteer.height,
+            width: constants.puppeteer.width
         });
         await page.goto(`file://${src}`, { waitUntil: 'networkidle0' });
         await page.screenshot({
