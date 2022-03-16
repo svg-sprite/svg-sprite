@@ -1,23 +1,18 @@
 'use strict';
 
-/* eslint-disable no-unused-expressions, max-nested-callbacks */
 const path = require('path');
 const fs = require('fs');
-const should = require('should');
 const mustache = require('mustache');
-const looksSame = require('looks-same');
 const glob = require('glob');
-const less = require('less');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
-const capturePuppeteer = require('../../../helpers/capture-puppeteer.js');
-const compareSvg2Png = require('../../../helpers/compare-svg-2-png.js');
-
+const asyncRenderers = require('../../../helpers/async-renderers.js');
 const { paths } = require('../../../helpers/constants.js');
-
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
+
+const tmpPath = path.join(paths.tmp, 'view.mixed');
 
 describe('svg-sprite: with «view» mode, packed layout and LESS render type', () => {
     let spriter;
@@ -25,12 +20,14 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
     const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
     let packedSvg;
-    let data = {};
+    let data;
 
-    before(removeTmpPath);
-    before('creates 2 files', done => {
+    beforeAll(async() => {
+        await removeTmpPath(tmpPath);
+        data = {};
+
         spriter = new SVGSpriter({
-            dest: paths.tmp,
+            dest: tmpPath,
             shape: {
                 align: path.join(paths.fixtures, 'yaml/align.mixed.yaml'),
                 dimension: {
@@ -40,7 +37,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
             }
         });
         addFixtureFiles(spriter, align, cwdAlign);
-        spriter.compile({
+        const { result, data: cssData } = await spriter.compileAsync({
             view: {
                 sprite: 'svg/view.packed.mixed.svg',
                 layout: 'packed',
@@ -51,52 +48,36 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
                     }
                 }
             }
-        }, (error, result, cssData) => {
-            writeFiles(result);
-            data = cssData.view;
-            packedSvg = path.basename(result.view.sprite.path);
-            done();
         });
+        writeFiles(result);
+        data = cssData.view;
+        packedSvg = path.basename(result.view.sprite.path);
     });
 
-    it('creates visually correct sprite', done => {
-        compareSvg2Png(
-            path.join(paths.tmp, 'view/svg', packedSvg),
-            path.join(paths.tmp, 'view/png/css.packed.mixed.png'),
-            path.join(paths.expectations, '/png/css.packed.aligned.png'),
-            path.join(paths.tmp, 'view/png/css.packed.mixed.diff.png'),
-            done,
-            'The packed sprite doesn\'t match the expected one!'
-        );
+    it('creates visually correct sprite', async() => {
+        expect.hasAssertions();
+
+        const input = path.join(tmpPath, 'view/svg', packedSvg);
+        const expected = path.join(paths.expectations, 'png/css.packed.aligned.png');
+
+        await expect(input).toBeVisuallyEqualTo(expected);
     });
 
-    it('creates a visually correct stylesheet resource', done => {
-        const lessFile = path.join(paths.tmp, 'view/sprite.mixed.less');
+    it('creates a visually correct stylesheet resource', async() => {
+        expect.hasAssertions();
 
-        fs.readFile(lessFile, 'utf-8', (err, lessText) => {
-            should(err).not.ok;
+        const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
+        const lessText = fs.readFileSync(lessFile, 'utf-8');
+        const output = await asyncRenderers.less(lessText, {});
 
-            less.render(lessText, {}, (error, output) => {
-                should(error).not.ok;
-                should(writeFile(path.join(paths.tmp, 'view/sprite.mixed.less.css'), output.css)).be.ok;
+        await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);
 
-                data.css = '../sprite.mixed.less.css';
+        data.css = '../sprite.mixed.less.css';
 
-                const out = mustache.render(previewTemplate, data);
-                const preview = writeFile(path.join(paths.tmp, 'view/html/less.packed.mixed.html'), out);
-                const previewImage = path.join(paths.tmp, 'view/png/less.packed.mixed.html.png');
+        const out = mustache.render(previewTemplate, data);
+        const preview = await writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
+        const expected = path.join(paths.expectations, 'png/css.packed.aligned.html.png');
 
-                should(preview).be.ok;
-
-                capturePuppeteer(preview, previewImage, error => {
-                    should(error).not.ok;
-                    looksSame(previewImage, path.join(paths.expectations, '/png/css.packed.aligned.html.png'), (error, result) => {
-                        should(error).not.ok;
-                        should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
-                        done();
-                    });
-                });
-            });
-        });
+        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
 });

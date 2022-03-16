@@ -1,200 +1,199 @@
 'use strict';
 
-/* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals */
+/* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
 
-const assert = require('assert').strict;
 const { isFunction, isObject, isString, isPlainObject } = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
     describe('isFunction', () => {
         it('should return true for a class', () => {
-            assert.equal(isFunction(class {}), true);
+            expect(isFunction(class {})).toBe(true);
         });
 
         it('should return true for a function', () => {
-            assert.equal(isFunction(() => {}), true);
+            expect(isFunction(() => {})).toBe(true);
         });
 
         it('should return true for an async function', () => {
-            assert.equal(isFunction(async() => {}), true);
+            expect(isFunction(async() => {})).toBe(true);
         });
 
         it('should return true for generator function', () => {
-            assert.equal(isFunction(function * () {}), true);
+            expect(isFunction(function * () {})).toBe(true);
         });
 
         it('should return false for a RegExp', () => {
-            assert.equal(isFunction(/a/g), false);
+            expect(isFunction(/a/g)).toBe(false);
         });
 
         it('should return false for a null value', () => {
-            assert.equal(isFunction(null), false);
+            expect(isFunction(null)).toBe(false);
         });
 
         it('should return false for an undefined value', () => {
-            assert.equal(isFunction(undefined), false);
+            expect(isFunction(undefined)).toBe(false);
         });
 
         it('should return false for a plain object', () => {
-            assert.equal(isFunction({}), false);
+            expect(isFunction({})).toBe(false);
         });
 
         it('should return false for an array', () => {
-            assert.equal(isFunction([1, 2, 3]), false);
+            expect(isFunction([1, 2, 3])).toBe(false);
         });
 
         it('should return false for a numeric value', () => {
-            assert.equal(isFunction(123), false);
+            expect(isFunction(123)).toBe(false);
         });
 
         it('should return false for a string', () => {
-            assert.equal(isFunction('test'), false);
+            expect(isFunction('test')).toBe(false);
         });
 
         it('should return false for a boolean value', () => {
-            assert.equal(isFunction(false), false);
+            expect(isFunction(false)).toBe(false);
         });
     });
 
     describe('isObject', () => {
         it('should return true for an object', () => {
-            assert.equal(isObject({}), true);
+            expect(isObject({})).toBe(true);
         });
 
         it('should return true for a new String', () => {
-            assert.equal(isObject(new String('')), true);
+            expect(isObject(new String(''))).toBe(true);
         });
 
         it('should return true for a new Regexp', () => {
-            assert.equal(isObject(new RegExp('')), true);
+            expect(isObject(new RegExp(''))).toBe(true);
         });
 
         it('should return true for a new Number', () => {
-            assert.equal(isObject(new Number(1)), true);
+            expect(isObject(new Number(1))).toBe(true);
         });
 
         it('should return true for a new Boolean', () => {
-            assert.equal(isObject(new Boolean()), true);
+            expect(isObject(new Boolean())).toBe(true);
         });
 
         it('should return false for a new Array', () => {
-            assert.equal(isObject(Array.from({ length: 1 })), false);
+            expect(isObject(Array.from({ length: 1 }))).toBe(false);
         });
 
         it('should return false for an array', () => {
-            assert.equal(isObject([1, 2, 3]), false);
+            expect(isObject([1, 2, 3])).toBe(false);
         });
 
         it('should return false for a Function constructor', () => {
-            assert.equal(isObject(Function), false);
+            expect(isObject(Function)).toBe(false);
         });
 
         it('should return false for a null value', () => {
-            assert.equal(isObject(null), false);
+            expect(isObject(null)).toBe(false);
         });
 
         it('should return false for an undefined value', () => {
-            assert.equal(isObject(undefined), false);
+            expect(isObject(undefined)).toBe(false);
         });
 
         it('should return false for a string value', () => {
-            assert.equal(isObject('test'), false);
+            expect(isObject('test')).toBe(false);
         });
 
         it('should return false for a boolean value', () => {
-            assert.equal(isObject(false), false);
+            expect(isObject(false)).toBe(false);
         });
 
         it('should return false for a function', () => {
-            assert.equal(isObject(() => {}), false);
+            expect(isObject(() => {})).toBe(false);
         });
 
         it('should return false for a Symbol', () => {
-            assert.equal(isObject(Symbol('test')), false);
+            expect(isObject(Symbol('test'))).toBe(false);
         });
     });
 
     describe('isString', () => {
         it('should return true for a string', () => {
-            assert.equal(isString('test'), true);
+            expect(isString('test')).toBe(true);
         });
 
         it('should return false for an array', () => {
-            assert.equal(isString([1, 2, 3]), false);
+            expect(isString([1, 2, 3])).toBe(false);
         });
 
         it('should return false for a Function constructor', () => {
-            assert.equal(isString(Function), false);
+            expect(isString(Function)).toBe(false);
         });
 
         it('should return false for a null value', () => {
-            assert.equal(isString(null), false);
+            expect(isString(null)).toBe(false);
         });
 
         it('should return false for an undefined value', () => {
-            assert.equal(isString(undefined), false);
+            expect(isString(undefined)).toBe(false);
         });
 
         it('should return false for a boolean value', () => {
-            assert.equal(isString(false), false);
+            expect(isString(false)).toBe(false);
         });
     });
 
     describe('isPlainObject', () => {
         it('should return true for an object', () => {
-            assert.equal(isPlainObject({ a: 1 }), true);
+            expect(isPlainObject({ a: 1 })).toBe(true);
         });
 
         it('should return false for a new String', () => {
-            assert.equal(isPlainObject(new String('')), false);
+            expect(isPlainObject(new String(''))).toBe(false);
         });
 
         it('should return false for a new Regexp', () => {
-            assert.equal(isPlainObject(new RegExp('')), false);
+            expect(isPlainObject(new RegExp(''))).toBe(false);
         });
 
         it('should return false for a new Number', () => {
-            assert.equal(isPlainObject(new Number(1)), false);
+            expect(isPlainObject(new Number(1))).toBe(false);
         });
 
         it('should return false for a new Boolean', () => {
-            assert.equal(isPlainObject(new Boolean()), false);
+            expect(isPlainObject(new Boolean())).toBe(false);
         });
 
         it('should return false for a new Array', () => {
-            assert.equal(isPlainObject(Array.from({ length: 1 })), false);
+            expect(isPlainObject(Array.from({ length: 1 }))).toBe(false);
         });
 
         it('should return false for an array', () => {
-            assert.equal(isPlainObject([1, 2, 3]), false);
+            expect(isPlainObject([1, 2, 3])).toBe(false);
         });
 
         it('should return false for a Function constructor', () => {
-            assert.equal(isPlainObject(Function), false);
+            expect(isPlainObject(Function)).toBe(false);
         });
 
         it('should return false for a null value', () => {
-            assert.equal(isPlainObject(null), false);
+            expect(isPlainObject(null)).toBe(false);
         });
 
         it('should return false for an undefined value', () => {
-            assert.equal(isPlainObject(undefined), false);
+            expect(isPlainObject(undefined)).toBe(false);
         });
 
         it('should return false for a string value', () => {
-            assert.equal(isPlainObject('test'), false);
+            expect(isPlainObject('test')).toBe(false);
         });
 
         it('should return false for a boolean value', () => {
-            assert.equal(isPlainObject(false), false);
+            expect(isPlainObject(false)).toBe(false);
         });
 
         it('should return false for a function', () => {
-            assert.equal(isPlainObject(() => {}), false);
+            expect(isPlainObject(() => {})).toBe(false);
         });
 
         it('should return false for a Symbol', () => {
-            assert.equal(isPlainObject(Symbol('test')), false);
+            expect(isPlainObject(Symbol('test'))).toBe(false);
         });
     });
 });

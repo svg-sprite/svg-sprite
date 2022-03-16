@@ -1,250 +1,198 @@
 'use strict';
 
-// TODO fix/work around these
-/* eslint-disable no-unused-expressions, max-nested-callbacks */
-const fs = require('fs');
+/* eslint-disable max-nested-callbacks */
 const path = require('path');
-const should = require('should');
-const looksSame = require('looks-same');
+const fs = require('fs');
 const mustache = require('mustache');
 const sass = require('sass');
-const less = require('less');
-const stylus = require('stylus');
+const { constants: testConfigs } = require('../../../helpers/test-configs.js');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
-
-const capturePuppeteer = require('../../../helpers/capture-puppeteer.js');
-const writeFiles = require('../../../helpers/write-files.js');
-const writeFile = require('../../../helpers/write-file.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
-const testConfigs = require('../../../helpers/test-configs.js');
-
+const writeFiles = require('../../../helpers/write-files.js');
+const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 const { paths } = require('../../../helpers/constants.js');
-const compareSvg2Png = require('../../../helpers/compare-svg-2-png.js');
+const writeFile = require('../../../helpers/write-file.js');
+const asyncRenderers = require('../../../helpers/async-renderers.js');
 
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
 
-const removeTmpPath = require('../../../helpers/remove-temp-path.js');
+describe('testing minimal config', () => {
+    let spriter;
+    const svg = {};
+    let data;
 
-// Test the minimum configuration
-testConfigs.forEach(testConfig => {
-    describe(`svg-sprite: ${testConfig.name}, with minimum configuration and ${testConfig.files.length} SVG files`, () => {
-        let spriter = null;
-        let data = null;
-        const svg = {};
+    describe.each`
+        name          | testConfigKey
+        ${'default'}  | ${'DEFAULT'}
+        ${'w/o dims'} | ${'WITHOUT_DIMS'}
+    `('$name: with minimum configuration', ({ testConfigKey }) => {
+        const testConfig = testConfigs[testConfigKey];
 
-        before(removeTmpPath);
+        const tmpPath = path.join(paths.tmp, `css${testConfig.namespace}`);
 
-        // Test the CSS mode
-        describe('in «css» mode and all render types enabled', () => {
-            before(done => {
-                spriter = new SVGSpriter({
-                    dest: paths.tmp
-                });
-                addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
-                spriter.compile({
-                    css: {
-                        sprite: `svg/css.vertical${testConfig.namespace}.svg`,
-                        layout: 'vertical',
-                        dimensions: true,
-                        render: {
-                            css: true,
-                            scss: true,
-                            less: true,
-                            styl: true
+        beforeAll(async() => {
+            await removeTmpPath(tmpPath);
+            data = {};
+            spriter = new SVGSpriter({ dest: tmpPath });
+            addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+            const { result, data: cssData } = await spriter.compileAsync({
+                css: {
+                    sprite: `svg/css.vertical${testConfig.namespace}.svg`,
+                    layout: 'vertical',
+                    dimensions: true,
+                    render: {
+                        css: {
+                            dest: `sprite${testConfig.namespace}.css`
+                        },
+                        scss: {
+                            dest: `sprite${testConfig.namespace}.scss`
+                        },
+                        less: {
+                            dest: `sprite${testConfig.namespace}.less`
+                        },
+                        styl: {
+                            dest: `sprite${testConfig.namespace}.styl`
                         }
                     }
-                }, async(error, result, cssData) => {
-                    writeFiles(result);
-                    data = cssData.css;
-                    svg.vertical = path.basename(result.css.sprite.path);
+                }
+            });
 
-                    const otherLayouts = ['horizontal', 'diagonal', 'packed'];
+            writeFiles(result);
+            data = cssData.css;
+            svg.vertical = path.basename(result.css.sprite.path);
 
-                    const promises = otherLayouts.map(layout => {
-                        return new Promise((resolve, reject) => {
-                            spriter.compile({
-                                css: {
-                                    sprite: `svg/css.${layout}${testConfig.namespace}.svg`,
-                                    layout
-                                }
-                            }, (err, result) => {
-                                if (err) {
-                                    return reject(err);
-                                }
+            const promises = ['horizontal', 'diagonal', 'packed'].map(layout => {
+                return new Promise((resolve, reject) => {
+                    spriter.compile({
+                        css: {
+                            sprite: `svg/css.${layout}${testConfig.namespace}.svg`,
+                            layout
+                        }
+                    }, (error, result) => {
+                        if (error) {
+                            return reject(error);
+                        }
 
-                                writeFiles(result);
-                                svg[layout] = path.basename(result.css.sprite.path);
-                                resolve();
-                            });
-                        });
+                        writeFiles(result);
+                        svg[layout] = path.basename(result.css.sprite.path);
+                        resolve();
                     });
-
-                    try {
-                        await Promise.all(promises);
-                        done();
-                    } catch (error_) {
-                        done(error_);
-                    }
                 });
             });
 
-            // Test sprite renderings
-            describe('creates visually correct sprite with', () => {
-                // Vertical layout
-                it('vertical layout', done => {
-                    compareSvg2Png(
-                        path.join(paths.tmp, 'css/svg', svg.vertical),
-                        path.join(paths.tmp, `css/png/css.vertical${testConfig.namespace}.png`),
-                        path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`),
-                        path.join(paths.tmp, `css/png/css.vertical${testConfig.namespace}.diff.png`),
-                        done,
-                        'The vertical sprite doesn\'t match the expected one!'
-                    );
-                });
+            await Promise.all(promises);
+        });
 
-                // Horizontal layout
-                it('horizontal layout', done => {
-                    compareSvg2Png(
-                        path.join(paths.tmp, 'css/svg', svg.horizontal),
-                        path.join(paths.tmp, `css/png/css.horizontal${testConfig.namespace}.png`),
-                        path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`),
-                        path.join(paths.tmp, `css/png/css.horizontal${testConfig.namespace}.diff.png`),
-                        done,
-                        'The horizontal sprite doesn\'t match the expected one!'
-                    );
-                });
+        // Test sprite renderings
+        describe('creates visually correct sprite with', () => {
+            // Vertical layout
+            it('vertical layout', async() => {
+                expect.hasAssertions();
 
-                // Diagonal layout
-                it('diagonal layout', done => {
-                    compareSvg2Png(
-                        path.join(paths.tmp, 'css/svg', svg.diagonal),
-                        path.join(paths.tmp, `css/png/css.diagonal${testConfig.namespace}.png`),
-                        path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`),
-                        path.join(paths.tmp, `css/png/css.diagonal${testConfig.namespace}.diff.png`),
-                        done,
-                        'The diagonal sprite doesn\'t match the expected one!'
-                    );
-                });
+                const input = path.join(tmpPath, 'css/svg', svg.vertical);
+                const expected = path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`);
 
-                // Packed layout
-                it('packed layout', done => {
-                    compareSvg2Png(
-                        path.join(paths.tmp, 'css/svg', svg.packed),
-                        path.join(paths.tmp, `css/png/css.packed${testConfig.namespace}.png`),
-                        path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`),
-                        path.join(paths.tmp, `css/png/css.packed${testConfig.namespace}.diff.png`),
-                        done,
-                        'The packed sprite doesn\'t match the expected one!'
-                    );
-                });
+                await expect(input).toBeVisuallyEqualTo(expected);
             });
 
-            // Test stylesheet resources
-            describe('creates a visually correct stylesheet resource in', () => {
-                // Plain CSS
-                it('CSS format', done => {
-                    data.css = '../sprite.css';
-                    const out = mustache.render(previewTemplate, data);
-                    const preview = writeFile(path.join(paths.tmp, 'css/html/css.html'), out);
-                    const previewImage = path.join(paths.tmp, `css/png/css.html${testConfig.namespace}.png`);
-                    preview.should.be.ok;
+            // Horizontal layout
+            it('horizontal layout', async() => {
+                expect.hasAssertions();
 
-                    capturePuppeteer(preview, previewImage, error => {
-                        should(error).not.ok;
-                        looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
-                            should(error).not.ok;
-                            should.ok(result.equal, 'The generated CSS preview doesn\'t match the expected one!');
-                            done();
-                        });
-                    });
-                });
+                const input = path.join(tmpPath, 'css/svg', svg.horizontal);
+                const expected = path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`);
 
-                // Sass
-                it('Sass format', done => {
-                    sass.render({ file: path.join(paths.tmp, 'css/sprite.scss') }, (err, scssText) => {
-                        should(err).not.ok;
-                        should(writeFile(path.join(paths.tmp, 'css/sprite.scss.css'), scssText.css)).be.ok;
+                await expect(input).toBeVisuallyEqualTo(expected);
+            });
 
-                        data.css = '../sprite.scss.css';
+            // Diagonal layout
+            it('diagonal layout', async() => {
+                expect.hasAssertions();
 
-                        const out = mustache.render(previewTemplate, data);
-                        const preview = writeFile(path.join(paths.tmp, 'css/html/scss.html'), out);
-                        const previewImage = path.join(paths.tmp, `css/png/scss.html${testConfig.namespace}.png`);
+                const input = path.join(tmpPath, 'css/svg', svg.diagonal);
+                const expected = path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`);
 
-                        preview.should.be.ok;
+                await expect(input).toBeVisuallyEqualTo(expected);
+            });
 
-                        capturePuppeteer(preview, previewImage, error => {
-                            should(error).not.ok;
-                            looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
-                                should(error).not.ok;
-                                should.ok(result.equal, 'The generated Sass preview doesn\'t match the expected one!');
-                                done();
-                            });
-                        });
-                    });
-                });
+            // Packed layout
+            it('packed layout', async() => {
+                expect.hasAssertions();
 
-                // LESS
-                it('LESS format', done => {
-                    const lessFile = path.join(paths.tmp, 'css/sprite.less');
+                const input = path.join(tmpPath, 'css/svg', svg.packed);
+                const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
 
-                    fs.readFile(lessFile, 'utf-8', (err, lessText) => {
-                        should(err).not.ok;
+                await expect(input).toBeVisuallyEqualTo(expected);
+            });
+        });
 
-                        less.render(lessText, {}, (error, output) => {
-                            should(error).not.ok;
-                            should(writeFile(path.join(paths.tmp, 'css/sprite.less.css'), output.css)).be.ok;
+        // Test stylesheet resources
+        describe('creates a visually correct stylesheet resource in', () => {
+            // Plain CSS
+            it('CSS format', async() => {
+                expect.hasAssertions();
 
-                            data.css = '../sprite.less.css';
+                data.css = `../sprite${testConfig.namespace}.css`;
 
-                            const out = mustache.render(previewTemplate, data);
-                            const preview = writeFile(path.join(paths.tmp, 'css/html/less.html'), out);
-                            const previewImage = path.join(paths.tmp, 'css/png/less.html.png');
+                const out = mustache.render(previewTemplate, data);
+                const preview = await writeFile(path.join(tmpPath, `css/html/css${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                            preview.should.be.ok;
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+            });
 
-                            capturePuppeteer(preview, previewImage, error => {
-                                should(error).not.ok;
-                                looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
-                                    should(error).not.ok;
-                                    should.ok(result.equal, 'The generated LESS preview doesn\'t match the expected one!');
-                                    done();
-                                });
-                            });
-                        });
-                    });
-                });
+            // Sass
+            it('Sass format', async() => {
+                expect.hasAssertions();
 
-                // Stylus
-                it('Stylus format', done => {
-                    const stylusFile = path.join(paths.tmp, 'css/sprite.styl');
+                const scssText = sass.renderSync({ file: path.join(tmpPath, `css/sprite${testConfig.namespace}.scss`) });
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.scss.css`), scssText.css);
 
-                    fs.readFile(stylusFile, 'utf-8', (err, stylusText) => {
-                        should(err).not.ok;
+                data.css = `../sprite${testConfig.namespace}.scss.css`;
 
-                        stylus.render(stylusText, {}, (error, output) => {
-                            should(error).not.ok;
-                            should(writeFile(path.join(paths.tmp, 'css/sprite.styl.css'), output)).be.ok;
+                const out = mustache.render(previewTemplate, data);
+                const preview = await writeFile(path.join(tmpPath, `css/html/scss${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
 
-                            data.css = '../sprite.styl.css';
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+            });
 
-                            const out = mustache.render(previewTemplate, data);
-                            const preview = writeFile(path.join(paths.tmp, 'css/html/styl.html'), out);
-                            const previewImage = path.join(paths.tmp, `css/png/styl${testConfig.namespace}.html.png`);
+            // LESS
+            it('LESS format', async() => {
+                expect.hasAssertions();
 
-                            preview.should.be.ok;
+                const lessFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.less`);
+                const lessText = fs.readFileSync(lessFile, 'utf-8');
+                const output = await asyncRenderers.less(lessText, {});
 
-                            capturePuppeteer(preview, previewImage, error => {
-                                should(error).not.ok;
-                                looksSame(previewImage, path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`), (error, result) => {
-                                    should(error).not.ok;
-                                    should.ok(result.equal, 'The generated Stylus preview doesn\'t match the expected one!');
-                                    done();
-                                });
-                            });
-                        });
-                    });
-                });
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
+
+                data.css = `../sprite${testConfig.namespace}.less.css`;
+
+                const out = mustache.render(previewTemplate, data);
+                const preview = await writeFile(path.join(tmpPath, `css/html/less${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
+
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+            });
+
+            // Stylus
+            it('Stylus format', async() => {
+                expect.hasAssertions();
+
+                const stylusFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.styl`);
+                const stylusText = fs.readFileSync(stylusFile, 'utf-8');
+                const output = await asyncRenderers.stylus(stylusText, {});
+
+                await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);
+
+                data.css = `../sprite${testConfig.namespace}.styl.css`;
+
+                const out = mustache.render(previewTemplate, data);
+                const preview = await writeFile(path.join(tmpPath, `css/html/styl${testConfig.namespace}.html`), out);
+                const expected = path.join(paths.expectations, `png/css.html${testConfig.namespace}.png`);
+
+                await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
             });
         });
     });

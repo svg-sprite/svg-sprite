@@ -1,41 +1,42 @@
 'use strict';
 
-const assert = require('assert').strict;
+/* eslint-disable jest/prefer-expect-assertions */
+
 const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
 
 describe('testing fixing svg string', () => {
-    it('should return valid svg file on svg with multiline attribute values 1', () => {
-        assert.equal(fixXMLString(`<svg viewBox="0 0 0 16
-                                     16"></svg>`), '<svg viewBox="0 0 0 16 16"/>');
+    it('should return valid svg file on svg with one multiline attribute values', () => {
+        expect(fixXMLString(`<svg viewBox="0 0 16
+                                     16"></svg>`)).toBe('<svg viewBox="0 0 16 16"/>');
     });
 
-    it('should return valid svg file on svg with multiline attribute values 2', () => {
-        assert.equal(fixXMLString(`<svg fill="r
+    it('should return valid svg file on svg with few multiline attribute values', () => {
+        expect(fixXMLString(`<svg fill="r
                                                             e
                                                             d"
-                                                            viewBox="0 0 0 16
-                                                                                                 16"></svg>`),
-        '<svg fill="r e d" viewBox="0 0 0 16 16"/>');
+                                                            viewBox="0 0 16
+                                                                                                 16"></svg>`)).toBe(
+            '<svg fill="r e d" viewBox="0 0 16 16"/>');
     });
 
-    it('should return valid svg file on svg with multiline attribute values 3', () => {
-        assert.equal(fixXMLString(`<svg fill="r
+    it('should return valid svg file on svg with multiple multiline attribute values', () => {
+        expect(fixXMLString(`<svg fill="r
                                                             e
                                                             d"
                                                             viewBox="0
                                                             0
                                                             16
-                                                            16"></svg>`),
-        '<svg fill="r e d" viewBox="0 0 16 16"/>');
-    });
-
-    it('should throw an error on invalid file', () => {
-        assert.throws(() => {
-            fixXMLString('<svg viewBox=></svg>');
-        }, Error);
+                                                            16"></svg>`)).toBe(
+            '<svg fill="r e d" viewBox="0 0 16 16"/>');
     });
 
     it('should return same string on valid svg', () => {
-        assert.equal(fixXMLString('<svg viewBox="0 0 0 16 16"></svg>'), '<svg viewBox="0 0 0 16 16"/>');
+        expect(fixXMLString('<svg viewBox="0 0 16 16"></svg>')).toBe('<svg viewBox="0 0 16 16"/>');
+    });
+
+    it('should throw an error on invalid file', () => {
+        expect(() => {
+            fixXMLString('<svg viewBox=></svg>');
+        }).toThrow(Error);
     });
 });

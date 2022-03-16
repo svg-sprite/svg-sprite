@@ -1,12 +1,10 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks */
-const assert = require('assert').strict;
+/* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
 const fs = require('fs');
 const path = require('path');
 const { Buffer } = require('buffer');
 const File = require('vinyl');
-const sinon = require('sinon');
 const SVGSpriter = require('../lib/svg-sprite.js');
 
 const TEST_SVG = 'fixture/svg/single/weather-clear.svg';
@@ -33,68 +31,66 @@ describe('testing SVGSpriter', () => {
                 });
 
                 spriter._queue = {
-                    add: sinon.stub()
+                    add: jest.fn()
                 };
 
                 spriter.add(TEST_FILE);
-                assert.equal(TEST_FILE.base, path.resolve(TEST_FILE.base));
 
-                const addedFile = spriter._queue.add.getCall(0).args[0];
-                assert.deepEqual(addedFile, TEST_FILE);
+                expect(TEST_FILE.base).toStrictEqual(path.resolve(TEST_FILE.base));
+                expect(spriter._queue.add).toHaveBeenCalledWith(TEST_FILE);
             });
         });
 
         describe('testing adding non-vinyl file', () => {
             it('should raise an error when passing name with an absolute path', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add(TEST_SVG, path.resolve(TEST_SVG), TEST_EMPTY_SVG);
-                }, Error);
+                }).toThrow(Error);
             });
 
             it('should raise an error when passing less than 3 arguments', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add(TEST_SVG);
-                }, Error);
-                assert.throws(() => {
+                }).toThrow(Error);
+                expect(() => {
                     spriter.add(TEST_SVG, null);
-                });
+                }).toThrow(Error);
             });
 
             it('should throw an error if passed file arg is empty', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add('', null, TEST_EMPTY_SVG);
-                }, Error);
+                }).toThrow(Error);
             });
 
             it('should throw an error if passed name arg is empty and file path is not valid', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add(' ', '../', TEST_EMPTY_SVG);
-                }, Error);
+                }).toThrow(Error);
             });
 
             it('should throw an error if passed svg arg is empty', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add(TEST_SVG, null, '');
-                }, Error);
-                assert.throws(() => {
+                }).toThrow(Error);
+                expect(() => {
                     spriter.add(TEST_SVG, null, ' ');
-                }, Error);
+                }).toThrow(Error);
             });
 
             it('should throw an error if passed name differs from the ending of passed file path', () => {
-                assert.throws(() => {
+                expect(() => {
                     spriter.add(TEST_SVG, 'absolutely-random-string', TEST_EMPTY_SVG);
-                }, Error);
+                }).toThrow(Error);
             });
 
             it('should create vinyl file from passed relative file and add it to _queue', () => {
                 spriter._queue = {
-                    add: sinon.stub()
+                    add: jest.fn()
                 };
                 spriter.add(TEST_SVG, 'weather-clear.svg', TEST_EMPTY_SVG);
 
-                const addedFile = spriter._queue.add.getCall(0).args[0];
-                assert.deepEqual(addedFile, new File({
+                expect(spriter._queue.add).toHaveBeenCalledWith(new File({
                     base: path.dirname(path.resolve(TEST_SVG)),
                     path: path.resolve(TEST_SVG),
                     contents: Buffer.from(TEST_EMPTY_SVG)
@@ -103,12 +99,11 @@ describe('testing SVGSpriter', () => {
 
             it('should create vinyl file from passed absolute file and add it to _queue', () => {
                 spriter._queue = {
-                    add: sinon.stub()
+                    add: jest.fn()
                 };
                 spriter.add(path.resolve(TEST_SVG), 'weather-clear.svg', TEST_EMPTY_SVG);
 
-                const addedFile = spriter._queue.add.getCall(0).args[0];
-                assert.deepEqual(addedFile, new File({
+                expect(spriter._queue.add).toHaveBeenCalledWith(new File({
                     base: path.dirname(path.resolve(TEST_SVG)),
                     path: path.resolve(TEST_SVG),
                     contents: Buffer.from(TEST_EMPTY_SVG)

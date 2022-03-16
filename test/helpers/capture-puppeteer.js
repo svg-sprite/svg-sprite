@@ -10,6 +10,7 @@ const puppeteer = require('puppeteer');
  * @param {Function} cb               Function
  */
 module.exports = async(src, target, cb) => {
+    let error;
     let browser;
 
     try {
@@ -25,12 +26,13 @@ module.exports = async(src, target, cb) => {
             path: target,
             type: 'png'
         });
-        cb();
-    } catch (error) {
-        cb(error);
+    } catch (error_) {
+        error = error_;
     } finally {
         if (browser) {
             await browser.close();
         }
+
+        cb(error);
     }
 };
