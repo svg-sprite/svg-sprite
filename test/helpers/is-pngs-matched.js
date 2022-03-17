@@ -1,11 +1,12 @@
 'use strict';
 
-const { promises: fs } = require('fs');
+const fs = require('fs').promises;
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 const constants = require('./constants.js');
 
 const MAX_MISMATCH = 5;
+
 /**
  *
  * @param {string} input                                                          input png
@@ -16,8 +17,7 @@ module.exports = async(input, expected) => {
     const inputPng = PNG.sync.read(await fs.readFile(input));
     const expectedPng = PNG.sync.read(await fs.readFile(expected));
 
-    const { width } = constants.puppeteer;
-    const { height } = constants.puppeteer;
+    const { width, height } = constants.puppeteer;
 
     const diff = new PNG({ width, height });
     const matched = pixelmatch(
