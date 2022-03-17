@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { promises: fs } = require('fs');
+const fs = require('fs').promises;
 const { PNG } = require('pngjs');
 const compareSvg2PngHelper = require('../helpers/compare-svg-2-png.js');
 const capturePuppeteer = require('../helpers/capture-browser.js');
