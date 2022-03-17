@@ -2,7 +2,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { chromium } = require('playwright');
+const { chromium } = require('playwright-chromium');
 const { PNG } = require('pngjs');
 const convertSvg2Png = require('./convert-svg-2-png.js');
 const isPngsMatched = require('./is-pngs-matched.js');
