@@ -1,6 +1,7 @@
 'use strict';
 
 const constants = require('./constants.js');
+
 /**
  * @param {string} svgPath            svg path
  * @param {string} pngPath            png path
