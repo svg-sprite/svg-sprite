@@ -16,8 +16,7 @@ module.exports = async(src, target) => {
         browser = await chromium.launch();
         const context = await browser.newContext();
         const page = await context.newPage();
-        const { height } = constants.browser;
-        const { width } = constants.browser;
+        const { width, height } = constants.browser;
 
         await page.setViewportSize({
             width,
