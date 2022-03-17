@@ -15,13 +15,9 @@ async function convertSvg2Png(svgPath, pngPath, browser) {
         page = await context.newPage();
         await page.goto(`file://${svgPath}`);
 
-        const { height } = constants.browser;
-        const { width } = constants.browser;
+        const { width, height } = constants.browser;
 
-        await page.setViewportSize({
-            width,
-            height
-        });
+        await page.setViewportSize({ width, height });
         await page.screenshot({
             omitBackground: true,
             path: pngPath,
