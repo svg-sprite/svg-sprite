@@ -1,54 +1,32 @@
 'use strict';
 
 const path = require('path');
-const looksSame = require('looks-same');
-const compareSvg2PngHelper = require('../helpers/compare-svg-2-png-helper.js');
-const capturePuppeteer = require('../helpers/capture-puppeteer.js');
+const { promises: fs } = require('fs');
+const { PNG } = require('pngjs');
+const compareSvg2PngHelper = require('../helpers/compare-svg-2-png.js');
+const capturePuppeteer = require('../helpers/capture-browser.js');
+const isPngsMatched = require('../helpers/is-pngs-matched.js');
 
 const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPath) => {
-    return new Promise((resolve, reject) => {
-        const ext = path.extname(resultPNGPath);
-        const diffPath = resultPNGPath.replace(`.${ext}`, `.diff.${ext}`);
-        compareSvg2PngHelper(receivedSVGPath, resultPNGPath, expectedPNGPath, diffPath, (error, result) => {
-            if (error) {
-                return reject(error);
-            }
-
-            resolve({ isEqual: result.equal, difference: JSON.stringify(result.diffClusters) });
-        });
-    });
+    const ext = path.extname(resultPNGPath);
+    const diffPath = resultPNGPath.replace(`.${ext}`, `.diff.${ext}`);
+    return compareSvg2PngHelper(receivedSVGPath, resultPNGPath, expectedPNGPath, diffPath);
 };
 
-const capturePuppeteerAsync = (previewHTML, previewImage, expectedPNGPath) => {
-    return new Promise((resolve, reject) => {
-        capturePuppeteer(previewHTML, previewImage, error => {
-            if (error) {
-                return reject(error);
-            }
+const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) => {
+    await capturePuppeteer(previewHTML, previewImage);
 
-            looksSame(previewImage, expectedPNGPath, (error, result) => {
-                if (error) {
-                    return reject(error);
-                }
+    const matchedResult = await isPngsMatched(previewImage, expectedPNGPath);
+    const diff = path.join(path.dirname(previewImage), path.basename(previewImage).replace('.png', '.diff.png'));
 
-                const res = { isEqual: result.equal, difference: JSON.stringify(result.diffClusters) };
+    if (matchedResult.isEqual) {
+        return matchedResult;
+    }
 
-                if (!result.equal) {
-                    looksSame.createDiff({
-                        reference: expectedPNGPath,
-                        current: previewImage,
-                        diff: path.join(path.dirname(previewImage), path.basename(previewImage).replace('.png', '.diff.png')),
-                        highlightColor: '#ff00ff'
-                    }, () => {
-                        resolve(res);
-                    });
-                    return;
-                }
+    await fs.mkdir(path.dirname(diff), { recursive: true });
+    await fs.writeFile(diff, PNG.sync.write(matchedResult.diff));
 
-                resolve(res);
-            });
-        });
-    });
+    return matchedResult;
 };
 
 // eslint-disable-next-line jest/require-hook
@@ -61,7 +39,7 @@ expect.extend({
         };
 
         const resultPNGPath = path.join(path.dirname(receivedSVGPath), path.basename(receivedSVGPath).replace('.svg', '.svg.png'));
-        const { isEqual, difference } = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
+        const { isEqual, matched } = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
 
         const expected = path.basename(receivedSVGPath);
         const received = path.basename(expectedPNGPath);
@@ -75,7 +53,7 @@ expect.extend({
             }\n\n` +
                 `${this.utils.printReceived('Difference:')} ${expected} -> ${received}\n` +
                 `Expected: ${this.utils.printExpected('no difference')}\n` +
-                `Received: ${this.utils.printReceived(difference)}`;
+                `Received: ${this.utils.printReceived(matched)} mismatches`;
 
         return {
             pass: isEqual,
@@ -91,7 +69,7 @@ expect.extend({
         };
 
         const previewImagePath = path.join(path.dirname(receivedHTMLPath), `${path.basename(receivedHTMLPath)}.png`);
-        const { isEqual, difference } = await capturePuppeteerAsync(receivedHTMLPath, previewImagePath, expectedPNGPath);
+        const { isEqual, matched } = await capturePuppeteerAsync(receivedHTMLPath, previewImagePath, expectedPNGPath);
 
         const expected = path.basename(receivedHTMLPath);
         const received = path.basename(expectedPNGPath);
@@ -105,7 +83,7 @@ expect.extend({
             }\n\n` +
                 `${this.utils.printReceived('Difference:')} ${expected} -> ${received}\n` +
                 `Expected: ${this.utils.printExpected('no difference')}\n` +
-                `Received: ${this.utils.printReceived(difference)}`;
+                `Received: ${this.utils.printReceived(matched)} mismatches`;
 
         return {
             pass: isEqual,

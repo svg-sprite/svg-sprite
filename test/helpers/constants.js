@@ -6,7 +6,7 @@ module.exports = {
         fixtures: path.resolve(path.join(__dirname, '../fixture')),
         expectations: path.resolve(path.join(__dirname, '../expected'))
     },
-    puppeteer: {
+    browser: {
         width: 1280,
         height: 1024
     }

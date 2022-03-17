@@ -59,9 +59,8 @@
     "eslint-plugin-jsdoc": "^38.0.4",
     "jest": "^27.5.1",
     "less": "^4.1.2",
-    "looks-same": "^7.3.0",
     "pixelmatch": "^5.2.1",
-    "puppeteer": "^13.5.1",
+    "playwright": "^1.20.0",
     "sass": "^1.49.9",
     "stylus": "^0.56.0",
     "xo": "^0.48.0"
@@ -121,7 +120,7 @@
             "File",
             "SVGShape",
             "SVGSprite",
-            "puppeteer",
+            "playwright",
             "HTMLElement"
           ]
         }

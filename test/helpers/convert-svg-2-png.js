@@ -3,19 +3,24 @@
 const constants = require('./constants.js');
 
 /**
- * @param {string} svgPath            svg path
- * @param {string} pngPath            png path
- * @param {puppeteer.Browser} browser puppeteer browser
+ * @param {string} svgPath             svg path
+ * @param {string} pngPath             png path
+ * @param {playwright.Browser} browser chromium browser
  */
 async function convertSvg2Png(svgPath, pngPath, browser) {
     let page;
 
     try {
-        page = await browser.newPage();
+        const context = await browser.newContext();
+        page = await context.newPage();
         await page.goto(`file://${svgPath}`);
-        await page.setViewport({
-            width: constants.puppeteer.width,
-            height: constants.puppeteer.height
+
+        const { height } = constants.browser;
+        const { width } = constants.browser;
+
+        await page.setViewportSize({
+            width,
+            height
         });
         await page.screenshot({
             omitBackground: true,
@@ -25,8 +30,8 @@ async function convertSvg2Png(svgPath, pngPath, browser) {
             clip: {
                 x: 0,
                 y: 0,
-                width: constants.puppeteer.width,
-                height: constants.puppeteer.height
+                width,
+                height
             }
         });
     } finally {
