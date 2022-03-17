@@ -1,33 +1,9 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs').promises;
-const { PNG } = require('pngjs');
-const compareSvg2PngHelper = require('../helpers/compare-svg-2-png.js');
-const capturePuppeteer = require('../helpers/capture-browser.js');
-const isPngsMatched = require('../helpers/is-pngs-matched.js');
 
-const compareSvg2PngAsync = async(receivedSVGPath, resultPNGPath, expectedPNGPath) => {
-    const ext = path.extname(resultPNGPath);
-    const diffPath = resultPNGPath.replace(`.${ext}`, `.diff.${ext}`);
-    return compareSvg2PngHelper(receivedSVGPath, resultPNGPath, expectedPNGPath, diffPath);
-};
-
-const capturePuppeteerAsync = async(previewHTML, previewImage, expectedPNGPath) => {
-    await capturePuppeteer(previewHTML, previewImage);
-
-    const matchedResult = await isPngsMatched(previewImage, expectedPNGPath);
-    const diff = path.join(path.dirname(previewImage), path.basename(previewImage).replace('.png', '.diff.png'));
-
-    if (matchedResult.isEqual) {
-        return matchedResult;
-    }
-
-    await fs.mkdir(path.dirname(diff), { recursive: true });
-    await fs.writeFile(diff, PNG.sync.write(matchedResult.diff));
-
-    return matchedResult;
-};
+const compareSvg2Png = require('../helpers/compare-svg-2-png.js');
+const compareHTML2Png = require('../helpers/compare-html-2-png.js');
 
 // eslint-disable-next-line jest/require-hook
 expect.extend({
@@ -39,7 +15,7 @@ expect.extend({
         };
 
         const resultPNGPath = path.join(path.dirname(receivedSVGPath), path.basename(receivedSVGPath).replace('.svg', '.svg.png'));
-        const { isEqual, matched } = await compareSvg2PngAsync(receivedSVGPath, resultPNGPath, expectedPNGPath);
+        const { isEqual, matched } = await compareSvg2Png(receivedSVGPath, resultPNGPath, expectedPNGPath);
 
         const expected = path.basename(receivedSVGPath);
         const received = path.basename(expectedPNGPath);
@@ -68,8 +44,7 @@ expect.extend({
             promise: this.promise
         };
 
-        const previewImagePath = path.join(path.dirname(receivedHTMLPath), `${path.basename(receivedHTMLPath)}.png`);
-        const { isEqual, matched } = await capturePuppeteerAsync(receivedHTMLPath, previewImagePath, expectedPNGPath);
+        const { isEqual, matched } = await compareHTML2Png(receivedHTMLPath, expectedPNGPath);
 
         const expected = path.basename(receivedHTMLPath);
         const received = path.basename(expectedPNGPath);

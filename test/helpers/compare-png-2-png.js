@@ -1,14 +1,22 @@
 'use strict';
 
 const fs = require('fs').promises;
+const path = require('path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 const constants = require('./constants.js');
 
-const MAX_MISMATCH = 5;
-
 /**
- *
+ * @param {Buffer} diff diff buffer
+ * @param {string} filePath where to store the diff
+ */
+const storeDiff = async(diff, filePath) => {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, PNG.sync.write(diff));
+};
+
+const MAX_MISMATCH = 5;
+/**
  * @param {string} input                                                          input png
  * @param {string} expected                                                       expected png
  * @returns {Promise<{isEqual: boolean, matched: (number|*), diff: exports.PNG}>} matching results
@@ -36,6 +44,14 @@ module.exports = async(input, expected) => {
             diff
         };
     }
+
+    await storeDiff(
+        diff,
+        path.join(
+            path.dirname(inputPng),
+            path.basename(inputPng).replace('.png', '.diff.png')
+        )
+    );
 
     return {
         isEqual: false,
