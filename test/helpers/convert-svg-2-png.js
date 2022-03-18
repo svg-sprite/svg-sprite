@@ -1,38 +1,33 @@
 'use strict';
 
-const constants = require('./constants.js');
+const { chromium } = require('playwright-chromium');
 
 /**
  * @param {string} svgPath             svg path
  * @param {string} pngPath             png path
- * @param {playwright.Browser} browser chromium browser
  */
-async function convertSvg2Png(svgPath, pngPath, browser) {
+async function convertSvg2Png(svgPath, pngPath) {
     let page;
+    let browser;
 
     try {
+        browser = await chromium.launch();
         const context = await browser.newContext();
         page = await context.newPage();
         await page.goto(`file://${svgPath}`);
 
-        const { width, height } = constants.browser;
-
-        await page.setViewportSize({ width, height });
-        await page.screenshot({
+        await page.locator('svg').first().screenshot({
             omitBackground: true,
             path: pngPath,
-            type: 'png',
-
-            clip: {
-                x: 0,
-                y: 0,
-                width,
-                height
-            }
+            type: 'png'
         });
     } finally {
         if (page) {
             await page.close();
+        }
+
+        if (browser) {
+            await browser.close();
         }
     }
 }

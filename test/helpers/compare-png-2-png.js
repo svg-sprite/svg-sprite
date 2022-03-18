@@ -4,7 +4,6 @@ const fs = require('fs').promises;
 const path = require('path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
-const constants = require('./constants.js');
 
 /**
  * @param {Buffer} diff diff buffer
@@ -25,9 +24,10 @@ module.exports = async(input, expected) => {
     const inputPng = PNG.sync.read(await fs.readFile(input));
     const expectedPng = PNG.sync.read(await fs.readFile(expected));
 
-    const { width, height } = constants.browser;
+    const { width, height } = inputPng;
 
     const diff = new PNG({ width, height });
+
     const matched = pixelmatch(
         inputPng.data,
         expectedPng.data,

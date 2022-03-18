@@ -2,7 +2,6 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const { chromium } = require('playwright-chromium');
 const convertSvg2Png = require('./convert-svg-2-png.js');
 const comparePng2Png = require('./compare-png-2-png.js');
 
@@ -15,16 +14,7 @@ const comparePng2Png = require('./compare-png-2-png.js');
  */
 module.exports = async(svg, png, expected) => {
     await fs.mkdir(path.dirname(png), { recursive: true });
-    let browser;
+    await convertSvg2Png(svg, png);
 
-    try {
-        browser = await chromium.launch();
-        await convertSvg2Png(svg, png, browser);
-
-        return comparePng2Png(png, expected);
-    } finally {
-        if (browser) {
-            await browser.close();
-        }
-    }
+    return comparePng2Png(png, expected);
 };
