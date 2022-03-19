@@ -177,7 +177,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             expect.hasAssertions();
 
             const input = path.join(tmpPath, 'css/svg', svgPath);
-            const expected = path.join(paths.expectations, 'png/css.packed.aligned.png');
+            const expected = path.join(paths.expectations, 'png/css.packed.centered.png');
 
             await expect(input).toBeVisuallyEqualTo(expected);
         });
