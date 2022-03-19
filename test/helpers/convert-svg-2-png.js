@@ -1,18 +1,21 @@
 'use strict';
 
+const { launchBrowser } = require('./capture-browser.js');
+
 /**
- * @param {string} svgPath            svg path
- * @param {string} pngPath            png path
- * @param {puppeteer.Browser} browser puppeteer browser
+ * @param {string} svgPath             svg path
+ * @param {string} pngPath             png path
  */
-async function convertSvg2Png(svgPath, pngPath, browser) {
+async function convertSvg2Png(svgPath, pngPath) {
     let page;
 
     try {
-        page = await browser.newPage();
+        const browser = await launchBrowser();
+        const context = await browser.newContext();
+        page = await context.newPage();
         await page.goto(`file://${svgPath}`);
-        const svg = await page.$('svg');
-        await svg.screenshot({
+
+        await page.locator('svg').first().screenshot({
             omitBackground: true,
             path: pngPath,
             type: 'png'
