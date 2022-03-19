@@ -21,10 +21,7 @@ module.exports = async(HTMLPath, expectedImagePath) => {
         const { width, height } = constants.browser;
         const previewImagePath = `${HTMLPath}.png`;
 
-        await page.setViewportSize({
-            width,
-            height
-        });
+        await page.setViewportSize({ width, height });
 
         await page.goto(`file://${HTMLPath}`);
         await page.screenshot({
