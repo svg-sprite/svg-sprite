@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>SVG &lt;view&gt; sprite preview | svg-sprite</title>
+        <title>SVG &lt;defs&gt; sprite preview | svg-sprite</title>
         <link href="{{{css}}}" rel="stylesheet">
         <style>
             body {
@@ -47,10 +47,11 @@
         </style>
     </head>
     <body>
+        {{{svg}}}
         <ol>
             {{#shapes}}<li>
                 <figure>
-                    <img src="../{{{sprite}}}#{{name}}" class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}" alt="{{name}}">
+                    <svg class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}"><use xlink:href="#{{name}}"/></svg>
                     <figcaption>{{name}}</figcaption>
                 </figure>
             </li>{{/shapes}}
