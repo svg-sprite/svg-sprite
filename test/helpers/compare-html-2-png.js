@@ -1,6 +1,6 @@
 'use strict';
 
-const { chromium } = require('playwright-chromium');
+const { launchBrowser } = require('./capture-browser.js');
 const comparePng2Png = require('./compare-png-2-png.js');
 const constants = require('./constants.js');
 
@@ -11,11 +11,10 @@ const constants = require('./constants.js');
  * @param {string} expectedImagePath       Expected screenshot file
  */
 module.exports = async(HTMLPath, expectedImagePath) => {
-    let browser;
     let page;
 
     try {
-        browser = await chromium.launch();
+        const browser = await launchBrowser();
         const context = await browser.newContext();
         page = await context.newPage();
         const { width, height } = constants.browser;
@@ -35,10 +34,6 @@ module.exports = async(HTMLPath, expectedImagePath) => {
     } finally {
         if (page) {
             await page.close();
-        }
-
-        if (browser) {
-            await browser.close();
         }
     }
 };

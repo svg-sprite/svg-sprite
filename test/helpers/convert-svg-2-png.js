@@ -1,6 +1,6 @@
 'use strict';
 
-const { chromium } = require('playwright-chromium');
+const { launchBrowser } = require('./capture-browser.js');
 
 /**
  * @param {string} svgPath             svg path
@@ -8,10 +8,9 @@ const { chromium } = require('playwright-chromium');
  */
 async function convertSvg2Png(svgPath, pngPath) {
     let page;
-    let browser;
 
     try {
-        browser = await chromium.launch();
+        const browser = await launchBrowser();
         const context = await browser.newContext();
         page = await context.newPage();
         await page.goto(`file://${svgPath}`);
@@ -24,10 +23,6 @@ async function convertSvg2Png(svgPath, pngPath) {
     } finally {
         if (page) {
             await page.close();
-        }
-
-        if (browser) {
-            await browser.close();
         }
     }
 }
