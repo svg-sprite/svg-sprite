@@ -5,6 +5,8 @@ const path = require('path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 
+const MAX_MISMATCH = 5;
+
 /**
  * @param {Buffer} diff diff buffer
  * @param {string} filePath where to store the diff
@@ -14,7 +16,6 @@ const storeDiff = async(diff, filePath) => {
     await fs.writeFile(filePath, PNG.sync.write(diff));
 };
 
-const MAX_MISMATCH = 5;
 /**
  * @param {string} input                                                          input png
  * @param {string} expected                                                       expected png
@@ -38,11 +39,7 @@ module.exports = async(input, expected) => {
     );
 
     if (matched <= MAX_MISMATCH) {
-        return {
-            isEqual: true,
-            matched,
-            diff
-        };
+        return { isEqual: true, matched, diff };
     }
 
     await storeDiff(
@@ -53,9 +50,5 @@ module.exports = async(input, expected) => {
         )
     );
 
-    return {
-        isEqual: false,
-        matched,
-        diff
-    };
+    return { isEqual: false, matched, diff };
 };
