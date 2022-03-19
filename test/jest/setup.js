@@ -3,8 +3,7 @@
 const path = require('path');
 const compareSvg2Png = require('../helpers/compare-svg-2-png.js');
 const compareHTML2Png = require('../helpers/compare-html-2-png.js');
-const { launchBrowser } = require('../helpers/capture-browser.js');
-const { closeBrowser } = require('../helpers/capture-browser.js');
+const { launchBrowser, closeBrowser } = require('../helpers/capture-browser.js');
 
 // eslint-disable-next-line jest/require-hook
 expect.extend({
