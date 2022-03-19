@@ -389,7 +389,7 @@ The **«defs»** mode creates a single SVG file combining the original shapes as
 
 The **«symbol»** mode behaves pretty much like the «defs» mode except it's using `<symbol>` elements to combine the original shapes into a sprite. Again, you can `<use>` the shapes with either **document-internal references** (`<svg><use xlink:href="#internal-id"/></svg>` while having the SVG sprite embedded inline into the very same document) or as an **external SVG spritemap** (`<svg><use xlink:href="http://example.com/sprite.svg#fragment-id"/></svg>`). Please see [this article by Chris Coyier](https://css-tricks.com/svg-symbol-good-choice-icons/) for further explanation of the `<symbol>` technique. Compared to the `defs` mode, one of the main benefits is that you don't have to provide the `viewBox` attribute on every `<use>` element which makes it a lot easier.
 
-For both «defs» and «symbol» sprites you will have to use something like [SVG for Everybody](https://github.com/jonathantneal/svg4everybody) if you want to get external spritemap references working in Internet Explorer 9-11. In addition to the [common mode properties](#common-mode-properties), «defs» and «symbol» sprites have one extra option:
+In addition to the [common mode properties](#common-mode-properties), «defs» and «symbol» sprites have one extra option:
 
 
 Property         | Type            | Default       | Description                                |
