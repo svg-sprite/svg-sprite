@@ -30,10 +30,7 @@ expect.extend({
                 `Expected: ${this.utils.printExpected('no difference')}\n` +
                 `Received: ${this.utils.printReceived(matched)} mismatches`;
 
-        return {
-            pass: isEqual,
-            message
-        };
+        return { pass: isEqual, message };
     },
 
     async toBeVisuallyCorrectAsHTMLTo(receivedHTMLPath, expectedPNGPath) {
@@ -49,19 +46,14 @@ expect.extend({
         const received = path.basename(expectedPNGPath);
 
         const message = isEqual ?
-            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)
-            }\n\n` +
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)}\n\n` +
                 `Expected: not ${this.utils.printExpected(expected)}\n` +
                 `Received: ${this.utils.printReceived(received)}` :
-            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)
-            }\n\n` +
+            () => `${this.utils.matcherHint('toBeVisuallyCorrectAsHTMLTo', undefined, undefined, options)}\n\n` +
                 `${this.utils.printReceived('Difference:')} ${expected} -> ${received}\n` +
                 `Expected: ${this.utils.printExpected('no difference')}\n` +
                 `Received: ${this.utils.printReceived(matched)} mismatches`;
 
-        return {
-            pass: isEqual,
-            message
-        };
+        return { pass: isEqual, message };
     }
 });
