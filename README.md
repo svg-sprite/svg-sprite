@@ -128,7 +128,6 @@ Many configuration properties (all except `mode`) apply to all sprites created b
 
 ```js
 // Common svg-sprite config options and their default values
-
 const config = {
     dest: '.', // Main output directory
     log: null, // Logging verbosity (default: no logging)
@@ -190,7 +189,6 @@ To further configure a sprite, pass in an object with configuration options:
 
 ```js
 // «symbol» sprite with CSS stylesheet resource
-
 const config = {
     mode: {
         css: {
@@ -208,7 +206,6 @@ Many `mode` properties are shared between the different sprite types, but there 
 
 ```js
 // Common mode properties
-
 const config = {
     mode: {
         <mode>: {
@@ -242,7 +239,6 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 
 ```js
 // «symbol» sprite with CSS stylesheet resource
-
 const config = {
     mode: {
         inline: true, // Prepare for inline embedding
@@ -258,7 +254,6 @@ Traditional **CSS sprite** with a **Sass stylesheet**:
 
 ```js
 // «css» sprite with Sass stylesheet resource
-
 const config = {
     mode: {
         css: { // Create a «css» sprite
@@ -277,7 +272,6 @@ const config = {
 
 ```js
 // «defs», «symbol» and «stack» sprites in parallel
-
 const config = {
     mode: {
         defs: true,
@@ -294,7 +288,6 @@ const config = {
 
 ```js
 // Just optimize source SVG files, create no sprite
-
 const config = {
     shape: {
         dest: 'path/to/out/dir'

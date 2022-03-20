@@ -31,7 +31,6 @@ spriter.compile((error, result) => {
 
 ```js
 // svg-sprite Grunt task
-
 grunt.initConfig({
     svg_sprite: {
         minimal: {
@@ -47,7 +46,6 @@ grunt.initConfig({
 
 ```js
 // svg-sprite Gulp task
-
 gulp.src('assets/*.svg')
     .pipe(svgSprite(config))
     .pipe(gulp.dest('out'));
