@@ -43,6 +43,7 @@
     "glob": "^7.2.3",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
+    "lodash.merge": "^4.6.2",
     "mustache": "^4.2.0",
     "prettysize": "^2.0.0",
     "svgo": "^2.8.0",
