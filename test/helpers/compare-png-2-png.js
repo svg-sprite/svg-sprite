@@ -8,7 +8,7 @@ const pixelmatch = require('pixelmatch');
 const MAX_MISMATCH = 5;
 
 /**
- * @param {Buffer} diff diff buffer
+ * @param {PNG} diff        diff PNG
  * @param {string} filePath where to store the diff
  */
 const storeDiff = async(diff, filePath) => {
@@ -45,8 +45,8 @@ module.exports = async(input, expected) => {
     await storeDiff(
         diff,
         path.join(
-            path.dirname(inputPng),
-            path.basename(inputPng).replace('.png', '.diff.png')
+            path.dirname(input),
+            path.basename(input).replace('.png', '.diff.png')
         )
     );
 
