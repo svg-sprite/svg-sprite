@@ -16,7 +16,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const _ = require('lodash');
+const merge = require('lodash.merge');
 const File = require('vinyl');
 const yaml = require('js-yaml');
 const glob = require('glob');
@@ -176,7 +176,7 @@ if (argv.config) {
             }
         }
 
-        _.merge(config, externalConfig);
+        merge(config, externalConfig);
     } catch (error) {
         console.error('[ERROR] Skipping --config file due to errors ("%s")', error.message.trim());
     }
