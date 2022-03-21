@@ -44,11 +44,6 @@
             figcaption {
                 display: none;
             }
-            i {
-                display: inline-block;
-                background: center no-repeat;
-                background-size: cover;
-            }
             img {
                 display: inline-block;
             }
@@ -57,15 +52,6 @@
     <body>
         <ol>
             {{#shapes}}
-            <li>
-                <figure>
-                    <i
-                        class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}"
-                        style="background-image: url(../{{{sprite}}}#{{name}})"
-                    ></i>
-                    <figcaption>{{name}}</figcaption>
-                </figure>
-            </li>
             <li>
                 <figure>
                     <img src="../{{{sprite}}}#{{name}}" class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}" alt="{{name}}">
