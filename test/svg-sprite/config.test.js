@@ -1,3 +1,5 @@
+'use strict';
+
 const winston = require('winston');
 const SVGSpriterConfig = require('../../lib/svg-sprite/config.js');
 
