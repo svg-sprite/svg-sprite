@@ -9,9 +9,12 @@ describe('testing constructor', () => {
             expect.hasAssertions();
 
             const TEST_LOGGER = winston.createLogger({
-                transports: [new winston.transports.Console({
-                    level: 'info'
-                })]
+                transports: [
+                    new winston.transports.Console({
+                        level: 'info'
+                    })
+                ],
+                level: 'info'
             });
             const config = new SVGSpriterConfig({
                 log: TEST_LOGGER
