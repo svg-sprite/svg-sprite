@@ -134,15 +134,6 @@ describe('testing layout()', () => {
         expect.hasAssertions();
 
         const TEST_CONFIG = {
-            dest: 'TEST_DEST',
-            layout: 'TEST_LAYOUT',
-            common: 'TEST_COMMON',
-            mixin: 'TEST_MIXIN',
-            prefix: 'TEST_PREFIX',
-            dimensions: 'TEST_DIMENSIONS',
-            sprite: 'TEST_SPRITE',
-            bust: 'TEST_BUST',
-            svg: 'TEST_SVG',
             variables: {
                 TEST_1: 'TEST_1',
                 TEST_2: 'TEST_2'
