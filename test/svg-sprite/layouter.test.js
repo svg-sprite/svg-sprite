@@ -491,3 +491,144 @@ describe('testing constructor', () => {
     });
 });
 
+describe('testing defaultVariables', () => {
+    let layouter;
+
+    beforeEach(() => {
+        layouter = new SVGSpriteLayouter(new SVGSpriter({ dest: '.' }), {});
+    });
+
+    describe('testing invert', () => {
+        it('should be a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.invert).toBeInstanceOf(Function);
+        });
+
+        it('should return a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.invert()).toBeInstanceOf(Function);
+        });
+
+        it('should revert number as a mustache function', () => {
+            expect.hasAssertions();
+
+            const TEST_NUMBER = 5;
+            const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_NUMBER);
+
+            expect(layouter._commonData.invert()(TEST_NUMBER, MOCK_RENDER_FN)).toBe(-5);
+            expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_NUMBER);
+        });
+    });
+
+    describe('testing classname', () => {
+        it('should be a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.classname).toBeInstanceOf(Function);
+        });
+
+        it('should return a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.classname()).toBeInstanceOf(Function);
+        });
+
+        it('should call render as a mustache function', () => {
+            expect.hasAssertions();
+
+            const TEST_STR = 'test';
+            const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_STR);
+
+            layouter._commonData.classname()(TEST_STR, MOCK_RENDER_FN);
+
+            expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_STR);
+        });
+
+        describe('testing function', () => {
+            it('should replace all last class if string includes spaces', () => {
+                expect.hasAssertions();
+
+                const TEST_STR = 'test1 test2  test3 test4';
+
+                expect(
+                    layouter._commonData.classname()(
+                        TEST_STR,
+                        jest.fn().mockReturnValueOnce(TEST_STR)
+                    )
+                ).toBe('test4');
+            });
+
+            it('should remove the dot', () => {
+                expect.hasAssertions();
+
+                const TEST_STR = '.classname';
+
+                expect(
+                    layouter._commonData.classname()(
+                        TEST_STR,
+                        jest.fn().mockReturnValueOnce(TEST_STR)
+                    )
+                ).toBe('classname');
+            });
+
+            it('should return initial string if it is not started with dot', () => {
+                expect.hasAssertions();
+
+                const TEST_STR = 'class';
+
+                expect(
+                    layouter._commonData.classname()(
+                        TEST_STR,
+                        jest.fn().mockReturnValueOnce(TEST_STR)
+                    )
+                ).toBe('class');
+            });
+        });
+    });
+
+    describe('testing escape', () => {
+        it('should be a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.escape).toBeInstanceOf(Function);
+        });
+
+        it('should return a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.escape()).toBeInstanceOf(Function);
+        });
+
+        it('should revert number replace \\ with \\\\ as a mustache fn', () => {
+            expect.hasAssertions();
+
+            const TEST_STR = '\\1\\2\\3\\4';
+            const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_STR);
+
+            expect(
+                layouter._commonData.escape()(TEST_STR, MOCK_RENDER_FN)
+            ).toBe('\\\\1\\\\2\\\\3\\\\4');
+            expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_STR);
+        });
+    });
+
+    describe('testing encodeHashSign', () => {
+        it('should be a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.encodeHashSign).toBeInstanceOf(Function);
+        });
+
+        it('should return a function', () => {
+            expect.hasAssertions();
+            expect(layouter._commonData.encodeHashSign()).toBeInstanceOf(Function);
+        });
+
+        it('should revert number replace # with %23 as a mustache fn', () => {
+            expect.hasAssertions();
+
+            const TEST_STR = '#1#2#3#4';
+            const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_STR);
+
+            expect(
+                layouter._commonData.encodeHashSign()(TEST_STR, MOCK_RENDER_FN)
+            ).toBe('%231%232%233%234');
+            expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_STR);
+        });
+    });
+});
