@@ -1,3 +1,5 @@
+'use strict';
+
 const SVGSpriter = require('../../lib/svg-sprite.js');
 const SVGSpriteLayouter = require('../../lib/svg-sprite/layouter.js');
 const CSSLayouter = require('../../lib/svg-sprite/mode/css.js');
