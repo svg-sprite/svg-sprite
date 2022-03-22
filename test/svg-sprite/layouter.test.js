@@ -181,3 +181,322 @@ describe('testing layout()', () => {
         );
     });
 });
+
+describe('testing constructor', () => {
+    let spriter;
+
+    beforeEach(() => {
+        spriter = new SVGSpriter({ dest: '.' });
+    });
+
+    it('should set expected initial data', () => {
+        expect.hasAssertions();
+
+        const TEST_CONFIG = {};
+        const layouter = new SVGSpriteLayouter(spriter, TEST_CONFIG);
+
+        expect(layouter._spriter).toBe(spriter);
+        expect(layouter.config).toBe(TEST_CONFIG);
+        expect(layouter.mode).toBeNull();
+        expect(layouter.files).toStrictEqual({});
+        expect(layouter.data).toStrictEqual({});
+    });
+
+    it('should debug info', () => {
+        expect.hasAssertions();
+
+        jest.spyOn(spriter, 'debug');
+        // eslint-disable-next-line no-new
+        new SVGSpriteLayouter(spriter, {});
+
+        expect(spriter.debug).toHaveBeenCalledWith('Created layouter instance');
+    });
+
+    it('should set _commonData according to spriter.config.variables', () => {
+        expect.hasAssertions();
+
+        const TEST_VARIABLES_CONFIG = {
+            TEST: 1
+        };
+        spriter.config.variables = TEST_VARIABLES_CONFIG;
+        const layouter = new SVGSpriteLayouter(spriter, {});
+
+        expect(layouter._commonData).toStrictEqual({
+            shapes: [],
+            classname: expect.any(Function),
+            date: expect.stringMatching(/\w+, \d{2} \w+ \d{4} \d{2}:\d{2}:\d{2} GMT/),
+            encodeHashSign: expect.any(Function),
+            escape: expect.any(Function),
+            invert: expect.any(Function),
+            ...TEST_VARIABLES_CONFIG
+        });
+    });
+
+    it('should fill up shapes accordingly to spriter shapes ' +
+        'with proper data and proper width/height calculation', () => {
+        expect.hasAssertions();
+
+        const TEST_DIMENSIONS = {
+            '100x100': {
+                width: 100,
+                height: 100
+            },
+            '200x200': {
+                width: 200,
+                height: 200
+            },
+            '300x300': {
+                width: 300,
+                height: 300
+            }
+        };
+        const TEST_PADDINGS = {
+            0: {
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+            },
+            5: {
+                top: 5,
+                left: 5,
+                right: 5,
+                bottom: 5
+            },
+            10: {
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: 10
+            }
+        };
+        const TEST_MASTER_SHAPE = {
+            id: 'master',
+            base: 'base',
+            master: { id: 'master' },
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['100x100']),
+            config: { spacing: { padding: TEST_PADDINGS['0'] } }
+        };
+        const TEST_SECOND = {
+            id: '2',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['100x100']),
+            config: { spacing: { padding: TEST_PADDINGS['5'] } }
+        };
+        const TEST_THIRD = {
+            id: '3',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['100x100']),
+            config: { spacing: { padding: TEST_PADDINGS['10'] } }
+        };
+        const TEST_FOURTH = {
+            id: '4',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['200x200']),
+            config: { spacing: { padding: TEST_PADDINGS['0'] } }
+        };
+        const TEST_FIFTH = {
+            id: '5',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['200x200']),
+            config: { spacing: { padding: TEST_PADDINGS['5'] } }
+        };
+        const TEST_SIXTH = {
+            id: '6',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['200x200']),
+            config: { spacing: { padding: TEST_PADDINGS['10'] } }
+        };
+        const TEST_SEVENTH = {
+            id: '4',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['300x300']),
+            config: { spacing: { padding: TEST_PADDINGS['0'] } }
+        };
+        const TEST_EIGHT = {
+            id: '5',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['300x300']),
+            config: { spacing: { padding: TEST_PADDINGS['5'] } }
+        };
+        const TEST_NINTH = {
+            id: '6',
+            base: 'base',
+            master: null,
+            getDimensions: jest.fn().mockReturnValueOnce(TEST_DIMENSIONS['300x300']),
+            config: { spacing: { padding: TEST_PADDINGS['10'] } }
+        };
+        spriter._shapes = [
+            TEST_MASTER_SHAPE,
+            TEST_SECOND,
+            TEST_THIRD,
+            TEST_FOURTH,
+            TEST_FIFTH,
+            TEST_SIXTH,
+            TEST_SEVENTH,
+            TEST_EIGHT,
+            TEST_NINTH
+        ];
+        const layouter = new SVGSpriteLayouter(spriter, {});
+
+        expect(layouter._commonData.shapes).toHaveLength(9);
+        expect(layouter._commonData.shapes[0]).toStrictEqual({
+            name: TEST_MASTER_SHAPE.id,
+            base: TEST_MASTER_SHAPE.base,
+            master: TEST_MASTER_SHAPE.master.id,
+            width: {
+                inner: 100,
+                outer: 100
+            },
+            height: {
+                inner: 100,
+                outer: 100
+            },
+            first: true,
+            last: false
+        });
+        expect(layouter._commonData.shapes[1]).toStrictEqual({
+            name: TEST_SECOND.id,
+            base: TEST_SECOND.base,
+            master: null,
+            width: {
+                inner: 90,
+                outer: 100
+            },
+            height: {
+                inner: 90,
+                outer: 100
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[2]).toStrictEqual({
+            name: TEST_THIRD.id,
+            base: TEST_THIRD.base,
+            master: null,
+            width: {
+                inner: 80,
+                outer: 100
+            },
+            height: {
+                inner: 80,
+                outer: 100
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[3]).toStrictEqual({
+            name: TEST_FOURTH.id,
+            base: TEST_FOURTH.base,
+            master: null,
+            width: {
+                inner: 200,
+                outer: 200
+            },
+            height: {
+                inner: 200,
+                outer: 200
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[3]).toStrictEqual({
+            name: TEST_FOURTH.id,
+            base: TEST_FOURTH.base,
+            master: null,
+            width: {
+                inner: 200,
+                outer: 200
+            },
+            height: {
+                inner: 200,
+                outer: 200
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[4]).toStrictEqual({
+            name: TEST_FIFTH.id,
+            base: TEST_FIFTH.base,
+            master: null,
+            width: {
+                inner: 190,
+                outer: 200
+            },
+            height: {
+                inner: 190,
+                outer: 200
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[5]).toStrictEqual({
+            name: TEST_SIXTH.id,
+            base: TEST_SIXTH.base,
+            master: null,
+            width: {
+                inner: 180,
+                outer: 200
+            },
+            height: {
+                inner: 180,
+                outer: 200
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[6]).toStrictEqual({
+            name: TEST_SEVENTH.id,
+            base: TEST_SEVENTH.base,
+            master: null,
+            width: {
+                inner: 300,
+                outer: 300
+            },
+            height: {
+                inner: 300,
+                outer: 300
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[7]).toStrictEqual({
+            name: TEST_EIGHT.id,
+            base: TEST_EIGHT.base,
+            master: null,
+            width: {
+                inner: 290,
+                outer: 300
+            },
+            height: {
+                inner: 290,
+                outer: 300
+            },
+            first: false,
+            last: false
+        });
+        expect(layouter._commonData.shapes[8]).toStrictEqual({
+            name: TEST_NINTH.id,
+            base: TEST_NINTH.base,
+            master: null,
+            width: {
+                inner: 280,
+                outer: 300
+            },
+            height: {
+                inner: 280,
+                outer: 300
+            },
+            first: false,
+            last: true
+        });
+    });
+});
+
