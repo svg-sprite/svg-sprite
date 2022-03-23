@@ -50,19 +50,19 @@
     "vinyl": "^2.2.1",
     "winston": "^3.6.0",
     "xpath": "^0.0.32",
-    "yargs": "^17.3.1"
+    "yargs": "^17.4.0"
   },
   "devDependencies": {
-    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-jest": "^26.1.2",
     "eslint-plugin-jest-formatting": "^3.1.0",
-    "eslint-plugin-jsdoc": "^38.0.4",
+    "eslint-plugin-jsdoc": "^38.0.6",
     "jest": "^27.5.1",
     "less": "^4.1.2",
     "pixelmatch": "^5.2.1",
     "playwright-chromium": "^1.20.0",
     "pngjs": "^6.0.0",
     "sass": "^1.49.9",
-    "stylus": "^0.56.0",
+    "stylus": "^0.57.0",
     "xo": "^0.48.0"
   },
   "keywords": [
