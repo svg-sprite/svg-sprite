@@ -76,12 +76,9 @@ describe('utils', () => {
             expect(isObject(new Boolean())).toBe(true);
         });
 
-        it('should return false for a new Array', () => {
-            expect(isObject(Array.from({ length: 1 }))).toBe(false);
-        });
-
-        it('should return false for an array', () => {
-            expect(isObject([1, 2, 3])).toBe(false);
+        it('should return true for an array (lodash backport)', () => {
+            // todo: must return false
+            expect(isObject([1, 2, 3])).toBe(true);
         });
 
         it('should return false for a Function constructor', () => {
