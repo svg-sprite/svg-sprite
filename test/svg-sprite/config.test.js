@@ -1,7 +1,9 @@
 'use strict';
 
+const path = require('path');
 const winston = require('winston');
 const SVGSpriterConfig = require('../../lib/svg-sprite/config.js');
+const { paths } = require('../../test/helpers/constants.js');
 
 describe('testing constructor', () => {
     describe('testing log', () => {
@@ -102,6 +104,26 @@ describe('testing constructor', () => {
                 expect(config.log.transports[0].level).toBe('info');
                 expect(config.log.transports[0].silent).toBe(true);
             });
+        });
+    });
+
+    describe('testing initial attributes', () => {
+        it('should set dest from config.dest', () => {
+            expect.hasAssertions();
+
+            const config = new SVGSpriterConfig({
+                dest: paths.tmp
+            });
+
+            expect(config.dest).toBe(path.resolve(paths.tmp));
+        });
+
+        it('should set dest as current directory if not provided', () => {
+            expect.hasAssertions();
+
+            const config = new SVGSpriterConfig({});
+
+            expect(config.dest).toBe(path.resolve('.'));
         });
     });
 });
