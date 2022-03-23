@@ -4,6 +4,7 @@ const path = require('path');
 const compareSvg2Png = require('../helpers/compare-svg-2-png.js');
 const compareHTML2Png = require('../helpers/compare-html-2-png.js');
 const { launchBrowser, closeBrowser } = require('../helpers/capture-browser.js');
+const { isObject } = require('../../lib/svg-sprite/utils/index.js');
 
 // eslint-disable-next-line jest/require-hook
 expect.extend({
@@ -56,6 +57,25 @@ expect.extend({
                 `Received: ${this.utils.printReceived(matched)} mismatches`;
 
         return { pass: isEqual, message };
+    },
+
+    toBeDefaultWinstonLogger(received) {
+        const options = {
+            comment: 'Object is default winson logger created by SVGSpriterConfig',
+            isNot: this.isNot,
+            promise: this.promise
+        };
+        const pass = (
+            isObject(received) &&
+            Array.isArray(received.transports) &&
+            received.transports.length === 1
+        );
+        return {
+            pass,
+            message: pass ? () => 'Is winston logger, all OK' : () => `${this.utils.matcherHint('toBeDefaultWinsonLogger', undefined, undefined, options)}\n\n` +
+                `Expected: ${this.utils.printExpected('winston logger')}\n` +
+                `Received: ${this.utils.printReceived(received)}`
+        };
     }
 });
 
