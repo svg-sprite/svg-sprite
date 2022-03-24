@@ -22,4 +22,14 @@ describe('testing initial attributes', () => {
 
         expect(config.dest).toBe(path.resolve('.'));
     });
+
+    it('should set variables accordingly to config.variables', () => {
+        expect.hasAssertions();
+
+        const TEST_VARIABLES = { TEST_1: 1, TEST_2: 2 };
+        const config = new SVGSpriterConfig({ variables: TEST_VARIABLES });
+
+        expect(config.variables).toStrictEqual(TEST_VARIABLES);
+        expect(config.variables).not.toBe(TEST_VARIABLES);
+    });
 });
