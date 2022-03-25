@@ -39,7 +39,6 @@ describe('testing sort', () => {
         expect.hasAssertions();
 
         const TEST_FN = jest.fn();
-
         const config = new SVGSpriterConfig({ shape: { sort: TEST_FN } });
 
         expect(config.shape.sort).toBe(TEST_FN);
