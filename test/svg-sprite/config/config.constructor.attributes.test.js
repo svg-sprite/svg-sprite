@@ -33,3 +33,38 @@ describe('testing initial attributes', () => {
         expect(config.variables).not.toBe(TEST_VARIABLES);
     });
 });
+
+describe('testing sort', () => {
+    it('should set sort accordingly to config if function provided', () => {
+        expect.hasAssertions();
+
+        const TEST_FN = jest.fn();
+
+        const config = new SVGSpriterConfig({ shape: { sort: TEST_FN } });
+
+        expect(config.shape.sort).toBe(TEST_FN);
+    });
+
+    it('should set default sort if not provided', () => {
+        expect.hasAssertions();
+
+        const config = new SVGSpriterConfig({});
+        const TEST_SHAPES = [
+            { id: 0 },
+            { id: 0 },
+            { id: 1 },
+            { id: 3 },
+            { id: 2 }
+        ];
+
+        expect(TEST_SHAPES.sort(config.shape.sort)).toStrictEqual(
+            [
+                { id: 0 },
+                { id: 0 },
+                { id: 1 },
+                { id: 2 },
+                { id: 3 }
+            ]
+        );
+    });
+});
