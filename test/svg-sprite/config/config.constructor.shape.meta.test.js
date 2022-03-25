@@ -9,7 +9,7 @@ const SVGSpriterConfig = require('../../../lib/svg-sprite/config.js');
 jest.mock('fs');
 jest.mock('yaml');
 
-describe('testing meta', () => {
+describe('testing SVGSpriterConfig shape.meta', () => {
     it('should copy fields from config.shape', () => {
         expect.hasAssertions();
 
