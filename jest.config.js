@@ -1,5 +1,10 @@
 'use strict';
 
+const IGNORES = [
+    '/node_modules/',
+    'tmp'
+];
+
 module.exports = {
     clearMocks: true,
     resetMocks: true,
@@ -7,19 +12,18 @@ module.exports = {
     coverageReporters: ['html', 'lcov', 'text'],
     collectCoverageFrom: [
         'bin/*.js',
-        'lib/**/*.js',
-        '!**/node_modules/**'
+        'lib/**/*.js'
     ],
     moduleFileExtensions: [
         'js',
         'json'
     ],
+    modulePathIgnorePatterns: IGNORES,
     testMatch: [
-        '**/*.test.js'
+        '<rootDir>/test/**/*.test.js'
     ],
-    testPathIgnorePatterns: [
-        '/node_modules/'
-    ],
+    testPathIgnorePatterns: IGNORES,
+    watchPathIgnorePatterns: IGNORES,
     setupFilesAfterEnv: ['<rootDir>/test/jest/setup.js'],
     globalSetup: '<rootDir>/test/jest/setup.global.js',
     testTimeout: 15_000
