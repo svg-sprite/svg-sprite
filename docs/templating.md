@@ -141,7 +141,7 @@ There are a couple of functions directly built into *svg-sprite*. You may use th
 
 Takes no arguments and returns the current date and time as GMT string (e.g. *Mon, 22 Dec 2014 16:18:53 GMT*).
 
-```html
+```mustache
 <p>Generated at {{date}} by svg-sprite</p>
 ```
 
@@ -159,7 +159,7 @@ Returns the negative value of a floating point number.
 
 Returns the innermost part of a CSS selector as a class name (with the leading dot stripped off). For instance, if `fullselector` had the value *.svg .icon-cart*,
 
-```html
+```mustache
 <i class="{{#classname}}{{fullselector}}{{/classname}}">Cart</i>
 ```
 

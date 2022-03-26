@@ -10,7 +10,7 @@ svg-sprite is a low-level [Node.js](https://nodejs.org/) module that **takes a b
 * inline sprites using the **`<symbol>` element**
 * and [SVG stacks](https://simurai.com/blog/2012/04/02/svg-stacks).
 
-It comes with a set of [Mustache](https://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](https://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](https://sass-lang.com/), [Less](http://lesscss.org/) and [Stylus](https://stylus-lang.com/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
+It comes with a set of [Mustache](https://mustache.github.io/) templates for creating stylesheets in good ol' [CSS](https://www.w3.org/Style/CSS/) or one of the major **pre-processor formats** ([Sass](https://sass-lang.com/), [Less](https://lesscss.org/) and [Stylus](https://stylus-lang.com/)). Tweaking the templates or even adding your own **custom output format** is really easy, just as switching on the generation of an **HTML example document** along with your sprite.
 
 For an up-to-date list of browsers supporting [SVG in general](https://caniuse.com/svg) respectively [SVG fragment identifiers](https://caniuse.com/svg-fragment) in particular (required for `<defs>` and `<symbol>` sprites as well as SVG stacks) please refer to [caniuse.com](https://caniuse.com/).
 
