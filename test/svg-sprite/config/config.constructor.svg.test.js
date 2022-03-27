@@ -32,7 +32,7 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
     });
 
     describe.each(['xmlDeclaration', 'doctypeDeclaration', 'dimensionAttributes'])('testing %p attr', field => {
-        it('should set te passed value', () => {
+        it('should set the passed value', () => {
             expect.hasAssertions();
 
             const TEST_VAR = 'test-var';
