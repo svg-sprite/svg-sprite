@@ -73,4 +73,20 @@ describe('calculateSvgDimensions', () => {
         expect(firstRunDimensions).toStrictEqual(secondRunDimensions);
         expect(thirdRunDimensions).toStrictEqual(secondRunDimensions);
     });
+
+    it('should throw error if error occurred', () => {
+        expect.hasAssertions();
+
+        jest.doMock('@resvg/resvg-js', () => {
+            return {
+                render: jest.fn().mockImplementationOnce(() => {
+                    throw new Error('test');
+                })
+            };
+        });
+
+        expect(() => {
+            calculateSvgDimensions('');
+        }).toThrow(Error);
+    });
 });
