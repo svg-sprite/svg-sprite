@@ -1,3 +1,5 @@
+'use strict';
+
 const { EventEmitter } = require('events');
 const path = require('path');
 const SVGSpriterQueue = require('../../lib/svg-sprite/queue.js');
