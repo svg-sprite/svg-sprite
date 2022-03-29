@@ -1,3 +1,5 @@
+'use strict';
+
 const SVGSpriteCssPacker = require('../../../lib/svg-sprite/mode/css/packer.js');
 
 describe('testing SVGSpriteCssPacker', () => {
