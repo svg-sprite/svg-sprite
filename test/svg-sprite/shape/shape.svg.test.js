@@ -255,3 +255,121 @@ describe('testing setSVG()', () => {
         expect(shape._initSVG).toHaveBeenCalledWith();
     });
 });
+
+describe('testing _setDimensions()', () => {
+    it('should set viewbox and call cb', () => {
+        expect.hasAssertions();
+
+        const TEST_WIDTH = 300;
+        const TEST_HEIGHT = 100;
+        const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+        shape.width = TEST_WIDTH;
+        shape.height = TEST_HEIGHT;
+
+        const cb = jest.fn();
+        jest.spyOn(shape, 'getViewbox').mockReturnValueOnce(null);
+        shape._setDimensions(cb);
+
+        expect(shape.getViewbox).toHaveBeenCalledWith(TEST_WIDTH, TEST_HEIGHT);
+        expect(cb).toHaveBeenCalledWith(null);
+    });
+
+    it('should set attributes for all dimensions', () => {
+        expect.hasAssertions();
+
+        const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+        const TEST_WIDTH = 300;
+        const TEST_HEIGHT = 100;
+        jest.spyOn(shape.dom.documentElement, 'setAttribute').mockImplementation();
+        jest.spyOn(shape, 'getViewbox').mockReturnValueOnce(null);
+        jest.spyOn(shape, 'getDimensions').mockReturnValueOnce({ height: TEST_HEIGHT, width: TEST_WIDTH });
+        shape._setDimensions(jest.fn());
+
+        expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledTimes(2);
+        expect(shape.dom.documentElement.setAttribute.mock.calls[0]).toStrictEqual(expect.arrayContaining(['height', TEST_HEIGHT]));
+        expect(shape.dom.documentElement.setAttribute.mock.calls[1]).toStrictEqual(expect.arrayContaining(['width', TEST_WIDTH]));
+    });
+
+    describe('shape need to be scaled', () => {
+        it('should scale if width is more than maxWidth', () => {
+            expect.hasAssertions();
+
+            const TEST_WIDTH = 400;
+            const TEST_HEIGHT = 100;
+            const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+            shape.width = TEST_WIDTH;
+            shape.height = TEST_HEIGHT;
+            shape.config.spacing.box = 'padding';
+            shape.config.spacing.padding.right = 10;
+            shape.config.spacing.padding.left = 10;
+            shape.config.dimension.maxWidth = TEST_WIDTH;
+
+            shape._setDimensions(jest.fn());
+
+            expect(shape._scale).toBe(380 / 400);
+            expect(shape.width).toBe(380);
+            expect(shape.height).toBe(100 * 380 / 400);
+        });
+
+        it('should scale if height is more than maxHeight', () => {
+            expect.hasAssertions();
+
+            const TEST_WIDTH = 300;
+            const TEST_HEIGHT = 100;
+            const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+            shape.width = TEST_WIDTH;
+            shape.height = TEST_HEIGHT;
+            shape.config.spacing.box = 'padding';
+            shape.config.spacing.padding.top = 10;
+            shape.config.spacing.padding.bottom = 10;
+            shape.config.dimension.maxHeight = TEST_HEIGHT;
+
+            shape._setDimensions(jest.fn());
+
+            expect(shape.height).toBe(80);
+            expect(shape.width).toBe(300 * 80 / 100);
+            expect(shape._scale).toBe(0.8);
+        });
+
+        it('should scale if height is less than maxHeight and width is less than maxWidth nad spacing is icon', () => {
+            expect.hasAssertions();
+
+            const TEST_WIDTH = 300;
+            const TEST_HEIGHT = 100;
+            const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+            shape.width = TEST_WIDTH / 2;
+            shape.height = TEST_HEIGHT / 2;
+            shape.config.spacing.box = 'icon';
+            shape.config.dimension.maxHeight = TEST_HEIGHT;
+            shape.config.dimension.maxWidth = TEST_WIDTH;
+
+            shape._setDimensions(jest.fn());
+
+            expect(shape._scale).toBe(2);
+            expect(shape.height).toBe(100);
+            expect(shape.width).toBe(150 * 2);
+        });
+    });
+
+    describe('with icon box size', () => {
+        it('should set expected spacing', () => {
+            expect.hasAssertions();
+
+            const TEST_WIDTH = 300;
+            const TEST_HEIGHT = 100;
+            const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
+            shape.width = TEST_WIDTH * 2;
+            shape.height = TEST_HEIGHT;
+            shape.config.spacing.box = 'icon';
+            shape.config.dimension.maxHeight = TEST_HEIGHT;
+            shape.config.dimension.maxWidth = TEST_WIDTH;
+
+            shape._setDimensions(jest.fn());
+
+            expect(shape.config.spacing.padding.left).toBe(0);
+            expect(shape.config.spacing.padding.right).toBe(0);
+            expect(shape.config.spacing.padding.top).toBe(25);
+            expect(shape.config.spacing.padding.bottom).toBe(25);
+        });
+    });
+});
