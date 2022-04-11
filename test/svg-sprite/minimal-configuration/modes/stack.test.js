@@ -58,3 +58,46 @@ describe.each`
         await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
 });
+
+describe('without viewbox', () => {
+    const testConfig = constants.WITHOUT_DIMS;
+    const tmpPath = path.join(paths.tmp, 'stack-without-viewbox');
+    let svg;
+    let spriter;
+    let data;
+
+    beforeAll(async() => {
+        await removeTmpPath(tmpPath);
+        data = {};
+
+        spriter = new SVGSpriter({ dest: tmpPath });
+        addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+        const { result, data: cssData } = await spriter.compileAsync({
+            stack: {
+                sprite: `svg/stack${testConfig.namespace}.svg`, render: {
+                    css: true
+                },
+                rootviewbox: false
+            }
+        });
+        writeFiles(result);
+        data = cssData.stack;
+        svg = path.basename(result.stack.sprite.path);
+    });
+
+    it('creates a visually correct stylesheet resource in CSS format', async() => {
+        expect.hasAssertions();
+
+        const svgData = await fs.readFile(path.join(tmpPath, 'stack/svg', svg));
+
+        data.svg = svgData.toString();
+        data.css = '../sprite.css';
+
+        const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf-8');
+        const out = mustache.render(previewTemplate, data);
+        const preview = await writeFile(path.join(tmpPath, 'stack/html/stack-without-viewbox.html'), out);
+        const expected = path.join(paths.expectations, 'png/stack-without-viewbox.html.png');
+
+        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+    });
+});
