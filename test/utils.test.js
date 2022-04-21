@@ -213,5 +213,11 @@ describe('utils', () => {
         it('should not fail with empty arrays', () => {
             expect(zipObject([], [])).toStrictEqual({});
         });
+
+        it('should throw error if non-array value passed', () => {
+            expect(() => {
+                zipObject(1, false);
+            }).toThrow(new Error('Some of passed parameters are not array'));
+        });
     });
 });
