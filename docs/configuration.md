@@ -401,7 +401,11 @@ Property         | Type            | Default       | Description                
 
 The «stack» mode creates a single SVG file by combining the original shapes as nested `<svg>` elements. Instead of spreading the shapes using individual horizontal and/or vertical offsets, the stack contains a small CSS portion that hides all the shapes by default. Only the *active* shape as determined by the `:target` pseudo selector will be visible. For this technique to work, the client will have to [support SVG fragment identifiers](https://caniuse.com/svg-fragment) or use a polyfill like [fixsvgstack.jquery.js](https://github.com/preciousforever/SVG-Stacker/blob/master/fixsvgstack.jquery.js). Please see [this post by simurai](https://simurai.com/blog/2012/04/02/svg-stacks) for a further explanation of SVG stacks.
 
-«stack» sprites don't have any options in addition to the [common mode properties](#common-mode-properties).
+In addition to the [common mode properties](#common-mode-properties), «stack» sprites have one extra option:
+
+Property         | Type            | Default       | Description                                |
+---------------- | --------------- | ------------- | ------------------------------------------ |
+`mode.<mode>.rootviewbox` | Boolean | `true`       | If you want to disable rendering of the root elements viewBox attribute, you will want to set this to `false`. This way for example you can have svg sprites in multiple aspect ratios. |
 
 
 #### Rendering configurations
