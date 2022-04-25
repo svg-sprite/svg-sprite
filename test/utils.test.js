@@ -217,7 +217,7 @@ describe('utils', () => {
         it('should throw error if non-array value passed', () => {
             expect(() => {
                 zipObject(1, false);
-            }).toThrow(new Error('Some of passed parameters are not array'));
+            }).toThrow(new TypeError('Both parameters must be an array'));
         });
     });
 });
