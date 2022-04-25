@@ -205,7 +205,7 @@ describe('utils', () => {
             expect(zipObject(['a', 'b'], [1, 2])).toStrictEqual({ a: 1, b: 2 });
         });
 
-        it('should return the zipped object with imbalanced arrays', () => {
+        it('should return the zipped object with unbalanced arrays', () => {
             expect(zipObject(['a', 'b', 'c'], [1, 2])).toStrictEqual({ a: 1, b: 2, c: undefined });
             expect(zipObject(['a'], [1, 2])).toStrictEqual({ a: 1 });
         });
