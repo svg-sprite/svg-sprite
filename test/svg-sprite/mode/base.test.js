@@ -51,7 +51,6 @@ describe('testings SVGSpriteBase', () => {
             const TEST_DATA = {};
 
             const { cls, initFn } = getClassAndInitFn();
-
             const base = new cls(TEST_SPRITER, TEST_CONFIG, TEST_DATA, '');
 
             expect(initFn).toHaveBeenCalledWith();
@@ -112,7 +111,6 @@ describe('testings SVGSpriteBase', () => {
                 const TEST_DATA = {};
 
                 const { cls } = getClassAndInitFn();
-
                 const base = new cls(TEST_SPRITER, TEST_CONFIG, TEST_DATA, '');
 
                 expect(base.config.render).toStrictEqual(expect.objectContaining({
@@ -253,9 +251,7 @@ describe('testings SVGSpriteBase', () => {
                 sprite: ''
             };
             const { cls } = getClassAndInitFn();
-
             const base = new cls(TEST_SPRITER, TEST_CONFIG, {}, '');
-
             const testFn = jest.fn();
 
             base.layout([], testFn);
@@ -286,7 +282,6 @@ describe('testings SVGSpriteBase', () => {
                 render: { svg: true, png: true, bmp: false }
             };
             const { cls } = getClassAndInitFn();
-
             const base = new cls(TEST_SPRITER, TEST_CONFIG, {}, '');
 
             const TEST_FILES = {};
