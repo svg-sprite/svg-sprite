@@ -423,11 +423,11 @@ describe('testings SVGSpriteBase', () => {
             const { cls } = getClassAndInitFn();
             const base = new cls(TEST_SPRITER, TEST_CONFIG, {}, '');
             const TEST_SVG = 'svg';
-            const TEST_SPRITE = 'sprite-ae8eb96d.svg';
+            const TEST_SPRITE_MATCH = /sprite-[a-z\d]{8}\.svg/;
 
-            expect(base._addCacheBusting(TEST_SVG)).toStrictEqual(expect.stringContaining(TEST_SPRITE));
-            expect(base.data.sprite).toBe(TEST_SPRITE);
-            expect(base.data.example).toStrictEqual(expect.stringContaining(TEST_SPRITE));
+            expect(base._addCacheBusting(TEST_SVG)).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
+            expect(base.data.sprite).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
+            expect(base.data.example).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
         });
     });
 });
