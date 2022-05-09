@@ -58,3 +58,36 @@ describe.each`
         await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
 });
+
+describe('testing width and height setting', () => {
+    const tmpPath = path.join(paths.tmp, 'symbol.width');
+
+    let spriter;
+    let data;
+
+    it('should set width and height if dimensions are set to true', async() => {
+        await removeTmpPath(tmpPath);
+        data = {};
+
+        spriter = new SVGSpriter({
+            dest: tmpPath
+        });
+        spriter.add('svg.svg', null, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 20" width="34" height="20">
+\t<path d="M4 0l13 12.978L30.008 0l4 4-17 17-17-17z" fill="white" />
+</svg>`);
+        const { result } = await spriter.compileAsync({
+            symbol: true,
+            shape: {
+                dimension: {
+                    attributes: true
+                }
+            },
+            svg: {
+                dimensionAttributes: true
+            }
+        });
+
+        expect(result.symbol.sprite.contents.toString()).toContain('width="34"');
+        expect(result.symbol.sprite.contents.toString()).toContain('height="20"');
+    });
+});
