@@ -14,7 +14,7 @@ const { paths } = require('../../../helpers/constants.js');
 const writeFile = require('../../../helpers/write-file.js');
 const asyncRenderers = require('../../../helpers/async-renderers.js');
 
-const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
+const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf8');
 
 describe('testing minimal config', () => {
     let spriter;
@@ -162,7 +162,7 @@ describe('testing minimal config', () => {
                 expect.hasAssertions();
 
                 const lessFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.less`);
-                const lessText = fs.readFileSync(lessFile, 'utf-8');
+                const lessText = fs.readFileSync(lessFile, 'utf8');
                 const output = await asyncRenderers.less(lessText, {});
 
                 await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
@@ -181,7 +181,7 @@ describe('testing minimal config', () => {
                 expect.hasAssertions();
 
                 const stylusFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.styl`);
-                const stylusText = fs.readFileSync(stylusFile, 'utf-8');
+                const stylusText = fs.readFileSync(stylusFile, 'utf8');
                 const output = await asyncRenderers.stylus(stylusText, {});
 
                 await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);

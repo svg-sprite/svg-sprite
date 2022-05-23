@@ -18,7 +18,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     let spriter;
     const cwdAlign = path.join(paths.fixtures, 'svg/css');
     const align = glob.sync('**/*.svg', { cwd: cwdAlign });
-    const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf-8');
+    const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf8');
     let packedSvg;
     let data;
 
@@ -67,7 +67,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         expect.hasAssertions();
 
         const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
-        const lessText = fs.readFileSync(lessFile, 'utf-8');
+        const lessText = fs.readFileSync(lessFile, 'utf8');
         const output = await asyncRenderers.less(lessText, {});
 
         await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);

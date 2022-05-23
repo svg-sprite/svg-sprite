@@ -14,7 +14,7 @@ const { paths } = require('../../helpers/constants.js');
 
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
-const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf-8');
+const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
 
 const tmpPath = path.join(paths.tmp, 'mixed');
 
