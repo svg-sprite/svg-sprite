@@ -77,16 +77,24 @@ describe('testing setNamespace()', () => {
                 }
             }];
             const THIRD_ELEMENTS = [{
+                nodeValue: 'data:'
+            }, {
+                nodeValue: `#${TEST_ATTR_VALUE}`,
+                ownerElement: {
+                    setAttribute: jest.fn()
+                }
+            }];
+            const FOURTH_ELEMENTS = [{
                 localName: 'TEST local name',
                 ownerElement: {
                     setAttribute: jest.fn()
                 }
             }];
 
-            const FORTH_ELEMENTS = [{
+            const SIXTH_ELEMENTS = [{
                 ownerElement: { setAttribute: jest.fn() }
             }];
-            const mockSelect = jest.fn().mockReturnValueOnce(FIRST_ELEMENTS).mockReturnValueOnce(SECOND_ELEMENTS).mockReturnValueOnce(THIRD_ELEMENTS).mockReturnValue(FORTH_ELEMENTS);
+            const mockSelect = jest.fn().mockReturnValueOnce(FIRST_ELEMENTS).mockReturnValueOnce(SECOND_ELEMENTS).mockReturnValueOnce(THIRD_ELEMENTS).mockReturnValueOnce(FOURTH_ELEMENTS).mockReturnValue(SIXTH_ELEMENTS);
 
             const mockMinifyBlock = jest.fn().mockReturnValue({ css: '' });
 
@@ -99,20 +107,22 @@ describe('testing setNamespace()', () => {
 
             shape.setNamespace(TEST_NAMESPACE);
 
-            expect(mockSelect).toHaveBeenCalledTimes(13);
+            expect(mockSelect).toHaveBeenCalledTimes(14);
             expect(mockSelect.mock.calls[0][0]).toBe('//*[@id]');
             expect(mockSelect.mock.calls[1][0]).toBe('//@xlink:href');
+            expect(mockSelect.mock.calls[2][0]).toBe('//@href[not(@xlink:href)]');
 
             ['style', 'fill', 'stroke', 'filter', 'clip-path', 'mask', 'marker-start', 'marker-end', 'marker-mid'].forEach((ref, i) => {
-                expect(mockSelect.mock.calls[2 + i][0]).toBe(`//@${ref}`);
+                expect(mockSelect.mock.calls[3 + i][0]).toBe(`//@${ref}`);
             });
 
-            expect(mockSelect.mock.calls[11][0]).toBe('//svg:style');
             expect(mockSelect.mock.calls[12][0]).toBe('//svg:style');
+            expect(mockSelect.mock.calls[13][0]).toBe('//svg:style');
 
             expect(FIRST_ELEMENTS[0].setAttribute).toHaveBeenCalledWith('id', `${TEST_NAMESPACE}${TEST_ATTR_VALUE}`);
             expect(SECOND_ELEMENTS[1].ownerElement.setAttribute).toHaveBeenCalledWith('xlink:href', `#${TEST_NAMESPACE}${TEST_ATTR_VALUE}`);
-            expect(THIRD_ELEMENTS[0].ownerElement.setAttribute).toHaveBeenCalledWith(THIRD_ELEMENTS[0].localName, '');
+            expect(THIRD_ELEMENTS[1].ownerElement.setAttribute).toHaveBeenCalledWith('href', `#${TEST_NAMESPACE}${TEST_ATTR_VALUE}`);
+            expect(FOURTH_ELEMENTS[0].ownerElement.setAttribute).toHaveBeenCalledWith(FOURTH_ELEMENTS[0].localName, '');
             expect(shape._namespaced).toBe(true);
 
             expect(mockMinifyBlock).toHaveBeenCalledWith('', { restructure: false });
