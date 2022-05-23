@@ -15,7 +15,7 @@ const { paths } = require('../../helpers/constants.js');
 
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
-const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf-8');
+const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
 
 const tmpPath = path.join(paths.tmp, 'center');
 
@@ -186,7 +186,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
             expect.hasAssertions();
 
             const lessFile = path.join(tmpPath, 'css/sprite.centered.less');
-            const lessText = fs.readFileSync(lessFile, 'utf-8');
+            const lessText = fs.readFileSync(lessFile, 'utf8');
             const output = await asyncRenderers.less(lessText, {});
 
             await writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
