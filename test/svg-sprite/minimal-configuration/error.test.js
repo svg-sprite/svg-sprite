@@ -11,9 +11,12 @@ describe('svg-sprite: errors', () => {
         spriter = new SVGSpriter({
             shape: {
                 dest: 'svg'
+            },
+            mode: {
+                symbol: true
             }
         });
-        jest.spyOn(spriter, '_layout').mockImplementation().mockImplementation((_, cb) => {
+        jest.spyOn(spriter, '_layout').mockImplementation((_, cb) => {
             cb(new TestError(), {}, {});
         });
     });
@@ -28,10 +31,6 @@ describe('svg-sprite: errors', () => {
     // eslint-disable-next-line jest/no-done-callback
     it('should throw error if compilation has failed in callback mode', done => {
         expect.hasAssertions();
-
-        spriter._layout = (_, cb) => {
-            cb(new TestError('test'), {}, {});
-        };
 
         spriter.compile(error => {
             expect(error).toBeInstanceOf(TestError);
