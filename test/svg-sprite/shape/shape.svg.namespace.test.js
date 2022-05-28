@@ -110,7 +110,7 @@ describe('testing setNamespace()', () => {
             expect(mockSelect).toHaveBeenCalledTimes(14);
             expect(mockSelect.mock.calls[0][0]).toBe('//*[@id]');
             expect(mockSelect.mock.calls[1][0]).toBe('//@xlink:href');
-            expect(mockSelect.mock.calls[2][0]).toBe('//@href[not(@xlink:href)]');
+            expect(mockSelect.mock.calls[2][0]).toBe('//@href');
 
             ['style', 'fill', 'stroke', 'filter', 'clip-path', 'mask', 'marker-start', 'marker-end', 'marker-mid'].forEach((ref, i) => {
                 expect(mockSelect.mock.calls[3 + i][0]).toBe(`//@${ref}`);
