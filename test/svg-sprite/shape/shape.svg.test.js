@@ -119,6 +119,66 @@ describe('testing getSVG()', () => {
         expect(shape.getSVG()).toContain(TEST_DOCTYPE_DECLARATION);
         expect(shape.getSVG()).toContain(TEST_XML_DECLARATION);
     });
+
+    it('should substitute ID references in href attributes', () => {
+        expect.hasAssertions();
+
+        const shape = new SVGShape({
+            ...TEST_FILE,
+            contents: '<svg xmlns="http://www.w3.org/2000/svg" id="abc" height="0" width="0"><use href="#abc"/></svg>'
+        }, {
+            config: {
+                shape: {
+                    meta: {},
+                    align: {}
+                },
+                svg: {
+                    doctypeDeclaration: '',
+                    namespaceIDPrefix: 'someprefix-',
+                    namespaceClassnames: false,
+                    namespaceIDs: true
+                },
+                mode: {
+                    view: true
+                }
+            },
+            verbose: jest.fn()
+        });
+        shape.complement(jest.fn);
+        shape.setNamespace('ns-');
+
+        expect(shape.getSVG()).toBe('<svg xmlns="http://www.w3.org/2000/svg" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use href="#someprefix-ns-abc"/></svg>');
+    });
+
+    it('should substitute ID references in xlink:href attributes', () => {
+        expect.hasAssertions();
+
+        const shape = new SVGShape({
+            ...TEST_FILE,
+            contents: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="abc" height="0" width="0"><use xlink:href="#abc"/></svg>'
+        }, {
+            config: {
+                shape: {
+                    meta: {},
+                    align: {}
+                },
+                svg: {
+                    doctypeDeclaration: '',
+                    namespaceIDPrefix: 'someprefix-',
+                    namespaceClassnames: false,
+                    namespaceIDs: true
+                },
+                mode: {
+                    view: true
+                }
+            },
+            verbose: jest.fn()
+        });
+        shape.complement(jest.fn);
+        shape.setNamespace('ns-');
+
+        expect(shape.getSVG()).toBe('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use xlink:href="#someprefix-ns-abc"/></svg>');
+    });
 });
 
 describe('testing _stripInlineNamespaceDeclarations()', () => {
