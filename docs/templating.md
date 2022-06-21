@@ -124,6 +124,8 @@ For each sprite generation process, a data object is constructed that is passed 
                 },
                 // Shape SVG (inline embeddable version)
                 svg: '<svg> ... </svg>',
+                // file size, pretty formated. Check the note below.
+                fileSize: '1 Kb'
             }
         ],
         // Current date (RFC-1123)
@@ -131,6 +133,8 @@ For each sprite generation process, a data object is constructed that is passed 
     }
 }
 ```
+
+**NOTE!**  `fileSize` property of each shape is null unless the `example` [config is passed](api.md#compilation-example)
 
 
 ### Builtin templating functions
