@@ -50,6 +50,8 @@ describe.each`
         data.svg = svgData.toString();
         data.css = '../sprite.css';
 
+        expect(data.svg).toMatchSnapshot();
+
         const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
