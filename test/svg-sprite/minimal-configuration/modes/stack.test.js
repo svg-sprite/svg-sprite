@@ -50,6 +50,8 @@ describe.each`
         data.svg = svgData.toString();
         data.css = '../sprite.css';
 
+        expect(data.svg).toMatchSnapshot();
+
         const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`), out);
@@ -92,6 +94,8 @@ describe('without viewbox', () => {
 
         data.svg = svgData.toString();
         data.css = '../sprite.css';
+
+        expect(data.svg).toMatchSnapshot();
 
         const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
