@@ -3,34 +3,14 @@
 /* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
 
 const {
-    escapeHtml,
     isFunction,
     isObject,
     isString,
-    isPlainObject
-    ,
+    isPlainObject,
     zipObject
 } = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
-    describe('escapeHtml', () => {
-        it('should escape HTML characters', () => {
-            expect(escapeHtml('fred, barney, & pebbles')).toBe('fred, barney, &amp; pebbles');
-            expect(escapeHtml('<div class="test" />')).toBe('&lt;div class=&quot;test&quot; &#x2F;&gt;');
-            expect(escapeHtml('<span id=\'test\' />')).toBe('&lt;span id=&#39;test&#39; &#x2F;&gt;');
-        });
-
-        it('should return empty string with empty string passed', () => {
-            expect(escapeHtml('')).toBe('');
-        });
-
-        it('should not escape any additional characters', () => {
-            const TEST_STRING = 'My salary increased by 20% up to whopping $10000 per year :(';
-
-            expect(escapeHtml(TEST_STRING)).toBe(TEST_STRING);
-        });
-    });
-
     describe('isFunction', () => {
         it('should return true for a class', () => {
             expect(isFunction(class {})).toBe(true);
