@@ -162,7 +162,7 @@ embedded above. They may be styled via CSS.
                             <use xlink:href="#{{name}}"></use>
                         </svg>
                     </div>
-                    <h2>{{name}}</h2>
+                    <h2>{{name}}, {{ fileSize }}</h2>
                 </li>
 {{/shapes}}         </ul>
 
@@ -189,7 +189,7 @@ SVG sprite. They may be styled via CSS.
                             <use xlink:href="{{{example}}}#{{name}}"></use>
                         </shapes>
                     </div>
-                    <h2>{{name}}</h2>
+                    <h2>{{name}}, {{ fileSize }}</h2>
                 </li>
 {{/shapes}}         </ul>{{/inline}}
 

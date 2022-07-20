@@ -223,6 +223,32 @@ describe('testing constructor', () => {
         });
     });
 
+    it('should fill up shapes with file sizes if config.example is true', () => {
+        expect.hasAssertions();
+
+        const TEST_SHAPE = {
+            id: 'master',
+            base: 'base',
+            master: { id: 'master' },
+            getDimensions: jest.fn().mockReturnValueOnce({}),
+            config: { spacing: { padding: {} } },
+            source: {
+                contents: 'test'
+            }
+        };
+
+        spriter._shapes = [
+            TEST_SHAPE
+        ];
+        const layouter = new SVGSpriteLayouter(spriter, {
+            example: true
+        });
+
+        expect(layouter._commonData.shapes[0]).toStrictEqual(expect.objectContaining({
+            fileSize: '4 Bytes'
+        }));
+    });
+
     it('should fill up shapes accordingly to spriter shapes ' +
         'with proper data and proper width/height calculation', () => {
         expect.hasAssertions();
@@ -351,7 +377,8 @@ describe('testing constructor', () => {
                 outer: 100
             },
             first: true,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[1]).toStrictEqual({
             name: TEST_SECOND.id,
@@ -366,7 +393,8 @@ describe('testing constructor', () => {
                 outer: 100
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[2]).toStrictEqual({
             name: TEST_THIRD.id,
@@ -381,7 +409,8 @@ describe('testing constructor', () => {
                 outer: 100
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[3]).toStrictEqual({
             name: TEST_FOURTH.id,
@@ -396,7 +425,8 @@ describe('testing constructor', () => {
                 outer: 200
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[3]).toStrictEqual({
             name: TEST_FOURTH.id,
@@ -411,7 +441,8 @@ describe('testing constructor', () => {
                 outer: 200
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[4]).toStrictEqual({
             name: TEST_FIFTH.id,
@@ -426,7 +457,8 @@ describe('testing constructor', () => {
                 outer: 200
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[5]).toStrictEqual({
             name: TEST_SIXTH.id,
@@ -441,7 +473,8 @@ describe('testing constructor', () => {
                 outer: 200
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[6]).toStrictEqual({
             name: TEST_SEVENTH.id,
@@ -456,7 +489,8 @@ describe('testing constructor', () => {
                 outer: 300
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[7]).toStrictEqual({
             name: TEST_EIGHT.id,
@@ -471,7 +505,8 @@ describe('testing constructor', () => {
                 outer: 300
             },
             first: false,
-            last: false
+            last: false,
+            fileSize: null
         });
         expect(layouter._commonData.shapes[8]).toStrictEqual({
             name: TEST_NINTH.id,
@@ -486,7 +521,8 @@ describe('testing constructor', () => {
                 outer: 300
             },
             first: false,
-            last: true
+            last: true,
+            fileSize: null
         });
     });
 });
