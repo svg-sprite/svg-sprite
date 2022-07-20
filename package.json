@@ -178,6 +178,7 @@
           "jest/globals"
         ],
         "rules": {
+          "jest/max-expects": "off",
           "jest/no-hooks": "off",
           "jest/prefer-lowercase-title": "off"
         }
