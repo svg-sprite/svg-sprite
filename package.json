@@ -55,7 +55,7 @@
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-jest": "^26.6.0",
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsdoc": "^38.1.6",
     "jest": "^28.1.3",
