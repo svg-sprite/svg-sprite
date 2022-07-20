@@ -199,9 +199,7 @@ Promise
 
 **error** `{Error}` — Error message in case the compilation has failed
 
-##### Compilation example
-
-Depending on the particular mode and render configuration, quite a lot of resources might be generated during a single compilation run. To understand the way *svg-sprite* returns these resources, please have a look at the following example:
+##### Async compilation example
 
 ```js
 try {
