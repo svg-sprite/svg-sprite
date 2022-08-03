@@ -241,8 +241,9 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 // «symbol» sprite with CSS stylesheet resource
 const config = {
     mode: {
-        inline: true, // Prepare for inline embedding
-        symbol: true // Create a «symbol» sprite
+        symbol: {        // Create a «symbol» sprite
+            inline: true // Prepare for inline embedding
+        }
     }
 }
 ```
