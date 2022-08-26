@@ -6,7 +6,6 @@ const compareHTML2Png = require('../helpers/compare-html-2-png.js');
 const { launchBrowser, closeBrowser } = require('../helpers/capture-browser.js');
 const { isObject } = require('../../lib/svg-sprite/utils/index.js');
 
-// eslint-disable-next-line jest/require-hook
 expect.extend({
     async toBeVisuallyEqualTo(receivedSVGPath, expectedPNGPath) {
         const options = {
