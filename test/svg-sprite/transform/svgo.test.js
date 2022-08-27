@@ -77,7 +77,15 @@ describe('testing transforms.svgo', () => {
     it('should add provided config', () => {
         expect.hasAssertions();
 
-        const TEST_PLUGINS = ['TEST'];
+        const TEST_PLUGINS = [{
+            name: 'preset-default',
+            params: {
+                overrides: {
+                    removeTitle: false,
+                    removeDesc: false
+                }
+            }
+        }];
         const spriter = {
             config: {
                 svg: {
