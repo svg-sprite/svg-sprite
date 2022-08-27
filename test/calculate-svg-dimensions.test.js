@@ -3,6 +3,7 @@
 const { readFile } = require('fs').promises;
 const path = require('path');
 const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
+const DimensionsCalculationError = require('../lib/svg-sprite/errors/dimensions-calculation-error.js');
 
 describe('calculateSvgDimensions', () => {
     it('should return the expected dimensions from 46x46 fixture', async() => {
@@ -87,6 +88,6 @@ describe('calculateSvgDimensions', () => {
 
         expect(() => {
             calculateSvgDimensions('');
-        }).toThrow(Error);
+        }).toThrow(DimensionsCalculationError);
     });
 });

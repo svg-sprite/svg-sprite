@@ -3,6 +3,7 @@
 /* eslint-disable jest/prefer-expect-assertions */
 
 const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
+const XmlFixingError = require('../lib/svg-sprite/errors/xml-fixing-error.js');
 
 describe('testing fixing svg string', () => {
     it('should return valid svg file on svg with one multiline attribute values', () => {
@@ -37,6 +38,6 @@ describe('testing fixing svg string', () => {
     it('should throw an error on invalid file', () => {
         expect(() => {
             fixXMLString('<svg viewBox=></svg>');
-        }).toThrow(Error);
+        }).toThrow(XmlFixingError);
     });
 });

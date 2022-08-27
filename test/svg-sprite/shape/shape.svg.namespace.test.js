@@ -2,6 +2,7 @@
 
 const xpath = require('xpath');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
+const NotPermittedError = require('../../../lib/svg-sprite/errors/not-permitted-error.js');
 
 const TEST_SPRITER = {
     config: {
@@ -52,7 +53,7 @@ describe('testing setNamespace()', () => {
 
         expect(() => {
             shape.setNamespace({});
-        }).toThrow(new Error('Shape namespace cannot be set before complementing'));
+        }).toThrow(new NotPermittedError('Shape namespace cannot be set before complementing'));
     });
 
     describe('if namespaceIds', () => {
