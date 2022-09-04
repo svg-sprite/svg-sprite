@@ -15,7 +15,7 @@ const TEST_SPRITER = {
     verbose: jest.fn()
 };
 
-jest.mock('../../../lib/svg-sprite/utils/fix-xml-string', () => jest.fn());
+jest.mock('../../../lib/svg-sprite/utils/fix-xml-string.js', () => jest.fn());
 
 describe('testing _initSVG()', () => {
     it('should call fixXMLString if passed svg is not normal', () => {
