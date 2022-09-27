@@ -20,6 +20,7 @@ const TEST_FILE = {
 
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 const calculateSvgDimensions = require('../../../lib/svg-sprite/utils/calculate-svg-dimensions.js');
+const DimensionsCalculationError = require('../../../lib/svg-sprite/errors/dimensions-calculation-error.js');
 
 jest.mock('../../../lib/svg-sprite/utils/calculate-svg-dimensions');
 
@@ -115,11 +116,11 @@ describe('testing _determineDimensions()', () => {
         shape.height = 0;
 
         calculateSvgDimensions.mockImplementation(() => {
-            throw new Error(TEST_ERROR);
+            throw new DimensionsCalculationError(TEST_ERROR);
         });
         shape._determineDimensions(cb);
 
-        expect(cb).toHaveBeenCalledWith(new Error(TEST_ERROR));
+        expect(cb).toHaveBeenCalledWith(new DimensionsCalculationError(TEST_ERROR));
     });
 });
 

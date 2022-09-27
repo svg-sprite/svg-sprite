@@ -8,6 +8,7 @@ const glob = require('glob');
 const getShape = require('../lib/svg-sprite/shape.js');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
+const ArgumentError = require('../lib/svg-sprite/errors/argument-error.js');
 
 jest.mock('../lib/svg-sprite/utils/fix-xml-string.js', () => jest.fn());
 
@@ -36,7 +37,7 @@ describe('testing SVGShape initialization', () => {
                 path: __dirname,
                 contents: Buffer.from(TEST_SVG)
             }), spriter);
-        }).not.toThrow(Error);
+        }).not.toThrow(ArgumentError);
         expect(fixXMLString).toHaveBeenCalledWith(TEST_SVG);
     });
 
@@ -52,7 +53,7 @@ describe('testing SVGShape initialization', () => {
                 path: __dirname,
                 contents: Buffer.from(TEST_SVG)
             }), spriter);
-        }).toThrow(new Error('Invalid SVG file'));
+        }).toThrow(new ArgumentError('Invalid SVG file'));
         expect(fixXMLString).toHaveBeenCalledWith(TEST_SVG);
     });
 
@@ -66,7 +67,7 @@ describe('testing SVGShape initialization', () => {
                 path: __dirname,
                 contents: Buffer.from(TEST_NON_SVG)
             }), spriter);
-        }).toThrow(Error);
+        }).toThrow(ArgumentError);
         expect(fixXMLString).toHaveBeenCalledWith(TEST_NON_SVG);
     });
 
@@ -86,7 +87,7 @@ describe('testing SVGShape initialization', () => {
                     path: __dirname,
                     contents: svgFileBuffer
                 }), spriter);
-            }).not.toThrow(Error);
+            }).not.toThrow(ArgumentError);
             expect(fixXMLString).not.toHaveBeenCalled();
         });
     });
