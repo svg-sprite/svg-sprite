@@ -52,7 +52,9 @@ describe.each`
 
             const input = path.join(tmpPath, 'view/svg', svg);
             const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
+            const svgFile = await fs.readFile(input);
 
+            expect(svgFile.toString()).toMatchSnapshot();
             await expect(input).toBeVisuallyEqualTo(expected);
         });
 

@@ -92,6 +92,7 @@ describe('testing minimal config', () => {
                 const input = path.join(tmpPath, 'css/svg', svg.vertical);
                 const expected = path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`);
 
+                expect(fs.readFileSync(input).toString()).toMatchSnapshot();
                 await expect(input).toBeVisuallyEqualTo(expected);
             });
 
@@ -102,6 +103,7 @@ describe('testing minimal config', () => {
                 const input = path.join(tmpPath, 'css/svg', svg.horizontal);
                 const expected = path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`);
 
+                expect(fs.readFileSync(input).toString()).toMatchSnapshot();
                 await expect(input).toBeVisuallyEqualTo(expected);
             });
 
@@ -112,6 +114,7 @@ describe('testing minimal config', () => {
                 const input = path.join(tmpPath, 'css/svg', svg.diagonal);
                 const expected = path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`);
 
+                expect(fs.readFileSync(input).toString()).toMatchSnapshot();
                 await expect(input).toBeVisuallyEqualTo(expected);
             });
 
@@ -122,6 +125,7 @@ describe('testing minimal config', () => {
                 const input = path.join(tmpPath, 'css/svg', svg.packed);
                 const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
 
+                expect(fs.readFileSync(input).toString()).toMatchSnapshot();
                 await expect(input).toBeVisuallyEqualTo(expected);
             });
         });
