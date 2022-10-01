@@ -49,7 +49,7 @@
     "mustache": "^4.2.0",
     "prettysize": "^2.0.0",
     "svgo": "^2.8.0",
-    "vinyl": "^2.2.1",
+    "vinyl": "^3.0.0",
     "winston": "^3.8.2",
     "xpath": "^0.0.32",
     "yargs": "^17.5.1"
