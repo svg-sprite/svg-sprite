@@ -185,7 +185,8 @@ describe('testing Shape.constructor', () => {
                     const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
 
                     expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative)).toBe('folder--test_path.f');
-                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative)).toBe(shape.id);
+                    expect(path.relative(TEST_FILE_WITH_FOLDERS.base, TEST_FILE_WITH_FOLDERS.path)).toBe(TEST_FILE_WITH_FOLDERS.relative);
+                    expect(shape.id).toBe('folder--test_path.f');
                 });
             });
         });
