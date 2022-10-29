@@ -13,6 +13,13 @@ describe('testing Shape.constructor', () => {
             relative: 'test_relative'
         };
 
+        const TEST_FILE_WITH_FOLDERS = {
+            contents: '<svg>TEST CONTENT</svg>',
+            base: `${path.sep}my${path.sep}full${path.sep}path`,
+            path: `${path.sep}my${path.sep}full${path.sep}path${path.sep}folder${path.sep}test_path.f.svg`,
+            relative: `folder${path.sep}test_path.f.svg` //relative path depends on a base full path to search files
+        };
+
         it('should set expected initial values', () => {
             expect.hasAssertions();
 
@@ -28,6 +35,7 @@ describe('testing Shape.constructor', () => {
             expect(shape.spriter).toBe(TEST_SPRITER);
             expect(shape.source).toBe(TEST_FILE);
             expect(shape.name).toBe(path.basename(TEST_FILE.path));
+            expect(shape.id).toBe(path.basename(TEST_FILE.path));
             expect(shape.master).toBeNull();
             expect(shape.copies).toBe(0);
             expect(shape._precision).toBe(10 ** 2);
@@ -157,6 +165,27 @@ describe('testing Shape.constructor', () => {
 
                     expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test.f-test');
                     expect(shape.config.id.generator('test 1.svg')).toBe('test_1-test');
+                });
+
+                it('should id shape keep folder names from relative path', () => {
+                    expect.hasAssertions();
+
+                    const TEST_SPRITER = {
+                        config: {
+                            shape: {
+                                id: {
+                                    generator: true
+                                },
+                                meta: {},
+                                align: {}
+                            }
+                        },
+                        verbose: jest.fn()
+                    };
+                    const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
+
+                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative)).toBe('folder--test_path.f');
+                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative)).toBe(shape.id);
                 });
             });
         });
