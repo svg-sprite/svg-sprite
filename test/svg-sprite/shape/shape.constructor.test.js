@@ -13,16 +13,6 @@ describe('testing Shape.constructor', () => {
             relative: 'test_relative'
         };
 
-        const baseFolder = `${path.sep}my${path.sep}full${path.sep}path`
-        const fullPath = `${path.sep}my${path.sep}full${path.sep}path${path.sep}folder${path.sep}test_path.f.svg`
-
-        const TEST_FILE_WITH_FOLDERS = {
-            contents: '<svg>TEST CONTENT</svg>',
-            base: baseFolder,
-            path: fullPath,
-            relative: path.relative(baseFolder, fullPath) //relative path depends on a base full path to search files
-        };
-
         it('should set expected initial values', () => {
             expect.hasAssertions();
 
@@ -82,6 +72,34 @@ describe('testing Shape.constructor', () => {
 
                     expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test--test.f');
                     expect(shape.config.id.generator('test 1.svg')).toBe('test_1');
+                });
+
+                it('default generator should keep folder names from relative path', () => {
+                    expect.hasAssertions();
+
+                    const baseFolder = `${path.sep}my${path.sep}full${path.sep}path`;
+                    const fullPath = `${path.sep}my${path.sep}full${path.sep}path${path.sep}folder${path.sep}test_path.f.svg`;
+                    const TEST_FILE_WITH_FOLDERS = {
+                        contents: '<svg>TEST CONTENT</svg>',
+                        base: baseFolder,
+                        path: fullPath,
+                        relative: path.relative(baseFolder, fullPath) //relative path depends on a base full path to search files
+                    };
+                    const TEST_SPRITER = {
+                        config: {
+                            shape: {
+                                id: {
+                                    generator: true
+                                },
+                                meta: {},
+                                align: {}
+                            }
+                        },
+                        verbose: jest.fn()
+                    };
+                    const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
+
+                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative, TEST_FILE_WITH_FOLDERS)).toBe('folder--test_path.f');
                 });
 
                 it('should set generator if provided generator is a string', () => {
@@ -168,27 +186,6 @@ describe('testing Shape.constructor', () => {
 
                     expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test.f-test');
                     expect(shape.config.id.generator('test 1.svg')).toBe('test_1-test');
-                });
-
-                it('should id shape keep folder names from relative path', () => {
-                    expect.hasAssertions();
-
-                    const TEST_SPRITER = {
-                        config: {
-                            shape: {
-                                id: {
-                                    generator: true
-                                },
-                                meta: {},
-                                align: {}
-                            }
-                        },
-                        verbose: jest.fn()
-                    };
-                    const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
-
-                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative)).toBe('folder--test_path.f');
-                    expect(shape.id).toBe('folder--test_path.f');
                 });
             });
         });
