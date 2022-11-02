@@ -108,15 +108,18 @@ function addConfigMap(store, path, value) {
  */
 function writeFiles(files) {
     let written = 0;
+
     for (const file of Object.values(files)) {
-        if (isObject(file)) {
-            if (file.constructor === File) {
-                fs.mkdirSync(path.dirname(file.path), { recursive: true });
-                fs.writeFileSync(file.path, file.contents);
-                ++written;
-            } else {
-                written += writeFiles(file);
-            }
+        if (!isObject(file)) {
+            continue;
+        }
+
+        if (file.constructor === File) {
+            fs.mkdirSync(path.dirname(file.path), { recursive: true });
+            fs.writeFileSync(file.path, file.contents);
+            ++written;
+        } else {
+            written += writeFiles(file);
         }
     }
 
@@ -269,9 +272,9 @@ const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
 
 for (let file of files) {
     let basename = file;
-    // TODO: get rid of variable redefinition
-    file = path.resolve(file);
+    file = path.resolve(file); // TODO: get rid of variable redefinition
     const stat = fs.lstatSync(file);
+
     if (stat.isSymbolicLink()) {
         file = fs.readlinkSync(file);
         basename = path.basename(file);
