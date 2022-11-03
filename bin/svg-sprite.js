@@ -269,6 +269,7 @@ const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
 
 for (let file of files) {
     let basename = file;
+    // TODO: get rid of variable redefinition
     file = path.resolve(file);
     const stat = fs.lstatSync(file);
     if (stat.isSymbolicLink()) {
