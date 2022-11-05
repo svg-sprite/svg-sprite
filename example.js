@@ -9,6 +9,35 @@ const cwd = path.join(__dirname, 'test/fixture/svg/single');
 const dest = path.join(__dirname, 'tmp');
 const files = glob.sync('**/weather*.svg', { cwd });
 
+const svgoConfig = {
+    multipass: true,
+    plugins: [
+        {
+            name: 'preset-default',
+            params: {
+                overrides: {
+                    removeUnknownsAndDefaults: {
+                        keepRoleAttr: true
+                    },
+                    removeViewBox: false
+                }
+            }
+        },
+        'cleanupListOfValues',
+        'convertStyleToAttrs',
+        'sortAttrs',
+        {
+            name: 'removeAttrs',
+            params: {
+                attrs: [
+                    'clip-rule',
+                    'data-name'
+                ]
+            }
+        }
+    ]
+};
+
 const spriter = new SVGSpriter({
     dest,
     log: 'debug',
@@ -18,34 +47,7 @@ const spriter = new SVGSpriter({
     },
     shape: {
         transform: [{
-            svgo: {
-                multipass: true,
-                plugins: [
-                    {
-                        name: 'preset-default',
-                        params: {
-                            overrides: {
-                                removeUnknownsAndDefaults: {
-                                    keepRoleAttr: true
-                                },
-                                removeViewBox: false
-                            }
-                        }
-                    },
-                    'cleanupListOfValues',
-                    'convertStyleToAttrs',
-                    'sortAttrs',
-                    {
-                        name: 'removeAttrs',
-                        params: {
-                            attrs: [
-                                'clip-rule',
-                                'data-name'
-                            ]
-                        }
-                    }
-                ]
-            }
+            svgo: svgoConfig
         }]
     }
 });
