@@ -11,7 +11,7 @@ on:
 
 env:
   FORCE_COLOR: 2
-  NODE: 16 # The Node.js version to run lint on
+  NODE: 18 # The Node.js version to run lint on
 
 jobs:
   run:
