@@ -74,13 +74,13 @@ describe('testing SVGShape initialization', () => {
     it('should not throw an error and should not call fixXMLString on actual valid svg files', () => {
         expect.hasAssertions();
 
-        const cwdWeather = path.join(__dirname, 'fixture/svg/single');
-        const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
+        const cwd = path.join(__dirname, 'fixture/svg/single');
+        const weatherFiles = glob.sync('**/weather*.svg', { cwd });
 
-        expect.assertions(weather.length * 2);
+        expect.assertions(weatherFiles.length * 2);
 
-        for (const weatherFile of weather) {
-            const svgFileBuffer = fs.readFileSync(path.join(cwdWeather, weatherFile));
+        for (const weatherFile of weatherFiles) {
+            const svgFileBuffer = fs.readFileSync(path.join(cwd, weatherFile));
 
             expect(() => {
                 getShape(new File({
