@@ -14,8 +14,9 @@ const TEST_SPRITER = {
 };
 const TEST_FILE = {
     contents: '<svg></svg>',
-    path: 'test_path',
-    relative: 'test_relative'
+    path: '/test_base/test_path',
+    relative: 'test_relative',
+    base: '/test_base/'
 };
 
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
