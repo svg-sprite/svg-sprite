@@ -69,6 +69,7 @@ expect.extend({
             Array.isArray(received.transports) &&
             received.transports.length === 1
         );
+
         return {
             pass,
             message: pass ? () => 'Is winston logger, all OK' : () => `${this.utils.matcherHint('toBeDefaultWinsonLogger', undefined, undefined, options)}\n\n` +
