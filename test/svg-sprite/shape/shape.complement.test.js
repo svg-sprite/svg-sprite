@@ -1,5 +1,8 @@
 'use strict';
 
+const { Buffer } = require('buffer');
+const File = require('vinyl');
+
 const TEST_SPRITER = {
     config: {
         shape: {
@@ -12,12 +15,12 @@ const TEST_SPRITER = {
     },
     verbose: jest.fn()
 };
-const TEST_FILE = {
-    contents: '<svg></svg>',
+const TEST_FILE = new File({
+    contents: Buffer.from('<svg></svg>'),
     path: '/test_base/test_path',
-    relative: 'test_relative',
-    base: '/test_base/'
-};
+    base: '/test_base/',
+    cwd: '/'
+});
 
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 const calculateSvgDimensions = require('../../../lib/svg-sprite/utils/calculate-svg-dimensions.js');

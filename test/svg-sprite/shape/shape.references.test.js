@@ -1,5 +1,7 @@
 'use strict';
 
+const { Buffer } = require('buffer');
+const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
 jest.mock('cssom', () => {
@@ -21,11 +23,12 @@ const TEST_SPRITER = {
     },
     verbose: jest.fn()
 };
-const TEST_FILE = {
-    contents: '<svg></svg>',
+const TEST_FILE = new File({
+    contents: Buffer.from('<svg></svg>'),
     path: 'test_path',
-    relative: 'test_relative'
-};
+    base: '/test_base/',
+    cwd: '/'
+});
 
 describe('testing _replaceIdAndClassnameReferences()', () => {
     it('should replace ids if subs ids passed', () => {

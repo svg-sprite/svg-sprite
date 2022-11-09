@@ -1,7 +1,8 @@
 'use strict';
 
 /* eslint-disable no-new */
-
+const { Buffer } = require('buffer');
+const File = require('vinyl');
 const fixXMLString = require('../../../lib/svg-sprite/utils/fix-xml-string.js');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
@@ -21,11 +22,12 @@ describe('testing _initSVG()', () => {
     it('should call fixXMLString if passed svg is not normal', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: 's',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('s'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -46,11 +48,12 @@ describe('testing _initSVG()', () => {
     it('should call fixXMLString and throw error if passed svg is not normal', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: 's',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('s'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -73,11 +76,12 @@ describe('testing _initSVG()', () => {
     it('should call fixXMLString and throw error if passed svg is not normal and fixXMLString thrown error', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: 's',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('s'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -101,11 +105,12 @@ describe('testing _initSVG()', () => {
     it('should not call fixXMLString if passed svg is normal', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -128,11 +133,12 @@ describe('testing _initSVG()', () => {
             '<!ENTITY name1 "value1">',
             '<!ENTITY name2 "value2">'
         ];
-        const TEST_FILE = {
-            contents: `<svg><!DOCTYPE ${TEST_ENTITIES.join('\n')}>&name1;</svg>`,
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from(`<svg><!DOCTYPE ${TEST_ENTITIES.join('\n')}>&name1;</svg>`),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -151,21 +157,14 @@ describe('testing _initSVG()', () => {
     it('should throw error if bad svg parsed', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: {
-                toString() {
-                    return {
-                        substr() {
-                            return '<<ddfasdfasdf>>';
-                        },
-                        match() {
-                            return 1;
-                        }
-                    };
-                }
-            }, path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from(
+                '<<ddfasdfasdf>>'
+            ),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -178,7 +177,7 @@ describe('testing _initSVG()', () => {
 
         expect(() => {
             new SVGShape(TEST_FILE, TEST_SPRITER);
-        }).toThrow(/Invalid SVG file \(\[xmldom error]/);
+        }).toThrow('Invalid SVG file');
     });
 
     it('should set width and height', () => {
@@ -187,11 +186,12 @@ describe('testing _initSVG()', () => {
         const TEST_WIDTH = 200;
         const TEST_HEIGHT = 100;
 
-        const TEST_FILE = {
-            contents: `<svg width="${TEST_WIDTH}" height="${TEST_HEIGHT}"></svg>`,
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from(`<svg width="${TEST_WIDTH}" height="${TEST_HEIGHT}"></svg>`),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -211,11 +211,12 @@ describe('testing _initSVG()', () => {
     it('should set width, height and viewBox to false', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -236,11 +237,12 @@ describe('testing _initSVG()', () => {
     it('should set expected viewBox', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg viewBox="0 1 2 3 4 5 20d ten"></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg viewBox="0 1 2 3 4 5 20d ten"></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -259,11 +261,12 @@ describe('testing _initSVG()', () => {
     it('should fill viewBox', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg viewBox="0 1"></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg viewBox="0 1"></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const TEST_SPRITER = {
             config: {
                 shape: {
@@ -282,11 +285,12 @@ describe('testing _initSVG()', () => {
     it('should set title and description to null', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
@@ -297,11 +301,12 @@ describe('testing _initSVG()', () => {
     it('should set title and description accordingly to svg', () => {
         expect.hasAssertions();
 
-        const TEST_FILE = {
-            contents: '<svg><title>test title</title><desc>test description</desc></svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg><title>test title</title><desc>test description</desc></svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
         expect(shape.title.toString()).toBe('<title>test title</title>');
