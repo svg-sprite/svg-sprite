@@ -3,15 +3,18 @@
 /* eslint-disable max-nested-callbacks */
 
 const path = require('path');
+const { Buffer } = require('buffer');
+const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
 describe('testing Shape.constructor', () => {
     describe('testing constructor', () => {
-        const TEST_FILE = {
-            contents: '<svg>TEST CONTENT</svg>',
-            path: 'test_path',
-            relative: 'test_relative'
-        };
+        const TEST_FILE = new File({
+            contents: Buffer.from('<svg>TEST CONTENT</svg>'),
+            path: '/test_base/test_path',
+            base: '/test_base/',
+            cwd: '/'
+        });
 
         it('should set expected initial values', () => {
             expect.hasAssertions();
@@ -27,8 +30,8 @@ describe('testing Shape.constructor', () => {
 
             expect(shape.spriter).toBe(TEST_SPRITER);
             expect(shape.source).toBe(TEST_FILE);
-            expect(shape.name).toBe(path.basename(TEST_FILE.path));
-            expect(shape.id).toBe(path.basename(TEST_FILE.path));
+            expect(shape.name).toBe(path.basename(TEST_FILE.relative));
+            expect(shape.id).toBe(path.basename(TEST_FILE.relative));
             expect(shape.master).toBeNull();
             expect(shape.copies).toBe(0);
             expect(shape._precision).toBe(10 ** 2);
@@ -79,12 +82,12 @@ describe('testing Shape.constructor', () => {
 
                     const baseFolder = `${path.sep}my${path.sep}full${path.sep}path`;
                     const fullPath = `${path.sep}my${path.sep}full${path.sep}path${path.sep}folder${path.sep}test_path.f.svg`;
-                    const TEST_FILE_WITH_FOLDERS = {
-                        contents: '<svg>TEST CONTENT</svg>',
+                    const TEST_FILE_WITH_FOLDERS = new File({
+                        contents: Buffer.from('<svg>TEST CONTENT</svg>'),
                         base: baseFolder,
                         path: fullPath,
-                        relative: path.relative(baseFolder, fullPath) //relative path depends on a base full path to search files
-                    };
+                        cwd: '/'
+                    });
                     const TEST_SPRITER = {
                         config: {
                             shape: {

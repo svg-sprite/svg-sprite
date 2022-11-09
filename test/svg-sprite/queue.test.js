@@ -2,6 +2,7 @@
 
 const { EventEmitter } = require('events');
 const path = require('path');
+const File = require('vinyl');
 const SVGSpriterQueue = require('../../lib/svg-sprite/queue.js');
 const Shape = require('../../lib/svg-sprite/shape.js');
 
@@ -62,10 +63,11 @@ describe('testing Queue', () => {
             expect.hasAssertions();
 
             const spriter = { debug: jest.fn() };
-            const TEST_FILE_NAME = 'test.svg';
-            const TEST_FILE = {
-                path: TEST_FILE_NAME
-            };
+            const TEST_FILE_NAME = '/base/test.svg';
+            const TEST_FILE = new File({
+                path: TEST_FILE_NAME,
+                base: '/base/'
+            });
             const queue = new SVGSpriterQueue(spriter);
 
             jest.spyOn(queue, 'emit');
@@ -190,7 +192,7 @@ describe('testing Queue', () => {
             it('should not increase active call _spriter.error and emit "remove" event if error occured', async() => {
                 expect.hasAssertions();
 
-                const TEST_FILE = { path: 'file' };
+                const TEST_FILE = new File({ path: '/base/file', base: '/base/' });
                 const TEST_ERROR_MESSAGE = 'error';
                 queue._files = [1];
                 queue.active = 2;
@@ -211,7 +213,7 @@ describe('testing Queue', () => {
             it('should not increase active call _spriter.error and emit "remove" event if error occured and active is zero', async() => {
                 expect.hasAssertions();
 
-                const TEST_FILE = { path: 'file' };
+                const TEST_FILE = new File({ path: '/base/file', base: '/base/' });
                 queue._files = [1];
                 queue.active = 0;
                 jest.spyOn(queue._files, 'shift').mockReturnValueOnce(TEST_FILE);
