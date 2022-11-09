@@ -1,6 +1,8 @@
 'use strict';
 
+const { Buffer } = require('buffer');
 const xpath = require('xpath');
+const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 const NotPermittedError = require('../../../lib/svg-sprite/errors/not-permitted-error.js');
 
@@ -16,11 +18,12 @@ const TEST_SPRITER = {
     },
     verbose: jest.fn()
 };
-const TEST_FILE = {
-    contents: '<svg></svg>',
-    path: 'test_path',
-    relative: 'test_relative'
-};
+const TEST_FILE = new File({
+    contents: Buffer.from('<svg></svg>'),
+    path: '/test_base/test_path',
+    base: '/test_base/',
+    cwd: '/'
+});
 jest.mock('xpath');
 jest.mock('csso', () => {
     return {
@@ -228,7 +231,7 @@ describe('testing resetNamespace()', () => {
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
         shape.spriter.config.svg.namespaceIDs = true;
         shape._namespaced = true;
-        shape.svg.ready = TEST_FILE.contents;
+        shape.svg.ready = TEST_FILE.contents.toString();
         shape.resetNamespace();
 
         expect(shape._namespaced).toBe(false);

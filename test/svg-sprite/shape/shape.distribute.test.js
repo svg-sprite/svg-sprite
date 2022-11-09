@@ -1,5 +1,7 @@
 'use strict';
 
+const { Buffer } = require('buffer');
+const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
 const TEST_SPRITER = {
@@ -11,11 +13,12 @@ const TEST_SPRITER = {
     },
     verbose: jest.fn()
 };
-const TEST_FILE = {
-    contents: '<svg></svg>',
-    path: 'test_path',
-    relative: 'test_relative'
-};
+const TEST_FILE = new File({
+    cwd: '/',
+    contents: Buffer.from('<svg></svg>'),
+    path: '/test_base/test_path',
+    base: '/test_base/'
+});
 
 describe('testing distribute()', () => {
     it('should update attributes', () => {
@@ -25,8 +28,8 @@ describe('testing distribute()', () => {
         shape.align = [['TEST_1', 1]];
         shape.distribute();
 
-        expect(shape.base).toBe(`TEST_1 ${TEST_FILE.path}`);
-        expect(shape.id).toBe(`TEST_1 ${TEST_FILE.path}`);
+        expect(shape.base).toBe(`TEST_1 ${TEST_FILE.relative}`);
+        expect(shape.id).toBe(`TEST_1 ${TEST_FILE.relative}`);
         expect(shape.align).toBe(1);
         expect(shape.copies).toBe(0);
     });
@@ -39,7 +42,7 @@ describe('testing distribute()', () => {
         shape.state = 'test_state';
         shape.distribute();
 
-        expect(shape.id).toBe(`TEST_1 ${TEST_FILE.path}~test_state`);
+        expect(shape.id).toBe(`TEST_1 ${TEST_FILE.relative}~test_state`);
     });
 
     it('should create copies', () => {
@@ -57,13 +60,13 @@ describe('testing distribute()', () => {
 
         expect(firstCopy).toBe(shape);
 
-        expect(secondCopy.base).toBe(`TEST_2 ${TEST_FILE.path}`);
-        expect(secondCopy.id).toBe(`TEST_2 ${TEST_FILE.path}`);
+        expect(secondCopy.base).toBe(`TEST_2 ${TEST_FILE.relative}`);
+        expect(secondCopy.id).toBe(`TEST_2 ${TEST_FILE.relative}`);
         expect(secondCopy.align).toBe(2);
         expect(secondCopy.master).toBe(shape);
 
-        expect(thirdCopy.base).toBe(`TEST_3 ${TEST_FILE.path}`);
-        expect(thirdCopy.id).toBe(`TEST_3 ${TEST_FILE.path}`);
+        expect(thirdCopy.base).toBe(`TEST_3 ${TEST_FILE.relative}`);
+        expect(thirdCopy.id).toBe(`TEST_3 ${TEST_FILE.relative}`);
         expect(thirdCopy.align).toBe(3);
         expect(thirdCopy.master).toBe(shape);
 
