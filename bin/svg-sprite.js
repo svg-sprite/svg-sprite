@@ -276,7 +276,17 @@ argv._.reduce((f, g) => [...f, ...glob.sync(g)], [])
             basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
         }
 
-        spriter.add(file, basename, fs.readFileSync(file));
+        let openedFile = null;
+
+        try {
+            openedFile = fs.readFileSync(file);
+        } catch (error) {
+            console.error(`[ERROR] Skipping (${file}) due to errors (${error.message.trim()})`);
+        }
+
+        if (openedFile) {
+            spriter.add(file, basename, openedFile);
+        }
     });
 
 spriter.compile((error, result) => {
