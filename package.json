@@ -104,7 +104,6 @@
         "never"
       ],
       "eslint-comments/disable-enable-pair": "off",
-      "guard-for-in": "off",
       "jsdoc/check-values": [
         "warn",
         {
@@ -149,10 +148,8 @@
       ],
       "spaced-comment": "off",
       "unicorn/explicit-length-check": "off",
-      "unicorn/no-array-for-each": "off",
       "unicorn/no-array-method-this-argument": "off",
       "unicorn/no-array-reduce": "off",
-      "unicorn/no-for-loop": "off",
       "unicorn/prefer-code-point": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-reflect-apply": "off",
