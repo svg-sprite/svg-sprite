@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const fs = require('node:fs').promises;
+const { readFile } = require('node:fs').promises;
 const mustache = require('mustache');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
@@ -52,7 +52,7 @@ describe.each`
 
             const input = path.join(tmpPath, 'view/svg', svg);
             const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
-            const svgFile = await fs.readFile(input);
+            const svgFile = await readFile(input);
 
             expect(svgFile.toString()).toMatchSnapshot();
             await expect(input).toBeVisuallyEqualTo(expected);
@@ -63,7 +63,7 @@ describe.each`
 
             data.css = '../sprite.css';
 
-            const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/view.html'), 'utf8');
+            const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/view.html'), 'utf8');
             const out = mustache.render(previewTemplate, data);
             const preview = await writeFile(path.join(tmpPath, 'view/html/view.html'), out);
             const expected = path.join(paths.expectations, `png/view.html${testConfig.namespace}.png`);

@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const fs = require('node:fs').promises;
+const { readFile } = require('node:fs').promises;
 const mustache = require('mustache');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
@@ -45,14 +45,14 @@ describe.each`
     it('creates a visually correct stylesheet resource in CSS format', async() => {
         expect.hasAssertions();
 
-        const svgData = await fs.readFile(path.join(tmpPath, 'symbol/svg', svg));
+        const svgData = await readFile(path.join(tmpPath, 'symbol/svg', svg));
 
         data.svg = svgData.toString();
         data.css = '../sprite.css';
 
         expect(data.svg).toMatchSnapshot();
 
-        const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf8');
+        const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/symbol.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'symbol/html/symbol.html'), out);
         const expected = path.join(paths.expectations, `png/symbol.html${testConfig.namespace}.png`);
