@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const fs = require('node:fs').promises;
+const { readFile } = require('node:fs').promises;
 const mustache = require('mustache');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
@@ -45,14 +45,14 @@ describe.each`
     it('creates a visually correct stylesheet resource in CSS format', async() => {
         expect.hasAssertions();
 
-        const svgData = await fs.readFile(path.join(tmpPath, 'stack/svg', svg));
+        const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
 
         data.svg = svgData.toString();
         data.css = '../sprite.css';
 
         expect(data.svg).toMatchSnapshot();
 
-        const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+        const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`), out);
         const expected = path.join(paths.expectations, `png/stack${testConfig.namespace}.html.png`);
@@ -90,14 +90,14 @@ describe('without viewbox', () => {
     it('creates a visually correct stylesheet resource in CSS format', async() => {
         expect.hasAssertions();
 
-        const svgData = await fs.readFile(path.join(tmpPath, 'stack/svg', svg));
+        const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
 
         data.svg = svgData.toString();
         data.css = '../sprite.css';
 
         expect(data.svg).toMatchSnapshot();
 
-        const previewTemplate = await fs.readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+        const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
         const out = mustache.render(previewTemplate, data);
         const preview = await writeFile(path.join(tmpPath, 'stack/html/stack-without-viewbox.html'), out);
         const expected = path.join(paths.expectations, 'png/stack-without-viewbox.html.png');
