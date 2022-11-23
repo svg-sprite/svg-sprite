@@ -1,7 +1,7 @@
 'use strict';
 
-const { mkdir, writeFile } = require('fs').promises;
-const path = require('path');
+const { mkdir, writeFile } = require('node:fs').promises;
+const path = require('node:path');
 
 /**
  * Prepare and output a file and create directories as necessary

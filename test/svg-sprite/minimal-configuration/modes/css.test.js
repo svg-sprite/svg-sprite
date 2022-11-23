@@ -1,8 +1,8 @@
 'use strict';
 
 /* eslint-disable max-nested-callbacks */
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 const mustache = require('mustache');
 const sass = require('sass');
 const { constants: testConfigs } = require('../../../helpers/test-configs.js');

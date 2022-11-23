@@ -1,8 +1,8 @@
 'use strict';
 
-const { Buffer } = require('buffer');
-const path = require('path');
-const fs = require('fs');
+const { Buffer } = require('node:buffer');
+const path = require('node:path');
+const fs = require('node:fs');
 const File = require('vinyl');
 const glob = require('glob');
 const getShape = require('../lib/svg-sprite/shape.js');

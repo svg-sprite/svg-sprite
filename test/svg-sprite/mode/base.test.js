@@ -2,15 +2,15 @@
 
 /* eslint-disable new-cap */
 
-const path = require('path');
-const { Buffer } = require('buffer');
-const process = require('process');
+const path = require('node:path');
+const { Buffer } = require('node:buffer');
+const process = require('node:process');
 const mustache = require('mustache');
 const File = require('vinyl');
 const SVGSpriteBase = require('../../../lib/svg-sprite/mode/base.js');
 
 jest.mock('mustache');
-jest.mock('fs');
+jest.mock('node:fs');
 
 describe('testings SVGSpriteBase', () => {
     const TEST_MODE_NAME = 'base';

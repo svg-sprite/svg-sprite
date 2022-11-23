@@ -1,12 +1,12 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const { Buffer } = require('buffer');
+const fs = require('node:fs');
+const path = require('node:path');
+const { Buffer } = require('node:buffer');
 const yaml = require('js-yaml');
 const SVGSpriterConfig = require('../../../lib/svg-sprite/config.js');
 
-jest.mock('fs');
+jest.mock('node:fs');
 jest.mock('yaml');
 
 describe('testing SVGSpriterConfig shape.align', () => {
