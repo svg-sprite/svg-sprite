@@ -1,7 +1,7 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs').promises;
+const path = require('node:path');
+const fs = require('node:fs').promises;
 const mustache = require('mustache');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');

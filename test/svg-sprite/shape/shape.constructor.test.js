@@ -2,8 +2,8 @@
 
 /* eslint-disable max-nested-callbacks */
 
-const path = require('path');
-const { Buffer } = require('buffer');
+const path = require('node:path');
+const { Buffer } = require('node:buffer');
 const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 

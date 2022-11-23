@@ -1,7 +1,7 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs').promises;
+const path = require('node:path');
+const fs = require('node:fs').promises;
 const mustache = require('mustache');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');

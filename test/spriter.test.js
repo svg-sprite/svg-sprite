@@ -1,9 +1,9 @@
 'use strict';
 
 /* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
-const fs = require('fs');
-const path = require('path');
-const { Buffer } = require('buffer');
+const fs = require('node:fs');
+const path = require('node:path');
+const { Buffer } = require('node:buffer');
 const File = require('vinyl');
 const SVGSpriter = require('../lib/svg-sprite.js');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const path = require('path');
+const path = require('node:path');
 const glob = require('glob');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles, addRelativeFixtureFiles } = require('../../helpers/add-files.js');

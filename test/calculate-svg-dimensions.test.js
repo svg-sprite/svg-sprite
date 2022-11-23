@@ -1,7 +1,7 @@
 'use strict';
 
-const { readFile } = require('fs').promises;
-const path = require('path');
+const { readFile } = require('node:fs').promises;
+const path = require('node:path');
 const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');
 const DimensionsCalculationError = require('../lib/svg-sprite/errors/dimensions-calculation-error.js');
 

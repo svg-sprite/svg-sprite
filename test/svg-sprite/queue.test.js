@@ -1,13 +1,13 @@
 'use strict';
 
-const { EventEmitter } = require('events');
-const path = require('path');
+const { EventEmitter } = require('node:events');
+const path = require('node:path');
 const File = require('vinyl');
 const SVGSpriterQueue = require('../../lib/svg-sprite/queue.js');
 const Shape = require('../../lib/svg-sprite/shape.js');
 
 jest.mock('../../lib/svg-sprite/shape.js');
-jest.mock('events');
+jest.mock('node:events');
 
 describe('testing Queue', () => {
     describe('testing constructor()', () => {

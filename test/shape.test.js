@@ -1,7 +1,7 @@
 'use strict';
 
-const { Buffer } = require('buffer');
-const path = require('path');
+const { Buffer } = require('node:buffer');
+const path = require('node:path');
 const { DOMParser } = require('@xmldom/xmldom');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-dimensions.js');

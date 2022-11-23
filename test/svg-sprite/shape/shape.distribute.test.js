@@ -1,6 +1,6 @@
 'use strict';
 
-const { Buffer } = require('buffer');
+const { Buffer } = require('node:buffer');
 const File = require('vinyl');
 const SVGShape = require('../../../lib/svg-sprite/shape.js');
 

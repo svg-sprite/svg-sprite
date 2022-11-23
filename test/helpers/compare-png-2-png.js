@@ -1,7 +1,7 @@
 'use strict';
 
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require('node:fs').promises;
+const path = require('node:path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 
