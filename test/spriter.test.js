@@ -112,3 +112,33 @@ describe('testing SVGSpriter', () => {
         });
     });
 });
+
+describe('testing transform', () => {
+    it('should call all transformations', async() => {
+        const testTransformFunction = jest.fn();
+        const spriter = new SVGSpriter({
+            shape: {
+                dest: 'svg',
+                transform: [
+                    'svgo',
+                    {
+                        custom(_, __, callback) {
+                            testTransformFunction();
+                            callback(null);
+                        }
+                    }
+                ]
+            }
+        });
+
+        spriter.add(new File({
+            base: path.dirname(TEST_SVG),
+            path: TEST_SVG,
+            contents: fs.readFileSync(path.join(__dirname, TEST_SVG))
+        }));
+
+        await spriter.compileAsync({ css: true });
+
+        expect(testTransformFunction).toHaveBeenCalledWith();
+    });
+});
