@@ -36,10 +36,8 @@ describe('testing transforms.svgo', () => {
         svgoTransform(shape, {}, spriter, noop);
 
         expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, { plugins: ['preset-default', {
-            active: true,
             name: 'removeXMLProcInst'
         }, {
-            active: true,
             name: 'removeDoctype'
         }] });
     });
@@ -65,13 +63,7 @@ describe('testing transforms.svgo', () => {
         jest.spyOn(svgo, 'optimize').mockReturnValueOnce(TEST_RESULT);
         svgoTransform(shape, {}, spriter, noop);
 
-        expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, { plugins: ['preset-default', {
-            active: false,
-            name: 'removeXMLProcInst'
-        }, {
-            active: false,
-            name: 'removeDoctype'
-        }] });
+        expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, { plugins: ['preset-default'] });
     });
 
     it('should add provided config', () => {
