@@ -2,12 +2,12 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
-const glob = require('glob');
+const { globSync } = require('glob');
 const SVGSpriter = require('./lib/svg-sprite.js');
 
 const cwd = path.join(__dirname, 'test/fixture/svg/single');
 const dest = path.join(__dirname, 'tmp');
-const files = glob.sync('**/weather*.svg', { cwd });
+const files = globSync('**/weather*.svg', { cwd });
 
 const svgoConfig = {
     multipass: true,

@@ -97,7 +97,7 @@ const fs = require('fs');
 const path = require('path');
 const SVGSpriter = require('svg-sprite');
 const File = require('vinyl');
-const glob = require('glob');
+const { globSync } = require('glob');
 
 const spriter = new SVGSpriter({
     dest: 'out',
@@ -112,7 +112,7 @@ const spriter = new SVGSpriter({
 const cwd = path.resolve('assets');
 
 // Find SVG files recursively via `glob`
-glob.sync('**/*.svg', { cwd }, (err, files) => {
+globSync('**/*.svg', { cwd }, (err, files) => {
     for (const file of files) {
         // Create and add a vinyl file instance for each SVG
         spriter.add(new File({

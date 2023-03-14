@@ -1,14 +1,14 @@
 'use strict';
 
 const path = require('node:path');
-const glob = require('glob');
+const { globSync } = require('glob');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 const { paths } = require('../../helpers/constants.js');
 const removeTmpPath = require('../../helpers/remove-temp-path.js');
 
 const cwd = path.join(paths.fixtures, 'svg/single');
-const weather = glob.sync('**/weather*.svg', { cwd });
+const weather = globSync('**/weather*.svg', { cwd });
 
 const tmpPath = path.join(paths.tmp, 'rerun');
 
