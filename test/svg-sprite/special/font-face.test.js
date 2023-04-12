@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('node:path');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { paths } = require('../../helpers/constants.js');

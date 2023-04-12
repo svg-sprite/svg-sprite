@@ -2,6 +2,8 @@
 
 const { Buffer } = require('node:buffer');
 const File = require('vinyl');
+const { XMLSerializer } = require('@xmldom/xmldom');
+const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
 const TEST_SPRITER = {
     config: {
@@ -21,9 +23,6 @@ const TEST_FILE = new File({
     base: '/test_base/',
     cwd: '/'
 });
-
-const { XMLSerializer } = require('@xmldom/xmldom');
-const SVGShape = require('../../../lib/svg-sprite/shape.js');
 
 describe('testing getSVG()', () => {
     it('should clone node if shape is not master', () => {
