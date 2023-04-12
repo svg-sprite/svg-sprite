@@ -1,6 +1,7 @@
 'use strict';
 
 /* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
+
 const fs = require('node:fs');
 const path = require('node:path');
 const { Buffer } = require('node:buffer');
