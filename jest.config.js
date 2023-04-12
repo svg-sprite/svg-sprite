@@ -1,7 +1,14 @@
 'use strict';
 
+const os = require('node:os');
+
+const THREADS = Math.max(os.cpus().length - 2, 2);
+
 module.exports = {
     clearMocks: true,
+    maxConcurrency: THREADS,
+    maxWorkers: THREADS,
+    workerThreads: true,
     resetMocks: true,
     coverageProvider: 'v8',
     coverageReporters: ['html', 'lcov', 'text'],
