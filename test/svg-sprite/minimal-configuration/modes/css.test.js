@@ -1,6 +1,7 @@
 'use strict';
 
 /* eslint-disable max-nested-callbacks */
+
 const path = require('node:path');
 const fs = require('node:fs');
 const mustache = require('mustache');

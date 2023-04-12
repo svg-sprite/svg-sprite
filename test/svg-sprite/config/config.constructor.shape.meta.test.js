@@ -7,7 +7,7 @@ const yaml = require('js-yaml');
 const SVGSpriterConfig = require('../../../lib/svg-sprite/config.js');
 
 jest.mock('node:fs');
-jest.mock('yaml');
+jest.mock('js-yaml');
 
 describe('testing SVGSpriterConfig shape.meta', () => {
     it('should copy fields from config.shape', () => {

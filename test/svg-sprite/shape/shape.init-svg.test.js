@@ -1,6 +1,7 @@
 'use strict';
 
 /* eslint-disable no-new */
+
 const { Buffer } = require('node:buffer');
 const File = require('vinyl');
 const fixXMLString = require('../../../lib/svg-sprite/utils/fix-xml-string.js');
