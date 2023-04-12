@@ -105,7 +105,7 @@
       ],
       "eslint-comments/disable-enable-pair": "off",
       "jsdoc/check-values": [
-        "warn",
+        "error",
         {
           "allowedLicenses": [
             "MIT https://github.com/svg-sprite/svg-sprite/blob/main/LICENSE"
