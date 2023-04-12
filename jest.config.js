@@ -1,11 +1,8 @@
 'use strict';
 
 const os = require('node:os');
-const process = require('node:process');
 
-const THREADS = process.env.CI ?
-    os.cpus().length * 1.5 :
-    Math.max(os.cpus().length - 2, 2);
+const THREADS = Math.max(os.cpus().length - 2, 2);
 
 module.exports = {
     clearMocks: true,
