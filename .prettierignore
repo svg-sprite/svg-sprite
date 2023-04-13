@@ -1,2 +1,7 @@
-/lib
-/bin
+/coverage/
+/test/**
+/tmpl/**
+/tmp/
+*.md
+*.yaml
+*.yml

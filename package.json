@@ -27,7 +27,7 @@
   "scripts": {
     "lint": "xo",
     "fix": "xo --fix",
-    "format": "prettier --write --ignore-path .gitignore .",
+    "format": "prettier --write .",
     "jest": "jest",
     "example": "node example.js",
     "test": "jest",
