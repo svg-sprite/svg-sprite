@@ -18,17 +18,28 @@ describe('testing SVGSpriteCssPacker', () => {
         it('should set blocks and positions and ignore master shape', () => {
             expect.hasAssertions();
 
-            const TEST_SHAPES = [{
-                master: false, getDimensions: jest.fn().mockReturnValueOnce({ height: 0, width: 5 })
-            }, {
-                master: false, getDimensions: jest.fn().mockReturnValueOnce({ height: 5, width: 0 })
-            }, {
-                master: false, getDimensions: jest.fn().mockReturnValueOnce({ height: 6, width: 0 })
-            }, {
-                master: false, getDimensions: jest.fn().mockReturnValueOnce({ height: 0, width: 6 })
-            }, {
-                master: true, getDimensions: jest.fn()
-            }];
+            const TEST_SHAPES = [
+                {
+                    master: false,
+                    getDimensions: jest.fn().mockReturnValueOnce({ height: 0, width: 5 })
+                },
+                {
+                    master: false,
+                    getDimensions: jest.fn().mockReturnValueOnce({ height: 5, width: 0 })
+                },
+                {
+                    master: false,
+                    getDimensions: jest.fn().mockReturnValueOnce({ height: 6, width: 0 })
+                },
+                {
+                    master: false,
+                    getDimensions: jest.fn().mockReturnValueOnce({ height: 0, width: 6 })
+                },
+                {
+                    master: true,
+                    getDimensions: jest.fn()
+                }
+            ];
 
             const packer = new SVGSpriteCssPacker(TEST_SHAPES);
 
@@ -37,7 +48,9 @@ describe('testing SVGSpriteCssPacker', () => {
             expect(packer.blocks).toStrictEqual([
                 { height: 6, index: 2, width: 0 },
                 {
-                    height: 0, index: 3, width: 6
+                    height: 0,
+                    index: 3,
+                    width: 6
                 },
                 { height: 0, index: 0, width: 5 },
                 { height: 5, index: 1, width: 0 }
@@ -231,29 +244,32 @@ describe('testing SVGSpriteCssPacker', () => {
 
     describe('testing _growNode()', () => {
         it.each`
-            rootWidth | rootHeight | width | height | fnToCall        | fnNotToCall
-            ${10}     | ${100}     | ${10} | ${100} | ${'_growRight'} | ${'_growBottom'}
-            ${100}    | ${100}     | ${10} | ${100} | ${'_growRight'} | ${'_growBottom'}
-            ${10}     | ${1}       | ${10} | ${1}   | ${'_growBottom'}| ${'_growRight'}
-            ${10}     | ${1}       | ${10} | ${100} | ${'_growBottom'}| ${'_growRight'}
-        `('should call $fnToCall() and not call $fnNotToCall for params: width=$width, height=$height, root={width: $rootWidth, height: $rootHeight}', ({ rootWidth, rootHeight, width, height, fnToCall, fnNotToCall }) => {
-            expect.hasAssertions();
+            rootWidth | rootHeight | width | height | fnToCall         | fnNotToCall
+            ${10}     | ${100}     | ${10} | ${100} | ${'_growRight'}  | ${'_growBottom'}
+            ${100}    | ${100}     | ${10} | ${100} | ${'_growRight'}  | ${'_growBottom'}
+            ${10}     | ${1}       | ${10} | ${1}   | ${'_growBottom'} | ${'_growRight'}
+            ${10}     | ${1}       | ${10} | ${100} | ${'_growBottom'} | ${'_growRight'}
+        `(
+            'should call $fnToCall() and not call $fnNotToCall for params: width=$width, height=$height, root={width: $rootWidth, height: $rootHeight}',
+            ({ rootWidth, rootHeight, width, height, fnToCall, fnNotToCall }) => {
+                expect.hasAssertions();
 
-            const packer = new SVGSpriteCssPacker([]);
-            Object.assign(packer.root, {
-                width: rootWidth,
-                height: rootHeight
-            });
+                const packer = new SVGSpriteCssPacker([]);
+                Object.assign(packer.root, {
+                    width: rootWidth,
+                    height: rootHeight
+                });
 
-            const TEST_RESULT = {};
+                const TEST_RESULT = {};
 
-            jest.spyOn(packer, fnToCall).mockReturnValueOnce(TEST_RESULT);
-            jest.spyOn(packer, fnNotToCall);
+                jest.spyOn(packer, fnToCall).mockReturnValueOnce(TEST_RESULT);
+                jest.spyOn(packer, fnNotToCall);
 
-            expect(packer._growNode(width, height)).toBe(TEST_RESULT);
-            expect(packer[fnToCall]).toHaveBeenCalledWith(width, height);
-            expect(packer[fnNotToCall]).not.toHaveBeenCalled();
-        });
+                expect(packer._growNode(width, height)).toBe(TEST_RESULT);
+                expect(packer[fnToCall]).toHaveBeenCalledWith(width, height);
+                expect(packer[fnNotToCall]).not.toHaveBeenCalled();
+            }
+        );
 
         it('should return null and not call _growRight() or _growBottom() if width and height is greater than the root`s ones', () => {
             expect.hasAssertions();

@@ -102,7 +102,9 @@ describe('testing Shape.constructor', () => {
                     };
                     const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
 
-                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative, TEST_FILE_WITH_FOLDERS)).toBe('folder--test_path.f');
+                    expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative, TEST_FILE_WITH_FOLDERS)).toBe(
+                        'folder--test_path.f'
+                    );
                 });
 
                 it('should set generator if provided generator is a string', () => {
@@ -200,7 +202,8 @@ describe('testing Shape.constructor', () => {
                 const TEST_SPRITER = {
                     config: {
                         shape: {
-                            meta: { TEST_ID: 'TEST_META' }, align: {},
+                            meta: { TEST_ID: 'TEST_META' },
+                            align: {},
                             id: {
                                 generator() {
                                     return 'TEST_ID';
@@ -221,7 +224,8 @@ describe('testing Shape.constructor', () => {
                 const TEST_SPRITER = {
                     config: {
                         shape: {
-                            meta: { [path.basename(TEST_FILE.relative, '.svg')]: 'TEST_META' }, align: {},
+                            meta: { [path.basename(TEST_FILE.relative, '.svg')]: 'TEST_META' },
+                            align: {},
                             id: {
                                 generator() {
                                     return 'TEST_ID';
@@ -276,7 +280,6 @@ describe('testing Shape.constructor', () => {
                         shape: {
                             meta: {},
                             align: { [path.basename(TEST_FILE.relative, '.svg')]: { TEST_3: 3 } }
-
                         }
                     },
                     verbose: jest.fn()
@@ -288,4 +291,3 @@ describe('testing Shape.constructor', () => {
         });
     });
 });
-

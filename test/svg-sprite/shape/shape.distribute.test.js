@@ -49,7 +49,11 @@ describe('testing distribute()', () => {
         expect.hasAssertions();
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
-        shape.align = [['TEST_1', 1], ['TEST_2', 2], ['TEST_3', 3]];
+        shape.align = [
+            ['TEST_1', 1],
+            ['TEST_2', 2],
+            ['TEST_3', 3]
+        ];
 
         const copies = shape.distribute();
 

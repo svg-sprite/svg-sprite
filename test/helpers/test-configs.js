@@ -22,7 +22,6 @@ const constants = {
         files: withoutDims,
         cwd: cwdWithoutDims
     }
-
 };
 
 module.exports = [constants.DEFAULT, constants.WITHOUT_DIMS];

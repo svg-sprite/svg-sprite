@@ -7,10 +7,10 @@ const constants = require('./constants.js');
 /**
  * Capture a screenshot of a URL using browser
  *
- * @param {string} HTMLPath                Input HTML file path
- * @param {string} expectedImagePath       Expected screenshot file
+ * @param {string} HTMLPath          Input HTML file path
+ * @param {string} expectedImagePath Expected screenshot file
  */
-module.exports = async(HTMLPath, expectedImagePath) => {
+module.exports = async (HTMLPath, expectedImagePath) => {
     let page;
 
     try {

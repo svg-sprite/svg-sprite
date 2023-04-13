@@ -3,8 +3,8 @@
 const { launchBrowser } = require('./capture-browser.js');
 
 /**
- * @param {string} svgPath             svg path
- * @param {string} pngPath             png path
+ * @param {string} svgPath Svg path
+ * @param {string} pngPath Png path
  */
 async function convertSvg2Png(svgPath, pngPath) {
     let page;

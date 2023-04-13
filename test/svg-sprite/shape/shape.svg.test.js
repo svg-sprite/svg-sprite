@@ -126,65 +126,79 @@ describe('testing getSVG()', () => {
     it('should substitute ID references in href attributes', () => {
         expect.hasAssertions();
 
-        const shape = new SVGShape(new File({
-            base: TEST_FILE.base,
-            path: TEST_FILE.path,
-            cwd: TEST_FILE.cwd,
-            contents: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" id="abc" height="0" width="0"><use href="#abc"/></svg>')
-        }), {
-            config: {
-                shape: {
-                    meta: {},
-                    align: {}
+        const shape = new SVGShape(
+            new File({
+                base: TEST_FILE.base,
+                path: TEST_FILE.path,
+                cwd: TEST_FILE.cwd,
+                contents: Buffer.from(
+                    '<svg xmlns="http://www.w3.org/2000/svg" id="abc" height="0" width="0"><use href="#abc"/></svg>'
+                )
+            }),
+            {
+                config: {
+                    shape: {
+                        meta: {},
+                        align: {}
+                    },
+                    svg: {
+                        doctypeDeclaration: '',
+                        namespaceIDPrefix: 'someprefix-',
+                        namespaceClassnames: false,
+                        namespaceIDs: true
+                    },
+                    mode: {
+                        view: true
+                    }
                 },
-                svg: {
-                    doctypeDeclaration: '',
-                    namespaceIDPrefix: 'someprefix-',
-                    namespaceClassnames: false,
-                    namespaceIDs: true
-                },
-                mode: {
-                    view: true
-                }
-            },
-            verbose: jest.fn()
-        });
+                verbose: jest.fn()
+            }
+        );
         shape.complement(jest.fn);
         shape.setNamespace('ns-');
 
-        expect(shape.getSVG()).toBe('<svg xmlns="http://www.w3.org/2000/svg" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use href="#someprefix-ns-abc"/></svg>');
+        expect(shape.getSVG()).toBe(
+            '<svg xmlns="http://www.w3.org/2000/svg" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use href="#someprefix-ns-abc"/></svg>'
+        );
     });
 
     it('should substitute ID references in xlink:href attributes', () => {
         expect.hasAssertions();
 
-        const shape = new SVGShape(new File({
-            base: TEST_FILE.base,
-            path: TEST_FILE.path,
-            cwd: TEST_FILE.cwd,
-            contents: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="abc" height="0" width="0"><use xlink:href="#abc"/></svg>')
-        }), {
-            config: {
-                shape: {
-                    meta: {},
-                    align: {}
+        const shape = new SVGShape(
+            new File({
+                base: TEST_FILE.base,
+                path: TEST_FILE.path,
+                cwd: TEST_FILE.cwd,
+                contents: Buffer.from(
+                    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="abc" height="0" width="0"><use xlink:href="#abc"/></svg>'
+                )
+            }),
+            {
+                config: {
+                    shape: {
+                        meta: {},
+                        align: {}
+                    },
+                    svg: {
+                        doctypeDeclaration: '',
+                        namespaceIDPrefix: 'someprefix-',
+                        namespaceClassnames: false,
+                        namespaceIDs: true
+                    },
+                    mode: {
+                        view: true
+                    }
                 },
-                svg: {
-                    doctypeDeclaration: '',
-                    namespaceIDPrefix: 'someprefix-',
-                    namespaceClassnames: false,
-                    namespaceIDs: true
-                },
-                mode: {
-                    view: true
-                }
-            },
-            verbose: jest.fn()
-        });
+                verbose: jest.fn()
+            }
+        );
         shape.complement(jest.fn);
         shape.setNamespace('ns-');
 
-        expect(shape.getSVG()).toBe('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use xlink:href="#someprefix-ns-abc"/></svg>');
+        expect(shape.getSVG()).toBe(
+            '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="someprefix-ns-abc" height="0" width="0" viewBox="0 0 0 0"><use xlink:href="#someprefix-ns-abc"/></svg>'
+        );
     });
 });
 
@@ -260,7 +274,9 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
             childNodes: []
         };
 
-        expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, { xlink: shape.XLINK_NAMESPACE })).toBe(TEST_ELEMENT);
+        expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, { xlink: shape.XLINK_NAMESPACE })).toBe(
+            TEST_ELEMENT
+        );
         expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith('xmlns:xlink');
         expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith('xmlns:xlink');
     });
@@ -300,9 +316,13 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
 
         expect(shape._stripInlineNamespaceDeclarations).toHaveBeenCalledTimes(2);
         expect(shape._stripInlineNamespaceDeclarations.mock.calls[0][0]).toStrictEqual(TEST_CHILD_1);
-        expect(shape._stripInlineNamespaceDeclarations.mock.calls[0][1]).toStrictEqual(expect.objectContaining(TEST_ELEMENT._nsMap));
+        expect(shape._stripInlineNamespaceDeclarations.mock.calls[0][1]).toStrictEqual(
+            expect.objectContaining(TEST_ELEMENT._nsMap)
+        );
         expect(shape._stripInlineNamespaceDeclarations.mock.calls[1][0]).toStrictEqual(TEST_CHILD_1);
-        expect(shape._stripInlineNamespaceDeclarations.mock.calls[1][1]).toStrictEqual(expect.objectContaining(TEST_ELEMENT._nsMap));
+        expect(shape._stripInlineNamespaceDeclarations.mock.calls[1][1]).toStrictEqual(
+            expect.objectContaining(TEST_ELEMENT._nsMap)
+        );
     });
 });
 

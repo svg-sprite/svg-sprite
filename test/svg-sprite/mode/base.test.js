@@ -113,25 +113,35 @@ describe('testings SVGSpriteBase', () => {
                 const { cls } = getClassAndInitFn();
                 const base = new cls(TEST_SPRITER, TEST_CONFIG, TEST_DATA, '');
 
-                expect(base.config.render).toStrictEqual(expect.objectContaining({
-                    png: {
-                        template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.png'),
-                        dest: path.join(TEST_CONFIG.dest, 'sprite.png')
-                    },
-                    jpg: {
-                        template: path.resolve(process.cwd(), 'jpg'),
-                        dest: path.join(TEST_CONFIG.dest, 'sprite.jpg')
-                    },
-                    bmp: {
-                        dest: path.resolve(TEST_CONFIG.dest, 'dest.bmp'),
-                        template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.bmp')
-                    },
-                    webp: {
-                        dest: path.resolve(TEST_CONFIG.dest, 'here.webp'),
-                        template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.webp')
-                    }
-
-                }));
+                expect(base.config.render).toStrictEqual(
+                    expect.objectContaining({
+                        png: {
+                            template: path.resolve(
+                                path.dirname(path.dirname(path.dirname(__dirname))),
+                                'tmpl/common/sprite.png'
+                            ),
+                            dest: path.join(TEST_CONFIG.dest, 'sprite.png')
+                        },
+                        jpg: {
+                            template: path.resolve(process.cwd(), 'jpg'),
+                            dest: path.join(TEST_CONFIG.dest, 'sprite.jpg')
+                        },
+                        bmp: {
+                            dest: path.resolve(TEST_CONFIG.dest, 'dest.bmp'),
+                            template: path.resolve(
+                                path.dirname(path.dirname(path.dirname(__dirname))),
+                                'tmpl/common/sprite.bmp'
+                            )
+                        },
+                        webp: {
+                            dest: path.resolve(TEST_CONFIG.dest, 'here.webp'),
+                            template: path.resolve(
+                                path.dirname(path.dirname(path.dirname(__dirname))),
+                                'tmpl/common/sprite.webp'
+                            )
+                        }
+                    })
+                );
                 expect(base._cssDest).toBe(path.resolve('css-dest'));
             });
         });
@@ -162,7 +172,11 @@ describe('testings SVGSpriteBase', () => {
             // eslint-disable-next-line no-new
             new cls(TEST_SPRITER, TEST_CONFIG, TEST_DATA, '');
 
-            expect(TEST_SPRITER.debug).toHaveBeenCalledWith('Created «%s» sprite instance («%s» mode)', TEST_MODE_NAME, TEST_MODE_NAME);
+            expect(TEST_SPRITER.debug).toHaveBeenCalledWith(
+                'Created «%s» sprite instance («%s» mode)',
+                TEST_MODE_NAME,
+                TEST_MODE_NAME
+            );
         });
 
         describe('if example passed', () => {
@@ -190,7 +204,10 @@ describe('testings SVGSpriteBase', () => {
                 const base = new cls(TEST_SPRITER, TEST_CONFIG, TEST_DATA, '');
 
                 expect(base.config.example).toStrictEqual({
-                    template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), path.join('tmpl', TEST_MODE_NAME, 'sprite.html')),
+                    template: path.resolve(
+                        path.dirname(path.dirname(path.dirname(__dirname))),
+                        path.join('tmpl', TEST_MODE_NAME, 'sprite.html')
+                    ),
                     dest: path.join(TEST_CONFIG.dest, `sprite.${TEST_MODE_NAME}.html`)
                 });
                 expect(base.data.example).toBe('sprite.svg');
@@ -261,7 +278,7 @@ describe('testings SVGSpriteBase', () => {
     });
 
     describe('testing _buildCSSResources', () => {
-        it('should transform passed files', async() => {
+        it('should transform passed files', async () => {
             expect.hasAssertions();
 
             const TEST_SPRITER = {
@@ -286,7 +303,10 @@ describe('testings SVGSpriteBase', () => {
 
             const TEST_FILES = {};
             const testFn = jest.fn();
-            jest.spyOn(mustache, 'render').mockReturnValueOnce('first').mockReturnValueOnce('second').mockReturnValueOnce('');
+            jest.spyOn(mustache, 'render')
+                .mockReturnValueOnce('first')
+                .mockReturnValueOnce('second')
+                .mockReturnValueOnce('');
 
             base._buildCSSResources(TEST_FILES, testFn);
 

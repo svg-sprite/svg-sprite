@@ -40,7 +40,9 @@ describe('testing _replaceIdAndClassnameReferences()', () => {
             id1: 'NEW ID 1'
         };
 
-        expect(shape._replaceIdAndClassnameReferences(TEST_STRING, TEST_SUBS_IDS, {}, false)).toBe('url(#NEW ID 1) url(id2)');
+        expect(shape._replaceIdAndClassnameReferences(TEST_STRING, TEST_SUBS_IDS, {}, false)).toBe(
+            'url(#NEW ID 1) url(id2)'
+        );
     });
 
     it('should not change string if subs ids is null', () => {
@@ -62,8 +64,15 @@ describe('testing _replaceIdAndClassnameReferences()', () => {
         const TEST_SUBST_CLASSNAMES = { b: 2 };
         jest.spyOn(shape, '_replaceIdAndClassnameReferencesInCssSelectors').mockReturnValueOnce(TEST_RESULT);
 
-        expect(shape._replaceIdAndClassnameReferences(TEST_STR, TEST_SUBS_IDS, TEST_SUBST_CLASSNAMES, true)).toBe(TEST_RESULT);
-        expect(shape._replaceIdAndClassnameReferencesInCssSelectors).toHaveBeenCalledWith(TEST_STR, '', TEST_SUBS_IDS, TEST_SUBST_CLASSNAMES);
+        expect(shape._replaceIdAndClassnameReferences(TEST_STR, TEST_SUBS_IDS, TEST_SUBST_CLASSNAMES, true)).toBe(
+            TEST_RESULT
+        );
+        expect(shape._replaceIdAndClassnameReferencesInCssSelectors).toHaveBeenCalledWith(
+            TEST_STR,
+            '',
+            TEST_SUBS_IDS,
+            TEST_SUBST_CLASSNAMES
+        );
     });
 });
 
@@ -72,19 +81,25 @@ describe('testing _replaceIdAndClassnameReferencesInCssSelectors()', () => {
         expect.hasAssertions();
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
-        const TEST_RULES = [{
-            keyText: '2',
-            __starts: 0,
-            __ends: 2
-        }, {
-            cssRules: [{
+        const TEST_RULES = [
+            {
+                keyText: '2',
                 __starts: 0,
-                __ends: 3
-            }, {
-                __starts: 4,
-                __ends: 7
-            }]
-        }];
+                __ends: 2
+            },
+            {
+                cssRules: [
+                    {
+                        __starts: 0,
+                        __ends: 3
+                    },
+                    {
+                        __starts: 4,
+                        __ends: 7
+                    }
+                ]
+            }
+        ];
         const TEST_STRING = '0123456789';
 
         const expected = shape._replaceIdAndClassnameReferencesInCssSelectors(TEST_STRING, TEST_RULES, {}, {});
@@ -97,13 +112,17 @@ describe('testing _replaceIdAndClassnameReferencesInCssSelectors()', () => {
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
         const TEST_ID = 'test-id';
-        const TEST_RULES = [{
-            selectorText: `div.cls1:has(div),#${TEST_ID}`
-        }, {
-            selectorText: '.cls2,.x,.xx'
-        }, {
-            selectorText: 'a#a[href="test"]'
-        }];
+        const TEST_RULES = [
+            {
+                selectorText: `div.cls1:has(div),#${TEST_ID}`
+            },
+            {
+                selectorText: '.cls2,.x,.xx'
+            },
+            {
+                selectorText: 'a#a[href="test"]'
+            }
+        ];
         const TEST_SUBS_IDS = {
             [`#${TEST_ID}`]: 'NO',
             '#a': 'b'
@@ -114,7 +133,12 @@ describe('testing _replaceIdAndClassnameReferencesInCssSelectors()', () => {
             '.xx': 'yy'
         };
         const TEST_STRING = 'str';
-        const expected = shape._replaceIdAndClassnameReferencesInCssSelectors(TEST_STRING, TEST_RULES, TEST_SUBS_IDS, TEST_CLASS_SUBS);
+        const expected = shape._replaceIdAndClassnameReferencesInCssSelectors(
+            TEST_STRING,
+            TEST_RULES,
+            TEST_SUBS_IDS,
+            TEST_CLASS_SUBS
+        );
 
         expect(expected).toBe(`div.cls1:has(div),#NO${TEST_STRING}.NOCLS,.y,.yy${TEST_STRING}a#b[href="test"]str`);
     });

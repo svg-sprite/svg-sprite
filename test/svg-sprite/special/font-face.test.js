@@ -5,10 +5,11 @@ const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { paths } = require('../../helpers/constants.js');
 
 describe('testing font face preserving', () => {
-    it('preserve font-face in sprite', async() => {
+    it('preserve font-face in sprite', async () => {
         expect.hasAssertions();
 
-        const TEST_FONT_FACE = '@font-face{font-family:Montserrat-SemiBold;src:url() format(\'woff\');font-weight:600;font-style:normal;font-display:swap}';
+        const TEST_FONT_FACE =
+            "@font-face{font-family:Montserrat-SemiBold;src:url() format('woff');font-weight:600;font-style:normal;font-display:swap}";
         const spriter = new SVGSpriter({
             dest: '.',
             shape: {
@@ -37,8 +38,6 @@ describe('testing font face preserving', () => {
             }
         });
 
-        expect(result.symbol.sprite.contents.toString().trim()).toContain(
-            TEST_FONT_FACE
-        );
+        expect(result.symbol.sprite.contents.toString().trim()).toContain(TEST_FONT_FACE);
     });
 });

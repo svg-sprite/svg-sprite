@@ -2,6 +2,6 @@
 
 const removeTmpPath = require('../helpers/remove-temp-path.js');
 
-module.exports = async() => {
+module.exports = async () => {
     await removeTmpPath();
 };

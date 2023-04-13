@@ -2,13 +2,7 @@
 
 /* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
 
-const {
-    isFunction,
-    isObject,
-    isString,
-    isPlainObject,
-    zipObject
-} = require('../lib/svg-sprite/utils/index.js');
+const { isFunction, isObject, isString, isPlainObject, zipObject } = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
     describe('isFunction', () => {
@@ -21,11 +15,11 @@ describe('utils', () => {
         });
 
         it('should return true for an async function', () => {
-            expect(isFunction(async() => {})).toBe(true);
+            expect(isFunction(async () => {})).toBe(true);
         });
 
         it('should return true for generator function', () => {
-            expect(isFunction(function * () {})).toBe(true);
+            expect(isFunction(function* () {})).toBe(true);
         });
 
         it('should return false for a RegExp', () => {

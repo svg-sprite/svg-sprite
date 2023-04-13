@@ -22,7 +22,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     let packedSvg;
     let data;
 
-    beforeAll(async() => {
+    beforeAll(async () => {
         await removeTmpPath(tmpPath);
         data = {};
 
@@ -54,7 +54,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         packedSvg = path.basename(result.view.sprite.path);
     });
 
-    it('creates visually correct sprite', async() => {
+    it('creates visually correct sprite', async () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'view/svg', packedSvg);
@@ -64,7 +64,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         await expect(input).toBeVisuallyEqualTo(expected);
     });
 
-    it('creates a visually correct stylesheet resource', async() => {
+    it('creates a visually correct stylesheet resource', async () => {
         expect.hasAssertions();
 
         const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');

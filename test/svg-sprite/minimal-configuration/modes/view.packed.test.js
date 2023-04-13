@@ -12,9 +12,9 @@ const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 const { constants } = require('../../../helpers/test-configs.js');
 
 describe.each`
-        name          | testConfigKey
-        ${'default'}  | ${'DEFAULT'}
-        ${'w/o dims'} | ${'WITHOUT_DIMS'}
+    name          | testConfigKey
+    ${'default'}  | ${'DEFAULT'}
+    ${'w/o dims'} | ${'WITHOUT_DIMS'}
 `('svg-sprite: $name: «symbol» mode', ({ testConfigKey }) => {
     const testConfig = constants[testConfigKey];
 
@@ -27,7 +27,7 @@ describe.each`
 
     // Test the view mode
     describe(`svg-sprite: ${testConfig.name} in «view» mode`, () => {
-        beforeAll(async() => {
+        beforeAll(async () => {
             data = {};
             spriter = new SVGSpriter({ dest: tmpPath });
             addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
@@ -47,7 +47,7 @@ describe.each`
         });
 
         // Packed layout
-        it('creates visually correct sprite with packed layout', async() => {
+        it('creates visually correct sprite with packed layout', async () => {
             expect.hasAssertions();
 
             const input = path.join(tmpPath, 'view/svg', svg);
@@ -58,7 +58,7 @@ describe.each`
             await expect(input).toBeVisuallyEqualTo(expected);
         });
 
-        it('creates a visually correct stylesheet resource in CSS format', async() => {
+        it('creates a visually correct stylesheet resource in CSS format', async () => {
             expect.hasAssertions();
 
             data.css = '../sprite.css';

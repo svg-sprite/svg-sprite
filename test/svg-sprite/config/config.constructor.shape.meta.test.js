@@ -98,7 +98,8 @@ describe('testing SVGSpriterConfig shape.meta', () => {
 
             expect(yaml.load).toHaveBeenCalledWith(TEST_FILE_CONTENTS);
             expect(config.shape.meta).toStrictEqual({
-                [path.join(path.dirname(TEST_FILE_NAME), path.basename(TEST_FILE_NAME, '.svg'))]: TEST_META[TEST_FILE_NAME]
+                [path.join(path.dirname(TEST_FILE_NAME), path.basename(TEST_FILE_NAME, '.svg'))]:
+                    TEST_META[TEST_FILE_NAME]
             });
         });
 

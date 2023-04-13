@@ -41,32 +41,29 @@ describe('testing layout()', () => {
         expect(spriter.info).toHaveBeenCalledWith('Laying out «%s» sprite («%s» mode)', 'css', 'css');
     });
 
-    it.each([
-        'css',
-        'defs',
-        'stack',
-        'symbol',
-        'view'
-    ])('should require %p mode, construct addressed layouter, and call "layout method" and change passed files', mode => {
-        expect.hasAssertions();
+    it.each(['css', 'defs', 'stack', 'symbol', 'view'])(
+        'should require %p mode, construct addressed layouter, and call "layout method" and change passed files',
+        mode => {
+            expect.hasAssertions();
 
-        const TEST_FN = jest.fn();
-        const layout = layouters[mode].mockImplementation(() => {
-            return {
-                layout: TEST_FN
-            };
-        });
-        const TEST_KEY = `TEST_${mode}`;
-        const TEST_FILES = {};
+            const TEST_FN = jest.fn();
+            const layout = layouters[mode].mockImplementation(() => {
+                return {
+                    layout: TEST_FN
+                };
+            });
+            const TEST_KEY = `TEST_${mode}`;
+            const TEST_FILES = {};
 
-        const layouter = new SVGSpriteLayouter(spriter, {});
-        layouter.layout(TEST_FILES, TEST_KEY, mode, noop);
+            const layouter = new SVGSpriteLayouter(spriter, {});
+            layouter.layout(TEST_FILES, TEST_KEY, mode, noop);
 
-        expect(layout).toHaveBeenCalledWith(spriter, expect.any(Object), expect.any(Object), TEST_KEY);
-        expect(TEST_FN).toHaveBeenCalledWith({}, noop);
-        expect(TEST_FILES).toHaveProperty(TEST_KEY);
-        expect(TEST_FILES[TEST_KEY]).toStrictEqual({});
-    });
+            expect(layout).toHaveBeenCalledWith(spriter, expect.any(Object), expect.any(Object), TEST_KEY);
+            expect(TEST_FN).toHaveBeenCalledWith({}, noop);
+            expect(TEST_FILES).toHaveProperty(TEST_KEY);
+            expect(TEST_FILES[TEST_KEY]).toStrictEqual({});
+        }
+    );
 
     it('should pass expected config and data to layout', () => {
         expect.hasAssertions();
@@ -122,9 +119,7 @@ describe('testing layout()', () => {
 
         expect(layout).toHaveBeenCalledWith(
             expect.any(Object),
-            expect.objectContaining(
-                TEST_CONFIG
-            ),
+            expect.objectContaining(TEST_CONFIG),
             expect.any(Object),
             expect.any(String)
         );
@@ -237,20 +232,19 @@ describe('testing constructor', () => {
             }
         };
 
-        spriter._shapes = [
-            TEST_SHAPE
-        ];
+        spriter._shapes = [TEST_SHAPE];
         const layouter = new SVGSpriteLayouter(spriter, {
             example: true
         });
 
-        expect(layouter._commonData.shapes[0]).toStrictEqual(expect.objectContaining({
-            fileSize: '4 Bytes'
-        }));
+        expect(layouter._commonData.shapes[0]).toStrictEqual(
+            expect.objectContaining({
+                fileSize: '4 Bytes'
+            })
+        );
     });
 
-    it('should fill up shapes accordingly to spriter shapes ' +
-        'with proper data and proper width/height calculation', () => {
+    it('should fill up shapes accordingly to spriter shapes with proper data and proper width/height calculation', () => {
         expect.hasAssertions();
 
         const TEST_DIMENSIONS = {
@@ -584,12 +578,9 @@ describe('testing defaultVariables', () => {
 
                 const TEST_STR = 'test1 test2  test3 test4';
 
-                expect(
-                    layouter._commonData.classname()(
-                        TEST_STR,
-                        jest.fn().mockReturnValueOnce(TEST_STR)
-                    )
-                ).toBe('test4');
+                expect(layouter._commonData.classname()(TEST_STR, jest.fn().mockReturnValueOnce(TEST_STR))).toBe(
+                    'test4'
+                );
             });
 
             it('should remove the dot', () => {
@@ -597,12 +588,9 @@ describe('testing defaultVariables', () => {
 
                 const TEST_STR = '.classname';
 
-                expect(
-                    layouter._commonData.classname()(
-                        TEST_STR,
-                        jest.fn().mockReturnValueOnce(TEST_STR)
-                    )
-                ).toBe('classname');
+                expect(layouter._commonData.classname()(TEST_STR, jest.fn().mockReturnValueOnce(TEST_STR))).toBe(
+                    'classname'
+                );
             });
 
             it('should return initial string if it is not started with dot', () => {
@@ -610,12 +598,9 @@ describe('testing defaultVariables', () => {
 
                 const TEST_STR = 'class';
 
-                expect(
-                    layouter._commonData.classname()(
-                        TEST_STR,
-                        jest.fn().mockReturnValueOnce(TEST_STR)
-                    )
-                ).toBe('class');
+                expect(layouter._commonData.classname()(TEST_STR, jest.fn().mockReturnValueOnce(TEST_STR))).toBe(
+                    'class'
+                );
             });
         });
     });
@@ -637,9 +622,7 @@ describe('testing defaultVariables', () => {
             const TEST_STR = '\\1\\2\\3\\4';
             const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_STR);
 
-            expect(
-                layouter._commonData.escape()(TEST_STR, MOCK_RENDER_FN)
-            ).toBe('\\\\1\\\\2\\\\3\\\\4');
+            expect(layouter._commonData.escape()(TEST_STR, MOCK_RENDER_FN)).toBe('\\\\1\\\\2\\\\3\\\\4');
             expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_STR);
         });
     });
@@ -661,9 +644,7 @@ describe('testing defaultVariables', () => {
             const TEST_STR = '#1#2#3#4';
             const MOCK_RENDER_FN = jest.fn().mockReturnValueOnce(TEST_STR);
 
-            expect(
-                layouter._commonData.encodeHashSign()(TEST_STR, MOCK_RENDER_FN)
-            ).toBe('%231%232%233%234');
+            expect(layouter._commonData.encodeHashSign()(TEST_STR, MOCK_RENDER_FN)).toBe('%231%232%233%234');
             expect(MOCK_RENDER_FN).toHaveBeenCalledWith(TEST_STR);
         });
     });

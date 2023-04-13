@@ -41,10 +41,7 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
     it('should set expected array if transforms is an array of strings', () => {
         expect.hasAssertions();
 
-        const TEST_TRANSFORMS = [
-            'test',
-            'test_2'
-        ];
+        const TEST_TRANSFORMS = ['test', 'test_2'];
         const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
         const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
 
@@ -57,10 +54,7 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
     it('should set expected custom array of transforms if transforms is an array of functions', () => {
         expect.hasAssertions();
 
-        const TEST_TRANSFORMS = [
-            jest.fn(),
-            jest.fn()
-        ];
+        const TEST_TRANSFORMS = [jest.fn(), jest.fn()];
         const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
         const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
 
@@ -74,12 +68,15 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
         expect.hasAssertions();
 
         const TEST_TRANSFORM_CONFIG = { TEST: 2 };
-        const TEST_TRANSFORMS = [{
-            TEST: jest.fn(),
-            TEST_THAT_SHOULD_NOT_INCLUDED: jest.fn()
-        }, {
-            TEST_2: TEST_TRANSFORM_CONFIG
-        }];
+        const TEST_TRANSFORMS = [
+            {
+                TEST: jest.fn(),
+                TEST_THAT_SHOULD_NOT_INCLUDED: jest.fn()
+            },
+            {
+                TEST_2: TEST_TRANSFORM_CONFIG
+            }
+        ];
         const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
         const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
 

@@ -130,10 +130,7 @@ describe('testing _initSVG()', () => {
     it('should fill entities', () => {
         expect.hasAssertions();
 
-        const TEST_ENTITIES = [
-            '<!ENTITY name1 "value1">',
-            '<!ENTITY name2 "value2">'
-        ];
+        const TEST_ENTITIES = ['<!ENTITY name1 "value1">', '<!ENTITY name2 "value2">'];
         const TEST_FILE = new File({
             contents: Buffer.from(`<svg><!DOCTYPE ${TEST_ENTITIES.join('\n')}>&name1;</svg>`),
             path: '/test_base/test_path',
@@ -152,16 +149,16 @@ describe('testing _initSVG()', () => {
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-        expect(shape.svg.current.replace('\n', '')).toBe('<svg><!DOCTYPE <!ENTITY name1 "value1"><!ENTITY name2 "value2">>value1</svg>');
+        expect(shape.svg.current.replace('\n', '')).toBe(
+            '<svg><!DOCTYPE <!ENTITY name1 "value1"><!ENTITY name2 "value2">>value1</svg>'
+        );
     });
 
     it('should throw error if bad svg parsed', () => {
         expect.hasAssertions();
 
         const TEST_FILE = new File({
-            contents: Buffer.from(
-                '<<ddfasdfasdf>>'
-            ),
+            contents: Buffer.from('<<ddfasdfasdf>>'),
             path: '/test_base/test_path',
             base: '/test_base/',
             cwd: '/'

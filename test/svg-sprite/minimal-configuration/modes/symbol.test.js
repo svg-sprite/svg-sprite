@@ -12,9 +12,9 @@ const { paths } = require('../../../helpers/constants.js');
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
 describe.each`
-        name          | testConfigKey
-        ${'default'}  | ${'DEFAULT'}
-        ${'w/o dims'} | ${'WITHOUT_DIMS'}
+    name          | testConfigKey
+    ${'default'}  | ${'DEFAULT'}
+    ${'w/o dims'} | ${'WITHOUT_DIMS'}
 `('svg-sprite: $name: «symbol» mode', ({ testConfigKey }) => {
     const testConfig = constants[testConfigKey];
 
@@ -24,7 +24,7 @@ describe.each`
     let spriter;
     let data;
 
-    beforeAll(async() => {
+    beforeAll(async () => {
         await removeTmpPath(tmpPath);
         data = {};
 
@@ -32,7 +32,8 @@ describe.each`
         addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
         const { result, data: cssData } = await spriter.compileAsync({
             symbol: {
-                sprite: `svg/symbol${testConfig.namespace}.svg`, render: {
+                sprite: `svg/symbol${testConfig.namespace}.svg`,
+                render: {
                     css: true
                 }
             }
@@ -42,7 +43,7 @@ describe.each`
         svg = path.basename(result.symbol.sprite.path);
     });
 
-    it('creates a visually correct stylesheet resource in CSS format', async() => {
+    it('creates a visually correct stylesheet resource in CSS format', async () => {
         expect.hasAssertions();
 
         const svgData = await readFile(path.join(tmpPath, 'symbol/svg', svg));

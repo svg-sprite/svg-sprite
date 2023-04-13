@@ -6,7 +6,7 @@ const calculateSvgDimensions = require('../lib/svg-sprite/utils/calculate-svg-di
 const DimensionsCalculationError = require('../lib/svg-sprite/errors/dimensions-calculation-error.js');
 
 describe('calculateSvgDimensions', () => {
-    it('should return the expected dimensions from 46x46 fixture', async() => {
+    it('should return the expected dimensions from 46x46 fixture', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
@@ -17,7 +17,7 @@ describe('calculateSvgDimensions', () => {
         expect(dimensions).toStrictEqual(expected);
     });
 
-    it('should return the expected dimensions from 2048x2048 fixture', async() => {
+    it('should return the expected dimensions from 2048x2048 fixture', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/2048x2048.svg');
@@ -28,7 +28,7 @@ describe('calculateSvgDimensions', () => {
         expect(dimensions).toStrictEqual(expected);
     });
 
-    it('should return the expected dimensions from 32x32 fixture', async() => {
+    it('should return the expected dimensions from 32x32 fixture', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/32x32.svg');
@@ -39,7 +39,7 @@ describe('calculateSvgDimensions', () => {
         expect(dimensions).toStrictEqual(expected);
     });
 
-    it('should return the expected dimensions from 100x100 fixture', async() => {
+    it('should return the expected dimensions from 100x100 fixture', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/100x100.svg');
@@ -50,7 +50,7 @@ describe('calculateSvgDimensions', () => {
         expect(dimensions).toStrictEqual(expected);
     });
 
-    it('should return the expected dimensions from 231x69 fixture', async() => {
+    it('should return the expected dimensions from 231x69 fixture', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/231x69.svg');
@@ -61,7 +61,7 @@ describe('calculateSvgDimensions', () => {
         expect(dimensions).toStrictEqual(expected);
     });
 
-    it('should return same results no each run', async() => {
+    it('should return same results no each run', async () => {
         expect.hasAssertions();
 
         const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');

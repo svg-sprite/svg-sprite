@@ -64,19 +64,20 @@ describe('testing log', () => {
             global.console = originalConsole;
         });
 
-        it.each(
-            ['info', 'verbose', 'debug']
-        )('non-silent with %p log level if passed config.log has %p value', logLevel => {
-            expect.hasAssertions();
+        it.each(['info', 'verbose', 'debug'])(
+            'non-silent with %p log level if passed config.log has %p value',
+            logLevel => {
+                expect.hasAssertions();
 
-            const config = new SVGSpriterConfig({
-                log: logLevel
-            });
+                const config = new SVGSpriterConfig({
+                    log: logLevel
+                });
 
-            expect(config.log).toBeDefaultWinstonLogger();
-            expect(config.log.transports[0].level).toBe(logLevel);
-            expect(config.log.transports[0].silent).toBe(false);
-        });
+                expect(config.log).toBeDefaultWinstonLogger();
+                expect(config.log.transports[0].level).toBe(logLevel);
+                expect(config.log.transports[0].silent).toBe(false);
+            }
+        );
 
         it('non-silent with info level if passed truthy value', () => {
             expect.hasAssertions();
@@ -103,4 +104,3 @@ describe('testing log', () => {
         });
     });
 });
-

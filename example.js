@@ -29,10 +29,7 @@ const svgoConfig = {
         {
             name: 'removeAttrs',
             params: {
-                attrs: [
-                    'clip-rule',
-                    'data-name'
-                ]
+                attrs: ['clip-rule', 'data-name']
             }
         }
     ]
@@ -46,18 +43,21 @@ const spriter = new SVGSpriter({
         xmlDeclaration: false
     },
     shape: {
-        transform: [{
-            svgo: svgoConfig
-        }]
+        transform: [
+            {
+                svgo: svgoConfig
+            }
+        ]
     }
 });
 
 /**
  * Add a bunch of SVG files
  *
- * @param {SVGSpriter} spriter          Spriter instance
- * @param {Array} files                 SVG files
- * @returns {SVGSpriter}                Spriter instance
+ * @param   {SVGSpriter} spriter Spriter instance
+ * @param   {Array}      files   SVG files
+ *
+ * @returns {SVGSpriter}         Spriter instance
  */
 function addFixtureFiles(spriter, files) {
     for (const file of files) {
@@ -68,19 +68,22 @@ function addFixtureFiles(spriter, files) {
     return spriter;
 }
 
-addFixtureFiles(spriter, files).compile({
-    css: {
-        sprite: 'svg/sprite.vertical.svg',
-        layout: 'vertical',
-        dimensions: true,
-        render: {
-            css: true,
-            scss: true
+addFixtureFiles(spriter, files).compile(
+    {
+        css: {
+            sprite: 'svg/sprite.vertical.svg',
+            layout: 'vertical',
+            dimensions: true,
+            render: {
+                css: true,
+                scss: true
+            }
+        }
+    },
+    (error, result) => {
+        for (const type of Object.values(result.css)) {
+            fs.mkdirSync(path.dirname(type.path), { recursive: true });
+            fs.writeFileSync(type.path, type.contents);
         }
     }
-}, (error, result) => {
-    for (const type of Object.values(result.css)) {
-        fs.mkdirSync(path.dirname(type.path), { recursive: true });
-        fs.writeFileSync(type.path, type.contents);
-    }
-});
+);

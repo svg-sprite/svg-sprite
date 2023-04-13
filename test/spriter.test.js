@@ -91,11 +91,13 @@ describe('testing SVGSpriter', () => {
                 };
                 spriter.add(TEST_SVG, 'weather-clear.svg', TEST_EMPTY_SVG);
 
-                expect(spriter._queue.add).toHaveBeenCalledWith(new File({
-                    base: path.dirname(path.resolve(TEST_SVG)),
-                    path: path.resolve(TEST_SVG),
-                    contents: Buffer.from(TEST_EMPTY_SVG)
-                }));
+                expect(spriter._queue.add).toHaveBeenCalledWith(
+                    new File({
+                        base: path.dirname(path.resolve(TEST_SVG)),
+                        path: path.resolve(TEST_SVG),
+                        contents: Buffer.from(TEST_EMPTY_SVG)
+                    })
+                );
             });
 
             it('should create vinyl file from passed absolute file and add it to _queue', () => {
@@ -104,18 +106,20 @@ describe('testing SVGSpriter', () => {
                 };
                 spriter.add(path.resolve(TEST_SVG), 'weather-clear.svg', TEST_EMPTY_SVG);
 
-                expect(spriter._queue.add).toHaveBeenCalledWith(new File({
-                    base: path.dirname(path.resolve(TEST_SVG)),
-                    path: path.resolve(TEST_SVG),
-                    contents: Buffer.from(TEST_EMPTY_SVG)
-                }));
+                expect(spriter._queue.add).toHaveBeenCalledWith(
+                    new File({
+                        base: path.dirname(path.resolve(TEST_SVG)),
+                        path: path.resolve(TEST_SVG),
+                        contents: Buffer.from(TEST_EMPTY_SVG)
+                    })
+                );
             });
         });
     });
 });
 
 describe('testing transform', () => {
-    it('should call all transformations', async() => {
+    it('should call all transformations', async () => {
         const testTransformFunction = jest.fn();
         const spriter = new SVGSpriter({
             shape: {
@@ -132,11 +136,13 @@ describe('testing transform', () => {
             }
         });
 
-        spriter.add(new File({
-            base: path.dirname(TEST_SVG),
-            path: TEST_SVG,
-            contents: fs.readFileSync(path.join(__dirname, TEST_SVG))
-        }));
+        spriter.add(
+            new File({
+                base: path.dirname(TEST_SVG),
+                path: TEST_SVG,
+                contents: fs.readFileSync(path.join(__dirname, TEST_SVG))
+            })
+        );
 
         await spriter.compileAsync({ css: true });
 

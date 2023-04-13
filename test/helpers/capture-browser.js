@@ -8,7 +8,7 @@ const getBrowser = () => {
     return browser;
 };
 
-const launchBrowser = async() => {
+const launchBrowser = async () => {
     const currentBrowserInstance = getBrowser();
     if (currentBrowserInstance) {
         return currentBrowserInstance;
@@ -18,7 +18,7 @@ const launchBrowser = async() => {
     return browser;
 };
 
-const closeBrowser = async() => {
+const closeBrowser = async () => {
     const currentBrowserInstance = getBrowser();
 
     if (!currentBrowserInstance) {

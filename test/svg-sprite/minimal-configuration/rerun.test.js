@@ -15,7 +15,7 @@ const tmpPath = path.join(paths.tmp, 'rerun');
 describe('testing rerun', () => {
     beforeAll(removeTmpPath.bind(null, tmpPath));
 
-    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', async() => {
+    it('creates 5 files and then additional 1 on each layout after rerun when all render types disabled', async () => {
         expect.assertions(11);
 
         const spriter = new SVGSpriter({ dest: tmpPath });
@@ -43,18 +43,21 @@ describe('testing rerun', () => {
 
         const promises = otherLayouts.map(mode => {
             return new Promise(resolve => {
-                spriter.compile({
-                    css: {
-                        sprite: `svg/css.${mode}.svg`,
-                        layout: 'horizontal'
-                    }
-                }, (error, result) => {
-                    expect(error).toBeNull();
-                    expect(result.css).toBeInstanceOf(Object);
-                    expect(Object.values(result.css)).toHaveLength(1);
+                spriter.compile(
+                    {
+                        css: {
+                            sprite: `svg/css.${mode}.svg`,
+                            layout: 'horizontal'
+                        }
+                    },
+                    (error, result) => {
+                        expect(error).toBeNull();
+                        expect(result.css).toBeInstanceOf(Object);
+                        expect(Object.values(result.css)).toHaveLength(1);
 
-                    resolve();
-                });
+                        resolve();
+                    }
+                );
             });
         });
 

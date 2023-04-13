@@ -86,18 +86,19 @@ describe('testing SVGSprite', () => {
             expect(sprite._serialized).toBeNull();
         });
 
-        it.each(
-            [false, true, {}, jest.fn(), Symbol(''), 1, null, undefined, 'string']
-        )('should not push to content if %p passed', param => {
-            expect.hasAssertions();
+        it.each([false, true, {}, jest.fn(), Symbol(''), 1, null, undefined, 'string'])(
+            'should not push to content if %p passed',
+            param => {
+                expect.hasAssertions();
 
-            const sprite = new SVGSprite(false, false, {}, false, []);
+                const sprite = new SVGSprite(false, false, {}, false, []);
 
-            sprite.add(param);
+                sprite.add(param);
 
-            expect(sprite.content).toStrictEqual([param]);
-            expect(sprite._serialized).toBeNull();
-        });
+                expect(sprite.content).toStrictEqual([param]);
+                expect(sprite._serialized).toBeNull();
+            }
+        );
     });
 
     describe('testing toString()', () => {
@@ -149,11 +150,13 @@ describe('testing SVGSprite', () => {
             const sprite = new SVGSprite(false, false, {}, false, []);
             jest.spyOn(sprite, 'toString').mockReturnValueOnce(TEST_CONTENT);
 
-            expect(sprite.toFile(TEST_BASE, TEST_PATH)).toStrictEqual(new File({
-                base: TEST_BASE,
-                path: TEST_PATH,
-                contents: Buffer.from(TEST_CONTENT)
-            }));
+            expect(sprite.toFile(TEST_BASE, TEST_PATH)).toStrictEqual(
+                new File({
+                    base: TEST_BASE,
+                    path: TEST_PATH,
+                    contents: Buffer.from(TEST_CONTENT)
+                })
+            );
         });
     });
 });

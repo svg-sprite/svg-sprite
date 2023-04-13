@@ -20,7 +20,7 @@ describe('svg-sprite: with no arguments', () => {
         });
     });
 
-    it('with no SVG files has an empty result', async() => {
+    it('with no SVG files has an empty result', async () => {
         expect.assertions(6);
 
         const { result, data } = await spriter.compileAsync();
@@ -33,7 +33,7 @@ describe('svg-sprite: with no arguments', () => {
         expect(data).toStrictEqual({});
     });
 
-    it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, async() => {
+    it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, async () => {
         expect.assertions(6);
 
         addFixtureFiles(spriter, weather, cwdWeather);
@@ -47,7 +47,7 @@ describe('svg-sprite: with no arguments', () => {
         expect(data).toStrictEqual({});
     });
 
-    it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, async() => {
+    it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, async () => {
         expect.assertions(6);
 
         addRelativeFixtureFiles(spriter, weather, cwdWeather);

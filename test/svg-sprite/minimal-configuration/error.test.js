@@ -21,9 +21,9 @@ describe('svg-sprite: errors', () => {
         });
     });
 
-    it('should throw error if compilation has failed in async mode', async() => {
+    it('should throw error if compilation has failed in async mode', async () => {
         expect.hasAssertions();
-        await expect(async() => {
+        await expect(async () => {
             await spriter.compileAsync();
         }).rejects.toThrow(TestError);
     });

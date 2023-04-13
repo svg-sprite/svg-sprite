@@ -157,8 +157,12 @@ describe('testing _setDimensions()', () => {
         shape._setDimensions(jest.fn());
 
         expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledTimes(2);
-        expect(shape.dom.documentElement.setAttribute.mock.calls[0]).toStrictEqual(expect.arrayContaining(['height', TEST_HEIGHT]));
-        expect(shape.dom.documentElement.setAttribute.mock.calls[1]).toStrictEqual(expect.arrayContaining(['width', TEST_WIDTH]));
+        expect(shape.dom.documentElement.setAttribute.mock.calls[0]).toStrictEqual(
+            expect.arrayContaining(['height', TEST_HEIGHT])
+        );
+        expect(shape.dom.documentElement.setAttribute.mock.calls[1]).toStrictEqual(
+            expect.arrayContaining(['width', TEST_WIDTH])
+        );
     });
 
     describe('shape need to be scaled', () => {
@@ -179,7 +183,7 @@ describe('testing _setDimensions()', () => {
 
             expect(shape._scale).toBe(380 / 400);
             expect(shape.width).toBe(380);
-            expect(shape.height).toBe(100 * 380 / 400);
+            expect(shape.height).toBe((100 * 380) / 400);
         });
 
         it('should scale if height is more than maxHeight', () => {
@@ -198,7 +202,7 @@ describe('testing _setDimensions()', () => {
             shape._setDimensions(jest.fn());
 
             expect(shape.height).toBe(80);
-            expect(shape.width).toBe(300 * 80 / 100);
+            expect(shape.width).toBe((300 * 80) / 100);
             expect(shape._scale).toBe(0.8);
         });
 
@@ -330,7 +334,9 @@ describe('testing _addMetadata()', () => {
         shape._addMetadata(noop);
 
         expect(shape.description).not.toBeNull();
-        expect(shape.description.toString()).toBe('<desc id="test_path-desc" xmlns="http://www.w3.org/2000/svg">TEST</desc>');
+        expect(shape.description.toString()).toBe(
+            '<desc id="test_path-desc" xmlns="http://www.w3.org/2000/svg">TEST</desc>'
+        );
     });
 
     it('should set meta title', () => {
@@ -366,7 +372,9 @@ describe('testing _addMetadata()', () => {
         shape._addMetadata(noop);
 
         expect(shape.title).not.toBeNull();
-        expect(shape.title.toString()).toBe('<title id="test_path-title" xmlns="http://www.w3.org/2000/svg">TEST</title>');
+        expect(shape.title.toString()).toBe(
+            '<title id="test_path-title" xmlns="http://www.w3.org/2000/svg">TEST</title>'
+        );
     });
 
     it('should remove aria-labelledby if neither title or descriptions contains in meta', () => {
@@ -386,7 +394,7 @@ describe('testing _addMetadata()', () => {
 });
 
 describe('testing complement()', () => {
-    it('should call all functions and set ready state', async() => {
+    it('should call all functions and set ready state', async () => {
         expect.hasAssertions();
 
         const testComplementDimensions = jest.fn().mockImplementation(fn => fn(null));
@@ -396,15 +404,21 @@ describe('testing complement()', () => {
 
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-        shape._complementDimensions = { bind() {
-            return testComplementDimensions;
-        } };
-        shape._addPadding = { bind() {
-            return testAddPadding;
-        } };
-        shape._addMetadata = { bind() {
-            return testAddMetadata;
-        } };
+        shape._complementDimensions = {
+            bind() {
+                return testComplementDimensions;
+            }
+        };
+        shape._addPadding = {
+            bind() {
+                return testAddPadding;
+            }
+        };
+        shape._addMetadata = {
+            bind() {
+                return testAddMetadata;
+            }
+        };
 
         shape.complement(noop);
 
