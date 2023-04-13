@@ -1,11 +1,10 @@
 # svg-sprite
 
-This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
-
+This file is part of the documentation of _svg-sprite_ — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 ## Command line usage
 
-You may use *svg-sprite* as a command line tool. Type `svg-sprite --help` to get all the available options:
+You may use _svg-sprite_ as a command line tool. Type `svg-sprite --help` to get all the available options:
 
 ```text
 Usage: svg-sprite [options] files

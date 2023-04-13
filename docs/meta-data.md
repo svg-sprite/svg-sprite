@@ -1,7 +1,6 @@
 # svg-sprite
 
-This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
-
+This file is part of the documentation of _svg-sprite_ — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 ## Meta data injection
 
@@ -12,23 +11,23 @@ By providing a simple [YAML](https://yaml.org/) file via the `shape.meta` config
 The YAML file needs to look like this:
 
 ```yaml
-"path/to/rectangle.svg":
-  title: "Green rectangle"
-  description: "A light green rectangle with rounded corners and a dark green border"
+'path/to/rectangle.svg':
+  title: 'Green rectangle'
+  description: 'A light green rectangle with rounded corners and a dark green border'
 
 path--to--circle:
-  title: "Red circle"
-  description: "A red circle with a black border"
+  title: 'Red circle'
+  description: 'A red circle with a black border'
 ```
 
 The keys need to match either
 
-* the **"local" file path part** of the SVG files you [register to the spriter](api.md#svgspriteraddfile--name-svg-) or
-* the final **shape IDs / CSS class names** as returned by the `id.generator` function.
+- the **"local" file path part** of the SVG files you [register to the spriter](api.md#svgspriteraddfile--name-svg-) or
+- the final **shape IDs / CSS class names** as returned by the `id.generator` function.
 
 ### SVG results
 
-For each of your shapes, *svg-sprite* will look for `title` and `description` keys and inject their values like this:
+For each of your shapes, _svg-sprite_ will look for `title` and `description` keys and inject their values like this:
 
 ```xml
 <svg aria-labelledby="title desc">
@@ -38,4 +37,4 @@ For each of your shapes, *svg-sprite* will look for `title` and `description` ke
 </svg>
 ```
 
-Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, *svg-sprite* will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.
+Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, _svg-sprite_ will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.

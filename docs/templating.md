@@ -1,7 +1,6 @@
 # svg-sprite
 
-This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
-
+This file is part of the documentation of _svg-sprite_ — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 ## Tweaking and adding output formats
 
@@ -132,16 +131,15 @@ For each sprite generation process, a data object is constructed that is passed 
 }
 ```
 
-**NOTE!**  `fileSize` property of each shape is null unless the `example` [config is passed](api.md#compilation-example)
-
+**NOTE!** `fileSize` property of each shape is null unless the `example` [config is passed](api.md#compilation-example)
 
 ### Builtin templating functions
 
-There are a couple of functions directly built into *svg-sprite*. You may use them in any template.
+There are a couple of functions directly built into _svg-sprite_. You may use them in any template.
 
 #### date
 
-Takes no arguments and returns the current date and time as GMT string (e.g. *Mon, 22 Dec 2014 16:18:53 GMT*).
+Takes no arguments and returns the current date and time as GMT string (e.g. _Mon, 22 Dec 2014 16:18:53 GMT_).
 
 ```mustache
 <p>Generated at {{date}} by svg-sprite</p>
@@ -159,7 +157,7 @@ Returns the negative value of a floating point number.
 
 #### classname
 
-Returns the innermost part of a CSS selector as a class name (with the leading dot stripped off). For instance, if `fullselector` had the value *.svg .icon-cart*,
+Returns the innermost part of a CSS selector as a class name (with the leading dot stripped off). For instance, if `fullselector` had the value _.svg .icon-cart_,
 
 ```mustache
 <i class="{{#classname}}{{fullselector}}{{/classname}}">Cart</i>
