@@ -15,7 +15,10 @@ const { paths } = require('../../helpers/constants.js');
 
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
-const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
+const previewTemplate = fs.readFileSync(
+  path.join(__dirname, '../../tmpl/css.html'),
+  'utf8'
+);
 
 const tmpPath = path.join(paths.tmp, 'center');
 
@@ -60,7 +63,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const expected = path.join(paths.expectations, 'png/css.vertical.centered.png');
+      const expected = path.join(
+        paths.expectations,
+        'png/css.vertical.centered.png'
+      );
 
       expect(fs.readFileSync(input).toString()).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
@@ -72,9 +78,15 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       data.css = '../sprite.centered.css';
 
       const out = mustache.render(previewTemplate, data);
-      const preview = await writeFile(path.join(tmpPath, 'css/html/css.vertical.centered.html'), out);
+      const preview = await writeFile(
+        path.join(tmpPath, 'css/html/css.vertical.centered.html'),
+        out
+      );
 
-      const expected = path.join(paths.expectations, 'png/css.vertical.centered.html.png');
+      const expected = path.join(
+        paths.expectations,
+        'png/css.vertical.centered.html.png'
+      );
 
       await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
@@ -118,7 +130,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const expected = path.join(paths.expectations, 'png/css.horizontal.centered.png');
+      const expected = path.join(
+        paths.expectations,
+        'png/css.horizontal.centered.png'
+      );
 
       expect(fs.readFileSync(input).toString()).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
@@ -127,15 +142,26 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
     it('creates a visually correct stylesheet resource', async () => {
       expect.hasAssertions();
 
-      const scssText = sass.renderSync({ file: path.join(tmpPath, 'css/sprite.centered.scss') });
+      const scssText = sass.renderSync({
+        file: path.join(tmpPath, 'css/sprite.centered.scss')
+      });
 
-      await writeFile(path.join(tmpPath, 'css/sprite.centered.scss.css'), scssText.css);
+      await writeFile(
+        path.join(tmpPath, 'css/sprite.centered.scss.css'),
+        scssText.css
+      );
 
       data.css = '../sprite.centered.scss.css';
 
       const out = mustache.render(previewTemplate, data);
-      const preview = await writeFile(path.join(tmpPath, 'css/html/scss.horizontal.centered.html'), out);
-      const expected = path.join(paths.expectations, 'png/css.horizontal.centered.html.png');
+      const preview = await writeFile(
+        path.join(tmpPath, 'css/html/scss.horizontal.centered.html'),
+        out
+      );
+      const expected = path.join(
+        paths.expectations,
+        'png/css.horizontal.centered.html.png'
+      );
 
       await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });
@@ -179,7 +205,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const expected = path.join(paths.expectations, 'png/css.packed.centered.png');
+      const expected = path.join(
+        paths.expectations,
+        'png/css.packed.centered.png'
+      );
 
       expect(fs.readFileSync(input).toString()).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
@@ -192,13 +221,22 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       const lessText = fs.readFileSync(lessFile, 'utf8');
       const output = await asyncRenderers.less(lessText, {});
 
-      await writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);
+      await writeFile(
+        path.join(tmpPath, 'css/sprite.centered.less.css'),
+        output.css
+      );
 
       data.css = '../sprite.centered.less.css';
 
       const out = mustache.render(previewTemplate, data);
-      const preview = await writeFile(path.join(tmpPath, 'css/html/less.packed.centered.html'), out);
-      const expected = path.join(paths.expectations, 'png/css.packed.aligned.html.png');
+      const preview = await writeFile(
+        path.join(tmpPath, 'css/html/less.packed.centered.html'),
+        out
+      );
+      const expected = path.join(
+        paths.expectations,
+        'png/css.packed.aligned.html.png'
+      );
 
       await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
     });

@@ -44,7 +44,9 @@ describe('testing SVGSpriteCssPacker', () => {
       const packer = new SVGSpriteCssPacker(TEST_SHAPES);
 
       expect(packer.shapes).toBe(TEST_SHAPES);
-      expect(packer.positions).toStrictEqual(TEST_SHAPES.map(() => ({ x: 0, y: 0 })));
+      expect(packer.positions).toStrictEqual(
+        TEST_SHAPES.map(() => ({ x: 0, y: 0 }))
+      );
       expect(packer.blocks).toStrictEqual([
         { height: 6, index: 2, width: 0 },
         {
@@ -126,11 +128,18 @@ describe('testing SVGSpriteCssPacker', () => {
           }
         };
 
-        jest.spyOn(packer, '_findNode').mockReturnValueOnce(null).mockReturnValueOnce(RESULT);
+        jest
+          .spyOn(packer, '_findNode')
+          .mockReturnValueOnce(null)
+          .mockReturnValueOnce(RESULT);
 
         expect(originalFn(TEST_ROOT, 20, 10)).toBe(RESULT);
         expect(packer._findNode).toHaveBeenCalledTimes(2);
-        expect(packer._findNode).toHaveBeenLastCalledWith(TEST_ROOT.down, 20, 10);
+        expect(packer._findNode).toHaveBeenLastCalledWith(
+          TEST_ROOT.down,
+          20,
+          10
+        );
       });
     });
   });
@@ -163,7 +172,10 @@ describe('testing SVGSpriteCssPacker', () => {
         }
       };
 
-      expect(packer._splitNode(TEST_NODE_COPY, 50, 50)).toStrictEqual({ ...TEST_NODE, ...expected });
+      expect(packer._splitNode(TEST_NODE_COPY, 50, 50)).toStrictEqual({
+        ...TEST_NODE,
+        ...expected
+      });
       expect(TEST_NODE_COPY).toStrictEqual(expect.objectContaining(expected));
     });
   });
@@ -182,7 +194,12 @@ describe('testing SVGSpriteCssPacker', () => {
         width: packer.root.width + TEST_WIDTH,
         height: packer.root.height,
         down: packer.root,
-        right: { x: packer.root.width, y: 0, width: TEST_WIDTH, height: packer.root.height }
+        right: {
+          x: packer.root.width,
+          y: 0,
+          width: TEST_WIDTH,
+          height: packer.root.height
+        }
       };
       const TEST_RESULT = { TEST: 'result' };
 
@@ -190,8 +207,16 @@ describe('testing SVGSpriteCssPacker', () => {
       jest.spyOn(packer, '_splitNode').mockReturnValueOnce(TEST_RESULT);
 
       expect(packer._growRight(TEST_WIDTH, TEST_HEIGHT)).toBe(TEST_RESULT);
-      expect(packer._findNode).toHaveBeenCalledWith(expected, TEST_WIDTH, TEST_HEIGHT);
-      expect(packer._splitNode).toHaveBeenLastCalledWith({}, TEST_WIDTH, TEST_HEIGHT);
+      expect(packer._findNode).toHaveBeenCalledWith(
+        expected,
+        TEST_WIDTH,
+        TEST_HEIGHT
+      );
+      expect(packer._splitNode).toHaveBeenLastCalledWith(
+        {},
+        TEST_WIDTH,
+        TEST_HEIGHT
+      );
     });
 
     it('should return false if node is not found', () => {
@@ -218,7 +243,12 @@ describe('testing SVGSpriteCssPacker', () => {
         y: 0,
         width: packer.root.width,
         height: packer.root.height + TEST_HEIGHT,
-        down: { x: 0, y: packer.root.height, width: packer.root.width, height: TEST_HEIGHT },
+        down: {
+          x: 0,
+          y: packer.root.height,
+          width: packer.root.width,
+          height: TEST_HEIGHT
+        },
         right: packer.root
       };
       const TEST_RESULT = { TEST: 'result' };
@@ -227,8 +257,16 @@ describe('testing SVGSpriteCssPacker', () => {
       jest.spyOn(packer, '_splitNode').mockReturnValueOnce(TEST_RESULT);
 
       expect(packer._growBottom(TEST_WIDTH, TEST_HEIGHT)).toBe(TEST_RESULT);
-      expect(packer._findNode).toHaveBeenCalledWith(expected, TEST_WIDTH, TEST_HEIGHT);
-      expect(packer._splitNode).toHaveBeenLastCalledWith({}, TEST_WIDTH, TEST_HEIGHT);
+      expect(packer._findNode).toHaveBeenCalledWith(
+        expected,
+        TEST_WIDTH,
+        TEST_HEIGHT
+      );
+      expect(packer._splitNode).toHaveBeenLastCalledWith(
+        {},
+        TEST_WIDTH,
+        TEST_HEIGHT
+      );
     });
 
     it('should return null if node is not found', () => {

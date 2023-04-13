@@ -47,8 +47,12 @@ describe('testing setDimensions()', () => {
 
     expect(shape.width).toBe(TEST_WIDTH);
     expect(shape.height).toBe(TEST_HEIGHT);
-    expect(shape.dom.documentElement.getAttribute('width')).toBe(TEST_WIDTH.toString());
-    expect(shape.dom.documentElement.getAttribute('height')).toBe(TEST_HEIGHT.toString());
+    expect(shape.dom.documentElement.getAttribute('width')).toBe(
+      TEST_WIDTH.toString()
+    );
+    expect(shape.dom.documentElement.getAttribute('height')).toBe(
+      TEST_HEIGHT.toString()
+    );
   });
 });
 
@@ -101,9 +105,13 @@ describe('testing setViewbox()', () => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
     const expected = [0, 1, 2, 3, 4, 23, Number.NaN];
 
-    expect(shape.setViewbox([0, 1, 2, 3, 4, '23', 'string'])).toStrictEqual(expected);
+    expect(shape.setViewbox([0, 1, 2, 3, 4, '23', 'string'])).toStrictEqual(
+      expected
+    );
     expect(shape.viewBox).toStrictEqual(expected);
-    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(expected.join(' '));
+    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(
+      expected.join(' ')
+    );
   });
 
   it('should fill with zeros if first param is empty array', () => {
@@ -114,7 +122,9 @@ describe('testing setViewbox()', () => {
 
     expect(shape.setViewbox([])).toStrictEqual(expected);
     expect(shape.viewBox).toStrictEqual(expected);
-    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(expected.join(' '));
+    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(
+      expected.join(' ')
+    );
   });
 
   it('should accordingly to passed params', () => {
@@ -125,6 +135,8 @@ describe('testing setViewbox()', () => {
 
     expect(shape.setViewbox(...expected)).toStrictEqual(expected);
     expect(shape.viewBox).toStrictEqual(expected);
-    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(expected.join(' '));
+    expect(shape.dom.documentElement.getAttribute('viewBox')).toBe(
+      expected.join(' ')
+    );
   });
 });

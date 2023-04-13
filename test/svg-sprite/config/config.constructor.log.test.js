@@ -45,9 +45,13 @@ describe('testing log', () => {
     expect(TEST_LOGGER.debug.mock.calls[2][0]).toBe('Prepared `shape` options');
     expect(TEST_LOGGER.debug.mock.calls[3][0]).toBe('Prepared `svg` options');
     expect(TEST_LOGGER.debug.mock.calls[4][0]).toBe('Prepared `mode` options');
-    expect(TEST_LOGGER.debug.mock.calls[5][0]).toBe('Prepared `variables` options');
+    expect(TEST_LOGGER.debug.mock.calls[5][0]).toBe(
+      'Prepared `variables` options'
+    );
     expect(TEST_LOGGER.verbose).toHaveBeenCalledTimes(1);
-    expect(TEST_LOGGER.verbose).toHaveBeenCalledWith('Initialized spriter configuration');
+    expect(TEST_LOGGER.verbose).toHaveBeenCalledWith(
+      'Initialized spriter configuration'
+    );
   });
 
   describe('should create winston logger', () => {

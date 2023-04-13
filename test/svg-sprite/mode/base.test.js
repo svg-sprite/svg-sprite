@@ -61,10 +61,14 @@ describe('testings SVGSpriteBase', () => {
       expect(base.data.mode).toBe(TEST_MODE_NAME);
       expect(base.data.key).toBe(TEST_MODE_NAME);
 
-      expect(base.config.dest).toBe(path.resolve(TEST_SPRITER.config.dest, TEST_CONFIG.dest));
+      expect(base.config.dest).toBe(
+        path.resolve(TEST_SPRITER.config.dest, TEST_CONFIG.dest)
+      );
       expect(base.config.bust).toBe(false);
       expect(base.config.prefix).toBe('1%s');
-      expect(base.config.sprite).toBe(path.resolve(TEST_CONFIG.dest, 'sprite.svg'));
+      expect(base.config.sprite).toBe(
+        path.resolve(TEST_CONFIG.dest, 'sprite.svg')
+      );
       expect(base._cssDest).toBe(TEST_CONFIG.dest);
       expect(base.tmpl).toBe('common');
       expect(base.MODE_CSS).toBe('css');
@@ -116,7 +120,10 @@ describe('testings SVGSpriteBase', () => {
         expect(base.config.render).toStrictEqual(
           expect.objectContaining({
             png: {
-              template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.png'),
+              template: path.resolve(
+                path.dirname(path.dirname(path.dirname(__dirname))),
+                'tmpl/common/sprite.png'
+              ),
               dest: path.join(TEST_CONFIG.dest, 'sprite.png')
             },
             jpg: {
@@ -125,11 +132,17 @@ describe('testings SVGSpriteBase', () => {
             },
             bmp: {
               dest: path.resolve(TEST_CONFIG.dest, 'dest.bmp'),
-              template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.bmp')
+              template: path.resolve(
+                path.dirname(path.dirname(path.dirname(__dirname))),
+                'tmpl/common/sprite.bmp'
+              )
             },
             webp: {
               dest: path.resolve(TEST_CONFIG.dest, 'here.webp'),
-              template: path.resolve(path.dirname(path.dirname(path.dirname(__dirname))), 'tmpl/common/sprite.webp')
+              template: path.resolve(
+                path.dirname(path.dirname(path.dirname(__dirname))),
+                'tmpl/common/sprite.webp'
+              )
             }
           })
         );
@@ -294,7 +307,11 @@ describe('testings SVGSpriteBase', () => {
 
       const TEST_FILES = {};
       const testFn = jest.fn();
-      jest.spyOn(mustache, 'render').mockReturnValueOnce('first').mockReturnValueOnce('second').mockReturnValueOnce('');
+      jest
+        .spyOn(mustache, 'render')
+        .mockReturnValueOnce('first')
+        .mockReturnValueOnce('second')
+        .mockReturnValueOnce('');
 
       base._buildCSSResources(TEST_FILES, testFn);
 
@@ -303,9 +320,15 @@ describe('testings SVGSpriteBase', () => {
       expect(testFn).toHaveBeenCalledWith(null, [undefined, undefined]);
       expect(TEST_SPRITER.verbose).toHaveBeenCalledTimes(2);
       // eslint-disable-next-line jest/prefer-strict-equal
-      expect(TEST_SPRITER.verbose.mock.calls[0]).toEqual(['Created «%s» stylesheet resource', 'svg']);
+      expect(TEST_SPRITER.verbose.mock.calls[0]).toEqual([
+        'Created «%s» stylesheet resource',
+        'svg'
+      ]);
       // eslint-disable-next-line jest/prefer-strict-equal
-      expect(TEST_SPRITER.verbose.mock.calls[1]).toEqual(['Created «%s» stylesheet resource', 'png']);
+      expect(TEST_SPRITER.verbose.mock.calls[1]).toEqual([
+        'Created «%s» stylesheet resource',
+        'png'
+      ]);
       expect(TEST_FILES).toStrictEqual({
         svg: new File({
           base: TEST_SPRITER.config.dest,
@@ -360,7 +383,10 @@ describe('testings SVGSpriteBase', () => {
           contents: Buffer.from('test example')
         })
       });
-      expect(TEST_SPRITER.verbose).toHaveBeenCalledWith('Created «%s» HTML example file', TEST_MODE_NAME);
+      expect(TEST_SPRITER.verbose).toHaveBeenCalledWith(
+        'Created «%s» HTML example file',
+        TEST_MODE_NAME
+      );
     });
   });
 
@@ -382,7 +408,9 @@ describe('testings SVGSpriteBase', () => {
 
       const TEST_DECLARATION = 'test declaration';
 
-      expect(SVGSpriteBase.prototype.declaration(true, TEST_DECLARATION)).toBe(TEST_DECLARATION);
+      expect(SVGSpriteBase.prototype.declaration(true, TEST_DECLARATION)).toBe(
+        TEST_DECLARATION
+      );
     });
 
     it('should return empty string if local declaration is falsy', () => {
@@ -395,7 +423,9 @@ describe('testings SVGSpriteBase', () => {
 
       const TEST_DECLARATION = 'test declaration';
 
-      expect(SVGSpriteBase.prototype.declaration(`${TEST_DECLARATION} `)).toBe(TEST_DECLARATION);
+      expect(SVGSpriteBase.prototype.declaration(`${TEST_DECLARATION} `)).toBe(
+        TEST_DECLARATION
+      );
     });
 
     it('should return empty string if global declaration is not provided', () => {
@@ -433,9 +463,15 @@ describe('testings SVGSpriteBase', () => {
       const TEST_SVG = 'svg';
       const TEST_SPRITE_MATCH = /sprite-[a-z\d]{8}\.svg/;
 
-      expect(base._addCacheBusting(TEST_SVG)).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
-      expect(base.data.sprite).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
-      expect(base.data.example).toStrictEqual(expect.stringMatching(TEST_SPRITE_MATCH));
+      expect(base._addCacheBusting(TEST_SVG)).toStrictEqual(
+        expect.stringMatching(TEST_SPRITE_MATCH)
+      );
+      expect(base.data.sprite).toStrictEqual(
+        expect.stringMatching(TEST_SPRITE_MATCH)
+      );
+      expect(base.data.example).toStrictEqual(
+        expect.stringMatching(TEST_SPRITE_MATCH)
+      );
     });
   });
 });

@@ -53,10 +53,19 @@ describe.each`
 
     expect(data.svg).toMatchSnapshot();
 
-    const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/defs.html'), 'utf8');
+    const previewTemplate = await readFile(
+      path.join(__dirname, '../../../tmpl/defs.html'),
+      'utf8'
+    );
     const out = mustache.render(previewTemplate, data);
-    const preview = await writeFile(path.join(tmpPath, `defs/html/defs${testConfig.namespace}.html`), out);
-    const expected = path.join(paths.expectations, `png/defs${testConfig.namespace}.html.png`);
+    const preview = await writeFile(
+      path.join(tmpPath, `defs/html/defs${testConfig.namespace}.html`),
+      out
+    );
+    const expected = path.join(
+      paths.expectations,
+      `png/defs${testConfig.namespace}.html.png`
+    );
 
     await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
   });

@@ -9,7 +9,9 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
     expect.hasAssertions();
 
     const TEST_TRANSFORMS = [];
-    const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
+    const config = new SVGSpriterConfig({
+      shape: { transform: TEST_TRANSFORMS }
+    });
 
     expect(config.shape.transform).toStrictEqual(TEST_TRANSFORMS);
   });
@@ -43,7 +45,9 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
 
     const TEST_TRANSFORMS = ['test', 'test_2'];
     const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
-    const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
+    const config = new SVGSpriterConfig({
+      shape: { transform: TEST_TRANSFORMS }
+    });
 
     expect(config.shape.transform).toStrictEqual([
       [TEST_TRANSFORMS_COPY[0], {}],
@@ -56,7 +60,9 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
 
     const TEST_TRANSFORMS = [jest.fn(), jest.fn()];
     const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
-    const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
+    const config = new SVGSpriterConfig({
+      shape: { transform: TEST_TRANSFORMS }
+    });
 
     expect(config.shape.transform).toStrictEqual([
       ['custom', TEST_TRANSFORMS_COPY[0]],
@@ -78,7 +84,9 @@ describe('testing SVGSpriterConfig shape.transforms', () => {
       }
     ];
     const TEST_TRANSFORMS_COPY = [...TEST_TRANSFORMS];
-    const config = new SVGSpriterConfig({ shape: { transform: TEST_TRANSFORMS } });
+    const config = new SVGSpriterConfig({
+      shape: { transform: TEST_TRANSFORMS }
+    });
 
     expect(config.shape.transform).toStrictEqual([
       ['TEST', TEST_TRANSFORMS_COPY[0].TEST],

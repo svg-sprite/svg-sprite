@@ -52,7 +52,9 @@ describe('testing Shape.constructor', () => {
         };
         const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-        expect(shape.config).toStrictEqual(expect.objectContaining({ TEST: 1, TEST_2: 2 }));
+        expect(shape.config).toStrictEqual(
+          expect.objectContaining({ TEST: 1, TEST_2: 2 })
+        );
       });
 
       describe('testing generator', () => {
@@ -73,7 +75,9 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test--test.f');
+          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe(
+            'test--test.f'
+          );
           expect(shape.config.id.generator('test 1.svg')).toBe('test_1');
         });
 
@@ -102,9 +106,12 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
 
-          expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative, TEST_FILE_WITH_FOLDERS)).toBe(
-            'folder--test_path.f'
-          );
+          expect(
+            shape.config.id.generator(
+              TEST_FILE_WITH_FOLDERS.relative,
+              TEST_FILE_WITH_FOLDERS
+            )
+          ).toBe('folder--test_path.f');
         });
 
         it('should set generator if provided generator is a string', () => {
@@ -124,8 +131,12 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('generatortest--test.f');
-          expect(shape.config.id.generator('test 1.svg')).toBe('generatortest_1');
+          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe(
+            'generatortest--test.f'
+          );
+          expect(shape.config.id.generator('test 1.svg')).toBe(
+            'generatortest_1'
+          );
         });
 
         it('should set generator if provided generator is a string with %s', () => {
@@ -145,7 +156,9 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test--test.f-test');
+          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe(
+            'test--test.f-test'
+          );
           expect(shape.config.id.generator('test 1.svg')).toBe('test_1-test');
         });
 
@@ -167,7 +180,9 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test!test.f-test');
+          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe(
+            'test!test.f-test'
+          );
           expect(shape.config.id.generator('test 1.svg')).toBe('test_1-test');
         });
 
@@ -189,7 +204,9 @@ describe('testing Shape.constructor', () => {
           };
           const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe('test.f-test');
+          expect(shape.config.id.generator(`test${path.sep}test.f.svg`)).toBe(
+            'test.f-test'
+          );
           expect(shape.config.id.generator('test 1.svg')).toBe('test_1-test');
         });
       });
@@ -224,7 +241,9 @@ describe('testing Shape.constructor', () => {
         const TEST_SPRITER = {
           config: {
             shape: {
-              meta: { [path.basename(TEST_FILE.relative, '.svg')]: 'TEST_META' },
+              meta: {
+                [path.basename(TEST_FILE.relative, '.svg')]: 'TEST_META'
+              },
               align: {},
               id: {
                 generator() {
@@ -279,7 +298,9 @@ describe('testing Shape.constructor', () => {
           config: {
             shape: {
               meta: {},
-              align: { [path.basename(TEST_FILE.relative, '.svg')]: { TEST_3: 3 } }
+              align: {
+                [path.basename(TEST_FILE.relative, '.svg')]: { TEST_3: 3 }
+              }
             }
           },
           verbose: jest.fn()

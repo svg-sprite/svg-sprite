@@ -50,6 +50,12 @@ describe('testing sort', () => {
     const config = new SVGSpriterConfig({});
     const TEST_SHAPES = [{ id: 0 }, { id: 0 }, { id: 1 }, { id: 3 }, { id: 2 }];
 
-    expect(TEST_SHAPES.sort(config.shape.sort)).toStrictEqual([{ id: 0 }, { id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }]);
+    expect(TEST_SHAPES.sort(config.shape.sort)).toStrictEqual([
+      { id: 0 },
+      { id: 0 },
+      { id: 1 },
+      { id: 2 },
+      { id: 3 }
+    ]);
   });
 });

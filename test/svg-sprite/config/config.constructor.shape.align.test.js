@@ -81,7 +81,10 @@ describe('testing SVGSpriterConfig shape.align', () => {
       expect(yaml.load).toHaveBeenCalledWith(TEST_FILE_CONTENTS);
       expect(config.shape.align).toStrictEqual({
         ...DEFAULT_ALIGN,
-        [path.join(path.dirname(TEST_FILE_NAME), path.basename(TEST_FILE_NAME, '.svg'))]: {
+        [path.join(
+          path.dirname(TEST_FILE_NAME),
+          path.basename(TEST_FILE_NAME, '.svg')
+        )]: {
           '%sTEST': 1,
           '%sTEST_2': 1,
           '%sTEST_3': 0,

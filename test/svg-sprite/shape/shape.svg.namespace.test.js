@@ -33,13 +33,19 @@ jest.mock('csso', () => {
 
 describe('testing setNamespace()', () => {
   /**
-   * @param   {boolean} addNamespaceIds        Shape.spriter.config.svg.namespaceIDs
+   * @param   {boolean} addNamespaceIds
+   *   Shape.spriter.config.svg.namespaceIDs
    * @param   {boolean} isNamespaced           Shape._namespaced
-   * @param   {boolean} addNamespaceClassnames Shape.spriter.config.svg.namespaceClassnames
+   * @param   {boolean} addNamespaceClassnames
+   *   Shape.spriter.config.svg.namespaceClassnames
    *
    * @returns {object}                         SVGShape
    */
-  const createShape = (addNamespaceIds, isNamespaced, addNamespaceClassnames) => {
+  const createShape = (
+    addNamespaceIds,
+    isNamespaced,
+    addNamespaceClassnames
+  ) => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
     shape.spriter.config.svg.namespaceIDs = addNamespaceIds;
@@ -57,7 +63,11 @@ describe('testing setNamespace()', () => {
 
     expect(() => {
       shape.setNamespace({});
-    }).toThrow(new NotPermittedError('Shape namespace cannot be set before complementing'));
+    }).toThrow(
+      new NotPermittedError(
+        'Shape namespace cannot be set before complementing'
+      )
+    );
   });
 
   describe('if namespaceIds', () => {
@@ -65,7 +75,10 @@ describe('testing setNamespace()', () => {
       expect.hasAssertions();
 
       const shape = createShape(true, false, false);
-      jest.spyOn(shape, '_replaceIdAndClassnameReferences').mockImplementation().mockReturnValue('');
+      jest
+        .spyOn(shape, '_replaceIdAndClassnameReferences')
+        .mockImplementation()
+        .mockReturnValue('');
       const TEST_NAMESPACE = 'test-namespace';
       const TEST_ATTR_VALUE = 'id';
 
@@ -154,7 +167,10 @@ describe('testing setNamespace()', () => {
       expect(mockSelect.mock.calls[12][0]).toBe('//svg:style');
       expect(mockSelect.mock.calls[13][0]).toBe('//svg:style');
 
-      expect(FIRST_ELEMENTS[0].setAttribute).toHaveBeenCalledWith('id', `${TEST_NAMESPACE}${TEST_ATTR_VALUE}`);
+      expect(FIRST_ELEMENTS[0].setAttribute).toHaveBeenCalledWith(
+        'id',
+        `${TEST_NAMESPACE}${TEST_ATTR_VALUE}`
+      );
       expect(SECOND_ELEMENTS[1].ownerElement.setAttribute).toHaveBeenCalledWith(
         'xlink:href',
         `#${TEST_NAMESPACE}${TEST_ATTR_VALUE}`
@@ -163,7 +179,10 @@ describe('testing setNamespace()', () => {
         'href',
         `#${TEST_NAMESPACE}${TEST_ATTR_VALUE}`
       );
-      expect(FOURTH_ELEMENTS[0].ownerElement.setAttribute).toHaveBeenCalledWith(FOURTH_ELEMENTS[0].localName, '');
+      expect(FOURTH_ELEMENTS[0].ownerElement.setAttribute).toHaveBeenCalledWith(
+        FOURTH_ELEMENTS[0].localName,
+        ''
+      );
       expect(shape._namespaced).toBe(true);
 
       expect(mockMinifyBlock).toHaveBeenCalledWith('', { restructure: false });
@@ -173,7 +192,9 @@ describe('testing setNamespace()', () => {
       expect.hasAssertions();
 
       const shape = createShape(true, false, false);
-      jest.spyOn(shape, '_replaceIdAndClassnameReferences').mockImplementation();
+      jest
+        .spyOn(shape, '_replaceIdAndClassnameReferences')
+        .mockImplementation();
       const TEST_ATTR_VALUE = 'id';
       const TEST_NAMESPACE = 'test-namespace';
 
@@ -184,15 +205,22 @@ describe('testing setNamespace()', () => {
         }
       ];
 
-      jest.spyOn(shape.dom.documentElement, 'hasAttribute').mockImplementation().mockReturnValueOnce(true);
+      jest
+        .spyOn(shape.dom.documentElement, 'hasAttribute')
+        .mockImplementation()
+        .mockReturnValueOnce(true);
       jest
         .spyOn(shape.dom.documentElement, 'getAttribute')
         .mockImplementation()
         .mockReturnValueOnce(`${TEST_ATTR_VALUE} test`);
-      jest.spyOn(shape.dom.documentElement, 'setAttribute').mockImplementation();
+      jest
+        .spyOn(shape.dom.documentElement, 'setAttribute')
+        .mockImplementation();
       jest
         .spyOn(xpath, 'useNamespaces')
-        .mockReturnValueOnce(jest.fn().mockReturnValueOnce(FIRST_ELEMENTS).mockReturnValue([]));
+        .mockReturnValueOnce(
+          jest.fn().mockReturnValueOnce(FIRST_ELEMENTS).mockReturnValue([])
+        );
 
       shape.setNamespace(TEST_NAMESPACE);
 
@@ -208,7 +236,9 @@ describe('testing setNamespace()', () => {
       expect.hasAssertions();
 
       const shape = createShape(false, false, true);
-      jest.spyOn(shape, '_replaceIdAndClassnameReferences').mockImplementation();
+      jest
+        .spyOn(shape, '_replaceIdAndClassnameReferences')
+        .mockImplementation();
       const TEST_ELEMENTS = [
         {
           getAttribute: jest.fn().mockReturnValueOnce('1 2 3 4 5  6 '),
@@ -217,7 +247,10 @@ describe('testing setNamespace()', () => {
       ];
       const TEST_NAMESPACE = 'ns';
 
-      const mockSelect = jest.fn().mockReturnValueOnce(TEST_ELEMENTS).mockReturnValueOnce([]);
+      const mockSelect = jest
+        .fn()
+        .mockReturnValueOnce(TEST_ELEMENTS)
+        .mockReturnValueOnce([]);
 
       jest.spyOn(xpath, 'useNamespaces').mockReturnValueOnce(mockSelect);
 

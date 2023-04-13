@@ -53,10 +53,19 @@ describe.each`
 
     expect(data.svg).toMatchSnapshot();
 
-    const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+    const previewTemplate = await readFile(
+      path.join(__dirname, '../../../tmpl/stack.html'),
+      'utf8'
+    );
     const out = mustache.render(previewTemplate, data);
-    const preview = await writeFile(path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`), out);
-    const expected = path.join(paths.expectations, `png/stack${testConfig.namespace}.html.png`);
+    const preview = await writeFile(
+      path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`),
+      out
+    );
+    const expected = path.join(
+      paths.expectations,
+      `png/stack${testConfig.namespace}.html.png`
+    );
 
     await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
   });
@@ -99,10 +108,19 @@ describe('without viewbox', () => {
 
     expect(data.svg).toMatchSnapshot();
 
-    const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+    const previewTemplate = await readFile(
+      path.join(__dirname, '../../../tmpl/stack.html'),
+      'utf8'
+    );
     const out = mustache.render(previewTemplate, data);
-    const preview = await writeFile(path.join(tmpPath, 'stack/html/stack-without-viewbox.html'), out);
-    const expected = path.join(paths.expectations, 'png/stack-without-viewbox.html.png');
+    const preview = await writeFile(
+      path.join(tmpPath, 'stack/html/stack-without-viewbox.html'),
+      out
+    );
+    const expected = path.join(
+      paths.expectations,
+      'png/stack-without-viewbox.html.png'
+    );
 
     await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
   });

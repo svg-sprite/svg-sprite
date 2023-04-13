@@ -9,7 +9,10 @@ describe('calculateSvgDimensions', () => {
   it('should return the expected dimensions from 46x46 fixture', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/46x46.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
     const dimensions = calculateSvgDimensions(svg);
     const expected = { width: 46, height: 46 };
@@ -20,7 +23,10 @@ describe('calculateSvgDimensions', () => {
   it('should return the expected dimensions from 2048x2048 fixture', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/2048x2048.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/2048x2048.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
     const dimensions = calculateSvgDimensions(svg);
     const expected = { width: 2048, height: 2048 };
@@ -31,7 +37,10 @@ describe('calculateSvgDimensions', () => {
   it('should return the expected dimensions from 32x32 fixture', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/32x32.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/32x32.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
     const dimensions = calculateSvgDimensions(svg);
     const expected = { width: 32, height: 32 };
@@ -42,7 +51,10 @@ describe('calculateSvgDimensions', () => {
   it('should return the expected dimensions from 100x100 fixture', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/100x100.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/100x100.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
     const dimensions = calculateSvgDimensions(svg);
     const expected = { width: 100, height: 100 };
@@ -53,7 +65,10 @@ describe('calculateSvgDimensions', () => {
   it('should return the expected dimensions from 231x69 fixture', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/231x69.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/231x69.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
     const dimensions = calculateSvgDimensions(svg);
     const expected = { width: 231, height: 69 };
@@ -64,7 +79,10 @@ describe('calculateSvgDimensions', () => {
   it('should return same results no each run', async () => {
     expect.hasAssertions();
 
-    const svgFilePath = path.join(__dirname, 'fixture/svg/special/without-dims/46x46.svg');
+    const svgFilePath = path.join(
+      __dirname,
+      'fixture/svg/special/without-dims/46x46.svg'
+    );
     const svg = await readFile(svgFilePath, 'utf8');
 
     const firstRunDimensions = calculateSvgDimensions(svg);

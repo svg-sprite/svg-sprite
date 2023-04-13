@@ -99,7 +99,10 @@ describe('testing _determineDimensions()', () => {
     shape.width = 0;
     shape.height = 0;
 
-    calculateSvgDimensions.mockReturnValueOnce({ width: TEST_WIDTH, height: TEST_HEIGHT });
+    calculateSvgDimensions.mockReturnValueOnce({
+      width: TEST_WIDTH,
+      height: TEST_HEIGHT
+    });
     shape._determineDimensions(cb);
 
     expect(cb).toHaveBeenCalledWith(null);
@@ -153,7 +156,9 @@ describe('testing _setDimensions()', () => {
     const TEST_HEIGHT = 100;
     jest.spyOn(shape.dom.documentElement, 'setAttribute').mockImplementation();
     jest.spyOn(shape, 'getViewbox').mockReturnValueOnce(null);
-    jest.spyOn(shape, 'getDimensions').mockReturnValueOnce({ height: TEST_HEIGHT, width: TEST_WIDTH });
+    jest
+      .spyOn(shape, 'getDimensions')
+      .mockReturnValueOnce({ height: TEST_HEIGHT, width: TEST_WIDTH });
     shape._setDimensions(jest.fn());
 
     expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledTimes(2);
@@ -317,8 +322,14 @@ describe('testing _addMetadata()', () => {
 
     expect(noop).toHaveBeenCalledWith(null);
     expect(shape.description.textContent).toBe(TEST_DESCRIPTION);
-    expect(shape.description.setAttribute).toHaveBeenCalledWith('id', `${shape.id}-desc`);
-    expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledWith('aria-labelledby', `${shape.id}-desc`);
+    expect(shape.description.setAttribute).toHaveBeenCalledWith(
+      'id',
+      `${shape.id}-desc`
+    );
+    expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledWith(
+      'aria-labelledby',
+      `${shape.id}-desc`
+    );
   });
 
   it('should set description if not exists', () => {
@@ -355,8 +366,14 @@ describe('testing _addMetadata()', () => {
 
     expect(noop).toHaveBeenCalledWith(null);
     expect(shape.title.textContent).toBe(TEST_TITLE);
-    expect(shape.title.setAttribute).toHaveBeenCalledWith('id', `${shape.id}-title`);
-    expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledWith('aria-labelledby', `${shape.id}-title`);
+    expect(shape.title.setAttribute).toHaveBeenCalledWith(
+      'id',
+      `${shape.id}-title`
+    );
+    expect(shape.dom.documentElement.setAttribute).toHaveBeenCalledWith(
+      'aria-labelledby',
+      `${shape.id}-title`
+    );
   });
 
   it('should set title if not exists', () => {
@@ -372,7 +389,9 @@ describe('testing _addMetadata()', () => {
     shape._addMetadata(noop);
 
     expect(shape.title).not.toBeNull();
-    expect(shape.title.toString()).toBe('<title id="test_path-title" xmlns="http://www.w3.org/2000/svg">TEST</title>');
+    expect(shape.title.toString()).toBe(
+      '<title id="test_path-title" xmlns="http://www.w3.org/2000/svg">TEST</title>'
+    );
   });
 
   it('should remove aria-labelledby if neither title or descriptions contains in meta', () => {
@@ -381,13 +400,19 @@ describe('testing _addMetadata()', () => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
     const noop = jest.fn();
 
-    jest.spyOn(shape.dom.documentElement, 'hasAttribute').mockReturnValueOnce(true);
+    jest
+      .spyOn(shape.dom.documentElement, 'hasAttribute')
+      .mockReturnValueOnce(true);
     jest.spyOn(shape.dom.documentElement, 'removeAttribute');
 
     shape._addMetadata(noop);
 
-    expect(shape.dom.documentElement.hasAttribute).toHaveBeenCalledWith('aria-labelledby');
-    expect(shape.dom.documentElement.removeAttribute).toHaveBeenCalledWith('aria-labelledby');
+    expect(shape.dom.documentElement.hasAttribute).toHaveBeenCalledWith(
+      'aria-labelledby'
+    );
+    expect(shape.dom.documentElement.removeAttribute).toHaveBeenCalledWith(
+      'aria-labelledby'
+    );
   });
 });
 
@@ -395,7 +420,9 @@ describe('testing complement()', () => {
   it('should call all functions and set ready state', async () => {
     expect.hasAssertions();
 
-    const testComplementDimensions = jest.fn().mockImplementation(fn => fn(null));
+    const testComplementDimensions = jest
+      .fn()
+      .mockImplementation(fn => fn(null));
     const testAddPadding = jest.fn().mockImplementation(fn => fn(null));
     const testAddMetadata = jest.fn().mockImplementation(fn => fn(null));
     const noop = jest.fn();

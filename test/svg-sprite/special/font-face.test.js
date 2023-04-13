@@ -38,6 +38,8 @@ describe('testing font face preserving', () => {
       }
     });
 
-    expect(result.symbol.sprite.contents.toString().trim()).toContain(TEST_FONT_FACE);
+    expect(result.symbol.sprite.contents.toString().trim()).toContain(
+      TEST_FONT_FACE
+    );
   });
 });

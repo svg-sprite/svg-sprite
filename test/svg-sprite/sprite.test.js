@@ -86,19 +86,26 @@ describe('testing SVGSprite', () => {
       expect(sprite._serialized).toBeNull();
     });
 
-    it.each([false, true, {}, jest.fn(), Symbol(''), 1, null, undefined, 'string'])(
-      'should not push to content if %p passed',
-      param => {
-        expect.hasAssertions();
+    it.each([
+      false,
+      true,
+      {},
+      jest.fn(),
+      Symbol(''),
+      1,
+      null,
+      undefined,
+      'string'
+    ])('should not push to content if %p passed', param => {
+      expect.hasAssertions();
 
-        const sprite = new SVGSprite(false, false, {}, false, []);
+      const sprite = new SVGSprite(false, false, {}, false, []);
 
-        sprite.add(param);
+      sprite.add(param);
 
-        expect(sprite.content).toStrictEqual([param]);
-        expect(sprite._serialized).toBeNull();
-      }
-    );
+      expect(sprite.content).toStrictEqual([param]);
+      expect(sprite._serialized).toBeNull();
+    });
   });
 
   describe('testing toString()', () => {
@@ -128,7 +135,10 @@ describe('testing SVGSprite', () => {
     it('should transform svg in series', () => {
       expect.hasAssertions();
 
-      const TEST_TRANSFORM = [jest.fn().mockReturnValueOnce(false), jest.fn().mockReturnValueOnce('TEST')];
+      const TEST_TRANSFORM = [
+        jest.fn().mockReturnValueOnce(false),
+        jest.fn().mockReturnValueOnce('TEST')
+      ];
       const sprite = new SVGSprite(false, false, {}, false, TEST_TRANSFORM);
       const expected = 'TEST';
 

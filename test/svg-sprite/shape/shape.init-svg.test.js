@@ -130,9 +130,14 @@ describe('testing _initSVG()', () => {
   it('should fill entities', () => {
     expect.hasAssertions();
 
-    const TEST_ENTITIES = ['<!ENTITY name1 "value1">', '<!ENTITY name2 "value2">'];
+    const TEST_ENTITIES = [
+      '<!ENTITY name1 "value1">',
+      '<!ENTITY name2 "value2">'
+    ];
     const TEST_FILE = new File({
-      contents: Buffer.from(`<svg><!DOCTYPE ${TEST_ENTITIES.join('\n')}>&name1;</svg>`),
+      contents: Buffer.from(
+        `<svg><!DOCTYPE ${TEST_ENTITIES.join('\n')}>&name1;</svg>`
+      ),
       path: '/test_base/test_path',
       base: '/test_base/',
       cwd: '/'
@@ -185,7 +190,9 @@ describe('testing _initSVG()', () => {
     const TEST_HEIGHT = 100;
 
     const TEST_FILE = new File({
-      contents: Buffer.from(`<svg width="${TEST_WIDTH}" height="${TEST_HEIGHT}"></svg>`),
+      contents: Buffer.from(
+        `<svg width="${TEST_WIDTH}" height="${TEST_HEIGHT}"></svg>`
+      ),
       path: '/test_base/test_path',
       base: '/test_base/',
       cwd: '/'
@@ -300,7 +307,9 @@ describe('testing _initSVG()', () => {
     expect.hasAssertions();
 
     const TEST_FILE = new File({
-      contents: Buffer.from('<svg><title>test title</title><desc>test description</desc></svg>'),
+      contents: Buffer.from(
+        '<svg><title>test title</title><desc>test description</desc></svg>'
+      ),
       path: '/test_base/test_path',
       base: '/test_base/',
       cwd: '/'

@@ -28,10 +28,16 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
 
     const config = new SVGSpriterConfig({ svg: false });
 
-    expect(config.svg).toStrictEqual(expect.objectContaining(DEFAULT_SVG_CONFIG));
+    expect(config.svg).toStrictEqual(
+      expect.objectContaining(DEFAULT_SVG_CONFIG)
+    );
   });
 
-  describe.each(['xmlDeclaration', 'doctypeDeclaration', 'dimensionAttributes'])('testing %p attr', field => {
+  describe.each([
+    'xmlDeclaration',
+    'doctypeDeclaration',
+    'dimensionAttributes'
+  ])('testing %p attr', field => {
     it('should set the passed value', () => {
       expect.hasAssertions();
 
@@ -128,7 +134,9 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
       expect.hasAssertions();
 
       const TEST_TRANSFORMS = [jest.fn(), jest.fn()];
-      const config = new SVGSpriterConfig({ svg: { transform: TEST_TRANSFORMS } });
+      const config = new SVGSpriterConfig({
+        svg: { transform: TEST_TRANSFORMS }
+      });
 
       expect(config.svg.transform).toStrictEqual(TEST_TRANSFORMS);
     });
@@ -137,7 +145,9 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
       expect.hasAssertions();
 
       const TEST_TRANSFORMS = [1, 'test'];
-      const config = new SVGSpriterConfig({ svg: { transform: TEST_TRANSFORMS } });
+      const config = new SVGSpriterConfig({
+        svg: { transform: TEST_TRANSFORMS }
+      });
 
       expect(config.svg.transform).toStrictEqual([]);
     });
@@ -146,7 +156,9 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
       expect.hasAssertions();
 
       const TEST_TRANSFORM = jest.fn();
-      const config = new SVGSpriterConfig({ svg: { transform: TEST_TRANSFORM } });
+      const config = new SVGSpriterConfig({
+        svg: { transform: TEST_TRANSFORM }
+      });
 
       expect(config.svg.transform).toStrictEqual([TEST_TRANSFORM]);
     });

@@ -28,7 +28,9 @@ describe('testing Queue', () => {
       expect(queue._spriter).toBe(spriter);
       expect(queue._files).toStrictEqual([]);
       expect(queue.active).toBe(0);
-      expect(spriter.debug).toHaveBeenCalledWith('Created processing queue instance');
+      expect(spriter.debug).toHaveBeenCalledWith(
+        'Created processing queue instance'
+      );
     });
 
     it('should add events', () => {
@@ -72,7 +74,10 @@ describe('testing Queue', () => {
 
       queue.add(TEST_FILE);
 
-      expect(spriter.debug).toHaveBeenLastCalledWith('Added "%s" to processing queue', path.basename(TEST_FILE_NAME));
+      expect(spriter.debug).toHaveBeenLastCalledWith(
+        'Added "%s" to processing queue',
+        path.basename(TEST_FILE_NAME)
+      );
       expect(queue._files).toStrictEqual([TEST_FILE]);
       expect(queue.emit).toHaveBeenCalledWith('add');
     });
@@ -182,8 +187,13 @@ describe('testing Queue', () => {
         await new Promise(setImmediate); // await all async code to finish (async.waterfall)
 
         expect(queue.active).toBe(3);
-        expect(spriter._transformShape).toHaveBeenCalledWith(TEST_SHAPE, expect.any(Function));
-        expect(TEST_SHAPE.complement).toHaveBeenCalledWith(expect.any(Function));
+        expect(spriter._transformShape).toHaveBeenCalledWith(
+          TEST_SHAPE,
+          expect.any(Function)
+        );
+        expect(TEST_SHAPE.complement).toHaveBeenCalledWith(
+          expect.any(Function)
+        );
         expect(testFn).toHaveBeenCalledWith();
       });
 
@@ -204,7 +214,11 @@ describe('testing Queue', () => {
         await new Promise(setImmediate); // await all async code to finish (async.waterfall)
 
         expect(queue.active).toBe(2);
-        expect(spriter.error).toHaveBeenCalledWith('Skipping "%s" (%s)', 'file', TEST_ERROR_MESSAGE);
+        expect(spriter.error).toHaveBeenCalledWith(
+          'Skipping "%s" (%s)',
+          'file',
+          TEST_ERROR_MESSAGE
+        );
         expect(queue.emit).toHaveBeenCalledWith('remove');
       });
 

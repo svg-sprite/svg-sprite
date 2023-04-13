@@ -48,22 +48,34 @@ describe('testing getSVG()', () => {
     const TEST_SVG = {
       setAttribute: jest.fn()
     };
-    jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockReturnValueOnce('');
+    jest
+      .spyOn(shape, '_stripInlineNamespaceDeclarations')
+      .mockReturnValueOnce('');
     jest.spyOn(shape.dom, 'createElementNS').mockReturnValueOnce(TEST_SVG);
 
     shape.getSVG();
 
-    expect(shape.dom.createElementNS).toHaveBeenCalledWith('http://www.w3.org/2000/svg', 'use');
-    expect(TEST_SVG.setAttribute).toHaveBeenCalledWith('xlink:href', `#${TEST_ID}`);
+    expect(shape.dom.createElementNS).toHaveBeenCalledWith(
+      'http://www.w3.org/2000/svg',
+      'use'
+    );
+    expect(TEST_SVG.setAttribute).toHaveBeenCalledWith(
+      'xlink:href',
+      `#${TEST_ID}`
+    );
   });
 
   it('should return serialized string with declarations if inline is true', () => {
     expect.hasAssertions();
 
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
-    jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockReturnValueOnce(TEST_FILE.contents);
+    jest
+      .spyOn(shape, '_stripInlineNamespaceDeclarations')
+      .mockReturnValueOnce(TEST_FILE.contents);
 
-    expect(shape.getSVG(true)).toBe(new XMLSerializer().serializeToString(TEST_FILE.contents));
+    expect(shape.getSVG(true)).toBe(
+      new XMLSerializer().serializeToString(TEST_FILE.contents)
+    );
   });
 
   it('should call transform if it is a function', () => {
@@ -81,9 +93,13 @@ describe('testing getSVG()', () => {
     expect.hasAssertions();
 
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
-    jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockReturnValueOnce(TEST_FILE.contents);
+    jest
+      .spyOn(shape, '_stripInlineNamespaceDeclarations')
+      .mockReturnValueOnce(TEST_FILE.contents);
 
-    expect(shape.getSVG(true)).toBe(new XMLSerializer().serializeToString(TEST_FILE.contents));
+    expect(shape.getSVG(true)).toBe(
+      new XMLSerializer().serializeToString(TEST_FILE.contents)
+    );
   });
 
   it('should return serialized xml if shape is master', () => {
@@ -93,9 +109,13 @@ describe('testing getSVG()', () => {
     shape.master = {
       id: 2
     };
-    jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockReturnValueOnce(TEST_FILE.contents);
+    jest
+      .spyOn(shape, '_stripInlineNamespaceDeclarations')
+      .mockReturnValueOnce(TEST_FILE.contents);
 
-    expect(shape.getSVG(false)).toBe(new XMLSerializer().serializeToString(TEST_FILE.contents));
+    expect(shape.getSVG(false)).toBe(
+      new XMLSerializer().serializeToString(TEST_FILE.contents)
+    );
   });
 
   it('should add declarations if provided', () => {
@@ -234,15 +254,21 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
     const TEST_ELEMENT = {
       attributes: {
-        getNamedItem: jest.fn().mockReturnValueOnce({ value: shape.DEFAULT_SVG_NAMESPACE }),
+        getNamedItem: jest
+          .fn()
+          .mockReturnValueOnce({ value: shape.DEFAULT_SVG_NAMESPACE }),
         removeNamedItem: jest.fn()
       },
       childNodes: []
     };
 
-    expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT)).toBe(TEST_ELEMENT);
+    expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT)).toBe(
+      TEST_ELEMENT
+    );
     expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith('xmlns');
-    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith('xmlns');
+    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith(
+      'xmlns'
+    );
   });
 
   it('should remove xmlns:xlink if it not exists in nsMap', () => {
@@ -251,15 +277,23 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
     const TEST_ELEMENT = {
       attributes: {
-        getNamedItem: jest.fn().mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
+        getNamedItem: jest
+          .fn()
+          .mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
         removeNamedItem: jest.fn()
       },
       childNodes: []
     };
 
-    expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, {})).toBe(TEST_ELEMENT);
-    expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith('xmlns:xlink');
-    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith('xmlns:xlink');
+    expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, {})).toBe(
+      TEST_ELEMENT
+    );
+    expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith(
+      'xmlns:xlink'
+    );
+    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith(
+      'xmlns:xlink'
+    );
   });
 
   it('should remove xmlns:xlink if it exists in nsMap', () => {
@@ -268,15 +302,25 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
     const TEST_ELEMENT = {
       attributes: {
-        getNamedItem: jest.fn().mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
+        getNamedItem: jest
+          .fn()
+          .mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
         removeNamedItem: jest.fn()
       },
       childNodes: []
     };
 
-    expect(shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, { xlink: shape.XLINK_NAMESPACE })).toBe(TEST_ELEMENT);
-    expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith('xmlns:xlink');
-    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith('xmlns:xlink');
+    expect(
+      shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, {
+        xlink: shape.XLINK_NAMESPACE
+      })
+    ).toBe(TEST_ELEMENT);
+    expect(TEST_ELEMENT.attributes.getNamedItem).toHaveBeenCalledWith(
+      'xmlns:xlink'
+    );
+    expect(TEST_ELEMENT.attributes.removeNamedItem).toHaveBeenCalledWith(
+      'xmlns:xlink'
+    );
   });
 
   it('should call _stripInlineNamespaceDeclarations() for each child element', () => {
@@ -290,7 +334,9 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
     const TEST_ELEMENT = {
       _nsMap: { TEST_NS_MAP: true },
       attributes: {
-        getNamedItem: jest.fn().mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
+        getNamedItem: jest
+          .fn()
+          .mockReturnValueOnce({ value: shape.XLINK_NAMESPACE }),
         removeNamedItem: jest.fn()
       },
       childNodes: {
@@ -302,7 +348,9 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
           // eslint-disable-next-line jest/no-conditional-in-test
           if (!isMethodMocked) {
             isMethodMocked = true; // mocking the other calls
-            jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockImplementation();
+            jest
+              .spyOn(shape, '_stripInlineNamespaceDeclarations')
+              .mockImplementation();
           }
 
           return this[i];
@@ -313,14 +361,18 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
     shape._stripInlineNamespaceDeclarations(TEST_ELEMENT, false);
 
     expect(shape._stripInlineNamespaceDeclarations).toHaveBeenCalledTimes(2);
-    expect(shape._stripInlineNamespaceDeclarations.mock.calls[0][0]).toStrictEqual(TEST_CHILD_1);
-    expect(shape._stripInlineNamespaceDeclarations.mock.calls[0][1]).toStrictEqual(
-      expect.objectContaining(TEST_ELEMENT._nsMap)
-    );
-    expect(shape._stripInlineNamespaceDeclarations.mock.calls[1][0]).toStrictEqual(TEST_CHILD_1);
-    expect(shape._stripInlineNamespaceDeclarations.mock.calls[1][1]).toStrictEqual(
-      expect.objectContaining(TEST_ELEMENT._nsMap)
-    );
+    expect(
+      shape._stripInlineNamespaceDeclarations.mock.calls[0][0]
+    ).toStrictEqual(TEST_CHILD_1);
+    expect(
+      shape._stripInlineNamespaceDeclarations.mock.calls[0][1]
+    ).toStrictEqual(expect.objectContaining(TEST_ELEMENT._nsMap));
+    expect(
+      shape._stripInlineNamespaceDeclarations.mock.calls[1][0]
+    ).toStrictEqual(TEST_CHILD_1);
+    expect(
+      shape._stripInlineNamespaceDeclarations.mock.calls[1][1]
+    ).toStrictEqual(expect.objectContaining(TEST_ELEMENT._nsMap));
   });
 });
 

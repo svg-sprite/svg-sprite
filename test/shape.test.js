@@ -49,12 +49,17 @@ describe('testing shapes', () => {
 
       calculateSvgDimensions.mockReturnValueOnce(dimension);
 
-      const svgFilePath = path.join(__dirname, `fixture/svg/special/without-dims/${svg}`);
+      const svgFilePath = path.join(
+        __dirname,
+        `fixture/svg/special/without-dims/${svg}`
+      );
 
       spriter.add(svgFilePath, svg, Buffer.from(TEST_SVG));
 
       expect(calculateSvgDimensions).toHaveBeenCalledWith(
-        new DOMParser().parseFromString(`<?xml version="1.0" encoding="utf-8"?>${TEST_SVG}`).toString()
+        new DOMParser()
+          .parseFromString(`<?xml version="1.0" encoding="utf-8"?>${TEST_SVG}`)
+          .toString()
       );
 
       const { result } = await spriter.compileAsync();
@@ -62,10 +67,17 @@ describe('testing shapes', () => {
       expect(result).toBeInstanceOf(Object);
       expect(result.shapes).toBeInstanceOf(Array);
 
-      const dom = new DOMParser().parseFromString(result.shapes[0]._contents.toString(), 'text/xml');
+      const dom = new DOMParser().parseFromString(
+        result.shapes[0]._contents.toString(),
+        'text/xml'
+      );
 
-      expect(dom.documentElement.getAttribute('height')).toBe(dimension.height.toString());
-      expect(dom.documentElement.getAttribute('width')).toBe(dimension.width.toString());
+      expect(dom.documentElement.getAttribute('height')).toBe(
+        dimension.height.toString()
+      );
+      expect(dom.documentElement.getAttribute('width')).toBe(
+        dimension.width.toString()
+      );
     }
   );
 });

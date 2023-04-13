@@ -104,7 +104,11 @@ describe('testing SVGSpriter', () => {
         spriter._queue = {
           add: jest.fn()
         };
-        spriter.add(path.resolve(TEST_SVG), 'weather-clear.svg', TEST_EMPTY_SVG);
+        spriter.add(
+          path.resolve(TEST_SVG),
+          'weather-clear.svg',
+          TEST_EMPTY_SVG
+        );
 
         expect(spriter._queue.add).toHaveBeenCalledWith(
           new File({

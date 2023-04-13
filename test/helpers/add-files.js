@@ -14,7 +14,11 @@ const path = require('node:path');
 function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
   for (const file of files) {
     const filePath = path.join(cwd, file);
-    spriter.add(resolvePaths ? path.resolve(filePath) : file, file, fs.readFileSync(filePath, 'utf8'));
+    spriter.add(
+      resolvePaths ? path.resolve(filePath) : file,
+      file,
+      fs.readFileSync(filePath, 'utf8')
+    );
   }
 }
 

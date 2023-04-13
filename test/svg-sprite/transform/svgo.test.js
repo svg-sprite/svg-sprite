@@ -69,7 +69,9 @@ describe('testing transforms.svgo', () => {
     jest.spyOn(svgo, 'optimize').mockReturnValueOnce(TEST_RESULT);
     svgoTransform(shape, {}, spriter, noop);
 
-    expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, { plugins: ['preset-default'] });
+    expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, {
+      plugins: ['preset-default']
+    });
   });
 
   it('should add provided config', () => {
@@ -104,7 +106,9 @@ describe('testing transforms.svgo', () => {
     jest.spyOn(svgo, 'optimize').mockReturnValueOnce(TEST_RESULT);
     svgoTransform(shape, { plugins: TEST_PLUGINS }, spriter, noop);
 
-    expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, { plugins: expect.arrayContaining(TEST_PLUGINS) });
+    expect(svgo.optimize).toHaveBeenCalledWith(TEST_SVG, {
+      plugins: expect.arrayContaining(TEST_PLUGINS)
+    });
   });
 
   it('should log about optimizations', () => {
@@ -132,14 +136,22 @@ describe('testing transforms.svgo', () => {
     const shape = {
       name: 'name',
       setSVG: jest.fn(),
-      getSVG: jest.fn().mockReturnValueOnce(MOCKED_ORIGINAL_SVG).mockReturnValueOnce(MOCKED_OPTIMIZED_SVG)
+      getSVG: jest
+        .fn()
+        .mockReturnValueOnce(MOCKED_ORIGINAL_SVG)
+        .mockReturnValueOnce(MOCKED_OPTIMIZED_SVG)
     };
 
     jest.spyOn(svgo, 'optimize').mockReturnValueOnce({});
     svgoTransform(shape, {}, spriter, noop);
 
     expect(spriter.debug).toHaveBeenCalledTimes(2);
-    expect(spriter.debug).toHaveBeenCalledWith('Optimized "%s" with SVGO (saved %s / %s%%)', 'name', '3 Bytes', 50);
+    expect(spriter.debug).toHaveBeenCalledWith(
+      'Optimized "%s" with SVGO (saved %s / %s%%)',
+      'name',
+      '3 Bytes',
+      50
+    );
   });
 
   it('should not log about optimizations', () => {
@@ -220,6 +232,10 @@ describe('testing transforms.svgo', () => {
     svgoTransform(shape, {}, spriter, noop);
 
     expect(noop).toHaveBeenCalledWith(TEST_ERROR);
-    expect(spriter.error).toHaveBeenCalledWith('Optimizing "%s" with SVGO failed with error "%s"', 'name', TEST_ERROR);
+    expect(spriter.error).toHaveBeenCalledWith(
+      'Optimizing "%s" with SVGO failed with error "%s"',
+      'name',
+      TEST_ERROR
+    );
   });
 });

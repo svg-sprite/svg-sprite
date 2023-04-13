@@ -18,7 +18,10 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
   let spriter;
   const cwdAlign = path.join(paths.fixtures, 'svg/css');
   const align = glob.sync('**/*.svg', { cwd: cwdAlign });
-  const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf8');
+  const previewTemplate = fs.readFileSync(
+    path.join(__dirname, '../../../tmpl/css.html'),
+    'utf8'
+  );
   let packedSvg;
   let data;
 
@@ -71,13 +74,22 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     const lessText = fs.readFileSync(lessFile, 'utf8');
     const output = await asyncRenderers.less(lessText, {});
 
-    await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);
+    await writeFile(
+      path.join(tmpPath, 'view/sprite.mixed.less.css'),
+      output.css
+    );
 
     data.css = '../sprite.mixed.less.css';
 
     const out = mustache.render(previewTemplate, data);
-    const preview = await writeFile(path.join(tmpPath, 'view/html/less.packed.mixed.html'), out);
-    const expected = path.join(paths.expectations, 'png/css.packed.aligned.html.png');
+    const preview = await writeFile(
+      path.join(tmpPath, 'view/html/less.packed.mixed.html'),
+      out
+    );
+    const expected = path.join(
+      paths.expectations,
+      'png/css.packed.aligned.html.png'
+    );
 
     await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
   });

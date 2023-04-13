@@ -2,7 +2,13 @@
 
 /* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
 
-const { isFunction, isObject, isString, isPlainObject, zipObject } = require('../lib/svg-sprite/utils/index.js');
+const {
+  isFunction,
+  isObject,
+  isString,
+  isPlainObject,
+  zipObject
+} = require('../lib/svg-sprite/utils/index.js');
 
 describe('utils', () => {
   describe('isFunction', () => {
@@ -200,7 +206,11 @@ describe('utils', () => {
     });
 
     it('should return the zipped object with unbalanced arrays', () => {
-      expect(zipObject(['a', 'b', 'c'], [1, 2])).toStrictEqual({ a: 1, b: 2, c: undefined });
+      expect(zipObject(['a', 'b', 'c'], [1, 2])).toStrictEqual({
+        a: 1,
+        b: 2,
+        c: undefined
+      });
       expect(zipObject(['a'], [1, 2])).toStrictEqual({ a: 1 });
     });
 

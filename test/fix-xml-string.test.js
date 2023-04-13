@@ -36,7 +36,9 @@ describe('testing fixing svg string', () => {
   });
 
   it('should return same string on valid svg', () => {
-    expect(fixXMLString('<svg viewBox="0 0 16 16"></svg>')).toBe('<svg viewBox="0 0 16 16"/>');
+    expect(fixXMLString('<svg viewBox="0 0 16 16"></svg>')).toBe(
+      '<svg viewBox="0 0 16 16"/>'
+    );
   });
 
   it('should throw an error on invalid file', () => {
