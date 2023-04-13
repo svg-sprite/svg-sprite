@@ -1,28 +1,28 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" width="50" height="50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-    <style type="text/css">
-        .st0{
-            fill: #58BB6A;
-        }
-        .st1{
-            fill: none;
-            stroke: #58BA6A;
-            stroke-width: 2;
-            stroke-miterlimit: 10;
-        }
-        .draw {
-            stroke-dasharray: 22;
-            stroke-dashoffset: 22;
-            animation: dashAnim 1s linear both;
-        }
-        @keyframes dashAnim {
-            from {
-                stroke-dashoffset: 22;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-    </style>
-    <path class="st0" d="M24.8,45.4c-11.3,0-20.5-9.2-20.5-20.5S13.5,4.4,24.8,4.4c11.3,0,20.5,9.2,20.5,20.5S36.1,45.4,24.8,45.4z M24.8,6.2C14.5,6.2,6,14.6,6,24.9c0,10.3,8.4,18.8,18.8,18.8s18.8-8.4,18.8-18.8C43.6,14.6,35.1,6.2,24.8,6.2z"/>
-    <polyline class="st1 draw" points="18.2,24.6 22.8,29.2 30.8,21.3 "/>
+  <style type="text/css">
+    .st0{
+      fill: #58BB6A;
+    }
+    .st1{
+      fill: none;
+      stroke: #58BA6A;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+    }
+    .draw {
+      stroke-dasharray: 22;
+      stroke-dashoffset: 22;
+      animation: dashAnim 1s linear both;
+    }
+    @keyframes dashAnim {
+      from {
+        stroke-dashoffset: 22;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+  <path class="st0" d="M24.8,45.4c-11.3,0-20.5-9.2-20.5-20.5S13.5,4.4,24.8,4.4c11.3,0,20.5,9.2,20.5,20.5S36.1,45.4,24.8,45.4z M24.8,6.2C14.5,6.2,6,14.6,6,24.9c0,10.3,8.4,18.8,18.8,18.8s18.8-8.4,18.8-18.8C43.6,14.6,35.1,6.2,24.8,6.2z"/>
+  <polyline class="st1 draw" points="18.2,24.6 22.8,29.2 30.8,21.3 "/>
 </svg>

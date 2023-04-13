@@ -13,12 +13,12 @@ The YAML file needs to look like this:
 
 ```yaml
 "path/to/rectangle.svg":
-    title: "Green rectangle"
-    description: "A light green rectangle with rounded corners and a dark green border"
+  title: "Green rectangle"
+  description: "A light green rectangle with rounded corners and a dark green border"
 
 path--to--circle:
-    title: "Red circle"
-    description: "A red circle with a black border"
+  title: "Red circle"
+  description: "A red circle with a black border"
 ```
 
 The keys need to match either
@@ -32,9 +32,9 @@ For each of your shapes, *svg-sprite* will look for `title` and `description` ke
 
 ```xml
 <svg aria-labelledby="title desc">
-    <title id="title">Green rectangle</title>
-    <desc id="desc">A light green rectangle with rounded corners and a dark green border</desc>
-    <rect width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1" />
+  <title id="title">Green rectangle</title>
+  <desc id="desc">A light green rectangle with rounded corners and a dark green border</desc>
+  <rect width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1" />
 </svg>
 ```
 

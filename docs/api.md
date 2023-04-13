@@ -27,42 +27,42 @@ const SVGSpriter = require('svg-sprite'),
 // 1. Create and configure a spriter instance
 // ====================================================================
 const spriter = new SVGSpriter({
-    dest: 'out', // Main output directory
-    mode: {
-        css: { // Create a CSS sprite
-            render: {
-                css: true // Render a CSS stylesheet
-            }
-        }
+  dest: 'out', // Main output directory
+  mode: {
+    css: { // Create a CSS sprite
+      render: {
+        css: true // Render a CSS stylesheet
+      }
     }
+  }
 });
 
 // 2. Add some SVG files to process
 // ====================================================================
 spriter.add(
-    path.resolve('assets/example-1.svg'),
-    'example-1.svg',
-    fs.readFileSync('assets/example-1.svg', 'utf-8')
+  path.resolve('assets/example-1.svg'),
+  'example-1.svg',
+  fs.readFileSync('assets/example-1.svg', 'utf-8')
 );
 
 /* ... */
 
 spriter.add(
-    path.resolve('assets/example-x.svg'),
-    'example-x.svg',
-    fs.readFileSync('assets/example-x.svg', 'utf-8')
+  path.resolve('assets/example-x.svg'),
+  'example-x.svg',
+  fs.readFileSync('assets/example-x.svg', 'utf-8')
 );
 
 // 3. Trigger the (asynchronous) compilation process
 // ====================================================================
 spriter.compile((error, result, data) => {
-    // Run through all files that have been created for the `css` mode
-    for (const type of Object.values(result.css)) {
-        // Recursively create directories as needed
-        fs.mkdirSync(path.dirname(type.path), { recursive: true });
-        // Write the generated resource to disk
-        fs.writeFileSync(type.path, type.contents);
-    }
+  // Run through all files that have been created for the `css` mode
+  for (const type of Object.values(result.css)) {
+    // Recursively create directories as needed
+    fs.mkdirSync(path.dirname(type.path), { recursive: true });
+    // Write the generated resource to disk
+    fs.writeFileSync(type.path, type.contents);
+  }
 });
 ```
 
@@ -98,34 +98,34 @@ const File = require('vinyl');
 const glob = require('glob');
 
 const spriter = new SVGSpriter({
-    dest: 'out',
-    mode: {
-        css: {
-            render: {
-                css: true
-            }
-        }
+  dest: 'out',
+  mode: {
+    css: {
+      render: {
+        css: true
+      }
     }
+  }
 });
 const cwd = path.resolve('assets');
 
 // Find SVG files recursively via `glob`
 glob.sync('**/*.svg', { cwd }, (err, files) => {
-    for (const file of files) {
-        // Create and add a vinyl file instance for each SVG
-        spriter.add(new File({
-            path: path.join(cwd, file), // Absolute path to the SVG file
-            base: cwd, // Base path (see `name` argument)
-            contents: fs.readFileSync(path.join(cwd, file)) // SVG file contents
-        }));
-    })
+  for (const file of files) {
+    // Create and add a vinyl file instance for each SVG
+    spriter.add(new File({
+      path: path.join(cwd, file), // Absolute path to the SVG file
+      base: cwd, // Base path (see `name` argument)
+      contents: fs.readFileSync(path.join(cwd, file)) // SVG file contents
+    }));
+  })
 
-    spriter.compile((error, result, data) => {
-        for (const type of Object.values(result.css)) {
-            fs.mkdirSync(path.dirname(type.path), { recursive: true });
-            fs.writeFileSync(type.path, type.contents);
-        }
-    });
+  spriter.compile((error, result, data) => {
+    for (const type of Object.values(result.css)) {
+      fs.mkdirSync(path.dirname(type.path), { recursive: true });
+      fs.writeFileSync(type.path, type.contents);
+    }
+  });
 });
 ```
 
@@ -137,9 +137,9 @@ glob.sync('**/*.svg', { cwd }, (err, files) => {
 
 1. **config** `{Object}` *(optional)* — Configuration object setting the [output mode parameters](configuration.md#output-modes) for a single compilation run. If omitted, the `mode` property of the [main configuration](configuration.md) used for the [constructor](#svgspriter-config-) will be used.
 2. **callback** `{Function}` — Callback triggered when the compilation has finished, getting three arguments:
-    * **error** `{Error}` — Error message in case the compilation has failed
-    * **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
-    * **data** `{Object}` — Templating variables passed to Mustache for rendering the resources (see [sprite & shape variables](templating.md#sprite--shape-variables) for details)
+  * **error** `{Error}` — Error message in case the compilation has failed
+  * **result** `{Object}` — Directory of generated resources ([see below](#compilation-example))
+  * **data** `{Object}` — Templating variables passed to Mustache for rendering the resources (see [sprite & shape variables](templating.md#sprite--shape-variables) for details)
 
 ##### Compilation example
 
@@ -147,17 +147,17 @@ Depending on the particular mode and render configuration, quite a lot of resour
 
 ```js
 spriter.compile(
-    {
-        css: {
-            render: {
-                scss: true
-            },
-            example: true
-        }
-    },
-    (error, result, data) => {
-        console.log(result);
+  {
+    css: {
+      render: {
+        scss: true
+      },
+      example: true
     }
+  },
+  (error, result, data) => {
+    console.log(result);
+  }
 );
 ```
 
@@ -165,11 +165,11 @@ The spriter is instructed to create a CSS sprite along with the accompanying sty
 
 ```js
 {
-    css: {
-        sprite: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
-        scss: <File "css/sprite.scss" <Buffer 2e 73 76 ...>>,
-        example: <File "css/sprite.css.html" <Buffer 3c 21 44 ...>>
-    }
+  css: {
+    sprite: <File "css/svg/sprite.css.svg" <Buffer 3c 3f 78 ...>>,
+    scss: <File "css/sprite.scss" <Buffer 2e 73 76 ...>>,
+    example: <File "css/sprite.css.html" <Buffer 3c 21 44 ...>>
+  }
 }
 ```
 
@@ -190,8 +190,8 @@ Please note that the resources are always returned as [vinyl](https://github.com
 Promise
 
 * **Compilation Result** `{Object}` Object containing fields:
-    * **result** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
-    * **data** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+  * **result** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
+  * **data** `{Object}` — Same as in [SVGSpriter.compile](#svgspritercompile-config--callback-)
 
 ##### Throws
 
@@ -201,18 +201,18 @@ Promise
 
 ```js
 try {
-    const { result, data } = await spriter.compileAsync({
-        css: {
-            render: {
-                scss: true
-            },
-            example: true
-        }
-    });
+  const { result, data } = await spriter.compileAsync({
+    css: {
+      render: {
+        scss: true
+      },
+      example: true
+    }
+  });
 
-    console.log(result, data);
+  console.log(result, data);
 } catch (error) {
-    console.error(error);
+  console.error(error);
 }
 ```
 
@@ -224,8 +224,8 @@ try {
 
 1. **dest** `{String}` — Base directory for the SVG files in case they will be written to disk.
 2. **callback** `{Function}`: Callback triggered when the shapes are available, getting called with two arguments:
-    * **error** `{Error}` — Error message in case the shape access has failed.
-    * **result** `{Array}` — Array of [vinyl](https://github.com/gulpjs/vinyl) carrying the intermediate SVGs.
+  * **error** `{Error}` — Error message in case the shape access has failed.
+  * **result** `{Array}` — Array of [vinyl](https://github.com/gulpjs/vinyl) carrying the intermediate SVGs.
 
 ##### Shape access example
 
@@ -234,9 +234,9 @@ const fs = require('fs');
 const path = require('path');
 
 spriter.getShapes(path.resolve('tmp/svg'), (error, result) => {
-    result.forEach(file => {
-        fs.mkdirSync(path.dirname(file.path), { recursive: true });
-        fs.writeFileSync(file.path, file.contents);
-    });
+  result.forEach(file => {
+    fs.mkdirSync(path.dirname(file.path), { recursive: true });
+    fs.writeFileSync(file.path, file.contents);
+  });
 });
 ```

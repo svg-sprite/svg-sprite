@@ -5,27 +5,27 @@ const { chromium } = require('playwright-chromium');
 let browser;
 
 const getBrowser = () => {
-    return browser;
+  return browser;
 };
 
 const launchBrowser = async () => {
-    const currentBrowserInstance = getBrowser();
-    if (currentBrowserInstance) {
-        return currentBrowserInstance;
-    }
+  const currentBrowserInstance = getBrowser();
+  if (currentBrowserInstance) {
+    return currentBrowserInstance;
+  }
 
-    browser = await chromium.launch();
-    return browser;
+  browser = await chromium.launch();
+  return browser;
 };
 
 const closeBrowser = async () => {
-    const currentBrowserInstance = getBrowser();
+  const currentBrowserInstance = getBrowser();
 
-    if (!currentBrowserInstance) {
-        return;
-    }
+  if (!currentBrowserInstance) {
+    return;
+  }
 
-    await currentBrowserInstance.close();
+  await currentBrowserInstance.close();
 };
 
 module.exports = { launchBrowser, closeBrowser };

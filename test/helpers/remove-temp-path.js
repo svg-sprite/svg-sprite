@@ -11,5 +11,5 @@ const { paths } = require('./constants.js');
  * @returns {Promise<void>}
  */
 module.exports = async (pathName = paths.tmp) => {
-    await rm(pathName, { force: true, recursive: true });
+  await rm(pathName, { force: true, recursive: true });
 };

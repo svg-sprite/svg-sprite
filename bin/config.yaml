@@ -22,17 +22,17 @@ shape:
 
     generator:
       description: ID generation callback [via CLI only template strings]
-      default: "%s"
+      default: '%s'
       map: shape.id.generator
 
     pseudo:
       description: Separator for CSS pseudo classes
-      default: "~"
+      default: '~'
       map: shape.id.pseudo
 
     whitespace:
       description: Whitespace replacement string for shape IDs
-      default: "_"
+      default: '_'
       map: shape.id.whitespace
 
   dim:
@@ -91,7 +91,7 @@ shape:
     default: svgo
     map: shape.transform
 
-    "*":
+    '*':
       description: External JSON config files for named transformers
 
 svg:
@@ -113,7 +113,7 @@ svg:
 
     prefix:
       description: What, if any, prefix to apply to the automatically generated id
-      default: ""
+      default: ''
       map: svg.namespaceIDPrefix
 
     classnames:
@@ -243,7 +243,7 @@ css:
         default: sprite.styl
         map: mode.css.render.styl.dest
 
-    "*":
+    '*':
       description: Custom output renderings
       template:
         description: Custom output Mustache template (relative to svg-sprite basedir)
@@ -374,7 +374,7 @@ view:
         default: sprite.styl
         map: mode.view.render.styl.dest
 
-    "*":
+    '*':
       description: Custom output renderings
       template:
         description: Custom output Mustache template (relative to svg-sprite basedir)
@@ -489,7 +489,7 @@ defs:
         default: sprite.styl
         map: mode.defs.render.styl.dest
 
-    "*":
+    '*':
       description: Custom output renderings
       template:
         description: Custom output Mustache template (relative to svg-sprite basedir)
@@ -610,7 +610,7 @@ symbol:
         default: sprite.styl
         map: mode.symbol.render.styl.dest
 
-    "*":
+    '*':
       description: Custom output renderings
       template:
         description: Custom output Mustache template (relative to svg-sprite basedir)
@@ -736,7 +736,7 @@ stack:
         default: sprite.styl
         map: mode.stack.render.styl.dest
 
-    "*":
+    '*':
       description: Custom output renderings
       template:
         description: Custom output Mustache template (relative to svg-sprite basedir)
@@ -761,4 +761,4 @@ stack:
 
 variables:
   description: Path to external JSON file with Mustache variable definitions
-  map: "variables"
+  map: 'variables'

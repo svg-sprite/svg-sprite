@@ -1,23 +1,23 @@
 <svg height="36" preserveAspectRatio="xMidYMid" viewBox="0 0 36 36" width="36" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-        <style>
-            .cls-1 {
-            fill: #fff45c;
-            stroke: #fc0;
-            stroke-width: 2px;
-            }
-            .cls-2,
-            .cls-3 {
-            font-size: 20px;
-            }
-            .cls-3 {
-            fill: #fc0;
-            font-family: "Microsoft YaHei"
-            }
-        </style>
-    </defs>
-    <circle class="cls-1" cx="18" cy="18" r="17"/>
-    <text class="cls-2" x="8" y="24">
-        <tspan class="cls-3">爽</tspan>
-    </text>
+  <defs>
+    <style>
+      .cls-1 {
+      fill: #fff45c;
+      stroke: #fc0;
+      stroke-width: 2px;
+      }
+      .cls-2,
+      .cls-3 {
+      font-size: 20px;
+      }
+      .cls-3 {
+      fill: #fc0;
+      font-family: "Microsoft YaHei"
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="18" cy="18" r="17"/>
+  <text class="cls-2" x="8" y="24">
+    <tspan class="cls-3">爽</tspan>
+  </text>
 </svg>
