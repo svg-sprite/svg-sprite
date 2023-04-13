@@ -75,12 +75,12 @@ const spriter = new SVGSpriter(config);
 spriter.add(
   'assets/svg-1.svg',
   null,
-  fs.readFileSync('assets/svg-1.svg', 'utf-8')
+  fs.readFileSync('assets/svg-1.svg', 'utf8')
 );
 spriter.add(
   'assets/svg-2.svg',
   null,
-  fs.readFileSync('assets/svg-2.svg', 'utf-8')
+  fs.readFileSync('assets/svg-2.svg', 'utf8')
 );
 /* ... */
 
