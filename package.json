@@ -131,7 +131,6 @@
       ],
       "max-params": "off",
       "no-bitwise": "off",
-      "no-negated-condition": "off",
       "prefer-template": "error",
       "spaced-comment": "off",
       "unicorn/explicit-length-check": "off",
