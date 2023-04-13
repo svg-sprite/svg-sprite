@@ -1,7 +1,5 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
-
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
@@ -41,14 +39,3 @@ For each of your shapes, *svg-sprite* will look for `title` and `description` ke
 ```
 
 Please be aware that existing `<title>` and `<description>` elements in the SVG files will be overridden. Also, even without the `meta` file being specified, *svg-sprite* will try to find these two elements in your files and set the `aria-labelledby` attribute accordingly.
-
-
-[npm-url]: https://www.npmjs.com/package/svg-sprite
-[npm-image]: https://img.shields.io/npm/v/svg-sprite
-[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite
-
-[ci-url]: https://github.com/svg-sprite/svg-sprite/actions/workflows/test.yml?query=branch%3Amain
-[ci-image]: https://img.shields.io/github/actions/workflow/status/svg-sprite/svg-sprite/test.yml?branch=main&label=CI&logo=github
-
-[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
-[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main

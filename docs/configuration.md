@@ -1,7 +1,5 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
-
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
@@ -467,14 +465,3 @@ To **disable the rendering** without removing the whole structure, simply set th
     }
 }
 ```
-
-
-[npm-url]: https://www.npmjs.com/package/svg-sprite
-[npm-image]: https://img.shields.io/npm/v/svg-sprite
-[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite
-
-[ci-url]: https://github.com/svg-sprite/svg-sprite/actions/workflows/test.yml?query=branch%3Amain
-[ci-image]: https://img.shields.io/github/actions/workflow/status/svg-sprite/svg-sprite/test.yml?branch=main&label=CI&logo=github
-
-[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
-[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main

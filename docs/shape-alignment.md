@@ -1,7 +1,5 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
-
 This file is part of the documentation of *svg-sprite* — a free low-level Node.js module that **takes a bunch of SVG files**, optimizes them and creates **SVG sprites** of several types. The package is [hosted on GitHub](https://github.com/svg-sprite/svg-sprite).
 
 
@@ -63,14 +61,3 @@ Remember that the omitting the placeholder `"%s"`will make the template strings 
 ![Sprite with vertical layout, mixed x-axis positioning and displaced copies](../test/expected/png/css.vertical.mixed.png)
 
 As the displaced copies are created with the `<use>` element, your sprite doesn't get significantly bigger in file size by duplicating shapes this way. For each of the duplicates, an **individual CSS rule** is created in the stylesheet resources, using the virtual shape ID as selector class name.
-
-
-[npm-url]: https://www.npmjs.com/package/svg-sprite
-[npm-image]: https://img.shields.io/npm/v/svg-sprite
-[npm-downloads]: https://img.shields.io/npm/dm/svg-sprite
-
-[ci-url]: https://github.com/svg-sprite/svg-sprite/actions/workflows/test.yml?query=branch%3Amain
-[ci-image]: https://img.shields.io/github/actions/workflow/status/svg-sprite/svg-sprite/test.yml?branch=main&label=CI&logo=github
-
-[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
-[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
