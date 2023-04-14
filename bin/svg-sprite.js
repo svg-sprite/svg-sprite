@@ -270,20 +270,19 @@ if ('variables' in config) {
 const spriter = new SVGSpriter(config);
 const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
 
-for (let file of files) {
-    let basename = file;
-    file = path.resolve(file); // TODO: get rid of variable redefinition
+for (let fileName of files) {
+    let file = path.resolve(fileName);
     const stat = fs.lstatSync(file);
+
+    if (fileName.includes('/./')) {
+        fileName = fileName.replace('/./', '/'); // This is a back porting for cases explained here https://github.com/svg-sprite/svg-sprite/blob/main/docs/command-line.md#advanced-globbing
+    }
 
     if (stat.isSymbolicLink()) {
         file = fs.readlinkSync(file);
-        basename = path.basename(file);
-    } else {
-        const basepos = basename.lastIndexOf('./');
-        basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
     }
 
-    spriter.add(file, basename, fs.readFileSync(file));
+    spriter.add(file, fileName, fs.readFileSync(file));
 }
 
 spriter.compile((error, result) => {
