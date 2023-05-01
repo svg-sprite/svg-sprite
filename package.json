@@ -51,7 +51,7 @@
     "vinyl": "^3.0.0",
     "winston": "^3.8.2",
     "xpath": "^0.0.32",
-    "yargs": "^17.7.1"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "eslint-plugin-jest": "^27.2.1",
