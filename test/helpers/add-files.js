@@ -12,14 +12,14 @@ const path = require('node:path');
  * @param {boolean} resolvePaths      Whether to resolve the paths of SVG files
  */
 function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
-    for (const file of files) {
-        const filePath = path.join(cwd, file);
-        spriter.add(
-            resolvePaths ? path.resolve(filePath) : file,
-            file,
-            fs.readFileSync(filePath, 'utf8')
-        );
-    }
+  for (const file of files) {
+    const filePath = path.join(cwd, file);
+    spriter.add(
+      resolvePaths ? path.resolve(filePath) : file,
+      file,
+      fs.readFileSync(filePath, 'utf8')
+    );
+  }
 }
 
 /**
@@ -30,7 +30,7 @@ function addFixtureFilesBase(spriter, files, cwd, resolvePaths) {
  * @param {string} cwd                Working directory
  */
 function addFixtureFiles(spriter, files, cwd) {
-    addFixtureFilesBase(spriter, files, cwd, true);
+  addFixtureFilesBase(spriter, files, cwd, true);
 }
 
 /**
@@ -41,10 +41,10 @@ function addFixtureFiles(spriter, files, cwd) {
  * @param {string} cwd                Working directory
  */
 function addRelativeFixtureFiles(spriter, files, cwd) {
-    addFixtureFilesBase(spriter, files, cwd, false);
+  addFixtureFilesBase(spriter, files, cwd, false);
 }
 
 module.exports = {
-    addFixtureFiles,
-    addRelativeFixtureFiles
+  addFixtureFiles,
+  addRelativeFixtureFiles
 };

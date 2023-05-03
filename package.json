@@ -89,7 +89,7 @@
     "gulpfriendly"
   ],
   "xo": {
-    "space": 4,
+    "space": true,
     "plugins": [
       "jsdoc"
     ],

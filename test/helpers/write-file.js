@@ -11,11 +11,11 @@ const path = require('node:path');
  * @returns {string}                  File
  */
 module.exports = async(file, content) => {
-    try {
-        await mkdir(path.dirname(file), { recursive: true });
-        await writeFile(file, content);
-        return file;
-    } catch {
-        return null;
-    }
+  try {
+    await mkdir(path.dirname(file), { recursive: true });
+    await writeFile(file, content);
+    return file;
+  } catch {
+    return null;
+  }
 };

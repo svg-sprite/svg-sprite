@@ -13,8 +13,8 @@ const comparePng2Png = require('./compare-png-2-png.js');
  * @param {string} expected           Expected PNG file path
  */
 module.exports = async(svg, png, expected) => {
-    await mkdir(path.dirname(png), { recursive: true });
-    await convertSvg2Png(svg, png);
+  await mkdir(path.dirname(png), { recursive: true });
+  await convertSvg2Png(svg, png);
 
-    return comparePng2Png(png, expected);
+  return comparePng2Png(png, expected);
 };

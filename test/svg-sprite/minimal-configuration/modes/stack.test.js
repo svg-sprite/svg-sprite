@@ -16,92 +16,92 @@ describe.each`
         ${'default'}  | ${'DEFAULT'}
         ${'w/o dims'} | ${'WITHOUT_DIMS'}
 `('svg-sprite: $name: «stack» mode', ({ testConfigKey }) => {
-    const testConfig = constants[testConfigKey];
+  const testConfig = constants[testConfigKey];
 
-    const tmpPath = path.join(paths.tmp, `stack${testConfig.namespace}`);
+  const tmpPath = path.join(paths.tmp, `stack${testConfig.namespace}`);
 
-    let svg;
-    let spriter;
-    let data;
+  let svg;
+  let spriter;
+  let data;
 
-    beforeAll(async() => {
-        await removeTmpPath(tmpPath);
-        data = {};
+  beforeAll(async() => {
+    await removeTmpPath(tmpPath);
+    data = {};
 
-        spriter = new SVGSpriter({ dest: tmpPath });
-        addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
-        const { result, data: cssData } = await spriter.compileAsync({
-            stack: {
-                sprite: `svg/stack${testConfig.namespace}.svg`, render: {
-                    css: true
-                }
-            }
-        });
-        writeFiles(result);
-        data = cssData.stack;
-        svg = path.basename(result.stack.sprite.path);
+    spriter = new SVGSpriter({ dest: tmpPath });
+    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+    const { result, data: cssData } = await spriter.compileAsync({
+      stack: {
+        sprite: `svg/stack${testConfig.namespace}.svg`, render: {
+          css: true
+        }
+      }
     });
+    writeFiles(result);
+    data = cssData.stack;
+    svg = path.basename(result.stack.sprite.path);
+  });
 
-    it('creates a visually correct stylesheet resource in CSS format', async() => {
-        expect.hasAssertions();
+  it('creates a visually correct stylesheet resource in CSS format', async() => {
+    expect.hasAssertions();
 
-        const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
+    const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
 
-        data.svg = svgData.toString();
-        data.css = '../sprite.css';
+    data.svg = svgData.toString();
+    data.css = '../sprite.css';
 
-        expect(data.svg).toMatchSnapshot();
+    expect(data.svg).toMatchSnapshot();
 
-        const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
-        const out = mustache.render(previewTemplate, data);
-        const preview = await writeFile(path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`), out);
-        const expected = path.join(paths.expectations, `png/stack${testConfig.namespace}.html.png`);
+    const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+    const out = mustache.render(previewTemplate, data);
+    const preview = await writeFile(path.join(tmpPath, `stack/html/stack${testConfig.namespace}.html`), out);
+    const expected = path.join(paths.expectations, `png/stack${testConfig.namespace}.html.png`);
 
-        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
-    });
+    await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+  });
 });
 
 describe('without viewbox', () => {
-    const testConfig = constants.WITHOUT_DIMS;
-    const tmpPath = path.join(paths.tmp, 'stack-without-viewbox');
-    let svg;
-    let spriter;
-    let data;
+  const testConfig = constants.WITHOUT_DIMS;
+  const tmpPath = path.join(paths.tmp, 'stack-without-viewbox');
+  let svg;
+  let spriter;
+  let data;
 
-    beforeAll(async() => {
-        await removeTmpPath(tmpPath);
-        data = {};
+  beforeAll(async() => {
+    await removeTmpPath(tmpPath);
+    data = {};
 
-        spriter = new SVGSpriter({ dest: tmpPath });
-        addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
-        const { result, data: cssData } = await spriter.compileAsync({
-            stack: {
-                sprite: `svg/stack${testConfig.namespace}.svg`, render: {
-                    css: true
-                },
-                rootviewbox: false
-            }
-        });
-        writeFiles(result);
-        data = cssData.stack;
-        svg = path.basename(result.stack.sprite.path);
+    spriter = new SVGSpriter({ dest: tmpPath });
+    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+    const { result, data: cssData } = await spriter.compileAsync({
+      stack: {
+        sprite: `svg/stack${testConfig.namespace}.svg`, render: {
+          css: true
+        },
+        rootviewbox: false
+      }
     });
+    writeFiles(result);
+    data = cssData.stack;
+    svg = path.basename(result.stack.sprite.path);
+  });
 
-    it('creates a visually correct stylesheet resource in CSS format', async() => {
-        expect.hasAssertions();
+  it('creates a visually correct stylesheet resource in CSS format', async() => {
+    expect.hasAssertions();
 
-        const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
+    const svgData = await readFile(path.join(tmpPath, 'stack/svg', svg));
 
-        data.svg = svgData.toString();
-        data.css = '../sprite.css';
+    data.svg = svgData.toString();
+    data.css = '../sprite.css';
 
-        expect(data.svg).toMatchSnapshot();
+    expect(data.svg).toMatchSnapshot();
 
-        const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
-        const out = mustache.render(previewTemplate, data);
-        const preview = await writeFile(path.join(tmpPath, 'stack/html/stack-without-viewbox.html'), out);
-        const expected = path.join(paths.expectations, 'png/stack-without-viewbox.html.png');
+    const previewTemplate = await readFile(path.join(__dirname, '../../../tmpl/stack.html'), 'utf8');
+    const out = mustache.render(previewTemplate, data);
+    const preview = await writeFile(path.join(tmpPath, 'stack/html/stack-without-viewbox.html'), out);
+    const expected = path.join(paths.expectations, 'png/stack-without-viewbox.html.png');
 
-        await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
-    });
+    await expect(preview).toBeVisuallyCorrectAsHTMLTo(expected);
+  });
 });

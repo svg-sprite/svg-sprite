@@ -23,22 +23,22 @@ Being a low-level library with support for [Node.js streams](https://github.com/
 
 * [Installation](#installation)
 * [Getting started](#getting-started)
-    * [Usage pattern](#usage-pattern)
-    * [Standard API](docs/api.md)
-    * [Grunt & Gulp wrappers](docs/grunt-gulp.md)
+  * [Usage pattern](#usage-pattern)
+  * [Standard API](docs/api.md)
+  * [Grunt & Gulp wrappers](docs/grunt-gulp.md)
 * [Configuration basics](#configuration-basics)
-    * [General configuration options](#general-configuration-options)
-    * [Output modes](#output-modes)
-        * [Common mode properties](#common-mode-properties)
-        * [Basic examples](#basic-examples)
-    * [Output destinations](#output-destinations)
-        * [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
-    * [Full configuration documentation](docs/configuration.md)
-    * [Online configurator & project kickstarter](https://svg-sprite.github.io/svg-sprite/)
+  * [General configuration options](#general-configuration-options)
+  * [Output modes](#output-modes)
+    * [Common mode properties](#common-mode-properties)
+    * [Basic examples](#basic-examples)
+  * [Output destinations](#output-destinations)
+    * [Pre-processor formats and the sprite location](#pre-processor-formats-and-the-sprite-location)
+  * [Full configuration documentation](docs/configuration.md)
+  * [Online configurator & project kickstarter](https://svg-sprite.github.io/svg-sprite/)
 * [Advanced techniques](#advanced-techniques)
-    * [Meta data injection](docs/meta-data.md)
-    * [Aligning and duplicating shapes](docs/shape-alignment.md)
-    * [Tweaking and adding output formats](docs/templating.md)
+  * [Meta data injection](docs/meta-data.md)
+  * [Aligning and duplicating shapes](docs/shape-alignment.md)
+  * [Tweaking and adding output formats](docs/templating.md)
 * [Command line usage](docs/command-line.md)
 * [Known problems / To-do](#known-problems--to-do)
 * [Changelog](CHANGELOG.md)
@@ -82,23 +82,23 @@ spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8
 
 // Compile the sprite
 spriter.compile((error, result) => {
-    /* Write `result` files to disk (or do whatever with them ...) */
-    for (const mode of Object.values(result)) {
-        for (const resource of Object.values(mode)) {
-            fs.mkdirSync(path.dirname(resource.path), { recursive: true });
-            fs.writeFileSync(resource.path, resource.contents);
-        }
+  /* Write `result` files to disk (or do whatever with them ...) */
+  for (const mode of Object.values(result)) {
+    for (const resource of Object.values(mode)) {
+      fs.mkdirSync(path.dirname(resource.path), { recursive: true });
+      fs.writeFileSync(resource.path, resource.contents);
     }
+  }
 });
 
 // Or compile the sprite async
 const { result } = await spriter.compileAsync();
 /* Write `result` files to disk (or do whatever with them ...) */
 for (const mode of Object.values(result)) {
-    for (const resource of Object.values(mode)) {
-        fs.mkdirSync(path.dirname(resource.path), { recursive: true });
-        fs.writeFileSync(resource.path, resource.contents);
-    }
+  for (const resource of Object.values(mode)) {
+    fs.mkdirSync(path.dirname(resource.path), { recursive: true });
+    fs.writeFileSync(resource.path, resource.contents);
+  }
 }
 
 ```
@@ -112,12 +112,12 @@ Of course you noticed the `config` variable passed to the constructor in the abo
 
 ```js
 {
-    dest: <String>, // Main output directory
-    log: <String|Logger>, // Logging verbosity or custom logger
-    shape: <Object>, // SVG shape configuration
-    svg: <Object>, // Common SVG options
-    variables: <Object>, // Custom templating variables
-    mode: <Object> // Output mode configurations
+  dest: <String>, // Main output directory
+  log: <String|Logger>, // Logging verbosity or custom logger
+  shape: <Object>, // SVG shape configuration
+  svg: <Object>, // Common SVG options
+  variables: <Object>, // Custom templating variables
+  mode: <Object> // Output mode configurations
 }
 ```
 
@@ -131,38 +131,38 @@ Many configuration properties (all except `mode`) apply to all sprites created b
 ```js
 // Common svg-sprite config options and their default values
 const config = {
-    dest: '.', // Main output directory
-    log: null, // Logging verbosity (default: no logging)
-    shape: { // SVG shape related options
-        id: { // SVG shape ID related options
-            separator: '--', // Separator for directory name traversal
-            generator: function () { /*...*/ }, // SVG shape ID generator callback
-            pseudo: '~' // File name separator for shape states (e.g. ':hover')
-        },
-        dimension: {// Dimension related options
-            maxWidth: 2000, // Max. shape width
-            maxHeight: 2000, // Max. shape height
-            precision: 2, // Floating point precision
-            attributes: false, // Width and height attributes on embedded shapes
-        },
-        spacing: { // Spacing related options
-            padding: 0, // Padding around all shapes
-            box: 'content' // Padding strategy (similar to CSS `box-sizing`)
-        },
-        transform: ['svgo'], // List of transformations / optimizations
-        meta: null, // Path to YAML file with meta / accessibility data
-        align: null, // Path to YAML file with extended alignment data
-        dest: null // Output directory for optimized intermediate SVG shapes
+  dest: '.', // Main output directory
+  log: null, // Logging verbosity (default: no logging)
+  shape: { // SVG shape related options
+    id: { // SVG shape ID related options
+      separator: '--', // Separator for directory name traversal
+      generator: function () { /*...*/ }, // SVG shape ID generator callback
+      pseudo: '~' // File name separator for shape states (e.g. ':hover')
     },
-    svg: { // General options for created SVG files
-        xmlDeclaration: true, // Add XML declaration to SVG sprite
-        doctypeDeclaration: true, // Add DOCTYPE declaration to SVG sprite
-        namespaceIDs: true, // Add namespace token to all IDs in SVG shapes
-        namespaceIDPrefix: '', // Add a prefix to the automatically generated namespaceIDs
-        namespaceClassnames: true, // Add namespace token to all CSS class names in SVG shapes
-        dimensionAttributes: true // Width and height attributes on the sprite
+    dimension: {// Dimension related options
+      maxWidth: 2000, // Max. shape width
+      maxHeight: 2000, // Max. shape height
+      precision: 2, // Floating point precision
+      attributes: false, // Width and height attributes on embedded shapes
     },
-    variables: {} // Custom Mustache templating variables and functions
+    spacing: { // Spacing related options
+      padding: 0, // Padding around all shapes
+      box: 'content' // Padding strategy (similar to CSS `box-sizing`)
+    },
+    transform: ['svgo'], // List of transformations / optimizations
+    meta: null, // Path to YAML file with meta / accessibility data
+    align: null, // Path to YAML file with extended alignment data
+    dest: null // Output directory for optimized intermediate SVG shapes
+  },
+  svg: { // General options for created SVG files
+    xmlDeclaration: true, // Add XML declaration to SVG sprite
+    doctypeDeclaration: true, // Add DOCTYPE declaration to SVG sprite
+    namespaceIDs: true, // Add namespace token to all IDs in SVG shapes
+    namespaceIDPrefix: '', // Add a prefix to the automatically generated namespaceIDs
+    namespaceClassnames: true, // Add namespace token to all CSS class names in SVG shapes
+    dimensionAttributes: true // Width and height attributes on the sprite
+  },
+  variables: {} // Custom Mustache templating variables and functions
 }
 ```
 
@@ -177,13 +177,13 @@ To enable the creation of a specific sprite type with default values, simply set
 
 ```js
 const config = {
-    mode: {
-        css: true, // Create a «css» sprite
-        view: true, // Create a «view» sprite
-        defs: true, // Create a «defs» sprite
-        symbol: true, // Create a «symbol» sprite
-        stack: true // Create a «stack» sprite
-    }
+  mode: {
+    css: true, // Create a «css» sprite
+    view: true, // Create a «view» sprite
+    defs: true, // Create a «defs» sprite
+    symbol: true, // Create a «symbol» sprite
+    stack: true // Create a «stack» sprite
+  }
 }
 ```
 
@@ -192,12 +192,12 @@ To further configure a sprite, pass in an object with configuration options:
 ```js
 // «symbol» sprite with CSS stylesheet resource
 const config = {
-    mode: {
-        css: {
-            // Configuration for the «css» sprite
-            // ...
-        }
+  mode: {
+    css: {
+      // Configuration for the «css» sprite
+      // ...
     }
+  }
 }
 ```
 
@@ -209,25 +209,25 @@ Many `mode` properties are shared between the different sprite types, but there 
 ```js
 // Common mode properties
 const config = {
-    mode: {
-        <mode>: {
-            dest: "<mode>", // Mode specific output directory
-            prefix: "svg-%s", // Prefix for CSS selectors
-            dimensions: "-dims", // Suffix for dimension CSS selectors
-            sprite: "svg/sprite.<mode>.svg", // Sprite path and name
-            bust: true || false, // Cache busting (mode dependent default value)
-            render: { // Stylesheet rendering definitions
-                /* -------------------------------------------
-                css: false, // CSS stylesheet options
-                scss: false, // Sass stylesheet options
-                less: false, // LESS stylesheet options
-                styl: false, // Stylus stylesheet options
-                <custom>: ... // Custom stylesheet options
-                -------------------------------------------    */
-            },
-            example: false // Create an HTML example document
-        }
+  mode: {
+    <mode>: {
+      dest: "<mode>", // Mode specific output directory
+      prefix: "svg-%s", // Prefix for CSS selectors
+      dimensions: "-dims", // Suffix for dimension CSS selectors
+      sprite: "svg/sprite.<mode>.svg", // Sprite path and name
+      bust: true || false, // Cache busting (mode dependent default value)
+      render: { // Stylesheet rendering definitions
+        /* -------------------------------------------
+        css: false, // CSS stylesheet options
+        scss: false, // Sass stylesheet options
+        less: false, // LESS stylesheet options
+        styl: false, // Stylus stylesheet options
+        <custom>: ... // Custom stylesheet options
+        -------------------------------------------  */
+      },
+      example: false // Create an HTML example document
     }
+  }
 }
 ```
 
@@ -242,11 +242,11 @@ Foreground image **sprite with `<symbol>` elements** (for being `<use>`d in your
 ```js
 // «symbol» sprite with CSS stylesheet resource
 const config = {
-    mode: {
-        symbol: {        // Create a «symbol» sprite
-            inline: true // Prepare for inline embedding
-        }
+  mode: {
+    symbol: {    // Create a «symbol» sprite
+      inline: true // Prepare for inline embedding
     }
+  }
 }
 ```
 
@@ -258,13 +258,13 @@ Traditional **CSS sprite** with a **Sass stylesheet**:
 ```js
 // «css» sprite with Sass stylesheet resource
 const config = {
-    mode: {
-        css: { // Create a «css» sprite
-            render: {
-                scss: true // Render a Sass stylesheet
-            }
-        }
+  mode: {
+    css: { // Create a «css» sprite
+      render: {
+        scss: true // Render a Sass stylesheet
+      }
     }
+  }
 }
 ```
 
@@ -276,11 +276,11 @@ const config = {
 ```js
 // «defs», «symbol» and «stack» sprites in parallel
 const config = {
-    mode: {
-        defs: true,
-        symbol: true,
-        stack: true
-    }
+  mode: {
+    defs: true,
+    symbol: true,
+    stack: true
+  }
 }
 ```
 
@@ -292,9 +292,9 @@ const config = {
 ```js
 // Just optimize source SVG files, create no sprite
 const config = {
-    shape: {
-        dest: 'path/to/out/dir'
-    }
+  shape: {
+    dest: 'path/to/out/dir'
+  }
 }
 ```
 
@@ -306,16 +306,16 @@ Depending on your particular configuration, *svg-sprite* creates a lot of files 
 Relative destination paths refer to their ancestors as shown in the following scheme, with the current working directory being the ultimate base.
 
 ```text
-        Destination option                     Default               Comment
+    Destination option           Default         Comment
 ---------------------------------------------------------------------------------------------
-cwd $   <dest>/                                .                     Main output directory
-            <mode.css.dest>/                   css                   «css» base directory
-                <mode.css.sprite>              svg/sprite.css.svg    Sprite location
-                <mode.css.render.css.dest>     sprite.css            CSS stylesheet location
-                <mode.css.render.scss.dest>    sprite.scss           Sass stylesheet location
-                ...
-            <mode.view>/                       view                  «view» base directory
-                ...
+cwd $   <dest>/                .           Main output directory
+      <mode.css.dest>/           css           «css» base directory
+        <mode.css.sprite>        svg/sprite.css.svg  Sprite location
+        <mode.css.render.css.dest>   sprite.css      CSS stylesheet location
+        <mode.css.render.scss.dest>  sprite.scss       Sass stylesheet location
+        ...
+      <mode.view>/             view          «view» base directory
+        ...
 ```
 
 By default, stylesheet resources are generated directly into the respective **mode's base directory**.
