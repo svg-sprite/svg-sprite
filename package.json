@@ -132,7 +132,6 @@
       ],
       "max-params": "off",
       "no-bitwise": "off",
-      "no-negated-condition": "off",
       "object-curly-spacing": [
         "error",
         "always"
@@ -150,6 +149,7 @@
       "unicorn/explicit-length-check": "off",
       "unicorn/no-array-method-this-argument": "off",
       "unicorn/no-array-reduce": "off",
+      "unicorn/no-negated-condition": "off",
       "unicorn/prefer-code-point": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-reflect-apply": "off",
