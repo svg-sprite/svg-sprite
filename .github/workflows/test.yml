@@ -13,6 +13,9 @@ env:
   FORCE_COLOR: 2
   NODE_COV: 18 # The Node.js version to run coveralls on
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Node ${{ matrix.node }} on ${{ matrix.os }}

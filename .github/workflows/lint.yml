@@ -13,6 +13,9 @@ env:
   FORCE_COLOR: 2
   NODE: 18 # The Node.js version to run lint on
 
+permissions:
+  contents: read
+
 jobs:
   run:
     name: Lint
