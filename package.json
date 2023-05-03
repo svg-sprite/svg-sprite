@@ -159,8 +159,7 @@
     "overrides": [
       {
         "files": [
-          "test/**/*.test.js",
-          "test/jest/*.js"
+          "test/**"
         ],
         "plugins": [
           "jest",
@@ -177,7 +176,8 @@
           "jest/max-expects": "off",
           "jest/no-hooks": "off",
           "jest/no-untyped-mock-factory": "off",
-          "jest/prefer-lowercase-title": "off"
+          "jest/prefer-lowercase-title": "off",
+          "jsdoc/require-returns": "off"
         }
       }
     ]
