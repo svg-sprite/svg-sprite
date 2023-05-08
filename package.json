@@ -41,6 +41,7 @@
     "csso": "^5.0.5",
     "cssom": "^0.5.0",
     "glob": "^7.2.3",
+    "import-lazy": "^4.0.0",
     "js-yaml": "^4.1.0",
     "lodash.escape": "^4.0.1",
     "lodash.merge": "^4.6.2",
