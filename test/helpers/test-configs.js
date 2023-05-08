@@ -10,18 +10,18 @@ const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
 const withoutDims = glob.sync('**/*.svg', { cwd: cwdWithoutDims });
 
 const constants = {
-    DEFAULT: {
-        name: 'weather',
-        namespace: '',
-        files: weather,
-        cwd: cwdWeather
-    },
-    WITHOUT_DIMS: {
-        name: 'without-dims',
-        namespace: '-without-dims',
-        files: withoutDims,
-        cwd: cwdWithoutDims
-    }
+  DEFAULT: {
+    name: 'weather',
+    namespace: '',
+    files: weather,
+    cwd: cwdWeather
+  },
+  WITHOUT_DIMS: {
+    name: 'without-dims',
+    namespace: '-without-dims',
+    files: withoutDims,
+    cwd: cwdWithoutDims
+  }
 
 };
 

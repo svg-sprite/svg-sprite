@@ -21,7 +21,7 @@ spriter.add('assets/svg-2.svg', null, fs.readFileSync('assets/svg-2.svg', 'utf-8
 
 // Compile sprite
 spriter.compile((error, result) => {
-    /* ... Write `result` files to disk or do whatever with them ... */
+  /* ... Write `result` files to disk or do whatever with them ... */
 });
 ```
 
@@ -30,13 +30,13 @@ spriter.compile((error, result) => {
 ```js
 // svg-sprite Grunt task
 grunt.initConfig({
-    svg_sprite: {
-        minimal: {
-            src: ['assets/**/*.svg'],
-            dest: 'out',
-            options: config
-        }
+  svg_sprite: {
+    minimal: {
+      src: ['assets/**/*.svg'],
+      dest: 'out',
+      options: config
     }
+  }
 });
 ```
 
@@ -45,6 +45,6 @@ grunt.initConfig({
 ```js
 // svg-sprite Gulp task
 gulp.src('assets/*.svg')
-    .pipe(svgSprite(config))
-    .pipe(gulp.dest('out'));
+  .pipe(svgSprite(config))
+  .pipe(gulp.dest('out'));
 ```

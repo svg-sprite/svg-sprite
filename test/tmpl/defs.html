@@ -1,60 +1,60 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>SVG &lt;defs&gt; sprite preview | svg-sprite</title>
-        <link href="{{{css}}}" rel="stylesheet">
-        <style>
-            body {
-                padding: 0;
-                margin: 0;
-                color: #666;
-                background: #fafafa;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 16px;
-                line-height: 1.4;
-                width: 1280px;
-            }
-            ol {
-                margin: 0;
-                padding: 0;
-            }
-            li {
-                display: inline-block;
-                background-color: #fff;
-                position: relative;
-                margin: 14px;
-                vertical-align: middle;
-                border: 1px solid #ccc;
-                padding: 13px;
-                cursor: default;
-                width: 200px;
-                height: 200px;
-                line-height: 200px;
-            }
-            figure {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-                display: inline-block;
-                line-height: 1;
-                vertical-align: middle;
-            }
-            figcaption {
-                display: none;
-            }
-        </style>
-    </head>
-    <body>
-        {{{svg}}}
-        <ol>
-            {{#shapes}}<li>
-                <figure>
-                    <svg class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}"><use xlink:href="#{{name}}"/></svg>
-                    <figcaption>{{name}}</figcaption>
-                </figure>
-            </li>{{/shapes}}
-        </ol>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <title>SVG &lt;defs&gt; sprite preview | svg-sprite</title>
+    <link href="{{{css}}}" rel="stylesheet">
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        color: #666;
+        background: #fafafa;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.4;
+        width: 1280px;
+      }
+      ol {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        display: inline-block;
+        background-color: #fff;
+        position: relative;
+        margin: 14px;
+        vertical-align: middle;
+        border: 1px solid #ccc;
+        padding: 13px;
+        cursor: default;
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+      }
+      figure {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: inline-block;
+        line-height: 1;
+        vertical-align: middle;
+      }
+      figcaption {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    {{{svg}}}
+    <ol>
+      {{#shapes}}<li>
+        <figure>
+          <svg class="{{#selector.dimensions}}{{#last}}{{#classname}}{{raw}}{{/classname}}{{/last}}{{/selector.dimensions}}"><use xlink:href="#{{name}}"/></svg>
+          <figcaption>{{name}}</figcaption>
+        </figure>
+      </li>{{/shapes}}
+    </ol>
+  </body>
 </html>

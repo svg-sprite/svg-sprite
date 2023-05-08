@@ -12,8 +12,8 @@ const MAX_MISMATCH = 5;
  * @param {string} filePath where to store the diff
  */
 const storeDiff = async(diff, filePath) => {
-    await mkdir(path.dirname(filePath), { recursive: true });
-    await writeFile(filePath, PNG.sync.write(diff));
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, PNG.sync.write(diff));
 };
 
 /**
@@ -22,33 +22,33 @@ const storeDiff = async(diff, filePath) => {
  * @returns {Promise<{isEqual: boolean, matched: (number|*), diff: exports.PNG}>} matching results
  */
 module.exports = async(input, expected) => {
-    const inputPng = PNG.sync.read(await readFile(input));
-    const expectedPng = PNG.sync.read(await readFile(expected));
+  const inputPng = PNG.sync.read(await readFile(input));
+  const expectedPng = PNG.sync.read(await readFile(expected));
 
-    const { width, height } = inputPng;
+  const { width, height } = inputPng;
 
-    const diff = new PNG({ width, height });
+  const diff = new PNG({ width, height });
 
-    const matched = pixelmatch(
-        inputPng.data,
-        expectedPng.data,
-        diff.data,
-        width,
-        height,
-        { threshold: 0.1 }
-    );
+  const matched = pixelmatch(
+    inputPng.data,
+    expectedPng.data,
+    diff.data,
+    width,
+    height,
+    { threshold: 0.1 }
+  );
 
-    if (matched <= MAX_MISMATCH) {
-        return { isEqual: true, matched, diff };
-    }
+  if (matched <= MAX_MISMATCH) {
+    return { isEqual: true, matched, diff };
+  }
 
-    await storeDiff(
-        diff,
-        path.join(
-            path.dirname(input),
-            path.basename(input).replace('.png', '.diff.png')
-        )
-    );
+  await storeDiff(
+    diff,
+    path.join(
+      path.dirname(input),
+      path.basename(input).replace('.png', '.diff.png')
+    )
+  );
 
-    return { isEqual: false, matched, diff };
+  return { isEqual: false, matched, diff };
 };
