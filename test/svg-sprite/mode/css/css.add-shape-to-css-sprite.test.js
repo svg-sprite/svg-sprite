@@ -1,5 +1,6 @@
-'use strict';
 /* eslint-disable max-nested-callbacks */
+
+'use strict';
 
 const SVGSpriteCss = require('../../../../lib/svg-sprite/mode/css.js');
 const SVGSprite = require('../../../../lib/svg-sprite/sprite.js');
