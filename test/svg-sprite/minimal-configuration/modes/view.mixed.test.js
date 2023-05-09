@@ -58,9 +58,10 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     expect.hasAssertions();
 
     const input = path.join(tmpPath, 'view/svg', packedSvg);
+    const actual = fs.readFileSync(input, 'utf8');
     const expected = path.join(paths.expectations, 'png/css.packed.mixed.png');
 
-    expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+    expect(actual).toMatchSnapshot();
     await expect(input).toBeVisuallyEqualTo(expected);
   });
 

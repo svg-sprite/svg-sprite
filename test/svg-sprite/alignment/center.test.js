@@ -60,9 +60,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
+      const actual = fs.readFileSync(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.vertical.centered.png');
 
-      expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 
@@ -118,9 +119,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
+      const actual = fs.readFileSync(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.horizontal.centered.png');
 
-      expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 
@@ -179,9 +181,10 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
+      const actual = fs.readFileSync(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.packed.centered.png');
 
-      expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 

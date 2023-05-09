@@ -91,9 +91,10 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.vertical);
+        const actual = fs.readFileSync(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`);
 
-        expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+        expect(actual).toMatchSnapshot();
         await expect(input).toBeVisuallyEqualTo(expected);
       });
 
@@ -102,9 +103,10 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.horizontal);
+        const actual = fs.readFileSync(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`);
 
-        expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+        expect(actual).toMatchSnapshot();
         await expect(input).toBeVisuallyEqualTo(expected);
       });
 
@@ -113,9 +115,10 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.diagonal);
+        const actual = fs.readFileSync(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`);
 
-        expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+        expect(actual).toMatchSnapshot();
         await expect(input).toBeVisuallyEqualTo(expected);
       });
 
@@ -124,9 +127,10 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.packed);
+        const actual = fs.readFileSync(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
 
-        expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+        expect(actual).toMatchSnapshot();
         await expect(input).toBeVisuallyEqualTo(expected);
       });
     });

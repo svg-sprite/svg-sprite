@@ -1,6 +1,6 @@
 'use strict';
 
-const { mkdir } = require('node:fs').promises;
+const { mkdir } = require('node:fs/promises');
 const path = require('node:path');
 const convertSvg2Png = require('./convert-svg-2-png.js');
 const comparePng2Png = require('./compare-png-2-png.js');
