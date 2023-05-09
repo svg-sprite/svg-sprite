@@ -30,7 +30,7 @@ describe.each`
     beforeAll(async() => {
       data = {};
       spriter = new SVGSpriter({ dest: tmpPath });
-      addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+      await addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
       const { result, data: cssData } = await spriter.compileAsync({
         view: {
           sprite: `svg/view.packed${testConfig.namespace}.svg`,
@@ -41,7 +41,8 @@ describe.each`
           }
         }
       });
-      writeFiles(result);
+
+      await writeFiles(result);
       data = cssData.view;
       svg = path.basename(result.view.sprite.path);
     });

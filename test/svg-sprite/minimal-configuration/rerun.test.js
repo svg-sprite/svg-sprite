@@ -20,7 +20,7 @@ describe('testing rerun', () => {
 
     const spriter = new SVGSpriter({ dest: tmpPath });
 
-    addFixtureFiles(spriter, weather, cwd);
+    await addFixtureFiles(spriter, weather, cwd);
 
     const { result: firstResult } = await spriter.compileAsync({
       css: {

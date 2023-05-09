@@ -1,8 +1,8 @@
-'use strict';
-
 /* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
 
-const fs = require('node:fs');
+'use strict';
+
+const { readFile } = require('node:fs/promises');
 const path = require('node:path');
 const { Buffer } = require('node:buffer');
 const File = require('vinyl');
@@ -24,11 +24,11 @@ describe('testing SVGSpriter', () => {
 
   describe('testing add()', () => {
     describe('testing adding vinyl file', () => {
-      it('should transform file.base of Vinyl file with path.resolve and add to _queue as vinyl file', () => {
+      it('should transform file.base of Vinyl file with path.resolve and add to _queue as vinyl file', async() => {
         const TEST_FILE = new File({
           base: path.dirname(TEST_SVG),
           path: TEST_SVG,
-          contents: fs.readFileSync(path.join(__dirname, TEST_SVG))
+          contents: await readFile(path.join(__dirname, TEST_SVG))
         });
 
         spriter._queue = {
@@ -135,7 +135,7 @@ describe('testing transform', () => {
     spriter.add(new File({
       base: path.dirname(TEST_SVG),
       path: TEST_SVG,
-      contents: fs.readFileSync(path.join(__dirname, TEST_SVG))
+      contents: await readFile(path.join(__dirname, TEST_SVG))
     }));
 
     await spriter.compileAsync({ css: true });

@@ -29,7 +29,7 @@ describe.each`
     data = {};
 
     spriter = new SVGSpriter({ dest: tmpPath });
-    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+    await addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
     const { result, data: cssData } = await spriter.compileAsync({
       symbol: {
         sprite: `svg/symbol${testConfig.namespace}.svg`, render: {
@@ -37,7 +37,8 @@ describe.each`
         }
       }
     });
-    writeFiles(result);
+
+    await writeFiles(result);
     data = cssData.symbol;
     svg = path.basename(result.symbol.sprite.path);
   });

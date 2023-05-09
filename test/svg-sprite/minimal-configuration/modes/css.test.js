@@ -15,6 +15,7 @@ const { paths } = require('../../../helpers/constants.js');
 const writeFile = require('../../../helpers/write-file.js');
 const asyncRenderers = require('../../../helpers/async-renderers.js');
 
+const { readFile } = fs.promises;
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../../tmpl/css.html'), 'utf8');
 
 describe('testing minimal config', () => {
@@ -35,7 +36,7 @@ describe('testing minimal config', () => {
       await removeTmpPath(tmpPath);
       data = {};
       spriter = new SVGSpriter({ dest: tmpPath });
-      addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+      await addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
       const { result, data: cssData } = await spriter.compileAsync({
         css: {
           sprite: `svg/css.vertical${testConfig.namespace}.svg`,
@@ -58,7 +59,7 @@ describe('testing minimal config', () => {
         }
       });
 
-      writeFiles(result);
+      await writeFiles(result);
       data = cssData.css;
       svg.vertical = path.basename(result.css.sprite.path);
 
@@ -69,12 +70,12 @@ describe('testing minimal config', () => {
               sprite: `svg/css.${layout}${testConfig.namespace}.svg`,
               layout
             }
-          }, (error, result) => {
+          }, async(error, result) => {
             if (error) {
               return reject(error);
             }
 
-            writeFiles(result);
+            await writeFiles(result);
             svg[layout] = path.basename(result.css.sprite.path);
             resolve();
           });
@@ -91,7 +92,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.vertical);
-        const actual = fs.readFileSync(input, 'utf8');
+        const actual = await readFile(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.vertical${testConfig.namespace}.png`);
 
         expect(actual).toMatchSnapshot();
@@ -103,7 +104,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.horizontal);
-        const actual = fs.readFileSync(input, 'utf8');
+        const actual = await readFile(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.horizontal${testConfig.namespace}.png`);
 
         expect(actual).toMatchSnapshot();
@@ -115,7 +116,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.diagonal);
-        const actual = fs.readFileSync(input, 'utf8');
+        const actual = await readFile(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.diagonal${testConfig.namespace}.png`);
 
         expect(actual).toMatchSnapshot();
@@ -127,7 +128,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const input = path.join(tmpPath, 'css/svg', svg.packed);
-        const actual = fs.readFileSync(input, 'utf8');
+        const actual = await readFile(input, 'utf8');
         const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
 
         expect(actual).toMatchSnapshot();
@@ -171,7 +172,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const lessFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.less`);
-        const lessText = fs.readFileSync(lessFile, 'utf8');
+        const lessText = await readFile(lessFile, 'utf8');
         const output = await asyncRenderers.less(lessText, {});
 
         await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.less.css`), output.css);
@@ -190,7 +191,7 @@ describe('testing minimal config', () => {
         expect.hasAssertions();
 
         const stylusFile = path.join(tmpPath, `css/sprite${testConfig.namespace}.styl`);
-        const stylusText = fs.readFileSync(stylusFile, 'utf8');
+        const stylusText = await readFile(stylusFile, 'utf8');
         const output = await asyncRenderers.stylus(stylusText, {});
 
         await writeFile(path.join(tmpPath, `css/sprite${testConfig.namespace}.styl.css`), output);

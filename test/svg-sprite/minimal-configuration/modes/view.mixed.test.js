@@ -12,6 +12,7 @@ const asyncRenderers = require('../../../helpers/async-renderers.js');
 const { paths } = require('../../../helpers/constants.js');
 const removeTmpPath = require('../../../helpers/remove-temp-path.js');
 
+const { readFile } = fs.promises;
 const tmpPath = path.join(paths.tmp, 'view.mixed');
 
 describe('svg-sprite: with «view» mode, packed layout and LESS render type', () => {
@@ -36,7 +37,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         }
       }
     });
-    addFixtureFiles(spriter, align, cwdAlign);
+    await addFixtureFiles(spriter, align, cwdAlign);
     const { result, data: cssData } = await spriter.compileAsync({
       view: {
         sprite: 'svg/view.packed.mixed.svg',
@@ -49,7 +50,8 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
         }
       }
     });
-    writeFiles(result);
+
+    await writeFiles(result);
     data = cssData.view;
     packedSvg = path.basename(result.view.sprite.path);
   });
@@ -58,7 +60,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     expect.hasAssertions();
 
     const input = path.join(tmpPath, 'view/svg', packedSvg);
-    const actual = fs.readFileSync(input, 'utf8');
+    const actual = await readFile(input, 'utf8');
     const expected = path.join(paths.expectations, 'png/css.packed.mixed.png');
 
     expect(actual).toMatchSnapshot();
@@ -69,7 +71,7 @@ describe('svg-sprite: with «view» mode, packed layout and LESS render type', (
     expect.hasAssertions();
 
     const lessFile = path.join(tmpPath, 'view/sprite.mixed.less');
-    const lessText = fs.readFileSync(lessFile, 'utf8');
+    const lessText = await readFile(lessFile, 'utf8');
     const output = await asyncRenderers.less(lessText, {});
 
     await writeFile(path.join(tmpPath, 'view/sprite.mixed.less.css'), output.css);

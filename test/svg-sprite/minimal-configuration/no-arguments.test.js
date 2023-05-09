@@ -36,7 +36,7 @@ describe('svg-sprite: with no arguments', () => {
   it(`with ${weather.length} SVG files returns ${weather.length} optimized shapes`, async() => {
     expect.assertions(6);
 
-    addFixtureFiles(spriter, weather, cwdWeather);
+    await addFixtureFiles(spriter, weather, cwdWeather);
     const { result, data } = await spriter.compileAsync();
 
     expect(result).toBeInstanceOf(Object);
@@ -50,7 +50,7 @@ describe('svg-sprite: with no arguments', () => {
   it(`with ${weather.length} SVG files with relative paths returns ${weather.length} optimized shapes`, async() => {
     expect.assertions(6);
 
-    addRelativeFixtureFiles(spriter, weather, cwdWeather);
+    await addRelativeFixtureFiles(spriter, weather, cwdWeather);
 
     const { result, data } = await spriter.compileAsync();
 

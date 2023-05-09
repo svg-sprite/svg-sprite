@@ -2,7 +2,7 @@
 
 const { Buffer } = require('node:buffer');
 const path = require('node:path');
-const fs = require('node:fs');
+const { readFile } = require('node:fs/promises');
 const File = require('vinyl');
 const glob = require('glob');
 const getShape = require('../lib/svg-sprite/shape.js');
@@ -71,7 +71,7 @@ describe('testing SVGShape initialization', () => {
     expect(fixXMLString).toHaveBeenCalledWith(TEST_NON_SVG);
   });
 
-  it('should not throw an error and should not call fixXMLString on actual valid svg files', () => {
+  it('should not throw an error and should not call fixXMLString on actual valid svg files', async() => {
     expect.hasAssertions();
 
     const cwd = path.join(__dirname, 'fixture/svg/single');
@@ -80,7 +80,7 @@ describe('testing SVGShape initialization', () => {
     expect.assertions(weatherFiles.length * 2);
 
     for (const weatherFile of weatherFiles) {
-      const svgFileBuffer = fs.readFileSync(path.join(cwd, weatherFile));
+      const svgFileBuffer = await readFile(path.join(cwd, weatherFile));
 
       expect(() => {
         getShape(new File({

@@ -13,6 +13,7 @@ const removeTmpPath = require('../../helpers/remove-temp-path.js');
 const asyncRenderers = require('../../helpers/async-renderers.js');
 const { paths } = require('../../helpers/constants.js');
 
+const { readFile } = fs.promises;
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
@@ -38,7 +39,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
-      addFixtureFiles(spriter, align, cwdAlign);
+
+      await addFixtureFiles(spriter, align, cwdAlign);
       const { result, data: cssData } = await spriter.compileAsync({
         css: {
           sprite: 'svg/css.vertical.centered.svg',
@@ -51,7 +53,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
-      writeFiles(result);
+
+      await writeFiles(result);
       data = cssData.css;
       svgPath = path.basename(result.css.sprite.path);
     });
@@ -60,7 +63,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const actual = fs.readFileSync(input, 'utf8');
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.vertical.centered.png');
 
       expect(actual).toMatchSnapshot();
@@ -97,7 +100,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
-      addFixtureFiles(spriter, align, cwdAlign);
+
+      await addFixtureFiles(spriter, align, cwdAlign);
       const { result, data: cssData } = await spriter.compileAsync({
         css: {
           sprite: 'svg/css.horizontal.centered.svg',
@@ -110,8 +114,9 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
+
       data = cssData.css;
-      writeFiles(result.css);
+      await writeFiles(result.css);
       svgPath = path.basename(result.css.sprite.path);
     });
 
@@ -119,7 +124,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const actual = fs.readFileSync(input, 'utf8');
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.horizontal.centered.png');
 
       expect(actual).toMatchSnapshot();
@@ -159,7 +164,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
-      addFixtureFiles(spriter, align, cwdAlign);
+
+      await addFixtureFiles(spriter, align, cwdAlign);
       const { result, data: cssData } = await spriter.compileAsync({
         css: {
           sprite: 'svg/css.packed.centered.svg',
@@ -172,7 +178,8 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
           }
         }
       });
-      writeFiles(result);
+
+      await writeFiles(result);
       data = cssData.css;
       svgPath = path.basename(result.css.sprite.path);
     });
@@ -181,7 +188,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'css/svg', svgPath);
-      const actual = fs.readFileSync(input, 'utf8');
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.packed.centered.png');
 
       expect(actual).toMatchSnapshot();
@@ -192,7 +199,7 @@ describe(`svg-sprite: with centered alignment and ${align.length} SVG files`, ()
       expect.hasAssertions();
 
       const lessFile = path.join(tmpPath, 'css/sprite.centered.less');
-      const lessText = fs.readFileSync(lessFile, 'utf8');
+      const lessText = await readFile(lessFile, 'utf8');
       const output = await asyncRenderers.less(lessText, {});
 
       await writeFile(path.join(tmpPath, 'css/sprite.centered.less.css'), output.css);

@@ -12,6 +12,7 @@ const writeFile = require('../../helpers/write-file.js');
 const removeTmpPath = require('../../helpers/remove-temp-path.js');
 const { paths } = require('../../helpers/constants.js');
 
+const { readFile } = fs.promises;
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
 const align = glob.sync('**/*.svg', { cwd: cwdAlign });
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
@@ -37,7 +38,8 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
           }
         }
       });
-      addFixtureFiles(spriter, align, cwdAlign);
+
+      await addFixtureFiles(spriter, align, cwdAlign);
       const { result, data: cssData } = await spriter.compileAsync({
         view: {
           sprite: 'svg/view.vertical.mixed.svg',
@@ -50,7 +52,8 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
           }
         }
       });
-      writeFiles(result);
+
+      await writeFiles(result);
       data = cssData.view;
       svgPath = path.basename(result.view.sprite.path);
     });
@@ -59,7 +62,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'view/svg', svgPath);
-      const actual = fs.readFileSync(input, 'utf8');
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.vertical.mixed.png');
 
       expect(actual).toMatchSnapshot();
@@ -99,7 +102,8 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
           namespaceIDs: true
         }
       });
-      addFixtureFiles(spriter, align, cwdAlign);
+
+      await addFixtureFiles(spriter, align, cwdAlign);
       const { result, data: cssData } = await spriter.compileAsync({
         view: {
           sprite: 'svg/view.horizontal.mixed.svg',
@@ -112,7 +116,8 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
           }
         }
       });
-      writeFiles(result);
+
+      await writeFiles(result);
       data = cssData.view;
       svgPath = path.basename(result.view.sprite.path);
     });
@@ -121,7 +126,7 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'view/svg', svgPath);
-      const actual = fs.readFileSync(input, 'utf8');
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.horizontal.mixed.png');
 
       expect(actual).toMatchSnapshot();

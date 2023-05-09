@@ -155,6 +155,7 @@
       "unicorn/prefer-module": "off",
       "unicorn/prefer-reflect-apply": "off",
       "unicorn/prefer-string-slice": "off",
+      "unicorn/prefer-top-level-await": "off",
       "unicorn/prevent-abbreviations": "off"
     },
     "overrides": [
@@ -178,7 +179,8 @@
           "jest/no-hooks": "off",
           "jest/no-untyped-mock-factory": "off",
           "jest/prefer-lowercase-title": "off",
-          "jsdoc/require-returns": "off"
+          "jsdoc/require-returns": "off",
+          "no-await-in-loop": "off"
         }
       }
     ]

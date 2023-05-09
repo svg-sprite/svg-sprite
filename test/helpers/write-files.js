@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('node:fs');
+const { mkdir, writeFile } = require('node:fs/promises');
 const path = require('node:path');
 const File = require('vinyl');
 const { isObject } = require('../../lib/svg-sprite/utils/index.js');
@@ -11,16 +11,16 @@ const { isObject } = require('../../lib/svg-sprite/utils/index.js');
  * @param {object | Array} files      Files
  * @returns {number}                  Number of written files
  */
-module.exports = function writeFiles(files) {
+module.exports = async function writeFiles(files) {
   let written = 0;
   for (const file of Object.values(files)) {
     if (isObject(file) || Array.isArray(file)) {
       if (file.constructor === File) {
-        fs.mkdirSync(path.dirname(file.path), { recursive: true });
-        fs.writeFileSync(file.path, file.contents);
+        await mkdir(path.dirname(file.path), { recursive: true });
+        await writeFile(file.path, file.contents);
         ++written;
       } else {
-        written += writeFiles(file);
+        written += await writeFiles(file);
       }
     }
   }

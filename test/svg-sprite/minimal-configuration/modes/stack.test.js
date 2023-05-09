@@ -29,7 +29,7 @@ describe.each`
     data = {};
 
     spriter = new SVGSpriter({ dest: tmpPath });
-    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+    await addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
     const { result, data: cssData } = await spriter.compileAsync({
       stack: {
         sprite: `svg/stack${testConfig.namespace}.svg`, render: {
@@ -37,7 +37,8 @@ describe.each`
         }
       }
     });
-    writeFiles(result);
+
+    await writeFiles(result);
     data = cssData.stack;
     svg = path.basename(result.stack.sprite.path);
   });
@@ -71,7 +72,7 @@ describe('without viewbox', () => {
     data = {};
 
     spriter = new SVGSpriter({ dest: tmpPath });
-    addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
+    await addFixtureFiles(spriter, testConfig.files, testConfig.cwd);
     const { result, data: cssData } = await spriter.compileAsync({
       stack: {
         sprite: `svg/stack${testConfig.namespace}.svg`, render: {
@@ -80,7 +81,8 @@ describe('without viewbox', () => {
         rootviewbox: false
       }
     });
-    writeFiles(result);
+
+    await writeFiles(result);
     data = cssData.stack;
     svg = path.basename(result.stack.sprite.path);
   });
