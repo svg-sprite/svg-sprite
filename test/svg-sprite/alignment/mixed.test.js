@@ -59,9 +59,10 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'view/svg', svgPath);
+      const actual = fs.readFileSync(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.vertical.mixed.png');
 
-      expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 
@@ -120,9 +121,10 @@ describe(`svg-sprite: with mixed alignment and ${align.length} SVG files`, () =>
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'view/svg', svgPath);
+      const actual = fs.readFileSync(input, 'utf8');
       const expected = path.join(paths.expectations, 'png/css.horizontal.mixed.png');
 
-      expect(fs.readFileSync(input).toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 

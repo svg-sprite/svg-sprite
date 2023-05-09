@@ -1,6 +1,6 @@
 'use strict';
 
-const { rm } = require('node:fs').promises;
+const { rm } = require('node:fs/promises');
 const { paths } = require('./constants.js');
 
 /**
