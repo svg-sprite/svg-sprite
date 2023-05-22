@@ -98,6 +98,23 @@ describe('testing SVGSpriter', () => {
         }));
       });
 
+      it.each([
+        [null],
+        [undefined],
+        ['']
+      ])('should create vinyl file with file name if name is %p', name => {
+        spriter._queue = {
+          add: jest.fn()
+        };
+        spriter.add(TEST_SVG, name, TEST_EMPTY_SVG);
+
+        expect(spriter._queue.add).toHaveBeenCalledWith(new File({
+          base: path.dirname(path.resolve(TEST_SVG)),
+          path: path.resolve(TEST_SVG),
+          contents: Buffer.from(TEST_EMPTY_SVG)
+        }));
+      });
+
       it('should create vinyl file from passed absolute file and add it to _queue', () => {
         spriter._queue = {
           add: jest.fn()
