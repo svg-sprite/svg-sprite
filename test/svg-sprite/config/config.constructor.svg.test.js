@@ -150,5 +150,14 @@ describe('testing svg SVGSpriterConfig.constructor', () => {
 
       expect(config.svg.transform).toStrictEqual([TEST_TRANSFORM]);
     });
+
+    it('should throw an error if wrong type is passed', () => {
+      expect.hasAssertions();
+
+      expect(() => {
+        // eslint-disable-next-line no-new
+        new SVGSpriterConfig({ svg: { transform: 42 } });
+      }).toThrow(TypeError);
+    });
   });
 });
