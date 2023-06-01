@@ -208,6 +208,15 @@ describe('utils', () => {
     it('allow specifying a set of characters to trim', () => {
       expect(trimStart('../././../../somefile.txt', '/.')).toBe('somefile.txt');
     });
+    it('coerces undefined inputs to strings', () => {
+      expect(trimStart(undefined)).toBe('');
+    });
+    it('coerces null inputs to strings', () => {
+      expect(trimStart(null, '*')).toBe('');
+    });
+    it('handles empty strings', () => {
+      expect(trimStart('', '_-_')).toBe('');
+    });
   });
 
   describe('zipObject', () => {
