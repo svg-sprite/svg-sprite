@@ -214,8 +214,12 @@ describe('utils', () => {
     it('coerces null inputs to strings', () => {
       expect(trimStart(null, '*')).toBe('');
     });
-    it('handles empty strings', () => {
+    it('handles empty string inputs', () => {
       expect(trimStart('', '_-_')).toBe('');
+    });
+    it('handles empty string inputs', () => {
+      const string = '   a lovely string   ';
+      expect(trimStart(string, '')).toBe(string);
     });
   });
 
