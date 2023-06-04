@@ -205,20 +205,26 @@ describe('utils', () => {
     it('should trim the start of a string of space characters', () => {
       expect(trimStart('  abc  ')).toBe('abc  ');
     });
+
     it('allow specifying a set of characters to trim', () => {
       expect(trimStart('../././../../somefile.txt', '/.')).toBe('somefile.txt');
     });
+
     it('coerces undefined inputs to strings', () => {
       expect(trimStart(undefined)).toBe('');
     });
+
     it('coerces null inputs to strings', () => {
       expect(trimStart(null, '*')).toBe('');
     });
+
     it('handles empty string inputs', () => {
       expect(trimStart('', '_-_')).toBe('');
     });
-    it('handles empty string inputs', () => {
+
+    it('handles empty string of chars to trim', () => {
       const string = '   a lovely string   ';
+
       expect(trimStart(string, '')).toBe(string);
     });
   });
