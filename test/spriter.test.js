@@ -99,9 +99,9 @@ describe('testing SVGSpriter', () => {
       });
 
       it.each([
-        [null],
-        [undefined],
-        ['']
+        null,
+        undefined,
+        ''
       ])('should create vinyl file with file name if name is %p', name => {
         spriter._queue = {
           add: jest.fn()
