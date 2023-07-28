@@ -56,7 +56,7 @@ weather-storm:
   "%s": 0
 ```
 
-Remember that the omitting the placeholder `"%s"`will make the template strings to be used as a suffices, effectively leading to the virtual shape IDs / CSS class names `"weather-clear-left"` and `"weather-clear-right"` (`"-left"` is equivalent to `"%s-left"`).
+Remember that omitting the placeholder `"%s"`will make the template strings to be used as a suffices, effectively leading to the virtual shape IDs / CSS class names `"weather-clear-left"` and `"weather-clear-right"` (`"-left"` is equivalent to `"%s-left"`).
 
 ![Sprite with vertical layout, mixed x-axis positioning and displaced copies](../test/expected/png/css.vertical.mixed.png)
 
