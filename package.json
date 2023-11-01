@@ -37,7 +37,7 @@
     "@resvg/resvg-js": "^2.4.1",
     "@xmldom/xmldom": "^0.8.8",
     "async": "^3.2.4",
-    "css-selector-parser": "^1.4.1",
+    "css-selector-parser": "^3.0.0",
     "csso": "^5.0.5",
     "cssom": "^0.5.0",
     "glob": "^7.2.3",
