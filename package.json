@@ -36,7 +36,7 @@
   "dependencies": {
     "@resvg/resvg-js": "^2.4.1",
     "@xmldom/xmldom": "0.8.8",
-    "async": "^3.2.4",
+    "async": "^3.2.5",
     "css-selector-parser": "^1.4.1",
     "csso": "^5.0.5",
     "cssom": "^0.5.0",
