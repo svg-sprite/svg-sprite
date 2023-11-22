@@ -1,6 +1,6 @@
 'use strict';
 
-const { mkdir, readFile, writeFile } = require('node:fs').promises;
+const { mkdir, readFile, writeFile } = require('node:fs/promises');
 const path = require('node:path');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');

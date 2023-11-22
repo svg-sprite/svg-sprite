@@ -1,6 +1,6 @@
 'use strict';
 
-const { mkdir, writeFile } = require('node:fs').promises;
+const { mkdir, writeFile } = require('node:fs/promises');
 const path = require('node:path');
 
 /**

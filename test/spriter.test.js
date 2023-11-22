@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
+/* eslint-disable max-nested-callbacks */
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -90,6 +90,23 @@ describe('testing SVGSpriter', () => {
           add: jest.fn()
         };
         spriter.add(TEST_SVG, 'weather-clear.svg', TEST_EMPTY_SVG);
+
+        expect(spriter._queue.add).toHaveBeenCalledWith(new File({
+          base: path.dirname(path.resolve(TEST_SVG)),
+          path: path.resolve(TEST_SVG),
+          contents: Buffer.from(TEST_EMPTY_SVG)
+        }));
+      });
+
+      it.each([
+        null,
+        undefined,
+        ''
+      ])('should create vinyl file with file name if name is %p', name => {
+        spriter._queue = {
+          add: jest.fn()
+        };
+        spriter.add(TEST_SVG, name, TEST_EMPTY_SVG);
 
         expect(spriter._queue.add).toHaveBeenCalledWith(new File({
           base: path.dirname(path.resolve(TEST_SVG)),

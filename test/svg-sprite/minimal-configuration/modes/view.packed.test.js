@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const { readFile } = require('node:fs').promises;
+const { readFile } = require('node:fs/promises');
 const mustache = require('mustache');
 const writeFiles = require('../../../helpers/write-files.js');
 const writeFile = require('../../../helpers/write-file.js');
@@ -51,10 +51,10 @@ describe.each`
       expect.hasAssertions();
 
       const input = path.join(tmpPath, 'view/svg', svg);
+      const actual = await readFile(input, 'utf8');
       const expected = path.join(paths.expectations, `png/css.packed${testConfig.namespace}.png`);
-      const svgFile = await readFile(input);
 
-      expect(svgFile.toString()).toMatchSnapshot();
+      expect(actual).toMatchSnapshot();
       await expect(input).toBeVisuallyEqualTo(expected);
     });
 
