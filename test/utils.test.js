@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals, jest/prefer-expect-assertions */
+/* eslint-disable unicorn/new-for-builtins, no-new-wrappers, prefer-regex-literals */
 
 const {
   isFunction,

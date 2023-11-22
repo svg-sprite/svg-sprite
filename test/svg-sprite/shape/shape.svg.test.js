@@ -285,7 +285,6 @@ describe('testing _stripInlineNamespaceDeclarations()', () => {
         2: TEST_CHILD_3,
         length: 3,
         item(i) {
-          // eslint-disable-next-line jest/no-conditional-in-test
           if (!isMethodMocked) {
             isMethodMocked = true; // mocking the other calls
             jest.spyOn(shape, '_stripInlineNamespaceDeclarations').mockImplementation();
