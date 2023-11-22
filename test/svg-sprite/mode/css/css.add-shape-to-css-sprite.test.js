@@ -95,9 +95,7 @@ describe('testing CSSSvgSprite._addShapeToCSSSprite', () => {
         expect(TEST_GET_SVG).toHaveBeenCalledWith(true, expect.any(Function));
 
         expect(TEST_SHAPE_DOM.setAttribute).toHaveBeenCalledTimes(2);
-        // eslint-disable-next-line jest/prefer-strict-equal
         expect(TEST_SHAPE_DOM.setAttribute.mock.calls[0]).toEqual([Object.keys(TEST_ROOT_ATTRS)[0], TEST_ROOT_ATTRS.root]);
-        // eslint-disable-next-line jest/prefer-strict-equal
         expect(TEST_SHAPE_DOM.setAttribute.mock.calls[1]).toEqual([Object.keys(TEST_ROOT_ATTRS)[1], TEST_ROOT_ATTRS.another]);
       });
     });
