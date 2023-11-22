@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint-disable max-nested-callbacks, jest/prefer-expect-assertions */
+/* eslint-disable max-nested-callbacks */
 
 const fs = require('node:fs');
 const path = require('node:path');
