@@ -79,7 +79,6 @@ expect.extend({
   }
 });
 
-// eslint-disable-next-line jest/require-top-level-describe
 beforeAll(launchBrowser);
-// eslint-disable-next-line jest/require-top-level-describe
+
 afterAll(closeBrowser);

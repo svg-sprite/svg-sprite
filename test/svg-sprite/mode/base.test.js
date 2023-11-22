@@ -294,9 +294,7 @@ describe('testings SVGSpriteBase', () => {
 
       expect(testFn).toHaveBeenCalledWith(null, [undefined, undefined]);
       expect(TEST_SPRITER.verbose).toHaveBeenCalledTimes(2);
-      // eslint-disable-next-line jest/prefer-strict-equal
       expect(TEST_SPRITER.verbose.mock.calls[0]).toEqual(['Created «%s» stylesheet resource', 'svg']);
-      // eslint-disable-next-line jest/prefer-strict-equal
       expect(TEST_SPRITER.verbose.mock.calls[1]).toEqual(['Created «%s» stylesheet resource', 'png']);
       expect(TEST_FILES).toStrictEqual({
         svg: new File({

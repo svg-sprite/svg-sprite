@@ -166,17 +166,13 @@
           "jest-formatting"
         ],
         "extends": [
-          "plugin:jest/all",
+          "plugin:jest/recommended",
           "plugin:jest-formatting/strict"
         ],
         "envs": [
           "jest/globals"
         ],
         "rules": {
-          "jest/max-expects": "off",
-          "jest/no-hooks": "off",
-          "jest/no-untyped-mock-factory": "off",
-          "jest/prefer-lowercase-title": "off",
           "jsdoc/require-returns": "off"
         }
       }

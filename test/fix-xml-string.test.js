@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-disable jest/prefer-expect-assertions */
-
 const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
 const XmlFixingError = require('../lib/svg-sprite/errors/xml-fixing-error.js');
 
