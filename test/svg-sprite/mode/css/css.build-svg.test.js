@@ -109,9 +109,7 @@ describe('testing _buildSVG', () => {
     SVGSpriteCss.prototype._buildSVG.call(mockedSprite, TEST_XML_DECLARATION, TEST_DOC_DECLARATION);
 
     expect(mockedSprite.declaration).toHaveBeenCalledTimes(2);
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(mockedSprite.declaration.mock.calls[0]).toEqual([mockedSprite.config.svg.xmlDeclaration, TEST_XML_DECLARATION]);
-    // eslint-disable-next-line jest/prefer-strict-equal
     expect(mockedSprite.declaration.mock.calls[1]).toEqual([mockedSprite.config.svg.doctypeDeclaration, TEST_DOC_DECLARATION]);
   });
 
