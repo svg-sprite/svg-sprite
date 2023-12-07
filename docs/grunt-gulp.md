@@ -25,7 +25,7 @@ spriter.compile((error, result) => {
 });
 ```
 
-## Grunt task (using [grunt-svg-sprite](https://github.com/svg-sprite/svg-sprite))
+## Grunt task (using [grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite))
 
 ```js
 // svg-sprite Grunt task

@@ -16,7 +16,7 @@ For an up-to-date list of browsers supporting [SVG in general](https://caniuse.c
 
 ## Grunt, Gulp & Co.
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
 
 
 ## Table of contents
