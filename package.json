@@ -50,7 +50,7 @@
     "svgo": "^3.0.4",
     "vinyl": "^3.0.0",
     "winston": "^3.11.0",
-    "xpath": "^0.0.33",
+    "xpath": "^0.0.34",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
