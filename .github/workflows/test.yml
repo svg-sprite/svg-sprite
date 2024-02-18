@@ -59,7 +59,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu') && matrix.node == env.NODE_COV
 
       - name: Upload failed tests' screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: svg-sprite-ci-${{ matrix.node }}-${{ matrix.os }}-${{ github.sha }}
