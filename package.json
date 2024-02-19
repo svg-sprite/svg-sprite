@@ -64,7 +64,7 @@
     "pngjs": "^7.0.0",
     "sass": "^1.71.0",
     "stylus": "^0.62.0",
-    "xo": "^0.54.2"
+    "xo": "^0.57.0"
   },
   "keywords": [
     "icon",
@@ -127,6 +127,7 @@
       ],
       "jsdoc/require-returns": "error",
       "jsdoc/tag-lines": "off",
+      "logical-assignment-operators": "off",
       "max-depth": [
         "warn",
         5
@@ -152,6 +153,7 @@
       "unicorn/no-array-reduce": "off",
       "unicorn/no-negated-condition": "off",
       "unicorn/prefer-code-point": "off",
+      "unicorn/prefer-event-target": "off",
       "unicorn/prefer-module": "off",
       "unicorn/prefer-reflect-apply": "off",
       "unicorn/prefer-string-slice": "off",

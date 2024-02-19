@@ -27,7 +27,9 @@ module.exports = async(HTMLPath, expectedImagePath) => {
       omitBackground: true,
       path: previewImagePath,
       type: 'png',
-      clip: { x: 0, y: 0, width, height }
+      clip: {
+        x: 0, y: 0, width, height
+      }
     });
 
     return comparePng2Png(previewImagePath, expectedImagePath);
