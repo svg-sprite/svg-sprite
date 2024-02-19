@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
+      - 2.x
       - "!dependabot/**"
   pull_request:
-    # The branches below must be a subset of the branches above
     branches:
       - main
+      - 2.x
       - "!dependabot/**"
   schedule:
     - cron: "0 0 * * 0"
@@ -25,12 +26,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: "javascript"
+          queries: +security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript"
