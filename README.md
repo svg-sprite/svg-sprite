@@ -1,6 +1,6 @@
 # svg-sprite
 
-[![npm version][npm-image]][npm-url] [![npm downloads][npm-downloads]][npm-url] [![Build Status][ci-image]][ci-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![Build Status][ci-image]][ci-url] [![npm version][npm-image]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![npm downloads][npm-downloads]][npm-url]
 
 svg-sprite is a low-level [Node.js](https://nodejs.org/) module that **takes a bunch of [SVG](https://www.w3.org/TR/SVG/) files**, optimizes them and bakes them into **SVG sprites** of several types:
 
@@ -16,7 +16,7 @@ For an up-to-date list of browsers supporting [SVG in general](https://caniuse.c
 
 ## Grunt, Gulp & Co.
 
-Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
+Being a low-level library with support for [Node.js streams](https://github.com/substack/stream-handbook), *svg-sprite* doesn't take on the part of accessing the file system (i.e. reading the source SVGs from and writing the sprites and CSS files to disk). If you don't want to take care of this stuff yourself, you might rather have a look at the available wrappers for **Grunt** ([grunt-svg-sprite](https://github.com/svg-sprite/grunt-svg-sprite)) and **Gulp** ([gulp-svg-sprite](https://github.com/svg-sprite/gulp-svg-sprite)). *svg-sprite* is also the foundation of the **[iconizr](https://github.com/jkphl/node-iconizr)** project, which serves high-quality SVG based **CSS icon kits with PNG fallbacks**.
 
 
 ## Table of contents
@@ -70,6 +70,8 @@ The procedure is the very same for all supported sprite types («modes»).
 ```js
 const fs = require('fs');
 const path = require('path');
+const SVGSpriter = require('svg-sprite');
+
 // Create spriter instance (see below for `config` examples)
 const spriter = new SVGSpriter(config);
 
@@ -387,11 +389,11 @@ Copyright © 2018 Joschi Kuphal <joschi@kuphal.net> / [@jkphl](https://twitter.c
 
 
 [npm-url]: https://www.npmjs.com/package/svg-sprite
-[npm-image]: https://img.shields.io/npm/v/svg-sprite
+[npm-image]: https://img.shields.io/npm/v/svg-sprite?logo=npm&logoColor=fff
 [npm-downloads]: https://img.shields.io/npm/dm/svg-sprite
 
-[ci-url]: https://github.com/svg-sprite/svg-sprite/actions?query=workflow%3ATests+branch%3Amain
-[ci-image]: https://img.shields.io/github/workflow/status/svg-sprite/svg-sprite/Tests/main?label=CI&logo=github
+[ci-url]: https://github.com/svg-sprite/svg-sprite/actions/workflows/test.yml?query=branch%3A2.x
+[ci-image]: https://img.shields.io/github/actions/workflow/status/svg-sprite/svg-sprite/test.yml?branch=2.x&label=CI&logo=github
 
-[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=main
-[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/main
+[coveralls-url]: https://coveralls.io/github/svg-sprite/svg-sprite?branch=2.x
+[coveralls-image]: https://img.shields.io/coveralls/github/svg-sprite/svg-sprite/2.x?logo=coveralls
