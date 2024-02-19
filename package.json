@@ -47,7 +47,7 @@
     "lodash.merge": "^4.6.2",
     "mustache": "^4.2.0",
     "prettysize": "^2.0.0",
-    "svgo": "^3.0.4",
+    "svgo": "^3.2.0",
     "vinyl": "^3.0.0",
     "winston": "^3.11.0",
     "xpath": "^0.0.34",
