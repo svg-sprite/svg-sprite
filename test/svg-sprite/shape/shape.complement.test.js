@@ -396,15 +396,21 @@ describe('testing complement()', () => {
 
     const shape = new SVGShape(TEST_FILE, TEST_SPRITER);
 
-    shape._complementDimensions = { bind() {
-      return testComplementDimensions;
-    } };
-    shape._addPadding = { bind() {
-      return testAddPadding;
-    } };
-    shape._addMetadata = { bind() {
-      return testAddMetadata;
-    } };
+    shape._complementDimensions = {
+      bind() {
+        return testComplementDimensions;
+      }
+    };
+    shape._addPadding = {
+      bind() {
+        return testAddPadding;
+      }
+    };
+    shape._addMetadata = {
+      bind() {
+        return testAddMetadata;
+      }
+    };
 
     shape.complement(noop);
 
