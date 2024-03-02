@@ -25,7 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node: [14.18, 16, 18, 20]
+        node: [16, 18, 20]
         include:
           - os: macos-latest
             node: 18
@@ -59,7 +59,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu') && matrix.node == env.NODE_COV
 
       - name: Upload failed tests' screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: svg-sprite-ci-${{ matrix.node }}-${{ matrix.os }}-${{ github.sha }}

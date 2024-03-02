@@ -45,7 +45,9 @@ describe('testing Shape.constructor', () => {
 
         const TEST_SPRITER = {
           config: {
-            shape: { meta: {}, align: {}, TEST: 1, TEST_2: 2 },
+            shape: {
+              meta: {}, align: {}, TEST: 1, TEST_2: 2
+            },
             id: {}
           },
           verbose: jest.fn()

@@ -12,7 +12,9 @@ describe('testing SVGSpriteCssPacker', () => {
       expect(packer.shapes).toStrictEqual([]);
       expect(packer.positions).toStrictEqual([]);
       expect(packer.blocks).toStrictEqual([]);
-      expect(packer.root).toStrictEqual({ x: 0, y: 0, width: 0, height: 0 });
+      expect(packer.root).toStrictEqual({
+        x: 0, y: 0, width: 0, height: 0
+      });
     });
 
     it('should set blocks and positions and ignore master shape', () => {
@@ -42,7 +44,9 @@ describe('testing SVGSpriteCssPacker', () => {
         { height: 0, index: 0, width: 5 },
         { height: 5, index: 1, width: 0 }
       ]);
-      expect(packer.root).toStrictEqual({ x: 0, y: 0, width: 0, height: 0 });
+      expect(packer.root).toStrictEqual({
+        x: 0, y: 0, width: 0, height: 0
+      });
     });
   });
 
@@ -169,7 +173,9 @@ describe('testing SVGSpriteCssPacker', () => {
         width: packer.root.width + TEST_WIDTH,
         height: packer.root.height,
         down: packer.root,
-        right: { x: packer.root.width, y: 0, width: TEST_WIDTH, height: packer.root.height }
+        right: {
+          x: packer.root.width, y: 0, width: TEST_WIDTH, height: packer.root.height
+        }
       };
       const TEST_RESULT = { TEST: 'result' };
 
@@ -205,7 +211,9 @@ describe('testing SVGSpriteCssPacker', () => {
         y: 0,
         width: packer.root.width,
         height: packer.root.height + TEST_HEIGHT,
-        down: { x: 0, y: packer.root.height, width: packer.root.width, height: TEST_HEIGHT },
+        down: {
+          x: 0, y: packer.root.height, width: packer.root.width, height: TEST_HEIGHT
+        },
         right: packer.root
       };
       const TEST_RESULT = { TEST: 'result' };
