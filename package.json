@@ -34,9 +34,9 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@resvg/resvg-js": "^2.1.0",
-    "@xmldom/xmldom": "^0.8.3",
-    "async": "^3.2.4",
+    "@resvg/resvg-js": "^2.6.0",
+    "@xmldom/xmldom": "^0.8.10",
+    "async": "^3.2.5",
     "css-selector-parser": "^1.4.1",
     "csso": "^4.2.0",
     "cssom": "^0.5.0",
@@ -48,22 +48,22 @@
     "prettysize": "^2.0.0",
     "svgo": "^2.8.0",
     "vinyl": "^2.2.1",
-    "winston": "^3.8.2",
-    "xpath": "^0.0.32",
-    "yargs": "^17.5.1"
+    "winston": "^3.11.0",
+    "xpath": "^0.0.34",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "eslint-plugin-jest": "^26.9.0",
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsdoc": "^38.1.6",
     "jest": "^28.1.3",
-    "less": "^4.1.3",
+    "less": "^4.2.0",
     "pixelmatch": "^5.3.0",
     "playwright-chromium": "1.21.1",
     "pngjs": "^6.0.0",
     "sass": "^1.55.0",
     "stylus": "^0.59.0",
-    "xo": "^0.52.3"
+    "xo": "^0.52.4"
   },
   "keywords": [
     "icon",
