@@ -63,7 +63,7 @@
     "playwright-chromium": "1.21.1",
     "pngjs": "^7.0.0",
     "sass": "^1.72.0",
-    "stylus": "^0.62.0",
+    "stylus": "^0.63.0",
     "xo": "^0.56.0"
   },
   "keywords": [
