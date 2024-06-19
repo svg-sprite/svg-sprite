@@ -60,7 +60,7 @@
     "jest": "^29.7.0",
     "less": "^4.2.0",
     "pixelmatch": "^5.3.0",
-    "playwright-chromium": "1.21.1",
+    "playwright-chromium": "1.44.1",
     "pngjs": "^7.0.0",
     "sass": "^1.72.0",
     "stylus": "^0.63.0",
