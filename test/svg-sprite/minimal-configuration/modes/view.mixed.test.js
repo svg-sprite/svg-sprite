@@ -3,7 +3,7 @@
 const path = require('node:path');
 const fs = require('node:fs');
 const mustache = require('mustache');
-const { FDir } = require('fdir');
+const { fdir: FDir } = require('fdir');
 const SVGSpriter = require('../../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../../helpers/add-files.js');
 const writeFiles = require('../../../helpers/write-files.js');

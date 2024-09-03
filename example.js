@@ -2,7 +2,7 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
-const { FDir } = require('fdir');
+const { fdir: FDir } = require('fdir');
 const SVGSpriter = require('./lib/svg-sprite.js');
 
 const cwd = path.join(__dirname, 'test/fixture/svg/single');

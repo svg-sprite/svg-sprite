@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const { FDir } = require('fdir');
+const { fdir: FDir } = require('fdir');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles, addRelativeFixtureFiles } = require('../../helpers/add-files.js');
 const { paths } = require('../../helpers/constants.js');

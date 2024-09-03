@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('node:path');
-const { FDir } = require('fdir');
+const { fdir: FDir } = require('fdir');
 const { paths } = require('./constants.js');
 
 const cwdWeather = path.join(paths.fixtures, 'svg/single');
