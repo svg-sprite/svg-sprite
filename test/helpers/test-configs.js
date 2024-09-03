@@ -1,13 +1,13 @@
 'use strict';
 
 const path = require('node:path');
-const { fdir } = require('fdir');
+const { FDir } = require('fdir');
 const { paths } = require('./constants.js');
 
 const cwdWeather = path.join(paths.fixtures, 'svg/single');
 const cwdWithoutDims = path.join(paths.fixtures, 'svg/special/without-dims');
-const weather = new fdir().glob('**/weather*.svg').crawl(cwdWeather).sync();
-const withoutDims = new fdir().glob('**/*.svg').crawl(cwdWithoutDims).sync();
+const weather = new FDir().glob('**/weather*.svg').crawl(cwdWeather).sync();
+const withoutDims = new FDir().glob('**/*.svg').crawl(cwdWithoutDims).sync();
 
 const constants = {
   DEFAULT: {

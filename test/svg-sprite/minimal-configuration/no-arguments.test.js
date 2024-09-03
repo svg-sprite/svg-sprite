@@ -1,13 +1,13 @@
 'use strict';
 
 const path = require('node:path');
-const { fdir } = require('fdir');
+const { FDir } = require('fdir');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles, addRelativeFixtureFiles } = require('../../helpers/add-files.js');
 const { paths } = require('../../helpers/constants.js');
 
 const cwdWeather = path.join(paths.fixtures, 'svg/single');
-const weather = new fdir().glob('**/weather*.svg').crawl(cwdWeather).sync();
+const weather = new FDir().glob('**/weather*.svg').crawl(cwdWeather).sync();
 
 describe('svg-sprite: with no arguments', () => {
   let spriter;

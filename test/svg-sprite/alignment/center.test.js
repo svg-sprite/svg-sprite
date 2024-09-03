@@ -4,7 +4,7 @@ const path = require('node:path');
 const fs = require('node:fs');
 const mustache = require('mustache');
 const sass = require('sass');
-const { fdir } = require('fdir');
+const { FDir } = require('fdir');
 const SVGSpriter = require('../../../lib/svg-sprite.js');
 const { addFixtureFiles } = require('../../helpers/add-files.js');
 const writeFiles = require('../../helpers/write-files.js');
@@ -14,7 +14,7 @@ const asyncRenderers = require('../../helpers/async-renderers.js');
 const { paths } = require('../../helpers/constants.js');
 
 const cwdAlign = path.join(paths.fixtures, 'svg/css');
-const align = new fdir().glob('**/*.svg').crawl(cwdAlign).sync();
+const align = new FDir().glob('**/*.svg').crawl(cwdAlign).sync();
 const previewTemplate = fs.readFileSync(path.join(__dirname, '../../tmpl/css.html'), 'utf8');
 
 const tmpPath = path.join(paths.tmp, 'center');

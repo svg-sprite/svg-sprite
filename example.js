@@ -2,12 +2,12 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
-const { fdir } = require('fdir');
+const { FDir } = require('fdir');
 const SVGSpriter = require('./lib/svg-sprite.js');
 
 const cwd = path.join(__dirname, 'test/fixture/svg/single');
 const dest = path.join(__dirname, 'tmp');
-const files = new fdir().glob('**/weather*.svg').crawl(cwd).sync();
+const files = new FDir().glob('**/weather*.svg').crawl(cwd).sync();
 
 const svgoConfig = {
   multipass: true,
