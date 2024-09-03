@@ -1,13 +1,13 @@
 'use strict';
 
 const path = require('node:path');
-const glob = require('glob');
+const { fdir } = require('fdir');
 const { paths } = require('./constants.js');
 
 const cwdWeather = path.join(paths.fixtures, 'svg/single');
 const cwdWithoutDims = path.join(paths.fixtures, 'svg/special/without-dims');
-const weather = glob.sync('**/weather*.svg', { cwd: cwdWeather });
-const withoutDims = glob.sync('**/*.svg', { cwd: cwdWithoutDims });
+const weather = new fdir().glob('**/weather*.svg').crawl(cwdWeather).sync();
+const withoutDims = new fdir().glob('**/*.svg').crawl(cwdWithoutDims).sync();
 
 const constants = {
   DEFAULT: {

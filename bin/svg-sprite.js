@@ -19,7 +19,7 @@ const path = require('node:path');
 const merge = require('lodash.merge');
 const File = require('vinyl');
 const yaml = require('js-yaml');
-const glob = require('glob');
+const { fdir } = require('fdir');
 let yargs = require('yargs');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const { isObject, zipObject } = require('../lib/svg-sprite/utils/index.js');
@@ -268,7 +268,7 @@ if ('variables' in config) {
 }
 
 const spriter = new SVGSpriter(config);
-const files = argv._.reduce((f, g) => [...f, ...glob.sync(g)], []);
+const files = argv._.reduce((f, g) => [...f, ...new fdir().glob(g).crawl().sync()], []);
 
 for (let file of files) {
   let basename = file;
