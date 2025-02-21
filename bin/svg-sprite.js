@@ -280,7 +280,7 @@ for (let file of files) {
     basename = path.basename(file);
   } else {
     const basepos = basename.lastIndexOf('./');
-    basename = basepos >= 0 ? basename.substr(basepos + 2) : path.basename(file);
+    basename = basepos !== -1 ? basename.substr(basepos + 2) : path.basename(file);
   }
 
   spriter.add(file, basename, fs.readFileSync(file));
