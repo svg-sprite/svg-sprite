@@ -61,7 +61,7 @@ describe('testing log', () => {
     });
 
     afterAll(() => {
-      global.console = originalConsole;
+      globalThis.console = originalConsole;
     });
 
     it.each(
