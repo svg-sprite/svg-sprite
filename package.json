@@ -62,7 +62,7 @@
     "pixelmatch": "^5.3.0",
     "playwright-chromium": "^1.50.1",
     "pngjs": "^7.0.0",
-    "sass": "^1.85.0",
+    "sass": "^1.85.1",
     "stylus": "^0.64.0",
     "xo": "^0.60.0"
   },
