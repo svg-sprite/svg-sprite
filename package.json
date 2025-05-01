@@ -58,7 +58,7 @@
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsdoc": "^47.0.2",
     "jest": "^29.7.0",
-    "less": "^4.2.2",
+    "less": "^4.3.0",
     "pixelmatch": "^5.3.0",
     "playwright-chromium": "^1.50.1",
     "pngjs": "^7.0.0",
