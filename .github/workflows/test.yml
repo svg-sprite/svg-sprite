@@ -39,7 +39,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
           cache: npm
@@ -59,7 +59,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu') && matrix.node == env.NODE_COV
 
       - name: Upload failed tests' screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: svg-sprite-ci-${{ matrix.node }}-${{ matrix.os }}-${{ github.sha }}
