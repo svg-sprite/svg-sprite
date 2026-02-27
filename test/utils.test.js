@@ -7,6 +7,7 @@ const {
   isObject,
   isString,
   isPlainObject,
+  prettyBytes,
   trimStart,
   zipObject
 } = require('../lib/svg-sprite/utils/index.js');
@@ -198,6 +199,40 @@ describe('utils', () => {
 
     it('should return false for a Symbol', () => {
       expect(isPlainObject(Symbol('test'))).toBe(false);
+    });
+  });
+
+  describe('prettyBytes', () => {
+    it('should return "0 Bytes" for zero', () => {
+      expect(prettyBytes(0)).toBe('0 Bytes');
+    });
+
+    it('should return bytes for small values', () => {
+      expect(prettyBytes(100)).toBe('100 Bytes');
+    });
+
+    it('should return kB at 1024 boundary', () => {
+      expect(prettyBytes(1024)).toBe('1 kB');
+    });
+
+    it('should return decimal kB for non-round values', () => {
+      expect(prettyBytes(1536)).toBe('1.5 kB');
+    });
+
+    it('should return MB for megabyte values', () => {
+      expect(prettyBytes(1_048_576)).toBe('1 MB');
+    });
+
+    it('should return GB for gigabyte values', () => {
+      expect(prettyBytes(1_073_741_824)).toBe('1 GB');
+    });
+
+    it('should return "1 Bytes" for size of 1', () => {
+      expect(prettyBytes(1)).toBe('1 Bytes');
+    });
+
+    it('should return "0 Bytes" for negative values', () => {
+      expect(prettyBytes(-1)).toBe('0 Bytes');
     });
   });
 
