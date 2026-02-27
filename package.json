@@ -46,7 +46,6 @@
     "lodash.escape": "^4.0.1",
     "lodash.merge": "^4.6.2",
     "mustache": "^4.2.0",
-    "prettysize": "^2.0.0",
     "svgo": "^3.3.2",
     "vinyl": "^3.0.1",
     "winston": "^3.17.0",
