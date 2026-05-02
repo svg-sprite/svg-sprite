@@ -4,7 +4,7 @@ const { Buffer } = require('node:buffer');
 const path = require('node:path');
 const fs = require('node:fs');
 const File = require('vinyl');
-const glob = require('glob');
+const { fdir: FDir } = require('fdir');
 const getShape = require('../lib/svg-sprite/shape.js');
 const SVGSpriter = require('../lib/svg-sprite.js');
 const fixXMLString = require('../lib/svg-sprite/utils/fix-xml-string.js');
@@ -75,7 +75,7 @@ describe('testing SVGShape initialization', () => {
     expect.hasAssertions();
 
     const cwd = path.join(__dirname, 'fixture/svg/single');
-    const weatherFiles = glob.sync('**/weather*.svg', { cwd });
+    const weatherFiles = new FDir().glob('**/weather*.svg').crawl(cwd).sync();
 
     expect.assertions(weatherFiles.length * 2);
 
