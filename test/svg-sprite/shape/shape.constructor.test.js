@@ -107,6 +107,38 @@ describe('testing Shape.constructor', () => {
           expect(shape.config.id.generator(TEST_FILE_WITH_FOLDERS.relative, TEST_FILE_WITH_FOLDERS)).toBe('folder--test_path.f');
         });
 
+        it('should use basename for the shape id if namespaceIDs is disabled', () => {
+          expect.hasAssertions();
+
+          const baseFolder = `${path.sep}my${path.sep}full${path.sep}path`;
+          const fullPath = `${path.sep}my${path.sep}full${path.sep}path${path.sep}folder${path.sep}test_path.f.svg`;
+          const TEST_FILE_WITH_FOLDERS = new File({
+            contents: Buffer.from('<svg>TEST CONTENT</svg>'),
+            base: baseFolder,
+            path: fullPath,
+            cwd: '/'
+          });
+          const TEST_SPRITER = {
+            config: {
+              svg: {
+                namespaceIDs: false
+              },
+              shape: {
+                id: {
+                  generator: true
+                },
+                meta: {},
+                align: {}
+              }
+            },
+            verbose: jest.fn()
+          };
+          const shape = new SVGShape(TEST_FILE_WITH_FOLDERS, TEST_SPRITER);
+
+          expect(shape.name).toBe('test_path.f.svg');
+          expect(shape.id).toBe('test_path.f');
+        });
+
         it('should set generator if provided generator is a string', () => {
           expect.hasAssertions();
 
@@ -290,4 +322,3 @@ describe('testing Shape.constructor', () => {
     });
   });
 });
-
