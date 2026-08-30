@@ -13,7 +13,6 @@ module.exports = {
   coverageProvider: 'v8',
   coverageReporters: ['html', 'lcov', 'text'],
   collectCoverageFrom: [
-    'bin/*.js',
     'lib/**/*.js',
     '!**/node_modules/**'
   ],

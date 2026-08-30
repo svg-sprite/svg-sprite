@@ -39,7 +39,7 @@ Being a low-level library with support for [Node.js streams](https://github.com/
   * [Meta data injection](docs/meta-data.md)
   * [Aligning and duplicating shapes](docs/shape-alignment.md)
   * [Tweaking and adding output formats](docs/templating.md)
-* [Command line usage](docs/command-line.md)
+* [Command line usage](#command-line-usage)
 * [Known problems / To-do](#known-problems--to-do)
 * [Changelog](CHANGELOG.md)
 * [Legal](#legal)
@@ -364,13 +364,19 @@ For CSS sprites using a `"horizontal"` or `"vertical"` layout it is sometimes de
 
 ## Command line usage
 
-*svg-sprite* comes with a pretty feature complete command line version. A typical example could look like this:
+The command line interface has been split out into the separate [`svg-sprite-cli`](https://github.com/svg-sprite/svg-sprite) package. Install it globally to get the `svg-sprite` command:
+
+```bash
+npm install svg-sprite-cli -g
+```
+
+A typical example could look like this:
 
 ```bash
 svg-sprite --css --css-render-css --css-example --dest=out assets/*.svg
 ```
 
-Please refer to the [CLI guide](docs/command-line.md) for further details.
+Please refer to the [CLI guide](svg-sprite-cli/docs/command-line.md) for further details.
 
 
 ## Known problems / To-do
